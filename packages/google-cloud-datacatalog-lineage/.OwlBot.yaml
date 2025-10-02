@@ -1,4 +1,4 @@
-# Copyright 2022 Google LLC
+# Copyright 2025 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,5 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-  - source: /google/cloud/datacatalog/lineage/google-cloud-datacatalog-lineage-nodejs
-    dest: /owl-bot-staging/google-cloud-datacatalog-lineage
+    - source: /google/cloud/datacatalog/lineage/google-cloud-datacatalog-lineage-nodejs
+      dest: /owl-bot-staging/google-cloud-datacatalog-lineage
+
+api-name: lineage

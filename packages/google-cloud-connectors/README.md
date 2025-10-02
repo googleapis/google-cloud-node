@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Connectors API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-connectors)
+# [Connectors API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/connectors.svg)](https://www.npmjs.org/package/@google-cloud/connectors)
-
-
-
 
 Connectors API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-connectors/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Connectors API Node.js Client API Reference][client-docs]
+* [Connectors API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/connectors/latest)
 
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-connectors](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-connectors)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +28,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,104 +44,39 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Connectors API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/connectors
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. Parent resource of the Connection, of the form:
- *  `projects/* /locations/*`
- */
-// const parent = 'abc123'
-/**
- *  Page size.
- */
-// const pageSize = 1234
-/**
- *  Page token.
- */
-// const pageToken = 'abc123'
-/**
- *  Filter.
- */
-// const filter = 'abc123'
-/**
- *  Order by parameters.
- */
-// const orderBy = 'abc123'
-/**
- *  Specifies which fields of the Connection are returned in the response.
- *  Defaults to `BASIC` view.
- */
-// const view = {}
-
-// Imports the Connectors library
-const {ConnectorsClient} = require('@google-cloud/connectors').v1;
-
-// Instantiates a client
-const connectorsClient = new ConnectorsClient();
-
-async function callListConnections() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = await connectorsClient.listConnectionsAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListConnections();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-connectors/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Connectors.create_connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.create_connection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.create_connection.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.delete_connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.delete_connection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.delete_connection.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.get_connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.get_connection_schema_metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection_schema_metadata.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection_schema_metadata.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.get_connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.get_connector_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector_version.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.get_global_settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_global_settings.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_global_settings.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.get_provider | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_provider.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_provider.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.get_runtime_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_runtime_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.get_runtime_config.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.list_connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connections.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_connections.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.list_connector_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connector_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_connector_versions.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.list_connectors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connectors.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_connectors.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.list_providers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_providers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_providers.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.list_runtime_action_schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_action_schemas.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_action_schemas.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.list_runtime_entity_schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_entity_schemas.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_entity_schemas.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.refresh_connection_schema_metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.refresh_connection_schema_metadata.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.refresh_connection_schema_metadata.js,packages/google-cloud-connectors/samples/README.md) |
-| Connectors.update_connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.update_connection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/generated/v1/connectors.update_connection.js,packages/google-cloud-connectors/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-connectors/samples/quickstart.js,packages/google-cloud-connectors/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.create_connection.js) |
+| delete connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.delete_connection.js) |
+| get connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection.js) |
+| get connection schema metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connection_schema_metadata.js) |
+| get connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector.js) |
+| get connector version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_connector_version.js) |
+| get global settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_global_settings.js) |
+| get provider | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_provider.js) |
+| get runtime config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.get_runtime_config.js) |
+| list connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connections.js) |
+| list connector versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connector_versions.js) |
+| list connectors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_connectors.js) |
+| list providers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_providers.js) |
+| list runtime action schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_action_schemas.js) |
+| list runtime entity schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.list_runtime_entity_schemas.js) |
+| refresh connection schema metadata | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.refresh_connection_schema_metadata.js) |
+| update connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/connectors.update_connection.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples/generated/v1/snippet_metadata_google.cloud.connectors.v1.json) |
 
-
-
-The [Connectors API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -170,45 +103,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
-
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/connectors/latest
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=connectors.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-connectors

@@ -1,747 +1,747 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-cloudsecuritycompliance",
-        "version": "0.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.cloudsecuritycompliance.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_ListFrameworks_async",
-            "title": "Config listFrameworks Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Frameworks in a given organization.",
-            "canonical": true,
-            "file": "config.list_frameworks.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListFrameworks",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.ListFrameworks",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.ListFrameworksResponse",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "ListFrameworks",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.ListFrameworks",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_GetFramework_async",
-            "title": "Config getFramework Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single Framework.",
-            "canonical": true,
-            "file": "config.get_framework.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetFramework",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.GetFramework",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "major_revision_id",
-                        "type": "TYPE_INT64"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.Framework",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "GetFramework",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.GetFramework",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_CreateFramework_async",
-            "title": "Config createFramework Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a single framework for a given resource.",
-            "canonical": true,
-            "file": "config.create_framework.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateFramework",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.CreateFramework",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "framework_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "framework",
-                        "type": ".google.cloud.cloudsecuritycompliance.v1.Framework"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.Framework",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "CreateFramework",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.CreateFramework",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_UpdateFramework_async",
-            "title": "Config updateFramework Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a single Framework.",
-            "canonical": true,
-            "file": "config.update_framework.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateFramework",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateFramework",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "framework",
-                        "type": ".google.cloud.cloudsecuritycompliance.v1.Framework"
-                    },
-                    {
-                        "name": "major_revision_id",
-                        "type": "TYPE_INT64"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.Framework",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "UpdateFramework",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateFramework",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_DeleteFramework_async",
-            "title": "Config deleteFramework Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single Framework.",
-            "canonical": true,
-            "file": "config.delete_framework.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteFramework",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteFramework",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "DeleteFramework",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteFramework",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_ListCloudControls_async",
-            "title": "Config listCloudControls Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists CloudControls in a given organization.",
-            "canonical": true,
-            "file": "config.list_cloud_controls.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCloudControls",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.ListCloudControlsResponse",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "ListCloudControls",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_GetCloudControl_async",
-            "title": "Config getCloudControl Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single CloudControl.",
-            "canonical": true,
-            "file": "config.get_cloud_control.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCloudControl",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.GetCloudControl",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.CloudControl",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "GetCloudControl",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.GetCloudControl",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_CreateCloudControl_async",
-            "title": "Config createCloudControl Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a single CloudControl for a given resource.",
-            "canonical": true,
-            "file": "config.create_cloud_control.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCloudControl",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.CreateCloudControl",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cloud_control_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cloud_control",
-                        "type": ".google.cloud.cloudsecuritycompliance.v1.CloudControl"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.CloudControl",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "CreateCloudControl",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.CreateCloudControl",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_UpdateCloudControl_async",
-            "title": "Config updateCloudControl Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a single CloudControl.",
-            "canonical": true,
-            "file": "config.update_cloud_control.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCloudControl",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateCloudControl",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "cloud_control",
-                        "type": ".google.cloud.cloudsecuritycompliance.v1.CloudControl"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.CloudControl",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "UpdateCloudControl",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateCloudControl",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Config_DeleteCloudControl_async",
-            "title": "Config deleteCloudControl Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single CloudControl.",
-            "canonical": true,
-            "file": "config.delete_cloud_control.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteCloudControl",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteCloudControl",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ConfigClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
-                },
-                "method": {
-                    "shortName": "DeleteCloudControl",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteCloudControl",
-                    "service": {
-                        "shortName": "Config",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_CreateFrameworkDeployment_async",
-            "title": "Config createFrameworkDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new FrameworkDeployment in a given project and location.",
-            "canonical": true,
-            "file": "deployment.create_framework_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateFrameworkDeployment",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.CreateFrameworkDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "framework_deployment_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "framework_deployment",
-                        "type": ".google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DeploymentClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
-                },
-                "method": {
-                    "shortName": "CreateFrameworkDeployment",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.CreateFrameworkDeployment",
-                    "service": {
-                        "shortName": "Deployment",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_DeleteFrameworkDeployment_async",
-            "title": "Config deleteFrameworkDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single FrameworkDeployment.",
-            "canonical": true,
-            "file": "deployment.delete_framework_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteFrameworkDeployment",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.DeleteFrameworkDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DeploymentClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
-                },
-                "method": {
-                    "shortName": "DeleteFrameworkDeployment",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.DeleteFrameworkDeployment",
-                    "service": {
-                        "shortName": "Deployment",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_GetFrameworkDeployment_async",
-            "title": "Config getFrameworkDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single FrameworkDeployment.",
-            "canonical": true,
-            "file": "deployment.get_framework_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetFrameworkDeployment",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetFrameworkDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment",
-                "client": {
-                    "shortName": "DeploymentClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
-                },
-                "method": {
-                    "shortName": "GetFrameworkDeployment",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetFrameworkDeployment",
-                    "service": {
-                        "shortName": "Deployment",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_ListFrameworkDeployments_async",
-            "title": "Config listFrameworkDeployments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists FrameworkDeployments in a given parent and location.",
-            "canonical": true,
-            "file": "deployment.list_framework_deployments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListFrameworkDeployments",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListFrameworkDeployments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.ListFrameworkDeploymentsResponse",
-                "client": {
-                    "shortName": "DeploymentClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
-                },
-                "method": {
-                    "shortName": "ListFrameworkDeployments",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListFrameworkDeployments",
-                    "service": {
-                        "shortName": "Deployment",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_GetCloudControlDeployment_async",
-            "title": "Config getCloudControlDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single CloudControlDeployment.",
-            "canonical": true,
-            "file": "deployment.get_cloud_control_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCloudControlDeployment",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetCloudControlDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment",
-                "client": {
-                    "shortName": "DeploymentClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
-                },
-                "method": {
-                    "shortName": "GetCloudControlDeployment",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetCloudControlDeployment",
-                    "service": {
-                        "shortName": "Deployment",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_ListCloudControlDeployments_async",
-            "title": "Config listCloudControlDeployments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists CloudControlDeployments under a given parent.",
-            "canonical": true,
-            "file": "deployment.list_cloud_control_deployments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCloudControlDeployments",
-                "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListCloudControlDeployments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.cloudsecuritycompliance.v1.ListCloudControlDeploymentsResponse",
-                "client": {
-                    "shortName": "DeploymentClient",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
-                },
-                "method": {
-                    "shortName": "ListCloudControlDeployments",
-                    "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListCloudControlDeployments",
-                    "service": {
-                        "shortName": "Deployment",
-                        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-cloudsecuritycompliance",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.cloudsecuritycompliance.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_ListFrameworks_async",
+      "title": "Config listFrameworks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all Frameworks (both Built-in and Custom) available within a given parent resource. This method supports pagination. The latest major version of each Framework is returned.",
+      "canonical": true,
+      "file": "config.list_frameworks.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFrameworks",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.ListFrameworks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.ListFrameworksResponse",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "ListFrameworks",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.ListFrameworks",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_GetFramework_async",
+      "title": "Config getFramework Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Framework. This method retrieves a Framework resource, which can be either Built-in or Custom, identified by its name. By default, the latest major version of the Framework is returned. A specific major version can be retrieved by specifying the `major_revision_id` in the request.",
+      "canonical": true,
+      "file": "config.get_framework.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetFramework",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.GetFramework",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "major_revision_id",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.Framework",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "GetFramework",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.GetFramework",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_CreateFramework_async",
+      "title": "Config createFramework Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Framework with type `Custom` under a given parent resource. Frameworks with type `Built-in` are managed by Google and cannot be created through this API.",
+      "canonical": true,
+      "file": "config.create_framework.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateFramework",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.CreateFramework",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "framework_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "framework",
+            "type": ".google.cloud.cloudsecuritycompliance.v1.Framework"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.Framework",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "CreateFramework",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.CreateFramework",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_UpdateFramework_async",
+      "title": "Config updateFramework Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single Framework. This method allows for partial updates of a Framework resource. The fields to be updated are specified using the `update_mask`. - If an `update_mask` is provided, only the fields specified in the mask will be updated. - If no `update_mask` is provided, all fields present in the request's `framework` body will be used to overwrite the existing resource. This operation can only be performed on Frameworks with type `CUSTOM`. A successful update will result in a new version of the Framework.",
+      "canonical": true,
+      "file": "config.update_framework.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateFramework",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateFramework",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "framework",
+            "type": ".google.cloud.cloudsecuritycompliance.v1.Framework"
+          },
+          {
+            "name": "major_revision_id",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.Framework",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "UpdateFramework",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateFramework",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_DeleteFramework_async",
+      "title": "Config deleteFramework Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Custom Framework, including all its minor and minor revisions. - This operation can only be performed on Frameworks with type `CUSTOM`.   Built-in Frameworks cannot be deleted. - The Framework cannot be deleted if it is currently deployed on any   resource. - This action is permanent and cannot be undone.",
+      "canonical": true,
+      "file": "config.delete_framework.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteFramework",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteFramework",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "DeleteFramework",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteFramework",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_ListCloudControls_async",
+      "title": "Config listCloudControls Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all CloudControls (both Built-in and Custom) available within a given parent resource. This method supports pagination. The latest major version of each CloudControl is returned.",
+      "canonical": true,
+      "file": "config.list_cloud_controls.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCloudControls",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.ListCloudControlsResponse",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "ListCloudControls",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_GetCloudControl_async",
+      "title": "Config getCloudControl Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single CloudControl. This method retrieves a CloudControl resource, which can be either Built-in or Custom, identified by its name. By default, the latest major version of the CloudControl is returned. A specific major version can be retrieved by specifying the `major_revision_id` in the request.",
+      "canonical": true,
+      "file": "config.get_cloud_control.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCloudControl",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.GetCloudControl",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.CloudControl",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "GetCloudControl",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.GetCloudControl",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_CreateCloudControl_async",
+      "title": "Config createCloudControl Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new CloudControl with type `Custom` under a given parent resource. `Built-in` CloudControls are managed by Google and cannot be created through this API.",
+      "canonical": true,
+      "file": "config.create_cloud_control.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCloudControl",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.CreateCloudControl",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cloud_control_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cloud_control",
+            "type": ".google.cloud.cloudsecuritycompliance.v1.CloudControl"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.CloudControl",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "CreateCloudControl",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.CreateCloudControl",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_UpdateCloudControl_async",
+      "title": "Config updateCloudControl Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single CloudControl. This method allows for partial updates of a Custom CloudControl resource. Built-in CloudControls cannot be updated. - If an `update_mask` is provided, only the fields specified in the mask will be updated. - If no `update_mask` is provided, all fields present in the request's `cloud_control` body will be used to overwrite the existing resource. A successful update will result in a new version of the CloudControl.",
+      "canonical": true,
+      "file": "config.update_cloud_control.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCloudControl",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateCloudControl",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "cloud_control",
+            "type": ".google.cloud.cloudsecuritycompliance.v1.CloudControl"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.CloudControl",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "UpdateCloudControl",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.UpdateCloudControl",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Config_DeleteCloudControl_async",
+      "title": "Config deleteCloudControl Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Custom CloudControl, including all its major and minor revisions. - This operation can only be performed on CloudControls with type `CUSTOM`.   Built-in CloudControls cannot be deleted. - The CloudControl cannot be deleted if any of its revisions are currently   referenced by any Framework. - This action is permanent and cannot be undone.",
+      "canonical": true,
+      "file": "config.delete_cloud_control.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCloudControl",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteCloudControl",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ConfigClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.ConfigClient"
+        },
+        "method": {
+          "shortName": "DeleteCloudControl",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Config.DeleteCloudControl",
+          "service": {
+            "shortName": "Config",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Config"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_CreateFrameworkDeployment_async",
+      "title": "Config createFrameworkDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new FrameworkDeployment in a given parent resource.",
+      "canonical": true,
+      "file": "deployment.create_framework_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateFrameworkDeployment",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.CreateFrameworkDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "framework_deployment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "framework_deployment",
+            "type": ".google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DeploymentClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
+        },
+        "method": {
+          "shortName": "CreateFrameworkDeployment",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.CreateFrameworkDeployment",
+          "service": {
+            "shortName": "Deployment",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_DeleteFrameworkDeployment_async",
+      "title": "Config deleteFrameworkDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single FrameworkDeployment.",
+      "canonical": true,
+      "file": "deployment.delete_framework_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteFrameworkDeployment",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.DeleteFrameworkDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DeploymentClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
+        },
+        "method": {
+          "shortName": "DeleteFrameworkDeployment",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.DeleteFrameworkDeployment",
+          "service": {
+            "shortName": "Deployment",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_GetFrameworkDeployment_async",
+      "title": "Config getFrameworkDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single FrameworkDeployment.",
+      "canonical": true,
+      "file": "deployment.get_framework_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetFrameworkDeployment",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetFrameworkDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment",
+        "client": {
+          "shortName": "DeploymentClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
+        },
+        "method": {
+          "shortName": "GetFrameworkDeployment",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetFrameworkDeployment",
+          "service": {
+            "shortName": "Deployment",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_ListFrameworkDeployments_async",
+      "title": "Config listFrameworkDeployments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists FrameworkDeployments in a given parent resource.",
+      "canonical": true,
+      "file": "deployment.list_framework_deployments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFrameworkDeployments",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListFrameworkDeployments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.ListFrameworkDeploymentsResponse",
+        "client": {
+          "shortName": "DeploymentClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
+        },
+        "method": {
+          "shortName": "ListFrameworkDeployments",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListFrameworkDeployments",
+          "service": {
+            "shortName": "Deployment",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_GetCloudControlDeployment_async",
+      "title": "Config getCloudControlDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single CloudControlDeployment.",
+      "canonical": true,
+      "file": "deployment.get_cloud_control_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCloudControlDeployment",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetCloudControlDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment",
+        "client": {
+          "shortName": "DeploymentClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
+        },
+        "method": {
+          "shortName": "GetCloudControlDeployment",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.GetCloudControlDeployment",
+          "service": {
+            "shortName": "Deployment",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudsecuritycompliance_v1_generated_Deployment_ListCloudControlDeployments_async",
+      "title": "Config listCloudControlDeployments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists CloudControlDeployments in a given parent resource.",
+      "canonical": true,
+      "file": "deployment.list_cloud_control_deployments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCloudControlDeployments",
+        "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListCloudControlDeployments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.cloudsecuritycompliance.v1.ListCloudControlDeploymentsResponse",
+        "client": {
+          "shortName": "DeploymentClient",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.DeploymentClient"
+        },
+        "method": {
+          "shortName": "ListCloudControlDeployments",
+          "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment.ListCloudControlDeployments",
+          "service": {
+            "shortName": "Deployment",
+            "fullName": "google.cloud.cloudsecuritycompliance.v1.Deployment"
+          }
+        }
+      }
+    }
+  ]
 }

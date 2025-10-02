@@ -782,6 +782,9 @@ export class AlloyDBAdminClient {
  * @param {string} request.sqlStatement
  *   Required. SQL statement to execute on database. Any valid statement is
  *   permitted, including DDL, DML, DQL statements.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validates the sql statement by performing
+ *   syntax and semantic validation and doesn't execute the query.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

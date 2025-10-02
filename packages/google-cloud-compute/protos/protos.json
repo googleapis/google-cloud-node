@@ -1016,6 +1016,54 @@
                         }
                       }
                     },
+                    "AddNetworkInterfaceInstanceRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 18257045,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networkInterfaceResource": {
+                          "type": "NetworkInterface",
+                          "id": 325814789,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "AddNodesNodeGroupRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -14907,6 +14955,54 @@
                         }
                       }
                     },
+                    "DeleteNetworkInterfaceInstanceRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "instance": {
+                          "type": "string",
+                          "id": 18257045,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networkInterfaceName": {
+                          "type": "string",
+                          "id": 381342722,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
                     "DeleteNetworkRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -25045,6 +25141,13 @@
                       }
                     },
                     "GetServiceAttachmentRequest": {
+                      "oneofs": {
+                        "_showNatIps": {
+                          "oneof": [
+                            "showNatIps"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -25065,6 +25168,13 @@
                           "id": 338957549,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "showNatIps": {
+                          "type": "bool",
+                          "id": 485502156,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -25235,6 +25345,13 @@
                       }
                     },
                     "GetSubnetworkRequest": {
+                      "oneofs": {
+                        "_views": {
+                          "oneof": [
+                            "views"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -25255,6 +25372,22 @@
                           "id": 307827694,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "views": {
+                          "type": "string",
+                          "id": 112204398,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Views": {
+                          "values": {
+                            "UNDEFINED_VIEWS": 0,
+                            "DEFAULT": 115302945,
+                            "WITH_UTILIZATION": 504090633
                           }
                         }
                       }
@@ -32225,6 +32358,7 @@
                           "values": {
                             "UNDEFINED_STATUS": 0,
                             "DEPROVISIONING": 428935662,
+                            "PENDING": 35394935,
                             "PROVISIONING": 290896621,
                             "REPAIRING": 413483285,
                             "RUNNING": 121282975,
@@ -34983,7 +35117,21 @@
                       }
                     },
                     "InstanceParams": {
+                      "oneofs": {
+                        "_requestValidForDuration": {
+                          "oneof": [
+                            "requestValidForDuration"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "requestValidForDuration": {
+                          "type": "Duration",
+                          "id": 116247389,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "resourceManagerTags": {
                           "keyType": "string",
                           "type": "string",
@@ -35657,6 +35805,7 @@
                           "values": {
                             "UNDEFINED_STATUS": 0,
                             "DEPROVISIONING": 428935662,
+                            "PENDING": 35394935,
                             "PROVISIONING": 290896621,
                             "REPAIRING": 413483285,
                             "RUNNING": 121282975,
@@ -40011,6 +40160,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "singleRegionProductionCriticalPeerLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 439537103
+                        },
                         "status": {
                           "type": "string",
                           "id": 181260274,
@@ -40500,6 +40654,11 @@
                             "maxLagSize10Gbps"
                           ]
                         },
+                        "_maxLagSize400Gbps": {
+                          "oneof": [
+                            "maxLagSize400Gbps"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -40621,6 +40780,13 @@
                         "maxLagSize10Gbps": {
                           "type": "int32",
                           "id": 294007573,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxLagSize400Gbps": {
+                          "type": "int32",
+                          "id": 104941138,
                           "options": {
                             "proto3_optional": true
                           }
@@ -49758,6 +49924,11 @@
                           "oneof": [
                             "returnPartialSuccess"
                           ]
+                        },
+                        "_views": {
+                          "oneof": [
+                            "views"
+                          ]
                         }
                       },
                       "fields": {
@@ -49808,6 +49979,22 @@
                           "id": 517198390,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "views": {
+                          "type": "string",
+                          "id": 112204398,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Views": {
+                          "values": {
+                            "UNDEFINED_VIEWS": 0,
+                            "DEFAULT": 115302945,
+                            "WITH_UTILIZATION": 504090633
                           }
                         }
                       }
@@ -52107,6 +52294,7 @@
                           "values": {
                             "UNDEFINED_INSTANCE_STATUS": 0,
                             "DEPROVISIONING": 428935662,
+                            "PENDING": 35394935,
                             "PROVISIONING": 290896621,
                             "REPAIRING": 413483285,
                             "RUNNING": 121282975,
@@ -54480,6 +54668,11 @@
                             "nicType"
                           ]
                         },
+                        "_parentNicName": {
+                          "oneof": [
+                            "parentNicName"
+                          ]
+                        },
                         "_queueCount": {
                           "oneof": [
                             "queueCount"
@@ -54493,6 +54686,11 @@
                         "_subnetwork": {
                           "oneof": [
                             "subnetwork"
+                          ]
+                        },
+                        "_vlan": {
+                          "oneof": [
+                            "vlan"
                           ]
                         }
                       },
@@ -54582,6 +54780,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "parentNicName": {
+                          "type": "string",
+                          "id": 418764375,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "queueCount": {
                           "type": "int32",
                           "id": 503708769,
@@ -54599,6 +54804,13 @@
                         "subnetwork": {
                           "type": "string",
                           "id": 307827694,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "vlan": {
+                          "type": "int32",
+                          "id": 3622243,
                           "options": {
                             "proto3_optional": true
                           }
@@ -55154,6 +55366,11 @@
                             "name"
                           ]
                         },
+                        "_profileType": {
+                          "oneof": [
+                            "profileType"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -55216,6 +55433,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "profileType": {
+                          "type": "NetworkProfileProfileType",
+                          "id": 150167568,
                           "options": {
                             "proto3_optional": true
                           }
@@ -55793,6 +56017,90 @@
                             "UNDEFINED_UNICAST": 0,
                             "UNICAST_SDN": 379954157,
                             "UNICAST_ULL": 379956325
+                          }
+                        }
+                      }
+                    },
+                    "NetworkProfileProfileType": {
+                      "oneofs": {
+                        "_networkType": {
+                          "oneof": [
+                            "networkType"
+                          ]
+                        },
+                        "_rdmaSubtype": {
+                          "oneof": [
+                            "rdmaSubtype"
+                          ]
+                        },
+                        "_ullSubtype": {
+                          "oneof": [
+                            "ullSubtype"
+                          ]
+                        },
+                        "_vpcSubtype": {
+                          "oneof": [
+                            "vpcSubtype"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkType": {
+                          "type": "string",
+                          "id": 517413547,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rdmaSubtype": {
+                          "type": "string",
+                          "id": 82019713,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ullSubtype": {
+                          "type": "string",
+                          "id": 94311408,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "vpcSubtype": {
+                          "type": "string",
+                          "id": 356623396,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "NetworkType": {
+                          "values": {
+                            "UNDEFINED_NETWORK_TYPE": 0,
+                            "RDMA": 2510662,
+                            "ULL": 84117,
+                            "VPC": 85193
+                          }
+                        },
+                        "RdmaSubtype": {
+                          "values": {
+                            "UNDEFINED_RDMA_SUBTYPE": 0,
+                            "FALCON": 455787729,
+                            "ROCE": 2520927
+                          }
+                        },
+                        "UllSubtype": {
+                          "values": {
+                            "UNDEFINED_ULL_SUBTYPE": 0,
+                            "OPERATOR": 282073252,
+                            "PARTICIPANT": 236028691
+                          }
+                        },
+                        "VpcSubtype": {
+                          "values": {
+                            "UNDEFINED_VPC_SUBTYPE": 0,
+                            "REGIONAL": 92288543
                           }
                         }
                       }
@@ -66318,12 +66626,24 @@
                           "oneof": [
                             "backendService"
                           ]
+                        },
+                        "_mirrorPercent": {
+                          "oneof": [
+                            "mirrorPercent"
+                          ]
                         }
                       },
                       "fields": {
                         "backendService": {
                           "type": "string",
                           "id": 306946058,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "mirrorPercent": {
+                          "type": "double",
+                          "id": 277432261,
                           "options": {
                             "proto3_optional": true
                           }
@@ -70087,6 +70407,11 @@
                             "network"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_region": {
                           "oneof": [
                             "region"
@@ -70171,6 +70496,13 @@
                         "network": {
                           "type": "string",
                           "id": 232872494,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "RouterParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -71427,6 +71759,15 @@
                         }
                       }
                     },
+                    "RouterParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
+                        }
+                      }
+                    },
                     "RouterStatus": {
                       "oneofs": {
                         "_network": {
@@ -72619,6 +72960,11 @@
                             "provisioningModel"
                           ]
                         },
+                        "_skipGuestOsShutdown": {
+                          "oneof": [
+                            "skipGuestOsShutdown"
+                          ]
+                        },
                         "_terminationTime": {
                           "oneof": [
                             "terminationTime"
@@ -72715,6 +73061,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "skipGuestOsShutdown": {
+                          "type": "bool",
+                          "id": 201662378,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "terminationTime": {
                           "type": "string",
                           "id": 428082984,
@@ -72742,6 +73095,7 @@
                         "ProvisioningModel": {
                           "values": {
                             "UNDEFINED_PROVISIONING_MODEL": 0,
+                            "FLEX_START": 101746812,
                             "RESERVATION_BOUND": 293538571,
                             "SPOT": 2552066,
                             "STANDARD": 484642493
@@ -74889,6 +75243,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "natIps": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 117635086
                         },
                         "propagatedConnectionCount": {
                           "type": "uint32",
@@ -82742,6 +83101,11 @@
                           "oneof": [
                             "state"
                           ]
+                        },
+                        "_utilizationDetails": {
+                          "oneof": [
+                            "utilizationDetails"
+                          ]
                         }
                       },
                       "fields": {
@@ -82948,6 +83312,13 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 432294995
+                        },
+                        "utilizationDetails": {
+                          "type": "SubnetworkUtilizationDetails",
+                          "id": 125404453,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -83296,6 +83667,125 @@
                         "reservedInternalRange": {
                           "type": "string",
                           "id": 286248754,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SubnetworkUtilizationDetails": {
+                      "oneofs": {
+                        "_externalIpv6InstanceUtilization": {
+                          "oneof": [
+                            "externalIpv6InstanceUtilization"
+                          ]
+                        },
+                        "_externalIpv6LbUtilization": {
+                          "oneof": [
+                            "externalIpv6LbUtilization"
+                          ]
+                        },
+                        "_internalIpv6Utilization": {
+                          "oneof": [
+                            "internalIpv6Utilization"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "externalIpv6InstanceUtilization": {
+                          "type": "SubnetworkUtilizationDetailsIPV6Utilization",
+                          "id": 419750236,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "externalIpv6LbUtilization": {
+                          "type": "SubnetworkUtilizationDetailsIPV6Utilization",
+                          "id": 136563645,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "internalIpv6Utilization": {
+                          "type": "SubnetworkUtilizationDetailsIPV6Utilization",
+                          "id": 69707020,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ipv4Utilizations": {
+                          "rule": "repeated",
+                          "type": "SubnetworkUtilizationDetailsIPV4Utilization",
+                          "id": 206180011
+                        }
+                      }
+                    },
+                    "SubnetworkUtilizationDetailsIPV4Utilization": {
+                      "oneofs": {
+                        "_rangeName": {
+                          "oneof": [
+                            "rangeName"
+                          ]
+                        },
+                        "_totalAllocatedIp": {
+                          "oneof": [
+                            "totalAllocatedIp"
+                          ]
+                        },
+                        "_totalFreeIp": {
+                          "oneof": [
+                            "totalFreeIp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rangeName": {
+                          "type": "string",
+                          "id": 332216397,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalAllocatedIp": {
+                          "type": "int64",
+                          "id": 279055546,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalFreeIp": {
+                          "type": "int64",
+                          "id": 105624031,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "SubnetworkUtilizationDetailsIPV6Utilization": {
+                      "oneofs": {
+                        "_totalAllocatedIp": {
+                          "oneof": [
+                            "totalAllocatedIp"
+                          ]
+                        },
+                        "_totalFreeIp": {
+                          "oneof": [
+                            "totalFreeIp"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "totalAllocatedIp": {
+                          "type": "Uint128",
+                          "id": 279055546,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "totalFreeIp": {
+                          "type": "Uint128",
+                          "id": 105624031,
                           "options": {
                             "proto3_optional": true
                           }
@@ -86459,6 +86949,38 @@
                         }
                       }
                     },
+                    "TestIamPermissionsAddressRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "TestIamPermissionsBackendBucketRequest": {
                       "fields": {
                         "project": {
@@ -86584,6 +87106,31 @@
                         }
                       }
                     },
+                    "TestIamPermissionsGlobalAddressRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "TestIamPermissionsImageRequest": {
                       "fields": {
                         "project": {
@@ -86603,6 +87150,38 @@
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
                           "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsInstanceGroupRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -87072,6 +87651,38 @@
                         }
                       }
                     },
+                    "TestIamPermissionsRegionInstanceGroupRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "TestIamPermissionsRegionInstantSnapshotRequest": {
                       "fields": {
                         "project": {
@@ -87321,6 +87932,70 @@
                         }
                       }
                     },
+                    "TestIamPermissionsTargetInstanceRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsTargetPoolRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "TestIamPermissionsVpnGatewayRequest": {
                       "fields": {
                         "project": {
@@ -87501,6 +88176,8 @@
                             "UNDEFINED_MAINTENANCE_REASONS": 0,
                             "FAILURE_DISK": 8573778,
                             "FAILURE_GPU": 467876919,
+                            "FAILURE_GPU_MULTIPLE_FAULTY_HOSTS_CUSTOMER_REPORTED": 223284959,
+                            "FAILURE_GPU_NVLINK_SWITCH_CUSTOMER_REPORTED": 88487838,
                             "FAILURE_GPU_TEMPERATURE": 24926540,
                             "FAILURE_GPU_XID": 51956587,
                             "FAILURE_INFRA": 270541467,
@@ -90638,6 +91315,11 @@
                     },
                     "VpnTunnel": {
                       "oneofs": {
+                        "_cipherSuite": {
+                          "oneof": [
+                            "cipherSuite"
+                          ]
+                        },
                         "_creationTimestamp": {
                           "oneof": [
                             "creationTimestamp"
@@ -90745,6 +91427,13 @@
                         }
                       },
                       "fields": {
+                        "cipherSuite": {
+                          "type": "VpnTunnelCipherSuite",
+                          "id": 443788228,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "creationTimestamp": {
                           "type": "string",
                           "id": 30525366,
@@ -91005,6 +91694,36 @@
                         }
                       }
                     },
+                    "VpnTunnelCipherSuite": {
+                      "oneofs": {
+                        "_phase1": {
+                          "oneof": [
+                            "phase1"
+                          ]
+                        },
+                        "_phase2": {
+                          "oneof": [
+                            "phase2"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "phase1": {
+                          "type": "VpnTunnelPhase1Algorithms",
+                          "id": 84289046,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "phase2": {
+                          "type": "VpnTunnelPhase2Algorithms",
+                          "id": 84289047,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "VpnTunnelList": {
                       "oneofs": {
                         "_id": {
@@ -91073,6 +91792,49 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "VpnTunnelPhase1Algorithms": {
+                      "fields": {
+                        "dh": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3204
+                        },
+                        "encryption": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 97980291
+                        },
+                        "integrity": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 492830541
+                        },
+                        "prf": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 111268
+                        }
+                      }
+                    },
+                    "VpnTunnelPhase2Algorithms": {
+                      "fields": {
+                        "encryption": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 97980291
+                        },
+                        "integrity": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 492830541
+                        },
+                        "pfs": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 110909
                         }
                       }
                     },
@@ -92075,6 +92837,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsAddressRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/addresses/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/addresses/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
                             }
                           ]
                         }
@@ -94311,6 +95093,26 @@
                               "(google.cloud.operation_service)": "GlobalOperations"
                             }
                           ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsGlobalAddressRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/global/addresses/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/global/addresses/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,resource,test_permissions_request_resource"
+                            }
+                          ]
                         }
                       }
                     },
@@ -96187,6 +96989,26 @@
                               "(google.cloud.operation_service)": "ZoneOperations"
                             }
                           ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsInstanceGroupRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/instanceGroups/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,zone,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/instanceGroups/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,resource,test_permissions_request_resource"
+                            }
+                          ]
                         }
                       }
                     },
@@ -96436,6 +97258,30 @@
                             }
                           ]
                         },
+                        "AddNetworkInterface": {
+                          "requestType": "AddNetworkInterfaceInstanceRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "network_interface_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/addNetworkInterface",
+                            "(google.api.method_signature)": "project,zone,instance,network_interface_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "network_interface_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/addNetworkInterface"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,instance,network_interface_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
                         "AddResourcePolicies": {
                           "requestType": "AddResourcePoliciesInstanceRequest",
                           "responseType": "Operation",
@@ -96564,6 +97410,28 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,instance,access_config,network_interface"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "DeleteNetworkInterface": {
+                          "requestType": "DeleteNetworkInterfaceInstanceRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/deleteNetworkInterface",
+                            "(google.api.method_signature)": "project,zone,instance,network_interface_name",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/deleteNetworkInterface"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,instance,network_interface_name"
                             },
                             {
                               "(google.cloud.operation_service)": "ZoneOperations"
@@ -103379,6 +104247,26 @@
                               "(google.cloud.operation_service)": "RegionOperations"
                             }
                           ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRegionInstanceGroupRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/instanceGroups/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/instanceGroups/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                            }
+                          ]
                         }
                       }
                     },
@@ -108527,6 +109415,26 @@
                               "(google.cloud.operation_service)": "ZoneOperations"
                             }
                           ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsTargetInstanceRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/targetInstances/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,zone,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/targetInstances/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,resource,test_permissions_request_resource"
+                            }
+                          ]
                         }
                       }
                     },
@@ -108797,6 +109705,26 @@
                             },
                             {
                               "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsTargetPoolRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/regions/{region}/targetPools/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/v1/projects/{project}/regions/{region}/targetPools/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
                             }
                           ]
                         }
@@ -116872,6 +117800,21 @@
                     },
                     "AllocationAggregateReservation": {
                       "oneofs": {
+                        "_hostCount": {
+                          "oneof": [
+                            "hostCount"
+                          ]
+                        },
+                        "_inUseHostCount": {
+                          "oneof": [
+                            "inUseHostCount"
+                          ]
+                        },
+                        "_inUseInstanceCount": {
+                          "oneof": [
+                            "inUseInstanceCount"
+                          ]
+                        },
                         "_vmFamily": {
                           "oneof": [
                             "vmFamily"
@@ -116884,6 +117827,27 @@
                         }
                       },
                       "fields": {
+                        "hostCount": {
+                          "type": "int32",
+                          "id": 297782200,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "inUseHostCount": {
+                          "type": "int32",
+                          "id": 364069834,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "inUseInstanceCount": {
+                          "type": "int32",
+                          "id": 319874039,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "inUseResources": {
                           "rule": "repeated",
                           "type": "AllocationAggregateReservationReservedResourceInfo",
@@ -122212,6 +123176,11 @@
                           "rule": "repeated",
                           "type": "int32",
                           "id": 3003767
+                        },
+                        "asns32": {
+                          "rule": "repeated",
+                          "type": "uint32",
+                          "id": 202267158
                         },
                         "type": {
                           "type": "string",
@@ -131574,6 +132543,11 @@
                             "parent"
                           ]
                         },
+                        "_policySource": {
+                          "oneof": [
+                            "policySource"
+                          ]
+                        },
                         "_policyType": {
                           "oneof": [
                             "policyType"
@@ -131672,6 +132646,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "policySource": {
+                          "type": "string",
+                          "id": 232383432,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "policyType": {
                           "type": "string",
                           "id": 18158119,
@@ -131721,6 +132702,13 @@
                         }
                       },
                       "nested": {
+                        "PolicySource": {
+                          "values": {
+                            "UNDEFINED_POLICY_SOURCE": 0,
+                            "SYSTEM": 313484847,
+                            "USER_DEFINED": 491485557
+                          }
+                        },
                         "PolicyType": {
                           "values": {
                             "UNDEFINED_POLICY_TYPE": 0,
@@ -131924,6 +132912,11 @@
                             "securityProfileGroup"
                           ]
                         },
+                        "_targetType": {
+                          "oneof": [
+                            "targetType"
+                          ]
+                        },
                         "_tlsInspect": {
                           "oneof": [
                             "tlsInspect"
@@ -132008,6 +133001,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "targetForwardingRules": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 495923747
+                        },
                         "targetResources": {
                           "rule": "repeated",
                           "type": "string",
@@ -132023,6 +133021,13 @@
                           "type": "string",
                           "id": 457639710
                         },
+                        "targetType": {
+                          "type": "string",
+                          "id": 62925096,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "tlsInspect": {
                           "type": "bool",
                           "id": 43425488,
@@ -132037,6 +133042,13 @@
                             "UNDEFINED_DIRECTION": 0,
                             "EGRESS": 432880501,
                             "INGRESS": 516931221
+                          }
+                        },
+                        "TargetType": {
+                          "values": {
+                            "UNDEFINED_TARGET_TYPE": 0,
+                            "INSTANCES": 131337822,
+                            "INTERNAL_MANAGED_LB": 309241080
                           }
                         }
                       }
@@ -133166,6 +134178,11 @@
                             "planningStatus"
                           ]
                         },
+                        "_protectionTier": {
+                          "oneof": [
+                            "protectionTier"
+                          ]
+                        },
                         "_reservationMode": {
                           "oneof": [
                             "reservationMode"
@@ -133321,6 +134338,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "protectionTier": {
+                          "type": "string",
+                          "id": 503959432,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "reservationMode": {
                           "type": "string",
                           "id": 277294646,
@@ -133414,6 +134438,14 @@
                             "DRAFT": 65307009,
                             "PLANNING_STATUS_UNSPECIFIED": 252728940,
                             "SUBMITTED": 450918619
+                          }
+                        },
+                        "ProtectionTier": {
+                          "values": {
+                            "UNDEFINED_PROTECTION_TIER": 0,
+                            "CAPACITY_OPTIMIZED": 17430466,
+                            "PROTECTION_TIER_UNSPECIFIED": 262261984,
+                            "STANDARD": 484642493
                           }
                         },
                         "ReservationMode": {
@@ -138679,6 +139711,13 @@
                       }
                     },
                     "GetServiceAttachmentRequest": {
+                      "oneofs": {
+                        "_showNatIps": {
+                          "oneof": [
+                            "showNatIps"
+                          ]
+                        }
+                      },
                       "fields": {
                         "project": {
                           "type": "string",
@@ -138699,6 +139738,13 @@
                           "id": 338957549,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "showNatIps": {
+                          "type": "bool",
+                          "id": 485502156,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -146410,6 +147456,7 @@
                           "values": {
                             "UNDEFINED_STATUS": 0,
                             "DEPROVISIONING": 428935662,
+                            "PENDING": 35394935,
                             "PENDING_STOP": 362509770,
                             "PROVISIONING": 290896621,
                             "REPAIRING": 413483285,
@@ -149540,7 +150587,21 @@
                       }
                     },
                     "InstanceParams": {
+                      "oneofs": {
+                        "_requestValidForDuration": {
+                          "oneof": [
+                            "requestValidForDuration"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "requestValidForDuration": {
+                          "type": "Duration",
+                          "id": 116247389,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "resourceManagerTags": {
                           "keyType": "string",
                           "type": "string",
@@ -150263,6 +151324,7 @@
                           "values": {
                             "UNDEFINED_STATUS": 0,
                             "DEPROVISIONING": 428935662,
+                            "PENDING": 35394935,
                             "PENDING_STOP": 362509770,
                             "PROVISIONING": 290896621,
                             "REPAIRING": 413483285,
@@ -154728,6 +155790,11 @@
                             "proto3_optional": true
                           }
                         },
+                        "singleRegionProductionCriticalPeerLocations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 439537103
+                        },
                         "status": {
                           "type": "string",
                           "id": 181260274,
@@ -155236,6 +156303,11 @@
                             "maxLagSize10Gbps"
                           ]
                         },
+                        "_maxLagSize400Gbps": {
+                          "oneof": [
+                            "maxLagSize400Gbps"
+                          ]
+                        },
                         "_name": {
                           "oneof": [
                             "name"
@@ -155357,6 +156429,13 @@
                         "maxLagSize10Gbps": {
                           "type": "int32",
                           "id": 294007573,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxLagSize400Gbps": {
+                          "type": "int32",
+                          "id": 104941138,
                           "options": {
                             "proto3_optional": true
                           }
@@ -167838,6 +168917,7 @@
                           "values": {
                             "UNDEFINED_INSTANCE_STATUS": 0,
                             "DEPROVISIONING": 428935662,
+                            "PENDING": 35394935,
                             "PENDING_STOP": 362509770,
                             "PROVISIONING": 290896621,
                             "REPAIRING": 413483285,
@@ -171502,6 +172582,11 @@
                             "name"
                           ]
                         },
+                        "_profileType": {
+                          "oneof": [
+                            "profileType"
+                          ]
+                        },
                         "_selfLink": {
                           "oneof": [
                             "selfLink"
@@ -171564,6 +172649,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "profileType": {
+                          "type": "NetworkProfileProfileType",
+                          "id": 150167568,
                           "options": {
                             "proto3_optional": true
                           }
@@ -172141,6 +173233,90 @@
                             "UNDEFINED_UNICAST": 0,
                             "UNICAST_SDN": 379954157,
                             "UNICAST_ULL": 379956325
+                          }
+                        }
+                      }
+                    },
+                    "NetworkProfileProfileType": {
+                      "oneofs": {
+                        "_networkType": {
+                          "oneof": [
+                            "networkType"
+                          ]
+                        },
+                        "_rdmaSubtype": {
+                          "oneof": [
+                            "rdmaSubtype"
+                          ]
+                        },
+                        "_ullSubtype": {
+                          "oneof": [
+                            "ullSubtype"
+                          ]
+                        },
+                        "_vpcSubtype": {
+                          "oneof": [
+                            "vpcSubtype"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkType": {
+                          "type": "string",
+                          "id": 517413547,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rdmaSubtype": {
+                          "type": "string",
+                          "id": 82019713,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ullSubtype": {
+                          "type": "string",
+                          "id": 94311408,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "vpcSubtype": {
+                          "type": "string",
+                          "id": 356623396,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "NetworkType": {
+                          "values": {
+                            "UNDEFINED_NETWORK_TYPE": 0,
+                            "RDMA": 2510662,
+                            "ULL": 84117,
+                            "VPC": 85193
+                          }
+                        },
+                        "RdmaSubtype": {
+                          "values": {
+                            "UNDEFINED_RDMA_SUBTYPE": 0,
+                            "FALCON": 455787729,
+                            "ROCE": 2520927
+                          }
+                        },
+                        "UllSubtype": {
+                          "values": {
+                            "UNDEFINED_ULL_SUBTYPE": 0,
+                            "OPERATOR": 282073252,
+                            "PARTICIPANT": 236028691
+                          }
+                        },
+                        "VpcSubtype": {
+                          "values": {
+                            "UNDEFINED_VPC_SUBTYPE": 0,
+                            "REGIONAL": 92288543
                           }
                         }
                       }
@@ -176780,6 +177956,11 @@
                           "oneof": [
                             "requestId"
                           ]
+                        },
+                        "_updateMask": {
+                          "oneof": [
+                            "updateMask"
+                          ]
                         }
                       },
                       "fields": {
@@ -176802,6 +177983,13 @@
                           "id": 216159612,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "string",
+                          "id": 500079778,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -178048,6 +179236,11 @@
                           "oneof": [
                             "requestId"
                           ]
+                        },
+                        "_updateMask": {
+                          "oneof": [
+                            "updateMask"
+                          ]
                         }
                       },
                       "fields": {
@@ -178077,6 +179270,13 @@
                           "id": 402693443,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "string",
+                          "id": 500079778,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -184491,6 +185691,11 @@
                             "inUseCount"
                           ]
                         },
+                        "_inUseHostCount": {
+                          "oneof": [
+                            "inUseHostCount"
+                          ]
+                        },
                         "_kind": {
                           "oneof": [
                             "kind"
@@ -184574,6 +185779,13 @@
                         "inUseCount": {
                           "type": "int32",
                           "id": 493458877,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "inUseHostCount": {
+                          "type": "int32",
+                          "id": 364069834,
                           "options": {
                             "proto3_optional": true
                           }
@@ -185007,6 +186219,11 @@
                             "inUseCount"
                           ]
                         },
+                        "_inUseHostCount": {
+                          "oneof": [
+                            "inUseHostCount"
+                          ]
+                        },
                         "_kind": {
                           "oneof": [
                             "kind"
@@ -185080,6 +186297,13 @@
                         "inUseCount": {
                           "type": "int32",
                           "id": 493458877,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "inUseHostCount": {
+                          "type": "int32",
+                          "id": 364069834,
                           "options": {
                             "proto3_optional": true
                           }
@@ -193286,6 +194510,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "natIps": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 117635086
                         },
                         "propagatedConnectionCount": {
                           "type": "uint32",
@@ -207991,6 +209220,8 @@
                             "UNDEFINED_MAINTENANCE_REASONS": 0,
                             "FAILURE_DISK": 8573778,
                             "FAILURE_GPU": 467876919,
+                            "FAILURE_GPU_MULTIPLE_FAULTY_HOSTS_CUSTOMER_REPORTED": 223284959,
+                            "FAILURE_GPU_NVLINK_SWITCH_CUSTOMER_REPORTED": 88487838,
                             "FAILURE_GPU_TEMPERATURE": 24926540,
                             "FAILURE_GPU_XID": 51956587,
                             "FAILURE_INFRA": 270541467,
@@ -212690,6 +213921,11 @@
                     },
                     "WireProperties": {
                       "oneofs": {
+                        "_bandwidthAllocation": {
+                          "oneof": [
+                            "bandwidthAllocation"
+                          ]
+                        },
                         "_bandwidthUnmetered": {
                           "oneof": [
                             "bandwidthUnmetered"
@@ -212702,6 +213938,13 @@
                         }
                       },
                       "fields": {
+                        "bandwidthAllocation": {
+                          "type": "string",
+                          "id": 90651950,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "bandwidthUnmetered": {
                           "type": "int64",
                           "id": 272650017,
@@ -212718,6 +213961,13 @@
                         }
                       },
                       "nested": {
+                        "BandwidthAllocation": {
+                          "values": {
+                            "UNDEFINED_BANDWIDTH_ALLOCATION": 0,
+                            "ALLOCATE_PER_WIRE": 358730057,
+                            "SHARED_WITH_WIRE_GROUP": 286454628
+                          }
+                        },
                         "FaultResponse": {
                           "values": {
                             "UNDEFINED_FAULT_RESPONSE": 0,
@@ -235309,7 +236559,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "http": {
@@ -235433,10 +236684,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -235577,28 +236824,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -235656,11 +236881,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -235720,19 +236940,6 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
-              }
-            },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
               }
             },
             "LaunchStage": {
@@ -235867,19 +237074,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -235917,11 +237117,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -236011,10 +237206,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -236240,10 +237431,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -236458,7 +237645,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -236594,8 +237780,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -236622,10 +237807,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -236694,26 +237875,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -236803,10 +237964,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -236950,7 +238107,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -236961,7 +238117,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -236972,7 +238127,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -236983,7 +238137,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -236994,8 +238147,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -237005,38 +238157,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -237081,13 +238222,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -237101,33 +238236,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -237156,26 +238264,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -237188,12 +238281,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -237277,14 +238364,6 @@
                     }
                   }
                 }
-              }
-            },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {

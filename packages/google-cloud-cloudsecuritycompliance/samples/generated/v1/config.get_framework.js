@@ -35,7 +35,7 @@ function main(name) {
    */
   // const name = 'abc123'
   /**
-   *  Optional. The Framework major revision to retrieve. If not specified, the
+   *  Optional. The Framework major version to retrieve. If not specified, the
    *  most recently updated revision_id is retrieved.
    */
   // const majorRevisionId = 1234

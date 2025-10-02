@@ -59,7 +59,7 @@ function main(orderBy, project, region) {
   // const region = 'us-central1'
 
   // Imports the Compute library
-  const {AddressesClient} = require('@google-cloud/compute-small').v1small;
+  const {AddressesClient} = require('@google-cloud/compute').v1small;
 
   // Instantiates a client
   const computeClient = new AddressesClient();

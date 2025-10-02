@@ -29,7 +29,9 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent value for ListFrameworkDeploymentsRequest.
+   *  Required. parent resource of the FrameworkDeployment in the format:
+   *  organizations/{organization}/locations/{location}
+   *  Only global location is supported.
    */
   // const parent = 'abc123'
   /**

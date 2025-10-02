@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Controls Partner API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudcontrolspartner)
+# [Cloud Controls Partner API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/cloudcontrolspartner.svg)](https://www.npmjs.org/package/@google-cloud/cloudcontrolspartner)
-
-
-
 
 Cloud Controls Partner API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudcontrolspartner/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Cloud Controls Partner API Node.js Client API Reference][client-docs]
-* [Cloud Controls Partner API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-cloudcontrolspartner](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudcontrolspartner)
+* [Cloud Controls Partner API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/cloudcontrolspartner/latest)
+* [Cloud Controls Partner API Documentation](https://cloud.google.com/sovereign-controls-by-partners/docs/sovereign-partners/reference/rest)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +28,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
-* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,54 +44,49 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Cloud Controls Partner API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/cloudcontrolspartner
 ```
 
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-cloudcontrolspartner/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Cloud_controls_partner_core.create_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.create_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.create_customer.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.delete_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.delete_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.delete_customer.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_customer.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_ekm_connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_ekm_connections.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_ekm_connections.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_partner | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_partner_permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner_permissions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner_permissions.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_workload.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.list_access_approval_requests | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_access_approval_requests.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_access_approval_requests.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.list_customers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_customers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_customers.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.list_workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_workloads.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_workloads.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.update_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.update_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.update_customer.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_monitoring.get_violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.get_violation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.get_violation.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_monitoring.list_violations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.list_violations.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.list_violations.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.create_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.delete_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_customer.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_ekm_connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_ekm_connections.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_ekm_connections.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_partner | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_partner_permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner_permissions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner_permissions.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.get_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_workload.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.list_access_approval_requests | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_access_approval_requests.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_access_approval_requests.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.list_customers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_customers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_customers.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.list_workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_workloads.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_workloads.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_core.update_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_monitoring.get_violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.get_violation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.get_violation.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Cloud_controls_partner_monitoring.list_violations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.list_violations.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.list_violations.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-cloudcontrolspartner/samples/quickstart.js,packages/google-cloud-cloudcontrolspartner/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.create_customer.js) |
+| delete customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.delete_customer.js) |
+| get customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_customer.js) |
+| get ekm connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_ekm_connections.js) |
+| get partner | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner.js) |
+| get partner permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_partner_permissions.js) |
+| get workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.get_workload.js) |
+| list access approval requests | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_access_approval_requests.js) |
+| list customers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_customers.js) |
+| list workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.list_workloads.js) |
+| update customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_core.update_customer.js) |
+| get violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.get_violation.js) |
+| list violations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/cloud_controls_partner_monitoring.list_violations.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1/snippet_metadata_google.cloud.cloudcontrolspartner.v1.json) |
+| create customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.create_customer.js) |
+| delete customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.delete_customer.js) |
+| get customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_customer.js) |
+| get ekm connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_ekm_connections.js) |
+| get partner | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner.js) |
+| get partner permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_partner_permissions.js) |
+| get workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.get_workload.js) |
+| list access approval requests | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_access_approval_requests.js) |
+| list customers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_customers.js) |
+| list workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.list_workloads.js) |
+| update customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_core.update_customer.js) |
+| get violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.get_violation.js) |
+| list violations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/cloud_controls_partner_monitoring.list_violations.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples/generated/v1beta/snippet_metadata_google.cloud.cloudcontrolspartner.v1beta.json) |
 
-
-
-The [Cloud Controls Partner API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -120,45 +113,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/cloudcontrolspartner/latest
-[product-docs]: https://cloud.google.com/sovereign-controls-by-partners/docs/sovereign-partners
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=cloudcontrolspartner.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudcontrolspartner
