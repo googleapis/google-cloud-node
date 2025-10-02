@@ -1,0 +1,5 @@
+[
+  "../../protos/google/shopping/merchant/issueresolution/v1beta/aggregateproductstatuses.proto",
+  "../../protos/google/shopping/merchant/issueresolution/v1beta/issueresolution.proto",
+  "../../protos/google/shopping/type/types.proto"
+]
