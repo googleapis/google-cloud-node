@@ -1,25 +1,25 @@
-[//]: # "partials.introduction"
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Channel API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-channel)
+# [Cloud Channel API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/channel.svg)](https://www.npmjs.org/package/@google-cloud/channel)
 
+Cloud Channel API client for Node.js
 
-
-
-Channel client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-channel/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Cloud Channel API Node.js Client API Reference][client-docs]
-* [Cloud Channel API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-channel](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-channel)
+* [Cloud Channel API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/channel/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -28,18 +28,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -47,192 +44,74 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Cloud Channel API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/channel
 ```
 
-
-### Using the client library
-
-```javascript
-// Reads the secrets from a `oauth2.keys.json` file, which should be downloaded
-// from the Google Developers Console and saved in the same directory with the
-// sample app.
-
-// This sample app only calls read-only methods from the Channel API. Include
-// additional scopes if calling methods that modify the configuration.
-const SCOPES = ['https://www.googleapis.com/auth/apps.order'];
-
-async function listCustomers(authClient, accountNumber) {
-  // Imports the Google Cloud client library
-  const {CloudChannelServiceClient} = require('@google-cloud/channel');
-
-  // Instantiates a client using OAuth2 credentials.
-  const sslCreds = grpc.credentials.createSsl();
-  const credentials = grpc.credentials.combineChannelCredentials(
-    sslCreds,
-    grpc.credentials.createFromGoogleCredential(authClient)
-  );
-
-  // Instantiates a client
-  const client = new CloudChannelServiceClient({
-    sslCreds: credentials,
-  });
-
-  // Calls listCustomers() method
-  const customers = await client.listCustomers({
-    parent: `accounts/${accountNumber}`,
-  });
-  console.info(customers);
-}
-
-/**
- * Create a new OAuth2Client, and go through the OAuth2 content
- * workflow.  Return the full client to the callback.
- */
-function getAuthenticatedClient(keys) {
-  return new Promise((resolve, reject) => {
-    // Create an oAuth client to authorize the API call. Secrets are kept in a
-    // `keys.json` file, which should be downloaded from the Google Developers
-    // Console.
-    const oAuth2Client = new OAuth2Client(
-      keys.web.client_id,
-      keys.web.client_secret,
-      // The first redirect URL from the `oauth2.keys.json` file will be used
-      // to generate the OAuth2 callback URL. Update the line below or edit
-      // the redirect URL in the Google Developers Console if needed.
-      // This sample app expects the callback URL to be
-      // 'http://localhost:3000/oauth2callback'
-      keys.web.redirect_uris[0]
-    );
-
-    // Generate the url that will be used for the consent dialog.
-    const authorizeUrl = oAuth2Client.generateAuthUrl({
-      access_type: 'offline',
-      scope: SCOPES.join(' '),
-    });
-
-    // Open an http server to accept the oauth callback. In this example, the
-    // only request to our webserver is to /oauth2callback?code=<code>
-    const server = http
-      .createServer(async (req, res) => {
-        try {
-          if (req.url.indexOf('/oauth2callback') > -1) {
-            // Acquire the code from the querystring, and close the web
-            // server.
-            const qs = new url.URL(req.url, 'http://localhost:3000')
-              .searchParams;
-            const code = qs.get('code');
-            console.log(`Code is ${code}`);
-            res.end('Authentication successful! Please return to the console.');
-            server.destroy();
-
-            // Now that we have the code, use that to acquire tokens.
-            const r = await oAuth2Client.getToken(code);
-            // Make sure to set the credentials on the OAuth2 client.
-            oAuth2Client.setCredentials(r.tokens);
-            console.info('Tokens acquired.');
-            resolve(oAuth2Client);
-          }
-        } catch (e) {
-          reject(e);
-        }
-      })
-      .listen(3000, () => {
-        // Open the browser to the authorize url to start the workflow.
-        // This line will not work if you are running the code in the
-        // environment where a browser is not available. In this case,
-        // copy the URL and open it manually in a browser.
-        console.info(`Opening the browser with URL: ${authorizeUrl}`);
-        open(authorizeUrl, {wait: false}).then(cp => cp.unref());
-      });
-    destroyer(server);
-  });
-}
-
-async function main(accountNumber, keys) {
-  // TODO: uncomment with your account number
-  // const accountNumber = '1234'
-
-  // TODO: uncomment this line with your oAuth2 file
-  //const keys = require('./oauth2.keys.json');
-
-  getAuthenticatedClient(keys).then(authClient =>
-    listCustomers(authClient, accountNumber)
-  );
-}
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-channel/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Cloud_channel_reports_service.fetch_report_results | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_reports_service.fetch_report_results.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_reports_service.fetch_report_results.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_reports_service.list_reports | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_reports_service.list_reports.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_reports_service.list_reports.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_reports_service.run_report_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_reports_service.run_report_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_reports_service.run_report_job.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.activate_entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.activate_entitlement.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.activate_entitlement.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.cancel_entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.cancel_entitlement.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.cancel_entitlement.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.change_offer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.change_offer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.change_offer.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.change_parameters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.change_parameters.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.change_parameters.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.change_renewal_settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.change_renewal_settings.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.change_renewal_settings.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.check_cloud_identity_accounts_exist | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.check_cloud_identity_accounts_exist.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.check_cloud_identity_accounts_exist.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.create_channel_partner_link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_channel_partner_link.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_channel_partner_link.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.create_channel_partner_repricing_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_channel_partner_repricing_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_channel_partner_repricing_config.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.create_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_customer.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.create_customer_repricing_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_customer_repricing_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_customer_repricing_config.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.create_entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_entitlement.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_entitlement.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.delete_channel_partner_repricing_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.delete_channel_partner_repricing_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.delete_channel_partner_repricing_config.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.delete_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.delete_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.delete_customer.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.delete_customer_repricing_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.delete_customer_repricing_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.delete_customer_repricing_config.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.get_channel_partner_link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_channel_partner_link.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_channel_partner_link.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.get_channel_partner_repricing_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_channel_partner_repricing_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_channel_partner_repricing_config.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.get_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_customer.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.get_customer_repricing_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_customer_repricing_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_customer_repricing_config.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.get_entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_entitlement.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_entitlement.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.import_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.import_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.import_customer.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_channel_partner_links | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_channel_partner_links.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_channel_partner_links.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_channel_partner_repricing_configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_channel_partner_repricing_configs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_channel_partner_repricing_configs.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_customer_repricing_configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_customer_repricing_configs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_customer_repricing_configs.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_customers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_customers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_customers.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_entitlement_changes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_entitlement_changes.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_entitlement_changes.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_entitlements | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_entitlements.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_entitlements.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_offers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_offers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_offers.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_products.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_products.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_purchasable_offers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_purchasable_offers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_purchasable_offers.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_purchasable_skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_purchasable_skus.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_purchasable_skus.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_sku_group_billable_skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_group_billable_skus.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_group_billable_skus.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_sku_groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_groups.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_groups.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_skus.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_skus.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_subscribers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_subscribers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_subscribers.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_transferable_offers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_transferable_offers.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_transferable_offers.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.list_transferable_skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_transferable_skus.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_transferable_skus.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.lookup_offer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.lookup_offer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.lookup_offer.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.provision_cloud_identity | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.provision_cloud_identity.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.provision_cloud_identity.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.query_eligible_billing_accounts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.query_eligible_billing_accounts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.query_eligible_billing_accounts.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.register_subscriber | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.register_subscriber.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.register_subscriber.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.start_paid_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.start_paid_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.start_paid_service.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.suspend_entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.suspend_entitlement.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.suspend_entitlement.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.transfer_entitlements | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.transfer_entitlements.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.transfer_entitlements.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.transfer_entitlements_to_google | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.transfer_entitlements_to_google.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.transfer_entitlements_to_google.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.unregister_subscriber | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.unregister_subscriber.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.unregister_subscriber.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.update_channel_partner_link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_channel_partner_link.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_channel_partner_link.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.update_channel_partner_repricing_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_channel_partner_repricing_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_channel_partner_repricing_config.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.update_customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_customer.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_customer.js,packages/google-cloud-channel/samples/README.md) |
-| Cloud_channel_service.update_customer_repricing_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_customer_repricing_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_customer_repricing_config.js,packages/google-cloud-channel/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-channel/samples/quickstart.js,packages/google-cloud-channel/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| fetch report results | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_reports_service.fetch_report_results.js) |
+| list reports | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_reports_service.list_reports.js) |
+| run report job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_reports_service.run_report_job.js) |
+| activate entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.activate_entitlement.js) |
+| cancel entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.cancel_entitlement.js) |
+| change offer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.change_offer.js) |
+| change parameters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.change_parameters.js) |
+| change renewal settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.change_renewal_settings.js) |
+| check cloud identity accounts exist | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.check_cloud_identity_accounts_exist.js) |
+| create channel partner link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_channel_partner_link.js) |
+| create channel partner repricing config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_channel_partner_repricing_config.js) |
+| create customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_customer.js) |
+| create customer repricing config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_customer_repricing_config.js) |
+| create entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.create_entitlement.js) |
+| delete channel partner repricing config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.delete_channel_partner_repricing_config.js) |
+| delete customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.delete_customer.js) |
+| delete customer repricing config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.delete_customer_repricing_config.js) |
+| get channel partner link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_channel_partner_link.js) |
+| get channel partner repricing config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_channel_partner_repricing_config.js) |
+| get customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_customer.js) |
+| get customer repricing config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_customer_repricing_config.js) |
+| get entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.get_entitlement.js) |
+| import customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.import_customer.js) |
+| list channel partner links | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_channel_partner_links.js) |
+| list channel partner repricing configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_channel_partner_repricing_configs.js) |
+| list customer repricing configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_customer_repricing_configs.js) |
+| list customers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_customers.js) |
+| list entitlement changes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_entitlement_changes.js) |
+| list entitlements | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_entitlements.js) |
+| list offers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_offers.js) |
+| list products | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_products.js) |
+| list purchasable offers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_purchasable_offers.js) |
+| list purchasable skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_purchasable_skus.js) |
+| list sku group billable skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_group_billable_skus.js) |
+| list sku groups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_sku_groups.js) |
+| list skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_skus.js) |
+| list subscribers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_subscribers.js) |
+| list transferable offers | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_transferable_offers.js) |
+| list transferable skus | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.list_transferable_skus.js) |
+| lookup offer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.lookup_offer.js) |
+| provision cloud identity | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.provision_cloud_identity.js) |
+| query eligible billing accounts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.query_eligible_billing_accounts.js) |
+| register subscriber | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.register_subscriber.js) |
+| start paid service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.start_paid_service.js) |
+| suspend entitlement | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.suspend_entitlement.js) |
+| transfer entitlements | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.transfer_entitlements.js) |
+| transfer entitlements to google | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.transfer_entitlements_to_google.js) |
+| unregister subscriber | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.unregister_subscriber.js) |
+| update channel partner link | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_channel_partner_link.js) |
+| update channel partner repricing config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_channel_partner_repricing_config.js) |
+| update customer | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_customer.js) |
+| update customer repricing config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/cloud_channel_service.update_customer_repricing_config.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples/generated/v1/snippet_metadata_google.cloud.channel.v1.json) |
 
-
-
-The [Cloud Channel API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -259,42 +138,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/channel/latest
-[product-docs]: https://cloud.google.com/channel/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=cloudchannel.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-channel

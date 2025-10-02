@@ -26,14 +26,6 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
-                /** RegulatoryControlResponsibilityType enum. */
-                enum RegulatoryControlResponsibilityType {
-                    REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED = 0,
-                    GOOGLE = 1,
-                    CUSTOMER = 2,
-                    SHARED = 3
-                }
-
                 /** EnforcementMode enum. */
                 enum EnforcementMode {
                     ENFORCEMENT_MODE_UNSPECIFIED = 0,
@@ -124,9 +116,6 @@ export namespace google {
                     /** Framework type */
                     type?: (google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|keyof typeof google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|null);
 
-                    /** Framework cloudControlGroupDetails */
-                    cloudControlGroupDetails?: (google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails[]|null);
-
                     /** Framework cloudControlDetails */
                     cloudControlDetails?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlDetails[]|null);
 
@@ -138,6 +127,9 @@ export namespace google {
 
                     /** Framework supportedTargetResourceTypes */
                     supportedTargetResourceTypes?: (google.cloud.cloudsecuritycompliance.v1.TargetResourceType[]|null);
+
+                    /** Framework supportedEnforcementModes */
+                    supportedEnforcementModes?: (google.cloud.cloudsecuritycompliance.v1.EnforcementMode[]|null);
                 }
 
                 /** Represents a Framework. */
@@ -164,9 +156,6 @@ export namespace google {
                     /** Framework type. */
                     public type: (google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|keyof typeof google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType);
 
-                    /** Framework cloudControlGroupDetails. */
-                    public cloudControlGroupDetails: google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails[];
-
                     /** Framework cloudControlDetails. */
                     public cloudControlDetails: google.cloud.cloudsecuritycompliance.v1.ICloudControlDetails[];
 
@@ -178,6 +167,9 @@ export namespace google {
 
                     /** Framework supportedTargetResourceTypes. */
                     public supportedTargetResourceTypes: google.cloud.cloudsecuritycompliance.v1.TargetResourceType[];
+
+                    /** Framework supportedEnforcementModes. */
+                    public supportedEnforcementModes: google.cloud.cloudsecuritycompliance.v1.EnforcementMode[];
 
                     /**
                      * Creates a new Framework instance using the specified properties.
@@ -259,252 +251,9 @@ export namespace google {
 
                 namespace Framework {
 
-                    /** Properties of a CloudControlGroupDetails. */
-                    interface ICloudControlGroupDetails {
-
-                        /** CloudControlGroupDetails cloudControlGroup */
-                        cloudControlGroup?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup|null);
-                    }
-
-                    /** Represents a CloudControlGroupDetails. */
-                    class CloudControlGroupDetails implements ICloudControlGroupDetails {
-
-                        /**
-                         * Constructs a new CloudControlGroupDetails.
-                         * @param [properties] Properties to set
-                         */
-                        constructor(properties?: google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails);
-
-                        /** CloudControlGroupDetails cloudControlGroup. */
-                        public cloudControlGroup?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup|null);
-
-                        /** CloudControlGroupDetails kind. */
-                        public kind?: "cloudControlGroup";
-
-                        /**
-                         * Creates a new CloudControlGroupDetails instance using the specified properties.
-                         * @param [properties] Properties to set
-                         * @returns CloudControlGroupDetails instance
-                         */
-                        public static create(properties?: google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails): google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails;
-
-                        /**
-                         * Encodes the specified CloudControlGroupDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.verify|verify} messages.
-                         * @param message CloudControlGroupDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encode(message: google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Encodes the specified CloudControlGroupDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.verify|verify} messages.
-                         * @param message CloudControlGroupDetails message or plain object to encode
-                         * @param [writer] Writer to encode to
-                         * @returns Writer
-                         */
-                        public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                        /**
-                         * Decodes a CloudControlGroupDetails message from the specified reader or buffer.
-                         * @param reader Reader or buffer to decode from
-                         * @param [length] Message length if known beforehand
-                         * @returns CloudControlGroupDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails;
-
-                        /**
-                         * Decodes a CloudControlGroupDetails message from the specified reader or buffer, length delimited.
-                         * @param reader Reader or buffer to decode from
-                         * @returns CloudControlGroupDetails
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails;
-
-                        /**
-                         * Verifies a CloudControlGroupDetails message.
-                         * @param message Plain object to verify
-                         * @returns `null` if valid, otherwise the reason why it is not
-                         */
-                        public static verify(message: { [k: string]: any }): (string|null);
-
-                        /**
-                         * Creates a CloudControlGroupDetails message from a plain object. Also converts values to their respective internal types.
-                         * @param object Plain object
-                         * @returns CloudControlGroupDetails
-                         */
-                        public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails;
-
-                        /**
-                         * Creates a plain object from a CloudControlGroupDetails message. Also converts values to other types if specified.
-                         * @param message CloudControlGroupDetails
-                         * @param [options] Conversion options
-                         * @returns Plain object
-                         */
-                        public static toObject(message: google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                        /**
-                         * Converts this CloudControlGroupDetails to JSON.
-                         * @returns JSON object
-                         */
-                        public toJSON(): { [k: string]: any };
-
-                        /**
-                         * Gets the default type url for CloudControlGroupDetails
-                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns The default type url
-                         */
-                        public static getTypeUrl(typeUrlPrefix?: string): string;
-                    }
-
                     /** FrameworkType enum. */
                     enum FrameworkType {
                         FRAMEWORK_TYPE_UNSPECIFIED = 0,
-                        BUILT_IN = 1,
-                        CUSTOM = 2
-                    }
-                }
-
-                /** Properties of a CloudControlGroup. */
-                interface ICloudControlGroup {
-
-                    /** CloudControlGroup name */
-                    name?: (string|null);
-
-                    /** CloudControlGroup description */
-                    description?: (string|null);
-
-                    /** CloudControlGroup type */
-                    type?: (google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.CloudControlGroupType|keyof typeof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.CloudControlGroupType|null);
-
-                    /** CloudControlGroup controlId */
-                    controlId?: (string|null);
-
-                    /** CloudControlGroup cloudControlDetails */
-                    cloudControlDetails?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlDetails[]|null);
-
-                    /** CloudControlGroup majorRevisionId */
-                    majorRevisionId?: (number|Long|string|null);
-
-                    /** CloudControlGroup control */
-                    control?: (string|null);
-                }
-
-                /** Represents a CloudControlGroup. */
-                class CloudControlGroup implements ICloudControlGroup {
-
-                    /**
-                     * Constructs a new CloudControlGroup.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup);
-
-                    /** CloudControlGroup name. */
-                    public name: string;
-
-                    /** CloudControlGroup description. */
-                    public description: string;
-
-                    /** CloudControlGroup type. */
-                    public type: (google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.CloudControlGroupType|keyof typeof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.CloudControlGroupType);
-
-                    /** CloudControlGroup controlId. */
-                    public controlId: string;
-
-                    /** CloudControlGroup cloudControlDetails. */
-                    public cloudControlDetails: google.cloud.cloudsecuritycompliance.v1.ICloudControlDetails[];
-
-                    /** CloudControlGroup majorRevisionId. */
-                    public majorRevisionId: (number|Long|string);
-
-                    /** CloudControlGroup control. */
-                    public control: string;
-
-                    /**
-                     * Creates a new CloudControlGroup instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CloudControlGroup instance
-                     */
-                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup): google.cloud.cloudsecuritycompliance.v1.CloudControlGroup;
-
-                    /**
-                     * Encodes the specified CloudControlGroup message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.verify|verify} messages.
-                     * @param message CloudControlGroup message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CloudControlGroup message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.verify|verify} messages.
-                     * @param message CloudControlGroup message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CloudControlGroup message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CloudControlGroup
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CloudControlGroup;
-
-                    /**
-                     * Decodes a CloudControlGroup message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CloudControlGroup
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CloudControlGroup;
-
-                    /**
-                     * Verifies a CloudControlGroup message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CloudControlGroup message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CloudControlGroup
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CloudControlGroup;
-
-                    /**
-                     * Creates a plain object from a CloudControlGroup message. Also converts values to other types if specified.
-                     * @param message CloudControlGroup
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CloudControlGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CloudControlGroup to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CloudControlGroup
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace CloudControlGroup {
-
-                    /** CloudControlGroupType enum. */
-                    enum CloudControlGroupType {
-                        CLOUD_CONTROL_GROUP_TYPE_UNSPECIFIED = 0,
                         BUILT_IN = 1,
                         CUSTOM = 2
                     }
@@ -2445,304 +2194,6 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
-                /** Properties of a Control. */
-                interface IControl {
-
-                    /** Control name */
-                    name?: (string|null);
-
-                    /** Control displayName */
-                    displayName?: (string|null);
-
-                    /** Control description */
-                    description?: (string|null);
-
-                    /** Control family */
-                    family?: (google.cloud.cloudsecuritycompliance.v1.Control.Family|keyof typeof google.cloud.cloudsecuritycompliance.v1.Control.Family|null);
-
-                    /** Control controlFamily */
-                    controlFamily?: (google.cloud.cloudsecuritycompliance.v1.IControlFamily|null);
-
-                    /** Control responsibilityType */
-                    responsibilityType?: (google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|keyof typeof google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|null);
-
-                    /** Control googleResponsibilityDescription */
-                    googleResponsibilityDescription?: (string|null);
-
-                    /** Control googleResponsibilityImplementation */
-                    googleResponsibilityImplementation?: (string|null);
-
-                    /** Control customerResponsibilityDescription */
-                    customerResponsibilityDescription?: (string|null);
-
-                    /** Control customerResponsibilityImplementation */
-                    customerResponsibilityImplementation?: (string|null);
-
-                    /** Control sharedResponsibilityDescription */
-                    sharedResponsibilityDescription?: (string|null);
-
-                    /** Control additionalContentUri */
-                    additionalContentUri?: (string|null);
-
-                    /** Control relatedFrameworks */
-                    relatedFrameworks?: (string[]|null);
-                }
-
-                /** Represents a Control. */
-                class Control implements IControl {
-
-                    /**
-                     * Constructs a new Control.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IControl);
-
-                    /** Control name. */
-                    public name: string;
-
-                    /** Control displayName. */
-                    public displayName: string;
-
-                    /** Control description. */
-                    public description: string;
-
-                    /** Control family. */
-                    public family: (google.cloud.cloudsecuritycompliance.v1.Control.Family|keyof typeof google.cloud.cloudsecuritycompliance.v1.Control.Family);
-
-                    /** Control controlFamily. */
-                    public controlFamily?: (google.cloud.cloudsecuritycompliance.v1.IControlFamily|null);
-
-                    /** Control responsibilityType. */
-                    public responsibilityType: (google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|keyof typeof google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType);
-
-                    /** Control googleResponsibilityDescription. */
-                    public googleResponsibilityDescription: string;
-
-                    /** Control googleResponsibilityImplementation. */
-                    public googleResponsibilityImplementation: string;
-
-                    /** Control customerResponsibilityDescription. */
-                    public customerResponsibilityDescription: string;
-
-                    /** Control customerResponsibilityImplementation. */
-                    public customerResponsibilityImplementation: string;
-
-                    /** Control sharedResponsibilityDescription. */
-                    public sharedResponsibilityDescription: string;
-
-                    /** Control additionalContentUri. */
-                    public additionalContentUri: string;
-
-                    /** Control relatedFrameworks. */
-                    public relatedFrameworks: string[];
-
-                    /**
-                     * Creates a new Control instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns Control instance
-                     */
-                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IControl): google.cloud.cloudsecuritycompliance.v1.Control;
-
-                    /**
-                     * Encodes the specified Control message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Control.verify|verify} messages.
-                     * @param message Control message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified Control message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Control.verify|verify} messages.
-                     * @param message Control message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IControl, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a Control message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns Control
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.Control;
-
-                    /**
-                     * Decodes a Control message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns Control
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.Control;
-
-                    /**
-                     * Verifies a Control message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a Control message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns Control
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.Control;
-
-                    /**
-                     * Creates a plain object from a Control message. Also converts values to other types if specified.
-                     * @param message Control
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.Control, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this Control to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for Control
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace Control {
-
-                    /** Family enum. */
-                    enum Family {
-                        FAMILY_UNSPECIFIED = 0,
-                        AC = 1,
-                        AT = 2,
-                        AU = 3,
-                        CA = 4,
-                        CM = 5,
-                        CP = 6,
-                        IA = 7,
-                        IR = 8,
-                        MA = 9,
-                        MP = 10,
-                        PE = 11,
-                        PL = 12,
-                        PS = 13,
-                        RA = 14,
-                        SA = 15,
-                        SC = 16,
-                        SI = 17,
-                        SR = 18
-                    }
-                }
-
-                /** Properties of a ControlFamily. */
-                interface IControlFamily {
-
-                    /** ControlFamily familyId */
-                    familyId?: (string|null);
-
-                    /** ControlFamily displayName */
-                    displayName?: (string|null);
-                }
-
-                /** Represents a ControlFamily. */
-                class ControlFamily implements IControlFamily {
-
-                    /**
-                     * Constructs a new ControlFamily.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IControlFamily);
-
-                    /** ControlFamily familyId. */
-                    public familyId: string;
-
-                    /** ControlFamily displayName. */
-                    public displayName: string;
-
-                    /**
-                     * Creates a new ControlFamily instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns ControlFamily instance
-                     */
-                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IControlFamily): google.cloud.cloudsecuritycompliance.v1.ControlFamily;
-
-                    /**
-                     * Encodes the specified ControlFamily message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlFamily.verify|verify} messages.
-                     * @param message ControlFamily message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IControlFamily, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified ControlFamily message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlFamily.verify|verify} messages.
-                     * @param message ControlFamily message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IControlFamily, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a ControlFamily message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns ControlFamily
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ControlFamily;
-
-                    /**
-                     * Decodes a ControlFamily message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns ControlFamily
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ControlFamily;
-
-                    /**
-                     * Verifies a ControlFamily message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a ControlFamily message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns ControlFamily
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ControlFamily;
-
-                    /**
-                     * Creates a plain object from a ControlFamily message. Also converts values to other types if specified.
-                     * @param message ControlFamily
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ControlFamily, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this ControlFamily to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for ControlFamily
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
                 /** Represents a Config */
                 class Config extends $protobuf.rpc.Service {
 
@@ -4411,9 +3862,6 @@ export namespace google {
                     /** FrameworkDeployment deploymentState */
                     deploymentState?: (google.cloud.cloudsecuritycompliance.v1.DeploymentState|keyof typeof google.cloud.cloudsecuritycompliance.v1.DeploymentState|null);
 
-                    /** FrameworkDeployment ccDeployments */
-                    ccDeployments?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlDeployment[]|null);
-
                     /** FrameworkDeployment createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
 
@@ -4422,9 +3870,6 @@ export namespace google {
 
                     /** FrameworkDeployment etag */
                     etag?: (string|null);
-
-                    /** FrameworkDeployment ccGroupDeployments */
-                    ccGroupDeployments?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment[]|null);
 
                     /** FrameworkDeployment targetResourceDisplayName */
                     targetResourceDisplayName?: (string|null);
@@ -4463,9 +3908,6 @@ export namespace google {
                     /** FrameworkDeployment deploymentState. */
                     public deploymentState: (google.cloud.cloudsecuritycompliance.v1.DeploymentState|keyof typeof google.cloud.cloudsecuritycompliance.v1.DeploymentState);
 
-                    /** FrameworkDeployment ccDeployments. */
-                    public ccDeployments: google.cloud.cloudsecuritycompliance.v1.ICloudControlDeployment[];
-
                     /** FrameworkDeployment createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
 
@@ -4474,9 +3916,6 @@ export namespace google {
 
                     /** FrameworkDeployment etag. */
                     public etag: string;
-
-                    /** FrameworkDeployment ccGroupDeployments. */
-                    public ccGroupDeployments: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment[];
 
                     /** FrameworkDeployment targetResourceDisplayName. */
                     public targetResourceDisplayName: string;
@@ -5246,115 +4685,6 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CloudControlMetadata
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a CloudControlGroupDeployment. */
-                interface ICloudControlGroupDeployment {
-
-                    /** CloudControlGroupDeployment cloudControlGroup */
-                    cloudControlGroup?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup|null);
-
-                    /** CloudControlGroupDeployment ccDeployments */
-                    ccDeployments?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlDeployment[]|null);
-
-                    /** CloudControlGroupDeployment ccDeploymentReferences */
-                    ccDeploymentReferences?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlDeploymentReference[]|null);
-                }
-
-                /** Represents a CloudControlGroupDeployment. */
-                class CloudControlGroupDeployment implements ICloudControlGroupDeployment {
-
-                    /**
-                     * Constructs a new CloudControlGroupDeployment.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment);
-
-                    /** CloudControlGroupDeployment cloudControlGroup. */
-                    public cloudControlGroup?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup|null);
-
-                    /** CloudControlGroupDeployment ccDeployments. */
-                    public ccDeployments: google.cloud.cloudsecuritycompliance.v1.ICloudControlDeployment[];
-
-                    /** CloudControlGroupDeployment ccDeploymentReferences. */
-                    public ccDeploymentReferences: google.cloud.cloudsecuritycompliance.v1.ICloudControlDeploymentReference[];
-
-                    /**
-                     * Creates a new CloudControlGroupDeployment instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns CloudControlGroupDeployment instance
-                     */
-                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment): google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment;
-
-                    /**
-                     * Encodes the specified CloudControlGroupDeployment message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.verify|verify} messages.
-                     * @param message CloudControlGroupDeployment message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified CloudControlGroupDeployment message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.verify|verify} messages.
-                     * @param message CloudControlGroupDeployment message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a CloudControlGroupDeployment message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns CloudControlGroupDeployment
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment;
-
-                    /**
-                     * Decodes a CloudControlGroupDeployment message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns CloudControlGroupDeployment
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment;
-
-                    /**
-                     * Verifies a CloudControlGroupDeployment message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a CloudControlGroupDeployment message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns CloudControlGroupDeployment
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment;
-
-                    /**
-                     * Creates a plain object from a CloudControlGroupDeployment message. Also converts values to other types if specified.
-                     * @param message CloudControlGroupDeployment
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this CloudControlGroupDeployment to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for CloudControlGroupDeployment
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -7060,9 +6390,6 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
-
-            /** CommonLanguageSettings selectiveGapicGeneration */
-            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -7079,9 +6406,6 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
-
-            /** CommonLanguageSettings selectiveGapicGeneration. */
-            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -7783,9 +7107,6 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
-
-            /** PythonSettings experimentalFeatures */
-            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -7799,9 +7120,6 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
-
-            /** PythonSettings experimentalFeatures. */
-            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -7879,118 +7197,6 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace PythonSettings {
-
-            /** Properties of an ExperimentalFeatures. */
-            interface IExperimentalFeatures {
-
-                /** ExperimentalFeatures restAsyncIoEnabled */
-                restAsyncIoEnabled?: (boolean|null);
-
-                /** ExperimentalFeatures protobufPythonicTypesEnabled */
-                protobufPythonicTypesEnabled?: (boolean|null);
-
-                /** ExperimentalFeatures unversionedPackageDisabled */
-                unversionedPackageDisabled?: (boolean|null);
-            }
-
-            /** Represents an ExperimentalFeatures. */
-            class ExperimentalFeatures implements IExperimentalFeatures {
-
-                /**
-                 * Constructs a new ExperimentalFeatures.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
-
-                /** ExperimentalFeatures restAsyncIoEnabled. */
-                public restAsyncIoEnabled: boolean;
-
-                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
-                public protobufPythonicTypesEnabled: boolean;
-
-                /** ExperimentalFeatures unversionedPackageDisabled. */
-                public unversionedPackageDisabled: boolean;
-
-                /**
-                 * Creates a new ExperimentalFeatures instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ExperimentalFeatures instance
-                 */
-                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                 * @param message ExperimentalFeatures message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                 * @param message ExperimentalFeatures message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ExperimentalFeatures
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ExperimentalFeatures
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Verifies an ExperimentalFeatures message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ExperimentalFeatures
-                 */
-                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                 * @param message ExperimentalFeatures
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ExperimentalFeatures to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ExperimentalFeatures
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
         }
 
         /** Properties of a NodeSettings. */
@@ -8319,9 +7525,6 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
-
-            /** GoSettings renamedServices */
-            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -8335,9 +7538,6 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
-
-            /** GoSettings renamedServices. */
-            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -8663,109 +7863,6 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
-        /** Properties of a SelectiveGapicGeneration. */
-        interface ISelectiveGapicGeneration {
-
-            /** SelectiveGapicGeneration methods */
-            methods?: (string[]|null);
-
-            /** SelectiveGapicGeneration generateOmittedAsInternal */
-            generateOmittedAsInternal?: (boolean|null);
-        }
-
-        /** Represents a SelectiveGapicGeneration. */
-        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
-
-            /**
-             * Constructs a new SelectiveGapicGeneration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ISelectiveGapicGeneration);
-
-            /** SelectiveGapicGeneration methods. */
-            public methods: string[];
-
-            /** SelectiveGapicGeneration generateOmittedAsInternal. */
-            public generateOmittedAsInternal: boolean;
-
-            /**
-             * Creates a new SelectiveGapicGeneration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns SelectiveGapicGeneration instance
-             */
-            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-             * @param message SelectiveGapicGeneration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-             * @param message SelectiveGapicGeneration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns SelectiveGapicGeneration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns SelectiveGapicGeneration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Verifies a SelectiveGapicGeneration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns SelectiveGapicGeneration
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-             * @param message SelectiveGapicGeneration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this SelectiveGapicGeneration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for SelectiveGapicGeneration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -8882,7 +7979,6 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
-            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -8912,9 +8008,6 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
-
-            /** FileDescriptorProto optionDependency */
-            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -8964,9 +8057,6 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
-
-            /** FileDescriptorProto optionDependency. */
-            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -9102,9 +8192,6 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
-
-            /** DescriptorProto visibility */
-            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -9145,9 +8232,6 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
-
-            /** DescriptorProto visibility. */
-            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -9996,9 +9080,6 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
-
-            /** EnumDescriptorProto visibility */
-            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -10024,9 +9105,6 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
-
-            /** EnumDescriptorProto visibility. */
-            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -10962,9 +10040,6 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
-            /** FieldOptions featureSupport */
-            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
-
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -11019,9 +10094,6 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
-
-            /** FieldOptions featureSupport. */
-            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -11238,121 +10310,6 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a FeatureSupport. */
-            interface IFeatureSupport {
-
-                /** FeatureSupport editionIntroduced */
-                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-
-                /** FeatureSupport editionDeprecated */
-                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-
-                /** FeatureSupport deprecationWarning */
-                deprecationWarning?: (string|null);
-
-                /** FeatureSupport editionRemoved */
-                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-            }
-
-            /** Represents a FeatureSupport. */
-            class FeatureSupport implements IFeatureSupport {
-
-                /**
-                 * Constructs a new FeatureSupport.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
-
-                /** FeatureSupport editionIntroduced. */
-                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /** FeatureSupport editionDeprecated. */
-                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /** FeatureSupport deprecationWarning. */
-                public deprecationWarning: string;
-
-                /** FeatureSupport editionRemoved. */
-                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /**
-                 * Creates a new FeatureSupport instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns FeatureSupport instance
-                 */
-                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                 * @param message FeatureSupport message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                 * @param message FeatureSupport message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a FeatureSupport message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns FeatureSupport
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns FeatureSupport
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Verifies a FeatureSupport message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns FeatureSupport
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                 * @param message FeatureSupport
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this FeatureSupport to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -11596,9 +10553,6 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
-            /** EnumValueOptions featureSupport */
-            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
-
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -11620,9 +10574,6 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
-
-            /** EnumValueOptions featureSupport. */
-            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -12216,12 +11167,6 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
-
-            /** FeatureSet enforceNamingStyle */
-            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
-
-            /** FeatureSet defaultSymbolVisibility */
-            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -12250,12 +11195,6 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
-
-            /** FeatureSet enforceNamingStyle. */
-            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
-
-            /** FeatureSet defaultSymbolVisibility. */
-            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -12379,116 +11318,6 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
-
-            /** EnforceNamingStyle enum. */
-            enum EnforceNamingStyle {
-                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
-                STYLE2024 = 1,
-                STYLE_LEGACY = 2
-            }
-
-            /** Properties of a VisibilityFeature. */
-            interface IVisibilityFeature {
-            }
-
-            /** Represents a VisibilityFeature. */
-            class VisibilityFeature implements IVisibilityFeature {
-
-                /**
-                 * Constructs a new VisibilityFeature.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
-
-                /**
-                 * Creates a new VisibilityFeature instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns VisibilityFeature instance
-                 */
-                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                 * @param message VisibilityFeature message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                 * @param message VisibilityFeature message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a VisibilityFeature message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns VisibilityFeature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns VisibilityFeature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Verifies a VisibilityFeature message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns VisibilityFeature
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                 * @param message VisibilityFeature
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this VisibilityFeature to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for VisibilityFeature
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace VisibilityFeature {
-
-                /** DefaultSymbolVisibility enum. */
-                enum DefaultSymbolVisibility {
-                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
-                    EXPORT_ALL = 1,
-                    EXPORT_TOP_LEVEL = 2,
-                    LOCAL_ALL = 3,
-                    STRICT = 4
-                }
-            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -12608,11 +11437,8 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault overridableFeatures */
-                overridableFeatures?: (google.protobuf.IFeatureSet|null);
-
-                /** FeatureSetEditionDefault fixedFeatures */
-                fixedFeatures?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -12627,11 +11453,8 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault overridableFeatures. */
-                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
-
-                /** FeatureSetEditionDefault fixedFeatures. */
-                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -13162,13 +11985,6 @@ export namespace google {
                     ALIAS = 2
                 }
             }
-        }
-
-        /** SymbolVisibility enum. */
-        enum SymbolVisibility {
-            VISIBILITY_UNSET = 0,
-            VISIBILITY_LOCAL = 1,
-            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Timestamp. */

@@ -67,24 +67,6 @@
                     var v1 = {};
     
                     /**
-                     * RegulatoryControlResponsibilityType enum.
-                     * @name google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType
-                     * @enum {number}
-                     * @property {number} REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED=0 REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED value
-                     * @property {number} GOOGLE=1 GOOGLE value
-                     * @property {number} CUSTOMER=2 CUSTOMER value
-                     * @property {number} SHARED=3 SHARED value
-                     */
-                    v1.RegulatoryControlResponsibilityType = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED"] = 0;
-                        values[valuesById[1] = "GOOGLE"] = 1;
-                        values[valuesById[2] = "CUSTOMER"] = 2;
-                        values[valuesById[3] = "SHARED"] = 3;
-                        return values;
-                    })();
-    
-                    /**
                      * EnforcementMode enum.
                      * @name google.cloud.cloudsecuritycompliance.v1.EnforcementMode
                      * @enum {number}
@@ -253,11 +235,11 @@
                          * @property {string|null} [displayName] Framework displayName
                          * @property {string|null} [description] Framework description
                          * @property {google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|null} [type] Framework type
-                         * @property {Array.<google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails>|null} [cloudControlGroupDetails] Framework cloudControlGroupDetails
                          * @property {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDetails>|null} [cloudControlDetails] Framework cloudControlDetails
                          * @property {Array.<google.cloud.cloudsecuritycompliance.v1.FrameworkCategory>|null} [category] Framework category
                          * @property {Array.<google.cloud.cloudsecuritycompliance.v1.CloudProvider>|null} [supportedCloudProviders] Framework supportedCloudProviders
                          * @property {Array.<google.cloud.cloudsecuritycompliance.v1.TargetResourceType>|null} [supportedTargetResourceTypes] Framework supportedTargetResourceTypes
+                         * @property {Array.<google.cloud.cloudsecuritycompliance.v1.EnforcementMode>|null} [supportedEnforcementModes] Framework supportedEnforcementModes
                          */
     
                         /**
@@ -269,11 +251,11 @@
                          * @param {google.cloud.cloudsecuritycompliance.v1.IFramework=} [properties] Properties to set
                          */
                         function Framework(properties) {
-                            this.cloudControlGroupDetails = [];
                             this.cloudControlDetails = [];
                             this.category = [];
                             this.supportedCloudProviders = [];
                             this.supportedTargetResourceTypes = [];
+                            this.supportedEnforcementModes = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -321,14 +303,6 @@
                         Framework.prototype.type = 0;
     
                         /**
-                         * Framework cloudControlGroupDetails.
-                         * @member {Array.<google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails>} cloudControlGroupDetails
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Framework
-                         * @instance
-                         */
-                        Framework.prototype.cloudControlGroupDetails = $util.emptyArray;
-    
-                        /**
                          * Framework cloudControlDetails.
                          * @member {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDetails>} cloudControlDetails
                          * @memberof google.cloud.cloudsecuritycompliance.v1.Framework
@@ -359,6 +333,14 @@
                          * @instance
                          */
                         Framework.prototype.supportedTargetResourceTypes = $util.emptyArray;
+    
+                        /**
+                         * Framework supportedEnforcementModes.
+                         * @member {Array.<google.cloud.cloudsecuritycompliance.v1.EnforcementMode>} supportedEnforcementModes
+                         * @memberof google.cloud.cloudsecuritycompliance.v1.Framework
+                         * @instance
+                         */
+                        Framework.prototype.supportedEnforcementModes = $util.emptyArray;
     
                         /**
                          * Creates a new Framework instance using the specified properties.
@@ -394,9 +376,6 @@
                                 writer.uint32(/* id 5, wireType 2 =*/42).string(message.description);
                             if (message.type != null && Object.hasOwnProperty.call(message, "type"))
                                 writer.uint32(/* id 6, wireType 0 =*/48).int32(message.type);
-                            if (message.cloudControlGroupDetails != null && message.cloudControlGroupDetails.length)
-                                for (var i = 0; i < message.cloudControlGroupDetails.length; ++i)
-                                    $root.google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.encode(message.cloudControlGroupDetails[i], writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             if (message.cloudControlDetails != null && message.cloudControlDetails.length)
                                 for (var i = 0; i < message.cloudControlDetails.length; ++i)
                                     $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDetails.encode(message.cloudControlDetails[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
@@ -416,6 +395,12 @@
                                 writer.uint32(/* id 11, wireType 2 =*/90).fork();
                                 for (var i = 0; i < message.supportedTargetResourceTypes.length; ++i)
                                     writer.int32(message.supportedTargetResourceTypes[i]);
+                                writer.ldelim();
+                            }
+                            if (message.supportedEnforcementModes != null && message.supportedEnforcementModes.length) {
+                                writer.uint32(/* id 13, wireType 2 =*/106).fork();
+                                for (var i = 0; i < message.supportedEnforcementModes.length; ++i)
+                                    writer.int32(message.supportedEnforcementModes[i]);
                                 writer.ldelim();
                             }
                             return writer;
@@ -474,12 +459,6 @@
                                         message.type = reader.int32();
                                         break;
                                     }
-                                case 7: {
-                                        if (!(message.cloudControlGroupDetails && message.cloudControlGroupDetails.length))
-                                            message.cloudControlGroupDetails = [];
-                                        message.cloudControlGroupDetails.push($root.google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.decode(reader, reader.uint32()));
-                                        break;
-                                    }
                                 case 8: {
                                         if (!(message.cloudControlDetails && message.cloudControlDetails.length))
                                             message.cloudControlDetails = [];
@@ -517,6 +496,17 @@
                                                 message.supportedTargetResourceTypes.push(reader.int32());
                                         } else
                                             message.supportedTargetResourceTypes.push(reader.int32());
+                                        break;
+                                    }
+                                case 13: {
+                                        if (!(message.supportedEnforcementModes && message.supportedEnforcementModes.length))
+                                            message.supportedEnforcementModes = [];
+                                        if ((tag & 7) === 2) {
+                                            var end2 = reader.uint32() + reader.pos;
+                                            while (reader.pos < end2)
+                                                message.supportedEnforcementModes.push(reader.int32());
+                                        } else
+                                            message.supportedEnforcementModes.push(reader.int32());
                                         break;
                                     }
                                 default:
@@ -575,15 +565,6 @@
                                 case 2:
                                     break;
                                 }
-                            if (message.cloudControlGroupDetails != null && message.hasOwnProperty("cloudControlGroupDetails")) {
-                                if (!Array.isArray(message.cloudControlGroupDetails))
-                                    return "cloudControlGroupDetails: array expected";
-                                for (var i = 0; i < message.cloudControlGroupDetails.length; ++i) {
-                                    var error = $root.google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.verify(message.cloudControlGroupDetails[i]);
-                                    if (error)
-                                        return "cloudControlGroupDetails." + error;
-                                }
-                            }
                             if (message.cloudControlDetails != null && message.hasOwnProperty("cloudControlDetails")) {
                                 if (!Array.isArray(message.cloudControlDetails))
                                     return "cloudControlDetails: array expected";
@@ -638,6 +619,20 @@
                                         break;
                                     }
                             }
+                            if (message.supportedEnforcementModes != null && message.hasOwnProperty("supportedEnforcementModes")) {
+                                if (!Array.isArray(message.supportedEnforcementModes))
+                                    return "supportedEnforcementModes: array expected";
+                                for (var i = 0; i < message.supportedEnforcementModes.length; ++i)
+                                    switch (message.supportedEnforcementModes[i]) {
+                                    default:
+                                        return "supportedEnforcementModes: enum value[] expected";
+                                    case 0:
+                                    case 1:
+                                    case 2:
+                                    case 3:
+                                        break;
+                                    }
+                            }
                             return null;
                         };
     
@@ -687,16 +682,6 @@
                             case 2:
                                 message.type = 2;
                                 break;
-                            }
-                            if (object.cloudControlGroupDetails) {
-                                if (!Array.isArray(object.cloudControlGroupDetails))
-                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.Framework.cloudControlGroupDetails: array expected");
-                                message.cloudControlGroupDetails = [];
-                                for (var i = 0; i < object.cloudControlGroupDetails.length; ++i) {
-                                    if (typeof object.cloudControlGroupDetails[i] !== "object")
-                                        throw TypeError(".google.cloud.cloudsecuritycompliance.v1.Framework.cloudControlGroupDetails: object expected");
-                                    message.cloudControlGroupDetails[i] = $root.google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.fromObject(object.cloudControlGroupDetails[i]);
-                                }
                             }
                             if (object.cloudControlDetails) {
                                 if (!Array.isArray(object.cloudControlDetails))
@@ -807,6 +792,35 @@
                                         break;
                                     }
                             }
+                            if (object.supportedEnforcementModes) {
+                                if (!Array.isArray(object.supportedEnforcementModes))
+                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.Framework.supportedEnforcementModes: array expected");
+                                message.supportedEnforcementModes = [];
+                                for (var i = 0; i < object.supportedEnforcementModes.length; ++i)
+                                    switch (object.supportedEnforcementModes[i]) {
+                                    default:
+                                        if (typeof object.supportedEnforcementModes[i] === "number") {
+                                            message.supportedEnforcementModes[i] = object.supportedEnforcementModes[i];
+                                            break;
+                                        }
+                                    case "ENFORCEMENT_MODE_UNSPECIFIED":
+                                    case 0:
+                                        message.supportedEnforcementModes[i] = 0;
+                                        break;
+                                    case "PREVENTIVE":
+                                    case 1:
+                                        message.supportedEnforcementModes[i] = 1;
+                                        break;
+                                    case "DETECTIVE":
+                                    case 2:
+                                        message.supportedEnforcementModes[i] = 2;
+                                        break;
+                                    case "AUDIT":
+                                    case 3:
+                                        message.supportedEnforcementModes[i] = 3;
+                                        break;
+                                    }
+                            }
                             return message;
                         };
     
@@ -824,11 +838,11 @@
                                 options = {};
                             var object = {};
                             if (options.arrays || options.defaults) {
-                                object.cloudControlGroupDetails = [];
                                 object.cloudControlDetails = [];
                                 object.category = [];
                                 object.supportedCloudProviders = [];
                                 object.supportedTargetResourceTypes = [];
+                                object.supportedEnforcementModes = [];
                             }
                             if (options.defaults) {
                                 object.name = "";
@@ -854,11 +868,6 @@
                                 object.description = message.description;
                             if (message.type != null && message.hasOwnProperty("type"))
                                 object.type = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType[message.type] === undefined ? message.type : $root.google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType[message.type] : message.type;
-                            if (message.cloudControlGroupDetails && message.cloudControlGroupDetails.length) {
-                                object.cloudControlGroupDetails = [];
-                                for (var j = 0; j < message.cloudControlGroupDetails.length; ++j)
-                                    object.cloudControlGroupDetails[j] = $root.google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.toObject(message.cloudControlGroupDetails[j], options);
-                            }
                             if (message.cloudControlDetails && message.cloudControlDetails.length) {
                                 object.cloudControlDetails = [];
                                 for (var j = 0; j < message.cloudControlDetails.length; ++j)
@@ -878,6 +887,11 @@
                                 object.supportedTargetResourceTypes = [];
                                 for (var j = 0; j < message.supportedTargetResourceTypes.length; ++j)
                                     object.supportedTargetResourceTypes[j] = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.TargetResourceType[message.supportedTargetResourceTypes[j]] === undefined ? message.supportedTargetResourceTypes[j] : $root.google.cloud.cloudsecuritycompliance.v1.TargetResourceType[message.supportedTargetResourceTypes[j]] : message.supportedTargetResourceTypes[j];
+                            }
+                            if (message.supportedEnforcementModes && message.supportedEnforcementModes.length) {
+                                object.supportedEnforcementModes = [];
+                                for (var j = 0; j < message.supportedEnforcementModes.length; ++j)
+                                    object.supportedEnforcementModes[j] = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.EnforcementMode[message.supportedEnforcementModes[j]] === undefined ? message.supportedEnforcementModes[j] : $root.google.cloud.cloudsecuritycompliance.v1.EnforcementMode[message.supportedEnforcementModes[j]] : message.supportedEnforcementModes[j];
                             }
                             return object;
                         };
@@ -908,235 +922,6 @@
                             return typeUrlPrefix + "/google.cloud.cloudsecuritycompliance.v1.Framework";
                         };
     
-                        Framework.CloudControlGroupDetails = (function() {
-    
-                            /**
-                             * Properties of a CloudControlGroupDetails.
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework
-                             * @interface ICloudControlGroupDetails
-                             * @property {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup|null} [cloudControlGroup] CloudControlGroupDetails cloudControlGroup
-                             */
-    
-                            /**
-                             * Constructs a new CloudControlGroupDetails.
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework
-                             * @classdesc Represents a CloudControlGroupDetails.
-                             * @implements ICloudControlGroupDetails
-                             * @constructor
-                             * @param {google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails=} [properties] Properties to set
-                             */
-                            function CloudControlGroupDetails(properties) {
-                                if (properties)
-                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                        if (properties[keys[i]] != null)
-                                            this[keys[i]] = properties[keys[i]];
-                            }
-    
-                            /**
-                             * CloudControlGroupDetails cloudControlGroup.
-                             * @member {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup|null|undefined} cloudControlGroup
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @instance
-                             */
-                            CloudControlGroupDetails.prototype.cloudControlGroup = null;
-    
-                            // OneOf field names bound to virtual getters and setters
-                            var $oneOfFields;
-    
-                            /**
-                             * CloudControlGroupDetails kind.
-                             * @member {"cloudControlGroup"|undefined} kind
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @instance
-                             */
-                            Object.defineProperty(CloudControlGroupDetails.prototype, "kind", {
-                                get: $util.oneOfGetter($oneOfFields = ["cloudControlGroup"]),
-                                set: $util.oneOfSetter($oneOfFields)
-                            });
-    
-                            /**
-                             * Creates a new CloudControlGroupDetails instance using the specified properties.
-                             * @function create
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @static
-                             * @param {google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails=} [properties] Properties to set
-                             * @returns {google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails} CloudControlGroupDetails instance
-                             */
-                            CloudControlGroupDetails.create = function create(properties) {
-                                return new CloudControlGroupDetails(properties);
-                            };
-    
-                            /**
-                             * Encodes the specified CloudControlGroupDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.verify|verify} messages.
-                             * @function encode
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @static
-                             * @param {google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails} message CloudControlGroupDetails message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CloudControlGroupDetails.encode = function encode(message, writer) {
-                                if (!writer)
-                                    writer = $Writer.create();
-                                if (message.cloudControlGroup != null && Object.hasOwnProperty.call(message, "cloudControlGroup"))
-                                    $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.encode(message.cloudControlGroup, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                                return writer;
-                            };
-    
-                            /**
-                             * Encodes the specified CloudControlGroupDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.verify|verify} messages.
-                             * @function encodeDelimited
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @static
-                             * @param {google.cloud.cloudsecuritycompliance.v1.Framework.ICloudControlGroupDetails} message CloudControlGroupDetails message or plain object to encode
-                             * @param {$protobuf.Writer} [writer] Writer to encode to
-                             * @returns {$protobuf.Writer} Writer
-                             */
-                            CloudControlGroupDetails.encodeDelimited = function encodeDelimited(message, writer) {
-                                return this.encode(message, writer).ldelim();
-                            };
-    
-                            /**
-                             * Decodes a CloudControlGroupDetails message from the specified reader or buffer.
-                             * @function decode
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @param {number} [length] Message length if known beforehand
-                             * @returns {google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails} CloudControlGroupDetails
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CloudControlGroupDetails.decode = function decode(reader, length, error) {
-                                if (!(reader instanceof $Reader))
-                                    reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails();
-                                while (reader.pos < end) {
-                                    var tag = reader.uint32();
-                                    if (tag === error)
-                                        break;
-                                    switch (tag >>> 3) {
-                                    case 1: {
-                                            message.cloudControlGroup = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    default:
-                                        reader.skipType(tag & 7);
-                                        break;
-                                    }
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Decodes a CloudControlGroupDetails message from the specified reader or buffer, length delimited.
-                             * @function decodeDelimited
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @static
-                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                             * @returns {google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails} CloudControlGroupDetails
-                             * @throws {Error} If the payload is not a reader or valid buffer
-                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                             */
-                            CloudControlGroupDetails.decodeDelimited = function decodeDelimited(reader) {
-                                if (!(reader instanceof $Reader))
-                                    reader = new $Reader(reader);
-                                return this.decode(reader, reader.uint32());
-                            };
-    
-                            /**
-                             * Verifies a CloudControlGroupDetails message.
-                             * @function verify
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @static
-                             * @param {Object.<string,*>} message Plain object to verify
-                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                             */
-                            CloudControlGroupDetails.verify = function verify(message) {
-                                if (typeof message !== "object" || message === null)
-                                    return "object expected";
-                                var properties = {};
-                                if (message.cloudControlGroup != null && message.hasOwnProperty("cloudControlGroup")) {
-                                    properties.kind = 1;
-                                    {
-                                        var error = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.verify(message.cloudControlGroup);
-                                        if (error)
-                                            return "cloudControlGroup." + error;
-                                    }
-                                }
-                                return null;
-                            };
-    
-                            /**
-                             * Creates a CloudControlGroupDetails message from a plain object. Also converts values to their respective internal types.
-                             * @function fromObject
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @static
-                             * @param {Object.<string,*>} object Plain object
-                             * @returns {google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails} CloudControlGroupDetails
-                             */
-                            CloudControlGroupDetails.fromObject = function fromObject(object) {
-                                if (object instanceof $root.google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails)
-                                    return object;
-                                var message = new $root.google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails();
-                                if (object.cloudControlGroup != null) {
-                                    if (typeof object.cloudControlGroup !== "object")
-                                        throw TypeError(".google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails.cloudControlGroup: object expected");
-                                    message.cloudControlGroup = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.fromObject(object.cloudControlGroup);
-                                }
-                                return message;
-                            };
-    
-                            /**
-                             * Creates a plain object from a CloudControlGroupDetails message. Also converts values to other types if specified.
-                             * @function toObject
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @static
-                             * @param {google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails} message CloudControlGroupDetails
-                             * @param {$protobuf.IConversionOptions} [options] Conversion options
-                             * @returns {Object.<string,*>} Plain object
-                             */
-                            CloudControlGroupDetails.toObject = function toObject(message, options) {
-                                if (!options)
-                                    options = {};
-                                var object = {};
-                                if (message.cloudControlGroup != null && message.hasOwnProperty("cloudControlGroup")) {
-                                    object.cloudControlGroup = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.toObject(message.cloudControlGroup, options);
-                                    if (options.oneofs)
-                                        object.kind = "cloudControlGroup";
-                                }
-                                return object;
-                            };
-    
-                            /**
-                             * Converts this CloudControlGroupDetails to JSON.
-                             * @function toJSON
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @instance
-                             * @returns {Object.<string,*>} JSON object
-                             */
-                            CloudControlGroupDetails.prototype.toJSON = function toJSON() {
-                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                            };
-    
-                            /**
-                             * Gets the default type url for CloudControlGroupDetails
-                             * @function getTypeUrl
-                             * @memberof google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails
-                             * @static
-                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                             * @returns {string} The default type url
-                             */
-                            CloudControlGroupDetails.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                                if (typeUrlPrefix === undefined) {
-                                    typeUrlPrefix = "type.googleapis.com";
-                                }
-                                return typeUrlPrefix + "/google.cloud.cloudsecuritycompliance.v1.Framework.CloudControlGroupDetails";
-                            };
-    
-                            return CloudControlGroupDetails;
-                        })();
-    
                         /**
                          * FrameworkType enum.
                          * @name google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType
@@ -1154,426 +939,6 @@
                         })();
     
                         return Framework;
-                    })();
-    
-                    v1.CloudControlGroup = (function() {
-    
-                        /**
-                         * Properties of a CloudControlGroup.
-                         * @memberof google.cloud.cloudsecuritycompliance.v1
-                         * @interface ICloudControlGroup
-                         * @property {string|null} [name] CloudControlGroup name
-                         * @property {string|null} [description] CloudControlGroup description
-                         * @property {google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.CloudControlGroupType|null} [type] CloudControlGroup type
-                         * @property {string|null} [controlId] CloudControlGroup controlId
-                         * @property {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDetails>|null} [cloudControlDetails] CloudControlGroup cloudControlDetails
-                         * @property {number|Long|null} [majorRevisionId] CloudControlGroup majorRevisionId
-                         * @property {string|null} [control] CloudControlGroup control
-                         */
-    
-                        /**
-                         * Constructs a new CloudControlGroup.
-                         * @memberof google.cloud.cloudsecuritycompliance.v1
-                         * @classdesc Represents a CloudControlGroup.
-                         * @implements ICloudControlGroup
-                         * @constructor
-                         * @param {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup=} [properties] Properties to set
-                         */
-                        function CloudControlGroup(properties) {
-                            this.cloudControlDetails = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * CloudControlGroup name.
-                         * @member {string} name
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @instance
-                         */
-                        CloudControlGroup.prototype.name = "";
-    
-                        /**
-                         * CloudControlGroup description.
-                         * @member {string} description
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @instance
-                         */
-                        CloudControlGroup.prototype.description = "";
-    
-                        /**
-                         * CloudControlGroup type.
-                         * @member {google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.CloudControlGroupType} type
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @instance
-                         */
-                        CloudControlGroup.prototype.type = 0;
-    
-                        /**
-                         * CloudControlGroup controlId.
-                         * @member {string} controlId
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @instance
-                         */
-                        CloudControlGroup.prototype.controlId = "";
-    
-                        /**
-                         * CloudControlGroup cloudControlDetails.
-                         * @member {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDetails>} cloudControlDetails
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @instance
-                         */
-                        CloudControlGroup.prototype.cloudControlDetails = $util.emptyArray;
-    
-                        /**
-                         * CloudControlGroup majorRevisionId.
-                         * @member {number|Long} majorRevisionId
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @instance
-                         */
-                        CloudControlGroup.prototype.majorRevisionId = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
-    
-                        /**
-                         * CloudControlGroup control.
-                         * @member {string} control
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @instance
-                         */
-                        CloudControlGroup.prototype.control = "";
-    
-                        /**
-                         * Creates a new CloudControlGroup instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup=} [properties] Properties to set
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.CloudControlGroup} CloudControlGroup instance
-                         */
-                        CloudControlGroup.create = function create(properties) {
-                            return new CloudControlGroup(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified CloudControlGroup message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup} message CloudControlGroup message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CloudControlGroup.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
-                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
-                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.type);
-                            if (message.controlId != null && Object.hasOwnProperty.call(message, "controlId"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.controlId);
-                            if (message.cloudControlDetails != null && message.cloudControlDetails.length)
-                                for (var i = 0; i < message.cloudControlDetails.length; ++i)
-                                    $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDetails.encode(message.cloudControlDetails[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
-                            if (message.majorRevisionId != null && Object.hasOwnProperty.call(message, "majorRevisionId"))
-                                writer.uint32(/* id 6, wireType 0 =*/48).int64(message.majorRevisionId);
-                            if (message.control != null && Object.hasOwnProperty.call(message, "control"))
-                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.control);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified CloudControlGroup message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup} message CloudControlGroup message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CloudControlGroup.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a CloudControlGroup message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.CloudControlGroup} CloudControlGroup
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CloudControlGroup.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.description = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.type = reader.int32();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.controlId = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        if (!(message.cloudControlDetails && message.cloudControlDetails.length))
-                                            message.cloudControlDetails = [];
-                                        message.cloudControlDetails.push($root.google.cloud.cloudsecuritycompliance.v1.CloudControlDetails.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 6: {
-                                        message.majorRevisionId = reader.int64();
-                                        break;
-                                    }
-                                case 8: {
-                                        message.control = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a CloudControlGroup message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.CloudControlGroup} CloudControlGroup
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CloudControlGroup.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a CloudControlGroup message.
-                         * @function verify
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        CloudControlGroup.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                if (!$util.isString(message.description))
-                                    return "description: string expected";
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                switch (message.type) {
-                                default:
-                                    return "type: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            if (message.controlId != null && message.hasOwnProperty("controlId"))
-                                if (!$util.isString(message.controlId))
-                                    return "controlId: string expected";
-                            if (message.cloudControlDetails != null && message.hasOwnProperty("cloudControlDetails")) {
-                                if (!Array.isArray(message.cloudControlDetails))
-                                    return "cloudControlDetails: array expected";
-                                for (var i = 0; i < message.cloudControlDetails.length; ++i) {
-                                    var error = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDetails.verify(message.cloudControlDetails[i]);
-                                    if (error)
-                                        return "cloudControlDetails." + error;
-                                }
-                            }
-                            if (message.majorRevisionId != null && message.hasOwnProperty("majorRevisionId"))
-                                if (!$util.isInteger(message.majorRevisionId) && !(message.majorRevisionId && $util.isInteger(message.majorRevisionId.low) && $util.isInteger(message.majorRevisionId.high)))
-                                    return "majorRevisionId: integer|Long expected";
-                            if (message.control != null && message.hasOwnProperty("control"))
-                                if (!$util.isString(message.control))
-                                    return "control: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a CloudControlGroup message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.CloudControlGroup} CloudControlGroup
-                         */
-                        CloudControlGroup.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup)
-                                return object;
-                            var message = new $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.description != null)
-                                message.description = String(object.description);
-                            switch (object.type) {
-                            default:
-                                if (typeof object.type === "number") {
-                                    message.type = object.type;
-                                    break;
-                                }
-                                break;
-                            case "CLOUD_CONTROL_GROUP_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.type = 0;
-                                break;
-                            case "BUILT_IN":
-                            case 1:
-                                message.type = 1;
-                                break;
-                            case "CUSTOM":
-                            case 2:
-                                message.type = 2;
-                                break;
-                            }
-                            if (object.controlId != null)
-                                message.controlId = String(object.controlId);
-                            if (object.cloudControlDetails) {
-                                if (!Array.isArray(object.cloudControlDetails))
-                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.cloudControlDetails: array expected");
-                                message.cloudControlDetails = [];
-                                for (var i = 0; i < object.cloudControlDetails.length; ++i) {
-                                    if (typeof object.cloudControlDetails[i] !== "object")
-                                        throw TypeError(".google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.cloudControlDetails: object expected");
-                                    message.cloudControlDetails[i] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDetails.fromObject(object.cloudControlDetails[i]);
-                                }
-                            }
-                            if (object.majorRevisionId != null)
-                                if ($util.Long)
-                                    (message.majorRevisionId = $util.Long.fromValue(object.majorRevisionId)).unsigned = false;
-                                else if (typeof object.majorRevisionId === "string")
-                                    message.majorRevisionId = parseInt(object.majorRevisionId, 10);
-                                else if (typeof object.majorRevisionId === "number")
-                                    message.majorRevisionId = object.majorRevisionId;
-                                else if (typeof object.majorRevisionId === "object")
-                                    message.majorRevisionId = new $util.LongBits(object.majorRevisionId.low >>> 0, object.majorRevisionId.high >>> 0).toNumber();
-                            if (object.control != null)
-                                message.control = String(object.control);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a CloudControlGroup message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.CloudControlGroup} message CloudControlGroup
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        CloudControlGroup.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.cloudControlDetails = [];
-                            if (options.defaults) {
-                                object.name = "";
-                                object.description = "";
-                                object.type = options.enums === String ? "CLOUD_CONTROL_GROUP_TYPE_UNSPECIFIED" : 0;
-                                object.controlId = "";
-                                if ($util.Long) {
-                                    var long = new $util.Long(0, 0, false);
-                                    object.majorRevisionId = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                                } else
-                                    object.majorRevisionId = options.longs === String ? "0" : 0;
-                                object.control = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                object.description = message.description;
-                            if (message.type != null && message.hasOwnProperty("type"))
-                                object.type = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.CloudControlGroupType[message.type] === undefined ? message.type : $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.CloudControlGroupType[message.type] : message.type;
-                            if (message.controlId != null && message.hasOwnProperty("controlId"))
-                                object.controlId = message.controlId;
-                            if (message.cloudControlDetails && message.cloudControlDetails.length) {
-                                object.cloudControlDetails = [];
-                                for (var j = 0; j < message.cloudControlDetails.length; ++j)
-                                    object.cloudControlDetails[j] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDetails.toObject(message.cloudControlDetails[j], options);
-                            }
-                            if (message.majorRevisionId != null && message.hasOwnProperty("majorRevisionId"))
-                                if (typeof message.majorRevisionId === "number")
-                                    object.majorRevisionId = options.longs === String ? String(message.majorRevisionId) : message.majorRevisionId;
-                                else
-                                    object.majorRevisionId = options.longs === String ? $util.Long.prototype.toString.call(message.majorRevisionId) : options.longs === Number ? new $util.LongBits(message.majorRevisionId.low >>> 0, message.majorRevisionId.high >>> 0).toNumber() : message.majorRevisionId;
-                            if (message.control != null && message.hasOwnProperty("control"))
-                                object.control = message.control;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this CloudControlGroup to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        CloudControlGroup.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for CloudControlGroup
-                         * @function getTypeUrl
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroup
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        CloudControlGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.cloudsecuritycompliance.v1.CloudControlGroup";
-                        };
-    
-                        /**
-                         * CloudControlGroupType enum.
-                         * @name google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.CloudControlGroupType
-                         * @enum {number}
-                         * @property {number} CLOUD_CONTROL_GROUP_TYPE_UNSPECIFIED=0 CLOUD_CONTROL_GROUP_TYPE_UNSPECIFIED value
-                         * @property {number} BUILT_IN=1 BUILT_IN value
-                         * @property {number} CUSTOM=2 CUSTOM value
-                         */
-                        CloudControlGroup.CloudControlGroupType = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "CLOUD_CONTROL_GROUP_TYPE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "BUILT_IN"] = 1;
-                            values[valuesById[2] = "CUSTOM"] = 2;
-                            return values;
-                        })();
-    
-                        return CloudControlGroup;
                     })();
     
                     v1.CloudControlDetails = (function() {
@@ -6943,920 +6308,6 @@
                         return OperationMetadata;
                     })();
     
-                    v1.Control = (function() {
-    
-                        /**
-                         * Properties of a Control.
-                         * @memberof google.cloud.cloudsecuritycompliance.v1
-                         * @interface IControl
-                         * @property {string|null} [name] Control name
-                         * @property {string|null} [displayName] Control displayName
-                         * @property {string|null} [description] Control description
-                         * @property {google.cloud.cloudsecuritycompliance.v1.Control.Family|null} [family] Control family
-                         * @property {google.cloud.cloudsecuritycompliance.v1.IControlFamily|null} [controlFamily] Control controlFamily
-                         * @property {google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|null} [responsibilityType] Control responsibilityType
-                         * @property {string|null} [googleResponsibilityDescription] Control googleResponsibilityDescription
-                         * @property {string|null} [googleResponsibilityImplementation] Control googleResponsibilityImplementation
-                         * @property {string|null} [customerResponsibilityDescription] Control customerResponsibilityDescription
-                         * @property {string|null} [customerResponsibilityImplementation] Control customerResponsibilityImplementation
-                         * @property {string|null} [sharedResponsibilityDescription] Control sharedResponsibilityDescription
-                         * @property {string|null} [additionalContentUri] Control additionalContentUri
-                         * @property {Array.<string>|null} [relatedFrameworks] Control relatedFrameworks
-                         */
-    
-                        /**
-                         * Constructs a new Control.
-                         * @memberof google.cloud.cloudsecuritycompliance.v1
-                         * @classdesc Represents a Control.
-                         * @implements IControl
-                         * @constructor
-                         * @param {google.cloud.cloudsecuritycompliance.v1.IControl=} [properties] Properties to set
-                         */
-                        function Control(properties) {
-                            this.relatedFrameworks = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * Control name.
-                         * @member {string} name
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.name = "";
-    
-                        /**
-                         * Control displayName.
-                         * @member {string} displayName
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.displayName = "";
-    
-                        /**
-                         * Control description.
-                         * @member {string} description
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.description = "";
-    
-                        /**
-                         * Control family.
-                         * @member {google.cloud.cloudsecuritycompliance.v1.Control.Family} family
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.family = 0;
-    
-                        /**
-                         * Control controlFamily.
-                         * @member {google.cloud.cloudsecuritycompliance.v1.IControlFamily|null|undefined} controlFamily
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.controlFamily = null;
-    
-                        /**
-                         * Control responsibilityType.
-                         * @member {google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType} responsibilityType
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.responsibilityType = 0;
-    
-                        /**
-                         * Control googleResponsibilityDescription.
-                         * @member {string} googleResponsibilityDescription
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.googleResponsibilityDescription = "";
-    
-                        /**
-                         * Control googleResponsibilityImplementation.
-                         * @member {string} googleResponsibilityImplementation
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.googleResponsibilityImplementation = "";
-    
-                        /**
-                         * Control customerResponsibilityDescription.
-                         * @member {string} customerResponsibilityDescription
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.customerResponsibilityDescription = "";
-    
-                        /**
-                         * Control customerResponsibilityImplementation.
-                         * @member {string} customerResponsibilityImplementation
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.customerResponsibilityImplementation = "";
-    
-                        /**
-                         * Control sharedResponsibilityDescription.
-                         * @member {string} sharedResponsibilityDescription
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.sharedResponsibilityDescription = "";
-    
-                        /**
-                         * Control additionalContentUri.
-                         * @member {string} additionalContentUri
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.additionalContentUri = "";
-    
-                        /**
-                         * Control relatedFrameworks.
-                         * @member {Array.<string>} relatedFrameworks
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         */
-                        Control.prototype.relatedFrameworks = $util.emptyArray;
-    
-                        /**
-                         * Creates a new Control instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.IControl=} [properties] Properties to set
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.Control} Control instance
-                         */
-                        Control.create = function create(properties) {
-                            return new Control(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified Control message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Control.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.IControl} message Control message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Control.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
-                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.displayName);
-                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
-                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.description);
-                            if (message.family != null && Object.hasOwnProperty.call(message, "family"))
-                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.family);
-                            if (message.controlFamily != null && Object.hasOwnProperty.call(message, "controlFamily"))
-                                $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.encode(message.controlFamily, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
-                            if (message.responsibilityType != null && Object.hasOwnProperty.call(message, "responsibilityType"))
-                                writer.uint32(/* id 7, wireType 0 =*/56).int32(message.responsibilityType);
-                            if (message.googleResponsibilityDescription != null && Object.hasOwnProperty.call(message, "googleResponsibilityDescription"))
-                                writer.uint32(/* id 8, wireType 2 =*/66).string(message.googleResponsibilityDescription);
-                            if (message.googleResponsibilityImplementation != null && Object.hasOwnProperty.call(message, "googleResponsibilityImplementation"))
-                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.googleResponsibilityImplementation);
-                            if (message.customerResponsibilityDescription != null && Object.hasOwnProperty.call(message, "customerResponsibilityDescription"))
-                                writer.uint32(/* id 10, wireType 2 =*/82).string(message.customerResponsibilityDescription);
-                            if (message.customerResponsibilityImplementation != null && Object.hasOwnProperty.call(message, "customerResponsibilityImplementation"))
-                                writer.uint32(/* id 11, wireType 2 =*/90).string(message.customerResponsibilityImplementation);
-                            if (message.sharedResponsibilityDescription != null && Object.hasOwnProperty.call(message, "sharedResponsibilityDescription"))
-                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.sharedResponsibilityDescription);
-                            if (message.additionalContentUri != null && Object.hasOwnProperty.call(message, "additionalContentUri"))
-                                writer.uint32(/* id 13, wireType 2 =*/106).string(message.additionalContentUri);
-                            if (message.relatedFrameworks != null && message.relatedFrameworks.length)
-                                for (var i = 0; i < message.relatedFrameworks.length; ++i)
-                                    writer.uint32(/* id 14, wireType 2 =*/114).string(message.relatedFrameworks[i]);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified Control message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.Control.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.IControl} message Control message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        Control.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a Control message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.Control} Control
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Control.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudsecuritycompliance.v1.Control();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.name = reader.string();
-                                        break;
-                                    }
-                                case 3: {
-                                        message.displayName = reader.string();
-                                        break;
-                                    }
-                                case 4: {
-                                        message.description = reader.string();
-                                        break;
-                                    }
-                                case 5: {
-                                        message.family = reader.int32();
-                                        break;
-                                    }
-                                case 6: {
-                                        message.controlFamily = $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 7: {
-                                        message.responsibilityType = reader.int32();
-                                        break;
-                                    }
-                                case 8: {
-                                        message.googleResponsibilityDescription = reader.string();
-                                        break;
-                                    }
-                                case 9: {
-                                        message.googleResponsibilityImplementation = reader.string();
-                                        break;
-                                    }
-                                case 10: {
-                                        message.customerResponsibilityDescription = reader.string();
-                                        break;
-                                    }
-                                case 11: {
-                                        message.customerResponsibilityImplementation = reader.string();
-                                        break;
-                                    }
-                                case 12: {
-                                        message.sharedResponsibilityDescription = reader.string();
-                                        break;
-                                    }
-                                case 13: {
-                                        message.additionalContentUri = reader.string();
-                                        break;
-                                    }
-                                case 14: {
-                                        if (!(message.relatedFrameworks && message.relatedFrameworks.length))
-                                            message.relatedFrameworks = [];
-                                        message.relatedFrameworks.push(reader.string());
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a Control message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.Control} Control
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        Control.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a Control message.
-                         * @function verify
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        Control.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                if (!$util.isString(message.name))
-                                    return "name: string expected";
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                if (!$util.isString(message.displayName))
-                                    return "displayName: string expected";
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                if (!$util.isString(message.description))
-                                    return "description: string expected";
-                            if (message.family != null && message.hasOwnProperty("family"))
-                                switch (message.family) {
-                                default:
-                                    return "family: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                case 4:
-                                case 5:
-                                case 6:
-                                case 7:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 12:
-                                case 13:
-                                case 14:
-                                case 15:
-                                case 16:
-                                case 17:
-                                case 18:
-                                    break;
-                                }
-                            if (message.controlFamily != null && message.hasOwnProperty("controlFamily")) {
-                                var error = $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.verify(message.controlFamily);
-                                if (error)
-                                    return "controlFamily." + error;
-                            }
-                            if (message.responsibilityType != null && message.hasOwnProperty("responsibilityType"))
-                                switch (message.responsibilityType) {
-                                default:
-                                    return "responsibilityType: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                case 3:
-                                    break;
-                                }
-                            if (message.googleResponsibilityDescription != null && message.hasOwnProperty("googleResponsibilityDescription"))
-                                if (!$util.isString(message.googleResponsibilityDescription))
-                                    return "googleResponsibilityDescription: string expected";
-                            if (message.googleResponsibilityImplementation != null && message.hasOwnProperty("googleResponsibilityImplementation"))
-                                if (!$util.isString(message.googleResponsibilityImplementation))
-                                    return "googleResponsibilityImplementation: string expected";
-                            if (message.customerResponsibilityDescription != null && message.hasOwnProperty("customerResponsibilityDescription"))
-                                if (!$util.isString(message.customerResponsibilityDescription))
-                                    return "customerResponsibilityDescription: string expected";
-                            if (message.customerResponsibilityImplementation != null && message.hasOwnProperty("customerResponsibilityImplementation"))
-                                if (!$util.isString(message.customerResponsibilityImplementation))
-                                    return "customerResponsibilityImplementation: string expected";
-                            if (message.sharedResponsibilityDescription != null && message.hasOwnProperty("sharedResponsibilityDescription"))
-                                if (!$util.isString(message.sharedResponsibilityDescription))
-                                    return "sharedResponsibilityDescription: string expected";
-                            if (message.additionalContentUri != null && message.hasOwnProperty("additionalContentUri"))
-                                if (!$util.isString(message.additionalContentUri))
-                                    return "additionalContentUri: string expected";
-                            if (message.relatedFrameworks != null && message.hasOwnProperty("relatedFrameworks")) {
-                                if (!Array.isArray(message.relatedFrameworks))
-                                    return "relatedFrameworks: array expected";
-                                for (var i = 0; i < message.relatedFrameworks.length; ++i)
-                                    if (!$util.isString(message.relatedFrameworks[i]))
-                                        return "relatedFrameworks: string[] expected";
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a Control message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.Control} Control
-                         */
-                        Control.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.cloudsecuritycompliance.v1.Control)
-                                return object;
-                            var message = new $root.google.cloud.cloudsecuritycompliance.v1.Control();
-                            if (object.name != null)
-                                message.name = String(object.name);
-                            if (object.displayName != null)
-                                message.displayName = String(object.displayName);
-                            if (object.description != null)
-                                message.description = String(object.description);
-                            switch (object.family) {
-                            default:
-                                if (typeof object.family === "number") {
-                                    message.family = object.family;
-                                    break;
-                                }
-                                break;
-                            case "FAMILY_UNSPECIFIED":
-                            case 0:
-                                message.family = 0;
-                                break;
-                            case "AC":
-                            case 1:
-                                message.family = 1;
-                                break;
-                            case "AT":
-                            case 2:
-                                message.family = 2;
-                                break;
-                            case "AU":
-                            case 3:
-                                message.family = 3;
-                                break;
-                            case "CA":
-                            case 4:
-                                message.family = 4;
-                                break;
-                            case "CM":
-                            case 5:
-                                message.family = 5;
-                                break;
-                            case "CP":
-                            case 6:
-                                message.family = 6;
-                                break;
-                            case "IA":
-                            case 7:
-                                message.family = 7;
-                                break;
-                            case "IR":
-                            case 8:
-                                message.family = 8;
-                                break;
-                            case "MA":
-                            case 9:
-                                message.family = 9;
-                                break;
-                            case "MP":
-                            case 10:
-                                message.family = 10;
-                                break;
-                            case "PE":
-                            case 11:
-                                message.family = 11;
-                                break;
-                            case "PL":
-                            case 12:
-                                message.family = 12;
-                                break;
-                            case "PS":
-                            case 13:
-                                message.family = 13;
-                                break;
-                            case "RA":
-                            case 14:
-                                message.family = 14;
-                                break;
-                            case "SA":
-                            case 15:
-                                message.family = 15;
-                                break;
-                            case "SC":
-                            case 16:
-                                message.family = 16;
-                                break;
-                            case "SI":
-                            case 17:
-                                message.family = 17;
-                                break;
-                            case "SR":
-                            case 18:
-                                message.family = 18;
-                                break;
-                            }
-                            if (object.controlFamily != null) {
-                                if (typeof object.controlFamily !== "object")
-                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.Control.controlFamily: object expected");
-                                message.controlFamily = $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.fromObject(object.controlFamily);
-                            }
-                            switch (object.responsibilityType) {
-                            default:
-                                if (typeof object.responsibilityType === "number") {
-                                    message.responsibilityType = object.responsibilityType;
-                                    break;
-                                }
-                                break;
-                            case "REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED":
-                            case 0:
-                                message.responsibilityType = 0;
-                                break;
-                            case "GOOGLE":
-                            case 1:
-                                message.responsibilityType = 1;
-                                break;
-                            case "CUSTOMER":
-                            case 2:
-                                message.responsibilityType = 2;
-                                break;
-                            case "SHARED":
-                            case 3:
-                                message.responsibilityType = 3;
-                                break;
-                            }
-                            if (object.googleResponsibilityDescription != null)
-                                message.googleResponsibilityDescription = String(object.googleResponsibilityDescription);
-                            if (object.googleResponsibilityImplementation != null)
-                                message.googleResponsibilityImplementation = String(object.googleResponsibilityImplementation);
-                            if (object.customerResponsibilityDescription != null)
-                                message.customerResponsibilityDescription = String(object.customerResponsibilityDescription);
-                            if (object.customerResponsibilityImplementation != null)
-                                message.customerResponsibilityImplementation = String(object.customerResponsibilityImplementation);
-                            if (object.sharedResponsibilityDescription != null)
-                                message.sharedResponsibilityDescription = String(object.sharedResponsibilityDescription);
-                            if (object.additionalContentUri != null)
-                                message.additionalContentUri = String(object.additionalContentUri);
-                            if (object.relatedFrameworks) {
-                                if (!Array.isArray(object.relatedFrameworks))
-                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.Control.relatedFrameworks: array expected");
-                                message.relatedFrameworks = [];
-                                for (var i = 0; i < object.relatedFrameworks.length; ++i)
-                                    message.relatedFrameworks[i] = String(object.relatedFrameworks[i]);
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a Control message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.Control} message Control
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        Control.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults)
-                                object.relatedFrameworks = [];
-                            if (options.defaults) {
-                                object.name = "";
-                                object.displayName = "";
-                                object.description = "";
-                                object.family = options.enums === String ? "FAMILY_UNSPECIFIED" : 0;
-                                object.controlFamily = null;
-                                object.responsibilityType = options.enums === String ? "REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED" : 0;
-                                object.googleResponsibilityDescription = "";
-                                object.googleResponsibilityImplementation = "";
-                                object.customerResponsibilityDescription = "";
-                                object.customerResponsibilityImplementation = "";
-                                object.sharedResponsibilityDescription = "";
-                                object.additionalContentUri = "";
-                            }
-                            if (message.name != null && message.hasOwnProperty("name"))
-                                object.name = message.name;
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                object.displayName = message.displayName;
-                            if (message.description != null && message.hasOwnProperty("description"))
-                                object.description = message.description;
-                            if (message.family != null && message.hasOwnProperty("family"))
-                                object.family = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.Control.Family[message.family] === undefined ? message.family : $root.google.cloud.cloudsecuritycompliance.v1.Control.Family[message.family] : message.family;
-                            if (message.controlFamily != null && message.hasOwnProperty("controlFamily"))
-                                object.controlFamily = $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily.toObject(message.controlFamily, options);
-                            if (message.responsibilityType != null && message.hasOwnProperty("responsibilityType"))
-                                object.responsibilityType = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType[message.responsibilityType] === undefined ? message.responsibilityType : $root.google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType[message.responsibilityType] : message.responsibilityType;
-                            if (message.googleResponsibilityDescription != null && message.hasOwnProperty("googleResponsibilityDescription"))
-                                object.googleResponsibilityDescription = message.googleResponsibilityDescription;
-                            if (message.googleResponsibilityImplementation != null && message.hasOwnProperty("googleResponsibilityImplementation"))
-                                object.googleResponsibilityImplementation = message.googleResponsibilityImplementation;
-                            if (message.customerResponsibilityDescription != null && message.hasOwnProperty("customerResponsibilityDescription"))
-                                object.customerResponsibilityDescription = message.customerResponsibilityDescription;
-                            if (message.customerResponsibilityImplementation != null && message.hasOwnProperty("customerResponsibilityImplementation"))
-                                object.customerResponsibilityImplementation = message.customerResponsibilityImplementation;
-                            if (message.sharedResponsibilityDescription != null && message.hasOwnProperty("sharedResponsibilityDescription"))
-                                object.sharedResponsibilityDescription = message.sharedResponsibilityDescription;
-                            if (message.additionalContentUri != null && message.hasOwnProperty("additionalContentUri"))
-                                object.additionalContentUri = message.additionalContentUri;
-                            if (message.relatedFrameworks && message.relatedFrameworks.length) {
-                                object.relatedFrameworks = [];
-                                for (var j = 0; j < message.relatedFrameworks.length; ++j)
-                                    object.relatedFrameworks[j] = message.relatedFrameworks[j];
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this Control to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        Control.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for Control
-                         * @function getTypeUrl
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.Control
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        Control.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.cloudsecuritycompliance.v1.Control";
-                        };
-    
-                        /**
-                         * Family enum.
-                         * @name google.cloud.cloudsecuritycompliance.v1.Control.Family
-                         * @enum {number}
-                         * @property {number} FAMILY_UNSPECIFIED=0 FAMILY_UNSPECIFIED value
-                         * @property {number} AC=1 AC value
-                         * @property {number} AT=2 AT value
-                         * @property {number} AU=3 AU value
-                         * @property {number} CA=4 CA value
-                         * @property {number} CM=5 CM value
-                         * @property {number} CP=6 CP value
-                         * @property {number} IA=7 IA value
-                         * @property {number} IR=8 IR value
-                         * @property {number} MA=9 MA value
-                         * @property {number} MP=10 MP value
-                         * @property {number} PE=11 PE value
-                         * @property {number} PL=12 PL value
-                         * @property {number} PS=13 PS value
-                         * @property {number} RA=14 RA value
-                         * @property {number} SA=15 SA value
-                         * @property {number} SC=16 SC value
-                         * @property {number} SI=17 SI value
-                         * @property {number} SR=18 SR value
-                         */
-                        Control.Family = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "FAMILY_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "AC"] = 1;
-                            values[valuesById[2] = "AT"] = 2;
-                            values[valuesById[3] = "AU"] = 3;
-                            values[valuesById[4] = "CA"] = 4;
-                            values[valuesById[5] = "CM"] = 5;
-                            values[valuesById[6] = "CP"] = 6;
-                            values[valuesById[7] = "IA"] = 7;
-                            values[valuesById[8] = "IR"] = 8;
-                            values[valuesById[9] = "MA"] = 9;
-                            values[valuesById[10] = "MP"] = 10;
-                            values[valuesById[11] = "PE"] = 11;
-                            values[valuesById[12] = "PL"] = 12;
-                            values[valuesById[13] = "PS"] = 13;
-                            values[valuesById[14] = "RA"] = 14;
-                            values[valuesById[15] = "SA"] = 15;
-                            values[valuesById[16] = "SC"] = 16;
-                            values[valuesById[17] = "SI"] = 17;
-                            values[valuesById[18] = "SR"] = 18;
-                            return values;
-                        })();
-    
-                        return Control;
-                    })();
-    
-                    v1.ControlFamily = (function() {
-    
-                        /**
-                         * Properties of a ControlFamily.
-                         * @memberof google.cloud.cloudsecuritycompliance.v1
-                         * @interface IControlFamily
-                         * @property {string|null} [familyId] ControlFamily familyId
-                         * @property {string|null} [displayName] ControlFamily displayName
-                         */
-    
-                        /**
-                         * Constructs a new ControlFamily.
-                         * @memberof google.cloud.cloudsecuritycompliance.v1
-                         * @classdesc Represents a ControlFamily.
-                         * @implements IControlFamily
-                         * @constructor
-                         * @param {google.cloud.cloudsecuritycompliance.v1.IControlFamily=} [properties] Properties to set
-                         */
-                        function ControlFamily(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * ControlFamily familyId.
-                         * @member {string} familyId
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @instance
-                         */
-                        ControlFamily.prototype.familyId = "";
-    
-                        /**
-                         * ControlFamily displayName.
-                         * @member {string} displayName
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @instance
-                         */
-                        ControlFamily.prototype.displayName = "";
-    
-                        /**
-                         * Creates a new ControlFamily instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.IControlFamily=} [properties] Properties to set
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.ControlFamily} ControlFamily instance
-                         */
-                        ControlFamily.create = function create(properties) {
-                            return new ControlFamily(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified ControlFamily message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlFamily.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.IControlFamily} message ControlFamily message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ControlFamily.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.familyId != null && Object.hasOwnProperty.call(message, "familyId"))
-                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.familyId);
-                            if (message.displayName != null && Object.hasOwnProperty.call(message, "displayName"))
-                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.displayName);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified ControlFamily message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlFamily.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.IControlFamily} message ControlFamily message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        ControlFamily.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a ControlFamily message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.ControlFamily} ControlFamily
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ControlFamily.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.familyId = reader.string();
-                                        break;
-                                    }
-                                case 2: {
-                                        message.displayName = reader.string();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a ControlFamily message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.ControlFamily} ControlFamily
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        ControlFamily.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a ControlFamily message.
-                         * @function verify
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        ControlFamily.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.familyId != null && message.hasOwnProperty("familyId"))
-                                if (!$util.isString(message.familyId))
-                                    return "familyId: string expected";
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                if (!$util.isString(message.displayName))
-                                    return "displayName: string expected";
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a ControlFamily message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.ControlFamily} ControlFamily
-                         */
-                        ControlFamily.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily)
-                                return object;
-                            var message = new $root.google.cloud.cloudsecuritycompliance.v1.ControlFamily();
-                            if (object.familyId != null)
-                                message.familyId = String(object.familyId);
-                            if (object.displayName != null)
-                                message.displayName = String(object.displayName);
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a ControlFamily message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.ControlFamily} message ControlFamily
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        ControlFamily.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults) {
-                                object.familyId = "";
-                                object.displayName = "";
-                            }
-                            if (message.familyId != null && message.hasOwnProperty("familyId"))
-                                object.familyId = message.familyId;
-                            if (message.displayName != null && message.hasOwnProperty("displayName"))
-                                object.displayName = message.displayName;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this ControlFamily to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        ControlFamily.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for ControlFamily
-                         * @function getTypeUrl
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.ControlFamily
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        ControlFamily.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.cloudsecuritycompliance.v1.ControlFamily";
-                        };
-    
-                        return ControlFamily;
-                    })();
-    
                     v1.Config = (function() {
     
                         /**
@@ -11385,11 +9836,9 @@
                          * @property {string|null} [description] FrameworkDeployment description
                          * @property {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlMetadata>|null} [cloudControlMetadata] FrameworkDeployment cloudControlMetadata
                          * @property {google.cloud.cloudsecuritycompliance.v1.DeploymentState|null} [deploymentState] FrameworkDeployment deploymentState
-                         * @property {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDeployment>|null} [ccDeployments] FrameworkDeployment ccDeployments
                          * @property {google.protobuf.ITimestamp|null} [createTime] FrameworkDeployment createTime
                          * @property {google.protobuf.ITimestamp|null} [updateTime] FrameworkDeployment updateTime
                          * @property {string|null} [etag] FrameworkDeployment etag
-                         * @property {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment>|null} [ccGroupDeployments] FrameworkDeployment ccGroupDeployments
                          * @property {string|null} [targetResourceDisplayName] FrameworkDeployment targetResourceDisplayName
                          * @property {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDeploymentReference>|null} [cloudControlDeploymentReferences] FrameworkDeployment cloudControlDeploymentReferences
                          */
@@ -11404,8 +9853,6 @@
                          */
                         function FrameworkDeployment(properties) {
                             this.cloudControlMetadata = [];
-                            this.ccDeployments = [];
-                            this.ccGroupDeployments = [];
                             this.cloudControlDeploymentReferences = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
@@ -11470,14 +9917,6 @@
                         FrameworkDeployment.prototype.deploymentState = 0;
     
                         /**
-                         * FrameworkDeployment ccDeployments.
-                         * @member {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDeployment>} ccDeployments
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment
-                         * @instance
-                         */
-                        FrameworkDeployment.prototype.ccDeployments = $util.emptyArray;
-    
-                        /**
                          * FrameworkDeployment createTime.
                          * @member {google.protobuf.ITimestamp|null|undefined} createTime
                          * @memberof google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment
@@ -11500,14 +9939,6 @@
                          * @instance
                          */
                         FrameworkDeployment.prototype.etag = "";
-    
-                        /**
-                         * FrameworkDeployment ccGroupDeployments.
-                         * @member {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment>} ccGroupDeployments
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment
-                         * @instance
-                         */
-                        FrameworkDeployment.prototype.ccGroupDeployments = $util.emptyArray;
     
                         /**
                          * FrameworkDeployment targetResourceDisplayName.
@@ -11564,18 +9995,12 @@
                                     $root.google.cloud.cloudsecuritycompliance.v1.CloudControlMetadata.encode(message.cloudControlMetadata[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
                             if (message.deploymentState != null && Object.hasOwnProperty.call(message, "deploymentState"))
                                 writer.uint32(/* id 7, wireType 0 =*/56).int32(message.deploymentState);
-                            if (message.ccDeployments != null && message.ccDeployments.length)
-                                for (var i = 0; i < message.ccDeployments.length; ++i)
-                                    $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.encode(message.ccDeployments[i], writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
                             if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
                                 $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 9, wireType 2 =*/74).fork()).ldelim();
                             if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
                                 $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
                             if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.etag);
-                            if (message.ccGroupDeployments != null && message.ccGroupDeployments.length)
-                                for (var i = 0; i < message.ccGroupDeployments.length; ++i)
-                                    $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.encode(message.ccGroupDeployments[i], writer.uint32(/* id 12, wireType 2 =*/98).fork()).ldelim();
                             if (message.targetResourceDisplayName != null && Object.hasOwnProperty.call(message, "targetResourceDisplayName"))
                                 writer.uint32(/* id 13, wireType 2 =*/106).string(message.targetResourceDisplayName);
                             if (message.cloudControlDeploymentReferences != null && message.cloudControlDeploymentReferences.length)
@@ -11647,12 +10072,6 @@
                                         message.deploymentState = reader.int32();
                                         break;
                                     }
-                                case 8: {
-                                        if (!(message.ccDeployments && message.ccDeployments.length))
-                                            message.ccDeployments = [];
-                                        message.ccDeployments.push($root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.decode(reader, reader.uint32()));
-                                        break;
-                                    }
                                 case 9: {
                                         message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
                                         break;
@@ -11663,12 +10082,6 @@
                                     }
                                 case 11: {
                                         message.etag = reader.string();
-                                        break;
-                                    }
-                                case 12: {
-                                        if (!(message.ccGroupDeployments && message.ccGroupDeployments.length))
-                                            message.ccGroupDeployments = [];
-                                        message.ccGroupDeployments.push($root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.decode(reader, reader.uint32()));
                                         break;
                                     }
                                 case 13: {
@@ -11758,15 +10171,6 @@
                                 case 7:
                                     break;
                                 }
-                            if (message.ccDeployments != null && message.hasOwnProperty("ccDeployments")) {
-                                if (!Array.isArray(message.ccDeployments))
-                                    return "ccDeployments: array expected";
-                                for (var i = 0; i < message.ccDeployments.length; ++i) {
-                                    var error = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.verify(message.ccDeployments[i]);
-                                    if (error)
-                                        return "ccDeployments." + error;
-                                }
-                            }
                             if (message.createTime != null && message.hasOwnProperty("createTime")) {
                                 var error = $root.google.protobuf.Timestamp.verify(message.createTime);
                                 if (error)
@@ -11780,15 +10184,6 @@
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 if (!$util.isString(message.etag))
                                     return "etag: string expected";
-                            if (message.ccGroupDeployments != null && message.hasOwnProperty("ccGroupDeployments")) {
-                                if (!Array.isArray(message.ccGroupDeployments))
-                                    return "ccGroupDeployments: array expected";
-                                for (var i = 0; i < message.ccGroupDeployments.length; ++i) {
-                                    var error = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.verify(message.ccGroupDeployments[i]);
-                                    if (error)
-                                        return "ccGroupDeployments." + error;
-                                }
-                            }
                             if (message.targetResourceDisplayName != null && message.hasOwnProperty("targetResourceDisplayName"))
                                 if (!$util.isString(message.targetResourceDisplayName))
                                     return "targetResourceDisplayName: string expected";
@@ -11882,16 +10277,6 @@
                                 message.deploymentState = 7;
                                 break;
                             }
-                            if (object.ccDeployments) {
-                                if (!Array.isArray(object.ccDeployments))
-                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment.ccDeployments: array expected");
-                                message.ccDeployments = [];
-                                for (var i = 0; i < object.ccDeployments.length; ++i) {
-                                    if (typeof object.ccDeployments[i] !== "object")
-                                        throw TypeError(".google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment.ccDeployments: object expected");
-                                    message.ccDeployments[i] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.fromObject(object.ccDeployments[i]);
-                                }
-                            }
                             if (object.createTime != null) {
                                 if (typeof object.createTime !== "object")
                                     throw TypeError(".google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment.createTime: object expected");
@@ -11904,16 +10289,6 @@
                             }
                             if (object.etag != null)
                                 message.etag = String(object.etag);
-                            if (object.ccGroupDeployments) {
-                                if (!Array.isArray(object.ccGroupDeployments))
-                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment.ccGroupDeployments: array expected");
-                                message.ccGroupDeployments = [];
-                                for (var i = 0; i < object.ccGroupDeployments.length; ++i) {
-                                    if (typeof object.ccGroupDeployments[i] !== "object")
-                                        throw TypeError(".google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment.ccGroupDeployments: object expected");
-                                    message.ccGroupDeployments[i] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.fromObject(object.ccGroupDeployments[i]);
-                                }
-                            }
                             if (object.targetResourceDisplayName != null)
                                 message.targetResourceDisplayName = String(object.targetResourceDisplayName);
                             if (object.cloudControlDeploymentReferences) {
@@ -11944,8 +10319,6 @@
                             var object = {};
                             if (options.arrays || options.defaults) {
                                 object.cloudControlMetadata = [];
-                                object.ccDeployments = [];
-                                object.ccGroupDeployments = [];
                                 object.cloudControlDeploymentReferences = [];
                             }
                             if (options.defaults) {
@@ -11977,22 +10350,12 @@
                             }
                             if (message.deploymentState != null && message.hasOwnProperty("deploymentState"))
                                 object.deploymentState = options.enums === String ? $root.google.cloud.cloudsecuritycompliance.v1.DeploymentState[message.deploymentState] === undefined ? message.deploymentState : $root.google.cloud.cloudsecuritycompliance.v1.DeploymentState[message.deploymentState] : message.deploymentState;
-                            if (message.ccDeployments && message.ccDeployments.length) {
-                                object.ccDeployments = [];
-                                for (var j = 0; j < message.ccDeployments.length; ++j)
-                                    object.ccDeployments[j] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.toObject(message.ccDeployments[j], options);
-                            }
                             if (message.createTime != null && message.hasOwnProperty("createTime"))
                                 object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
                             if (message.updateTime != null && message.hasOwnProperty("updateTime"))
                                 object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
                             if (message.etag != null && message.hasOwnProperty("etag"))
                                 object.etag = message.etag;
-                            if (message.ccGroupDeployments && message.ccGroupDeployments.length) {
-                                object.ccGroupDeployments = [];
-                                for (var j = 0; j < message.ccGroupDeployments.length; ++j)
-                                    object.ccGroupDeployments[j] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.toObject(message.ccGroupDeployments[j], options);
-                            }
                             if (message.targetResourceDisplayName != null && message.hasOwnProperty("targetResourceDisplayName"))
                                 object.targetResourceDisplayName = message.targetResourceDisplayName;
                             if (message.cloudControlDeploymentReferences && message.cloudControlDeploymentReferences.length) {
@@ -13851,306 +12214,6 @@
                         };
     
                         return CloudControlMetadata;
-                    })();
-    
-                    v1.CloudControlGroupDeployment = (function() {
-    
-                        /**
-                         * Properties of a CloudControlGroupDeployment.
-                         * @memberof google.cloud.cloudsecuritycompliance.v1
-                         * @interface ICloudControlGroupDeployment
-                         * @property {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup|null} [cloudControlGroup] CloudControlGroupDeployment cloudControlGroup
-                         * @property {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDeployment>|null} [ccDeployments] CloudControlGroupDeployment ccDeployments
-                         * @property {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDeploymentReference>|null} [ccDeploymentReferences] CloudControlGroupDeployment ccDeploymentReferences
-                         */
-    
-                        /**
-                         * Constructs a new CloudControlGroupDeployment.
-                         * @memberof google.cloud.cloudsecuritycompliance.v1
-                         * @classdesc Represents a CloudControlGroupDeployment.
-                         * @implements ICloudControlGroupDeployment
-                         * @constructor
-                         * @param {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment=} [properties] Properties to set
-                         */
-                        function CloudControlGroupDeployment(properties) {
-                            this.ccDeployments = [];
-                            this.ccDeploymentReferences = [];
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * CloudControlGroupDeployment cloudControlGroup.
-                         * @member {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroup|null|undefined} cloudControlGroup
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @instance
-                         */
-                        CloudControlGroupDeployment.prototype.cloudControlGroup = null;
-    
-                        /**
-                         * CloudControlGroupDeployment ccDeployments.
-                         * @member {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDeployment>} ccDeployments
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @instance
-                         */
-                        CloudControlGroupDeployment.prototype.ccDeployments = $util.emptyArray;
-    
-                        /**
-                         * CloudControlGroupDeployment ccDeploymentReferences.
-                         * @member {Array.<google.cloud.cloudsecuritycompliance.v1.ICloudControlDeploymentReference>} ccDeploymentReferences
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @instance
-                         */
-                        CloudControlGroupDeployment.prototype.ccDeploymentReferences = $util.emptyArray;
-    
-                        /**
-                         * Creates a new CloudControlGroupDeployment instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment=} [properties] Properties to set
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment} CloudControlGroupDeployment instance
-                         */
-                        CloudControlGroupDeployment.create = function create(properties) {
-                            return new CloudControlGroupDeployment(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified CloudControlGroupDeployment message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment} message CloudControlGroupDeployment message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CloudControlGroupDeployment.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.cloudControlGroup != null && Object.hasOwnProperty.call(message, "cloudControlGroup"))
-                                $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.encode(message.cloudControlGroup, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                            if (message.ccDeployments != null && message.ccDeployments.length)
-                                for (var i = 0; i < message.ccDeployments.length; ++i)
-                                    $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.encode(message.ccDeployments[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
-                            if (message.ccDeploymentReferences != null && message.ccDeploymentReferences.length)
-                                for (var i = 0; i < message.ccDeploymentReferences.length; ++i)
-                                    $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeploymentReference.encode(message.ccDeploymentReferences[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified CloudControlGroupDeployment message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupDeployment} message CloudControlGroupDeployment message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        CloudControlGroupDeployment.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a CloudControlGroupDeployment message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment} CloudControlGroupDeployment
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CloudControlGroupDeployment.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.cloudControlGroup = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.decode(reader, reader.uint32());
-                                        break;
-                                    }
-                                case 2: {
-                                        if (!(message.ccDeployments && message.ccDeployments.length))
-                                            message.ccDeployments = [];
-                                        message.ccDeployments.push($root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                case 3: {
-                                        if (!(message.ccDeploymentReferences && message.ccDeploymentReferences.length))
-                                            message.ccDeploymentReferences = [];
-                                        message.ccDeploymentReferences.push($root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeploymentReference.decode(reader, reader.uint32()));
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a CloudControlGroupDeployment message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment} CloudControlGroupDeployment
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        CloudControlGroupDeployment.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a CloudControlGroupDeployment message.
-                         * @function verify
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        CloudControlGroupDeployment.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.cloudControlGroup != null && message.hasOwnProperty("cloudControlGroup")) {
-                                var error = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.verify(message.cloudControlGroup);
-                                if (error)
-                                    return "cloudControlGroup." + error;
-                            }
-                            if (message.ccDeployments != null && message.hasOwnProperty("ccDeployments")) {
-                                if (!Array.isArray(message.ccDeployments))
-                                    return "ccDeployments: array expected";
-                                for (var i = 0; i < message.ccDeployments.length; ++i) {
-                                    var error = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.verify(message.ccDeployments[i]);
-                                    if (error)
-                                        return "ccDeployments." + error;
-                                }
-                            }
-                            if (message.ccDeploymentReferences != null && message.hasOwnProperty("ccDeploymentReferences")) {
-                                if (!Array.isArray(message.ccDeploymentReferences))
-                                    return "ccDeploymentReferences: array expected";
-                                for (var i = 0; i < message.ccDeploymentReferences.length; ++i) {
-                                    var error = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeploymentReference.verify(message.ccDeploymentReferences[i]);
-                                    if (error)
-                                        return "ccDeploymentReferences." + error;
-                                }
-                            }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a CloudControlGroupDeployment message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment} CloudControlGroupDeployment
-                         */
-                        CloudControlGroupDeployment.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment)
-                                return object;
-                            var message = new $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment();
-                            if (object.cloudControlGroup != null) {
-                                if (typeof object.cloudControlGroup !== "object")
-                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.cloudControlGroup: object expected");
-                                message.cloudControlGroup = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.fromObject(object.cloudControlGroup);
-                            }
-                            if (object.ccDeployments) {
-                                if (!Array.isArray(object.ccDeployments))
-                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.ccDeployments: array expected");
-                                message.ccDeployments = [];
-                                for (var i = 0; i < object.ccDeployments.length; ++i) {
-                                    if (typeof object.ccDeployments[i] !== "object")
-                                        throw TypeError(".google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.ccDeployments: object expected");
-                                    message.ccDeployments[i] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.fromObject(object.ccDeployments[i]);
-                                }
-                            }
-                            if (object.ccDeploymentReferences) {
-                                if (!Array.isArray(object.ccDeploymentReferences))
-                                    throw TypeError(".google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.ccDeploymentReferences: array expected");
-                                message.ccDeploymentReferences = [];
-                                for (var i = 0; i < object.ccDeploymentReferences.length; ++i) {
-                                    if (typeof object.ccDeploymentReferences[i] !== "object")
-                                        throw TypeError(".google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment.ccDeploymentReferences: object expected");
-                                    message.ccDeploymentReferences[i] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeploymentReference.fromObject(object.ccDeploymentReferences[i]);
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a CloudControlGroupDeployment message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @static
-                         * @param {google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment} message CloudControlGroupDeployment
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        CloudControlGroupDeployment.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.arrays || options.defaults) {
-                                object.ccDeployments = [];
-                                object.ccDeploymentReferences = [];
-                            }
-                            if (options.defaults)
-                                object.cloudControlGroup = null;
-                            if (message.cloudControlGroup != null && message.hasOwnProperty("cloudControlGroup"))
-                                object.cloudControlGroup = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlGroup.toObject(message.cloudControlGroup, options);
-                            if (message.ccDeployments && message.ccDeployments.length) {
-                                object.ccDeployments = [];
-                                for (var j = 0; j < message.ccDeployments.length; ++j)
-                                    object.ccDeployments[j] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeployment.toObject(message.ccDeployments[j], options);
-                            }
-                            if (message.ccDeploymentReferences && message.ccDeploymentReferences.length) {
-                                object.ccDeploymentReferences = [];
-                                for (var j = 0; j < message.ccDeploymentReferences.length; ++j)
-                                    object.ccDeploymentReferences[j] = $root.google.cloud.cloudsecuritycompliance.v1.CloudControlDeploymentReference.toObject(message.ccDeploymentReferences[j], options);
-                            }
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this CloudControlGroupDeployment to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        CloudControlGroupDeployment.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for CloudControlGroupDeployment
-                         * @function getTypeUrl
-                         * @memberof google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        CloudControlGroupDeployment.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.cloudsecuritycompliance.v1.CloudControlGroupDeployment";
-                        };
-    
-                        return CloudControlGroupDeployment;
                     })();
     
                     v1.CreateFrameworkDeploymentRequest = (function() {
@@ -18318,7 +16381,6 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
-                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -18354,14 +16416,6 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
-                 * CommonLanguageSettings selectiveGapicGeneration.
-                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
-                 * @memberof google.api.CommonLanguageSettings
-                 * @instance
-                 */
-                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
-    
-                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -18393,8 +16447,6 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
-                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
-                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -18444,10 +16496,6 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
-                                break;
-                            }
-                        case 3: {
-                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -18501,11 +16549,6 @@
                                 break;
                             }
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
-                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
-                        if (error)
-                            return "selectiveGapicGeneration." + error;
-                    }
                     return null;
                 };
     
@@ -18548,11 +16591,6 @@
                                 break;
                             }
                     }
-                    if (object.selectiveGapicGeneration != null) {
-                        if (typeof object.selectiveGapicGeneration !== "object")
-                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
-                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
-                    }
                     return message;
                 };
     
@@ -18571,10 +16609,8 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.referenceDocsUri = "";
-                        object.selectiveGapicGeneration = null;
-                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -18582,8 +16618,6 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
-                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
-                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -20406,7 +18440,6 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
-                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -20431,14 +18464,6 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
-    
-                /**
-                 * PythonSettings experimentalFeatures.
-                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
-                 * @memberof google.api.PythonSettings
-                 * @instance
-                 */
-                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -20466,8 +18491,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
-                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -20506,10 +18529,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -20552,11 +18571,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
-                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
-                        if (error)
-                            return "experimentalFeatures." + error;
-                    }
                     return null;
                 };
     
@@ -20577,11 +18591,6 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.experimentalFeatures != null) {
-                        if (typeof object.experimentalFeatures !== "object")
-                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
-                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
-                    }
                     return message;
                 };
     
@@ -20598,14 +18607,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults) {
+                    if (options.defaults)
                         object.common = null;
-                        object.experimentalFeatures = null;
-                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
-                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -20634,258 +18639,6 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
-    
-                PythonSettings.ExperimentalFeatures = (function() {
-    
-                    /**
-                     * Properties of an ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @interface IExperimentalFeatures
-                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
-                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
-                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
-                     */
-    
-                    /**
-                     * Constructs a new ExperimentalFeatures.
-                     * @memberof google.api.PythonSettings
-                     * @classdesc Represents an ExperimentalFeatures.
-                     * @implements IExperimentalFeatures
-                     * @constructor
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     */
-                    function ExperimentalFeatures(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * ExperimentalFeatures restAsyncIoEnabled.
-                     * @member {boolean} restAsyncIoEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures protobufPythonicTypesEnabled.
-                     * @member {boolean} protobufPythonicTypesEnabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
-    
-                    /**
-                     * ExperimentalFeatures unversionedPackageDisabled.
-                     * @member {boolean} unversionedPackageDisabled
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     */
-                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
-    
-                    /**
-                     * Creates a new ExperimentalFeatures instance using the specified properties.
-                     * @function create
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
-                     */
-                    ExperimentalFeatures.create = function create(properties) {
-                        return new ExperimentalFeatures(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
-                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
-                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
-                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.restAsyncIoEnabled = reader.bool();
-                                    break;
-                                }
-                            case 2: {
-                                    message.protobufPythonicTypesEnabled = reader.bool();
-                                    break;
-                                }
-                            case 3: {
-                                    message.unversionedPackageDisabled = reader.bool();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies an ExperimentalFeatures message.
-                     * @function verify
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    ExperimentalFeatures.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            if (typeof message.restAsyncIoEnabled !== "boolean")
-                                return "restAsyncIoEnabled: boolean expected";
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
-                                return "protobufPythonicTypesEnabled: boolean expected";
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            if (typeof message.unversionedPackageDisabled !== "boolean")
-                                return "unversionedPackageDisabled: boolean expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
-                     */
-                    ExperimentalFeatures.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
-                            return object;
-                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
-                        if (object.restAsyncIoEnabled != null)
-                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
-                        if (object.protobufPythonicTypesEnabled != null)
-                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
-                        if (object.unversionedPackageDisabled != null)
-                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    ExperimentalFeatures.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.restAsyncIoEnabled = false;
-                            object.protobufPythonicTypesEnabled = false;
-                            object.unversionedPackageDisabled = false;
-                        }
-                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
-                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
-                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
-                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
-                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
-                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this ExperimentalFeatures to JSON.
-                     * @function toJSON
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for ExperimentalFeatures
-                     * @function getTypeUrl
-                     * @memberof google.api.PythonSettings.ExperimentalFeatures
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
-                    };
-    
-                    return ExperimentalFeatures;
-                })();
     
                 return PythonSettings;
             })();
@@ -21763,7 +19516,6 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
-                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -21775,7 +19527,6 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
-                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -21789,14 +19540,6 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
-    
-                /**
-                 * GoSettings renamedServices.
-                 * @member {Object.<string,string>} renamedServices
-                 * @memberof google.api.GoSettings
-                 * @instance
-                 */
-                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -21824,9 +19567,6 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
-                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
-                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
-                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -21857,7 +19597,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -21865,29 +19605,6 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 2: {
-                                if (message.renamedServices === $util.emptyObject)
-                                    message.renamedServices = {};
-                                var end2 = reader.uint32() + reader.pos;
-                                key = "";
-                                value = "";
-                                while (reader.pos < end2) {
-                                    var tag2 = reader.uint32();
-                                    switch (tag2 >>> 3) {
-                                    case 1:
-                                        key = reader.string();
-                                        break;
-                                    case 2:
-                                        value = reader.string();
-                                        break;
-                                    default:
-                                        reader.skipType(tag2 & 7);
-                                        break;
-                                    }
-                                }
-                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -21930,14 +19647,6 @@
                         if (error)
                             return "common." + error;
                     }
-                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
-                        if (!$util.isObject(message.renamedServices))
-                            return "renamedServices: object expected";
-                        var key = Object.keys(message.renamedServices);
-                        for (var i = 0; i < key.length; ++i)
-                            if (!$util.isString(message.renamedServices[key[i]]))
-                                return "renamedServices: string{k:string} expected";
-                    }
                     return null;
                 };
     
@@ -21958,13 +19667,6 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
-                    if (object.renamedServices) {
-                        if (typeof object.renamedServices !== "object")
-                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
-                        message.renamedServices = {};
-                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
-                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
-                    }
                     return message;
                 };
     
@@ -21981,18 +19683,10 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.objects || options.defaults)
-                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
-                    var keys2;
-                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
-                        object.renamedServices = {};
-                        for (var j = 0; j < keys2.length; ++j)
-                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
-                    }
                     return object;
                 };
     
@@ -22631,251 +20325,6 @@
                 return values;
             })();
     
-            api.SelectiveGapicGeneration = (function() {
-    
-                /**
-                 * Properties of a SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @interface ISelectiveGapicGeneration
-                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
-                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
-                 */
-    
-                /**
-                 * Constructs a new SelectiveGapicGeneration.
-                 * @memberof google.api
-                 * @classdesc Represents a SelectiveGapicGeneration.
-                 * @implements ISelectiveGapicGeneration
-                 * @constructor
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 */
-                function SelectiveGapicGeneration(properties) {
-                    this.methods = [];
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * SelectiveGapicGeneration methods.
-                 * @member {Array.<string>} methods
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
-    
-                /**
-                 * SelectiveGapicGeneration generateOmittedAsInternal.
-                 * @member {boolean} generateOmittedAsInternal
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 */
-                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
-    
-                /**
-                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
-                 * @function create
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
-                 */
-                SelectiveGapicGeneration.create = function create(properties) {
-                    return new SelectiveGapicGeneration(properties);
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    if (message.methods != null && message.methods.length)
-                        for (var i = 0; i < message.methods.length; ++i)
-                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
-                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
-                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        case 1: {
-                                if (!(message.methods && message.methods.length))
-                                    message.methods = [];
-                                message.methods.push(reader.string());
-                                break;
-                            }
-                        case 2: {
-                                message.generateOmittedAsInternal = reader.bool();
-                                break;
-                            }
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies a SelectiveGapicGeneration message.
-                 * @function verify
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                SelectiveGapicGeneration.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    if (message.methods != null && message.hasOwnProperty("methods")) {
-                        if (!Array.isArray(message.methods))
-                            return "methods: array expected";
-                        for (var i = 0; i < message.methods.length; ++i)
-                            if (!$util.isString(message.methods[i]))
-                                return "methods: string[] expected";
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        if (typeof message.generateOmittedAsInternal !== "boolean")
-                            return "generateOmittedAsInternal: boolean expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
-                 */
-                SelectiveGapicGeneration.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
-                        return object;
-                    var message = new $root.google.api.SelectiveGapicGeneration();
-                    if (object.methods) {
-                        if (!Array.isArray(object.methods))
-                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
-                        message.methods = [];
-                        for (var i = 0; i < object.methods.length; ++i)
-                            message.methods[i] = String(object.methods[i]);
-                    }
-                    if (object.generateOmittedAsInternal != null)
-                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
-                    return message;
-                };
-    
-                /**
-                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                SelectiveGapicGeneration.toObject = function toObject(message, options) {
-                    if (!options)
-                        options = {};
-                    var object = {};
-                    if (options.arrays || options.defaults)
-                        object.methods = [];
-                    if (options.defaults)
-                        object.generateOmittedAsInternal = false;
-                    if (message.methods && message.methods.length) {
-                        object.methods = [];
-                        for (var j = 0; j < message.methods.length; ++j)
-                            object.methods[j] = message.methods[j];
-                    }
-                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
-                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
-                    return object;
-                };
-    
-                /**
-                 * Converts this SelectiveGapicGeneration to JSON.
-                 * @function toJSON
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for SelectiveGapicGeneration
-                 * @function getTypeUrl
-                 * @memberof google.api.SelectiveGapicGeneration
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
-                };
-    
-                return SelectiveGapicGeneration;
-            })();
-    
             /**
              * LaunchStage enum.
              * @name google.api.LaunchStage
@@ -23145,7 +20594,6 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
-             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -23160,7 +20608,6 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
-                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -23185,7 +20632,6 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
-                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -23208,7 +20654,6 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
-                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -23258,14 +20703,6 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
-    
-                /**
-                 * FileDescriptorProto optionDependency.
-                 * @member {Array.<string>} optionDependency
-                 * @memberof google.protobuf.FileDescriptorProto
-                 * @instance
-                 */
-                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -23388,9 +20825,6 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
-                    if (message.optionDependency != null && message.optionDependency.length)
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -23461,12 +20895,6 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
-                                break;
-                            }
-                        case 15: {
-                                if (!(message.optionDependency && message.optionDependency.length))
-                                    message.optionDependency = [];
-                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -23571,13 +20999,6 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
-                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
-                        if (!Array.isArray(message.optionDependency))
-                            return "optionDependency: array expected";
-                        for (var i = 0; i < message.optionDependency.length; ++i)
-                            if (!$util.isString(message.optionDependency[i]))
-                                return "optionDependency: string[] expected";
-                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -23632,7 +21053,6 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -23684,13 +21104,6 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
-                    }
-                    if (object.optionDependency) {
-                        if (!Array.isArray(object.optionDependency))
-                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
-                        message.optionDependency = [];
-                        for (var i = 0; i < object.optionDependency.length; ++i)
-                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -23754,10 +21167,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -23824,7 +21233,6 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
-                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -23881,11 +21289,6 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                    if (message.optionDependency && message.optionDependency.length) {
-                        object.optionDependency = [];
-                        for (var j = 0; j < message.optionDependency.length; ++j)
-                            object.optionDependency[j] = message.optionDependency[j];
-                    }
                     return object;
                 };
     
@@ -23934,7 +21337,6 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -24041,14 +21443,6 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * DescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.DescriptorProto
-                 * @instance
-                 */
-                DescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -24100,8 +21494,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -24192,10 +21584,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 11: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -24311,15 +21699,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -24419,26 +21798,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -24468,7 +21827,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -24514,8 +21872,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -26560,7 +23916,6 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
-                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -26622,14 +23977,6 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
-                 * EnumDescriptorProto visibility.
-                 * @member {google.protobuf.SymbolVisibility} visibility
-                 * @memberof google.protobuf.EnumDescriptorProto
-                 * @instance
-                 */
-                EnumDescriptorProto.prototype.visibility = 0;
-    
-                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -26666,8 +24013,6 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
-                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
-                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -26728,10 +24073,6 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
-                                break;
-                            }
-                        case 6: {
-                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -26802,15 +24143,6 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        switch (message.visibility) {
-                        default:
-                            return "visibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
                     return null;
                 };
     
@@ -26860,26 +24192,6 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
-                    switch (object.visibility) {
-                    default:
-                        if (typeof object.visibility === "number") {
-                            message.visibility = object.visibility;
-                            break;
-                        }
-                        break;
-                    case "VISIBILITY_UNSET":
-                    case 0:
-                        message.visibility = 0;
-                        break;
-                    case "VISIBILITY_LOCAL":
-                    case 1:
-                        message.visibility = 1;
-                        break;
-                    case "VISIBILITY_EXPORT":
-                    case 2:
-                        message.visibility = 2;
-                        break;
-                    }
                     return message;
                 };
     
@@ -26904,7 +24216,6 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
-                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -26925,8 +24236,6 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
-                    if (message.visibility != null && message.hasOwnProperty("visibility"))
-                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -29245,7 +26554,6 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -29367,14 +26675,6 @@
                 FieldOptions.prototype.features = null;
     
                 /**
-                 * FieldOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.FieldOptions
-                 * @instance
-                 */
-                FieldOptions.prototype.featureSupport = null;
-    
-                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -29448,8 +26748,6 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -29549,10 +26847,6 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                break;
-                            }
-                        case 22: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -29689,11 +26983,6 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
-                    }
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -29883,11 +27172,6 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -29985,7 +27269,6 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
-                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -30018,8 +27301,6 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -30292,7 +27573,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -30333,10 +27613,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -30435,488 +27711,6 @@
                     };
     
                     return EditionDefault;
-                })();
-    
-                FieldOptions.FeatureSupport = (function() {
-    
-                    /**
-                     * Properties of a FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @interface IFeatureSupport
-                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
-                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
-                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
-                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
-                     */
-    
-                    /**
-                     * Constructs a new FeatureSupport.
-                     * @memberof google.protobuf.FieldOptions
-                     * @classdesc Represents a FeatureSupport.
-                     * @implements IFeatureSupport
-                     * @constructor
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     */
-                    function FeatureSupport(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * FeatureSupport editionIntroduced.
-                     * @member {google.protobuf.Edition} editionIntroduced
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionIntroduced = 0;
-    
-                    /**
-                     * FeatureSupport editionDeprecated.
-                     * @member {google.protobuf.Edition} editionDeprecated
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionDeprecated = 0;
-    
-                    /**
-                     * FeatureSupport deprecationWarning.
-                     * @member {string} deprecationWarning
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.deprecationWarning = "";
-    
-                    /**
-                     * FeatureSupport editionRemoved.
-                     * @member {google.protobuf.Edition} editionRemoved
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     */
-                    FeatureSupport.prototype.editionRemoved = 0;
-    
-                    /**
-                     * Creates a new FeatureSupport instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
-                     */
-                    FeatureSupport.create = function create(properties) {
-                        return new FeatureSupport(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
-                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
-                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
-                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
-                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
-                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
-                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
-                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            case 1: {
-                                    message.editionIntroduced = reader.int32();
-                                    break;
-                                }
-                            case 2: {
-                                    message.editionDeprecated = reader.int32();
-                                    break;
-                                }
-                            case 3: {
-                                    message.deprecationWarning = reader.string();
-                                    break;
-                                }
-                            case 4: {
-                                    message.editionRemoved = reader.int32();
-                                    break;
-                                }
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a FeatureSupport message.
-                     * @function verify
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    FeatureSupport.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            switch (message.editionIntroduced) {
-                            default:
-                                return "editionIntroduced: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            switch (message.editionDeprecated) {
-                            default:
-                                return "editionDeprecated: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            if (!$util.isString(message.deprecationWarning))
-                                return "deprecationWarning: string expected";
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            switch (message.editionRemoved) {
-                            default:
-                                return "editionRemoved: enum value expected";
-                            case 0:
-                            case 900:
-                            case 998:
-                            case 999:
-                            case 1000:
-                            case 1001:
-                            case 1:
-                            case 2:
-                            case 99997:
-                            case 99998:
-                            case 99999:
-                            case 2147483647:
-                                break;
-                            }
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
-                     */
-                    FeatureSupport.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
-                            return object;
-                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
-                        switch (object.editionIntroduced) {
-                        default:
-                            if (typeof object.editionIntroduced === "number") {
-                                message.editionIntroduced = object.editionIntroduced;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionIntroduced = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionIntroduced = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionIntroduced = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionIntroduced = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionIntroduced = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionIntroduced = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionIntroduced = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionIntroduced = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionIntroduced = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionIntroduced = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionIntroduced = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionIntroduced = 2147483647;
-                            break;
-                        }
-                        switch (object.editionDeprecated) {
-                        default:
-                            if (typeof object.editionDeprecated === "number") {
-                                message.editionDeprecated = object.editionDeprecated;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionDeprecated = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionDeprecated = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionDeprecated = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionDeprecated = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionDeprecated = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionDeprecated = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionDeprecated = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionDeprecated = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionDeprecated = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionDeprecated = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionDeprecated = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionDeprecated = 2147483647;
-                            break;
-                        }
-                        if (object.deprecationWarning != null)
-                            message.deprecationWarning = String(object.deprecationWarning);
-                        switch (object.editionRemoved) {
-                        default:
-                            if (typeof object.editionRemoved === "number") {
-                                message.editionRemoved = object.editionRemoved;
-                                break;
-                            }
-                            break;
-                        case "EDITION_UNKNOWN":
-                        case 0:
-                            message.editionRemoved = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.editionRemoved = 900;
-                            break;
-                        case "EDITION_PROTO2":
-                        case 998:
-                            message.editionRemoved = 998;
-                            break;
-                        case "EDITION_PROTO3":
-                        case 999:
-                            message.editionRemoved = 999;
-                            break;
-                        case "EDITION_2023":
-                        case 1000:
-                            message.editionRemoved = 1000;
-                            break;
-                        case "EDITION_2024":
-                        case 1001:
-                            message.editionRemoved = 1001;
-                            break;
-                        case "EDITION_1_TEST_ONLY":
-                        case 1:
-                            message.editionRemoved = 1;
-                            break;
-                        case "EDITION_2_TEST_ONLY":
-                        case 2:
-                            message.editionRemoved = 2;
-                            break;
-                        case "EDITION_99997_TEST_ONLY":
-                        case 99997:
-                            message.editionRemoved = 99997;
-                            break;
-                        case "EDITION_99998_TEST_ONLY":
-                        case 99998:
-                            message.editionRemoved = 99998;
-                            break;
-                        case "EDITION_99999_TEST_ONLY":
-                        case 99999:
-                            message.editionRemoved = 99999;
-                            break;
-                        case "EDITION_MAX":
-                        case 2147483647:
-                            message.editionRemoved = 2147483647;
-                            break;
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    FeatureSupport.toObject = function toObject(message, options) {
-                        if (!options)
-                            options = {};
-                        var object = {};
-                        if (options.defaults) {
-                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.deprecationWarning = "";
-                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                        }
-                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
-                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
-                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
-                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
-                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
-                            object.deprecationWarning = message.deprecationWarning;
-                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
-                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
-                        return object;
-                    };
-    
-                    /**
-                     * Converts this FeatureSupport to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    FeatureSupport.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for FeatureSupport
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FieldOptions.FeatureSupport
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
-                    };
-    
-                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -31511,7 +28305,6 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
-                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -31556,14 +28349,6 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
-                 * EnumValueOptions featureSupport.
-                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
-                 * @memberof google.protobuf.EnumValueOptions
-                 * @instance
-                 */
-                EnumValueOptions.prototype.featureSupport = null;
-    
-                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -31601,8 +28386,6 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
-                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
-                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -31652,10 +28435,6 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
-                                break;
-                            }
-                        case 4: {
-                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -31710,11 +28489,6 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
-                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
-                        if (error)
-                            return "featureSupport." + error;
-                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -31748,11 +28522,6 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
-                    if (object.featureSupport != null) {
-                        if (typeof object.featureSupport !== "object")
-                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
-                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
-                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -31785,7 +28554,6 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
-                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -31793,8 +28561,6 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
-                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
-                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -33262,8 +30028,6 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
-                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
-                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -33330,22 +30094,6 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
-                 * FeatureSet enforceNamingStyle.
-                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.enforceNamingStyle = 0;
-    
-                /**
-                 * FeatureSet defaultSymbolVisibility.
-                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
-                 * @memberof google.protobuf.FeatureSet
-                 * @instance
-                 */
-                FeatureSet.prototype.defaultSymbolVisibility = 0;
-    
-                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -33381,10 +30129,6 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
-                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
-                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
-                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
-                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -33443,14 +30187,6 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
-                                break;
-                            }
-                        case 7: {
-                                message.enforceNamingStyle = reader.int32();
-                                break;
-                            }
-                        case 8: {
-                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -33541,26 +30277,6 @@
                         case 0:
                         case 1:
                         case 2:
-                            break;
-                        }
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        switch (message.enforceNamingStyle) {
-                        default:
-                            return "enforceNamingStyle: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                            break;
-                        }
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        switch (message.defaultSymbolVisibility) {
-                        default:
-                            return "defaultSymbolVisibility: enum value expected";
-                        case 0:
-                        case 1:
-                        case 2:
-                        case 3:
-                        case 4:
                             break;
                         }
                     return null;
@@ -33702,54 +30418,6 @@
                         message.jsonFormat = 2;
                         break;
                     }
-                    switch (object.enforceNamingStyle) {
-                    default:
-                        if (typeof object.enforceNamingStyle === "number") {
-                            message.enforceNamingStyle = object.enforceNamingStyle;
-                            break;
-                        }
-                        break;
-                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
-                    case 0:
-                        message.enforceNamingStyle = 0;
-                        break;
-                    case "STYLE2024":
-                    case 1:
-                        message.enforceNamingStyle = 1;
-                        break;
-                    case "STYLE_LEGACY":
-                    case 2:
-                        message.enforceNamingStyle = 2;
-                        break;
-                    }
-                    switch (object.defaultSymbolVisibility) {
-                    default:
-                        if (typeof object.defaultSymbolVisibility === "number") {
-                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
-                            break;
-                        }
-                        break;
-                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
-                    case 0:
-                        message.defaultSymbolVisibility = 0;
-                        break;
-                    case "EXPORT_ALL":
-                    case 1:
-                        message.defaultSymbolVisibility = 1;
-                        break;
-                    case "EXPORT_TOP_LEVEL":
-                    case 2:
-                        message.defaultSymbolVisibility = 2;
-                        break;
-                    case "LOCAL_ALL":
-                    case 3:
-                        message.defaultSymbolVisibility = 3;
-                        break;
-                    case "STRICT":
-                    case 4:
-                        message.defaultSymbolVisibility = 4;
-                        break;
-                    }
                     return message;
                 };
     
@@ -33773,8 +30441,6 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
-                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
-                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -33788,10 +30454,6 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
-                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
-                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
-                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
-                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -33917,219 +30579,6 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
-                })();
-    
-                /**
-                 * EnforceNamingStyle enum.
-                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
-                 * @enum {number}
-                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
-                 * @property {number} STYLE2024=1 STYLE2024 value
-                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
-                 */
-                FeatureSet.EnforceNamingStyle = (function() {
-                    var valuesById = {}, values = Object.create(valuesById);
-                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
-                    values[valuesById[1] = "STYLE2024"] = 1;
-                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
-                    return values;
-                })();
-    
-                FeatureSet.VisibilityFeature = (function() {
-    
-                    /**
-                     * Properties of a VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @interface IVisibilityFeature
-                     */
-    
-                    /**
-                     * Constructs a new VisibilityFeature.
-                     * @memberof google.protobuf.FeatureSet
-                     * @classdesc Represents a VisibilityFeature.
-                     * @implements IVisibilityFeature
-                     * @constructor
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     */
-                    function VisibilityFeature(properties) {
-                        if (properties)
-                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                if (properties[keys[i]] != null)
-                                    this[keys[i]] = properties[keys[i]];
-                    }
-    
-                    /**
-                     * Creates a new VisibilityFeature instance using the specified properties.
-                     * @function create
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
-                     */
-                    VisibilityFeature.create = function create(properties) {
-                        return new VisibilityFeature(properties);
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encode = function encode(message, writer) {
-                        if (!writer)
-                            writer = $Writer.create();
-                        return writer;
-                    };
-    
-                    /**
-                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                     * @function encodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
-                     * @param {$protobuf.Writer} [writer] Writer to encode to
-                     * @returns {$protobuf.Writer} Writer
-                     */
-                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
-                        return this.encode(message, writer).ldelim();
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer.
-                     * @function decode
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @param {number} [length] Message length if known beforehand
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decode = function decode(reader, length, error) {
-                        if (!(reader instanceof $Reader))
-                            reader = $Reader.create(reader);
-                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                        while (reader.pos < end) {
-                            var tag = reader.uint32();
-                            if (tag === error)
-                                break;
-                            switch (tag >>> 3) {
-                            default:
-                                reader.skipType(tag & 7);
-                                break;
-                            }
-                        }
-                        return message;
-                    };
-    
-                    /**
-                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                     * @function decodeDelimited
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
-                        if (!(reader instanceof $Reader))
-                            reader = new $Reader(reader);
-                        return this.decode(reader, reader.uint32());
-                    };
-    
-                    /**
-                     * Verifies a VisibilityFeature message.
-                     * @function verify
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} message Plain object to verify
-                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                     */
-                    VisibilityFeature.verify = function verify(message) {
-                        if (typeof message !== "object" || message === null)
-                            return "object expected";
-                        return null;
-                    };
-    
-                    /**
-                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                     * @function fromObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {Object.<string,*>} object Plain object
-                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
-                     */
-                    VisibilityFeature.fromObject = function fromObject(object) {
-                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
-                            return object;
-                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
-                    };
-    
-                    /**
-                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                     * @function toObject
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
-                     * @param {$protobuf.IConversionOptions} [options] Conversion options
-                     * @returns {Object.<string,*>} Plain object
-                     */
-                    VisibilityFeature.toObject = function toObject() {
-                        return {};
-                    };
-    
-                    /**
-                     * Converts this VisibilityFeature to JSON.
-                     * @function toJSON
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @instance
-                     * @returns {Object.<string,*>} JSON object
-                     */
-                    VisibilityFeature.prototype.toJSON = function toJSON() {
-                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                    };
-    
-                    /**
-                     * Gets the default type url for VisibilityFeature
-                     * @function getTypeUrl
-                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
-                     * @static
-                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns {string} The default type url
-                     */
-                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                        if (typeUrlPrefix === undefined) {
-                            typeUrlPrefix = "type.googleapis.com";
-                        }
-                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
-                    };
-    
-                    /**
-                     * DefaultSymbolVisibility enum.
-                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
-                     * @enum {number}
-                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
-                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
-                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
-                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
-                     * @property {number} STRICT=4 STRICT value
-                     */
-                    VisibilityFeature.DefaultSymbolVisibility = (function() {
-                        var valuesById = {}, values = Object.create(valuesById);
-                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
-                        values[valuesById[1] = "EXPORT_ALL"] = 1;
-                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
-                        values[valuesById[3] = "LOCAL_ALL"] = 3;
-                        values[valuesById[4] = "STRICT"] = 4;
-                        return values;
-                    })();
-    
-                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -34316,7 +30765,6 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -34334,7 +30782,6 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
-                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -34382,10 +30829,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -34438,10 +30881,6 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
-                        break;
-                    case "EDITION_LEGACY":
-                    case 900:
-                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -34551,8 +30990,7 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
-                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
                      */
     
                     /**
@@ -34579,20 +31017,12 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault overridableFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
+                     * FeatureSetEditionDefault features.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} features
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
-    
-                    /**
-                     * FeatureSetEditionDefault fixedFeatures.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
-                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
-                     * @instance
-                     */
-                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
+                    FeatureSetEditionDefault.prototype.features = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -34618,12 +31048,10 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
+                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
+                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
-                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
-                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
-                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -34664,12 +31092,8 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 4: {
-                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
-                                    break;
-                                }
-                            case 5: {
-                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 2: {
+                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -34712,7 +31136,6 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
-                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -34725,15 +31148,10 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
+                        if (message.features != null && message.hasOwnProperty("features")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
                             if (error)
-                                return "overridableFeatures." + error;
-                        }
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
-                            if (error)
-                                return "fixedFeatures." + error;
+                                return "features." + error;
                         }
                         return null;
                     };
@@ -34760,10 +31178,6 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
-                            break;
-                        case "EDITION_LEGACY":
-                        case 900:
-                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -34806,15 +31220,10 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.overridableFeatures != null) {
-                            if (typeof object.overridableFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
-                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
-                        }
-                        if (object.fixedFeatures != null) {
-                            if (typeof object.fixedFeatures !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
-                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
+                        if (object.features != null) {
+                            if (typeof object.features !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
+                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                         }
                         return message;
                     };
@@ -34833,16 +31242,13 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
+                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
-                            object.overridableFeatures = null;
-                            object.fixedFeatures = null;
                         }
+                        if (message.features != null && message.hasOwnProperty("features"))
+                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
-                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
-                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
-                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
-                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -36055,22 +32461,6 @@
                 })();
     
                 return GeneratedCodeInfo;
-            })();
-    
-            /**
-             * SymbolVisibility enum.
-             * @name google.protobuf.SymbolVisibility
-             * @enum {number}
-             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
-             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
-             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
-             */
-            protobuf.SymbolVisibility = (function() {
-                var valuesById = {}, values = Object.create(valuesById);
-                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
-                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
-                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
-                return values;
             })();
     
             protobuf.Timestamp = (function() {

@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Virtual Private Cloud: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vpcaccess)
+# [Serverless VPC Access API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/vpc-access.svg)](https://www.npmjs.org/package/@google-cloud/vpc-access)
 
+Serverless VPC Access API client for Node.js
 
-
-
-vpcaccess client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vpcaccess/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Virtual Private Cloud Node.js Client API Reference][client-docs]
-* [Virtual Private Cloud Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-vpcaccess](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vpcaccess)
+* [Serverless VPC Access API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/vpcaccess/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,77 +28,42 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Virtual Private Cloud API][enable_api].
+1.  [Enable the Serverless VPC Access API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/vpc-access
 ```
 
-
-### Using the client library
-
-```javascript
-// Imports the Google Cloud client library
-
-// remove this line after package is released
-// eslint-disable-next-line node/no-missing-require
-const {VpcAccessServiceClient} = require('@google-cloud/vpc-access');
-
-// TODO(developer): replace with your prefered project ID.
-// const projectId = 'my-project'
-
-// Creates a client
-// eslint-disable-next-line no-unused-vars
-const client = new VpcAccessServiceClient();
-
-async function listConnectors() {
-  const connectors = await client.listConnectors({
-    parent: `projects/${projectId}/locations/${location}`,
-  });
-  console.info(connectors);
-}
-listConnectors();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-vpcaccess/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Vpc_access_service.create_connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.create_connector.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.create_connector.js,packages/google-cloud-vpcaccess/samples/README.md) |
-| Vpc_access_service.delete_connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.delete_connector.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.delete_connector.js,packages/google-cloud-vpcaccess/samples/README.md) |
-| Vpc_access_service.get_connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.get_connector.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.get_connector.js,packages/google-cloud-vpcaccess/samples/README.md) |
-| Vpc_access_service.list_connectors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.list_connectors.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.list_connectors.js,packages/google-cloud-vpcaccess/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-vpcaccess/samples/quickstart.js,packages/google-cloud-vpcaccess/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/snippet_metadata_google.cloud.vpcaccess.v1.json) |
+| create connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.create_connector.js) |
+| delete connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.delete_connector.js) |
+| get connector | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.get_connector.js) |
+| list connectors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples/generated/v1/vpc_access_service.list_connectors.js) |
 
-
-
-The [Virtual Private Cloud Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -124,45 +90,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/vpc-access/latest
-[product-docs]: https://cloud.google.com/vpc/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=vpcaccess.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-vpcaccess

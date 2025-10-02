@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Binary Authorization: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-binaryauthorization)
+# [Binary Authorization API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/binary-authorization.svg)](https://www.npmjs.org/package/@google-cloud/binary-authorization)
 
+Binary Authorization API client for Node.js
 
-
-
-Binaryauthorization client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-binaryauthorization/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Binary Authorization Node.js Client API Reference][client-docs]
-* [Binary Authorization Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-binaryauthorization](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-binaryauthorization)
+* [Binary Authorization API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/binaryauthorization/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,88 +28,56 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Binary Authorization API][enable_api].
+1.  [Enable the Binary Authorization API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/binary-authorization
 ```
 
-
-### Using the client library
-
-```javascript
-// Imports the Google Cloud client library
-
-// eslint-disable-next-line node/no-missing-require
-const {
-  BinauthzManagementServiceV1Client,
-} = require('@google-cloud/binary-authorization');
-
-// TODO(developer): replace with your prefered project ID.
-// const projectId = 'my-project'
-
-// Creates a client
-const client = new BinauthzManagementServiceV1Client();
-
-async function listAttestors() {
-  const attestors = await client.listAttestors({parent});
-  console.info(attestors);
-}
-listAttestors();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-binaryauthorization/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Binauthz_management_service_v1.create_attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.create_attestor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.create_attestor.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1.delete_attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.delete_attestor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.delete_attestor.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1.get_attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_attestor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_attestor.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1.get_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_policy.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1.list_attestors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.list_attestors.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.list_attestors.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1.update_attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_attestor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_attestor.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1.update_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_policy.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| System_policy_v1.get_system_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/system_policy_v1.get_system_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/system_policy_v1.get_system_policy.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Validation_helper_v1.validate_attestation_occurrence | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/validation_helper_v1.validate_attestation_occurrence.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1/validation_helper_v1.validate_attestation_occurrence.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1_beta1.create_attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.create_attestor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.create_attestor.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1_beta1.delete_attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.delete_attestor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.delete_attestor.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1_beta1.get_attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_attestor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_attestor.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1_beta1.get_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_policy.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1_beta1.list_attestors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.list_attestors.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.list_attestors.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1_beta1.update_attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_attestor.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_attestor.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Binauthz_management_service_v1_beta1.update_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_policy.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| System_policy_v1_beta1.get_system_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/system_policy_v1_beta1.get_system_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/generated/v1beta1/system_policy_v1_beta1.get_system_policy.js,packages/google-cloud-binaryauthorization/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-binaryauthorization/samples/quickstart.js,packages/google-cloud-binaryauthorization/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.create_attestor.js) |
+| delete attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.delete_attestor.js) |
+| get attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_attestor.js) |
+| get policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.get_policy.js) |
+| list attestors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.list_attestors.js) |
+| update attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_attestor.js) |
+| update policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/binauthz_management_service_v1.update_policy.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/snippet_metadata_google.cloud.binaryauthorization.v1.json) |
+| get system policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/system_policy_v1.get_system_policy.js) |
+| validate attestation occurrence | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1/validation_helper_v1.validate_attestation_occurrence.js) |
+| create attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.create_attestor.js) |
+| delete attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.delete_attestor.js) |
+| get attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_attestor.js) |
+| get policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.get_policy.js) |
+| list attestors | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.list_attestors.js) |
+| update attestor | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_attestor.js) |
+| update policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/binauthz_management_service_v1_beta1.update_policy.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/snippet_metadata_google.cloud.binaryauthorization.v1beta1.json) |
+| get system policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples/generated/v1beta1/system_policy_v1_beta1.get_system_policy.js) |
 
-
-
-The [Binary Authorization Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -135,45 +104,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/binary-authorization/latest
-[product-docs]: https://cloud.google.com/binary-authorization/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=binaryauthorization.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-binaryauthorization

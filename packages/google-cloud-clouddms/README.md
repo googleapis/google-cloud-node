@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Database Migration Service: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-clouddms)
+# [Database Migration API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/dms.svg)](https://www.npmjs.org/package/@google-cloud/dms)
 
+Database Migration API client for Node.js
 
-
-
-Cloud Database Migration API client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-clouddms/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Cloud Database Migration Service Node.js Client API Reference][client-docs]
-* [Cloud Database Migration Service Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-clouddms](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-clouddms)
+* [Database Migration API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/clouddms/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,109 +28,79 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Cloud Database Migration Service API][enable_api].
+1.  [Enable the Database Migration API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/dms
 ```
 
-
-### Using the client library
-
-```javascript
-// Imports the Google Cloud client library
-const {DataMigrationServiceClient} = require('@google-cloud/dms');
-
-// const parent = 'projects/my-project', // Project to list service usage for.
-
-// Creates a client
-const client = new DataMigrationServiceClient();
-async function listMigrationJobs() {
-  for await (const migration of client.listMigrationJobsAsync({
-    parent: `projects/${projectId}/locations/${location}`,
-  })) {
-    console.info(`${migration.name} ${migration.state}`);
-  }
-}
-listMigrationJobs();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-clouddms/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Data_migration_service.apply_conversion_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.apply_conversion_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.apply_conversion_workspace.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.commit_conversion_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.commit_conversion_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.commit_conversion_workspace.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.convert_conversion_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.convert_conversion_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.convert_conversion_workspace.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.create_connection_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_connection_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_connection_profile.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.create_conversion_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_conversion_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_conversion_workspace.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.create_mapping_rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_mapping_rule.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_mapping_rule.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.create_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.create_private_connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_private_connection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_private_connection.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.delete_connection_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_connection_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_connection_profile.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.delete_conversion_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_conversion_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_conversion_workspace.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.delete_mapping_rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_mapping_rule.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_mapping_rule.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.delete_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.delete_private_connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_private_connection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_private_connection.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.describe_conversion_workspace_revisions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.describe_conversion_workspace_revisions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.describe_conversion_workspace_revisions.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.describe_database_entities | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.describe_database_entities.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.describe_database_entities.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.fetch_static_ips | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.fetch_static_ips.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.fetch_static_ips.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.generate_ssh_script | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.generate_ssh_script.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.generate_ssh_script.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.generate_tcp_proxy_script | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.generate_tcp_proxy_script.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.generate_tcp_proxy_script.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.get_connection_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_connection_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_connection_profile.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.get_conversion_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_conversion_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_conversion_workspace.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.get_mapping_rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_mapping_rule.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_mapping_rule.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.get_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.get_private_connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_private_connection.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_private_connection.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.import_mapping_rules | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.import_mapping_rules.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.import_mapping_rules.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.list_connection_profiles | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_connection_profiles.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_connection_profiles.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.list_conversion_workspaces | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_conversion_workspaces.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_conversion_workspaces.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.list_mapping_rules | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_mapping_rules.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_mapping_rules.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.list_migration_jobs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_migration_jobs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_migration_jobs.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.list_private_connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_private_connections.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_private_connections.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.promote_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.promote_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.promote_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.restart_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.restart_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.restart_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.resume_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.resume_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.resume_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.rollback_conversion_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.rollback_conversion_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.rollback_conversion_workspace.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.search_background_jobs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.search_background_jobs.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.search_background_jobs.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.seed_conversion_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.seed_conversion_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.seed_conversion_workspace.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.start_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.start_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.start_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.stop_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.stop_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.stop_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.update_connection_profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.update_connection_profile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.update_connection_profile.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.update_conversion_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.update_conversion_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.update_conversion_workspace.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.update_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.update_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.update_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Data_migration_service.verify_migration_job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.verify_migration_job.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.verify_migration_job.js,packages/google-cloud-clouddms/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-clouddms/samples/quickstart.js,packages/google-cloud-clouddms/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| apply conversion workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.apply_conversion_workspace.js) |
+| commit conversion workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.commit_conversion_workspace.js) |
+| convert conversion workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.convert_conversion_workspace.js) |
+| create connection profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_connection_profile.js) |
+| create conversion workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_conversion_workspace.js) |
+| create mapping rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_mapping_rule.js) |
+| create migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_migration_job.js) |
+| create private connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.create_private_connection.js) |
+| delete connection profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_connection_profile.js) |
+| delete conversion workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_conversion_workspace.js) |
+| delete mapping rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_mapping_rule.js) |
+| delete migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_migration_job.js) |
+| delete private connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.delete_private_connection.js) |
+| describe conversion workspace revisions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.describe_conversion_workspace_revisions.js) |
+| describe database entities | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.describe_database_entities.js) |
+| fetch static ips | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.fetch_static_ips.js) |
+| generate ssh script | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.generate_ssh_script.js) |
+| generate tcp proxy script | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.generate_tcp_proxy_script.js) |
+| get connection profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_connection_profile.js) |
+| get conversion workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_conversion_workspace.js) |
+| get mapping rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_mapping_rule.js) |
+| get migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_migration_job.js) |
+| get private connection | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.get_private_connection.js) |
+| import mapping rules | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.import_mapping_rules.js) |
+| list connection profiles | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_connection_profiles.js) |
+| list conversion workspaces | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_conversion_workspaces.js) |
+| list mapping rules | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_mapping_rules.js) |
+| list migration jobs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_migration_jobs.js) |
+| list private connections | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.list_private_connections.js) |
+| promote migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.promote_migration_job.js) |
+| restart migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.restart_migration_job.js) |
+| resume migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.resume_migration_job.js) |
+| rollback conversion workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.rollback_conversion_workspace.js) |
+| search background jobs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.search_background_jobs.js) |
+| seed conversion workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.seed_conversion_workspace.js) |
+| start migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.start_migration_job.js) |
+| stop migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.stop_migration_job.js) |
+| update connection profile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.update_connection_profile.js) |
+| update conversion workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.update_conversion_workspace.js) |
+| update migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.update_migration_job.js) |
+| verify migration job | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/data_migration_service.verify_migration_job.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples/generated/v1/snippet_metadata_google.cloud.clouddms.v1.json) |
 
-
-
-The [Cloud Database Migration Service Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -156,45 +127,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/dms/latest
-[product-docs]: https://cloud.google.com/database-migration/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=datamigration.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-clouddms

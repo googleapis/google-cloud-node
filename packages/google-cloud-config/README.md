@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Infrastructure Manager API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-config)
+# [Infrastructure Manager API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/config.svg)](https://www.npmjs.org/package/@google-cloud/config)
-
-
-
 
 Infrastructure Manager API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-config/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Infrastructure Manager API Node.js Client API Reference][client-docs]
-* [Infrastructure Manager API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-config](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-config)
+* [Infrastructure Manager API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/config/latest)
+* [Infrastructure Manager API Documentation](https://cloud.google.com/infrastructure-manager/docs/overview)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +28,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,130 +44,49 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Infrastructure Manager API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/config
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The parent in whose context the Deployments are listed. The
- *  parent value is in the format:
- *  'projects/{project_id}/locations/{location}'.
- */
-// const parent = 'abc123'
-/**
- *  When requesting a page of resources, 'page_size' specifies number of
- *  resources to return. If unspecified or set to 0, all resources will be
- *  returned.
- */
-// const pageSize = 1234
-/**
- *  Token returned by previous call to 'ListDeployments' which specifies the
- *  position in the list from where to continue listing the resources.
- */
-// const pageToken = 'abc123'
-/**
- *  Lists the Deployments that match the filter expression. A filter
- *  expression filters the resources listed in the response. The expression
- *  must be of the form '{field} {operator} {value}' where operators: '<', '>',
- *  '<=', '>=', '!=', '=', ':' are supported (colon ':' represents a HAS
- *  operator which is roughly synonymous with equality). {field} can refer to a
- *  proto or JSON field, or a synthetic field. Field names can be camelCase or
- *  snake_case.
- *  Examples:
- *  - Filter by name:
- *    name = "projects/foo/locations/us-central1/deployments/bar
- *  - Filter by labels:
- *    - Resources that have a key called 'foo'
- *      labels.foo:*
- *    - Resources that have a key called 'foo' whose value is 'bar'
- *      labels.foo = bar
- *  - Filter by state:
- *    - Deployments in CREATING state.
- *      state=CREATING
- */
-// const filter = 'abc123'
-/**
- *  Field to use to sort the list.
- */
-// const orderBy = 'abc123'
-
-// Imports the Config library
-const {ConfigClient} = require('@google-cloud/config').v1;
-
-// Instantiates a client
-const configClient = new ConfigClient();
-
-async function callListDeployments() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = await configClient.listDeploymentsAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListDeployments();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-config/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Config.create_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.create_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.create_deployment.js,packages/google-cloud-config/samples/README.md) |
-| Config.create_preview | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.create_preview.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.create_preview.js,packages/google-cloud-config/samples/README.md) |
-| Config.delete_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.delete_deployment.js,packages/google-cloud-config/samples/README.md) |
-| Config.delete_preview | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_preview.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.delete_preview.js,packages/google-cloud-config/samples/README.md) |
-| Config.delete_statefile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_statefile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.delete_statefile.js,packages/google-cloud-config/samples/README.md) |
-| Config.export_deployment_statefile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_deployment_statefile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.export_deployment_statefile.js,packages/google-cloud-config/samples/README.md) |
-| Config.export_lock_info | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_lock_info.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.export_lock_info.js,packages/google-cloud-config/samples/README.md) |
-| Config.export_preview_result | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_preview_result.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.export_preview_result.js,packages/google-cloud-config/samples/README.md) |
-| Config.export_revision_statefile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_revision_statefile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.export_revision_statefile.js,packages/google-cloud-config/samples/README.md) |
-| Config.get_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_deployment.js,packages/google-cloud-config/samples/README.md) |
-| Config.get_preview | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_preview.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_preview.js,packages/google-cloud-config/samples/README.md) |
-| Config.get_resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_resource.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_resource.js,packages/google-cloud-config/samples/README.md) |
-| Config.get_resource_change | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_resource_change.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_resource_change.js,packages/google-cloud-config/samples/README.md) |
-| Config.get_resource_drift | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_resource_drift.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_resource_drift.js,packages/google-cloud-config/samples/README.md) |
-| Config.get_revision | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_revision.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_revision.js,packages/google-cloud-config/samples/README.md) |
-| Config.get_terraform_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_terraform_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.get_terraform_version.js,packages/google-cloud-config/samples/README.md) |
-| Config.import_statefile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.import_statefile.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.import_statefile.js,packages/google-cloud-config/samples/README.md) |
-| Config.list_deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_deployments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_deployments.js,packages/google-cloud-config/samples/README.md) |
-| Config.list_previews | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_previews.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_previews.js,packages/google-cloud-config/samples/README.md) |
-| Config.list_resource_changes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_resource_changes.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_resource_changes.js,packages/google-cloud-config/samples/README.md) |
-| Config.list_resource_drifts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_resource_drifts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_resource_drifts.js,packages/google-cloud-config/samples/README.md) |
-| Config.list_resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_resources.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_resources.js,packages/google-cloud-config/samples/README.md) |
-| Config.list_revisions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_revisions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_revisions.js,packages/google-cloud-config/samples/README.md) |
-| Config.list_terraform_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_terraform_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.list_terraform_versions.js,packages/google-cloud-config/samples/README.md) |
-| Config.lock_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.lock_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.lock_deployment.js,packages/google-cloud-config/samples/README.md) |
-| Config.unlock_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.unlock_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.unlock_deployment.js,packages/google-cloud-config/samples/README.md) |
-| Config.update_deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.update_deployment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/generated/v1/config.update_deployment.js,packages/google-cloud-config/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-config/samples/quickstart.js,packages/google-cloud-config/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.create_deployment.js) |
+| create preview | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.create_preview.js) |
+| delete deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_deployment.js) |
+| delete preview | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_preview.js) |
+| delete statefile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.delete_statefile.js) |
+| export deployment statefile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_deployment_statefile.js) |
+| export lock info | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_lock_info.js) |
+| export preview result | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_preview_result.js) |
+| export revision statefile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.export_revision_statefile.js) |
+| get deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_deployment.js) |
+| get preview | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_preview.js) |
+| get resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_resource.js) |
+| get resource change | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_resource_change.js) |
+| get resource drift | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_resource_drift.js) |
+| get revision | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_revision.js) |
+| get terraform version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.get_terraform_version.js) |
+| import statefile | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.import_statefile.js) |
+| list deployments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_deployments.js) |
+| list previews | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_previews.js) |
+| list resource changes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_resource_changes.js) |
+| list resource drifts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_resource_drifts.js) |
+| list resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_resources.js) |
+| list revisions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_revisions.js) |
+| list terraform versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.list_terraform_versions.js) |
+| lock deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.lock_deployment.js) |
+| unlock deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.unlock_deployment.js) |
+| update deployment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/config.update_deployment.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples/generated/v1/snippet_metadata_google.cloud.config.v1.json) |
 
-
-
-The [Infrastructure Manager API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -196,45 +113,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/infra-manager/latest
-[product-docs]: https://cloud.google.com/infrastructure-manager/docs/overview
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=config.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-config

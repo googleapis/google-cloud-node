@@ -462,7 +462,7 @@ export class AlloyDBAdminClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const alloyDBAdminStubMethods =
-        ['listClusters', 'getCluster', 'createCluster', 'updateCluster', 'exportCluster', 'importCluster', 'upgradeCluster', 'deleteCluster', 'promoteCluster', 'switchoverCluster', 'restoreCluster', 'createSecondaryCluster', 'listInstances', 'getInstance', 'createInstance', 'createSecondaryInstance', 'batchCreateInstances', 'updateInstance', 'deleteInstance', 'failoverInstance', 'injectFault', 'restartInstance', 'executeSql', 'listBackups', 'getBackup', 'createBackup', 'updateBackup', 'deleteBackup', 'listSupportedDatabaseFlags', 'generateClientCertificate', 'getConnectionInfo', 'listUsers', 'getUser', 'createUser', 'updateUser', 'deleteUser', 'listDatabases'];
+        ['listClusters', 'getCluster', 'createCluster', 'updateCluster', 'exportCluster', 'importCluster', 'upgradeCluster', 'deleteCluster', 'promoteCluster', 'switchoverCluster', 'restoreCluster', 'createSecondaryCluster', 'listInstances', 'getInstance', 'createInstance', 'createSecondaryInstance', 'batchCreateInstances', 'updateInstance', 'deleteInstance', 'failoverInstance', 'injectFault', 'restartInstance', 'executeSql', 'listBackups', 'getBackup', 'createBackup', 'updateBackup', 'deleteBackup', 'listSupportedDatabaseFlags', 'generateClientCertificate', 'getConnectionInfo', 'listUsers', 'getUser', 'createUser', 'updateUser', 'deleteUser', 'listDatabases', 'createDatabase'];
     for (const methodName of alloyDBAdminStubMethods) {
       const callPromise = this.alloyDBAdminStub.then(
         stub => (...args: Array<{}>) => {
@@ -782,6 +782,9 @@ export class AlloyDBAdminClient {
  * @param {string} request.sqlStatement
  *   Required. SQL statement to execute on database. Any valid statement is
  *   permitted, including DDL, DML, DQL statements.
+ * @param {boolean} [request.validateOnly]
+ *   Optional. If set, validates the sql statement by performing
+ *   syntax and semantic validation and doesn't execute the query.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1632,6 +1635,104 @@ export class AlloyDBAdminClient {
         {}|undefined
       ]) => {
         this._log.info('deleteUser response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Creates a new Database in a given project, location, and cluster.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Value for parent.
+ * @param {string} request.databaseId
+ *   Required. ID of the requesting object.
+ * @param {google.cloud.alloydb.v1beta.Database} request.database
+ *   Required. The resource being created.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.alloydb.v1beta.Database|Database}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/alloy_d_b_admin.create_database.js</caption>
+ * region_tag:alloydb_v1beta_generated_AlloyDBAdmin_CreateDatabase_async
+ */
+  createDatabase(
+      request?: protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.alloydb.v1beta.IDatabase,
+        protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest|undefined, {}|undefined
+      ]>;
+  createDatabase(
+      request: protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.alloydb.v1beta.IDatabase,
+          protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDatabase(
+      request: protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest,
+      callback: Callback<
+          protos.google.cloud.alloydb.v1beta.IDatabase,
+          protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest|null|undefined,
+          {}|null|undefined>): void;
+  createDatabase(
+      request?: protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.alloydb.v1beta.IDatabase,
+          protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.alloydb.v1beta.IDatabase,
+          protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.alloydb.v1beta.IDatabase,
+        protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createDatabase request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.alloydb.v1beta.IDatabase,
+        protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createDatabase response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createDatabase(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.alloydb.v1beta.IDatabase,
+        protos.google.cloud.alloydb.v1beta.ICreateDatabaseRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createDatabase response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {

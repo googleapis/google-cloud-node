@@ -562,6 +562,7 @@ export class ImageAnnotatorClient {
     }
     return Promise.resolve();
   }
-}import {FeaturesMethod} from '../helpers';
+}
+import {FeaturesMethod} from '../helpers';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ImageAnnotatorClient extends FeaturesMethod {}

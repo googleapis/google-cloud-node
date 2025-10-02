@@ -38,7 +38,31 @@ type SqlTiersServiceClient = v1.SqlTiersServiceClient;
 const SqlUsersServiceClient = v1.SqlUsersServiceClient;
 type SqlUsersServiceClient = v1.SqlUsersServiceClient;
 
-export {v1, v1beta4, SqlBackupRunsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient, SqlFlagsServiceClient, SqlInstancesServiceClient, SqlOperationsServiceClient, SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient};
-export default {v1, v1beta4, SqlBackupRunsServiceClient, SqlConnectServiceClient, SqlDatabasesServiceClient, SqlFlagsServiceClient, SqlInstancesServiceClient, SqlOperationsServiceClient, SqlSslCertsServiceClient, SqlTiersServiceClient, SqlUsersServiceClient};
+export {
+  v1,
+  v1beta4,
+  SqlBackupRunsServiceClient,
+  SqlConnectServiceClient,
+  SqlDatabasesServiceClient,
+  SqlFlagsServiceClient,
+  SqlInstancesServiceClient,
+  SqlOperationsServiceClient,
+  SqlSslCertsServiceClient,
+  SqlTiersServiceClient,
+  SqlUsersServiceClient,
+};
+export default {
+  v1,
+  v1beta4,
+  SqlBackupRunsServiceClient,
+  SqlConnectServiceClient,
+  SqlDatabasesServiceClient,
+  SqlFlagsServiceClient,
+  SqlInstancesServiceClient,
+  SqlOperationsServiceClient,
+  SqlSslCertsServiceClient,
+  SqlTiersServiceClient,
+  SqlUsersServiceClient,
+};
 import * as protos from '../protos/protos';
 export {protos};

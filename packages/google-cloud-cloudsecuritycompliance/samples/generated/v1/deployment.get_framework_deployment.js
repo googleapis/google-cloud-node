@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. FrameworkDeployment name in either of the following formats:
+   *  Required. FrameworkDeployment name in the following format:
    *  organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}
    */
   // const name = 'abc123'
