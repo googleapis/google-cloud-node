@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.0.0](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-region-tag-v3.0.0...jsdoc-region-tag-v4.0.0) (2025-10-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* monorepo migration
+
+### Bug Fixes
+
+* Monorepo migration ([86a7376](https://github.com/googleapis/google-cloud-node-core/commit/86a7376da60852dae8eacf9ca97a6d302b6b7eb4))
+* Paths and link in jsdoc-region-tag package.json ([#61](https://github.com/googleapis/google-cloud-node-core/issues/61)) ([191e4ff](https://github.com/googleapis/google-cloud-node-core/commit/191e4ff86aca32da5ce98f6078cdfa3c31325467))
+
 ## [3.0.0](https://github.com/googleapis/jsdoc-region-tag/compare/v2.0.1...v3.0.0) (2023-08-10)
 
 

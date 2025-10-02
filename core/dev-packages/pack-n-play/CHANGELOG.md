@@ -1,5 +1,17 @@
 # Changelog
 
+## [4.2.0](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v4.1.0...pack-n-play-v4.2.0) (2025-10-02)
+
+
+### Features
+
+* Extends tsconfig from gts and removed attribute defined in gts ([#55](https://github.com/googleapis/google-cloud-node-core/issues/55)) ([bf8a6dc](https://github.com/googleapis/google-cloud-node-core/commit/bf8a6dc111e735a3191cc5f9a7cb655e2de21f86))
+
+
+### Bug Fixes
+
+* Eslint config in pack n play ([#54](https://github.com/googleapis/google-cloud-node-core/issues/54)) ([d36dc43](https://github.com/googleapis/google-cloud-node-core/commit/d36dc43cb11cedb3dd1c84324617341fd6d1ea16))
+
 ## [4.1.0](https://github.com/googleapis/google-cloud-node-core/compare/pack-n-play-v4.0.3...pack-n-play-v4.1.0) (2025-09-24)
 
 
