@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {DataPolicyServiceClient} from '@google-cloud/datapolicies';
+import {DataPolicyServiceClient} from '@google-cloud/biguqery-datapolicies';
 
 // check that the client class type name can be used
 function doStuffWithDataPolicyServiceClient(client: DataPolicyServiceClient) {
