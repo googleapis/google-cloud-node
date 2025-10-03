@@ -1,24 +1,24 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [App Hub API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apphub)
+# [App Hub API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/apphub.svg)](https://www.npmjs.org/package/@google-cloud/apphub)
-
-
-
 
 App Hub API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apphub/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [App Hub API Node.js Client API Reference][client-docs]
-* [App Hub API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-apphub](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apphub)
+* [App Hub API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/apphub/latest)
+* [App Hub API Documentation](https://cloud.google.com/app-hub/docs/overview)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +27,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,110 +43,49 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the App Hub API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/apphub
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. Project and location to list Discovered Services on.
- *  Expected format: `projects/{project}/locations/{location}`.
- */
-// const parent = 'abc123'
-/**
- *  Optional. Requested page size. Server may return fewer items than
- *  requested. If unspecified, server will pick an appropriate default.
- */
-// const pageSize = 1234
-/**
- *  Optional. A token identifying a page of results the server should return.
- */
-// const pageToken = 'abc123'
-/**
- *  Optional. Filtering results.
- */
-// const filter = 'abc123'
-/**
- *  Optional. Hint for how to order the results.
- */
-// const orderBy = 'abc123'
-
-// Imports the Apphub library
-const {AppHubClient} = require('@google-cloud/apphub').v1;
-
-// Instantiates a client
-const apphubClient = new AppHubClient();
-
-async function callListDiscoveredServices() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = apphubClient.listDiscoveredServicesAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListDiscoveredServices();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-apphub/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| App_hub.create_application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_application.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.create_application.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.create_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.create_service_project_attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service_project_attachment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service_project_attachment.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.create_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.create_workload.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.delete_application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_application.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_application.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.delete_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.delete_service_project_attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service_project_attachment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service_project_attachment.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.delete_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_workload.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.detach_service_project_attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.detach_service_project_attachment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.detach_service_project_attachment.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.get_application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_application.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_application.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.get_discovered_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_service.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.get_discovered_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_workload.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.get_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.get_service_project_attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service_project_attachment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service_project_attachment.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.get_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.get_workload.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.list_applications | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_applications.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_applications.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.list_discovered_services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_services.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_services.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.list_discovered_workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_workloads.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_workloads.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.list_service_project_attachments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_service_project_attachments.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_service_project_attachments.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.list_services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_services.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_services.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.list_workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_workloads.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.list_workloads.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.lookup_discovered_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_service.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.lookup_discovered_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_workload.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.lookup_service_project_attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_service_project_attachment.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_service_project_attachment.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.update_application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_application.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.update_application.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.update_service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_service.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.update_service.js,packages/google-cloud-apphub/samples/README.md) |
-| App_hub.update_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/generated/v1/app_hub.update_workload.js,packages/google-cloud-apphub/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apphub/samples/quickstart.js,packages/google-cloud-apphub/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_application.js) |
+| create service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service.js) |
+| create service project attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_service_project_attachment.js) |
+| create workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.create_workload.js) |
+| delete application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_application.js) |
+| delete service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service.js) |
+| delete service project attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_service_project_attachment.js) |
+| delete workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.delete_workload.js) |
+| detach service project attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.detach_service_project_attachment.js) |
+| get application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_application.js) |
+| get discovered service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_service.js) |
+| get discovered workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_discovered_workload.js) |
+| get service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service.js) |
+| get service project attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_service_project_attachment.js) |
+| get workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.get_workload.js) |
+| list applications | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_applications.js) |
+| list discovered services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_services.js) |
+| list discovered workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_discovered_workloads.js) |
+| list service project attachments | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_service_project_attachments.js) |
+| list services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_services.js) |
+| list workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.list_workloads.js) |
+| lookup discovered service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_service.js) |
+| lookup discovered workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_discovered_workload.js) |
+| lookup service project attachment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.lookup_service_project_attachment.js) |
+| update application | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_application.js) |
+| update service | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_service.js) |
+| update workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/app_hub.update_workload.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples/generated/v1/snippet_metadata_google.cloud.apphub.v1.json) |
 
-
-
-The [App Hub API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -176,44 +112,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-
-
-
-
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/apphub/latest
-[product-docs]: https://cloud.google.com/app-hub/docs/overview
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=apphub.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apphub

@@ -1,24 +1,24 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Area120 Tables API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-area120-tables)
+# [Area120 Tables API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
 [![npm version](https://img.shields.io/npm/v/@google/area120-tables.svg)](https://www.npmjs.org/package/@google/area120-tables)
 
+Area120 Tables API client for Node.js
 
-
-
-Tables client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-area120-tables/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Area120 Tables API Node.js Client API Reference][client-docs]
-* [Area120 Tables API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-area120-tables](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-area120-tables)
+* [Area120 Tables API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/tables/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +27,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,62 +43,34 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Area120 Tables API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google/area120-tables
 ```
 
-
-### Using the client library
-
-```javascript
-// Imports the Google Cloud client library
-
-const {TablesServiceClient} = require('@google/area120-tables');
-
-// TODO(developer): replace with your prefered project ID.
-// const projectId = 'my-project'
-
-// Creates a client
-const client = new TablesServiceClient();
-
-async function listTables() {
-  const res = await client.listTables();
-  console.log(res);
-}
-
-listTables();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-area120-tables/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Tables_service.batch_create_rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_create_rows.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_create_rows.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.batch_delete_rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_delete_rows.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_delete_rows.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.batch_update_rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_update_rows.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_update_rows.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.create_row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.create_row.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.create_row.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.delete_row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.delete_row.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.delete_row.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.get_row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_row.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_row.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.get_table | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_table.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_table.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.get_workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_workspace.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_workspace.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.list_rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_rows.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_rows.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.list_tables | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_tables.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_tables.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.list_workspaces | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_workspaces.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_workspaces.js,packages/google-area120-tables/samples/README.md) |
-| Tables_service.update_row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.update_row.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/generated/v1alpha1/tables_service.update_row.js,packages/google-area120-tables/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-area120-tables/samples/quickstart.js,packages/google-area120-tables/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| area120 | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/snippet_metadata_google.area120.tables.v1alpha1.json) |
+| batch create rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_create_rows.js) |
+| batch delete rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_delete_rows.js) |
+| batch update rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.batch_update_rows.js) |
+| create row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.create_row.js) |
+| delete row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.delete_row.js) |
+| get row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_row.js) |
+| get table | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_table.js) |
+| get workspace | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.get_workspace.js) |
+| list rows | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_rows.js) |
+| list tables | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_tables.js) |
+| list workspaces | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.list_workspaces.js) |
+| update row | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples/generated/v1alpha1/tables_service.update_row.js) |
 
-
-
-The [Area120 Tables API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -128,44 +97,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-
-
-
-
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/area120-tables/latest
-[product-docs]: https://area120.google.com/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=area120tables.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-area120-tables

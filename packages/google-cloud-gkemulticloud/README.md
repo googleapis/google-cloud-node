@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Anthos Multi-Cloud API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkemulticloud)
+# [GKE Multi-Cloud API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/gkemulticloud.svg)](https://www.npmjs.org/package/@google-cloud/gkemulticloud)
 
+GKE Multi-Cloud API client for Node.js
 
-
-
-Anthos Multi-Cloud API client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkemulticloud/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Anthos Multi-Cloud API Node.js Client API Reference][client-docs]
-
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-gkemulticloud](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkemulticloud)
+* [GKE Multi-Cloud API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/gkemulticloud/latest)
+* [GKE Multi-Cloud API Documentation](https://cloud.google.com/kubernetes-engine/multi-cloud/docs)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,149 +28,82 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Anthos Multi-Cloud API API][enable_api].
+1.  [Enable the GKE Multi-Cloud API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/gkemulticloud
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The parent location which owns this collection of
- *  AwsCluster google.cloud.gkemulticloud.v1.AwsCluster  resources.
- *  Location names are formatted as `projects/<project-id>/locations/<region>`.
- *  See Resource Names (https://cloud.google.com/apis/design/resource_names)
- *  for more details on GCP resource names.
- */
-// const parent = 'abc123'
-/**
- *  The maximum number of items to return.
- *  If not specified, a default value of 50 will be used by the service.
- *  Regardless of the pageSize value, the response can include a partial list
- *  and a caller should only rely on response's
- *  nextPageToken google.cloud.gkemulticloud.v1.ListAwsClustersResponse.next_page_token  to determine if
- *  there are more instances left to be queried.
- */
-// const pageSize = 1234
-/**
- *  The `nextPageToken` value returned from a previous
- *  awsClusters.list google.cloud.gkemulticloud.v1.AwsClusters.ListAwsClusters  request, if any.
- */
-// const pageToken = 'abc123'
-
-// Imports the Gkemulticloud library
-const {AwsClustersClient} = require('@google-cloud/gkemulticloud').v1;
-
-// Instantiates a client
-const gkemulticloudClient = new AwsClustersClient({
-  // API endpoint must be set:
-  apiEndpoint: 'us-west1-gkemulticloud.googleapis.com',
-});
-
-async function callListAwsClusters() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = await gkemulticloudClient.listAwsClustersAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListAwsClusters();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-gkemulticloud/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Attached_clusters.create_attached_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.create_attached_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.create_attached_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Attached_clusters.delete_attached_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.delete_attached_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.delete_attached_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Attached_clusters.generate_attached_cluster_agent_token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_agent_token.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_agent_token.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Attached_clusters.generate_attached_cluster_install_manifest | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Attached_clusters.get_attached_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Attached_clusters.get_attached_server_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_server_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_server_config.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Attached_clusters.import_attached_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.import_attached_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.import_attached_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Attached_clusters.list_attached_clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.list_attached_clusters.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.list_attached_clusters.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Attached_clusters.update_attached_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.update_attached_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.update_attached_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.create_aws_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.create_aws_node_pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_node_pool.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_node_pool.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.delete_aws_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.delete_aws_node_pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_node_pool.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_node_pool.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.generate_aws_access_token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_access_token.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_access_token.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.generate_aws_cluster_agent_token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_cluster_agent_token.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_cluster_agent_token.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.get_aws_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.get_aws_json_web_keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_json_web_keys.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_json_web_keys.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.get_aws_node_pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_node_pool.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_node_pool.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.get_aws_open_id_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_open_id_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_open_id_config.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.get_aws_server_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_server_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_server_config.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.list_aws_clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_clusters.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_clusters.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.list_aws_node_pools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_node_pools.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_node_pools.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.rollback_aws_node_pool_update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.update_aws_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Aws_clusters.update_aws_node_pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_node_pool.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_node_pool.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.create_azure_client | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_client.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_client.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.create_azure_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.create_azure_node_pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_node_pool.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_node_pool.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.delete_azure_client | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_client.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_client.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.delete_azure_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.delete_azure_node_pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_node_pool.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_node_pool.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.generate_azure_access_token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_access_token.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_access_token.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.generate_azure_cluster_agent_token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.get_azure_client | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_client.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_client.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.get_azure_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.get_azure_json_web_keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_json_web_keys.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_json_web_keys.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.get_azure_node_pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_node_pool.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_node_pool.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.get_azure_open_id_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_open_id_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_open_id_config.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.get_azure_server_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_server_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_server_config.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.list_azure_clients | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clients.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clients.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.list_azure_clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clusters.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clusters.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.list_azure_node_pools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_node_pools.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_node_pools.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.update_azure_cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_cluster.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_cluster.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Azure_clusters.update_azure_node_pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_node_pool.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_node_pool.js,packages/google-cloud-gkemulticloud/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-gkemulticloud/samples/quickstart.js,packages/google-cloud-gkemulticloud/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create attached cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.create_attached_cluster.js) |
+| delete attached cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.delete_attached_cluster.js) |
+| generate attached cluster agent token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_agent_token.js) |
+| generate attached cluster install manifest | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.generate_attached_cluster_install_manifest.js) |
+| get attached cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_cluster.js) |
+| get attached server config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.get_attached_server_config.js) |
+| import attached cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.import_attached_cluster.js) |
+| list attached clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.list_attached_clusters.js) |
+| update attached cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/attached_clusters.update_attached_cluster.js) |
+| create aws cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_cluster.js) |
+| create aws node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.create_aws_node_pool.js) |
+| delete aws cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_cluster.js) |
+| delete aws node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.delete_aws_node_pool.js) |
+| generate aws access token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_access_token.js) |
+| generate aws cluster agent token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.generate_aws_cluster_agent_token.js) |
+| get aws cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_cluster.js) |
+| get aws json web keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_json_web_keys.js) |
+| get aws node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_node_pool.js) |
+| get aws open id config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_open_id_config.js) |
+| get aws server config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.get_aws_server_config.js) |
+| list aws clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_clusters.js) |
+| list aws node pools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.list_aws_node_pools.js) |
+| rollback aws node pool update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.rollback_aws_node_pool_update.js) |
+| update aws cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_cluster.js) |
+| update aws node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/aws_clusters.update_aws_node_pool.js) |
+| create azure client | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_client.js) |
+| create azure cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_cluster.js) |
+| create azure node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.create_azure_node_pool.js) |
+| delete azure client | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_client.js) |
+| delete azure cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_cluster.js) |
+| delete azure node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.delete_azure_node_pool.js) |
+| generate azure access token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_access_token.js) |
+| generate azure cluster agent token | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.generate_azure_cluster_agent_token.js) |
+| get azure client | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_client.js) |
+| get azure cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_cluster.js) |
+| get azure json web keys | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_json_web_keys.js) |
+| get azure node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_node_pool.js) |
+| get azure open id config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_open_id_config.js) |
+| get azure server config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.get_azure_server_config.js) |
+| list azure clients | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clients.js) |
+| list azure clusters | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_clusters.js) |
+| list azure node pools | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.list_azure_node_pools.js) |
+| update azure cluster | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_cluster.js) |
+| update azure node pool | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/azure_clusters.update_azure_node_pool.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples/generated/v1/snippet_metadata_google.cloud.gkemulticloud.v1.json) |
 
-
-
-The [Anthos Multi-Cloud API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -196,45 +130,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
-
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/gkemulticloud/latest
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=gkemulticloud.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-gkemulticloud

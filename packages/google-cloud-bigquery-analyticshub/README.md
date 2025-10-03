@@ -1,24 +1,24 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Analytics Hub API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-analyticshub)
+# [Analytics Hub API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/bigquery-analyticshub.svg)](https://www.npmjs.org/package/@google-cloud/bigquery-analyticshub)
-
-
-
 
 Analytics Hub API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-analyticshub/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Analytics Hub API Node.js Client API Reference][client-docs]
+* [Analytics Hub API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/analyticshub/latest)
 
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-bigquery-analyticshub](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-analyticshub)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +27,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,106 +43,51 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Analytics Hub API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/bigquery-analyticshub
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The parent resource path of the listing.
- *  e.g. `projects/myproject/locations/US/dataExchanges/123`.
- */
-// const parent = 'abc123'
-/**
- *  The maximum number of results to return in a single response page. Leverage
- *  the page tokens to iterate through the entire collection.
- */
-// const pageSize = 1234
-/**
- *  Page token, returned by a previous call, to request the next page of
- *  results.
- */
-// const pageToken = 'abc123'
-
-// Imports the Analyticshub library
-const {AnalyticsHubServiceClient} =
-  require('@google-cloud/bigquery-analyticshub').v1;
-
-// Instantiates a client
-const analyticshubClient = new AnalyticsHubServiceClient();
-
-async function callListListings() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const iterable = await analyticshubClient.listListingsAsync(request);
-  for await (const response of iterable) {
-    console.log(response);
-  }
-}
-
-callListListings();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-bigquery-analyticshub/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Analytics_hub_service.approve_query_template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.approve_query_template.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.approve_query_template.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.create_data_exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_data_exchange.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_data_exchange.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.create_listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_listing.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_listing.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.create_query_template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_query_template.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_query_template.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.delete_data_exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_data_exchange.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_data_exchange.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.delete_listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_listing.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_listing.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.delete_query_template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_query_template.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_query_template.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.delete_subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_subscription.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_subscription.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.get_data_exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_data_exchange.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_data_exchange.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.get_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_iam_policy.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.get_listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_listing.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_listing.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.get_query_template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_query_template.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_query_template.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.get_subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_subscription.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_subscription.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.list_data_exchanges | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_data_exchanges.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_data_exchanges.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.list_listings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_listings.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_listings.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.list_org_data_exchanges | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_org_data_exchanges.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_org_data_exchanges.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.list_query_templates | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_query_templates.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_query_templates.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.list_shared_resource_subscriptions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_shared_resource_subscriptions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_shared_resource_subscriptions.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.list_subscriptions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_subscriptions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_subscriptions.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.refresh_subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.refresh_subscription.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.refresh_subscription.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.revoke_subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.revoke_subscription.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.revoke_subscription.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.set_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.set_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.set_iam_policy.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.submit_query_template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.submit_query_template.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.submit_query_template.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.subscribe_data_exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.subscribe_data_exchange.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.subscribe_data_exchange.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.subscribe_listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.subscribe_listing.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.subscribe_listing.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.test_iam_permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.test_iam_permissions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.test_iam_permissions.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.update_data_exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_data_exchange.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_data_exchange.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.update_listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_listing.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_listing.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Analytics_hub_service.update_query_template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_query_template.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_query_template.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-bigquery-analyticshub/samples/quickstart.js,packages/google-cloud-bigquery-analyticshub/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| approve query template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.approve_query_template.js) |
+| create data exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_data_exchange.js) |
+| create listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_listing.js) |
+| create query template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.create_query_template.js) |
+| delete data exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_data_exchange.js) |
+| delete listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_listing.js) |
+| delete query template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_query_template.js) |
+| delete subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.delete_subscription.js) |
+| get data exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_data_exchange.js) |
+| get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_iam_policy.js) |
+| get listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_listing.js) |
+| get query template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_query_template.js) |
+| get subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.get_subscription.js) |
+| list data exchanges | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_data_exchanges.js) |
+| list listings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_listings.js) |
+| list org data exchanges | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_org_data_exchanges.js) |
+| list query templates | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_query_templates.js) |
+| list shared resource subscriptions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_shared_resource_subscriptions.js) |
+| list subscriptions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.list_subscriptions.js) |
+| refresh subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.refresh_subscription.js) |
+| revoke subscription | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.revoke_subscription.js) |
+| set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.set_iam_policy.js) |
+| submit query template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.submit_query_template.js) |
+| subscribe data exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.subscribe_data_exchange.js) |
+| subscribe listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.subscribe_listing.js) |
+| test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.test_iam_permissions.js) |
+| update data exchange | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_data_exchange.js) |
+| update listing | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_listing.js) |
+| update query template | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/analytics_hub_service.update_query_template.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples/generated/v1/snippet_metadata_google.cloud.bigquery.analyticshub.v1.json) |
 
-
-
-The [Analytics Hub API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -172,44 +114,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-
-
-
-
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
-
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/analyticshub/latest
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/LICENSE)
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
-[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=google.cloud.bigquery.analyticshub.v1
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=analyticshub.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-bigquery-analyticshub

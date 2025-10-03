@@ -1,671 +1,671 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-data",
-        "version": "5.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.analytics.data.v1alpha",
-                "version": "v1alpha"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_RunFunnelReport_async",
-            "title": "AlphaAnalyticsData runFunnelReport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a customized funnel report of your Google Analytics event data. The data returned from the API is as a table with columns for the requested dimensions and metrics. Funnel exploration lets you visualize the steps your users take to complete a task and quickly see how well they are succeeding or failing at each step. For example, how do prospects become shoppers and then become buyers? How do one time buyers become repeat buyers? With this information, you can improve inefficient or abandoned customer journeys. To learn more, see [GA4 Funnel Explorations](https://support.google.com/analytics/answer/9327974). This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Data API Funnel Reporting Feedback](https://docs.google.com/forms/d/e/1FAIpQLSdwOlQDJAUoBiIgUZZ3S_Lwi8gr7Bb0k1jhvc-DEg7Rol3UjA/viewform).",
-            "canonical": true,
-            "file": "alpha_analytics_data.run_funnel_report.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 124,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RunFunnelReport",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.RunFunnelReport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "date_ranges",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "funnel",
-                        "type": ".google.analytics.data.v1alpha.Funnel"
-                    },
-                    {
-                        "name": "funnel_breakdown",
-                        "type": ".google.analytics.data.v1alpha.FunnelBreakdown"
-                    },
-                    {
-                        "name": "funnel_next_action",
-                        "type": ".google.analytics.data.v1alpha.FunnelNextAction"
-                    },
-                    {
-                        "name": "funnel_visualization_type",
-                        "type": ".google.analytics.data.v1alpha.RunFunnelReportRequest.FunnelVisualizationType"
-                    },
-                    {
-                        "name": "segments",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "limit",
-                        "type": "TYPE_INT64"
-                    },
-                    {
-                        "name": "dimension_filter",
-                        "type": ".google.analytics.data.v1alpha.FilterExpression"
-                    },
-                    {
-                        "name": "return_property_quota",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.RunFunnelReportResponse",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "RunFunnelReport",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.RunFunnelReport",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateAudienceList_async",
-            "title": "AlphaAnalyticsData createAudienceList Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an audience list for later retrieval. This method quickly returns the audience list's resource name and initiates a long running asynchronous request to form an audience list. To list the users in an audience list, first create the audience list through this method and then send the audience resource name to the `QueryAudienceList` method. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. An audience list is a snapshot of the users currently in the audience at the time of audience list creation. Creating audience lists for one audience on different days will return different results as users enter and exit the audience. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. Audience lists contain the users in each audience. This method is available at beta stability at [audienceExports.create](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/create). To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
-            "canonical": true,
-            "file": "alpha_analytics_data.create_audience_list.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAudienceList",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateAudienceList",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "audience_list",
-                        "type": ".google.analytics.data.v1alpha.AudienceList"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "CreateAudienceList",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateAudienceList",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryAudienceList_async",
-            "title": "AlphaAnalyticsData queryAudienceList Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves an audience list of users. After creating an audience, the users are not immediately available for listing. First, a request to `CreateAudienceList` is necessary to create an audience list of users, and then second, this method is used to retrieve the users in the audience list. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. This method is available at beta stability at [audienceExports.query](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/query). To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
-            "canonical": true,
-            "file": "alpha_analytics_data.query_audience_list.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "QueryAudienceList",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.QueryAudienceList",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "offset",
-                        "type": "TYPE_INT64"
-                    },
-                    {
-                        "name": "limit",
-                        "type": "TYPE_INT64"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.QueryAudienceListResponse",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "QueryAudienceList",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.QueryAudienceList",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_SheetExportAudienceList_async",
-            "title": "AlphaAnalyticsData sheetExportAudienceList Sample",
-            "origin": "API_DEFINITION",
-            "description": " Exports an audience list of users to a Google Sheet. After creating an audience, the users are not immediately available for listing. First, a request to `CreateAudienceList` is necessary to create an audience list of users, and then second, this method is used to export those users in the audience list to a Google Sheet. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
-            "canonical": true,
-            "file": "alpha_analytics_data.sheet_export_audience_list.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SheetExportAudienceList",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.SheetExportAudienceList",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "offset",
-                        "type": "TYPE_INT64"
-                    },
-                    {
-                        "name": "limit",
-                        "type": "TYPE_INT64"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.SheetExportAudienceListResponse",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "SheetExportAudienceList",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.SheetExportAudienceList",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetAudienceList_async",
-            "title": "AlphaAnalyticsData getAudienceList Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets configuration metadata about a specific audience list. This method can be used to understand an audience list after it has been created. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. This method is available at beta stability at [audienceExports.get](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/get). To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
-            "canonical": true,
-            "file": "alpha_analytics_data.get_audience_list.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAudienceList",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetAudienceList",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.AudienceList",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "GetAudienceList",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetAudienceList",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListAudienceLists_async",
-            "title": "AlphaAnalyticsData listAudienceLists Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all audience lists for a property. This method can be used for you to find and reuse existing audience lists rather than creating unnecessary new audience lists. The same audience can have multiple audience lists that represent the list of users that were in an audience on different days. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. This method is available at beta stability at [audienceExports.list](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/list). To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
-            "canonical": true,
-            "file": "alpha_analytics_data.list_audience_lists.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAudienceLists",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListAudienceLists",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.ListAudienceListsResponse",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "ListAudienceLists",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListAudienceLists",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateRecurringAudienceList_async",
-            "title": "AlphaAnalyticsData createRecurringAudienceList Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a recurring audience list. Recurring audience lists produces new audience lists each day. Audience lists are users in an audience at the time of the list's creation. A recurring audience list ensures that you have audience list based on the most recent data available for use each day. If you manually create audience list, you don't know when an audience list based on an additional day's data is available. This recurring audience list automates the creation of an audience list when an additional day's data is available. You will consume fewer quota tokens by using recurring audience list versus manually creating audience list at various times of day trying to guess when an additional day's data is ready. This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
-            "canonical": true,
-            "file": "alpha_analytics_data.create_recurring_audience_list.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateRecurringAudienceList",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateRecurringAudienceList",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "recurring_audience_list",
-                        "type": ".google.analytics.data.v1alpha.RecurringAudienceList"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.RecurringAudienceList",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "CreateRecurringAudienceList",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateRecurringAudienceList",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetRecurringAudienceList_async",
-            "title": "AlphaAnalyticsData getRecurringAudienceList Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets configuration metadata about a specific recurring audience list. This method can be used to understand a recurring audience list's state after it has been created. For example, a recurring audience list resource will generate audience list instances for each day, and this method can be used to get the resource name of the most recent audience list instance. This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
-            "canonical": true,
-            "file": "alpha_analytics_data.get_recurring_audience_list.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetRecurringAudienceList",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetRecurringAudienceList",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.RecurringAudienceList",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "GetRecurringAudienceList",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetRecurringAudienceList",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListRecurringAudienceLists_async",
-            "title": "AlphaAnalyticsData listRecurringAudienceLists Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all recurring audience lists for a property. This method can be used for you to find and reuse existing recurring audience lists rather than creating unnecessary new recurring audience lists. The same audience can have multiple recurring audience lists that represent different dimension combinations; for example, just the dimension `deviceId` or both the dimensions `deviceId` and `userId`. This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
-            "canonical": true,
-            "file": "alpha_analytics_data.list_recurring_audience_lists.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListRecurringAudienceLists",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListRecurringAudienceLists",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.ListRecurringAudienceListsResponse",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "ListRecurringAudienceLists",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListRecurringAudienceLists",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetPropertyQuotasSnapshot_async",
-            "title": "AlphaAnalyticsData getPropertyQuotasSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get all property quotas organized by quota category for a given property. This will charge 1 property quota from the category with the most quota.",
-            "canonical": true,
-            "file": "alpha_analytics_data.get_property_quotas_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPropertyQuotasSnapshot",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetPropertyQuotasSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.PropertyQuotasSnapshot",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "GetPropertyQuotasSnapshot",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetPropertyQuotasSnapshot",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateReportTask_async",
-            "title": "AlphaAnalyticsData createReportTask Sample",
-            "origin": "API_DEFINITION",
-            "description": " Initiates the creation of a report task. This method quickly returns a report task and initiates a long running asynchronous request to form a customized report of your Google Analytics event data. A report task will be retained and available for querying for 72 hours after it has been created. A report task created by one user can be listed and queried by all users who have access to the property.",
-            "canonical": true,
-            "file": "alpha_analytics_data.create_report_task.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateReportTask",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateReportTask",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "report_task",
-                        "type": ".google.analytics.data.v1alpha.ReportTask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "CreateReportTask",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateReportTask",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryReportTask_async",
-            "title": "AlphaAnalyticsData queryReportTask Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves a report task's content. After requesting the `CreateReportTask`, you are able to retrieve the report content once the report is ACTIVE. This method will return an error if the report task's state is not `ACTIVE`. A query response will return the tabular row & column values of the report.",
-            "canonical": true,
-            "file": "alpha_analytics_data.query_report_task.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "QueryReportTask",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.QueryReportTask",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "offset",
-                        "type": "TYPE_INT64"
-                    },
-                    {
-                        "name": "limit",
-                        "type": "TYPE_INT64"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.QueryReportTaskResponse",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "QueryReportTask",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.QueryReportTask",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetReportTask_async",
-            "title": "AlphaAnalyticsData getReportTask Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets report metadata about a specific report task. After creating a report task, use this method to check its processing state or inspect its report definition.",
-            "canonical": true,
-            "file": "alpha_analytics_data.get_report_task.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetReportTask",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetReportTask",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.ReportTask",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "GetReportTask",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetReportTask",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListReportTasks_async",
-            "title": "AlphaAnalyticsData listReportTasks Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all report tasks for a property.",
-            "canonical": true,
-            "file": "alpha_analytics_data.list_report_tasks.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListReportTasks",
-                "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListReportTasks",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.data.v1alpha.ListReportTasksResponse",
-                "client": {
-                    "shortName": "AlphaAnalyticsDataClient",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
-                },
-                "method": {
-                    "shortName": "ListReportTasks",
-                    "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListReportTasks",
-                    "service": {
-                        "shortName": "AlphaAnalyticsData",
-                        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-data",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.analytics.data.v1alpha",
+        "version": "v1alpha"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_RunFunnelReport_async",
+      "title": "AlphaAnalyticsData runFunnelReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a customized funnel report of your Google Analytics event data. The data returned from the API is as a table with columns for the requested dimensions and metrics. Funnel exploration lets you visualize the steps your users take to complete a task and quickly see how well they are succeeding or failing at each step. For example, how do prospects become shoppers and then become buyers? How do one time buyers become repeat buyers? With this information, you can improve inefficient or abandoned customer journeys. To learn more, see [GA4 Funnel Explorations](https://support.google.com/analytics/answer/9327974). This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Data API Funnel Reporting Feedback](https://docs.google.com/forms/d/e/1FAIpQLSdwOlQDJAUoBiIgUZZ3S_Lwi8gr7Bb0k1jhvc-DEg7Rol3UjA/viewform).",
+      "canonical": true,
+      "file": "alpha_analytics_data.run_funnel_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 124,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunFunnelReport",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.RunFunnelReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "date_ranges",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "funnel",
+            "type": ".google.analytics.data.v1alpha.Funnel"
+          },
+          {
+            "name": "funnel_breakdown",
+            "type": ".google.analytics.data.v1alpha.FunnelBreakdown"
+          },
+          {
+            "name": "funnel_next_action",
+            "type": ".google.analytics.data.v1alpha.FunnelNextAction"
+          },
+          {
+            "name": "funnel_visualization_type",
+            "type": ".google.analytics.data.v1alpha.RunFunnelReportRequest.FunnelVisualizationType"
+          },
+          {
+            "name": "segments",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "limit",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "dimension_filter",
+            "type": ".google.analytics.data.v1alpha.FilterExpression"
+          },
+          {
+            "name": "return_property_quota",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.RunFunnelReportResponse",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "RunFunnelReport",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.RunFunnelReport",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateAudienceList_async",
+      "title": "AlphaAnalyticsData createAudienceList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an audience list for later retrieval. This method quickly returns the audience list's resource name and initiates a long running asynchronous request to form an audience list. To list the users in an audience list, first create the audience list through this method and then send the audience resource name to the `QueryAudienceList` method. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. An audience list is a snapshot of the users currently in the audience at the time of audience list creation. Creating audience lists for one audience on different days will return different results as users enter and exit the audience. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. Audience lists contain the users in each audience. This method is available at beta stability at [audienceExports.create](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/create). To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+      "canonical": true,
+      "file": "alpha_analytics_data.create_audience_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAudienceList",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateAudienceList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "audience_list",
+            "type": ".google.analytics.data.v1alpha.AudienceList"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "CreateAudienceList",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateAudienceList",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryAudienceList_async",
+      "title": "AlphaAnalyticsData queryAudienceList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves an audience list of users. After creating an audience, the users are not immediately available for listing. First, a request to `CreateAudienceList` is necessary to create an audience list of users, and then second, this method is used to retrieve the users in the audience list. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. This method is available at beta stability at [audienceExports.query](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/query). To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+      "canonical": true,
+      "file": "alpha_analytics_data.query_audience_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryAudienceList",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.QueryAudienceList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "limit",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.QueryAudienceListResponse",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "QueryAudienceList",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.QueryAudienceList",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_SheetExportAudienceList_async",
+      "title": "AlphaAnalyticsData sheetExportAudienceList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports an audience list of users to a Google Sheet. After creating an audience, the users are not immediately available for listing. First, a request to `CreateAudienceList` is necessary to create an audience list of users, and then second, this method is used to export those users in the audience list to a Google Sheet. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. Audiences in Google Analytics 4 allow you to segment your users in the ways that are important to your business. To learn more, see https://support.google.com/analytics/answer/9267572. This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+      "canonical": true,
+      "file": "alpha_analytics_data.sheet_export_audience_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SheetExportAudienceList",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.SheetExportAudienceList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "limit",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.SheetExportAudienceListResponse",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "SheetExportAudienceList",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.SheetExportAudienceList",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetAudienceList_async",
+      "title": "AlphaAnalyticsData getAudienceList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets configuration metadata about a specific audience list. This method can be used to understand an audience list after it has been created. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. This method is available at beta stability at [audienceExports.get](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/get). To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+      "canonical": true,
+      "file": "alpha_analytics_data.get_audience_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAudienceList",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetAudienceList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.AudienceList",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "GetAudienceList",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetAudienceList",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListAudienceLists_async",
+      "title": "AlphaAnalyticsData listAudienceLists Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all audience lists for a property. This method can be used for you to find and reuse existing audience lists rather than creating unnecessary new audience lists. The same audience can have multiple audience lists that represent the list of users that were in an audience on different days. See [Creating an Audience List](https://developers.google.com/analytics/devguides/reporting/data/v1/audience-list-basics) for an introduction to Audience Lists with examples. This method is available at beta stability at [audienceExports.list](https://developers.google.com/analytics/devguides/reporting/data/v1/rest/v1beta/properties.audienceExports/list). To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+      "canonical": true,
+      "file": "alpha_analytics_data.list_audience_lists.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAudienceLists",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListAudienceLists",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.ListAudienceListsResponse",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "ListAudienceLists",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListAudienceLists",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateRecurringAudienceList_async",
+      "title": "AlphaAnalyticsData createRecurringAudienceList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a recurring audience list. Recurring audience lists produces new audience lists each day. Audience lists are users in an audience at the time of the list's creation. A recurring audience list ensures that you have audience list based on the most recent data available for use each day. If you manually create audience list, you don't know when an audience list based on an additional day's data is available. This recurring audience list automates the creation of an audience list when an additional day's data is available. You will consume fewer quota tokens by using recurring audience list versus manually creating audience list at various times of day trying to guess when an additional day's data is ready. This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+      "canonical": true,
+      "file": "alpha_analytics_data.create_recurring_audience_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRecurringAudienceList",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateRecurringAudienceList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "recurring_audience_list",
+            "type": ".google.analytics.data.v1alpha.RecurringAudienceList"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.RecurringAudienceList",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "CreateRecurringAudienceList",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateRecurringAudienceList",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetRecurringAudienceList_async",
+      "title": "AlphaAnalyticsData getRecurringAudienceList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets configuration metadata about a specific recurring audience list. This method can be used to understand a recurring audience list's state after it has been created. For example, a recurring audience list resource will generate audience list instances for each day, and this method can be used to get the resource name of the most recent audience list instance. This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+      "canonical": true,
+      "file": "alpha_analytics_data.get_recurring_audience_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRecurringAudienceList",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetRecurringAudienceList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.RecurringAudienceList",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "GetRecurringAudienceList",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetRecurringAudienceList",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListRecurringAudienceLists_async",
+      "title": "AlphaAnalyticsData listRecurringAudienceLists Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all recurring audience lists for a property. This method can be used for you to find and reuse existing recurring audience lists rather than creating unnecessary new recurring audience lists. The same audience can have multiple recurring audience lists that represent different dimension combinations; for example, just the dimension `deviceId` or both the dimensions `deviceId` and `userId`. This method is introduced at alpha stability with the intention of gathering feedback on syntax and capabilities before entering beta. To give your feedback on this API, complete the [Google Analytics Audience Export API Feedback](https://forms.gle/EeA5u5LW6PEggtCEA) form.",
+      "canonical": true,
+      "file": "alpha_analytics_data.list_recurring_audience_lists.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRecurringAudienceLists",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListRecurringAudienceLists",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.ListRecurringAudienceListsResponse",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "ListRecurringAudienceLists",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListRecurringAudienceLists",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetPropertyQuotasSnapshot_async",
+      "title": "AlphaAnalyticsData getPropertyQuotasSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get all property quotas organized by quota category for a given property. This will charge 1 property quota from the category with the most quota.",
+      "canonical": true,
+      "file": "alpha_analytics_data.get_property_quotas_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPropertyQuotasSnapshot",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetPropertyQuotasSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.PropertyQuotasSnapshot",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "GetPropertyQuotasSnapshot",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetPropertyQuotasSnapshot",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_CreateReportTask_async",
+      "title": "AlphaAnalyticsData createReportTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Initiates the creation of a report task. This method quickly returns a report task and initiates a long running asynchronous request to form a customized report of your Google Analytics event data. A report task will be retained and available for querying for 72 hours after it has been created. A report task created by one user can be listed and queried by all users who have access to the property.",
+      "canonical": true,
+      "file": "alpha_analytics_data.create_report_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateReportTask",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateReportTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "report_task",
+            "type": ".google.analytics.data.v1alpha.ReportTask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "CreateReportTask",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.CreateReportTask",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_QueryReportTask_async",
+      "title": "AlphaAnalyticsData queryReportTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a report task's content. After requesting the `CreateReportTask`, you are able to retrieve the report content once the report is ACTIVE. This method will return an error if the report task's state is not `ACTIVE`. A query response will return the tabular row & column values of the report.",
+      "canonical": true,
+      "file": "alpha_analytics_data.query_report_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryReportTask",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.QueryReportTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "limit",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.QueryReportTaskResponse",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "QueryReportTask",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.QueryReportTask",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_GetReportTask_async",
+      "title": "AlphaAnalyticsData getReportTask Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets report metadata about a specific report task. After creating a report task, use this method to check its processing state or inspect its report definition.",
+      "canonical": true,
+      "file": "alpha_analytics_data.get_report_task.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetReportTask",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetReportTask",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.ReportTask",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "GetReportTask",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.GetReportTask",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsdata_v1alpha_generated_AlphaAnalyticsData_ListReportTasks_async",
+      "title": "AlphaAnalyticsData listReportTasks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all report tasks for a property.",
+      "canonical": true,
+      "file": "alpha_analytics_data.list_report_tasks.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReportTasks",
+        "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListReportTasks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.data.v1alpha.ListReportTasksResponse",
+        "client": {
+          "shortName": "AlphaAnalyticsDataClient",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsDataClient"
+        },
+        "method": {
+          "shortName": "ListReportTasks",
+          "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData.ListReportTasks",
+          "service": {
+            "shortName": "AlphaAnalyticsData",
+            "fullName": "google.analytics.data.v1alpha.AlphaAnalyticsData"
+          }
+        }
+      }
+    }
+  ]
 }

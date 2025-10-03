@@ -1,1575 +1,1575 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-managedkafka",
-        "version": "0.8.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.managedkafka.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_ListClusters_async",
-            "title": "ManagedKafka listClusters Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the clusters in a given project and location.",
-            "canonical": true,
-            "file": "managed_kafka.list_clusters.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListClusters",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListClusters",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ListClustersResponse",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "ListClusters",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListClusters",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_GetCluster_async",
-            "title": "ManagedKafka getCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the properties of a single cluster.",
-            "canonical": true,
-            "file": "managed_kafka.get_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCluster",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Cluster",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "GetCluster",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetCluster",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_CreateCluster_async",
-            "title": "ManagedKafka createCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new cluster in a given project and location.",
-            "canonical": true,
-            "file": "managed_kafka.create_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 85,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCluster",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster",
-                        "type": ".google.cloud.managedkafka.v1.Cluster"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "CreateCluster",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateCluster",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_UpdateCluster_async",
-            "title": "ManagedKafka updateCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the properties of a single cluster.",
-            "canonical": true,
-            "file": "managed_kafka.update_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCluster",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "cluster",
-                        "type": ".google.cloud.managedkafka.v1.Cluster"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "UpdateCluster",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateCluster",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_DeleteCluster_async",
-            "title": "ManagedKafka deleteCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single cluster.",
-            "canonical": true,
-            "file": "managed_kafka.delete_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteCluster",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "DeleteCluster",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteCluster",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_ListTopics_async",
-            "title": "ManagedKafka listTopics Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the topics in a given cluster.",
-            "canonical": true,
-            "file": "managed_kafka.list_topics.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListTopics",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListTopics",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ListTopicsResponse",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "ListTopics",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListTopics",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_GetTopic_async",
-            "title": "ManagedKafka getTopic Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the properties of a single topic.",
-            "canonical": true,
-            "file": "managed_kafka.get_topic.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetTopic",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetTopic",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Topic",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "GetTopic",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetTopic",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_CreateTopic_async",
-            "title": "ManagedKafka createTopic Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new topic in a given project and location.",
-            "canonical": true,
-            "file": "managed_kafka.create_topic.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateTopic",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateTopic",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "topic_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "topic",
-                        "type": ".google.cloud.managedkafka.v1.Topic"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Topic",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "CreateTopic",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateTopic",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_UpdateTopic_async",
-            "title": "ManagedKafka updateTopic Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the properties of a single topic.",
-            "canonical": true,
-            "file": "managed_kafka.update_topic.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateTopic",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateTopic",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "topic",
-                        "type": ".google.cloud.managedkafka.v1.Topic"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Topic",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "UpdateTopic",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateTopic",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_DeleteTopic_async",
-            "title": "ManagedKafka deleteTopic Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single topic.",
-            "canonical": true,
-            "file": "managed_kafka.delete_topic.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteTopic",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteTopic",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "DeleteTopic",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteTopic",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_ListConsumerGroups_async",
-            "title": "ManagedKafka listConsumerGroups Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the consumer groups in a given cluster.",
-            "canonical": true,
-            "file": "managed_kafka.list_consumer_groups.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConsumerGroups",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListConsumerGroups",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ListConsumerGroupsResponse",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "ListConsumerGroups",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListConsumerGroups",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_GetConsumerGroup_async",
-            "title": "ManagedKafka getConsumerGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the properties of a single consumer group.",
-            "canonical": true,
-            "file": "managed_kafka.get_consumer_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConsumerGroup",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetConsumerGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ConsumerGroup",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "GetConsumerGroup",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetConsumerGroup",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_UpdateConsumerGroup_async",
-            "title": "ManagedKafka updateConsumerGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the properties of a single consumer group.",
-            "canonical": true,
-            "file": "managed_kafka.update_consumer_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConsumerGroup",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateConsumerGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "consumer_group",
-                        "type": ".google.cloud.managedkafka.v1.ConsumerGroup"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ConsumerGroup",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "UpdateConsumerGroup",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateConsumerGroup",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_DeleteConsumerGroup_async",
-            "title": "ManagedKafka deleteConsumerGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single consumer group.",
-            "canonical": true,
-            "file": "managed_kafka.delete_consumer_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConsumerGroup",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteConsumerGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "DeleteConsumerGroup",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteConsumerGroup",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_ListAcls_async",
-            "title": "ManagedKafka listAcls Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the acls in a given cluster.",
-            "canonical": true,
-            "file": "managed_kafka.list_acls.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAcls",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListAcls",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ListAclsResponse",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "ListAcls",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListAcls",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_GetAcl_async",
-            "title": "ManagedKafka getAcl Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the properties of a single acl.",
-            "canonical": true,
-            "file": "managed_kafka.get_acl.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAcl",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetAcl",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Acl",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "GetAcl",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetAcl",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_CreateAcl_async",
-            "title": "ManagedKafka createAcl Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new acl in the given project, location, and cluster.",
-            "canonical": true,
-            "file": "managed_kafka.create_acl.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 82,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAcl",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateAcl",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "acl_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "acl",
-                        "type": ".google.cloud.managedkafka.v1.Acl"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Acl",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "CreateAcl",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateAcl",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_UpdateAcl_async",
-            "title": "ManagedKafka updateAcl Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the properties of a single acl.",
-            "canonical": true,
-            "file": "managed_kafka.update_acl.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateAcl",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateAcl",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "acl",
-                        "type": ".google.cloud.managedkafka.v1.Acl"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Acl",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "UpdateAcl",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateAcl",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_DeleteAcl_async",
-            "title": "ManagedKafka deleteAcl Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an acl.",
-            "canonical": true,
-            "file": "managed_kafka.delete_acl.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAcl",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteAcl",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "DeleteAcl",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteAcl",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_AddAclEntry_async",
-            "title": "ManagedKafka addAclEntry Sample",
-            "origin": "API_DEFINITION",
-            "description": " Incremental update: Adds an acl entry to an acl. Creates the acl if it does not exist yet.",
-            "canonical": true,
-            "file": "managed_kafka.add_acl_entry.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AddAclEntry",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.AddAclEntry",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "acl",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "acl_entry",
-                        "type": ".google.cloud.managedkafka.v1.AclEntry"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.AddAclEntryResponse",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "AddAclEntry",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.AddAclEntry",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafka_RemoveAclEntry_async",
-            "title": "ManagedKafka removeAclEntry Sample",
-            "origin": "API_DEFINITION",
-            "description": " Incremental update: Removes an acl entry from an acl. Deletes the acl if its acl entries become empty (i.e. if the removed entry was the last one in the acl).",
-            "canonical": true,
-            "file": "managed_kafka.remove_acl_entry.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RemoveAclEntry",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafka.RemoveAclEntry",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "acl",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "acl_entry",
-                        "type": ".google.cloud.managedkafka.v1.AclEntry"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.RemoveAclEntryResponse",
-                "client": {
-                    "shortName": "ManagedKafkaClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
-                },
-                "method": {
-                    "shortName": "RemoveAclEntry",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafka.RemoveAclEntry",
-                    "service": {
-                        "shortName": "ManagedKafka",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_ListConnectClusters_async",
-            "title": "ManagedKafka listConnectClusters Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the Kafka Connect clusters in a given project and location.",
-            "canonical": true,
-            "file": "managed_kafka_connect.list_connect_clusters.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnectClusters",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectClusters",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ListConnectClustersResponse",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "ListConnectClusters",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectClusters",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_GetConnectCluster_async",
-            "title": "ManagedKafka getConnectCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the properties of a single Kafka Connect cluster.",
-            "canonical": true,
-            "file": "managed_kafka_connect.get_connect_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnectCluster",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnectCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ConnectCluster",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "GetConnectCluster",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnectCluster",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_CreateConnectCluster_async",
-            "title": "ManagedKafka createConnectCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new Kafka Connect cluster in a given project and location.",
-            "canonical": true,
-            "file": "managed_kafka_connect.create_connect_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 86,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConnectCluster",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnectCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connect_cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connect_cluster",
-                        "type": ".google.cloud.managedkafka.v1.ConnectCluster"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "CreateConnectCluster",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnectCluster",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_UpdateConnectCluster_async",
-            "title": "ManagedKafka updateConnectCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the properties of a single Kafka Connect cluster.",
-            "canonical": true,
-            "file": "managed_kafka_connect.update_connect_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConnectCluster",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnectCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "connect_cluster",
-                        "type": ".google.cloud.managedkafka.v1.ConnectCluster"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "UpdateConnectCluster",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnectCluster",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_DeleteConnectCluster_async",
-            "title": "ManagedKafka deleteConnectCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single Connect cluster.",
-            "canonical": true,
-            "file": "managed_kafka_connect.delete_connect_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConnectCluster",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnectCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "DeleteConnectCluster",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnectCluster",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_ListConnectors_async",
-            "title": "ManagedKafka listConnectors Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the connectors in a given Connect cluster.",
-            "canonical": true,
-            "file": "managed_kafka_connect.list_connectors.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnectors",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectors",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ListConnectorsResponse",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "ListConnectors",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectors",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_GetConnector_async",
-            "title": "ManagedKafka getConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the properties of a single connector.",
-            "canonical": true,
-            "file": "managed_kafka_connect.get_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnector",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Connector",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "GetConnector",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnector",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_CreateConnector_async",
-            "title": "ManagedKafka createConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new connector in a given Connect cluster.",
-            "canonical": true,
-            "file": "managed_kafka_connect.create_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConnector",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connector_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connector",
-                        "type": ".google.cloud.managedkafka.v1.Connector"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Connector",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "CreateConnector",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnector",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_UpdateConnector_async",
-            "title": "ManagedKafka updateConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the properties of a connector.",
-            "canonical": true,
-            "file": "managed_kafka_connect.update_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConnector",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "connector",
-                        "type": ".google.cloud.managedkafka.v1.Connector"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.Connector",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "UpdateConnector",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnector",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_DeleteConnector_async",
-            "title": "ManagedKafka deleteConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a connector.",
-            "canonical": true,
-            "file": "managed_kafka_connect.delete_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConnector",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "DeleteConnector",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnector",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_PauseConnector_async",
-            "title": "ManagedKafka pauseConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Pauses the connector and its tasks.",
-            "canonical": true,
-            "file": "managed_kafka_connect.pause_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "PauseConnector",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.PauseConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.PauseConnectorResponse",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "PauseConnector",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.PauseConnector",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_ResumeConnector_async",
-            "title": "ManagedKafka resumeConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Resumes the connector and its tasks.",
-            "canonical": true,
-            "file": "managed_kafka_connect.resume_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResumeConnector",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ResumeConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.ResumeConnectorResponse",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "ResumeConnector",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ResumeConnector",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_RestartConnector_async",
-            "title": "ManagedKafka restartConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Restarts the connector.",
-            "canonical": true,
-            "file": "managed_kafka_connect.restart_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RestartConnector",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.RestartConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.RestartConnectorResponse",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "RestartConnector",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.RestartConnector",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_StopConnector_async",
-            "title": "ManagedKafka stopConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Stops the connector.",
-            "canonical": true,
-            "file": "managed_kafka_connect.stop_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StopConnector",
-                "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.StopConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.v1.StopConnectorResponse",
-                "client": {
-                    "shortName": "ManagedKafkaConnectClient",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
-                },
-                "method": {
-                    "shortName": "StopConnector",
-                    "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.StopConnector",
-                    "service": {
-                        "shortName": "ManagedKafkaConnect",
-                        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-managedkafka",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.managedkafka.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_ListClusters_async",
+      "title": "ManagedKafka listClusters Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the clusters in a given project and location.",
+      "canonical": true,
+      "file": "managed_kafka.list_clusters.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListClusters",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListClusters",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ListClustersResponse",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "ListClusters",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListClusters",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_GetCluster_async",
+      "title": "ManagedKafka getCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the properties of a single cluster.",
+      "canonical": true,
+      "file": "managed_kafka.get_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCluster",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Cluster",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "GetCluster",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetCluster",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_CreateCluster_async",
+      "title": "ManagedKafka createCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new cluster in a given project and location.",
+      "canonical": true,
+      "file": "managed_kafka.create_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCluster",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster",
+            "type": ".google.cloud.managedkafka.v1.Cluster"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "CreateCluster",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateCluster",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_UpdateCluster_async",
+      "title": "ManagedKafka updateCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the properties of a single cluster.",
+      "canonical": true,
+      "file": "managed_kafka.update_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCluster",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "cluster",
+            "type": ".google.cloud.managedkafka.v1.Cluster"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "UpdateCluster",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateCluster",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_DeleteCluster_async",
+      "title": "ManagedKafka deleteCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single cluster.",
+      "canonical": true,
+      "file": "managed_kafka.delete_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCluster",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "DeleteCluster",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteCluster",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_ListTopics_async",
+      "title": "ManagedKafka listTopics Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the topics in a given cluster.",
+      "canonical": true,
+      "file": "managed_kafka.list_topics.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTopics",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListTopics",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ListTopicsResponse",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "ListTopics",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListTopics",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_GetTopic_async",
+      "title": "ManagedKafka getTopic Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the properties of a single topic.",
+      "canonical": true,
+      "file": "managed_kafka.get_topic.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTopic",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetTopic",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Topic",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "GetTopic",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetTopic",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_CreateTopic_async",
+      "title": "ManagedKafka createTopic Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new topic in a given project and location.",
+      "canonical": true,
+      "file": "managed_kafka.create_topic.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTopic",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateTopic",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "topic_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "topic",
+            "type": ".google.cloud.managedkafka.v1.Topic"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Topic",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "CreateTopic",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateTopic",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_UpdateTopic_async",
+      "title": "ManagedKafka updateTopic Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the properties of a single topic.",
+      "canonical": true,
+      "file": "managed_kafka.update_topic.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTopic",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateTopic",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "topic",
+            "type": ".google.cloud.managedkafka.v1.Topic"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Topic",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "UpdateTopic",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateTopic",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_DeleteTopic_async",
+      "title": "ManagedKafka deleteTopic Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single topic.",
+      "canonical": true,
+      "file": "managed_kafka.delete_topic.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTopic",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteTopic",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "DeleteTopic",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteTopic",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_ListConsumerGroups_async",
+      "title": "ManagedKafka listConsumerGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the consumer groups in a given cluster.",
+      "canonical": true,
+      "file": "managed_kafka.list_consumer_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConsumerGroups",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListConsumerGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ListConsumerGroupsResponse",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "ListConsumerGroups",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListConsumerGroups",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_GetConsumerGroup_async",
+      "title": "ManagedKafka getConsumerGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the properties of a single consumer group.",
+      "canonical": true,
+      "file": "managed_kafka.get_consumer_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConsumerGroup",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetConsumerGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ConsumerGroup",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "GetConsumerGroup",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetConsumerGroup",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_UpdateConsumerGroup_async",
+      "title": "ManagedKafka updateConsumerGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the properties of a single consumer group.",
+      "canonical": true,
+      "file": "managed_kafka.update_consumer_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConsumerGroup",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateConsumerGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "consumer_group",
+            "type": ".google.cloud.managedkafka.v1.ConsumerGroup"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ConsumerGroup",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "UpdateConsumerGroup",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateConsumerGroup",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_DeleteConsumerGroup_async",
+      "title": "ManagedKafka deleteConsumerGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single consumer group.",
+      "canonical": true,
+      "file": "managed_kafka.delete_consumer_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConsumerGroup",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteConsumerGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "DeleteConsumerGroup",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteConsumerGroup",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_ListAcls_async",
+      "title": "ManagedKafka listAcls Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the acls in a given cluster.",
+      "canonical": true,
+      "file": "managed_kafka.list_acls.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAcls",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListAcls",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ListAclsResponse",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "ListAcls",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.ListAcls",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_GetAcl_async",
+      "title": "ManagedKafka getAcl Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the properties of a single acl.",
+      "canonical": true,
+      "file": "managed_kafka.get_acl.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAcl",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetAcl",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Acl",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "GetAcl",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.GetAcl",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_CreateAcl_async",
+      "title": "ManagedKafka createAcl Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new acl in the given project, location, and cluster.",
+      "canonical": true,
+      "file": "managed_kafka.create_acl.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAcl",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateAcl",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "acl_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "acl",
+            "type": ".google.cloud.managedkafka.v1.Acl"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Acl",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "CreateAcl",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.CreateAcl",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_UpdateAcl_async",
+      "title": "ManagedKafka updateAcl Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the properties of a single acl.",
+      "canonical": true,
+      "file": "managed_kafka.update_acl.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAcl",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateAcl",
+        "async": true,
+        "parameters": [
+          {
+            "name": "acl",
+            "type": ".google.cloud.managedkafka.v1.Acl"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Acl",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "UpdateAcl",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.UpdateAcl",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_DeleteAcl_async",
+      "title": "ManagedKafka deleteAcl Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an acl.",
+      "canonical": true,
+      "file": "managed_kafka.delete_acl.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAcl",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteAcl",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "DeleteAcl",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.DeleteAcl",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_AddAclEntry_async",
+      "title": "ManagedKafka addAclEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Incremental update: Adds an acl entry to an acl. Creates the acl if it does not exist yet.",
+      "canonical": true,
+      "file": "managed_kafka.add_acl_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddAclEntry",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.AddAclEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "acl",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "acl_entry",
+            "type": ".google.cloud.managedkafka.v1.AclEntry"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.AddAclEntryResponse",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "AddAclEntry",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.AddAclEntry",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafka_RemoveAclEntry_async",
+      "title": "ManagedKafka removeAclEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Incremental update: Removes an acl entry from an acl. Deletes the acl if its acl entries become empty (i.e. if the removed entry was the last one in the acl).",
+      "canonical": true,
+      "file": "managed_kafka.remove_acl_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveAclEntry",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafka.RemoveAclEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "acl",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "acl_entry",
+            "type": ".google.cloud.managedkafka.v1.AclEntry"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.RemoveAclEntryResponse",
+        "client": {
+          "shortName": "ManagedKafkaClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaClient"
+        },
+        "method": {
+          "shortName": "RemoveAclEntry",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafka.RemoveAclEntry",
+          "service": {
+            "shortName": "ManagedKafka",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafka"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_ListConnectClusters_async",
+      "title": "ManagedKafka listConnectClusters Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the Kafka Connect clusters in a given project and location.",
+      "canonical": true,
+      "file": "managed_kafka_connect.list_connect_clusters.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConnectClusters",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectClusters",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ListConnectClustersResponse",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "ListConnectClusters",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectClusters",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_GetConnectCluster_async",
+      "title": "ManagedKafka getConnectCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the properties of a single Kafka Connect cluster.",
+      "canonical": true,
+      "file": "managed_kafka_connect.get_connect_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnectCluster",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnectCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ConnectCluster",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "GetConnectCluster",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnectCluster",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_CreateConnectCluster_async",
+      "title": "ManagedKafka createConnectCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Kafka Connect cluster in a given project and location.",
+      "canonical": true,
+      "file": "managed_kafka_connect.create_connect_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 86,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConnectCluster",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnectCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connect_cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connect_cluster",
+            "type": ".google.cloud.managedkafka.v1.ConnectCluster"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "CreateConnectCluster",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnectCluster",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_UpdateConnectCluster_async",
+      "title": "ManagedKafka updateConnectCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the properties of a single Kafka Connect cluster.",
+      "canonical": true,
+      "file": "managed_kafka_connect.update_connect_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConnectCluster",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnectCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "connect_cluster",
+            "type": ".google.cloud.managedkafka.v1.ConnectCluster"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "UpdateConnectCluster",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnectCluster",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_DeleteConnectCluster_async",
+      "title": "ManagedKafka deleteConnectCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Connect cluster.",
+      "canonical": true,
+      "file": "managed_kafka_connect.delete_connect_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConnectCluster",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnectCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "DeleteConnectCluster",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnectCluster",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_ListConnectors_async",
+      "title": "ManagedKafka listConnectors Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the connectors in a given Connect cluster.",
+      "canonical": true,
+      "file": "managed_kafka_connect.list_connectors.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConnectors",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectors",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ListConnectorsResponse",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "ListConnectors",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ListConnectors",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_GetConnector_async",
+      "title": "ManagedKafka getConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the properties of a single connector.",
+      "canonical": true,
+      "file": "managed_kafka_connect.get_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnector",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Connector",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "GetConnector",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.GetConnector",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_CreateConnector_async",
+      "title": "ManagedKafka createConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new connector in a given Connect cluster.",
+      "canonical": true,
+      "file": "managed_kafka_connect.create_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConnector",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connector_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connector",
+            "type": ".google.cloud.managedkafka.v1.Connector"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Connector",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "CreateConnector",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.CreateConnector",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_UpdateConnector_async",
+      "title": "ManagedKafka updateConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the properties of a connector.",
+      "canonical": true,
+      "file": "managed_kafka_connect.update_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConnector",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "connector",
+            "type": ".google.cloud.managedkafka.v1.Connector"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.Connector",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "UpdateConnector",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.UpdateConnector",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_DeleteConnector_async",
+      "title": "ManagedKafka deleteConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a connector.",
+      "canonical": true,
+      "file": "managed_kafka_connect.delete_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConnector",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "DeleteConnector",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.DeleteConnector",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_PauseConnector_async",
+      "title": "ManagedKafka pauseConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Pauses the connector and its tasks.",
+      "canonical": true,
+      "file": "managed_kafka_connect.pause_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PauseConnector",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.PauseConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.PauseConnectorResponse",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "PauseConnector",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.PauseConnector",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_ResumeConnector_async",
+      "title": "ManagedKafka resumeConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resumes the connector and its tasks.",
+      "canonical": true,
+      "file": "managed_kafka_connect.resume_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResumeConnector",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ResumeConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.ResumeConnectorResponse",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "ResumeConnector",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.ResumeConnector",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_RestartConnector_async",
+      "title": "ManagedKafka restartConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Restarts the connector.",
+      "canonical": true,
+      "file": "managed_kafka_connect.restart_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestartConnector",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.RestartConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.RestartConnectorResponse",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "RestartConnector",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.RestartConnector",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedKafkaConnect_StopConnector_async",
+      "title": "ManagedKafka stopConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Stops the connector.",
+      "canonical": true,
+      "file": "managed_kafka_connect.stop_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StopConnector",
+        "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.StopConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.v1.StopConnectorResponse",
+        "client": {
+          "shortName": "ManagedKafkaConnectClient",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnectClient"
+        },
+        "method": {
+          "shortName": "StopConnector",
+          "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect.StopConnector",
+          "service": {
+            "shortName": "ManagedKafkaConnect",
+            "fullName": "google.cloud.managedkafka.v1.ManagedKafkaConnect"
+          }
+        }
+      }
+    }
+  ]
 }

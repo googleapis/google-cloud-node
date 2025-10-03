@@ -1,24 +1,24 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Life Sciences: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-lifesciences)
+# [Cloud Life Sciences API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/life-sciences.svg)](https://www.npmjs.org/package/@google-cloud/life-sciences)
 
+Cloud Life Sciences API client for Node.js
 
-
-
-lifesciences client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-lifesciences/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Cloud Life Sciences Node.js Client API Reference][client-docs]
-* [Cloud Life Sciences Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-lifesciences](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-lifesciences)
+* [Cloud Life Sciences API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/lifesciences/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,72 +27,39 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Cloud Life Sciences API][enable_api].
+1.  [Enable the Cloud Life Sciences API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/life-sciences
 ```
 
-
-### Using the client library
-
-```javascript
-// Imports the Google Cloud client library
-
-const {WorkflowsServiceV2BetaClient} = require('@google-cloud/life-sciences');
-
-// const pipeline = 'name-of-pipeline', i.e., 1234
-// const projectId = your-project-id
-// const location = your-pipeline-location
-
-// Creates a client
-const client = new WorkflowsServiceV2BetaClient();
-
-async function checkPipelineProgress() {
-  const status = await client.checkRunPipelineProgress(
-    `projects/${projectId}/locations/${location}/operations/${pipeline}`
-  );
-  console.info(status);
-}
-checkPipelineProgress();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-lifesciences/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Workflows_service_v2_beta.run_pipeline | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-lifesciences/samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js,packages/google-cloud-lifesciences/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-lifesciences/samples/quickstart.js,packages/google-cloud-lifesciences/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/samples/generated/v2beta/snippet_metadata_google.cloud.lifesciences.v2beta.json) |
+| run pipeline | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/samples/generated/v2beta/workflows_service_v2_beta.run_pipeline.js) |
 
-
-
-The [Cloud Life Sciences Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -119,44 +86,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-
-
-
-
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/life-sciences/latest
-[product-docs]: https://cloud.google.com/life-sciences/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=lifesciences.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-lifesciences
