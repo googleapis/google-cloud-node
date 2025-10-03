@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const datapolicies = require('@google-cloud/bigquery-datapoliciesery-datapolicies');
+const datapolicies = require('@google-cloud/bigquery-datapolicies');
 
 function main() {
   const dataPolicyServiceClient = new datapolicies.DataPolicyServiceClient();
