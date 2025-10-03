@@ -246,7 +246,7 @@ describe('v1p1beta1.ImageAnnotatorClient', () => {
             const promise = new Promise((resolve, reject) => {
                  client.batchAnnotateImages(
                     request,
-                    (err?: Error|null, result?: protos.google.cloud.vision.v1p1beta1.IBatchAnnotateImagesResponse|null) => {
+                    (err?: Error|null, result?: protos.google.cloud.vision.beta1.IBatchAnnotateImagesResponse|null) => {
                         if (err) {
                             reject(err);
                         } else {
