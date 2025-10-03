@@ -19,7 +19,6 @@ import * as sinon from 'sinon';
 import * as generateReadMe from '../src/generate-readme';
 import path from 'path';
 
-const TEST_FIXTURES_PATH = path.join(__dirname, 'fixtures', 'combined-library');
 
 describe('tests running generate-readme command', () => {
   let initialGenerateReadMeStub: sinon.SinonStub;

@@ -17,7 +17,8 @@ import * as fs from 'fs/promises';
 import * as path from 'path';
 import { INDEX_PATH } from './generate-index';
 
-const SRC_PATH = 'src';
+export const SRC_PATH = 'src';
+export const ESM_SRC_PATH = 'esm/src';
 
 export interface VersionsAndClients {
   version: string
@@ -65,7 +66,7 @@ export class LibraryConfig {
      */
     constructor(sourcePath: string, destinationPath: string, defaultVersion?: string, isEsm?: boolean) {
         this.isEsm = isEsm ?? false;
-        this.srcPath = isEsm ? `esm/${SRC_PATH}` : SRC_PATH;
+        this.srcPath = isEsm ? ESM_SRC_PATH : SRC_PATH;
         this.sourcePath = sourcePath;
         this.destinationPath = destinationPath;
         this.defaultVersion = defaultVersion;

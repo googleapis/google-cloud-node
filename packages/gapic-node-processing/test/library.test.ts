@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { LibraryConfig } from '../src/library';
+import { ESM_SRC_PATH, LibraryConfig } from '../src/library';
 import { describe, it } from 'mocha';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
-import * as fs from 'fs/promises';
+import * as fs from 'fs';
 import * as path from 'path';
 
 const FAKE_DIRECTORY = 'sometestdir';
@@ -26,6 +26,19 @@ describe('LibraryConfig', () => {
   afterEach(() => {
     sinon.restore();
   });
+  describe('constructor', () => {
+    it('should set directory and destDirectory', () => {
+      const libraryConfig = new LibraryConfig(FAKE_DIRECTORY, FAKE_DEST_DIRECTORY);
+      assert.strictEqual(libraryConfig.sourcePath, FAKE_DIRECTORY);
+      assert.strictEqual(libraryConfig.destinationPath, FAKE_DEST_DIRECTORY);
+    });
+
+    it('should set whether isEsm and the appropriate srcPath', () => {
+      const libraryConfig = new LibraryConfig(FAKE_DIRECTORY, FAKE_DEST_DIRECTORY, undefined, true);
+      assert.strictEqual(libraryConfig.isEsm, true);
+      assert.strictEqual(libraryConfig.srcPath, ESM_SRC_PATH);
+    });
+  }); 
   describe('getHighestVersionWithPrecedence', () => {
     it('should return the highest major version', () => {
       const versions = ['v1', 'v2', 'v3'];
@@ -63,8 +76,8 @@ describe('LibraryConfig', () => {
   });
 
   describe('initialize', () => {
-    it('should correctly initialize versions and clients', async () => {
-      const readdirStub = sinon.stub(fs, 'readdir');
+    it('should correctly initialize versions and clients if no default version is provided', async () => {
+      const readdirStub = sinon.stub(fs.promises, 'readdir');
       readdirStub
         .withArgs(path.join(FAKE_DIRECTORY))
         .resolves([{ name: 'v1', isDirectory: () => true }, { name: 'v2', isDirectory: () => true }] as any);
@@ -74,9 +87,9 @@ describe('LibraryConfig', () => {
       readdirStub
         .withArgs(path.join(FAKE_DIRECTORY, 'v2', 'src'))
         .resolves([{ name: 'v2', isDirectory: () => true }] as any);
-      const statStub = sinon.stub(fs, 'stat');
+      const statStub = sinon.stub(fs.promises, 'stat');
       statStub.resolves({} as any);
-      const readFileStub = sinon.stub(fs, 'readFile');
+      const readFileStub = sinon.stub(fs.promises, 'readFile');
       readFileStub
         .withArgs(
           path.join(FAKE_DIRECTORY, 'v1', 'src', 'v1', 'index.ts'),
@@ -99,6 +112,44 @@ describe('LibraryConfig', () => {
         { version: 'v2', clients: ['V2Client'] },
       ]);
       assert.strictEqual(libraryConfig.defaultVersion, 'v2');
+    });
+
+    it('should correctly initialize versions and clients if a default version is provided', async () => {
+      const readdirStub = sinon.stub(fs.promises, 'readdir');
+      readdirStub
+        .withArgs(path.join(FAKE_DIRECTORY))
+        .resolves([{ name: 'v1', isDirectory: () => true }, { name: 'v2', isDirectory: () => true }] as any);
+      readdirStub
+        .withArgs(path.join(FAKE_DIRECTORY, 'v1', 'src'))
+        .resolves([{ name: 'v1', isDirectory: () => true }] as any);
+      readdirStub
+        .withArgs(path.join(FAKE_DIRECTORY, 'v2', 'src'))
+        .resolves([{ name: 'v2', isDirectory: () => true }] as any);
+      const statStub = sinon.stub(fs.promises, 'stat');
+      statStub.resolves({} as any);
+      const readFileStub = sinon.stub(fs.promises, 'readFile');
+      readFileStub
+        .withArgs(
+          path.join(FAKE_DIRECTORY, 'v1', 'src', 'v1', 'index.ts'),
+          'utf8'
+        )
+        .resolves('export { V1Client } from \'./v1_client\';');
+      readFileStub
+        .withArgs(
+          path.join(FAKE_DIRECTORY, 'v2', 'src', 'v2', 'index.ts'),
+          'utf8'
+        )
+        .resolves('export { V2Client } from \'./v2_client\';');
+
+      const libraryConfig = new LibraryConfig(FAKE_DIRECTORY, FAKE_DEST_DIRECTORY, 'v1');
+      await libraryConfig.initialize();
+
+      assert.deepStrictEqual(libraryConfig.versions, ['v1', 'v2']);
+      assert.deepStrictEqual(libraryConfig.clientsAndVersions, [
+        { version: 'v1', clients: ['V1Client'] },
+        { version: 'v2', clients: ['V2Client'] },
+      ]);
+      assert.deepStrictEqual(libraryConfig.defaultVersionAndClients, { version: 'v1', clients: ['V1Client'] });
     });
   });
 });
