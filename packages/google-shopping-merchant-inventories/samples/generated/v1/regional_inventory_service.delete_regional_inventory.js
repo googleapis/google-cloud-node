@@ -36,7 +36,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Inventories library
-  const {RegionalInventoryServiceClient} = require('@google-cloud/inventories').v1;
+  const {RegionalInventoryServiceClient} = require('@google-shopping/inventories').v1;
 
   // Instantiates a client
   const inventoriesClient = new RegionalInventoryServiceClient();
