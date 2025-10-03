@@ -522,6 +522,7 @@
              * @name google.protobuf.Edition
              * @enum {number}
              * @property {number} EDITION_UNKNOWN=0 EDITION_UNKNOWN value
+             * @property {number} EDITION_LEGACY=900 EDITION_LEGACY value
              * @property {number} EDITION_PROTO2=998 EDITION_PROTO2 value
              * @property {number} EDITION_PROTO3=999 EDITION_PROTO3 value
              * @property {number} EDITION_2023=1000 EDITION_2023 value
@@ -536,6 +537,7 @@
             protobuf.Edition = (function() {
                 var valuesById = {}, values = Object.create(valuesById);
                 values[valuesById[0] = "EDITION_UNKNOWN"] = 0;
+                values[valuesById[900] = "EDITION_LEGACY"] = 900;
                 values[valuesById[998] = "EDITION_PROTO2"] = 998;
                 values[valuesById[999] = "EDITION_PROTO3"] = 999;
                 values[valuesById[1000] = "EDITION_2023"] = 1000;
@@ -560,6 +562,7 @@
                  * @property {Array.<string>|null} [dependency] FileDescriptorProto dependency
                  * @property {Array.<number>|null} [publicDependency] FileDescriptorProto publicDependency
                  * @property {Array.<number>|null} [weakDependency] FileDescriptorProto weakDependency
+                 * @property {Array.<string>|null} [optionDependency] FileDescriptorProto optionDependency
                  * @property {Array.<google.protobuf.IDescriptorProto>|null} [messageType] FileDescriptorProto messageType
                  * @property {Array.<google.protobuf.IEnumDescriptorProto>|null} [enumType] FileDescriptorProto enumType
                  * @property {Array.<google.protobuf.IServiceDescriptorProto>|null} [service] FileDescriptorProto service
@@ -582,6 +585,7 @@
                     this.dependency = [];
                     this.publicDependency = [];
                     this.weakDependency = [];
+                    this.optionDependency = [];
                     this.messageType = [];
                     this.enumType = [];
                     this.service = [];
@@ -631,6 +635,14 @@
                  * @instance
                  */
                 FileDescriptorProto.prototype.weakDependency = $util.emptyArray;
+    
+                /**
+                 * FileDescriptorProto optionDependency.
+                 * @member {Array.<string>} optionDependency
+                 * @memberof google.protobuf.FileDescriptorProto
+                 * @instance
+                 */
+                FileDescriptorProto.prototype.optionDependency = $util.emptyArray;
     
                 /**
                  * FileDescriptorProto messageType.
@@ -753,6 +765,9 @@
                         writer.uint32(/* id 12, wireType 2 =*/98).string(message.syntax);
                     if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                         writer.uint32(/* id 14, wireType 0 =*/112).int32(message.edition);
+                    if (message.optionDependency != null && message.optionDependency.length)
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            writer.uint32(/* id 15, wireType 2 =*/122).string(message.optionDependency[i]);
                     return writer;
                 };
     
@@ -823,6 +838,12 @@
                                         message.weakDependency.push(reader.int32());
                                 } else
                                     message.weakDependency.push(reader.int32());
+                                break;
+                            }
+                        case 15: {
+                                if (!(message.optionDependency && message.optionDependency.length))
+                                    message.optionDependency = [];
+                                message.optionDependency.push(reader.string());
                                 break;
                             }
                         case 4: {
@@ -927,6 +948,13 @@
                             if (!$util.isInteger(message.weakDependency[i]))
                                 return "weakDependency: integer[] expected";
                     }
+                    if (message.optionDependency != null && message.hasOwnProperty("optionDependency")) {
+                        if (!Array.isArray(message.optionDependency))
+                            return "optionDependency: array expected";
+                        for (var i = 0; i < message.optionDependency.length; ++i)
+                            if (!$util.isString(message.optionDependency[i]))
+                                return "optionDependency: string[] expected";
+                    }
                     if (message.messageType != null && message.hasOwnProperty("messageType")) {
                         if (!Array.isArray(message.messageType))
                             return "messageType: array expected";
@@ -981,6 +1009,7 @@
                         default:
                             return "edition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -1032,6 +1061,13 @@
                         message.weakDependency = [];
                         for (var i = 0; i < object.weakDependency.length; ++i)
                             message.weakDependency[i] = object.weakDependency[i] | 0;
+                    }
+                    if (object.optionDependency) {
+                        if (!Array.isArray(object.optionDependency))
+                            throw TypeError(".google.protobuf.FileDescriptorProto.optionDependency: array expected");
+                        message.optionDependency = [];
+                        for (var i = 0; i < object.optionDependency.length; ++i)
+                            message.optionDependency[i] = String(object.optionDependency[i]);
                     }
                     if (object.messageType) {
                         if (!Array.isArray(object.messageType))
@@ -1095,6 +1131,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.edition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.edition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -1161,6 +1201,7 @@
                         object.extension = [];
                         object.publicDependency = [];
                         object.weakDependency = [];
+                        object.optionDependency = [];
                     }
                     if (options.defaults) {
                         object.name = "";
@@ -1217,6 +1258,11 @@
                         object.syntax = message.syntax;
                     if (message.edition != null && message.hasOwnProperty("edition"))
                         object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                    if (message.optionDependency && message.optionDependency.length) {
+                        object.optionDependency = [];
+                        for (var j = 0; j < message.optionDependency.length; ++j)
+                            object.optionDependency[j] = message.optionDependency[j];
+                    }
                     return object;
                 };
     
@@ -1265,6 +1311,7 @@
                  * @property {google.protobuf.IMessageOptions|null} [options] DescriptorProto options
                  * @property {Array.<google.protobuf.DescriptorProto.IReservedRange>|null} [reservedRange] DescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] DescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] DescriptorProto visibility
                  */
     
                 /**
@@ -1371,6 +1418,14 @@
                 DescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * DescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.DescriptorProto
+                 * @instance
+                 */
+                DescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new DescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.DescriptorProto
@@ -1422,6 +1477,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 10, wireType 2 =*/82).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 11, wireType 0 =*/88).int32(message.visibility);
                     return writer;
                 };
     
@@ -1512,6 +1569,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 11: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -1627,6 +1688,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -1726,6 +1796,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -1755,6 +1845,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -1800,6 +1891,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -3844,6 +3937,7 @@
                  * @property {google.protobuf.IEnumOptions|null} [options] EnumDescriptorProto options
                  * @property {Array.<google.protobuf.EnumDescriptorProto.IEnumReservedRange>|null} [reservedRange] EnumDescriptorProto reservedRange
                  * @property {Array.<string>|null} [reservedName] EnumDescriptorProto reservedName
+                 * @property {google.protobuf.SymbolVisibility|null} [visibility] EnumDescriptorProto visibility
                  */
     
                 /**
@@ -3905,6 +3999,14 @@
                 EnumDescriptorProto.prototype.reservedName = $util.emptyArray;
     
                 /**
+                 * EnumDescriptorProto visibility.
+                 * @member {google.protobuf.SymbolVisibility} visibility
+                 * @memberof google.protobuf.EnumDescriptorProto
+                 * @instance
+                 */
+                EnumDescriptorProto.prototype.visibility = 0;
+    
+                /**
                  * Creates a new EnumDescriptorProto instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.EnumDescriptorProto
@@ -3941,6 +4043,8 @@
                     if (message.reservedName != null && message.reservedName.length)
                         for (var i = 0; i < message.reservedName.length; ++i)
                             writer.uint32(/* id 5, wireType 2 =*/42).string(message.reservedName[i]);
+                    if (message.visibility != null && Object.hasOwnProperty.call(message, "visibility"))
+                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.visibility);
                     return writer;
                 };
     
@@ -4001,6 +4105,10 @@
                                 if (!(message.reservedName && message.reservedName.length))
                                     message.reservedName = [];
                                 message.reservedName.push(reader.string());
+                                break;
+                            }
+                        case 6: {
+                                message.visibility = reader.int32();
                                 break;
                             }
                         default:
@@ -4071,6 +4179,15 @@
                             if (!$util.isString(message.reservedName[i]))
                                 return "reservedName: string[] expected";
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        switch (message.visibility) {
+                        default:
+                            return "visibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
                     return null;
                 };
     
@@ -4120,6 +4237,26 @@
                         for (var i = 0; i < object.reservedName.length; ++i)
                             message.reservedName[i] = String(object.reservedName[i]);
                     }
+                    switch (object.visibility) {
+                    default:
+                        if (typeof object.visibility === "number") {
+                            message.visibility = object.visibility;
+                            break;
+                        }
+                        break;
+                    case "VISIBILITY_UNSET":
+                    case 0:
+                        message.visibility = 0;
+                        break;
+                    case "VISIBILITY_LOCAL":
+                    case 1:
+                        message.visibility = 1;
+                        break;
+                    case "VISIBILITY_EXPORT":
+                    case 2:
+                        message.visibility = 2;
+                        break;
+                    }
                     return message;
                 };
     
@@ -4144,6 +4281,7 @@
                     if (options.defaults) {
                         object.name = "";
                         object.options = null;
+                        object.visibility = options.enums === String ? "VISIBILITY_UNSET" : 0;
                     }
                     if (message.name != null && message.hasOwnProperty("name"))
                         object.name = message.name;
@@ -4164,6 +4302,8 @@
                         for (var j = 0; j < message.reservedName.length; ++j)
                             object.reservedName[j] = message.reservedName[j];
                     }
+                    if (message.visibility != null && message.hasOwnProperty("visibility"))
+                        object.visibility = options.enums === String ? $root.google.protobuf.SymbolVisibility[message.visibility] === undefined ? message.visibility : $root.google.protobuf.SymbolVisibility[message.visibility] : message.visibility;
                     return object;
                 };
     
@@ -6482,6 +6622,7 @@
                  * @property {Array.<google.protobuf.FieldOptions.OptionTargetType>|null} [targets] FieldOptions targets
                  * @property {Array.<google.protobuf.FieldOptions.IEditionDefault>|null} [editionDefaults] FieldOptions editionDefaults
                  * @property {google.protobuf.IFeatureSet|null} [features] FieldOptions features
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] FieldOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] FieldOptions uninterpretedOption
                  * @property {Array.<google.api.FieldBehavior>|null} [".google.api.fieldBehavior"] FieldOptions .google.api.fieldBehavior
                  * @property {google.api.IResourceReference|null} [".google.api.resourceReference"] FieldOptions .google.api.resourceReference
@@ -6603,6 +6744,14 @@
                 FieldOptions.prototype.features = null;
     
                 /**
+                 * FieldOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.FieldOptions
+                 * @instance
+                 */
+                FieldOptions.prototype.featureSupport = null;
+    
+                /**
                  * FieldOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.FieldOptions
@@ -6676,6 +6825,8 @@
                             $root.google.protobuf.FieldOptions.EditionDefault.encode(message.editionDefaults[i], writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                     if (message.features != null && Object.hasOwnProperty.call(message, "features"))
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -6775,6 +6926,10 @@
                             }
                         case 21: {
                                 message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 22: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -6911,6 +7066,11 @@
                         var error = $root.google.protobuf.FeatureSet.verify(message.features);
                         if (error)
                             return "features." + error;
+                    }
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
                     }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
@@ -7100,6 +7260,11 @@
                             throw TypeError(".google.protobuf.FieldOptions.features: object expected");
                         message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
                     }
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.FieldOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.FieldOptions.uninterpretedOption: array expected");
@@ -7197,6 +7362,7 @@
                         object.debugRedact = false;
                         object.retention = options.enums === String ? "RETENTION_UNKNOWN" : 0;
                         object.features = null;
+                        object.featureSupport = null;
                         object[".google.api.resourceReference"] = null;
                     }
                     if (message.ctype != null && message.hasOwnProperty("ctype"))
@@ -7229,6 +7395,8 @@
                     }
                     if (message.features != null && message.hasOwnProperty("features"))
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -7501,6 +7669,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -7541,6 +7710,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -7639,6 +7812,488 @@
                     };
     
                     return EditionDefault;
+                })();
+    
+                FieldOptions.FeatureSupport = (function() {
+    
+                    /**
+                     * Properties of a FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @interface IFeatureSupport
+                     * @property {google.protobuf.Edition|null} [editionIntroduced] FeatureSupport editionIntroduced
+                     * @property {google.protobuf.Edition|null} [editionDeprecated] FeatureSupport editionDeprecated
+                     * @property {string|null} [deprecationWarning] FeatureSupport deprecationWarning
+                     * @property {google.protobuf.Edition|null} [editionRemoved] FeatureSupport editionRemoved
+                     */
+    
+                    /**
+                     * Constructs a new FeatureSupport.
+                     * @memberof google.protobuf.FieldOptions
+                     * @classdesc Represents a FeatureSupport.
+                     * @implements IFeatureSupport
+                     * @constructor
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     */
+                    function FeatureSupport(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * FeatureSupport editionIntroduced.
+                     * @member {google.protobuf.Edition} editionIntroduced
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionIntroduced = 0;
+    
+                    /**
+                     * FeatureSupport editionDeprecated.
+                     * @member {google.protobuf.Edition} editionDeprecated
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionDeprecated = 0;
+    
+                    /**
+                     * FeatureSupport deprecationWarning.
+                     * @member {string} deprecationWarning
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.deprecationWarning = "";
+    
+                    /**
+                     * FeatureSupport editionRemoved.
+                     * @member {google.protobuf.Edition} editionRemoved
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     */
+                    FeatureSupport.prototype.editionRemoved = 0;
+    
+                    /**
+                     * Creates a new FeatureSupport instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport=} [properties] Properties to set
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport instance
+                     */
+                    FeatureSupport.create = function create(properties) {
+                        return new FeatureSupport(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.editionIntroduced != null && Object.hasOwnProperty.call(message, "editionIntroduced"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.editionIntroduced);
+                        if (message.editionDeprecated != null && Object.hasOwnProperty.call(message, "editionDeprecated"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).int32(message.editionDeprecated);
+                        if (message.deprecationWarning != null && Object.hasOwnProperty.call(message, "deprecationWarning"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.deprecationWarning);
+                        if (message.editionRemoved != null && Object.hasOwnProperty.call(message, "editionRemoved"))
+                            writer.uint32(/* id 4, wireType 0 =*/32).int32(message.editionRemoved);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.IFeatureSupport} message FeatureSupport message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    FeatureSupport.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.editionIntroduced = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.editionDeprecated = reader.int32();
+                                    break;
+                                }
+                            case 3: {
+                                    message.deprecationWarning = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.editionRemoved = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    FeatureSupport.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a FeatureSupport message.
+                     * @function verify
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    FeatureSupport.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            switch (message.editionIntroduced) {
+                            default:
+                                return "editionIntroduced: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            switch (message.editionDeprecated) {
+                            default:
+                                return "editionDeprecated: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            if (!$util.isString(message.deprecationWarning))
+                                return "deprecationWarning: string expected";
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            switch (message.editionRemoved) {
+                            default:
+                                return "editionRemoved: enum value expected";
+                            case 0:
+                            case 900:
+                            case 998:
+                            case 999:
+                            case 1000:
+                            case 1001:
+                            case 1:
+                            case 2:
+                            case 99997:
+                            case 99998:
+                            case 99999:
+                            case 2147483647:
+                                break;
+                            }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FieldOptions.FeatureSupport} FeatureSupport
+                     */
+                    FeatureSupport.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FieldOptions.FeatureSupport)
+                            return object;
+                        var message = new $root.google.protobuf.FieldOptions.FeatureSupport();
+                        switch (object.editionIntroduced) {
+                        default:
+                            if (typeof object.editionIntroduced === "number") {
+                                message.editionIntroduced = object.editionIntroduced;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionIntroduced = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionIntroduced = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionIntroduced = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionIntroduced = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionIntroduced = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionIntroduced = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionIntroduced = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionIntroduced = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionIntroduced = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionIntroduced = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionIntroduced = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionIntroduced = 2147483647;
+                            break;
+                        }
+                        switch (object.editionDeprecated) {
+                        default:
+                            if (typeof object.editionDeprecated === "number") {
+                                message.editionDeprecated = object.editionDeprecated;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionDeprecated = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionDeprecated = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionDeprecated = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionDeprecated = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionDeprecated = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionDeprecated = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionDeprecated = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionDeprecated = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionDeprecated = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionDeprecated = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionDeprecated = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionDeprecated = 2147483647;
+                            break;
+                        }
+                        if (object.deprecationWarning != null)
+                            message.deprecationWarning = String(object.deprecationWarning);
+                        switch (object.editionRemoved) {
+                        default:
+                            if (typeof object.editionRemoved === "number") {
+                                message.editionRemoved = object.editionRemoved;
+                                break;
+                            }
+                            break;
+                        case "EDITION_UNKNOWN":
+                        case 0:
+                            message.editionRemoved = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.editionRemoved = 900;
+                            break;
+                        case "EDITION_PROTO2":
+                        case 998:
+                            message.editionRemoved = 998;
+                            break;
+                        case "EDITION_PROTO3":
+                        case 999:
+                            message.editionRemoved = 999;
+                            break;
+                        case "EDITION_2023":
+                        case 1000:
+                            message.editionRemoved = 1000;
+                            break;
+                        case "EDITION_2024":
+                        case 1001:
+                            message.editionRemoved = 1001;
+                            break;
+                        case "EDITION_1_TEST_ONLY":
+                        case 1:
+                            message.editionRemoved = 1;
+                            break;
+                        case "EDITION_2_TEST_ONLY":
+                        case 2:
+                            message.editionRemoved = 2;
+                            break;
+                        case "EDITION_99997_TEST_ONLY":
+                        case 99997:
+                            message.editionRemoved = 99997;
+                            break;
+                        case "EDITION_99998_TEST_ONLY":
+                        case 99998:
+                            message.editionRemoved = 99998;
+                            break;
+                        case "EDITION_99999_TEST_ONLY":
+                        case 99999:
+                            message.editionRemoved = 99999;
+                            break;
+                        case "EDITION_MAX":
+                        case 2147483647:
+                            message.editionRemoved = 2147483647;
+                            break;
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {google.protobuf.FieldOptions.FeatureSupport} message FeatureSupport
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    FeatureSupport.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.editionIntroduced = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.editionDeprecated = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.deprecationWarning = "";
+                            object.editionRemoved = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                        }
+                        if (message.editionIntroduced != null && message.hasOwnProperty("editionIntroduced"))
+                            object.editionIntroduced = options.enums === String ? $root.google.protobuf.Edition[message.editionIntroduced] === undefined ? message.editionIntroduced : $root.google.protobuf.Edition[message.editionIntroduced] : message.editionIntroduced;
+                        if (message.editionDeprecated != null && message.hasOwnProperty("editionDeprecated"))
+                            object.editionDeprecated = options.enums === String ? $root.google.protobuf.Edition[message.editionDeprecated] === undefined ? message.editionDeprecated : $root.google.protobuf.Edition[message.editionDeprecated] : message.editionDeprecated;
+                        if (message.deprecationWarning != null && message.hasOwnProperty("deprecationWarning"))
+                            object.deprecationWarning = message.deprecationWarning;
+                        if (message.editionRemoved != null && message.hasOwnProperty("editionRemoved"))
+                            object.editionRemoved = options.enums === String ? $root.google.protobuf.Edition[message.editionRemoved] === undefined ? message.editionRemoved : $root.google.protobuf.Edition[message.editionRemoved] : message.editionRemoved;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this FeatureSupport to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    FeatureSupport.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for FeatureSupport
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FieldOptions.FeatureSupport
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    FeatureSupport.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FieldOptions.FeatureSupport";
+                    };
+    
+                    return FeatureSupport;
                 })();
     
                 return FieldOptions;
@@ -8233,6 +8888,7 @@
                  * @property {boolean|null} [deprecated] EnumValueOptions deprecated
                  * @property {google.protobuf.IFeatureSet|null} [features] EnumValueOptions features
                  * @property {boolean|null} [debugRedact] EnumValueOptions debugRedact
+                 * @property {google.protobuf.FieldOptions.IFeatureSupport|null} [featureSupport] EnumValueOptions featureSupport
                  * @property {Array.<google.protobuf.IUninterpretedOption>|null} [uninterpretedOption] EnumValueOptions uninterpretedOption
                  */
     
@@ -8277,6 +8933,14 @@
                 EnumValueOptions.prototype.debugRedact = false;
     
                 /**
+                 * EnumValueOptions featureSupport.
+                 * @member {google.protobuf.FieldOptions.IFeatureSupport|null|undefined} featureSupport
+                 * @memberof google.protobuf.EnumValueOptions
+                 * @instance
+                 */
+                EnumValueOptions.prototype.featureSupport = null;
+    
+                /**
                  * EnumValueOptions uninterpretedOption.
                  * @member {Array.<google.protobuf.IUninterpretedOption>} uninterpretedOption
                  * @memberof google.protobuf.EnumValueOptions
@@ -8314,6 +8978,8 @@
                         $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     if (message.debugRedact != null && Object.hasOwnProperty.call(message, "debugRedact"))
                         writer.uint32(/* id 3, wireType 0 =*/24).bool(message.debugRedact);
+                    if (message.featureSupport != null && Object.hasOwnProperty.call(message, "featureSupport"))
+                        $root.google.protobuf.FieldOptions.FeatureSupport.encode(message.featureSupport, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
                     if (message.uninterpretedOption != null && message.uninterpretedOption.length)
                         for (var i = 0; i < message.uninterpretedOption.length; ++i)
                             $root.google.protobuf.UninterpretedOption.encode(message.uninterpretedOption[i], writer.uint32(/* id 999, wireType 2 =*/7994).fork()).ldelim();
@@ -8363,6 +9029,10 @@
                             }
                         case 3: {
                                 message.debugRedact = reader.bool();
+                                break;
+                            }
+                        case 4: {
+                                message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.decode(reader, reader.uint32());
                                 break;
                             }
                         case 999: {
@@ -8417,6 +9087,11 @@
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         if (typeof message.debugRedact !== "boolean")
                             return "debugRedact: boolean expected";
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport")) {
+                        var error = $root.google.protobuf.FieldOptions.FeatureSupport.verify(message.featureSupport);
+                        if (error)
+                            return "featureSupport." + error;
+                    }
                     if (message.uninterpretedOption != null && message.hasOwnProperty("uninterpretedOption")) {
                         if (!Array.isArray(message.uninterpretedOption))
                             return "uninterpretedOption: array expected";
@@ -8450,6 +9125,11 @@
                     }
                     if (object.debugRedact != null)
                         message.debugRedact = Boolean(object.debugRedact);
+                    if (object.featureSupport != null) {
+                        if (typeof object.featureSupport !== "object")
+                            throw TypeError(".google.protobuf.EnumValueOptions.featureSupport: object expected");
+                        message.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.fromObject(object.featureSupport);
+                    }
                     if (object.uninterpretedOption) {
                         if (!Array.isArray(object.uninterpretedOption))
                             throw TypeError(".google.protobuf.EnumValueOptions.uninterpretedOption: array expected");
@@ -8482,6 +9162,7 @@
                         object.deprecated = false;
                         object.features = null;
                         object.debugRedact = false;
+                        object.featureSupport = null;
                     }
                     if (message.deprecated != null && message.hasOwnProperty("deprecated"))
                         object.deprecated = message.deprecated;
@@ -8489,6 +9170,8 @@
                         object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                     if (message.debugRedact != null && message.hasOwnProperty("debugRedact"))
                         object.debugRedact = message.debugRedact;
+                    if (message.featureSupport != null && message.hasOwnProperty("featureSupport"))
+                        object.featureSupport = $root.google.protobuf.FieldOptions.FeatureSupport.toObject(message.featureSupport, options);
                     if (message.uninterpretedOption && message.uninterpretedOption.length) {
                         object.uninterpretedOption = [];
                         for (var j = 0; j < message.uninterpretedOption.length; ++j)
@@ -9956,6 +10639,8 @@
                  * @property {google.protobuf.FeatureSet.Utf8Validation|null} [utf8Validation] FeatureSet utf8Validation
                  * @property {google.protobuf.FeatureSet.MessageEncoding|null} [messageEncoding] FeatureSet messageEncoding
                  * @property {google.protobuf.FeatureSet.JsonFormat|null} [jsonFormat] FeatureSet jsonFormat
+                 * @property {google.protobuf.FeatureSet.EnforceNamingStyle|null} [enforceNamingStyle] FeatureSet enforceNamingStyle
+                 * @property {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null} [defaultSymbolVisibility] FeatureSet defaultSymbolVisibility
                  */
     
                 /**
@@ -10022,6 +10707,22 @@
                 FeatureSet.prototype.jsonFormat = 0;
     
                 /**
+                 * FeatureSet enforceNamingStyle.
+                 * @member {google.protobuf.FeatureSet.EnforceNamingStyle} enforceNamingStyle
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.enforceNamingStyle = 0;
+    
+                /**
+                 * FeatureSet defaultSymbolVisibility.
+                 * @member {google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility} defaultSymbolVisibility
+                 * @memberof google.protobuf.FeatureSet
+                 * @instance
+                 */
+                FeatureSet.prototype.defaultSymbolVisibility = 0;
+    
+                /**
                  * Creates a new FeatureSet instance using the specified properties.
                  * @function create
                  * @memberof google.protobuf.FeatureSet
@@ -10057,6 +10758,10 @@
                         writer.uint32(/* id 5, wireType 0 =*/40).int32(message.messageEncoding);
                     if (message.jsonFormat != null && Object.hasOwnProperty.call(message, "jsonFormat"))
                         writer.uint32(/* id 6, wireType 0 =*/48).int32(message.jsonFormat);
+                    if (message.enforceNamingStyle != null && Object.hasOwnProperty.call(message, "enforceNamingStyle"))
+                        writer.uint32(/* id 7, wireType 0 =*/56).int32(message.enforceNamingStyle);
+                    if (message.defaultSymbolVisibility != null && Object.hasOwnProperty.call(message, "defaultSymbolVisibility"))
+                        writer.uint32(/* id 8, wireType 0 =*/64).int32(message.defaultSymbolVisibility);
                     return writer;
                 };
     
@@ -10115,6 +10820,14 @@
                             }
                         case 6: {
                                 message.jsonFormat = reader.int32();
+                                break;
+                            }
+                        case 7: {
+                                message.enforceNamingStyle = reader.int32();
+                                break;
+                            }
+                        case 8: {
+                                message.defaultSymbolVisibility = reader.int32();
                                 break;
                             }
                         default:
@@ -10205,6 +10918,26 @@
                         case 0:
                         case 1:
                         case 2:
+                            break;
+                        }
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        switch (message.enforceNamingStyle) {
+                        default:
+                            return "enforceNamingStyle: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                            break;
+                        }
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        switch (message.defaultSymbolVisibility) {
+                        default:
+                            return "defaultSymbolVisibility: enum value expected";
+                        case 0:
+                        case 1:
+                        case 2:
+                        case 3:
+                        case 4:
                             break;
                         }
                     return null;
@@ -10346,6 +11079,54 @@
                         message.jsonFormat = 2;
                         break;
                     }
+                    switch (object.enforceNamingStyle) {
+                    default:
+                        if (typeof object.enforceNamingStyle === "number") {
+                            message.enforceNamingStyle = object.enforceNamingStyle;
+                            break;
+                        }
+                        break;
+                    case "ENFORCE_NAMING_STYLE_UNKNOWN":
+                    case 0:
+                        message.enforceNamingStyle = 0;
+                        break;
+                    case "STYLE2024":
+                    case 1:
+                        message.enforceNamingStyle = 1;
+                        break;
+                    case "STYLE_LEGACY":
+                    case 2:
+                        message.enforceNamingStyle = 2;
+                        break;
+                    }
+                    switch (object.defaultSymbolVisibility) {
+                    default:
+                        if (typeof object.defaultSymbolVisibility === "number") {
+                            message.defaultSymbolVisibility = object.defaultSymbolVisibility;
+                            break;
+                        }
+                        break;
+                    case "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN":
+                    case 0:
+                        message.defaultSymbolVisibility = 0;
+                        break;
+                    case "EXPORT_ALL":
+                    case 1:
+                        message.defaultSymbolVisibility = 1;
+                        break;
+                    case "EXPORT_TOP_LEVEL":
+                    case 2:
+                        message.defaultSymbolVisibility = 2;
+                        break;
+                    case "LOCAL_ALL":
+                    case 3:
+                        message.defaultSymbolVisibility = 3;
+                        break;
+                    case "STRICT":
+                    case 4:
+                        message.defaultSymbolVisibility = 4;
+                        break;
+                    }
                     return message;
                 };
     
@@ -10369,6 +11150,8 @@
                         object.utf8Validation = options.enums === String ? "UTF8_VALIDATION_UNKNOWN" : 0;
                         object.messageEncoding = options.enums === String ? "MESSAGE_ENCODING_UNKNOWN" : 0;
                         object.jsonFormat = options.enums === String ? "JSON_FORMAT_UNKNOWN" : 0;
+                        object.enforceNamingStyle = options.enums === String ? "ENFORCE_NAMING_STYLE_UNKNOWN" : 0;
+                        object.defaultSymbolVisibility = options.enums === String ? "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN" : 0;
                     }
                     if (message.fieldPresence != null && message.hasOwnProperty("fieldPresence"))
                         object.fieldPresence = options.enums === String ? $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] === undefined ? message.fieldPresence : $root.google.protobuf.FeatureSet.FieldPresence[message.fieldPresence] : message.fieldPresence;
@@ -10382,6 +11165,10 @@
                         object.messageEncoding = options.enums === String ? $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] === undefined ? message.messageEncoding : $root.google.protobuf.FeatureSet.MessageEncoding[message.messageEncoding] : message.messageEncoding;
                     if (message.jsonFormat != null && message.hasOwnProperty("jsonFormat"))
                         object.jsonFormat = options.enums === String ? $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] === undefined ? message.jsonFormat : $root.google.protobuf.FeatureSet.JsonFormat[message.jsonFormat] : message.jsonFormat;
+                    if (message.enforceNamingStyle != null && message.hasOwnProperty("enforceNamingStyle"))
+                        object.enforceNamingStyle = options.enums === String ? $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] === undefined ? message.enforceNamingStyle : $root.google.protobuf.FeatureSet.EnforceNamingStyle[message.enforceNamingStyle] : message.enforceNamingStyle;
+                    if (message.defaultSymbolVisibility != null && message.hasOwnProperty("defaultSymbolVisibility"))
+                        object.defaultSymbolVisibility = options.enums === String ? $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] === undefined ? message.defaultSymbolVisibility : $root.google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility[message.defaultSymbolVisibility] : message.defaultSymbolVisibility;
                     return object;
                 };
     
@@ -10507,6 +11294,219 @@
                     values[valuesById[1] = "ALLOW"] = 1;
                     values[valuesById[2] = "LEGACY_BEST_EFFORT"] = 2;
                     return values;
+                })();
+    
+                /**
+                 * EnforceNamingStyle enum.
+                 * @name google.protobuf.FeatureSet.EnforceNamingStyle
+                 * @enum {number}
+                 * @property {number} ENFORCE_NAMING_STYLE_UNKNOWN=0 ENFORCE_NAMING_STYLE_UNKNOWN value
+                 * @property {number} STYLE2024=1 STYLE2024 value
+                 * @property {number} STYLE_LEGACY=2 STYLE_LEGACY value
+                 */
+                FeatureSet.EnforceNamingStyle = (function() {
+                    var valuesById = {}, values = Object.create(valuesById);
+                    values[valuesById[0] = "ENFORCE_NAMING_STYLE_UNKNOWN"] = 0;
+                    values[valuesById[1] = "STYLE2024"] = 1;
+                    values[valuesById[2] = "STYLE_LEGACY"] = 2;
+                    return values;
+                })();
+    
+                FeatureSet.VisibilityFeature = (function() {
+    
+                    /**
+                     * Properties of a VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @interface IVisibilityFeature
+                     */
+    
+                    /**
+                     * Constructs a new VisibilityFeature.
+                     * @memberof google.protobuf.FeatureSet
+                     * @classdesc Represents a VisibilityFeature.
+                     * @implements IVisibilityFeature
+                     * @constructor
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     */
+                    function VisibilityFeature(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Creates a new VisibilityFeature instance using the specified properties.
+                     * @function create
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature=} [properties] Properties to set
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature instance
+                     */
+                    VisibilityFeature.create = function create(properties) {
+                        return new VisibilityFeature(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.IVisibilityFeature} message VisibilityFeature message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    VisibilityFeature.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    VisibilityFeature.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a VisibilityFeature message.
+                     * @function verify
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    VisibilityFeature.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.protobuf.FeatureSet.VisibilityFeature} VisibilityFeature
+                     */
+                    VisibilityFeature.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.protobuf.FeatureSet.VisibilityFeature)
+                            return object;
+                        return new $root.google.protobuf.FeatureSet.VisibilityFeature();
+                    };
+    
+                    /**
+                     * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {google.protobuf.FeatureSet.VisibilityFeature} message VisibilityFeature
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    VisibilityFeature.toObject = function toObject() {
+                        return {};
+                    };
+    
+                    /**
+                     * Converts this VisibilityFeature to JSON.
+                     * @function toJSON
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    VisibilityFeature.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for VisibilityFeature
+                     * @function getTypeUrl
+                     * @memberof google.protobuf.FeatureSet.VisibilityFeature
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    VisibilityFeature.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.protobuf.FeatureSet.VisibilityFeature";
+                    };
+    
+                    /**
+                     * DefaultSymbolVisibility enum.
+                     * @name google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility
+                     * @enum {number}
+                     * @property {number} DEFAULT_SYMBOL_VISIBILITY_UNKNOWN=0 DEFAULT_SYMBOL_VISIBILITY_UNKNOWN value
+                     * @property {number} EXPORT_ALL=1 EXPORT_ALL value
+                     * @property {number} EXPORT_TOP_LEVEL=2 EXPORT_TOP_LEVEL value
+                     * @property {number} LOCAL_ALL=3 LOCAL_ALL value
+                     * @property {number} STRICT=4 STRICT value
+                     */
+                    VisibilityFeature.DefaultSymbolVisibility = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN"] = 0;
+                        values[valuesById[1] = "EXPORT_ALL"] = 1;
+                        values[valuesById[2] = "EXPORT_TOP_LEVEL"] = 2;
+                        values[valuesById[3] = "LOCAL_ALL"] = 3;
+                        values[valuesById[4] = "STRICT"] = 4;
+                        return values;
+                    })();
+    
+                    return VisibilityFeature;
                 })();
     
                 return FeatureSet;
@@ -10693,6 +11693,7 @@
                         default:
                             return "minimumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -10710,6 +11711,7 @@
                         default:
                             return "maximumEdition: enum value expected";
                         case 0:
+                        case 900:
                         case 998:
                         case 999:
                         case 1000:
@@ -10757,6 +11759,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.minimumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.minimumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -10809,6 +11815,10 @@
                     case "EDITION_UNKNOWN":
                     case 0:
                         message.maximumEdition = 0;
+                        break;
+                    case "EDITION_LEGACY":
+                    case 900:
+                        message.maximumEdition = 900;
                         break;
                     case "EDITION_PROTO2":
                     case 998:
@@ -10918,7 +11928,8 @@
                      * @memberof google.protobuf.FeatureSetDefaults
                      * @interface IFeatureSetEditionDefault
                      * @property {google.protobuf.Edition|null} [edition] FeatureSetEditionDefault edition
-                     * @property {google.protobuf.IFeatureSet|null} [features] FeatureSetEditionDefault features
+                     * @property {google.protobuf.IFeatureSet|null} [overridableFeatures] FeatureSetEditionDefault overridableFeatures
+                     * @property {google.protobuf.IFeatureSet|null} [fixedFeatures] FeatureSetEditionDefault fixedFeatures
                      */
     
                     /**
@@ -10945,12 +11956,20 @@
                     FeatureSetEditionDefault.prototype.edition = 0;
     
                     /**
-                     * FeatureSetEditionDefault features.
-                     * @member {google.protobuf.IFeatureSet|null|undefined} features
+                     * FeatureSetEditionDefault overridableFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} overridableFeatures
                      * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
                      * @instance
                      */
-                    FeatureSetEditionDefault.prototype.features = null;
+                    FeatureSetEditionDefault.prototype.overridableFeatures = null;
+    
+                    /**
+                     * FeatureSetEditionDefault fixedFeatures.
+                     * @member {google.protobuf.IFeatureSet|null|undefined} fixedFeatures
+                     * @memberof google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault
+                     * @instance
+                     */
+                    FeatureSetEditionDefault.prototype.fixedFeatures = null;
     
                     /**
                      * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -10976,10 +11995,12 @@
                     FeatureSetEditionDefault.encode = function encode(message, writer) {
                         if (!writer)
                             writer = $Writer.create();
-                        if (message.features != null && Object.hasOwnProperty.call(message, "features"))
-                            $root.google.protobuf.FeatureSet.encode(message.features, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                         if (message.edition != null && Object.hasOwnProperty.call(message, "edition"))
                             writer.uint32(/* id 3, wireType 0 =*/24).int32(message.edition);
+                        if (message.overridableFeatures != null && Object.hasOwnProperty.call(message, "overridableFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.overridableFeatures, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.fixedFeatures != null && Object.hasOwnProperty.call(message, "fixedFeatures"))
+                            $root.google.protobuf.FeatureSet.encode(message.fixedFeatures, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                         return writer;
                     };
     
@@ -11020,8 +12041,12 @@
                                     message.edition = reader.int32();
                                     break;
                                 }
-                            case 2: {
-                                    message.features = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                            case 4: {
+                                    message.overridableFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 5: {
+                                    message.fixedFeatures = $root.google.protobuf.FeatureSet.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -11064,6 +12089,7 @@
                             default:
                                 return "edition: enum value expected";
                             case 0:
+                            case 900:
                             case 998:
                             case 999:
                             case 1000:
@@ -11076,10 +12102,15 @@
                             case 2147483647:
                                 break;
                             }
-                        if (message.features != null && message.hasOwnProperty("features")) {
-                            var error = $root.google.protobuf.FeatureSet.verify(message.features);
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.overridableFeatures);
                             if (error)
-                                return "features." + error;
+                                return "overridableFeatures." + error;
+                        }
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures")) {
+                            var error = $root.google.protobuf.FeatureSet.verify(message.fixedFeatures);
+                            if (error)
+                                return "fixedFeatures." + error;
                         }
                         return null;
                     };
@@ -11106,6 +12137,10 @@
                         case "EDITION_UNKNOWN":
                         case 0:
                             message.edition = 0;
+                            break;
+                        case "EDITION_LEGACY":
+                        case 900:
+                            message.edition = 900;
                             break;
                         case "EDITION_PROTO2":
                         case 998:
@@ -11148,10 +12183,15 @@
                             message.edition = 2147483647;
                             break;
                         }
-                        if (object.features != null) {
-                            if (typeof object.features !== "object")
-                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.features: object expected");
-                            message.features = $root.google.protobuf.FeatureSet.fromObject(object.features);
+                        if (object.overridableFeatures != null) {
+                            if (typeof object.overridableFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.overridableFeatures: object expected");
+                            message.overridableFeatures = $root.google.protobuf.FeatureSet.fromObject(object.overridableFeatures);
+                        }
+                        if (object.fixedFeatures != null) {
+                            if (typeof object.fixedFeatures !== "object")
+                                throw TypeError(".google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.fixedFeatures: object expected");
+                            message.fixedFeatures = $root.google.protobuf.FeatureSet.fromObject(object.fixedFeatures);
                         }
                         return message;
                     };
@@ -11170,13 +12210,16 @@
                             options = {};
                         var object = {};
                         if (options.defaults) {
-                            object.features = null;
                             object.edition = options.enums === String ? "EDITION_UNKNOWN" : 0;
+                            object.overridableFeatures = null;
+                            object.fixedFeatures = null;
                         }
-                        if (message.features != null && message.hasOwnProperty("features"))
-                            object.features = $root.google.protobuf.FeatureSet.toObject(message.features, options);
                         if (message.edition != null && message.hasOwnProperty("edition"))
                             object.edition = options.enums === String ? $root.google.protobuf.Edition[message.edition] === undefined ? message.edition : $root.google.protobuf.Edition[message.edition] : message.edition;
+                        if (message.overridableFeatures != null && message.hasOwnProperty("overridableFeatures"))
+                            object.overridableFeatures = $root.google.protobuf.FeatureSet.toObject(message.overridableFeatures, options);
+                        if (message.fixedFeatures != null && message.hasOwnProperty("fixedFeatures"))
+                            object.fixedFeatures = $root.google.protobuf.FeatureSet.toObject(message.fixedFeatures, options);
                         return object;
                     };
     
@@ -12389,6 +13432,22 @@
                 })();
     
                 return GeneratedCodeInfo;
+            })();
+    
+            /**
+             * SymbolVisibility enum.
+             * @name google.protobuf.SymbolVisibility
+             * @enum {number}
+             * @property {number} VISIBILITY_UNSET=0 VISIBILITY_UNSET value
+             * @property {number} VISIBILITY_LOCAL=1 VISIBILITY_LOCAL value
+             * @property {number} VISIBILITY_EXPORT=2 VISIBILITY_EXPORT value
+             */
+            protobuf.SymbolVisibility = (function() {
+                var valuesById = {}, values = Object.create(valuesById);
+                values[valuesById[0] = "VISIBILITY_UNSET"] = 0;
+                values[valuesById[1] = "VISIBILITY_LOCAL"] = 1;
+                values[valuesById[2] = "VISIBILITY_EXPORT"] = 2;
+                return values;
             })();
     
             protobuf.Duration = (function() {
@@ -57005,6 +58064,7001 @@
                     return servicemesh;
                 })();
     
+                gkehub.v1alpha2 = (function() {
+    
+                    /**
+                     * Namespace v1alpha2.
+                     * @memberof google.cloud.gkehub
+                     * @namespace
+                     */
+                    var v1alpha2 = {};
+    
+                    v1alpha2.GkeHub = (function() {
+    
+                        /**
+                         * Constructs a new GkeHub service.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a GkeHub
+                         * @extends $protobuf.rpc.Service
+                         * @constructor
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         */
+                        function GkeHub(rpcImpl, requestDelimited, responseDelimited) {
+                            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                        }
+    
+                        (GkeHub.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = GkeHub;
+    
+                        /**
+                         * Creates new GkeHub service using the specified rpc implementation.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @static
+                         * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                         * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                         * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                         * @returns {GkeHub} RPC service. Useful where requests and/or responses are streamed.
+                         */
+                        GkeHub.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                            return new this(rpcImpl, requestDelimited, responseDelimited);
+                        };
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|listMemberships}.
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @typedef ListMembershipsCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.gkehub.v1alpha2.ListMembershipsResponse} [response] ListMembershipsResponse
+                         */
+    
+                        /**
+                         * Calls ListMemberships.
+                         * @function listMemberships
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsRequest} request ListMembershipsRequest message or plain object
+                         * @param {google.cloud.gkehub.v1alpha2.GkeHub.ListMembershipsCallback} callback Node-style callback called with the error, if any, and ListMembershipsResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GkeHub.prototype.listMemberships = function listMemberships(request, callback) {
+                            return this.rpcCall(listMemberships, $root.google.cloud.gkehub.v1alpha2.ListMembershipsRequest, $root.google.cloud.gkehub.v1alpha2.ListMembershipsResponse, request, callback);
+                        }, "name", { value: "ListMemberships" });
+    
+                        /**
+                         * Calls ListMemberships.
+                         * @function listMemberships
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsRequest} request ListMembershipsRequest message or plain object
+                         * @returns {Promise<google.cloud.gkehub.v1alpha2.ListMembershipsResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|getMembership}.
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @typedef GetMembershipCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.gkehub.v1alpha2.Membership} [response] Membership
+                         */
+    
+                        /**
+                         * Calls GetMembership.
+                         * @function getMembership
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IGetMembershipRequest} request GetMembershipRequest message or plain object
+                         * @param {google.cloud.gkehub.v1alpha2.GkeHub.GetMembershipCallback} callback Node-style callback called with the error, if any, and Membership
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GkeHub.prototype.getMembership = function getMembership(request, callback) {
+                            return this.rpcCall(getMembership, $root.google.cloud.gkehub.v1alpha2.GetMembershipRequest, $root.google.cloud.gkehub.v1alpha2.Membership, request, callback);
+                        }, "name", { value: "GetMembership" });
+    
+                        /**
+                         * Calls GetMembership.
+                         * @function getMembership
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IGetMembershipRequest} request GetMembershipRequest message or plain object
+                         * @returns {Promise<google.cloud.gkehub.v1alpha2.Membership>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|createMembership}.
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @typedef CreateMembershipCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls CreateMembership.
+                         * @function createMembership
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.ICreateMembershipRequest} request CreateMembershipRequest message or plain object
+                         * @param {google.cloud.gkehub.v1alpha2.GkeHub.CreateMembershipCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GkeHub.prototype.createMembership = function createMembership(request, callback) {
+                            return this.rpcCall(createMembership, $root.google.cloud.gkehub.v1alpha2.CreateMembershipRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "CreateMembership" });
+    
+                        /**
+                         * Calls CreateMembership.
+                         * @function createMembership
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.ICreateMembershipRequest} request CreateMembershipRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|deleteMembership}.
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @typedef DeleteMembershipCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls DeleteMembership.
+                         * @function deleteMembership
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest} request DeleteMembershipRequest message or plain object
+                         * @param {google.cloud.gkehub.v1alpha2.GkeHub.DeleteMembershipCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GkeHub.prototype.deleteMembership = function deleteMembership(request, callback) {
+                            return this.rpcCall(deleteMembership, $root.google.cloud.gkehub.v1alpha2.DeleteMembershipRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "DeleteMembership" });
+    
+                        /**
+                         * Calls DeleteMembership.
+                         * @function deleteMembership
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest} request DeleteMembershipRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|updateMembership}.
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @typedef UpdateMembershipCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.longrunning.Operation} [response] Operation
+                         */
+    
+                        /**
+                         * Calls UpdateMembership.
+                         * @function updateMembership
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest} request UpdateMembershipRequest message or plain object
+                         * @param {google.cloud.gkehub.v1alpha2.GkeHub.UpdateMembershipCallback} callback Node-style callback called with the error, if any, and Operation
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GkeHub.prototype.updateMembership = function updateMembership(request, callback) {
+                            return this.rpcCall(updateMembership, $root.google.cloud.gkehub.v1alpha2.UpdateMembershipRequest, $root.google.longrunning.Operation, request, callback);
+                        }, "name", { value: "UpdateMembership" });
+    
+                        /**
+                         * Calls UpdateMembership.
+                         * @function updateMembership
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest} request UpdateMembershipRequest message or plain object
+                         * @returns {Promise<google.longrunning.Operation>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|generateConnectManifest}.
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @typedef GenerateConnectManifestCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse} [response] GenerateConnectManifestResponse
+                         */
+    
+                        /**
+                         * Calls GenerateConnectManifest.
+                         * @function generateConnectManifest
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest} request GenerateConnectManifestRequest message or plain object
+                         * @param {google.cloud.gkehub.v1alpha2.GkeHub.GenerateConnectManifestCallback} callback Node-style callback called with the error, if any, and GenerateConnectManifestResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GkeHub.prototype.generateConnectManifest = function generateConnectManifest(request, callback) {
+                            return this.rpcCall(generateConnectManifest, $root.google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest, $root.google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse, request, callback);
+                        }, "name", { value: "GenerateConnectManifest" });
+    
+                        /**
+                         * Calls GenerateConnectManifest.
+                         * @function generateConnectManifest
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest} request GenerateConnectManifestRequest message or plain object
+                         * @returns {Promise<google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        /**
+                         * Callback as used by {@link google.cloud.gkehub.v1alpha2.GkeHub|initializeHub}.
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @typedef InitializeHubCallback
+                         * @type {function}
+                         * @param {Error|null} error Error, if any
+                         * @param {google.cloud.gkehub.v1alpha2.InitializeHubResponse} [response] InitializeHubResponse
+                         */
+    
+                        /**
+                         * Calls InitializeHub.
+                         * @function initializeHub
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubRequest} request InitializeHubRequest message or plain object
+                         * @param {google.cloud.gkehub.v1alpha2.GkeHub.InitializeHubCallback} callback Node-style callback called with the error, if any, and InitializeHubResponse
+                         * @returns {undefined}
+                         * @variation 1
+                         */
+                        Object.defineProperty(GkeHub.prototype.initializeHub = function initializeHub(request, callback) {
+                            return this.rpcCall(initializeHub, $root.google.cloud.gkehub.v1alpha2.InitializeHubRequest, $root.google.cloud.gkehub.v1alpha2.InitializeHubResponse, request, callback);
+                        }, "name", { value: "InitializeHub" });
+    
+                        /**
+                         * Calls InitializeHub.
+                         * @function initializeHub
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeHub
+                         * @instance
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubRequest} request InitializeHubRequest message or plain object
+                         * @returns {Promise<google.cloud.gkehub.v1alpha2.InitializeHubResponse>} Promise
+                         * @variation 2
+                         */
+    
+                        return GkeHub;
+                    })();
+    
+                    v1alpha2.Membership = (function() {
+    
+                        /**
+                         * Properties of a Membership.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IMembership
+                         * @property {string|null} [name] Membership name
+                         * @property {Object.<string,string>|null} [labels] Membership labels
+                         * @property {string|null} [description] Membership description
+                         * @property {google.cloud.gkehub.v1alpha2.IMembershipEndpoint|null} [endpoint] Membership endpoint
+                         * @property {google.cloud.gkehub.v1alpha2.IMembershipState|null} [state] Membership state
+                         * @property {google.protobuf.ITimestamp|null} [createTime] Membership createTime
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] Membership updateTime
+                         * @property {google.protobuf.ITimestamp|null} [deleteTime] Membership deleteTime
+                         * @property {string|null} [externalId] Membership externalId
+                         * @property {google.cloud.gkehub.v1alpha2.IAuthority|null} [authority] Membership authority
+                         * @property {google.protobuf.ITimestamp|null} [lastConnectionTime] Membership lastConnectionTime
+                         * @property {string|null} [uniqueId] Membership uniqueId
+                         * @property {google.cloud.gkehub.v1alpha2.Membership.InfrastructureType|null} [infrastructureType] Membership infrastructureType
+                         */
+    
+                        /**
+                         * Constructs a new Membership.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a Membership.
+                         * @implements IMembership
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IMembership=} [properties] Properties to set
+                         */
+                        function Membership(properties) {
+                            this.labels = {};
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Membership name.
+                         * @member {string} name
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.name = "";
+    
+                        /**
+                         * Membership labels.
+                         * @member {Object.<string,string>} labels
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.labels = $util.emptyObject;
+    
+                        /**
+                         * Membership description.
+                         * @member {string} description
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.description = "";
+    
+                        /**
+                         * Membership endpoint.
+                         * @member {google.cloud.gkehub.v1alpha2.IMembershipEndpoint|null|undefined} endpoint
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.endpoint = null;
+    
+                        /**
+                         * Membership state.
+                         * @member {google.cloud.gkehub.v1alpha2.IMembershipState|null|undefined} state
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.state = null;
+    
+                        /**
+                         * Membership createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.createTime = null;
+    
+                        /**
+                         * Membership updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.updateTime = null;
+    
+                        /**
+                         * Membership deleteTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} deleteTime
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.deleteTime = null;
+    
+                        /**
+                         * Membership externalId.
+                         * @member {string} externalId
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.externalId = "";
+    
+                        /**
+                         * Membership authority.
+                         * @member {google.cloud.gkehub.v1alpha2.IAuthority|null|undefined} authority
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.authority = null;
+    
+                        /**
+                         * Membership lastConnectionTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} lastConnectionTime
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.lastConnectionTime = null;
+    
+                        /**
+                         * Membership uniqueId.
+                         * @member {string} uniqueId
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.uniqueId = "";
+    
+                        /**
+                         * Membership infrastructureType.
+                         * @member {google.cloud.gkehub.v1alpha2.Membership.InfrastructureType} infrastructureType
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Membership.prototype.infrastructureType = 0;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * Membership type.
+                         * @member {"endpoint"|undefined} type
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         */
+                        Object.defineProperty(Membership.prototype, "type", {
+                            get: $util.oneOfGetter($oneOfFields = ["endpoint"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new Membership instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMembership=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.Membership} Membership instance
+                         */
+                        Membership.create = function create(properties) {
+                            return new Membership(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Membership message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.Membership.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMembership} message Membership message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Membership.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
+                            if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                            if (message.endpoint != null && Object.hasOwnProperty.call(message, "endpoint"))
+                                $root.google.cloud.gkehub.v1alpha2.MembershipEndpoint.encode(message.endpoint, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                $root.google.cloud.gkehub.v1alpha2.MembershipState.encode(message.state, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                            if (message.deleteTime != null && Object.hasOwnProperty.call(message, "deleteTime"))
+                                $root.google.protobuf.Timestamp.encode(message.deleteTime, writer.uint32(/* id 8, wireType 2 =*/66).fork()).ldelim();
+                            if (message.externalId != null && Object.hasOwnProperty.call(message, "externalId"))
+                                writer.uint32(/* id 9, wireType 2 =*/74).string(message.externalId);
+                            if (message.authority != null && Object.hasOwnProperty.call(message, "authority"))
+                                $root.google.cloud.gkehub.v1alpha2.Authority.encode(message.authority, writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
+                            if (message.lastConnectionTime != null && Object.hasOwnProperty.call(message, "lastConnectionTime"))
+                                $root.google.protobuf.Timestamp.encode(message.lastConnectionTime, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
+                            if (message.uniqueId != null && Object.hasOwnProperty.call(message, "uniqueId"))
+                                writer.uint32(/* id 12, wireType 2 =*/98).string(message.uniqueId);
+                            if (message.infrastructureType != null && Object.hasOwnProperty.call(message, "infrastructureType"))
+                                writer.uint32(/* id 13, wireType 0 =*/104).int32(message.infrastructureType);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Membership message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.Membership.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMembership} message Membership message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Membership.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a Membership message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.Membership} Membership
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Membership.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.Membership(), key, value;
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        if (message.labels === $util.emptyObject)
+                                            message.labels = {};
+                                        var end2 = reader.uint32() + reader.pos;
+                                        key = "";
+                                        value = "";
+                                        while (reader.pos < end2) {
+                                            var tag2 = reader.uint32();
+                                            switch (tag2 >>> 3) {
+                                            case 1:
+                                                key = reader.string();
+                                                break;
+                                            case 2:
+                                                value = reader.string();
+                                                break;
+                                            default:
+                                                reader.skipType(tag2 & 7);
+                                                break;
+                                            }
+                                        }
+                                        message.labels[key] = value;
+                                        break;
+                                    }
+                                case 3: {
+                                        message.description = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.endpoint = $root.google.cloud.gkehub.v1alpha2.MembershipEndpoint.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.state = $root.google.cloud.gkehub.v1alpha2.MembershipState.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 6: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.deleteTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 9: {
+                                        message.externalId = reader.string();
+                                        break;
+                                    }
+                                case 10: {
+                                        message.authority = $root.google.cloud.gkehub.v1alpha2.Authority.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 11: {
+                                        message.lastConnectionTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 12: {
+                                        message.uniqueId = reader.string();
+                                        break;
+                                    }
+                                case 13: {
+                                        message.infrastructureType = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a Membership message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.Membership} Membership
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Membership.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a Membership message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Membership.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.labels != null && message.hasOwnProperty("labels")) {
+                                if (!$util.isObject(message.labels))
+                                    return "labels: object expected";
+                                var key = Object.keys(message.labels);
+                                for (var i = 0; i < key.length; ++i)
+                                    if (!$util.isString(message.labels[key[i]]))
+                                        return "labels: string{k:string} expected";
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                if (!$util.isString(message.description))
+                                    return "description: string expected";
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint")) {
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.MembershipEndpoint.verify(message.endpoint);
+                                    if (error)
+                                        return "endpoint." + error;
+                                }
+                            }
+                            if (message.state != null && message.hasOwnProperty("state")) {
+                                var error = $root.google.cloud.gkehub.v1alpha2.MembershipState.verify(message.state);
+                                if (error)
+                                    return "state." + error;
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.deleteTime);
+                                if (error)
+                                    return "deleteTime." + error;
+                            }
+                            if (message.externalId != null && message.hasOwnProperty("externalId"))
+                                if (!$util.isString(message.externalId))
+                                    return "externalId: string expected";
+                            if (message.authority != null && message.hasOwnProperty("authority")) {
+                                var error = $root.google.cloud.gkehub.v1alpha2.Authority.verify(message.authority);
+                                if (error)
+                                    return "authority." + error;
+                            }
+                            if (message.lastConnectionTime != null && message.hasOwnProperty("lastConnectionTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.lastConnectionTime);
+                                if (error)
+                                    return "lastConnectionTime." + error;
+                            }
+                            if (message.uniqueId != null && message.hasOwnProperty("uniqueId"))
+                                if (!$util.isString(message.uniqueId))
+                                    return "uniqueId: string expected";
+                            if (message.infrastructureType != null && message.hasOwnProperty("infrastructureType"))
+                                switch (message.infrastructureType) {
+                                default:
+                                    return "infrastructureType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a Membership message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.Membership} Membership
+                         */
+                        Membership.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.Membership)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.Membership();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.labels) {
+                                if (typeof object.labels !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.Membership.labels: object expected");
+                                message.labels = {};
+                                for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                    message.labels[keys[i]] = String(object.labels[keys[i]]);
+                            }
+                            if (object.description != null)
+                                message.description = String(object.description);
+                            if (object.endpoint != null) {
+                                if (typeof object.endpoint !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.Membership.endpoint: object expected");
+                                message.endpoint = $root.google.cloud.gkehub.v1alpha2.MembershipEndpoint.fromObject(object.endpoint);
+                            }
+                            if (object.state != null) {
+                                if (typeof object.state !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.Membership.state: object expected");
+                                message.state = $root.google.cloud.gkehub.v1alpha2.MembershipState.fromObject(object.state);
+                            }
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.Membership.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.Membership.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            if (object.deleteTime != null) {
+                                if (typeof object.deleteTime !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.Membership.deleteTime: object expected");
+                                message.deleteTime = $root.google.protobuf.Timestamp.fromObject(object.deleteTime);
+                            }
+                            if (object.externalId != null)
+                                message.externalId = String(object.externalId);
+                            if (object.authority != null) {
+                                if (typeof object.authority !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.Membership.authority: object expected");
+                                message.authority = $root.google.cloud.gkehub.v1alpha2.Authority.fromObject(object.authority);
+                            }
+                            if (object.lastConnectionTime != null) {
+                                if (typeof object.lastConnectionTime !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.Membership.lastConnectionTime: object expected");
+                                message.lastConnectionTime = $root.google.protobuf.Timestamp.fromObject(object.lastConnectionTime);
+                            }
+                            if (object.uniqueId != null)
+                                message.uniqueId = String(object.uniqueId);
+                            switch (object.infrastructureType) {
+                            default:
+                                if (typeof object.infrastructureType === "number") {
+                                    message.infrastructureType = object.infrastructureType;
+                                    break;
+                                }
+                                break;
+                            case "INFRASTRUCTURE_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.infrastructureType = 0;
+                                break;
+                            case "ON_PREM":
+                            case 1:
+                                message.infrastructureType = 1;
+                                break;
+                            case "MULTI_CLOUD":
+                            case 2:
+                                message.infrastructureType = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a Membership message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.Membership} message Membership
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Membership.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.objects || options.defaults)
+                                object.labels = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.description = "";
+                                object.state = null;
+                                object.createTime = null;
+                                object.updateTime = null;
+                                object.deleteTime = null;
+                                object.externalId = "";
+                                object.authority = null;
+                                object.lastConnectionTime = null;
+                                object.uniqueId = "";
+                                object.infrastructureType = options.enums === String ? "INFRASTRUCTURE_TYPE_UNSPECIFIED" : 0;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            var keys2;
+                            if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                object.labels = {};
+                                for (var j = 0; j < keys2.length; ++j)
+                                    object.labels[keys2[j]] = message.labels[keys2[j]];
+                            }
+                            if (message.description != null && message.hasOwnProperty("description"))
+                                object.description = message.description;
+                            if (message.endpoint != null && message.hasOwnProperty("endpoint")) {
+                                object.endpoint = $root.google.cloud.gkehub.v1alpha2.MembershipEndpoint.toObject(message.endpoint, options);
+                                if (options.oneofs)
+                                    object.type = "endpoint";
+                            }
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = $root.google.cloud.gkehub.v1alpha2.MembershipState.toObject(message.state, options);
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            if (message.deleteTime != null && message.hasOwnProperty("deleteTime"))
+                                object.deleteTime = $root.google.protobuf.Timestamp.toObject(message.deleteTime, options);
+                            if (message.externalId != null && message.hasOwnProperty("externalId"))
+                                object.externalId = message.externalId;
+                            if (message.authority != null && message.hasOwnProperty("authority"))
+                                object.authority = $root.google.cloud.gkehub.v1alpha2.Authority.toObject(message.authority, options);
+                            if (message.lastConnectionTime != null && message.hasOwnProperty("lastConnectionTime"))
+                                object.lastConnectionTime = $root.google.protobuf.Timestamp.toObject(message.lastConnectionTime, options);
+                            if (message.uniqueId != null && message.hasOwnProperty("uniqueId"))
+                                object.uniqueId = message.uniqueId;
+                            if (message.infrastructureType != null && message.hasOwnProperty("infrastructureType"))
+                                object.infrastructureType = options.enums === String ? $root.google.cloud.gkehub.v1alpha2.Membership.InfrastructureType[message.infrastructureType] === undefined ? message.infrastructureType : $root.google.cloud.gkehub.v1alpha2.Membership.InfrastructureType[message.infrastructureType] : message.infrastructureType;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Membership to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Membership.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Membership
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.Membership
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Membership.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.Membership";
+                        };
+    
+                        /**
+                         * InfrastructureType enum.
+                         * @name google.cloud.gkehub.v1alpha2.Membership.InfrastructureType
+                         * @enum {number}
+                         * @property {number} INFRASTRUCTURE_TYPE_UNSPECIFIED=0 INFRASTRUCTURE_TYPE_UNSPECIFIED value
+                         * @property {number} ON_PREM=1 ON_PREM value
+                         * @property {number} MULTI_CLOUD=2 MULTI_CLOUD value
+                         */
+                        Membership.InfrastructureType = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "INFRASTRUCTURE_TYPE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "ON_PREM"] = 1;
+                            values[valuesById[2] = "MULTI_CLOUD"] = 2;
+                            return values;
+                        })();
+    
+                        return Membership;
+                    })();
+    
+                    v1alpha2.MembershipEndpoint = (function() {
+    
+                        /**
+                         * Properties of a MembershipEndpoint.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IMembershipEndpoint
+                         * @property {google.cloud.gkehub.v1alpha2.IGkeCluster|null} [gkeCluster] MembershipEndpoint gkeCluster
+                         * @property {google.cloud.gkehub.v1alpha2.IOnPremCluster|null} [onPremCluster] MembershipEndpoint onPremCluster
+                         * @property {google.cloud.gkehub.v1alpha2.IMultiCloudCluster|null} [multiCloudCluster] MembershipEndpoint multiCloudCluster
+                         * @property {google.cloud.gkehub.v1alpha2.IKubernetesMetadata|null} [kubernetesMetadata] MembershipEndpoint kubernetesMetadata
+                         * @property {google.cloud.gkehub.v1alpha2.IKubernetesResource|null} [kubernetesResource] MembershipEndpoint kubernetesResource
+                         */
+    
+                        /**
+                         * Constructs a new MembershipEndpoint.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a MembershipEndpoint.
+                         * @implements IMembershipEndpoint
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IMembershipEndpoint=} [properties] Properties to set
+                         */
+                        function MembershipEndpoint(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MembershipEndpoint gkeCluster.
+                         * @member {google.cloud.gkehub.v1alpha2.IGkeCluster|null|undefined} gkeCluster
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         */
+                        MembershipEndpoint.prototype.gkeCluster = null;
+    
+                        /**
+                         * MembershipEndpoint onPremCluster.
+                         * @member {google.cloud.gkehub.v1alpha2.IOnPremCluster|null|undefined} onPremCluster
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         */
+                        MembershipEndpoint.prototype.onPremCluster = null;
+    
+                        /**
+                         * MembershipEndpoint multiCloudCluster.
+                         * @member {google.cloud.gkehub.v1alpha2.IMultiCloudCluster|null|undefined} multiCloudCluster
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         */
+                        MembershipEndpoint.prototype.multiCloudCluster = null;
+    
+                        /**
+                         * MembershipEndpoint kubernetesMetadata.
+                         * @member {google.cloud.gkehub.v1alpha2.IKubernetesMetadata|null|undefined} kubernetesMetadata
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         */
+                        MembershipEndpoint.prototype.kubernetesMetadata = null;
+    
+                        /**
+                         * MembershipEndpoint kubernetesResource.
+                         * @member {google.cloud.gkehub.v1alpha2.IKubernetesResource|null|undefined} kubernetesResource
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         */
+                        MembershipEndpoint.prototype.kubernetesResource = null;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        /**
+                         * MembershipEndpoint type.
+                         * @member {"gkeCluster"|"onPremCluster"|"multiCloudCluster"|undefined} type
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         */
+                        Object.defineProperty(MembershipEndpoint.prototype, "type", {
+                            get: $util.oneOfGetter($oneOfFields = ["gkeCluster", "onPremCluster", "multiCloudCluster"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
+                        /**
+                         * Creates a new MembershipEndpoint instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMembershipEndpoint=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.MembershipEndpoint} MembershipEndpoint instance
+                         */
+                        MembershipEndpoint.create = function create(properties) {
+                            return new MembershipEndpoint(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MembershipEndpoint message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MembershipEndpoint.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMembershipEndpoint} message MembershipEndpoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MembershipEndpoint.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.gkeCluster != null && Object.hasOwnProperty.call(message, "gkeCluster"))
+                                $root.google.cloud.gkehub.v1alpha2.GkeCluster.encode(message.gkeCluster, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.kubernetesMetadata != null && Object.hasOwnProperty.call(message, "kubernetesMetadata"))
+                                $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata.encode(message.kubernetesMetadata, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.kubernetesResource != null && Object.hasOwnProperty.call(message, "kubernetesResource"))
+                                $root.google.cloud.gkehub.v1alpha2.KubernetesResource.encode(message.kubernetesResource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.onPremCluster != null && Object.hasOwnProperty.call(message, "onPremCluster"))
+                                $root.google.cloud.gkehub.v1alpha2.OnPremCluster.encode(message.onPremCluster, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.multiCloudCluster != null && Object.hasOwnProperty.call(message, "multiCloudCluster"))
+                                $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.encode(message.multiCloudCluster, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MembershipEndpoint message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MembershipEndpoint.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMembershipEndpoint} message MembershipEndpoint message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MembershipEndpoint.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MembershipEndpoint message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.MembershipEndpoint} MembershipEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MembershipEndpoint.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.MembershipEndpoint();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.gkeCluster = $root.google.cloud.gkehub.v1alpha2.GkeCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 4: {
+                                        message.onPremCluster = $root.google.cloud.gkehub.v1alpha2.OnPremCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 5: {
+                                        message.multiCloudCluster = $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.kubernetesMetadata = $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.kubernetesResource = $root.google.cloud.gkehub.v1alpha2.KubernetesResource.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MembershipEndpoint message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.MembershipEndpoint} MembershipEndpoint
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MembershipEndpoint.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MembershipEndpoint message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MembershipEndpoint.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            var properties = {};
+                            if (message.gkeCluster != null && message.hasOwnProperty("gkeCluster")) {
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.GkeCluster.verify(message.gkeCluster);
+                                    if (error)
+                                        return "gkeCluster." + error;
+                                }
+                            }
+                            if (message.onPremCluster != null && message.hasOwnProperty("onPremCluster")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.OnPremCluster.verify(message.onPremCluster);
+                                    if (error)
+                                        return "onPremCluster." + error;
+                                }
+                            }
+                            if (message.multiCloudCluster != null && message.hasOwnProperty("multiCloudCluster")) {
+                                if (properties.type === 1)
+                                    return "type: multiple values";
+                                properties.type = 1;
+                                {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.verify(message.multiCloudCluster);
+                                    if (error)
+                                        return "multiCloudCluster." + error;
+                                }
+                            }
+                            if (message.kubernetesMetadata != null && message.hasOwnProperty("kubernetesMetadata")) {
+                                var error = $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata.verify(message.kubernetesMetadata);
+                                if (error)
+                                    return "kubernetesMetadata." + error;
+                            }
+                            if (message.kubernetesResource != null && message.hasOwnProperty("kubernetesResource")) {
+                                var error = $root.google.cloud.gkehub.v1alpha2.KubernetesResource.verify(message.kubernetesResource);
+                                if (error)
+                                    return "kubernetesResource." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MembershipEndpoint message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.MembershipEndpoint} MembershipEndpoint
+                         */
+                        MembershipEndpoint.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.MembershipEndpoint)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.MembershipEndpoint();
+                            if (object.gkeCluster != null) {
+                                if (typeof object.gkeCluster !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.MembershipEndpoint.gkeCluster: object expected");
+                                message.gkeCluster = $root.google.cloud.gkehub.v1alpha2.GkeCluster.fromObject(object.gkeCluster);
+                            }
+                            if (object.onPremCluster != null) {
+                                if (typeof object.onPremCluster !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.MembershipEndpoint.onPremCluster: object expected");
+                                message.onPremCluster = $root.google.cloud.gkehub.v1alpha2.OnPremCluster.fromObject(object.onPremCluster);
+                            }
+                            if (object.multiCloudCluster != null) {
+                                if (typeof object.multiCloudCluster !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.MembershipEndpoint.multiCloudCluster: object expected");
+                                message.multiCloudCluster = $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.fromObject(object.multiCloudCluster);
+                            }
+                            if (object.kubernetesMetadata != null) {
+                                if (typeof object.kubernetesMetadata !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.MembershipEndpoint.kubernetesMetadata: object expected");
+                                message.kubernetesMetadata = $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata.fromObject(object.kubernetesMetadata);
+                            }
+                            if (object.kubernetesResource != null) {
+                                if (typeof object.kubernetesResource !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.MembershipEndpoint.kubernetesResource: object expected");
+                                message.kubernetesResource = $root.google.cloud.gkehub.v1alpha2.KubernetesResource.fromObject(object.kubernetesResource);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MembershipEndpoint message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.MembershipEndpoint} message MembershipEndpoint
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MembershipEndpoint.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.kubernetesMetadata = null;
+                                object.kubernetesResource = null;
+                            }
+                            if (message.gkeCluster != null && message.hasOwnProperty("gkeCluster")) {
+                                object.gkeCluster = $root.google.cloud.gkehub.v1alpha2.GkeCluster.toObject(message.gkeCluster, options);
+                                if (options.oneofs)
+                                    object.type = "gkeCluster";
+                            }
+                            if (message.kubernetesMetadata != null && message.hasOwnProperty("kubernetesMetadata"))
+                                object.kubernetesMetadata = $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata.toObject(message.kubernetesMetadata, options);
+                            if (message.kubernetesResource != null && message.hasOwnProperty("kubernetesResource"))
+                                object.kubernetesResource = $root.google.cloud.gkehub.v1alpha2.KubernetesResource.toObject(message.kubernetesResource, options);
+                            if (message.onPremCluster != null && message.hasOwnProperty("onPremCluster")) {
+                                object.onPremCluster = $root.google.cloud.gkehub.v1alpha2.OnPremCluster.toObject(message.onPremCluster, options);
+                                if (options.oneofs)
+                                    object.type = "onPremCluster";
+                            }
+                            if (message.multiCloudCluster != null && message.hasOwnProperty("multiCloudCluster")) {
+                                object.multiCloudCluster = $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster.toObject(message.multiCloudCluster, options);
+                                if (options.oneofs)
+                                    object.type = "multiCloudCluster";
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MembershipEndpoint to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MembershipEndpoint.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MembershipEndpoint
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipEndpoint
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MembershipEndpoint.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.MembershipEndpoint";
+                        };
+    
+                        return MembershipEndpoint;
+                    })();
+    
+                    v1alpha2.KubernetesResource = (function() {
+    
+                        /**
+                         * Properties of a KubernetesResource.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IKubernetesResource
+                         * @property {string|null} [membershipCrManifest] KubernetesResource membershipCrManifest
+                         * @property {Array.<google.cloud.gkehub.v1alpha2.IResourceManifest>|null} [membershipResources] KubernetesResource membershipResources
+                         * @property {Array.<google.cloud.gkehub.v1alpha2.IResourceManifest>|null} [connectResources] KubernetesResource connectResources
+                         * @property {google.cloud.gkehub.v1alpha2.IResourceOptions|null} [resourceOptions] KubernetesResource resourceOptions
+                         */
+    
+                        /**
+                         * Constructs a new KubernetesResource.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a KubernetesResource.
+                         * @implements IKubernetesResource
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IKubernetesResource=} [properties] Properties to set
+                         */
+                        function KubernetesResource(properties) {
+                            this.membershipResources = [];
+                            this.connectResources = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KubernetesResource membershipCrManifest.
+                         * @member {string} membershipCrManifest
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @instance
+                         */
+                        KubernetesResource.prototype.membershipCrManifest = "";
+    
+                        /**
+                         * KubernetesResource membershipResources.
+                         * @member {Array.<google.cloud.gkehub.v1alpha2.IResourceManifest>} membershipResources
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @instance
+                         */
+                        KubernetesResource.prototype.membershipResources = $util.emptyArray;
+    
+                        /**
+                         * KubernetesResource connectResources.
+                         * @member {Array.<google.cloud.gkehub.v1alpha2.IResourceManifest>} connectResources
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @instance
+                         */
+                        KubernetesResource.prototype.connectResources = $util.emptyArray;
+    
+                        /**
+                         * KubernetesResource resourceOptions.
+                         * @member {google.cloud.gkehub.v1alpha2.IResourceOptions|null|undefined} resourceOptions
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @instance
+                         */
+                        KubernetesResource.prototype.resourceOptions = null;
+    
+                        /**
+                         * Creates a new KubernetesResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IKubernetesResource=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.KubernetesResource} KubernetesResource instance
+                         */
+                        KubernetesResource.create = function create(properties) {
+                            return new KubernetesResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesResource message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.KubernetesResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IKubernetesResource} message KubernetesResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.membershipCrManifest != null && Object.hasOwnProperty.call(message, "membershipCrManifest"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.membershipCrManifest);
+                            if (message.membershipResources != null && message.membershipResources.length)
+                                for (var i = 0; i < message.membershipResources.length; ++i)
+                                    $root.google.cloud.gkehub.v1alpha2.ResourceManifest.encode(message.membershipResources[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            if (message.connectResources != null && message.connectResources.length)
+                                for (var i = 0; i < message.connectResources.length; ++i)
+                                    $root.google.cloud.gkehub.v1alpha2.ResourceManifest.encode(message.connectResources[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                            if (message.resourceOptions != null && Object.hasOwnProperty.call(message, "resourceOptions"))
+                                $root.google.cloud.gkehub.v1alpha2.ResourceOptions.encode(message.resourceOptions, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesResource message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.KubernetesResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IKubernetesResource} message KubernetesResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KubernetesResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.KubernetesResource} KubernetesResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesResource.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.KubernetesResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.membershipCrManifest = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.membershipResources && message.membershipResources.length))
+                                            message.membershipResources = [];
+                                        message.membershipResources.push($root.google.cloud.gkehub.v1alpha2.ResourceManifest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 4: {
+                                        if (!(message.connectResources && message.connectResources.length))
+                                            message.connectResources = [];
+                                        message.connectResources.push($root.google.cloud.gkehub.v1alpha2.ResourceManifest.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 5: {
+                                        message.resourceOptions = $root.google.cloud.gkehub.v1alpha2.ResourceOptions.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KubernetesResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.KubernetesResource} KubernetesResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KubernetesResource message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KubernetesResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.membershipCrManifest != null && message.hasOwnProperty("membershipCrManifest"))
+                                if (!$util.isString(message.membershipCrManifest))
+                                    return "membershipCrManifest: string expected";
+                            if (message.membershipResources != null && message.hasOwnProperty("membershipResources")) {
+                                if (!Array.isArray(message.membershipResources))
+                                    return "membershipResources: array expected";
+                                for (var i = 0; i < message.membershipResources.length; ++i) {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.ResourceManifest.verify(message.membershipResources[i]);
+                                    if (error)
+                                        return "membershipResources." + error;
+                                }
+                            }
+                            if (message.connectResources != null && message.hasOwnProperty("connectResources")) {
+                                if (!Array.isArray(message.connectResources))
+                                    return "connectResources: array expected";
+                                for (var i = 0; i < message.connectResources.length; ++i) {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.ResourceManifest.verify(message.connectResources[i]);
+                                    if (error)
+                                        return "connectResources." + error;
+                                }
+                            }
+                            if (message.resourceOptions != null && message.hasOwnProperty("resourceOptions")) {
+                                var error = $root.google.cloud.gkehub.v1alpha2.ResourceOptions.verify(message.resourceOptions);
+                                if (error)
+                                    return "resourceOptions." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KubernetesResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.KubernetesResource} KubernetesResource
+                         */
+                        KubernetesResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.KubernetesResource)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.KubernetesResource();
+                            if (object.membershipCrManifest != null)
+                                message.membershipCrManifest = String(object.membershipCrManifest);
+                            if (object.membershipResources) {
+                                if (!Array.isArray(object.membershipResources))
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.KubernetesResource.membershipResources: array expected");
+                                message.membershipResources = [];
+                                for (var i = 0; i < object.membershipResources.length; ++i) {
+                                    if (typeof object.membershipResources[i] !== "object")
+                                        throw TypeError(".google.cloud.gkehub.v1alpha2.KubernetesResource.membershipResources: object expected");
+                                    message.membershipResources[i] = $root.google.cloud.gkehub.v1alpha2.ResourceManifest.fromObject(object.membershipResources[i]);
+                                }
+                            }
+                            if (object.connectResources) {
+                                if (!Array.isArray(object.connectResources))
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.KubernetesResource.connectResources: array expected");
+                                message.connectResources = [];
+                                for (var i = 0; i < object.connectResources.length; ++i) {
+                                    if (typeof object.connectResources[i] !== "object")
+                                        throw TypeError(".google.cloud.gkehub.v1alpha2.KubernetesResource.connectResources: object expected");
+                                    message.connectResources[i] = $root.google.cloud.gkehub.v1alpha2.ResourceManifest.fromObject(object.connectResources[i]);
+                                }
+                            }
+                            if (object.resourceOptions != null) {
+                                if (typeof object.resourceOptions !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.KubernetesResource.resourceOptions: object expected");
+                                message.resourceOptions = $root.google.cloud.gkehub.v1alpha2.ResourceOptions.fromObject(object.resourceOptions);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KubernetesResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.KubernetesResource} message KubernetesResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KubernetesResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.membershipResources = [];
+                                object.connectResources = [];
+                            }
+                            if (options.defaults) {
+                                object.membershipCrManifest = "";
+                                object.resourceOptions = null;
+                            }
+                            if (message.membershipCrManifest != null && message.hasOwnProperty("membershipCrManifest"))
+                                object.membershipCrManifest = message.membershipCrManifest;
+                            if (message.membershipResources && message.membershipResources.length) {
+                                object.membershipResources = [];
+                                for (var j = 0; j < message.membershipResources.length; ++j)
+                                    object.membershipResources[j] = $root.google.cloud.gkehub.v1alpha2.ResourceManifest.toObject(message.membershipResources[j], options);
+                            }
+                            if (message.connectResources && message.connectResources.length) {
+                                object.connectResources = [];
+                                for (var j = 0; j < message.connectResources.length; ++j)
+                                    object.connectResources[j] = $root.google.cloud.gkehub.v1alpha2.ResourceManifest.toObject(message.connectResources[j], options);
+                            }
+                            if (message.resourceOptions != null && message.hasOwnProperty("resourceOptions"))
+                                object.resourceOptions = $root.google.cloud.gkehub.v1alpha2.ResourceOptions.toObject(message.resourceOptions, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KubernetesResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KubernetesResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for KubernetesResource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesResource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        KubernetesResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.KubernetesResource";
+                        };
+    
+                        return KubernetesResource;
+                    })();
+    
+                    v1alpha2.ResourceOptions = (function() {
+    
+                        /**
+                         * Properties of a ResourceOptions.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IResourceOptions
+                         * @property {string|null} [connectVersion] ResourceOptions connectVersion
+                         * @property {boolean|null} [v1beta1Crd] ResourceOptions v1beta1Crd
+                         * @property {string|null} [k8sVersion] ResourceOptions k8sVersion
+                         */
+    
+                        /**
+                         * Constructs a new ResourceOptions.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a ResourceOptions.
+                         * @implements IResourceOptions
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IResourceOptions=} [properties] Properties to set
+                         */
+                        function ResourceOptions(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceOptions connectVersion.
+                         * @member {string} connectVersion
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @instance
+                         */
+                        ResourceOptions.prototype.connectVersion = "";
+    
+                        /**
+                         * ResourceOptions v1beta1Crd.
+                         * @member {boolean} v1beta1Crd
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @instance
+                         */
+                        ResourceOptions.prototype.v1beta1Crd = false;
+    
+                        /**
+                         * ResourceOptions k8sVersion.
+                         * @member {string} k8sVersion
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @instance
+                         */
+                        ResourceOptions.prototype.k8sVersion = "";
+    
+                        /**
+                         * Creates a new ResourceOptions instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IResourceOptions=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.ResourceOptions} ResourceOptions instance
+                         */
+                        ResourceOptions.create = function create(properties) {
+                            return new ResourceOptions(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceOptions message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ResourceOptions.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IResourceOptions} message ResourceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceOptions.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.connectVersion != null && Object.hasOwnProperty.call(message, "connectVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.connectVersion);
+                            if (message.v1beta1Crd != null && Object.hasOwnProperty.call(message, "v1beta1Crd"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.v1beta1Crd);
+                            if (message.k8sVersion != null && Object.hasOwnProperty.call(message, "k8sVersion"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.k8sVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceOptions message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ResourceOptions.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IResourceOptions} message ResourceOptions message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceOptions message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.ResourceOptions} ResourceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceOptions.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.ResourceOptions();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.connectVersion = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.v1beta1Crd = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.k8sVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceOptions message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.ResourceOptions} ResourceOptions
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceOptions.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceOptions message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceOptions.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.connectVersion != null && message.hasOwnProperty("connectVersion"))
+                                if (!$util.isString(message.connectVersion))
+                                    return "connectVersion: string expected";
+                            if (message.v1beta1Crd != null && message.hasOwnProperty("v1beta1Crd"))
+                                if (typeof message.v1beta1Crd !== "boolean")
+                                    return "v1beta1Crd: boolean expected";
+                            if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
+                                if (!$util.isString(message.k8sVersion))
+                                    return "k8sVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceOptions message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.ResourceOptions} ResourceOptions
+                         */
+                        ResourceOptions.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.ResourceOptions)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.ResourceOptions();
+                            if (object.connectVersion != null)
+                                message.connectVersion = String(object.connectVersion);
+                            if (object.v1beta1Crd != null)
+                                message.v1beta1Crd = Boolean(object.v1beta1Crd);
+                            if (object.k8sVersion != null)
+                                message.k8sVersion = String(object.k8sVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceOptions message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ResourceOptions} message ResourceOptions
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceOptions.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.connectVersion = "";
+                                object.v1beta1Crd = false;
+                                object.k8sVersion = "";
+                            }
+                            if (message.connectVersion != null && message.hasOwnProperty("connectVersion"))
+                                object.connectVersion = message.connectVersion;
+                            if (message.v1beta1Crd != null && message.hasOwnProperty("v1beta1Crd"))
+                                object.v1beta1Crd = message.v1beta1Crd;
+                            if (message.k8sVersion != null && message.hasOwnProperty("k8sVersion"))
+                                object.k8sVersion = message.k8sVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceOptions to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceOptions.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceOptions
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceOptions
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.ResourceOptions";
+                        };
+    
+                        return ResourceOptions;
+                    })();
+    
+                    v1alpha2.GkeCluster = (function() {
+    
+                        /**
+                         * Properties of a GkeCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IGkeCluster
+                         * @property {string|null} [resourceLink] GkeCluster resourceLink
+                         * @property {boolean|null} [clusterMissing] GkeCluster clusterMissing
+                         */
+    
+                        /**
+                         * Constructs a new GkeCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a GkeCluster.
+                         * @implements IGkeCluster
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IGkeCluster=} [properties] Properties to set
+                         */
+                        function GkeCluster(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GkeCluster resourceLink.
+                         * @member {string} resourceLink
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @instance
+                         */
+                        GkeCluster.prototype.resourceLink = "";
+    
+                        /**
+                         * GkeCluster clusterMissing.
+                         * @member {boolean} clusterMissing
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @instance
+                         */
+                        GkeCluster.prototype.clusterMissing = false;
+    
+                        /**
+                         * Creates a new GkeCluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGkeCluster=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.GkeCluster} GkeCluster instance
+                         */
+                        GkeCluster.create = function create(properties) {
+                            return new GkeCluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GkeCluster message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GkeCluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGkeCluster} message GkeCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeCluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceLink != null && Object.hasOwnProperty.call(message, "resourceLink"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceLink);
+                            if (message.clusterMissing != null && Object.hasOwnProperty.call(message, "clusterMissing"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clusterMissing);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GkeCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GkeCluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGkeCluster} message GkeCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GkeCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GkeCluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.GkeCluster} GkeCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeCluster.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.GkeCluster();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.resourceLink = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.clusterMissing = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GkeCluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.GkeCluster} GkeCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GkeCluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GkeCluster message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GkeCluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                if (!$util.isString(message.resourceLink))
+                                    return "resourceLink: string expected";
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                if (typeof message.clusterMissing !== "boolean")
+                                    return "clusterMissing: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GkeCluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.GkeCluster} GkeCluster
+                         */
+                        GkeCluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.GkeCluster)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.GkeCluster();
+                            if (object.resourceLink != null)
+                                message.resourceLink = String(object.resourceLink);
+                            if (object.clusterMissing != null)
+                                message.clusterMissing = Boolean(object.clusterMissing);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GkeCluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.GkeCluster} message GkeCluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GkeCluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.resourceLink = "";
+                                object.clusterMissing = false;
+                            }
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                object.resourceLink = message.resourceLink;
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                object.clusterMissing = message.clusterMissing;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GkeCluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GkeCluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GkeCluster
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.GkeCluster
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GkeCluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.GkeCluster";
+                        };
+    
+                        return GkeCluster;
+                    })();
+    
+                    v1alpha2.OnPremCluster = (function() {
+    
+                        /**
+                         * Properties of an OnPremCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IOnPremCluster
+                         * @property {string|null} [resourceLink] OnPremCluster resourceLink
+                         * @property {boolean|null} [clusterMissing] OnPremCluster clusterMissing
+                         * @property {boolean|null} [adminCluster] OnPremCluster adminCluster
+                         */
+    
+                        /**
+                         * Constructs a new OnPremCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents an OnPremCluster.
+                         * @implements IOnPremCluster
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IOnPremCluster=} [properties] Properties to set
+                         */
+                        function OnPremCluster(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OnPremCluster resourceLink.
+                         * @member {string} resourceLink
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @instance
+                         */
+                        OnPremCluster.prototype.resourceLink = "";
+    
+                        /**
+                         * OnPremCluster clusterMissing.
+                         * @member {boolean} clusterMissing
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @instance
+                         */
+                        OnPremCluster.prototype.clusterMissing = false;
+    
+                        /**
+                         * OnPremCluster adminCluster.
+                         * @member {boolean} adminCluster
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @instance
+                         */
+                        OnPremCluster.prototype.adminCluster = false;
+    
+                        /**
+                         * Creates a new OnPremCluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IOnPremCluster=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.OnPremCluster} OnPremCluster instance
+                         */
+                        OnPremCluster.create = function create(properties) {
+                            return new OnPremCluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OnPremCluster message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OnPremCluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IOnPremCluster} message OnPremCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnPremCluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceLink != null && Object.hasOwnProperty.call(message, "resourceLink"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceLink);
+                            if (message.clusterMissing != null && Object.hasOwnProperty.call(message, "clusterMissing"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clusterMissing);
+                            if (message.adminCluster != null && Object.hasOwnProperty.call(message, "adminCluster"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.adminCluster);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OnPremCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OnPremCluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IOnPremCluster} message OnPremCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OnPremCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OnPremCluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.OnPremCluster} OnPremCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnPremCluster.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.OnPremCluster();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.resourceLink = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.clusterMissing = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.adminCluster = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OnPremCluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.OnPremCluster} OnPremCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OnPremCluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OnPremCluster message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OnPremCluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                if (!$util.isString(message.resourceLink))
+                                    return "resourceLink: string expected";
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                if (typeof message.clusterMissing !== "boolean")
+                                    return "clusterMissing: boolean expected";
+                            if (message.adminCluster != null && message.hasOwnProperty("adminCluster"))
+                                if (typeof message.adminCluster !== "boolean")
+                                    return "adminCluster: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OnPremCluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.OnPremCluster} OnPremCluster
+                         */
+                        OnPremCluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.OnPremCluster)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.OnPremCluster();
+                            if (object.resourceLink != null)
+                                message.resourceLink = String(object.resourceLink);
+                            if (object.clusterMissing != null)
+                                message.clusterMissing = Boolean(object.clusterMissing);
+                            if (object.adminCluster != null)
+                                message.adminCluster = Boolean(object.adminCluster);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OnPremCluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.OnPremCluster} message OnPremCluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OnPremCluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.resourceLink = "";
+                                object.clusterMissing = false;
+                                object.adminCluster = false;
+                            }
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                object.resourceLink = message.resourceLink;
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                object.clusterMissing = message.clusterMissing;
+                            if (message.adminCluster != null && message.hasOwnProperty("adminCluster"))
+                                object.adminCluster = message.adminCluster;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OnPremCluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OnPremCluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OnPremCluster
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.OnPremCluster
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OnPremCluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.OnPremCluster";
+                        };
+    
+                        return OnPremCluster;
+                    })();
+    
+                    v1alpha2.MultiCloudCluster = (function() {
+    
+                        /**
+                         * Properties of a MultiCloudCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IMultiCloudCluster
+                         * @property {string|null} [resourceLink] MultiCloudCluster resourceLink
+                         * @property {boolean|null} [clusterMissing] MultiCloudCluster clusterMissing
+                         */
+    
+                        /**
+                         * Constructs a new MultiCloudCluster.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a MultiCloudCluster.
+                         * @implements IMultiCloudCluster
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IMultiCloudCluster=} [properties] Properties to set
+                         */
+                        function MultiCloudCluster(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MultiCloudCluster resourceLink.
+                         * @member {string} resourceLink
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @instance
+                         */
+                        MultiCloudCluster.prototype.resourceLink = "";
+    
+                        /**
+                         * MultiCloudCluster clusterMissing.
+                         * @member {boolean} clusterMissing
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @instance
+                         */
+                        MultiCloudCluster.prototype.clusterMissing = false;
+    
+                        /**
+                         * Creates a new MultiCloudCluster instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMultiCloudCluster=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.MultiCloudCluster} MultiCloudCluster instance
+                         */
+                        MultiCloudCluster.create = function create(properties) {
+                            return new MultiCloudCluster(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MultiCloudCluster message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MultiCloudCluster.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMultiCloudCluster} message MultiCloudCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiCloudCluster.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resourceLink != null && Object.hasOwnProperty.call(message, "resourceLink"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.resourceLink);
+                            if (message.clusterMissing != null && Object.hasOwnProperty.call(message, "clusterMissing"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clusterMissing);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MultiCloudCluster message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MultiCloudCluster.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMultiCloudCluster} message MultiCloudCluster message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MultiCloudCluster.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MultiCloudCluster message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.MultiCloudCluster} MultiCloudCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiCloudCluster.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.resourceLink = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.clusterMissing = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MultiCloudCluster message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.MultiCloudCluster} MultiCloudCluster
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MultiCloudCluster.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MultiCloudCluster message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MultiCloudCluster.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                if (!$util.isString(message.resourceLink))
+                                    return "resourceLink: string expected";
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                if (typeof message.clusterMissing !== "boolean")
+                                    return "clusterMissing: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MultiCloudCluster message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.MultiCloudCluster} MultiCloudCluster
+                         */
+                        MultiCloudCluster.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.MultiCloudCluster();
+                            if (object.resourceLink != null)
+                                message.resourceLink = String(object.resourceLink);
+                            if (object.clusterMissing != null)
+                                message.clusterMissing = Boolean(object.clusterMissing);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MultiCloudCluster message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.MultiCloudCluster} message MultiCloudCluster
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MultiCloudCluster.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.resourceLink = "";
+                                object.clusterMissing = false;
+                            }
+                            if (message.resourceLink != null && message.hasOwnProperty("resourceLink"))
+                                object.resourceLink = message.resourceLink;
+                            if (message.clusterMissing != null && message.hasOwnProperty("clusterMissing"))
+                                object.clusterMissing = message.clusterMissing;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MultiCloudCluster to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MultiCloudCluster.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MultiCloudCluster
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.MultiCloudCluster
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MultiCloudCluster.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.MultiCloudCluster";
+                        };
+    
+                        return MultiCloudCluster;
+                    })();
+    
+                    v1alpha2.KubernetesMetadata = (function() {
+    
+                        /**
+                         * Properties of a KubernetesMetadata.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IKubernetesMetadata
+                         * @property {string|null} [kubernetesApiServerVersion] KubernetesMetadata kubernetesApiServerVersion
+                         * @property {string|null} [nodeProviderId] KubernetesMetadata nodeProviderId
+                         * @property {number|null} [nodeCount] KubernetesMetadata nodeCount
+                         * @property {number|null} [vcpuCount] KubernetesMetadata vcpuCount
+                         * @property {number|null} [memoryMb] KubernetesMetadata memoryMb
+                         * @property {google.protobuf.ITimestamp|null} [updateTime] KubernetesMetadata updateTime
+                         */
+    
+                        /**
+                         * Constructs a new KubernetesMetadata.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a KubernetesMetadata.
+                         * @implements IKubernetesMetadata
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IKubernetesMetadata=} [properties] Properties to set
+                         */
+                        function KubernetesMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * KubernetesMetadata kubernetesApiServerVersion.
+                         * @member {string} kubernetesApiServerVersion
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @instance
+                         */
+                        KubernetesMetadata.prototype.kubernetesApiServerVersion = "";
+    
+                        /**
+                         * KubernetesMetadata nodeProviderId.
+                         * @member {string} nodeProviderId
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @instance
+                         */
+                        KubernetesMetadata.prototype.nodeProviderId = "";
+    
+                        /**
+                         * KubernetesMetadata nodeCount.
+                         * @member {number} nodeCount
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @instance
+                         */
+                        KubernetesMetadata.prototype.nodeCount = 0;
+    
+                        /**
+                         * KubernetesMetadata vcpuCount.
+                         * @member {number} vcpuCount
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @instance
+                         */
+                        KubernetesMetadata.prototype.vcpuCount = 0;
+    
+                        /**
+                         * KubernetesMetadata memoryMb.
+                         * @member {number} memoryMb
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @instance
+                         */
+                        KubernetesMetadata.prototype.memoryMb = 0;
+    
+                        /**
+                         * KubernetesMetadata updateTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} updateTime
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @instance
+                         */
+                        KubernetesMetadata.prototype.updateTime = null;
+    
+                        /**
+                         * Creates a new KubernetesMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IKubernetesMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.KubernetesMetadata} KubernetesMetadata instance
+                         */
+                        KubernetesMetadata.create = function create(properties) {
+                            return new KubernetesMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesMetadata message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.KubernetesMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IKubernetesMetadata} message KubernetesMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kubernetesApiServerVersion != null && Object.hasOwnProperty.call(message, "kubernetesApiServerVersion"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kubernetesApiServerVersion);
+                            if (message.nodeProviderId != null && Object.hasOwnProperty.call(message, "nodeProviderId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nodeProviderId);
+                            if (message.nodeCount != null && Object.hasOwnProperty.call(message, "nodeCount"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).int32(message.nodeCount);
+                            if (message.vcpuCount != null && Object.hasOwnProperty.call(message, "vcpuCount"))
+                                writer.uint32(/* id 4, wireType 0 =*/32).int32(message.vcpuCount);
+                            if (message.memoryMb != null && Object.hasOwnProperty.call(message, "memoryMb"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).int32(message.memoryMb);
+                            if (message.updateTime != null && Object.hasOwnProperty.call(message, "updateTime"))
+                                $root.google.protobuf.Timestamp.encode(message.updateTime, writer.uint32(/* id 100, wireType 2 =*/802).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified KubernetesMetadata message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.KubernetesMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IKubernetesMetadata} message KubernetesMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        KubernetesMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a KubernetesMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.KubernetesMetadata} KubernetesMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.kubernetesApiServerVersion = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nodeProviderId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.nodeCount = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.vcpuCount = reader.int32();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.memoryMb = reader.int32();
+                                        break;
+                                    }
+                                case 100: {
+                                        message.updateTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a KubernetesMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.KubernetesMetadata} KubernetesMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        KubernetesMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a KubernetesMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        KubernetesMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kubernetesApiServerVersion != null && message.hasOwnProperty("kubernetesApiServerVersion"))
+                                if (!$util.isString(message.kubernetesApiServerVersion))
+                                    return "kubernetesApiServerVersion: string expected";
+                            if (message.nodeProviderId != null && message.hasOwnProperty("nodeProviderId"))
+                                if (!$util.isString(message.nodeProviderId))
+                                    return "nodeProviderId: string expected";
+                            if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
+                                if (!$util.isInteger(message.nodeCount))
+                                    return "nodeCount: integer expected";
+                            if (message.vcpuCount != null && message.hasOwnProperty("vcpuCount"))
+                                if (!$util.isInteger(message.vcpuCount))
+                                    return "vcpuCount: integer expected";
+                            if (message.memoryMb != null && message.hasOwnProperty("memoryMb"))
+                                if (!$util.isInteger(message.memoryMb))
+                                    return "memoryMb: integer expected";
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.updateTime);
+                                if (error)
+                                    return "updateTime." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a KubernetesMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.KubernetesMetadata} KubernetesMetadata
+                         */
+                        KubernetesMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.KubernetesMetadata();
+                            if (object.kubernetesApiServerVersion != null)
+                                message.kubernetesApiServerVersion = String(object.kubernetesApiServerVersion);
+                            if (object.nodeProviderId != null)
+                                message.nodeProviderId = String(object.nodeProviderId);
+                            if (object.nodeCount != null)
+                                message.nodeCount = object.nodeCount | 0;
+                            if (object.vcpuCount != null)
+                                message.vcpuCount = object.vcpuCount | 0;
+                            if (object.memoryMb != null)
+                                message.memoryMb = object.memoryMb | 0;
+                            if (object.updateTime != null) {
+                                if (typeof object.updateTime !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.KubernetesMetadata.updateTime: object expected");
+                                message.updateTime = $root.google.protobuf.Timestamp.fromObject(object.updateTime);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a KubernetesMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.KubernetesMetadata} message KubernetesMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        KubernetesMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.kubernetesApiServerVersion = "";
+                                object.nodeProviderId = "";
+                                object.nodeCount = 0;
+                                object.vcpuCount = 0;
+                                object.memoryMb = 0;
+                                object.updateTime = null;
+                            }
+                            if (message.kubernetesApiServerVersion != null && message.hasOwnProperty("kubernetesApiServerVersion"))
+                                object.kubernetesApiServerVersion = message.kubernetesApiServerVersion;
+                            if (message.nodeProviderId != null && message.hasOwnProperty("nodeProviderId"))
+                                object.nodeProviderId = message.nodeProviderId;
+                            if (message.nodeCount != null && message.hasOwnProperty("nodeCount"))
+                                object.nodeCount = message.nodeCount;
+                            if (message.vcpuCount != null && message.hasOwnProperty("vcpuCount"))
+                                object.vcpuCount = message.vcpuCount;
+                            if (message.memoryMb != null && message.hasOwnProperty("memoryMb"))
+                                object.memoryMb = message.memoryMb;
+                            if (message.updateTime != null && message.hasOwnProperty("updateTime"))
+                                object.updateTime = $root.google.protobuf.Timestamp.toObject(message.updateTime, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this KubernetesMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        KubernetesMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for KubernetesMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.KubernetesMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        KubernetesMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.KubernetesMetadata";
+                        };
+    
+                        return KubernetesMetadata;
+                    })();
+    
+                    v1alpha2.Authority = (function() {
+    
+                        /**
+                         * Properties of an Authority.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IAuthority
+                         * @property {string|null} [issuer] Authority issuer
+                         * @property {Uint8Array|null} [oidcJwks] Authority oidcJwks
+                         * @property {string|null} [identityProvider] Authority identityProvider
+                         * @property {string|null} [workloadIdentityPool] Authority workloadIdentityPool
+                         */
+    
+                        /**
+                         * Constructs a new Authority.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents an Authority.
+                         * @implements IAuthority
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IAuthority=} [properties] Properties to set
+                         */
+                        function Authority(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * Authority issuer.
+                         * @member {string} issuer
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @instance
+                         */
+                        Authority.prototype.issuer = "";
+    
+                        /**
+                         * Authority oidcJwks.
+                         * @member {Uint8Array} oidcJwks
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @instance
+                         */
+                        Authority.prototype.oidcJwks = $util.newBuffer([]);
+    
+                        /**
+                         * Authority identityProvider.
+                         * @member {string} identityProvider
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @instance
+                         */
+                        Authority.prototype.identityProvider = "";
+    
+                        /**
+                         * Authority workloadIdentityPool.
+                         * @member {string} workloadIdentityPool
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @instance
+                         */
+                        Authority.prototype.workloadIdentityPool = "";
+    
+                        /**
+                         * Creates a new Authority instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IAuthority=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.Authority} Authority instance
+                         */
+                        Authority.create = function create(properties) {
+                            return new Authority(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified Authority message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.Authority.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IAuthority} message Authority message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Authority.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.issuer != null && Object.hasOwnProperty.call(message, "issuer"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.issuer);
+                            if (message.identityProvider != null && Object.hasOwnProperty.call(message, "identityProvider"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.identityProvider);
+                            if (message.workloadIdentityPool != null && Object.hasOwnProperty.call(message, "workloadIdentityPool"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.workloadIdentityPool);
+                            if (message.oidcJwks != null && Object.hasOwnProperty.call(message, "oidcJwks"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).bytes(message.oidcJwks);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified Authority message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.Authority.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IAuthority} message Authority message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        Authority.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an Authority message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.Authority} Authority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Authority.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.Authority();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.issuer = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.oidcJwks = reader.bytes();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.identityProvider = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.workloadIdentityPool = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an Authority message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.Authority} Authority
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        Authority.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an Authority message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        Authority.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.issuer != null && message.hasOwnProperty("issuer"))
+                                if (!$util.isString(message.issuer))
+                                    return "issuer: string expected";
+                            if (message.oidcJwks != null && message.hasOwnProperty("oidcJwks"))
+                                if (!(message.oidcJwks && typeof message.oidcJwks.length === "number" || $util.isString(message.oidcJwks)))
+                                    return "oidcJwks: buffer expected";
+                            if (message.identityProvider != null && message.hasOwnProperty("identityProvider"))
+                                if (!$util.isString(message.identityProvider))
+                                    return "identityProvider: string expected";
+                            if (message.workloadIdentityPool != null && message.hasOwnProperty("workloadIdentityPool"))
+                                if (!$util.isString(message.workloadIdentityPool))
+                                    return "workloadIdentityPool: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an Authority message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.Authority} Authority
+                         */
+                        Authority.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.Authority)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.Authority();
+                            if (object.issuer != null)
+                                message.issuer = String(object.issuer);
+                            if (object.oidcJwks != null)
+                                if (typeof object.oidcJwks === "string")
+                                    $util.base64.decode(object.oidcJwks, message.oidcJwks = $util.newBuffer($util.base64.length(object.oidcJwks)), 0);
+                                else if (object.oidcJwks.length >= 0)
+                                    message.oidcJwks = object.oidcJwks;
+                            if (object.identityProvider != null)
+                                message.identityProvider = String(object.identityProvider);
+                            if (object.workloadIdentityPool != null)
+                                message.workloadIdentityPool = String(object.workloadIdentityPool);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an Authority message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.Authority} message Authority
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        Authority.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.issuer = "";
+                                object.identityProvider = "";
+                                object.workloadIdentityPool = "";
+                                if (options.bytes === String)
+                                    object.oidcJwks = "";
+                                else {
+                                    object.oidcJwks = [];
+                                    if (options.bytes !== Array)
+                                        object.oidcJwks = $util.newBuffer(object.oidcJwks);
+                                }
+                            }
+                            if (message.issuer != null && message.hasOwnProperty("issuer"))
+                                object.issuer = message.issuer;
+                            if (message.identityProvider != null && message.hasOwnProperty("identityProvider"))
+                                object.identityProvider = message.identityProvider;
+                            if (message.workloadIdentityPool != null && message.hasOwnProperty("workloadIdentityPool"))
+                                object.workloadIdentityPool = message.workloadIdentityPool;
+                            if (message.oidcJwks != null && message.hasOwnProperty("oidcJwks"))
+                                object.oidcJwks = options.bytes === String ? $util.base64.encode(message.oidcJwks, 0, message.oidcJwks.length) : options.bytes === Array ? Array.prototype.slice.call(message.oidcJwks) : message.oidcJwks;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this Authority to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        Authority.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for Authority
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.Authority
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        Authority.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.Authority";
+                        };
+    
+                        return Authority;
+                    })();
+    
+                    v1alpha2.MembershipState = (function() {
+    
+                        /**
+                         * Properties of a MembershipState.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IMembershipState
+                         * @property {google.cloud.gkehub.v1alpha2.MembershipState.Code|null} [code] MembershipState code
+                         */
+    
+                        /**
+                         * Constructs a new MembershipState.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a MembershipState.
+                         * @implements IMembershipState
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IMembershipState=} [properties] Properties to set
+                         */
+                        function MembershipState(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * MembershipState code.
+                         * @member {google.cloud.gkehub.v1alpha2.MembershipState.Code} code
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @instance
+                         */
+                        MembershipState.prototype.code = 0;
+    
+                        /**
+                         * Creates a new MembershipState instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMembershipState=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.MembershipState} MembershipState instance
+                         */
+                        MembershipState.create = function create(properties) {
+                            return new MembershipState(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified MembershipState message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MembershipState.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMembershipState} message MembershipState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MembershipState.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.code != null && Object.hasOwnProperty.call(message, "code"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.code);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified MembershipState message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.MembershipState.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IMembershipState} message MembershipState message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        MembershipState.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a MembershipState message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.MembershipState} MembershipState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MembershipState.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.MembershipState();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.code = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a MembershipState message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.MembershipState} MembershipState
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        MembershipState.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a MembershipState message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        MembershipState.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                switch (message.code) {
+                                default:
+                                    return "code: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 5:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a MembershipState message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.MembershipState} MembershipState
+                         */
+                        MembershipState.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.MembershipState)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.MembershipState();
+                            switch (object.code) {
+                            default:
+                                if (typeof object.code === "number") {
+                                    message.code = object.code;
+                                    break;
+                                }
+                                break;
+                            case "CODE_UNSPECIFIED":
+                            case 0:
+                                message.code = 0;
+                                break;
+                            case "CREATING":
+                            case 1:
+                                message.code = 1;
+                                break;
+                            case "READY":
+                            case 2:
+                                message.code = 2;
+                                break;
+                            case "DELETING":
+                            case 3:
+                                message.code = 3;
+                                break;
+                            case "UPDATING":
+                            case 4:
+                                message.code = 4;
+                                break;
+                            case "SERVICE_UPDATING":
+                            case 5:
+                                message.code = 5;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a MembershipState message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.MembershipState} message MembershipState
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        MembershipState.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.code = options.enums === String ? "CODE_UNSPECIFIED" : 0;
+                            if (message.code != null && message.hasOwnProperty("code"))
+                                object.code = options.enums === String ? $root.google.cloud.gkehub.v1alpha2.MembershipState.Code[message.code] === undefined ? message.code : $root.google.cloud.gkehub.v1alpha2.MembershipState.Code[message.code] : message.code;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this MembershipState to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        MembershipState.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for MembershipState
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.MembershipState
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        MembershipState.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.MembershipState";
+                        };
+    
+                        /**
+                         * Code enum.
+                         * @name google.cloud.gkehub.v1alpha2.MembershipState.Code
+                         * @enum {number}
+                         * @property {number} CODE_UNSPECIFIED=0 CODE_UNSPECIFIED value
+                         * @property {number} CREATING=1 CREATING value
+                         * @property {number} READY=2 READY value
+                         * @property {number} DELETING=3 DELETING value
+                         * @property {number} UPDATING=4 UPDATING value
+                         * @property {number} SERVICE_UPDATING=5 SERVICE_UPDATING value
+                         */
+                        MembershipState.Code = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CODE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "CREATING"] = 1;
+                            values[valuesById[2] = "READY"] = 2;
+                            values[valuesById[3] = "DELETING"] = 3;
+                            values[valuesById[4] = "UPDATING"] = 4;
+                            values[valuesById[5] = "SERVICE_UPDATING"] = 5;
+                            return values;
+                        })();
+    
+                        return MembershipState;
+                    })();
+    
+                    v1alpha2.ListMembershipsRequest = (function() {
+    
+                        /**
+                         * Properties of a ListMembershipsRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IListMembershipsRequest
+                         * @property {string|null} [parent] ListMembershipsRequest parent
+                         * @property {number|null} [pageSize] ListMembershipsRequest pageSize
+                         * @property {string|null} [pageToken] ListMembershipsRequest pageToken
+                         * @property {string|null} [filter] ListMembershipsRequest filter
+                         * @property {string|null} [orderBy] ListMembershipsRequest orderBy
+                         */
+    
+                        /**
+                         * Constructs a new ListMembershipsRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a ListMembershipsRequest.
+                         * @implements IListMembershipsRequest
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsRequest=} [properties] Properties to set
+                         */
+                        function ListMembershipsRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMembershipsRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @instance
+                         */
+                        ListMembershipsRequest.prototype.parent = "";
+    
+                        /**
+                         * ListMembershipsRequest pageSize.
+                         * @member {number} pageSize
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @instance
+                         */
+                        ListMembershipsRequest.prototype.pageSize = 0;
+    
+                        /**
+                         * ListMembershipsRequest pageToken.
+                         * @member {string} pageToken
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @instance
+                         */
+                        ListMembershipsRequest.prototype.pageToken = "";
+    
+                        /**
+                         * ListMembershipsRequest filter.
+                         * @member {string} filter
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @instance
+                         */
+                        ListMembershipsRequest.prototype.filter = "";
+    
+                        /**
+                         * ListMembershipsRequest orderBy.
+                         * @member {string} orderBy
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @instance
+                         */
+                        ListMembershipsRequest.prototype.orderBy = "";
+    
+                        /**
+                         * Creates a new ListMembershipsRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.ListMembershipsRequest} ListMembershipsRequest instance
+                         */
+                        ListMembershipsRequest.create = function create(properties) {
+                            return new ListMembershipsRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMembershipsRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ListMembershipsRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsRequest} message ListMembershipsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMembershipsRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                            if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                            if (message.filter != null && Object.hasOwnProperty.call(message, "filter"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.filter);
+                            if (message.orderBy != null && Object.hasOwnProperty.call(message, "orderBy"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.orderBy);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMembershipsRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ListMembershipsRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsRequest} message ListMembershipsRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMembershipsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMembershipsRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.ListMembershipsRequest} ListMembershipsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMembershipsRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.ListMembershipsRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.pageSize = reader.int32();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.pageToken = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.filter = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.orderBy = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMembershipsRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.ListMembershipsRequest} ListMembershipsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMembershipsRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMembershipsRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMembershipsRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                if (!$util.isInteger(message.pageSize))
+                                    return "pageSize: integer expected";
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                if (!$util.isString(message.pageToken))
+                                    return "pageToken: string expected";
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                if (!$util.isString(message.filter))
+                                    return "filter: string expected";
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                if (!$util.isString(message.orderBy))
+                                    return "orderBy: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMembershipsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.ListMembershipsRequest} ListMembershipsRequest
+                         */
+                        ListMembershipsRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.ListMembershipsRequest)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.ListMembershipsRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.pageSize != null)
+                                message.pageSize = object.pageSize | 0;
+                            if (object.pageToken != null)
+                                message.pageToken = String(object.pageToken);
+                            if (object.filter != null)
+                                message.filter = String(object.filter);
+                            if (object.orderBy != null)
+                                message.orderBy = String(object.orderBy);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMembershipsRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ListMembershipsRequest} message ListMembershipsRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMembershipsRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.pageSize = 0;
+                                object.pageToken = "";
+                                object.filter = "";
+                                object.orderBy = "";
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                object.pageSize = message.pageSize;
+                            if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                object.pageToken = message.pageToken;
+                            if (message.filter != null && message.hasOwnProperty("filter"))
+                                object.filter = message.filter;
+                            if (message.orderBy != null && message.hasOwnProperty("orderBy"))
+                                object.orderBy = message.orderBy;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMembershipsRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMembershipsRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMembershipsRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMembershipsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.ListMembershipsRequest";
+                        };
+    
+                        return ListMembershipsRequest;
+                    })();
+    
+                    v1alpha2.ListMembershipsResponse = (function() {
+    
+                        /**
+                         * Properties of a ListMembershipsResponse.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IListMembershipsResponse
+                         * @property {Array.<google.cloud.gkehub.v1alpha2.IMembership>|null} [resources] ListMembershipsResponse resources
+                         * @property {string|null} [nextPageToken] ListMembershipsResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListMembershipsResponse unreachable
+                         */
+    
+                        /**
+                         * Constructs a new ListMembershipsResponse.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a ListMembershipsResponse.
+                         * @implements IListMembershipsResponse
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsResponse=} [properties] Properties to set
+                         */
+                        function ListMembershipsResponse(properties) {
+                            this.resources = [];
+                            this.unreachable = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ListMembershipsResponse resources.
+                         * @member {Array.<google.cloud.gkehub.v1alpha2.IMembership>} resources
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @instance
+                         */
+                        ListMembershipsResponse.prototype.resources = $util.emptyArray;
+    
+                        /**
+                         * ListMembershipsResponse nextPageToken.
+                         * @member {string} nextPageToken
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @instance
+                         */
+                        ListMembershipsResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListMembershipsResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @instance
+                         */
+                        ListMembershipsResponse.prototype.unreachable = $util.emptyArray;
+    
+                        /**
+                         * Creates a new ListMembershipsResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsResponse=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.ListMembershipsResponse} ListMembershipsResponse instance
+                         */
+                        ListMembershipsResponse.create = function create(properties) {
+                            return new ListMembershipsResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ListMembershipsResponse message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ListMembershipsResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsResponse} message ListMembershipsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMembershipsResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.resources != null && message.resources.length)
+                                for (var i = 0; i < message.resources.length; ++i)
+                                    $root.google.cloud.gkehub.v1alpha2.Membership.encode(message.resources[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ListMembershipsResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ListMembershipsResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IListMembershipsResponse} message ListMembershipsResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ListMembershipsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ListMembershipsResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.ListMembershipsResponse} ListMembershipsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMembershipsResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.ListMembershipsResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.resources && message.resources.length))
+                                            message.resources = [];
+                                        message.resources.push($root.google.cloud.gkehub.v1alpha2.Membership.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 2: {
+                                        message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ListMembershipsResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.ListMembershipsResponse} ListMembershipsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ListMembershipsResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ListMembershipsResponse message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ListMembershipsResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.resources != null && message.hasOwnProperty("resources")) {
+                                if (!Array.isArray(message.resources))
+                                    return "resources: array expected";
+                                for (var i = 0; i < message.resources.length; ++i) {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.Membership.verify(message.resources[i]);
+                                    if (error)
+                                        return "resources." + error;
+                                }
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                if (!$util.isString(message.nextPageToken))
+                                    return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ListMembershipsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.ListMembershipsResponse} ListMembershipsResponse
+                         */
+                        ListMembershipsResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.ListMembershipsResponse)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.ListMembershipsResponse();
+                            if (object.resources) {
+                                if (!Array.isArray(object.resources))
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.ListMembershipsResponse.resources: array expected");
+                                message.resources = [];
+                                for (var i = 0; i < object.resources.length; ++i) {
+                                    if (typeof object.resources[i] !== "object")
+                                        throw TypeError(".google.cloud.gkehub.v1alpha2.ListMembershipsResponse.resources: object expected");
+                                    message.resources[i] = $root.google.cloud.gkehub.v1alpha2.Membership.fromObject(object.resources[i]);
+                                }
+                            }
+                            if (object.nextPageToken != null)
+                                message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.ListMembershipsResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ListMembershipsResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ListMembershipsResponse} message ListMembershipsResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ListMembershipsResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults) {
+                                object.resources = [];
+                                object.unreachable = [];
+                            }
+                            if (options.defaults)
+                                object.nextPageToken = "";
+                            if (message.resources && message.resources.length) {
+                                object.resources = [];
+                                for (var j = 0; j < message.resources.length; ++j)
+                                    object.resources[j] = $root.google.cloud.gkehub.v1alpha2.Membership.toObject(message.resources[j], options);
+                            }
+                            if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ListMembershipsResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ListMembershipsResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ListMembershipsResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.ListMembershipsResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ListMembershipsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.ListMembershipsResponse";
+                        };
+    
+                        return ListMembershipsResponse;
+                    })();
+    
+                    v1alpha2.GetMembershipRequest = (function() {
+    
+                        /**
+                         * Properties of a GetMembershipRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IGetMembershipRequest
+                         * @property {string|null} [name] GetMembershipRequest name
+                         */
+    
+                        /**
+                         * Constructs a new GetMembershipRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a GetMembershipRequest.
+                         * @implements IGetMembershipRequest
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IGetMembershipRequest=} [properties] Properties to set
+                         */
+                        function GetMembershipRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GetMembershipRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @instance
+                         */
+                        GetMembershipRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new GetMembershipRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGetMembershipRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.GetMembershipRequest} GetMembershipRequest instance
+                         */
+                        GetMembershipRequest.create = function create(properties) {
+                            return new GetMembershipRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GetMembershipRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GetMembershipRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGetMembershipRequest} message GetMembershipRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMembershipRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GetMembershipRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GetMembershipRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGetMembershipRequest} message GetMembershipRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GetMembershipRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GetMembershipRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.GetMembershipRequest} GetMembershipRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMembershipRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.GetMembershipRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GetMembershipRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.GetMembershipRequest} GetMembershipRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GetMembershipRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GetMembershipRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GetMembershipRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GetMembershipRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.GetMembershipRequest} GetMembershipRequest
+                         */
+                        GetMembershipRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.GetMembershipRequest)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.GetMembershipRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GetMembershipRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.GetMembershipRequest} message GetMembershipRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GetMembershipRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GetMembershipRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GetMembershipRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GetMembershipRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.GetMembershipRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GetMembershipRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.GetMembershipRequest";
+                        };
+    
+                        return GetMembershipRequest;
+                    })();
+    
+                    v1alpha2.CreateMembershipRequest = (function() {
+    
+                        /**
+                         * Properties of a CreateMembershipRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface ICreateMembershipRequest
+                         * @property {string|null} [parent] CreateMembershipRequest parent
+                         * @property {string|null} [membershipId] CreateMembershipRequest membershipId
+                         * @property {google.cloud.gkehub.v1alpha2.IMembership|null} [resource] CreateMembershipRequest resource
+                         */
+    
+                        /**
+                         * Constructs a new CreateMembershipRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a CreateMembershipRequest.
+                         * @implements ICreateMembershipRequest
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.ICreateMembershipRequest=} [properties] Properties to set
+                         */
+                        function CreateMembershipRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * CreateMembershipRequest parent.
+                         * @member {string} parent
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @instance
+                         */
+                        CreateMembershipRequest.prototype.parent = "";
+    
+                        /**
+                         * CreateMembershipRequest membershipId.
+                         * @member {string} membershipId
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @instance
+                         */
+                        CreateMembershipRequest.prototype.membershipId = "";
+    
+                        /**
+                         * CreateMembershipRequest resource.
+                         * @member {google.cloud.gkehub.v1alpha2.IMembership|null|undefined} resource
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @instance
+                         */
+                        CreateMembershipRequest.prototype.resource = null;
+    
+                        /**
+                         * Creates a new CreateMembershipRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ICreateMembershipRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.CreateMembershipRequest} CreateMembershipRequest instance
+                         */
+                        CreateMembershipRequest.create = function create(properties) {
+                            return new CreateMembershipRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMembershipRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.CreateMembershipRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ICreateMembershipRequest} message CreateMembershipRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMembershipRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                            if (message.membershipId != null && Object.hasOwnProperty.call(message, "membershipId"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.membershipId);
+                            if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                $root.google.cloud.gkehub.v1alpha2.Membership.encode(message.resource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified CreateMembershipRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.CreateMembershipRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ICreateMembershipRequest} message CreateMembershipRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        CreateMembershipRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a CreateMembershipRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.CreateMembershipRequest} CreateMembershipRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMembershipRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.CreateMembershipRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.parent = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.membershipId = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.resource = $root.google.cloud.gkehub.v1alpha2.Membership.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a CreateMembershipRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.CreateMembershipRequest} CreateMembershipRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        CreateMembershipRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a CreateMembershipRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        CreateMembershipRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                if (!$util.isString(message.parent))
+                                    return "parent: string expected";
+                            if (message.membershipId != null && message.hasOwnProperty("membershipId"))
+                                if (!$util.isString(message.membershipId))
+                                    return "membershipId: string expected";
+                            if (message.resource != null && message.hasOwnProperty("resource")) {
+                                var error = $root.google.cloud.gkehub.v1alpha2.Membership.verify(message.resource);
+                                if (error)
+                                    return "resource." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a CreateMembershipRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.CreateMembershipRequest} CreateMembershipRequest
+                         */
+                        CreateMembershipRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.CreateMembershipRequest)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.CreateMembershipRequest();
+                            if (object.parent != null)
+                                message.parent = String(object.parent);
+                            if (object.membershipId != null)
+                                message.membershipId = String(object.membershipId);
+                            if (object.resource != null) {
+                                if (typeof object.resource !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.CreateMembershipRequest.resource: object expected");
+                                message.resource = $root.google.cloud.gkehub.v1alpha2.Membership.fromObject(object.resource);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a CreateMembershipRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.CreateMembershipRequest} message CreateMembershipRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        CreateMembershipRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.parent = "";
+                                object.membershipId = "";
+                                object.resource = null;
+                            }
+                            if (message.parent != null && message.hasOwnProperty("parent"))
+                                object.parent = message.parent;
+                            if (message.membershipId != null && message.hasOwnProperty("membershipId"))
+                                object.membershipId = message.membershipId;
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                object.resource = $root.google.cloud.gkehub.v1alpha2.Membership.toObject(message.resource, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this CreateMembershipRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        CreateMembershipRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for CreateMembershipRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.CreateMembershipRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        CreateMembershipRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.CreateMembershipRequest";
+                        };
+    
+                        return CreateMembershipRequest;
+                    })();
+    
+                    v1alpha2.DeleteMembershipRequest = (function() {
+    
+                        /**
+                         * Properties of a DeleteMembershipRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IDeleteMembershipRequest
+                         * @property {string|null} [name] DeleteMembershipRequest name
+                         */
+    
+                        /**
+                         * Constructs a new DeleteMembershipRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a DeleteMembershipRequest.
+                         * @implements IDeleteMembershipRequest
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest=} [properties] Properties to set
+                         */
+                        function DeleteMembershipRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DeleteMembershipRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @instance
+                         */
+                        DeleteMembershipRequest.prototype.name = "";
+    
+                        /**
+                         * Creates a new DeleteMembershipRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.DeleteMembershipRequest} DeleteMembershipRequest instance
+                         */
+                        DeleteMembershipRequest.create = function create(properties) {
+                            return new DeleteMembershipRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMembershipRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.DeleteMembershipRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest} message DeleteMembershipRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMembershipRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DeleteMembershipRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.DeleteMembershipRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IDeleteMembershipRequest} message DeleteMembershipRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DeleteMembershipRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DeleteMembershipRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.DeleteMembershipRequest} DeleteMembershipRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMembershipRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.DeleteMembershipRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DeleteMembershipRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.DeleteMembershipRequest} DeleteMembershipRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DeleteMembershipRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DeleteMembershipRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DeleteMembershipRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DeleteMembershipRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.DeleteMembershipRequest} DeleteMembershipRequest
+                         */
+                        DeleteMembershipRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.DeleteMembershipRequest)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.DeleteMembershipRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DeleteMembershipRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.DeleteMembershipRequest} message DeleteMembershipRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DeleteMembershipRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.name = "";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DeleteMembershipRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DeleteMembershipRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DeleteMembershipRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.DeleteMembershipRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DeleteMembershipRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.DeleteMembershipRequest";
+                        };
+    
+                        return DeleteMembershipRequest;
+                    })();
+    
+                    v1alpha2.UpdateMembershipRequest = (function() {
+    
+                        /**
+                         * Properties of an UpdateMembershipRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IUpdateMembershipRequest
+                         * @property {string|null} [name] UpdateMembershipRequest name
+                         * @property {google.protobuf.IFieldMask|null} [updateMask] UpdateMembershipRequest updateMask
+                         * @property {google.cloud.gkehub.v1alpha2.IMembership|null} [resource] UpdateMembershipRequest resource
+                         */
+    
+                        /**
+                         * Constructs a new UpdateMembershipRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents an UpdateMembershipRequest.
+                         * @implements IUpdateMembershipRequest
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest=} [properties] Properties to set
+                         */
+                        function UpdateMembershipRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * UpdateMembershipRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @instance
+                         */
+                        UpdateMembershipRequest.prototype.name = "";
+    
+                        /**
+                         * UpdateMembershipRequest updateMask.
+                         * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @instance
+                         */
+                        UpdateMembershipRequest.prototype.updateMask = null;
+    
+                        /**
+                         * UpdateMembershipRequest resource.
+                         * @member {google.cloud.gkehub.v1alpha2.IMembership|null|undefined} resource
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @instance
+                         */
+                        UpdateMembershipRequest.prototype.resource = null;
+    
+                        /**
+                         * Creates a new UpdateMembershipRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.UpdateMembershipRequest} UpdateMembershipRequest instance
+                         */
+                        UpdateMembershipRequest.create = function create(properties) {
+                            return new UpdateMembershipRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMembershipRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.UpdateMembershipRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest} message UpdateMembershipRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMembershipRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                                $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                                $root.google.cloud.gkehub.v1alpha2.Membership.encode(message.resource, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified UpdateMembershipRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.UpdateMembershipRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IUpdateMembershipRequest} message UpdateMembershipRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        UpdateMembershipRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an UpdateMembershipRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.UpdateMembershipRequest} UpdateMembershipRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMembershipRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.UpdateMembershipRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.resource = $root.google.cloud.gkehub.v1alpha2.Membership.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an UpdateMembershipRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.UpdateMembershipRequest} UpdateMembershipRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        UpdateMembershipRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an UpdateMembershipRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        UpdateMembershipRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                                var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                                if (error)
+                                    return "updateMask." + error;
+                            }
+                            if (message.resource != null && message.hasOwnProperty("resource")) {
+                                var error = $root.google.cloud.gkehub.v1alpha2.Membership.verify(message.resource);
+                                if (error)
+                                    return "resource." + error;
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an UpdateMembershipRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.UpdateMembershipRequest} UpdateMembershipRequest
+                         */
+                        UpdateMembershipRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.UpdateMembershipRequest)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.UpdateMembershipRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.updateMask != null) {
+                                if (typeof object.updateMask !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.UpdateMembershipRequest.updateMask: object expected");
+                                message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                            }
+                            if (object.resource != null) {
+                                if (typeof object.resource !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.UpdateMembershipRequest.resource: object expected");
+                                message.resource = $root.google.cloud.gkehub.v1alpha2.Membership.fromObject(object.resource);
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an UpdateMembershipRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.UpdateMembershipRequest} message UpdateMembershipRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        UpdateMembershipRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.updateMask = null;
+                                object.resource = null;
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                                object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                            if (message.resource != null && message.hasOwnProperty("resource"))
+                                object.resource = $root.google.cloud.gkehub.v1alpha2.Membership.toObject(message.resource, options);
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this UpdateMembershipRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        UpdateMembershipRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for UpdateMembershipRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.UpdateMembershipRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        UpdateMembershipRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.UpdateMembershipRequest";
+                        };
+    
+                        return UpdateMembershipRequest;
+                    })();
+    
+                    v1alpha2.GenerateConnectManifestRequest = (function() {
+    
+                        /**
+                         * Properties of a GenerateConnectManifestRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IGenerateConnectManifestRequest
+                         * @property {string|null} [name] GenerateConnectManifestRequest name
+                         * @property {string|null} [namespace] GenerateConnectManifestRequest namespace
+                         * @property {Uint8Array|null} [proxy] GenerateConnectManifestRequest proxy
+                         * @property {string|null} [version] GenerateConnectManifestRequest version
+                         * @property {boolean|null} [isUpgrade] GenerateConnectManifestRequest isUpgrade
+                         * @property {string|null} [registry] GenerateConnectManifestRequest registry
+                         * @property {Uint8Array|null} [imagePullSecretContent] GenerateConnectManifestRequest imagePullSecretContent
+                         */
+    
+                        /**
+                         * Constructs a new GenerateConnectManifestRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a GenerateConnectManifestRequest.
+                         * @implements IGenerateConnectManifestRequest
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest=} [properties] Properties to set
+                         */
+                        function GenerateConnectManifestRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GenerateConnectManifestRequest name.
+                         * @member {string} name
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @instance
+                         */
+                        GenerateConnectManifestRequest.prototype.name = "";
+    
+                        /**
+                         * GenerateConnectManifestRequest namespace.
+                         * @member {string} namespace
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @instance
+                         */
+                        GenerateConnectManifestRequest.prototype.namespace = "";
+    
+                        /**
+                         * GenerateConnectManifestRequest proxy.
+                         * @member {Uint8Array} proxy
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @instance
+                         */
+                        GenerateConnectManifestRequest.prototype.proxy = $util.newBuffer([]);
+    
+                        /**
+                         * GenerateConnectManifestRequest version.
+                         * @member {string} version
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @instance
+                         */
+                        GenerateConnectManifestRequest.prototype.version = "";
+    
+                        /**
+                         * GenerateConnectManifestRequest isUpgrade.
+                         * @member {boolean} isUpgrade
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @instance
+                         */
+                        GenerateConnectManifestRequest.prototype.isUpgrade = false;
+    
+                        /**
+                         * GenerateConnectManifestRequest registry.
+                         * @member {string} registry
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @instance
+                         */
+                        GenerateConnectManifestRequest.prototype.registry = "";
+    
+                        /**
+                         * GenerateConnectManifestRequest imagePullSecretContent.
+                         * @member {Uint8Array} imagePullSecretContent
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @instance
+                         */
+                        GenerateConnectManifestRequest.prototype.imagePullSecretContent = $util.newBuffer([]);
+    
+                        /**
+                         * Creates a new GenerateConnectManifestRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest} GenerateConnectManifestRequest instance
+                         */
+                        GenerateConnectManifestRequest.create = function create(properties) {
+                            return new GenerateConnectManifestRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateConnectManifestRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest} message GenerateConnectManifestRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateConnectManifestRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                            if (message.namespace != null && Object.hasOwnProperty.call(message, "namespace"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.namespace);
+                            if (message.proxy != null && Object.hasOwnProperty.call(message, "proxy"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.proxy);
+                            if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.version);
+                            if (message.isUpgrade != null && Object.hasOwnProperty.call(message, "isUpgrade"))
+                                writer.uint32(/* id 5, wireType 0 =*/40).bool(message.isUpgrade);
+                            if (message.registry != null && Object.hasOwnProperty.call(message, "registry"))
+                                writer.uint32(/* id 6, wireType 2 =*/50).string(message.registry);
+                            if (message.imagePullSecretContent != null && Object.hasOwnProperty.call(message, "imagePullSecretContent"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).bytes(message.imagePullSecretContent);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateConnectManifestRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestRequest} message GenerateConnectManifestRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateConnectManifestRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GenerateConnectManifestRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest} GenerateConnectManifestRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateConnectManifestRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.name = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.namespace = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.proxy = reader.bytes();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.version = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.isUpgrade = reader.bool();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.registry = reader.string();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.imagePullSecretContent = reader.bytes();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GenerateConnectManifestRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest} GenerateConnectManifestRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateConnectManifestRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GenerateConnectManifestRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GenerateConnectManifestRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                if (!$util.isString(message.name))
+                                    return "name: string expected";
+                            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                                if (!$util.isString(message.namespace))
+                                    return "namespace: string expected";
+                            if (message.proxy != null && message.hasOwnProperty("proxy"))
+                                if (!(message.proxy && typeof message.proxy.length === "number" || $util.isString(message.proxy)))
+                                    return "proxy: buffer expected";
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                if (!$util.isString(message.version))
+                                    return "version: string expected";
+                            if (message.isUpgrade != null && message.hasOwnProperty("isUpgrade"))
+                                if (typeof message.isUpgrade !== "boolean")
+                                    return "isUpgrade: boolean expected";
+                            if (message.registry != null && message.hasOwnProperty("registry"))
+                                if (!$util.isString(message.registry))
+                                    return "registry: string expected";
+                            if (message.imagePullSecretContent != null && message.hasOwnProperty("imagePullSecretContent"))
+                                if (!(message.imagePullSecretContent && typeof message.imagePullSecretContent.length === "number" || $util.isString(message.imagePullSecretContent)))
+                                    return "imagePullSecretContent: buffer expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GenerateConnectManifestRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest} GenerateConnectManifestRequest
+                         */
+                        GenerateConnectManifestRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest();
+                            if (object.name != null)
+                                message.name = String(object.name);
+                            if (object.namespace != null)
+                                message.namespace = String(object.namespace);
+                            if (object.proxy != null)
+                                if (typeof object.proxy === "string")
+                                    $util.base64.decode(object.proxy, message.proxy = $util.newBuffer($util.base64.length(object.proxy)), 0);
+                                else if (object.proxy.length >= 0)
+                                    message.proxy = object.proxy;
+                            if (object.version != null)
+                                message.version = String(object.version);
+                            if (object.isUpgrade != null)
+                                message.isUpgrade = Boolean(object.isUpgrade);
+                            if (object.registry != null)
+                                message.registry = String(object.registry);
+                            if (object.imagePullSecretContent != null)
+                                if (typeof object.imagePullSecretContent === "string")
+                                    $util.base64.decode(object.imagePullSecretContent, message.imagePullSecretContent = $util.newBuffer($util.base64.length(object.imagePullSecretContent)), 0);
+                                else if (object.imagePullSecretContent.length >= 0)
+                                    message.imagePullSecretContent = object.imagePullSecretContent;
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GenerateConnectManifestRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest} message GenerateConnectManifestRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GenerateConnectManifestRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.name = "";
+                                object.namespace = "";
+                                if (options.bytes === String)
+                                    object.proxy = "";
+                                else {
+                                    object.proxy = [];
+                                    if (options.bytes !== Array)
+                                        object.proxy = $util.newBuffer(object.proxy);
+                                }
+                                object.version = "";
+                                object.isUpgrade = false;
+                                object.registry = "";
+                                if (options.bytes === String)
+                                    object.imagePullSecretContent = "";
+                                else {
+                                    object.imagePullSecretContent = [];
+                                    if (options.bytes !== Array)
+                                        object.imagePullSecretContent = $util.newBuffer(object.imagePullSecretContent);
+                                }
+                            }
+                            if (message.name != null && message.hasOwnProperty("name"))
+                                object.name = message.name;
+                            if (message.namespace != null && message.hasOwnProperty("namespace"))
+                                object.namespace = message.namespace;
+                            if (message.proxy != null && message.hasOwnProperty("proxy"))
+                                object.proxy = options.bytes === String ? $util.base64.encode(message.proxy, 0, message.proxy.length) : options.bytes === Array ? Array.prototype.slice.call(message.proxy) : message.proxy;
+                            if (message.version != null && message.hasOwnProperty("version"))
+                                object.version = message.version;
+                            if (message.isUpgrade != null && message.hasOwnProperty("isUpgrade"))
+                                object.isUpgrade = message.isUpgrade;
+                            if (message.registry != null && message.hasOwnProperty("registry"))
+                                object.registry = message.registry;
+                            if (message.imagePullSecretContent != null && message.hasOwnProperty("imagePullSecretContent"))
+                                object.imagePullSecretContent = options.bytes === String ? $util.base64.encode(message.imagePullSecretContent, 0, message.imagePullSecretContent.length) : options.bytes === Array ? Array.prototype.slice.call(message.imagePullSecretContent) : message.imagePullSecretContent;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GenerateConnectManifestRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GenerateConnectManifestRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GenerateConnectManifestRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenerateConnectManifestRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.GenerateConnectManifestRequest";
+                        };
+    
+                        return GenerateConnectManifestRequest;
+                    })();
+    
+                    v1alpha2.GenerateConnectManifestResponse = (function() {
+    
+                        /**
+                         * Properties of a GenerateConnectManifestResponse.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IGenerateConnectManifestResponse
+                         * @property {Array.<google.cloud.gkehub.v1alpha2.IConnectAgentResource>|null} [manifest] GenerateConnectManifestResponse manifest
+                         */
+    
+                        /**
+                         * Constructs a new GenerateConnectManifestResponse.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a GenerateConnectManifestResponse.
+                         * @implements IGenerateConnectManifestResponse
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestResponse=} [properties] Properties to set
+                         */
+                        function GenerateConnectManifestResponse(properties) {
+                            this.manifest = [];
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * GenerateConnectManifestResponse manifest.
+                         * @member {Array.<google.cloud.gkehub.v1alpha2.IConnectAgentResource>} manifest
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @instance
+                         */
+                        GenerateConnectManifestResponse.prototype.manifest = $util.emptyArray;
+    
+                        /**
+                         * Creates a new GenerateConnectManifestResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestResponse=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse} GenerateConnectManifestResponse instance
+                         */
+                        GenerateConnectManifestResponse.create = function create(properties) {
+                            return new GenerateConnectManifestResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateConnectManifestResponse message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestResponse} message GenerateConnectManifestResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateConnectManifestResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.manifest != null && message.manifest.length)
+                                for (var i = 0; i < message.manifest.length; ++i)
+                                    $root.google.cloud.gkehub.v1alpha2.ConnectAgentResource.encode(message.manifest[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified GenerateConnectManifestResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IGenerateConnectManifestResponse} message GenerateConnectManifestResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        GenerateConnectManifestResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a GenerateConnectManifestResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse} GenerateConnectManifestResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateConnectManifestResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        if (!(message.manifest && message.manifest.length))
+                                            message.manifest = [];
+                                        message.manifest.push($root.google.cloud.gkehub.v1alpha2.ConnectAgentResource.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a GenerateConnectManifestResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse} GenerateConnectManifestResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        GenerateConnectManifestResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a GenerateConnectManifestResponse message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        GenerateConnectManifestResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.manifest != null && message.hasOwnProperty("manifest")) {
+                                if (!Array.isArray(message.manifest))
+                                    return "manifest: array expected";
+                                for (var i = 0; i < message.manifest.length; ++i) {
+                                    var error = $root.google.cloud.gkehub.v1alpha2.ConnectAgentResource.verify(message.manifest[i]);
+                                    if (error)
+                                        return "manifest." + error;
+                                }
+                            }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a GenerateConnectManifestResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse} GenerateConnectManifestResponse
+                         */
+                        GenerateConnectManifestResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse();
+                            if (object.manifest) {
+                                if (!Array.isArray(object.manifest))
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse.manifest: array expected");
+                                message.manifest = [];
+                                for (var i = 0; i < object.manifest.length; ++i) {
+                                    if (typeof object.manifest[i] !== "object")
+                                        throw TypeError(".google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse.manifest: object expected");
+                                    message.manifest[i] = $root.google.cloud.gkehub.v1alpha2.ConnectAgentResource.fromObject(object.manifest[i]);
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a GenerateConnectManifestResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse} message GenerateConnectManifestResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        GenerateConnectManifestResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.arrays || options.defaults)
+                                object.manifest = [];
+                            if (message.manifest && message.manifest.length) {
+                                object.manifest = [];
+                                for (var j = 0; j < message.manifest.length; ++j)
+                                    object.manifest[j] = $root.google.cloud.gkehub.v1alpha2.ConnectAgentResource.toObject(message.manifest[j], options);
+                            }
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this GenerateConnectManifestResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        GenerateConnectManifestResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for GenerateConnectManifestResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        GenerateConnectManifestResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.GenerateConnectManifestResponse";
+                        };
+    
+                        return GenerateConnectManifestResponse;
+                    })();
+    
+                    v1alpha2.ConnectAgentResource = (function() {
+    
+                        /**
+                         * Properties of a ConnectAgentResource.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IConnectAgentResource
+                         * @property {google.cloud.gkehub.v1alpha2.ITypeMeta|null} [type] ConnectAgentResource type
+                         * @property {string|null} [manifest] ConnectAgentResource manifest
+                         */
+    
+                        /**
+                         * Constructs a new ConnectAgentResource.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a ConnectAgentResource.
+                         * @implements IConnectAgentResource
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IConnectAgentResource=} [properties] Properties to set
+                         */
+                        function ConnectAgentResource(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ConnectAgentResource type.
+                         * @member {google.cloud.gkehub.v1alpha2.ITypeMeta|null|undefined} type
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @instance
+                         */
+                        ConnectAgentResource.prototype.type = null;
+    
+                        /**
+                         * ConnectAgentResource manifest.
+                         * @member {string} manifest
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @instance
+                         */
+                        ConnectAgentResource.prototype.manifest = "";
+    
+                        /**
+                         * Creates a new ConnectAgentResource instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IConnectAgentResource=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.ConnectAgentResource} ConnectAgentResource instance
+                         */
+                        ConnectAgentResource.create = function create(properties) {
+                            return new ConnectAgentResource(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ConnectAgentResource message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ConnectAgentResource.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IConnectAgentResource} message ConnectAgentResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConnectAgentResource.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.type != null && Object.hasOwnProperty.call(message, "type"))
+                                $root.google.cloud.gkehub.v1alpha2.TypeMeta.encode(message.type, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.manifest != null && Object.hasOwnProperty.call(message, "manifest"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.manifest);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ConnectAgentResource message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ConnectAgentResource.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IConnectAgentResource} message ConnectAgentResource message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ConnectAgentResource.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ConnectAgentResource message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.ConnectAgentResource} ConnectAgentResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConnectAgentResource.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.ConnectAgentResource();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.type = $root.google.cloud.gkehub.v1alpha2.TypeMeta.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.manifest = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ConnectAgentResource message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.ConnectAgentResource} ConnectAgentResource
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ConnectAgentResource.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ConnectAgentResource message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ConnectAgentResource.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.type != null && message.hasOwnProperty("type")) {
+                                var error = $root.google.cloud.gkehub.v1alpha2.TypeMeta.verify(message.type);
+                                if (error)
+                                    return "type." + error;
+                            }
+                            if (message.manifest != null && message.hasOwnProperty("manifest"))
+                                if (!$util.isString(message.manifest))
+                                    return "manifest: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ConnectAgentResource message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.ConnectAgentResource} ConnectAgentResource
+                         */
+                        ConnectAgentResource.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.ConnectAgentResource)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.ConnectAgentResource();
+                            if (object.type != null) {
+                                if (typeof object.type !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.ConnectAgentResource.type: object expected");
+                                message.type = $root.google.cloud.gkehub.v1alpha2.TypeMeta.fromObject(object.type);
+                            }
+                            if (object.manifest != null)
+                                message.manifest = String(object.manifest);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ConnectAgentResource message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ConnectAgentResource} message ConnectAgentResource
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ConnectAgentResource.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.type = null;
+                                object.manifest = "";
+                            }
+                            if (message.type != null && message.hasOwnProperty("type"))
+                                object.type = $root.google.cloud.gkehub.v1alpha2.TypeMeta.toObject(message.type, options);
+                            if (message.manifest != null && message.hasOwnProperty("manifest"))
+                                object.manifest = message.manifest;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ConnectAgentResource to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ConnectAgentResource.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ConnectAgentResource
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.ConnectAgentResource
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ConnectAgentResource.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.ConnectAgentResource";
+                        };
+    
+                        return ConnectAgentResource;
+                    })();
+    
+                    v1alpha2.ResourceManifest = (function() {
+    
+                        /**
+                         * Properties of a ResourceManifest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IResourceManifest
+                         * @property {string|null} [manifest] ResourceManifest manifest
+                         * @property {boolean|null} [clusterScoped] ResourceManifest clusterScoped
+                         */
+    
+                        /**
+                         * Constructs a new ResourceManifest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a ResourceManifest.
+                         * @implements IResourceManifest
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IResourceManifest=} [properties] Properties to set
+                         */
+                        function ResourceManifest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * ResourceManifest manifest.
+                         * @member {string} manifest
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @instance
+                         */
+                        ResourceManifest.prototype.manifest = "";
+    
+                        /**
+                         * ResourceManifest clusterScoped.
+                         * @member {boolean} clusterScoped
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @instance
+                         */
+                        ResourceManifest.prototype.clusterScoped = false;
+    
+                        /**
+                         * Creates a new ResourceManifest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IResourceManifest=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.ResourceManifest} ResourceManifest instance
+                         */
+                        ResourceManifest.create = function create(properties) {
+                            return new ResourceManifest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceManifest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ResourceManifest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IResourceManifest} message ResourceManifest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceManifest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.manifest != null && Object.hasOwnProperty.call(message, "manifest"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.manifest);
+                            if (message.clusterScoped != null && Object.hasOwnProperty.call(message, "clusterScoped"))
+                                writer.uint32(/* id 2, wireType 0 =*/16).bool(message.clusterScoped);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified ResourceManifest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.ResourceManifest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IResourceManifest} message ResourceManifest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        ResourceManifest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a ResourceManifest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.ResourceManifest} ResourceManifest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceManifest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.ResourceManifest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.manifest = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.clusterScoped = reader.bool();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a ResourceManifest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.ResourceManifest} ResourceManifest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        ResourceManifest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a ResourceManifest message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        ResourceManifest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.manifest != null && message.hasOwnProperty("manifest"))
+                                if (!$util.isString(message.manifest))
+                                    return "manifest: string expected";
+                            if (message.clusterScoped != null && message.hasOwnProperty("clusterScoped"))
+                                if (typeof message.clusterScoped !== "boolean")
+                                    return "clusterScoped: boolean expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a ResourceManifest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.ResourceManifest} ResourceManifest
+                         */
+                        ResourceManifest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.ResourceManifest)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.ResourceManifest();
+                            if (object.manifest != null)
+                                message.manifest = String(object.manifest);
+                            if (object.clusterScoped != null)
+                                message.clusterScoped = Boolean(object.clusterScoped);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a ResourceManifest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ResourceManifest} message ResourceManifest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        ResourceManifest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.manifest = "";
+                                object.clusterScoped = false;
+                            }
+                            if (message.manifest != null && message.hasOwnProperty("manifest"))
+                                object.manifest = message.manifest;
+                            if (message.clusterScoped != null && message.hasOwnProperty("clusterScoped"))
+                                object.clusterScoped = message.clusterScoped;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this ResourceManifest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        ResourceManifest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for ResourceManifest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.ResourceManifest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        ResourceManifest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.ResourceManifest";
+                        };
+    
+                        return ResourceManifest;
+                    })();
+    
+                    v1alpha2.TypeMeta = (function() {
+    
+                        /**
+                         * Properties of a TypeMeta.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface ITypeMeta
+                         * @property {string|null} [kind] TypeMeta kind
+                         * @property {string|null} [apiVersion] TypeMeta apiVersion
+                         */
+    
+                        /**
+                         * Constructs a new TypeMeta.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents a TypeMeta.
+                         * @implements ITypeMeta
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.ITypeMeta=} [properties] Properties to set
+                         */
+                        function TypeMeta(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * TypeMeta kind.
+                         * @member {string} kind
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @instance
+                         */
+                        TypeMeta.prototype.kind = "";
+    
+                        /**
+                         * TypeMeta apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @instance
+                         */
+                        TypeMeta.prototype.apiVersion = "";
+    
+                        /**
+                         * Creates a new TypeMeta instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ITypeMeta=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.TypeMeta} TypeMeta instance
+                         */
+                        TypeMeta.create = function create(properties) {
+                            return new TypeMeta(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified TypeMeta message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.TypeMeta.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ITypeMeta} message TypeMeta message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TypeMeta.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.kind != null && Object.hasOwnProperty.call(message, "kind"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.kind);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.apiVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified TypeMeta message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.TypeMeta.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.ITypeMeta} message TypeMeta message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        TypeMeta.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a TypeMeta message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.TypeMeta} TypeMeta
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TypeMeta.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.TypeMeta();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.kind = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a TypeMeta message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.TypeMeta} TypeMeta
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        TypeMeta.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a TypeMeta message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        TypeMeta.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                if (!$util.isString(message.kind))
+                                    return "kind: string expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a TypeMeta message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.TypeMeta} TypeMeta
+                         */
+                        TypeMeta.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.TypeMeta)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.TypeMeta();
+                            if (object.kind != null)
+                                message.kind = String(object.kind);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a TypeMeta message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.TypeMeta} message TypeMeta
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        TypeMeta.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.kind = "";
+                                object.apiVersion = "";
+                            }
+                            if (message.kind != null && message.hasOwnProperty("kind"))
+                                object.kind = message.kind;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this TypeMeta to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        TypeMeta.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for TypeMeta
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.TypeMeta
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        TypeMeta.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.TypeMeta";
+                        };
+    
+                        return TypeMeta;
+                    })();
+    
+                    v1alpha2.InitializeHubRequest = (function() {
+    
+                        /**
+                         * Properties of an InitializeHubRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IInitializeHubRequest
+                         * @property {string|null} [project] InitializeHubRequest project
+                         */
+    
+                        /**
+                         * Constructs a new InitializeHubRequest.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents an InitializeHubRequest.
+                         * @implements IInitializeHubRequest
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubRequest=} [properties] Properties to set
+                         */
+                        function InitializeHubRequest(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InitializeHubRequest project.
+                         * @member {string} project
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @instance
+                         */
+                        InitializeHubRequest.prototype.project = "";
+    
+                        /**
+                         * Creates a new InitializeHubRequest instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubRequest=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.InitializeHubRequest} InitializeHubRequest instance
+                         */
+                        InitializeHubRequest.create = function create(properties) {
+                            return new InitializeHubRequest(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeHubRequest message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.InitializeHubRequest.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubRequest} message InitializeHubRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeHubRequest.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.project != null && Object.hasOwnProperty.call(message, "project"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.project);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeHubRequest message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.InitializeHubRequest.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubRequest} message InitializeHubRequest message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeHubRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InitializeHubRequest message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.InitializeHubRequest} InitializeHubRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeHubRequest.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.InitializeHubRequest();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.project = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InitializeHubRequest message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.InitializeHubRequest} InitializeHubRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeHubRequest.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InitializeHubRequest message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InitializeHubRequest.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                if (!$util.isString(message.project))
+                                    return "project: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InitializeHubRequest message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.InitializeHubRequest} InitializeHubRequest
+                         */
+                        InitializeHubRequest.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.InitializeHubRequest)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.InitializeHubRequest();
+                            if (object.project != null)
+                                message.project = String(object.project);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InitializeHubRequest message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.InitializeHubRequest} message InitializeHubRequest
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InitializeHubRequest.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.project = "";
+                            if (message.project != null && message.hasOwnProperty("project"))
+                                object.project = message.project;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InitializeHubRequest to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InitializeHubRequest.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InitializeHubRequest
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubRequest
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InitializeHubRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.InitializeHubRequest";
+                        };
+    
+                        return InitializeHubRequest;
+                    })();
+    
+                    v1alpha2.InitializeHubResponse = (function() {
+    
+                        /**
+                         * Properties of an InitializeHubResponse.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IInitializeHubResponse
+                         * @property {string|null} [serviceIdentity] InitializeHubResponse serviceIdentity
+                         * @property {string|null} [workloadIdentityPool] InitializeHubResponse workloadIdentityPool
+                         */
+    
+                        /**
+                         * Constructs a new InitializeHubResponse.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents an InitializeHubResponse.
+                         * @implements IInitializeHubResponse
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubResponse=} [properties] Properties to set
+                         */
+                        function InitializeHubResponse(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * InitializeHubResponse serviceIdentity.
+                         * @member {string} serviceIdentity
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @instance
+                         */
+                        InitializeHubResponse.prototype.serviceIdentity = "";
+    
+                        /**
+                         * InitializeHubResponse workloadIdentityPool.
+                         * @member {string} workloadIdentityPool
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @instance
+                         */
+                        InitializeHubResponse.prototype.workloadIdentityPool = "";
+    
+                        /**
+                         * Creates a new InitializeHubResponse instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubResponse=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.InitializeHubResponse} InitializeHubResponse instance
+                         */
+                        InitializeHubResponse.create = function create(properties) {
+                            return new InitializeHubResponse(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeHubResponse message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.InitializeHubResponse.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubResponse} message InitializeHubResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeHubResponse.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.serviceIdentity != null && Object.hasOwnProperty.call(message, "serviceIdentity"))
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.serviceIdentity);
+                            if (message.workloadIdentityPool != null && Object.hasOwnProperty.call(message, "workloadIdentityPool"))
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.workloadIdentityPool);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified InitializeHubResponse message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.InitializeHubResponse.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IInitializeHubResponse} message InitializeHubResponse message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        InitializeHubResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an InitializeHubResponse message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.InitializeHubResponse} InitializeHubResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeHubResponse.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.InitializeHubResponse();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.serviceIdentity = reader.string();
+                                        break;
+                                    }
+                                case 2: {
+                                        message.workloadIdentityPool = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an InitializeHubResponse message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.InitializeHubResponse} InitializeHubResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        InitializeHubResponse.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an InitializeHubResponse message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        InitializeHubResponse.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.serviceIdentity != null && message.hasOwnProperty("serviceIdentity"))
+                                if (!$util.isString(message.serviceIdentity))
+                                    return "serviceIdentity: string expected";
+                            if (message.workloadIdentityPool != null && message.hasOwnProperty("workloadIdentityPool"))
+                                if (!$util.isString(message.workloadIdentityPool))
+                                    return "workloadIdentityPool: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an InitializeHubResponse message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.InitializeHubResponse} InitializeHubResponse
+                         */
+                        InitializeHubResponse.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.InitializeHubResponse)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.InitializeHubResponse();
+                            if (object.serviceIdentity != null)
+                                message.serviceIdentity = String(object.serviceIdentity);
+                            if (object.workloadIdentityPool != null)
+                                message.workloadIdentityPool = String(object.workloadIdentityPool);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an InitializeHubResponse message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.InitializeHubResponse} message InitializeHubResponse
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        InitializeHubResponse.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.serviceIdentity = "";
+                                object.workloadIdentityPool = "";
+                            }
+                            if (message.serviceIdentity != null && message.hasOwnProperty("serviceIdentity"))
+                                object.serviceIdentity = message.serviceIdentity;
+                            if (message.workloadIdentityPool != null && message.hasOwnProperty("workloadIdentityPool"))
+                                object.workloadIdentityPool = message.workloadIdentityPool;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this InitializeHubResponse to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        InitializeHubResponse.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for InitializeHubResponse
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.InitializeHubResponse
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        InitializeHubResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.InitializeHubResponse";
+                        };
+    
+                        return InitializeHubResponse;
+                    })();
+    
+                    v1alpha2.OperationMetadata = (function() {
+    
+                        /**
+                         * Properties of an OperationMetadata.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @interface IOperationMetadata
+                         * @property {google.protobuf.ITimestamp|null} [createTime] OperationMetadata createTime
+                         * @property {google.protobuf.ITimestamp|null} [endTime] OperationMetadata endTime
+                         * @property {string|null} [target] OperationMetadata target
+                         * @property {string|null} [verb] OperationMetadata verb
+                         * @property {string|null} [statusDetail] OperationMetadata statusDetail
+                         * @property {boolean|null} [cancelRequested] OperationMetadata cancelRequested
+                         * @property {string|null} [apiVersion] OperationMetadata apiVersion
+                         */
+    
+                        /**
+                         * Constructs a new OperationMetadata.
+                         * @memberof google.cloud.gkehub.v1alpha2
+                         * @classdesc Represents an OperationMetadata.
+                         * @implements IOperationMetadata
+                         * @constructor
+                         * @param {google.cloud.gkehub.v1alpha2.IOperationMetadata=} [properties] Properties to set
+                         */
+                        function OperationMetadata(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * OperationMetadata createTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} createTime
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.createTime = null;
+    
+                        /**
+                         * OperationMetadata endTime.
+                         * @member {google.protobuf.ITimestamp|null|undefined} endTime
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.endTime = null;
+    
+                        /**
+                         * OperationMetadata target.
+                         * @member {string} target
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.target = "";
+    
+                        /**
+                         * OperationMetadata verb.
+                         * @member {string} verb
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.verb = "";
+    
+                        /**
+                         * OperationMetadata statusDetail.
+                         * @member {string} statusDetail
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.statusDetail = "";
+    
+                        /**
+                         * OperationMetadata cancelRequested.
+                         * @member {boolean} cancelRequested
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.cancelRequested = false;
+    
+                        /**
+                         * OperationMetadata apiVersion.
+                         * @member {string} apiVersion
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @instance
+                         */
+                        OperationMetadata.prototype.apiVersion = "";
+    
+                        /**
+                         * Creates a new OperationMetadata instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IOperationMetadata=} [properties] Properties to set
+                         * @returns {google.cloud.gkehub.v1alpha2.OperationMetadata} OperationMetadata instance
+                         */
+                        OperationMetadata.create = function create(properties) {
+                            return new OperationMetadata(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OperationMetadata.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.createTime != null && Object.hasOwnProperty.call(message, "createTime"))
+                                $root.google.protobuf.Timestamp.encode(message.createTime, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                            if (message.endTime != null && Object.hasOwnProperty.call(message, "endTime"))
+                                $root.google.protobuf.Timestamp.encode(message.endTime, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.target != null && Object.hasOwnProperty.call(message, "target"))
+                                writer.uint32(/* id 3, wireType 2 =*/26).string(message.target);
+                            if (message.verb != null && Object.hasOwnProperty.call(message, "verb"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.verb);
+                            if (message.statusDetail != null && Object.hasOwnProperty.call(message, "statusDetail"))
+                                writer.uint32(/* id 5, wireType 2 =*/42).string(message.statusDetail);
+                            if (message.cancelRequested != null && Object.hasOwnProperty.call(message, "cancelRequested"))
+                                writer.uint32(/* id 6, wireType 0 =*/48).bool(message.cancelRequested);
+                            if (message.apiVersion != null && Object.hasOwnProperty.call(message, "apiVersion"))
+                                writer.uint32(/* id 7, wireType 2 =*/58).string(message.apiVersion);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified OperationMetadata message, length delimited. Does not implicitly {@link google.cloud.gkehub.v1alpha2.OperationMetadata.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.IOperationMetadata} message OperationMetadata message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        OperationMetadata.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.gkehub.v1alpha2.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.gkehub.v1alpha2.OperationMetadata();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.createTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 2: {
+                                        message.endTime = $root.google.protobuf.Timestamp.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 3: {
+                                        message.target = reader.string();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.verb = reader.string();
+                                        break;
+                                    }
+                                case 5: {
+                                        message.statusDetail = reader.string();
+                                        break;
+                                    }
+                                case 6: {
+                                        message.cancelRequested = reader.bool();
+                                        break;
+                                    }
+                                case 7: {
+                                        message.apiVersion = reader.string();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes an OperationMetadata message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.gkehub.v1alpha2.OperationMetadata} OperationMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        OperationMetadata.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies an OperationMetadata message.
+                         * @function verify
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        OperationMetadata.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.createTime != null && message.hasOwnProperty("createTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.createTime);
+                                if (error)
+                                    return "createTime." + error;
+                            }
+                            if (message.endTime != null && message.hasOwnProperty("endTime")) {
+                                var error = $root.google.protobuf.Timestamp.verify(message.endTime);
+                                if (error)
+                                    return "endTime." + error;
+                            }
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                if (!$util.isString(message.target))
+                                    return "target: string expected";
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                if (!$util.isString(message.verb))
+                                    return "verb: string expected";
+                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
+                                if (!$util.isString(message.statusDetail))
+                                    return "statusDetail: string expected";
+                            if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
+                                if (typeof message.cancelRequested !== "boolean")
+                                    return "cancelRequested: boolean expected";
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                if (!$util.isString(message.apiVersion))
+                                    return "apiVersion: string expected";
+                            return null;
+                        };
+    
+                        /**
+                         * Creates an OperationMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.gkehub.v1alpha2.OperationMetadata} OperationMetadata
+                         */
+                        OperationMetadata.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.gkehub.v1alpha2.OperationMetadata)
+                                return object;
+                            var message = new $root.google.cloud.gkehub.v1alpha2.OperationMetadata();
+                            if (object.createTime != null) {
+                                if (typeof object.createTime !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.OperationMetadata.createTime: object expected");
+                                message.createTime = $root.google.protobuf.Timestamp.fromObject(object.createTime);
+                            }
+                            if (object.endTime != null) {
+                                if (typeof object.endTime !== "object")
+                                    throw TypeError(".google.cloud.gkehub.v1alpha2.OperationMetadata.endTime: object expected");
+                                message.endTime = $root.google.protobuf.Timestamp.fromObject(object.endTime);
+                            }
+                            if (object.target != null)
+                                message.target = String(object.target);
+                            if (object.verb != null)
+                                message.verb = String(object.verb);
+                            if (object.statusDetail != null)
+                                message.statusDetail = String(object.statusDetail);
+                            if (object.cancelRequested != null)
+                                message.cancelRequested = Boolean(object.cancelRequested);
+                            if (object.apiVersion != null)
+                                message.apiVersion = String(object.apiVersion);
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from an OperationMetadata message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @static
+                         * @param {google.cloud.gkehub.v1alpha2.OperationMetadata} message OperationMetadata
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        OperationMetadata.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults) {
+                                object.createTime = null;
+                                object.endTime = null;
+                                object.target = "";
+                                object.verb = "";
+                                object.statusDetail = "";
+                                object.cancelRequested = false;
+                                object.apiVersion = "";
+                            }
+                            if (message.createTime != null && message.hasOwnProperty("createTime"))
+                                object.createTime = $root.google.protobuf.Timestamp.toObject(message.createTime, options);
+                            if (message.endTime != null && message.hasOwnProperty("endTime"))
+                                object.endTime = $root.google.protobuf.Timestamp.toObject(message.endTime, options);
+                            if (message.target != null && message.hasOwnProperty("target"))
+                                object.target = message.target;
+                            if (message.verb != null && message.hasOwnProperty("verb"))
+                                object.verb = message.verb;
+                            if (message.statusDetail != null && message.hasOwnProperty("statusDetail"))
+                                object.statusDetail = message.statusDetail;
+                            if (message.cancelRequested != null && message.hasOwnProperty("cancelRequested"))
+                                object.cancelRequested = message.cancelRequested;
+                            if (message.apiVersion != null && message.hasOwnProperty("apiVersion"))
+                                object.apiVersion = message.apiVersion;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this OperationMetadata to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        OperationMetadata.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for OperationMetadata
+                         * @function getTypeUrl
+                         * @memberof google.cloud.gkehub.v1alpha2.OperationMetadata
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        OperationMetadata.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.gkehub.v1alpha2.OperationMetadata";
+                        };
+    
+                        return OperationMetadata;
+                    })();
+    
+                    return v1alpha2;
+                })();
+    
                 gkehub.policycontroller = (function() {
     
                     /**
@@ -75998,6 +84052,7 @@
                  * @interface ICommonLanguageSettings
                  * @property {string|null} [referenceDocsUri] CommonLanguageSettings referenceDocsUri
                  * @property {Array.<google.api.ClientLibraryDestination>|null} [destinations] CommonLanguageSettings destinations
+                 * @property {google.api.ISelectiveGapicGeneration|null} [selectiveGapicGeneration] CommonLanguageSettings selectiveGapicGeneration
                  */
     
                 /**
@@ -76033,6 +84088,14 @@
                 CommonLanguageSettings.prototype.destinations = $util.emptyArray;
     
                 /**
+                 * CommonLanguageSettings selectiveGapicGeneration.
+                 * @member {google.api.ISelectiveGapicGeneration|null|undefined} selectiveGapicGeneration
+                 * @memberof google.api.CommonLanguageSettings
+                 * @instance
+                 */
+                CommonLanguageSettings.prototype.selectiveGapicGeneration = null;
+    
+                /**
                  * Creates a new CommonLanguageSettings instance using the specified properties.
                  * @function create
                  * @memberof google.api.CommonLanguageSettings
@@ -76064,6 +84127,8 @@
                             writer.int32(message.destinations[i]);
                         writer.ldelim();
                     }
+                    if (message.selectiveGapicGeneration != null && Object.hasOwnProperty.call(message, "selectiveGapicGeneration"))
+                        $root.google.api.SelectiveGapicGeneration.encode(message.selectiveGapicGeneration, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
                     return writer;
                 };
     
@@ -76113,6 +84178,10 @@
                                         message.destinations.push(reader.int32());
                                 } else
                                     message.destinations.push(reader.int32());
+                                break;
+                            }
+                        case 3: {
+                                message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -76166,6 +84235,11 @@
                                 break;
                             }
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration")) {
+                        var error = $root.google.api.SelectiveGapicGeneration.verify(message.selectiveGapicGeneration);
+                        if (error)
+                            return "selectiveGapicGeneration." + error;
+                    }
                     return null;
                 };
     
@@ -76208,6 +84282,11 @@
                                 break;
                             }
                     }
+                    if (object.selectiveGapicGeneration != null) {
+                        if (typeof object.selectiveGapicGeneration !== "object")
+                            throw TypeError(".google.api.CommonLanguageSettings.selectiveGapicGeneration: object expected");
+                        message.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.fromObject(object.selectiveGapicGeneration);
+                    }
                     return message;
                 };
     
@@ -76226,8 +84305,10 @@
                     var object = {};
                     if (options.arrays || options.defaults)
                         object.destinations = [];
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.referenceDocsUri = "";
+                        object.selectiveGapicGeneration = null;
+                    }
                     if (message.referenceDocsUri != null && message.hasOwnProperty("referenceDocsUri"))
                         object.referenceDocsUri = message.referenceDocsUri;
                     if (message.destinations && message.destinations.length) {
@@ -76235,6 +84316,8 @@
                         for (var j = 0; j < message.destinations.length; ++j)
                             object.destinations[j] = options.enums === String ? $root.google.api.ClientLibraryDestination[message.destinations[j]] === undefined ? message.destinations[j] : $root.google.api.ClientLibraryDestination[message.destinations[j]] : message.destinations[j];
                     }
+                    if (message.selectiveGapicGeneration != null && message.hasOwnProperty("selectiveGapicGeneration"))
+                        object.selectiveGapicGeneration = $root.google.api.SelectiveGapicGeneration.toObject(message.selectiveGapicGeneration, options);
                     return object;
                 };
     
@@ -78057,6 +86140,7 @@
                  * @memberof google.api
                  * @interface IPythonSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] PythonSettings common
+                 * @property {google.api.PythonSettings.IExperimentalFeatures|null} [experimentalFeatures] PythonSettings experimentalFeatures
                  */
     
                 /**
@@ -78081,6 +86165,14 @@
                  * @instance
                  */
                 PythonSettings.prototype.common = null;
+    
+                /**
+                 * PythonSettings experimentalFeatures.
+                 * @member {google.api.PythonSettings.IExperimentalFeatures|null|undefined} experimentalFeatures
+                 * @memberof google.api.PythonSettings
+                 * @instance
+                 */
+                PythonSettings.prototype.experimentalFeatures = null;
     
                 /**
                  * Creates a new PythonSettings instance using the specified properties.
@@ -78108,6 +86200,8 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.experimentalFeatures != null && Object.hasOwnProperty.call(message, "experimentalFeatures"))
+                        $root.google.api.PythonSettings.ExperimentalFeatures.encode(message.experimentalFeatures, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
                     return writer;
                 };
     
@@ -78146,6 +86240,10 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.decode(reader, reader.uint32());
                                 break;
                             }
                         default:
@@ -78188,6 +86286,11 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures")) {
+                        var error = $root.google.api.PythonSettings.ExperimentalFeatures.verify(message.experimentalFeatures);
+                        if (error)
+                            return "experimentalFeatures." + error;
+                    }
                     return null;
                 };
     
@@ -78208,6 +86311,11 @@
                             throw TypeError(".google.api.PythonSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.experimentalFeatures != null) {
+                        if (typeof object.experimentalFeatures !== "object")
+                            throw TypeError(".google.api.PythonSettings.experimentalFeatures: object expected");
+                        message.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.fromObject(object.experimentalFeatures);
+                    }
                     return message;
                 };
     
@@ -78224,10 +86332,14 @@
                     if (!options)
                         options = {};
                     var object = {};
-                    if (options.defaults)
+                    if (options.defaults) {
                         object.common = null;
+                        object.experimentalFeatures = null;
+                    }
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    if (message.experimentalFeatures != null && message.hasOwnProperty("experimentalFeatures"))
+                        object.experimentalFeatures = $root.google.api.PythonSettings.ExperimentalFeatures.toObject(message.experimentalFeatures, options);
                     return object;
                 };
     
@@ -78256,6 +86368,258 @@
                     }
                     return typeUrlPrefix + "/google.api.PythonSettings";
                 };
+    
+                PythonSettings.ExperimentalFeatures = (function() {
+    
+                    /**
+                     * Properties of an ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @interface IExperimentalFeatures
+                     * @property {boolean|null} [restAsyncIoEnabled] ExperimentalFeatures restAsyncIoEnabled
+                     * @property {boolean|null} [protobufPythonicTypesEnabled] ExperimentalFeatures protobufPythonicTypesEnabled
+                     * @property {boolean|null} [unversionedPackageDisabled] ExperimentalFeatures unversionedPackageDisabled
+                     */
+    
+                    /**
+                     * Constructs a new ExperimentalFeatures.
+                     * @memberof google.api.PythonSettings
+                     * @classdesc Represents an ExperimentalFeatures.
+                     * @implements IExperimentalFeatures
+                     * @constructor
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     */
+                    function ExperimentalFeatures(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * ExperimentalFeatures restAsyncIoEnabled.
+                     * @member {boolean} restAsyncIoEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.restAsyncIoEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures protobufPythonicTypesEnabled.
+                     * @member {boolean} protobufPythonicTypesEnabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.protobufPythonicTypesEnabled = false;
+    
+                    /**
+                     * ExperimentalFeatures unversionedPackageDisabled.
+                     * @member {boolean} unversionedPackageDisabled
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     */
+                    ExperimentalFeatures.prototype.unversionedPackageDisabled = false;
+    
+                    /**
+                     * Creates a new ExperimentalFeatures instance using the specified properties.
+                     * @function create
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures=} [properties] Properties to set
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures instance
+                     */
+                    ExperimentalFeatures.create = function create(properties) {
+                        return new ExperimentalFeatures(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.restAsyncIoEnabled != null && Object.hasOwnProperty.call(message, "restAsyncIoEnabled"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).bool(message.restAsyncIoEnabled);
+                        if (message.protobufPythonicTypesEnabled != null && Object.hasOwnProperty.call(message, "protobufPythonicTypesEnabled"))
+                            writer.uint32(/* id 2, wireType 0 =*/16).bool(message.protobufPythonicTypesEnabled);
+                        if (message.unversionedPackageDisabled != null && Object.hasOwnProperty.call(message, "unversionedPackageDisabled"))
+                            writer.uint32(/* id 3, wireType 0 =*/24).bool(message.unversionedPackageDisabled);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.IExperimentalFeatures} message ExperimentalFeatures message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    ExperimentalFeatures.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.restAsyncIoEnabled = reader.bool();
+                                    break;
+                                }
+                            case 2: {
+                                    message.protobufPythonicTypesEnabled = reader.bool();
+                                    break;
+                                }
+                            case 3: {
+                                    message.unversionedPackageDisabled = reader.bool();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    ExperimentalFeatures.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an ExperimentalFeatures message.
+                     * @function verify
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    ExperimentalFeatures.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            if (typeof message.restAsyncIoEnabled !== "boolean")
+                                return "restAsyncIoEnabled: boolean expected";
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            if (typeof message.protobufPythonicTypesEnabled !== "boolean")
+                                return "protobufPythonicTypesEnabled: boolean expected";
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            if (typeof message.unversionedPackageDisabled !== "boolean")
+                                return "unversionedPackageDisabled: boolean expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.api.PythonSettings.ExperimentalFeatures} ExperimentalFeatures
+                     */
+                    ExperimentalFeatures.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.api.PythonSettings.ExperimentalFeatures)
+                            return object;
+                        var message = new $root.google.api.PythonSettings.ExperimentalFeatures();
+                        if (object.restAsyncIoEnabled != null)
+                            message.restAsyncIoEnabled = Boolean(object.restAsyncIoEnabled);
+                        if (object.protobufPythonicTypesEnabled != null)
+                            message.protobufPythonicTypesEnabled = Boolean(object.protobufPythonicTypesEnabled);
+                        if (object.unversionedPackageDisabled != null)
+                            message.unversionedPackageDisabled = Boolean(object.unversionedPackageDisabled);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {google.api.PythonSettings.ExperimentalFeatures} message ExperimentalFeatures
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    ExperimentalFeatures.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.restAsyncIoEnabled = false;
+                            object.protobufPythonicTypesEnabled = false;
+                            object.unversionedPackageDisabled = false;
+                        }
+                        if (message.restAsyncIoEnabled != null && message.hasOwnProperty("restAsyncIoEnabled"))
+                            object.restAsyncIoEnabled = message.restAsyncIoEnabled;
+                        if (message.protobufPythonicTypesEnabled != null && message.hasOwnProperty("protobufPythonicTypesEnabled"))
+                            object.protobufPythonicTypesEnabled = message.protobufPythonicTypesEnabled;
+                        if (message.unversionedPackageDisabled != null && message.hasOwnProperty("unversionedPackageDisabled"))
+                            object.unversionedPackageDisabled = message.unversionedPackageDisabled;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this ExperimentalFeatures to JSON.
+                     * @function toJSON
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    ExperimentalFeatures.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for ExperimentalFeatures
+                     * @function getTypeUrl
+                     * @memberof google.api.PythonSettings.ExperimentalFeatures
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    ExperimentalFeatures.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.api.PythonSettings.ExperimentalFeatures";
+                    };
+    
+                    return ExperimentalFeatures;
+                })();
     
                 return PythonSettings;
             })();
@@ -79133,6 +87497,7 @@
                  * @memberof google.api
                  * @interface IGoSettings
                  * @property {google.api.ICommonLanguageSettings|null} [common] GoSettings common
+                 * @property {Object.<string,string>|null} [renamedServices] GoSettings renamedServices
                  */
     
                 /**
@@ -79144,6 +87509,7 @@
                  * @param {google.api.IGoSettings=} [properties] Properties to set
                  */
                 function GoSettings(properties) {
+                    this.renamedServices = {};
                     if (properties)
                         for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                             if (properties[keys[i]] != null)
@@ -79157,6 +87523,14 @@
                  * @instance
                  */
                 GoSettings.prototype.common = null;
+    
+                /**
+                 * GoSettings renamedServices.
+                 * @member {Object.<string,string>} renamedServices
+                 * @memberof google.api.GoSettings
+                 * @instance
+                 */
+                GoSettings.prototype.renamedServices = $util.emptyObject;
     
                 /**
                  * Creates a new GoSettings instance using the specified properties.
@@ -79184,6 +87558,9 @@
                         writer = $Writer.create();
                     if (message.common != null && Object.hasOwnProperty.call(message, "common"))
                         $root.google.api.CommonLanguageSettings.encode(message.common, writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                    if (message.renamedServices != null && Object.hasOwnProperty.call(message, "renamedServices"))
+                        for (var keys = Object.keys(message.renamedServices), i = 0; i < keys.length; ++i)
+                            writer.uint32(/* id 2, wireType 2 =*/18).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.renamedServices[keys[i]]).ldelim();
                     return writer;
                 };
     
@@ -79214,7 +87591,7 @@
                 GoSettings.decode = function decode(reader, length, error) {
                     if (!(reader instanceof $Reader))
                         reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings();
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.GoSettings(), key, value;
                     while (reader.pos < end) {
                         var tag = reader.uint32();
                         if (tag === error)
@@ -79222,6 +87599,29 @@
                         switch (tag >>> 3) {
                         case 1: {
                                 message.common = $root.google.api.CommonLanguageSettings.decode(reader, reader.uint32());
+                                break;
+                            }
+                        case 2: {
+                                if (message.renamedServices === $util.emptyObject)
+                                    message.renamedServices = {};
+                                var end2 = reader.uint32() + reader.pos;
+                                key = "";
+                                value = "";
+                                while (reader.pos < end2) {
+                                    var tag2 = reader.uint32();
+                                    switch (tag2 >>> 3) {
+                                    case 1:
+                                        key = reader.string();
+                                        break;
+                                    case 2:
+                                        value = reader.string();
+                                        break;
+                                    default:
+                                        reader.skipType(tag2 & 7);
+                                        break;
+                                    }
+                                }
+                                message.renamedServices[key] = value;
                                 break;
                             }
                         default:
@@ -79264,6 +87664,14 @@
                         if (error)
                             return "common." + error;
                     }
+                    if (message.renamedServices != null && message.hasOwnProperty("renamedServices")) {
+                        if (!$util.isObject(message.renamedServices))
+                            return "renamedServices: object expected";
+                        var key = Object.keys(message.renamedServices);
+                        for (var i = 0; i < key.length; ++i)
+                            if (!$util.isString(message.renamedServices[key[i]]))
+                                return "renamedServices: string{k:string} expected";
+                    }
                     return null;
                 };
     
@@ -79284,6 +87692,13 @@
                             throw TypeError(".google.api.GoSettings.common: object expected");
                         message.common = $root.google.api.CommonLanguageSettings.fromObject(object.common);
                     }
+                    if (object.renamedServices) {
+                        if (typeof object.renamedServices !== "object")
+                            throw TypeError(".google.api.GoSettings.renamedServices: object expected");
+                        message.renamedServices = {};
+                        for (var keys = Object.keys(object.renamedServices), i = 0; i < keys.length; ++i)
+                            message.renamedServices[keys[i]] = String(object.renamedServices[keys[i]]);
+                    }
                     return message;
                 };
     
@@ -79300,10 +87715,18 @@
                     if (!options)
                         options = {};
                     var object = {};
+                    if (options.objects || options.defaults)
+                        object.renamedServices = {};
                     if (options.defaults)
                         object.common = null;
                     if (message.common != null && message.hasOwnProperty("common"))
                         object.common = $root.google.api.CommonLanguageSettings.toObject(message.common, options);
+                    var keys2;
+                    if (message.renamedServices && (keys2 = Object.keys(message.renamedServices)).length) {
+                        object.renamedServices = {};
+                        for (var j = 0; j < keys2.length; ++j)
+                            object.renamedServices[keys2[j]] = message.renamedServices[keys2[j]];
+                    }
                     return object;
                 };
     
@@ -79940,6 +88363,251 @@
                 values[valuesById[10] = "GITHUB"] = 10;
                 values[valuesById[20] = "PACKAGE_MANAGER"] = 20;
                 return values;
+            })();
+    
+            api.SelectiveGapicGeneration = (function() {
+    
+                /**
+                 * Properties of a SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @interface ISelectiveGapicGeneration
+                 * @property {Array.<string>|null} [methods] SelectiveGapicGeneration methods
+                 * @property {boolean|null} [generateOmittedAsInternal] SelectiveGapicGeneration generateOmittedAsInternal
+                 */
+    
+                /**
+                 * Constructs a new SelectiveGapicGeneration.
+                 * @memberof google.api
+                 * @classdesc Represents a SelectiveGapicGeneration.
+                 * @implements ISelectiveGapicGeneration
+                 * @constructor
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 */
+                function SelectiveGapicGeneration(properties) {
+                    this.methods = [];
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * SelectiveGapicGeneration methods.
+                 * @member {Array.<string>} methods
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.methods = $util.emptyArray;
+    
+                /**
+                 * SelectiveGapicGeneration generateOmittedAsInternal.
+                 * @member {boolean} generateOmittedAsInternal
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 */
+                SelectiveGapicGeneration.prototype.generateOmittedAsInternal = false;
+    
+                /**
+                 * Creates a new SelectiveGapicGeneration instance using the specified properties.
+                 * @function create
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration=} [properties] Properties to set
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration instance
+                 */
+                SelectiveGapicGeneration.create = function create(properties) {
+                    return new SelectiveGapicGeneration(properties);
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.methods != null && message.methods.length)
+                        for (var i = 0; i < message.methods.length; ++i)
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.methods[i]);
+                    if (message.generateOmittedAsInternal != null && Object.hasOwnProperty.call(message, "generateOmittedAsInternal"))
+                        writer.uint32(/* id 2, wireType 0 =*/16).bool(message.generateOmittedAsInternal);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.ISelectiveGapicGeneration} message SelectiveGapicGeneration message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                SelectiveGapicGeneration.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.api.SelectiveGapicGeneration();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                if (!(message.methods && message.methods.length))
+                                    message.methods = [];
+                                message.methods.push(reader.string());
+                                break;
+                            }
+                        case 2: {
+                                message.generateOmittedAsInternal = reader.bool();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                SelectiveGapicGeneration.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies a SelectiveGapicGeneration message.
+                 * @function verify
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                SelectiveGapicGeneration.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.methods != null && message.hasOwnProperty("methods")) {
+                        if (!Array.isArray(message.methods))
+                            return "methods: array expected";
+                        for (var i = 0; i < message.methods.length; ++i)
+                            if (!$util.isString(message.methods[i]))
+                                return "methods: string[] expected";
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        if (typeof message.generateOmittedAsInternal !== "boolean")
+                            return "generateOmittedAsInternal: boolean expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.api.SelectiveGapicGeneration} SelectiveGapicGeneration
+                 */
+                SelectiveGapicGeneration.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.api.SelectiveGapicGeneration)
+                        return object;
+                    var message = new $root.google.api.SelectiveGapicGeneration();
+                    if (object.methods) {
+                        if (!Array.isArray(object.methods))
+                            throw TypeError(".google.api.SelectiveGapicGeneration.methods: array expected");
+                        message.methods = [];
+                        for (var i = 0; i < object.methods.length; ++i)
+                            message.methods[i] = String(object.methods[i]);
+                    }
+                    if (object.generateOmittedAsInternal != null)
+                        message.generateOmittedAsInternal = Boolean(object.generateOmittedAsInternal);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {google.api.SelectiveGapicGeneration} message SelectiveGapicGeneration
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                SelectiveGapicGeneration.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.arrays || options.defaults)
+                        object.methods = [];
+                    if (options.defaults)
+                        object.generateOmittedAsInternal = false;
+                    if (message.methods && message.methods.length) {
+                        object.methods = [];
+                        for (var j = 0; j < message.methods.length; ++j)
+                            object.methods[j] = message.methods[j];
+                    }
+                    if (message.generateOmittedAsInternal != null && message.hasOwnProperty("generateOmittedAsInternal"))
+                        object.generateOmittedAsInternal = message.generateOmittedAsInternal;
+                    return object;
+                };
+    
+                /**
+                 * Converts this SelectiveGapicGeneration to JSON.
+                 * @function toJSON
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                SelectiveGapicGeneration.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for SelectiveGapicGeneration
+                 * @function getTypeUrl
+                 * @memberof google.api.SelectiveGapicGeneration
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                SelectiveGapicGeneration.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.api.SelectiveGapicGeneration";
+                };
+    
+                return SelectiveGapicGeneration;
             })();
     
             /**
