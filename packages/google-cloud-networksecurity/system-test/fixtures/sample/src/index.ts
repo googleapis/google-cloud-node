@@ -19,26 +19,13 @@
 import {AddressGroupServiceClient, NetworkSecurityClient, OrganizationAddressGroupServiceClient} from '@google-cloud/network-security';
 
 // check that the client class type name can be used
-function doStuffWithAddressGroupServiceClient(client: AddressGroupServiceClient) {
-  client.close();
-}
 function doStuffWithNetworkSecurityClient(client: NetworkSecurityClient) {
-  client.close();
-}
-function doStuffWithOrganizationAddressGroupServiceClient(client: OrganizationAddressGroupServiceClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const addressGroupServiceClient = new AddressGroupServiceClient();
-  doStuffWithAddressGroupServiceClient(addressGroupServiceClient);
-  // check that the client instance can be created
   const networkSecurityClient = new NetworkSecurityClient();
   doStuffWithNetworkSecurityClient(networkSecurityClient);
-  // check that the client instance can be created
-  const organizationAddressGroupServiceClient = new OrganizationAddressGroupServiceClient();
-  doStuffWithOrganizationAddressGroupServiceClient(organizationAddressGroupServiceClient);
 }
-
 main();

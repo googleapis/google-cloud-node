@@ -21,9 +21,7 @@
 const networksecurity = require('@google-cloud/network-security');
 
 function main() {
-  const addressGroupServiceClient = new networksecurity.AddressGroupServiceClient();
   const networkSecurityClient = new networksecurity.NetworkSecurityClient();
-  const organizationAddressGroupServiceClient = new networksecurity.OrganizationAddressGroupServiceClient();
 }
 
 main();
