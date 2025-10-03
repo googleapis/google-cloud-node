@@ -58,7 +58,7 @@ function main(name) {
   // const operatingSystem = {}
 
   // Imports the Gateway library
-  const {GatewayControlClient} = require('@google-cloud/gateway').v1;
+  const {GatewayControlClient} = require('@google-cloud/gke-connect-gateway').v1;
 
   // Instantiates a client
   const gatewayClient = new GatewayControlClient();
