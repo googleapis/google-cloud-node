@@ -1,1075 +1,1075 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-filestore",
-        "version": "4.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.filestore.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_ListInstances_async",
-            "title": "CloudFilestoreManager listInstances Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all instances in a project for either a specified location or for all locations.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.list_instances.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListInstances",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListInstances",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.filestore.v1beta1.ListInstancesResponse",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "ListInstances",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListInstances",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_GetInstance_async",
-            "title": "CloudFilestoreManager getInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a specific instance.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.get_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetInstance",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.filestore.v1beta1.Instance",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "GetInstance",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetInstance",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_CreateInstance_async",
-            "title": "CloudFilestoreManager createInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an instance. When creating from a backup, the capacity of the new instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).",
-            "canonical": true,
-            "file": "cloud_filestore_manager.create_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateInstance",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance",
-                        "type": ".google.cloud.filestore.v1beta1.Instance"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateInstance",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateInstance",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_UpdateInstance_async",
-            "title": "CloudFilestoreManager updateInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the settings of a specific instance.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.update_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateInstance",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "instance",
-                        "type": ".google.cloud.filestore.v1beta1.Instance"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateInstance",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateInstance",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_RestoreInstance_async",
-            "title": "CloudFilestoreManager restoreInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Restores an existing instance's file share from a backup. The capacity of the instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).",
-            "canonical": true,
-            "file": "cloud_filestore_manager.restore_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RestoreInstance",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.RestoreInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "file_share",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "source_snapshot",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "source_backup",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "RestoreInstance",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.RestoreInstance",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_RevertInstance_async",
-            "title": "CloudFilestoreManager revertInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Revert an existing instance's file system to a specified snapshot.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.revert_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RevertInstance",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.RevertInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "target_snapshot_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "RevertInstance",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.RevertInstance",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_PromoteReplica_async",
-            "title": "CloudFilestoreManager promoteReplica Sample",
-            "origin": "API_DEFINITION",
-            "description": " Promote the standby instance (replica).",
-            "canonical": true,
-            "file": "cloud_filestore_manager.promote_replica.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "PromoteReplica",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.PromoteReplica",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "peer_instance",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "PromoteReplica",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.PromoteReplica",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_DeleteInstance_async",
-            "title": "CloudFilestoreManager deleteInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an instance.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.delete_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteInstance",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteInstance",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteInstance",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_ListSnapshots_async",
-            "title": "CloudFilestoreManager listSnapshots Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all snapshots in a project for either a specified location or for all locations.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.list_snapshots.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSnapshots",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListSnapshots",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "return_partial_success",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.filestore.v1beta1.ListSnapshotsResponse",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "ListSnapshots",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListSnapshots",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_GetSnapshot_async",
-            "title": "CloudFilestoreManager getSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a specific snapshot.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.get_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSnapshot",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.filestore.v1beta1.Snapshot",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "GetSnapshot",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetSnapshot",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_CreateSnapshot_async",
-            "title": "CloudFilestoreManager createSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a snapshot.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.create_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateSnapshot",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "snapshot_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "snapshot",
-                        "type": ".google.cloud.filestore.v1beta1.Snapshot"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateSnapshot",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateSnapshot",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_DeleteSnapshot_async",
-            "title": "CloudFilestoreManager deleteSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a snapshot.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.delete_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSnapshot",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteSnapshot",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteSnapshot",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_UpdateSnapshot_async",
-            "title": "CloudFilestoreManager updateSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the settings of a specific snapshot.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.update_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSnapshot",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "snapshot",
-                        "type": ".google.cloud.filestore.v1beta1.Snapshot"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateSnapshot",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateSnapshot",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_ListBackups_async",
-            "title": "CloudFilestoreManager listBackups Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all backups in a project for either a specified location or for all locations.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.list_backups.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBackups",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListBackups",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.filestore.v1beta1.ListBackupsResponse",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "ListBackups",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListBackups",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_GetBackup_async",
-            "title": "CloudFilestoreManager getBackup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a specific backup.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.get_backup.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBackup",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetBackup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.filestore.v1beta1.Backup",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "GetBackup",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetBackup",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_CreateBackup_async",
-            "title": "CloudFilestoreManager createBackup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a backup.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.create_backup.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBackup",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateBackup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "backup",
-                        "type": ".google.cloud.filestore.v1beta1.Backup"
-                    },
-                    {
-                        "name": "backup_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateBackup",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateBackup",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_DeleteBackup_async",
-            "title": "CloudFilestoreManager deleteBackup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a backup.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.delete_backup.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteBackup",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteBackup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteBackup",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteBackup",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_UpdateBackup_async",
-            "title": "CloudFilestoreManager updateBackup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the settings of a specific backup.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.update_backup.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateBackup",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateBackup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "backup",
-                        "type": ".google.cloud.filestore.v1beta1.Backup"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateBackup",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateBackup",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_ListShares_async",
-            "title": "CloudFilestoreManager listShares Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all shares for a specified instance.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.list_shares.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListShares",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListShares",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.filestore.v1beta1.ListSharesResponse",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "ListShares",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListShares",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_GetShare_async",
-            "title": "CloudFilestoreManager getShare Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a specific share.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.get_share.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetShare",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetShare",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.filestore.v1beta1.Share",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "GetShare",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetShare",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_CreateShare_async",
-            "title": "CloudFilestoreManager createShare Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a share.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.create_share.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateShare",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateShare",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "share_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "share",
-                        "type": ".google.cloud.filestore.v1beta1.Share"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateShare",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateShare",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_DeleteShare_async",
-            "title": "CloudFilestoreManager deleteShare Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a share.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.delete_share.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteShare",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteShare",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteShare",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteShare",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "file_v1beta1_generated_CloudFilestoreManager_UpdateShare_async",
-            "title": "CloudFilestoreManager updateShare Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the settings of a specific share.",
-            "canonical": true,
-            "file": "cloud_filestore_manager.update_share.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateShare",
-                "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateShare",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "share",
-                        "type": ".google.cloud.filestore.v1beta1.Share"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudFilestoreManagerClient",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateShare",
-                    "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateShare",
-                    "service": {
-                        "shortName": "CloudFilestoreManager",
-                        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-filestore",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.filestore.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_ListInstances_async",
+      "title": "CloudFilestoreManager listInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all instances in a project for either a specified location or for all locations.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.list_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInstances",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.filestore.v1beta1.ListInstancesResponse",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "ListInstances",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListInstances",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_GetInstance_async",
+      "title": "CloudFilestoreManager getInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a specific instance.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.get_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInstance",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.filestore.v1beta1.Instance",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "GetInstance",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetInstance",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_CreateInstance_async",
+      "title": "CloudFilestoreManager createInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an instance. When creating from a backup, the capacity of the new instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).",
+      "canonical": true,
+      "file": "cloud_filestore_manager.create_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInstance",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance",
+            "type": ".google.cloud.filestore.v1beta1.Instance"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "CreateInstance",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateInstance",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_UpdateInstance_async",
+      "title": "CloudFilestoreManager updateInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the settings of a specific instance.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.update_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateInstance",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "instance",
+            "type": ".google.cloud.filestore.v1beta1.Instance"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateInstance",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateInstance",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_RestoreInstance_async",
+      "title": "CloudFilestoreManager restoreInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Restores an existing instance's file share from a backup. The capacity of the instance needs to be equal to or larger than the capacity of the backup (and also equal to or larger than the minimum capacity of the tier).",
+      "canonical": true,
+      "file": "cloud_filestore_manager.restore_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestoreInstance",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.RestoreInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "file_share",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source_snapshot",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source_backup",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "RestoreInstance",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.RestoreInstance",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_RevertInstance_async",
+      "title": "CloudFilestoreManager revertInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Revert an existing instance's file system to a specified snapshot.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.revert_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RevertInstance",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.RevertInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "target_snapshot_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "RevertInstance",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.RevertInstance",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_PromoteReplica_async",
+      "title": "CloudFilestoreManager promoteReplica Sample",
+      "origin": "API_DEFINITION",
+      "description": " Promote the standby instance (replica).",
+      "canonical": true,
+      "file": "cloud_filestore_manager.promote_replica.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PromoteReplica",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.PromoteReplica",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "peer_instance",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "PromoteReplica",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.PromoteReplica",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_DeleteInstance_async",
+      "title": "CloudFilestoreManager deleteInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an instance.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.delete_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInstance",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteInstance",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteInstance",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_ListSnapshots_async",
+      "title": "CloudFilestoreManager listSnapshots Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all snapshots in a project for either a specified location or for all locations.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.list_snapshots.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSnapshots",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListSnapshots",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.filestore.v1beta1.ListSnapshotsResponse",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "ListSnapshots",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListSnapshots",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_GetSnapshot_async",
+      "title": "CloudFilestoreManager getSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a specific snapshot.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.get_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSnapshot",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.filestore.v1beta1.Snapshot",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "GetSnapshot",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetSnapshot",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_CreateSnapshot_async",
+      "title": "CloudFilestoreManager createSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a snapshot.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.create_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSnapshot",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot",
+            "type": ".google.cloud.filestore.v1beta1.Snapshot"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "CreateSnapshot",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateSnapshot",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_DeleteSnapshot_async",
+      "title": "CloudFilestoreManager deleteSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a snapshot.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.delete_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSnapshot",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteSnapshot",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteSnapshot",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_UpdateSnapshot_async",
+      "title": "CloudFilestoreManager updateSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the settings of a specific snapshot.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.update_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSnapshot",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "snapshot",
+            "type": ".google.cloud.filestore.v1beta1.Snapshot"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateSnapshot",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateSnapshot",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_ListBackups_async",
+      "title": "CloudFilestoreManager listBackups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all backups in a project for either a specified location or for all locations.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.list_backups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBackups",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListBackups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.filestore.v1beta1.ListBackupsResponse",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "ListBackups",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListBackups",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_GetBackup_async",
+      "title": "CloudFilestoreManager getBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a specific backup.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.get_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBackup",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.filestore.v1beta1.Backup",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "GetBackup",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetBackup",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_CreateBackup_async",
+      "title": "CloudFilestoreManager createBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a backup.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.create_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBackup",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup",
+            "type": ".google.cloud.filestore.v1beta1.Backup"
+          },
+          {
+            "name": "backup_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "CreateBackup",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateBackup",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_DeleteBackup_async",
+      "title": "CloudFilestoreManager deleteBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a backup.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.delete_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBackup",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteBackup",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteBackup",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_UpdateBackup_async",
+      "title": "CloudFilestoreManager updateBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the settings of a specific backup.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.update_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBackup",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "backup",
+            "type": ".google.cloud.filestore.v1beta1.Backup"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateBackup",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateBackup",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_ListShares_async",
+      "title": "CloudFilestoreManager listShares Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all shares for a specified instance.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.list_shares.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListShares",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListShares",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.filestore.v1beta1.ListSharesResponse",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "ListShares",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.ListShares",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_GetShare_async",
+      "title": "CloudFilestoreManager getShare Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a specific share.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.get_share.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetShare",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetShare",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.filestore.v1beta1.Share",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "GetShare",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.GetShare",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_CreateShare_async",
+      "title": "CloudFilestoreManager createShare Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a share.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.create_share.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateShare",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateShare",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "share_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "share",
+            "type": ".google.cloud.filestore.v1beta1.Share"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "CreateShare",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.CreateShare",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_DeleteShare_async",
+      "title": "CloudFilestoreManager deleteShare Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a share.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.delete_share.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteShare",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteShare",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteShare",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.DeleteShare",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "file_v1beta1_generated_CloudFilestoreManager_UpdateShare_async",
+      "title": "CloudFilestoreManager updateShare Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the settings of a specific share.",
+      "canonical": true,
+      "file": "cloud_filestore_manager.update_share.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateShare",
+        "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateShare",
+        "async": true,
+        "parameters": [
+          {
+            "name": "share",
+            "type": ".google.cloud.filestore.v1beta1.Share"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudFilestoreManagerClient",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateShare",
+          "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager.UpdateShare",
+          "service": {
+            "shortName": "CloudFilestoreManager",
+            "fullName": "google.cloud.filestore.v1beta1.CloudFilestoreManager"
+          }
+        }
+      }
+    }
+  ]
 }

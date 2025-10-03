@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Filestore: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-filestore)
+# [Cloud Filestore API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/filestore.svg)](https://www.npmjs.org/package/@google-cloud/filestore)
 
+Cloud Filestore API client for Node.js
 
-
-
-file client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-filestore/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Filestore Node.js Client API Reference][client-docs]
-* [Filestore Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-filestore](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-filestore)
+* [Cloud Filestore API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/filestore/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,111 +28,80 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Filestore API][enable_api].
+1.  [Enable the Cloud Filestore API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/filestore
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * TODO(developer): Uncomment these variables before running the sample.
- */
-// const projectId = 'my-project';
-// const location = 'us-central1-a';
-
-// Imports the Google Cloud Some API library
-const {CloudFilestoreManagerClient} = require('@google-cloud/filestore');
-const client = new CloudFilestoreManagerClient();
-async function listInstances() {
-  for await (const instance of client.listInstancesAsync({
-    parent: `projects/${projectId}/locations/${location}`,
-  })) {
-    console.info(instance);
-  }
-}
-listInstances();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-filestore/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Cloud_filestore_manager.create_backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_backup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_backup.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.create_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.create_snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_snapshot.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_snapshot.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.delete_backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_backup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_backup.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.delete_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.delete_snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_snapshot.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_snapshot.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.get_backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_backup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_backup.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.get_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.get_snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_snapshot.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_snapshot.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.list_backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_backups.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_backups.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.list_instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_instances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_instances.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.list_snapshots | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_snapshots.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_snapshots.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.promote_replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.promote_replica.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.promote_replica.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.restore_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.restore_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.restore_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.revert_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.revert_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.revert_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.update_backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_backup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_backup.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.update_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.update_snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_snapshot.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_snapshot.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.create_backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_backup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_backup.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.create_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.create_share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_share.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_share.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.create_snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_snapshot.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_snapshot.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.delete_backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_backup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_backup.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.delete_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.delete_share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_share.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_share.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.delete_snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_snapshot.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_snapshot.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.get_backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_backup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_backup.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.get_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.get_share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_share.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_share.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.get_snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_snapshot.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_snapshot.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.list_backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_backups.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_backups.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.list_instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_instances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_instances.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.list_shares | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_shares.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_shares.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.list_snapshots | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_snapshots.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_snapshots.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.promote_replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.promote_replica.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.promote_replica.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.restore_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.restore_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.restore_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.revert_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.revert_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.revert_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.update_backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_backup.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_backup.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.update_instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_instance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_instance.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.update_share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_share.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_share.js,packages/google-cloud-filestore/samples/README.md) |
-| Cloud_filestore_manager.update_snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_snapshot.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_snapshot.js,packages/google-cloud-filestore/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-filestore/samples/quickstart.js,packages/google-cloud-filestore/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_backup.js) |
+| create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_instance.js) |
+| create snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.create_snapshot.js) |
+| delete backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_backup.js) |
+| delete instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_instance.js) |
+| delete snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.delete_snapshot.js) |
+| get backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_backup.js) |
+| get instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_instance.js) |
+| get snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.get_snapshot.js) |
+| list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_backups.js) |
+| list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_instances.js) |
+| list snapshots | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.list_snapshots.js) |
+| promote replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.promote_replica.js) |
+| restore instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.restore_instance.js) |
+| revert instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.revert_instance.js) |
+| update backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_backup.js) |
+| update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_instance.js) |
+| update snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/cloud_filestore_manager.update_snapshot.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1/snippet_metadata_google.cloud.filestore.v1.json) |
+| create backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_backup.js) |
+| create instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_instance.js) |
+| create share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_share.js) |
+| create snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.create_snapshot.js) |
+| delete backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_backup.js) |
+| delete instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_instance.js) |
+| delete share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_share.js) |
+| delete snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.delete_snapshot.js) |
+| get backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_backup.js) |
+| get instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_instance.js) |
+| get share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_share.js) |
+| get snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.get_snapshot.js) |
+| list backups | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_backups.js) |
+| list instances | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_instances.js) |
+| list shares | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_shares.js) |
+| list snapshots | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.list_snapshots.js) |
+| promote replica | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.promote_replica.js) |
+| restore instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.restore_instance.js) |
+| revert instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.revert_instance.js) |
+| update backup | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_backup.js) |
+| update instance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_instance.js) |
+| update share | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_share.js) |
+| update snapshot | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/cloud_filestore_manager.update_snapshot.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples/generated/v1beta1/snippet_metadata_google.cloud.filestore.v1beta1.json) |
 
-
-
-The [Filestore Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -158,45 +128,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/filestore/latest
-[product-docs]: https://cloud.google.com/filestore/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=file.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-filestore
