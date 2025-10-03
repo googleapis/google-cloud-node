@@ -36,11 +36,18 @@ export {{ '{' + service.name.toPascalCase() + 'Client}' }} from './{{ service.na
 */
 const CLIENT_EXTRACTION_REGEX = /export\s*{\s*(\w+Client)\s*}/g;
 
+/**
+ * Represents a parsed version, breaking it down into components for comparison.
+ * @property {string} version - The original version string (e.g., 'v1', 'v2beta1').
+ * @property {number} major - The major version number.
+ * @property {number} precedence - The numerical precedence of the release type (e.g., stable > beta > alpha).
+ * @property {number} preReleaseQualifier - The qualifier for pre-releases (e.g., the '2' in 'beta2').
+ */
 interface VersionSpec {
-  version: string; // Stores the "best" version found so far
+  version: string;
   major: number;
   precedence: number;
-  preReleaseQualifier: number; // For e.g., beta1 vs beta2
+  preReleaseQualifier: number;
 }
 
 /**
@@ -62,7 +69,6 @@ export class LibraryConfig {
 
   /**
    * @param isEsm Whether the library supports ES Modules.
-   * @param releaseLevel The current stability level of the library.
    * @param defaultVersion The recommended version to use.
    * @param sourcePath The path where the library is read from.
    * @param destinationPath The path where the library is written to.
@@ -109,6 +115,16 @@ export class LibraryConfig {
       this.sourcePath,
     );
     for (const directory of allVersionedLibraries) {
+      try {
+        await fs.stat(path.join(this.sourcePath, directory, this.srcPath));
+      } catch (err) {
+        throw new Error(
+          'Unexpected library format. Expected *only* top-level directories containing fully formed libraries for each verison.',
+        );
+        // If this fails, it means that the library is not
+        // in the format we expect. This could happen if we
+        // are rerunning the command on a well-formed library
+      }
       const versions = await getAllTopLevelDirectories(
         path.join(this.sourcePath, directory, this.srcPath),
       );
@@ -158,10 +174,9 @@ export class LibraryConfig {
     return defaultVersionAndClients;
   }
 
-  // In case a default version isn't provided, this function should
-  // offer a default version
   /**
    * Gets the highest version with precedence from a list of versions.
+   * Used in case we need to determine a default version if not provided.
    * Precedence is defined as: stable > beta > alpha.
    * If two versions have the same precedence, the one with the higher major version is chosen.
    * If two versions have the same precedence and major version, the one with the higher pre-release qualifier is chosen (e.g., beta2 > beta1).
@@ -189,16 +204,15 @@ export class LibraryConfig {
     };
 
     for (const version of versions) {
-      const match = version.match(/^v(\d+)(alpha|beta(\d*))?$/);
+      const match = version.match(/^v(\d+)(p\d+)?((alpha|beta)(\d*)?)?$/);
 
       if (match) {
         const majorVersion = parseInt(match[1], 10);
-        const preReleaseType = match[2]
-          ? match[2].startsWith('beta')
-            ? 'beta'
-            : 'alpha'
-          : '';
-        const preReleaseQualifier = match[3] ? parseInt(match[3], 10) : 0; // For beta1, beta2 etc.
+        // patch version is not used for sorting, but it is part of the regex
+        const preReleaseType = match[3]
+          ? alphaOrBetaPrecedence(match[3])
+          : ''; // Stable releases have highest precedence
+        const preReleaseQualifier = match[5] ? parseInt(match[5], 10) : 0; // For beta1, beta2 etc.
 
         const currentPrecedence = precedence[preReleaseType];
         const newVersionSpec: VersionSpec = {
@@ -211,6 +225,8 @@ export class LibraryConfig {
         if (isNewAHighestVersion(currentVersionSpec, newVersionSpec)) {
           currentVersionSpec = newVersionSpec;
         }
+      } else {
+        throw new Error(`Invalid version format: ${version}`);
       }
     }
 
@@ -218,12 +234,30 @@ export class LibraryConfig {
   }
 }
 
-// Comparison Logic:
-// 1. Higher Precedence (Stable > Beta > Alpha)
-// 2. Higher Major Version
-// 3. Within same pre-release type, higher qualifier (e.g., beta2 > beta1)
-// 4. If everything else is equal, the current one is just as good
+function alphaOrBetaPrecedence(preRelease: string): '' | 'beta' | 'alpha' {
+  console.log(preRelease);
+  if (preRelease.startsWith('beta')) {
+    console.log('beta')
+    return 'beta';
+  } else if (preRelease.startsWith('alpha')) {
+    console.log('alpha')
+    return 'alpha';
+  } else {
+    throw new Error(`Unknown pre-release type: ${preRelease}`);
+  }
+}
 
+/**
+ * Compares two version specifications to determine if the new version has a higher precedence.
+ * The comparison follows these rules in order:
+ * 1. Higher Precedence (Stable > Beta > Alpha)
+ * 2. Higher Major Version (if precedence is the same)
+ * 3. Higher pre-release qualifier (e.g., beta2 > beta1, if precedence and major version are the same)
+ *
+ * @param {VersionSpec} currentVersionSpec - The current highest version found so far.
+ * @param {VersionSpec} newVersionSpec - The new version to compare against the current one.
+ * @returns {boolean} True if the new version is considered higher, false otherwise.
+ */
 function isNewAHighestVersion(
   currentVersionSpec: VersionSpec,
   newVersionSpec: VersionSpec,
