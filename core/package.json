@@ -24,6 +24,7 @@
     "fix": "npm run fix --ws"
   },
   "workspaces": [
-    "dev-packages/pack-n-play"
+    "dev-packages/*",
+    "packages/*"
   ]
 }
