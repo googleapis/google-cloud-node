@@ -124,6 +124,18 @@ export async function traverseDirectory(
   return accumulator;
 }
 
+export async function getDefaultVersionSystemTest(
+  currentPath: string,
+  defaultVersion?: string,
+) {
+  if (!defaultVersion) {
+    console.warn('No default version specified; system test will');
+    return;
+  }
+
+
+}
+
 /**
  * Asynchronously traverses a directory to find all unique file paths and their content from multiple subdirectories.
  *
@@ -189,6 +201,8 @@ export async function ensureDirectoryExists(filePath: string): Promise<void> {
     }
   }
 }
+
+
 
 /**
  * Combines multiple library versions into a single, unified directory.
