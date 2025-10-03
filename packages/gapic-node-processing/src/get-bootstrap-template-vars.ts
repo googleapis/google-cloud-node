@@ -20,7 +20,11 @@ import {writeFileSync} from 'fs';
 
 const LANGUAGE = 'nodejs';
 
-const MIXINS = ['google.cloud.location.Locations', 'google.iam.v1.IAMPolicy', 'google.longrunning.Operations']
+const MIXINS = [
+  'google.cloud.location.Locations',
+  'google.iam.v1.IAMPolicy',
+  'google.longrunning.Operations',
+];
 
 export interface GHFile {
   content: string | undefined;
@@ -65,7 +69,7 @@ export interface TemplateVars {
 export async function getDistributionName(
   octokit: Octokit,
   apiId: string,
-  execSync: typeof ChildProcess.execSync
+  execSync: typeof ChildProcess.execSync,
 ) {
   const path = apiId.toString().replace(/\./g, '/');
 
@@ -81,12 +85,12 @@ export async function getDistributionName(
     writeFileSync(
       bazelLocation,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      Buffer.from((file as any).data.content, 'base64').toString('utf8')
+      Buffer.from((file as any).data.content, 'base64').toString('utf8'),
     );
   }
 
   const packageName = execSync(
-    `/go/bin/buildozer 'print package_name' ${bazelLocation}:%nodejs_gapic_library`
+    `/go/bin/buildozer 'print package_name' ${bazelLocation}:%nodejs_gapic_library`,
   )
     .toString('utf8')
     .replace('\n', '');
@@ -98,7 +102,7 @@ export async function getDistributionName(
 export async function compileVars(
   argv: CliArgs,
   serviceConfig: ServiceConfig,
-  distributionName: string
+  distributionName: string,
 ): Promise<TemplateVars> {
   return {
     name: serviceConfig.publishing.api_short_name,
@@ -121,7 +125,7 @@ export function getServiceName(serviceConfig: ServiceConfig) {
   let serviceName = '';
   if (serviceConfig?.apis) {
     for (const api of serviceConfig?.apis ?? []) {
-      if (!(MIXINS.includes(api.name))) {
+      if (!MIXINS.includes(api.name)) {
         serviceName = api.name.split('.')[api.name.split('.').length - 1];
       }
     }

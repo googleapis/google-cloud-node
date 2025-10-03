@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// eslint-disable-next-line node/no-unpublished-import
+// eslint-disable-next-line n/no-unpublished-import
 import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import {
@@ -29,9 +29,9 @@ import {
   DESTINATION_FOLDER,
   MONO_REPO_NAME,
 } from './bootstrap-library-command.test';
-// eslint-disable-next-line node/no-unpublished-import
+// eslint-disable-next-line n/no-unpublished-import
 import * as sinon from 'sinon';
-// eslint-disable-next-line node/no-unpublished-import
+// eslint-disable-next-line n/no-unpublished-import
 import {Octokit} from '@octokit/rest';
 import * as fs from 'fs';
 import yaml from 'js-yaml';
@@ -45,14 +45,14 @@ describe('get bootstrap template vars', () => {
     it('should return the API path without the version, with slashes', async () => {
       assert.deepStrictEqual(
         getApiPath('cloud.google.kms.v1'),
-        'cloud/google/kms'
+        'cloud/google/kms',
       );
     });
 
     it('should return the API path without the version, with dashes', async () => {
       assert.deepStrictEqual(
         getApiPathWithDashes('cloud.google.kms.v1'),
-        'cloud-google-kms'
+        'cloud-google-kms',
       );
     });
 
@@ -81,7 +81,7 @@ describe('get bootstrap template vars', () => {
               launch_stage: 'beta',
             },
           },
-          '@google-cloud/kms'
+          '@google-cloud/kms',
         ),
         {
           name: 'kms',
@@ -97,7 +97,7 @@ describe('get bootstrap template vars', () => {
           serviceName: 'KeyManagementService',
           hostName: 'kms.googleapis.com',
           folderName: DESTINATION_FOLDER,
-        }
+        },
       );
     });
   });
@@ -112,7 +112,7 @@ describe('get bootstrap template vars', () => {
       await getDistributionName(
         octokit,
         'google.cloud.kms.v1',
-        sinon.stub().returns(Buffer)
+        sinon.stub().returns(Buffer),
       );
 
       assert.ok(getContentStub.calledOnce);
@@ -122,7 +122,7 @@ describe('get bootstrap template vars', () => {
   describe('get service name', () => {
     it('should get the service name', async () => {
       const serviceConfig = yaml.load(
-        fs.readFileSync('./test/fixtures/serviceConfig.yaml', 'utf8')
+        fs.readFileSync('./test/fixtures/serviceConfig.yaml', 'utf8'),
       ) as ServiceConfig;
       const serviceName = getServiceName(serviceConfig);
 

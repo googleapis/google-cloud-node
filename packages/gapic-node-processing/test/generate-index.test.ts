@@ -17,9 +17,7 @@ import {describe, it} from 'mocha';
 import * as assert from 'assert';
 import * as path from 'path';
 import * as fs from 'fs/promises';
-import {
-  generateIndexTs,
-} from '../src/generate-index';
+import {generateIndexTs} from '../src/generate-index';
 import {
   LIB_POST_COMBINATION,
   LIB_POST_COMBINATION_ESM,
@@ -61,7 +59,7 @@ describe('generate index.ts', () => {
       ['v1', 'v1p1beta1', 'v2'],
       {version: 'v1', clients: ['AdaptationClient', 'SpeechClient']},
       false,
-      'src'
+      'src',
     );
 
     // Confirm index.ts was generated
@@ -93,9 +91,7 @@ describe('generate index.ts', () => {
     // Even though the library combination should delete the current library,
     // this allows us to ensure that our output is expected.
     try {
-      await fs.rm(
-        path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
-      );
+      await fs.rm(path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM));
     } catch (err) {
       console.log(`Could not delete ${LIB_POST_COMBINATION_ESM} directory`);
     }
@@ -108,17 +104,29 @@ describe('generate index.ts', () => {
       ['v2', 'v2beta2'],
       {version: 'v2', clients: ['CloudTasksClient']},
       true,
-      'esm/src'
+      'esm/src',
     );
 
     // Confirm index.ts was generated
     assert.ok(
       await fs.stat(
-        path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'src', 'index.ts'),
+        path.join(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION_ESM,
+          'esm',
+          'src',
+          'index.ts',
+        ),
       ),
     );
     const contents = await fs.readFile(
-      path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'src', 'index.ts'),
+      path.join(
+        TEST_FIXTURES_PATH,
+        LIB_POST_COMBINATION_ESM,
+        'esm',
+        'src',
+        'index.ts',
+      ),
       'utf8',
     );
     // Confirm all versions were generated

@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {Dirent} from 'fs';
 import * as nj from 'nunjucks';
-import { VersionsAndClients } from './library';
+import {VersionsAndClients} from './library';
 
 const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
@@ -43,7 +42,7 @@ export async function generateIndexTs(
   versions: string[],
   defaultVersionAndClients: VersionsAndClients,
   isEsm: boolean,
-  srcPath: string
+  srcPath: string,
 ) {
   // Render index.ts
   const variables = {versions, defaultVersionAndClients, isEsm};
@@ -57,7 +56,6 @@ export async function generateIndexTs(
 
   const compiledTemplate = env.render(TEMPLATE_FILE_NAME, variables);
 
-  console.log(path.join(currentLibrary, srcPath, INDEX_PATH))
   const outputPath = path.join(currentLibrary, srcPath, INDEX_PATH);
   console.log(
     `Generating index.ts in ${outputPath} with the following values: ${JSON.stringify(variables)}`,
@@ -65,4 +63,3 @@ export async function generateIndexTs(
   await fs.writeFile(outputPath, compiledTemplate);
   console.log(`Successfully wrote: ${outputPath}`);
 }
-

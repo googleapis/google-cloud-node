@@ -18,12 +18,12 @@ const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
 
 export interface FilePaths {
-  filePath: string
+  filePath: string;
 }
 
 export interface FilePathsAndContents {
-  filePath: string,
-  content: string
+  filePath: string;
+  content: string;
 }
 /**
  * Recursively removes a regex pattern from a specified property in an array of objects.
@@ -70,9 +70,7 @@ export function removeRegexFromNestedProperty(
  * @param filePaths An array of objects, where each object has a 'filePath' property.
  * @returns A promise that resolves when all file contents have been read and added to the array.
  */
-async function readFilesContent(
-  filePaths: FilePaths[],
-): Promise<void> {
+async function readFilesContent(filePaths: FilePaths[]): Promise<void> {
   const promises = filePaths.map(async item => {
     try {
       const content = await fs.readFile(item.filePath, 'utf-8');
@@ -122,18 +120,6 @@ export async function traverseDirectory(
   }
 
   return accumulator;
-}
-
-export async function getDefaultVersionSystemTest(
-  currentPath: string,
-  defaultVersion?: string,
-) {
-  if (!defaultVersion) {
-    console.warn('No default version specified; system test will');
-    return;
-  }
-
-
 }
 
 /**
@@ -201,8 +187,6 @@ export async function ensureDirectoryExists(filePath: string): Promise<void> {
     }
   }
 }
-
-
 
 /**
  * Combines multiple library versions into a single, unified directory.
