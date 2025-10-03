@@ -2,15 +2,14 @@
   "compilerOptions": {
     "rootDir": ".",
     "outDir": "build",
-    "allowSyntheticDefaultImports": false,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "composite": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["ES2023"],
-    "module": "commonjs",
+    "lib": ["ES2023", "dom"],
+    "module": "nodenext",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
@@ -25,7 +24,8 @@
     "src/**/*.ts",
     "test/*.ts",
     "test/**/*.ts",
-    ".eslintrc.json"
+    ".eslintrc.json",
+    "system-test/*.ts"
   ],
   "exclude": [
     "test/fixtures",
