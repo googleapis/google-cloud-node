@@ -1724,6 +1724,96 @@
                             return values;
                         })();
     
+                        /**
+                         * CarrierTransitTimeOption enum.
+                         * @name google.shopping.merchant.products.v1.CarrierTransitTimeOption
+                         * @enum {number}
+                         * @property {number} CARRIER_TRANSIT_TIME_OPTION_UNSPECIFIED=0 CARRIER_TRANSIT_TIME_OPTION_UNSPECIFIED value
+                         * @property {number} DHL_PAKET=1 DHL_PAKET value
+                         * @property {number} DHL_PACKCHEN=2 DHL_PACKCHEN value
+                         * @property {number} DHL_EXPRESSEASY=3 DHL_EXPRESSEASY value
+                         * @property {number} DPD_EXPRESS=4 DPD_EXPRESS value
+                         * @property {number} DPD_CLASSIC_PARCEL=5 DPD_CLASSIC_PARCEL value
+                         * @property {number} HERMES_HAUSTUR=6 HERMES_HAUSTUR value
+                         * @property {number} HERMES_PAKETSHOP=7 HERMES_PAKETSHOP value
+                         * @property {number} GLS_BUSINESS=8 GLS_BUSINESS value
+                         * @property {number} GLS_EXPRESS=9 GLS_EXPRESS value
+                         * @property {number} GLS_PRIVATE=10 GLS_PRIVATE value
+                         * @property {number} COLISSIMO_DOMICILE=11 COLISSIMO_DOMICILE value
+                         * @property {number} DHL_EXPRESS_12AM=12 DHL_EXPRESS_12AM value
+                         * @property {number} DHL_EXPRESS_9AM=13 DHL_EXPRESS_9AM value
+                         * @property {number} GEODIS_EXPRESS=14 GEODIS_EXPRESS value
+                         * @property {number} GEODIS_PACK_30=15 GEODIS_PACK_30 value
+                         * @property {number} GEODIS_SAME_DAY=16 GEODIS_SAME_DAY value
+                         * @property {number} GEODIS_TOP_24=17 GEODIS_TOP_24 value
+                         * @property {number} TNT_ESSENTIEL_24H=18 TNT_ESSENTIEL_24H value
+                         * @property {number} TNT_ESSENTIEL_FLEXIBILITE=19 TNT_ESSENTIEL_FLEXIBILITE value
+                         * @property {number} FEDEX_GROUND=20 FEDEX_GROUND value
+                         * @property {number} FEDEX_HOME_DELIVERY=21 FEDEX_HOME_DELIVERY value
+                         * @property {number} FEDEX_EXPRESS_SAVER=22 FEDEX_EXPRESS_SAVER value
+                         * @property {number} FEDEX_FIRST_OVERNIGHT=23 FEDEX_FIRST_OVERNIGHT value
+                         * @property {number} FEDEX_PRIORITY_OVERNIGHT=24 FEDEX_PRIORITY_OVERNIGHT value
+                         * @property {number} FEDEX_STANDARD_OVERNIGHT=25 FEDEX_STANDARD_OVERNIGHT value
+                         * @property {number} FEDEX_2DAY=26 FEDEX_2DAY value
+                         * @property {number} UPS_2ND_DAY_AIR=27 UPS_2ND_DAY_AIR value
+                         * @property {number} UPS_2ND_DAY_AM=28 UPS_2ND_DAY_AM value
+                         * @property {number} UPS_3_DAY_SELECT=29 UPS_3_DAY_SELECT value
+                         * @property {number} UPS_GROUND=30 UPS_GROUND value
+                         * @property {number} UPS_NEXT_DAY_AIR=31 UPS_NEXT_DAY_AIR value
+                         * @property {number} UPS_NEXT_DAY_AIR_EARLY_AM=32 UPS_NEXT_DAY_AIR_EARLY_AM value
+                         * @property {number} UPS_NEXT_DAY_AIR_SAVER=33 UPS_NEXT_DAY_AIR_SAVER value
+                         * @property {number} USPS_PRIORITY_MAIL_EXPRESS=34 USPS_PRIORITY_MAIL_EXPRESS value
+                         * @property {number} USPS_MEDIA_MAIL=35 USPS_MEDIA_MAIL value
+                         * @property {number} USPS_GROUND_ADVANTAGE_RETAIL=36 USPS_GROUND_ADVANTAGE_RETAIL value
+                         * @property {number} USPS_PRIORITY_MAIL=37 USPS_PRIORITY_MAIL value
+                         * @property {number} USPS_GROUND_ADVANTAGE_COMMERCIAL=38 USPS_GROUND_ADVANTAGE_COMMERCIAL value
+                         * @property {number} USPS_FIRST_CLASS_MAIL=39 USPS_FIRST_CLASS_MAIL value
+                         */
+                        v1.CarrierTransitTimeOption = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "CARRIER_TRANSIT_TIME_OPTION_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "DHL_PAKET"] = 1;
+                            values[valuesById[2] = "DHL_PACKCHEN"] = 2;
+                            values[valuesById[3] = "DHL_EXPRESSEASY"] = 3;
+                            values[valuesById[4] = "DPD_EXPRESS"] = 4;
+                            values[valuesById[5] = "DPD_CLASSIC_PARCEL"] = 5;
+                            values[valuesById[6] = "HERMES_HAUSTUR"] = 6;
+                            values[valuesById[7] = "HERMES_PAKETSHOP"] = 7;
+                            values[valuesById[8] = "GLS_BUSINESS"] = 8;
+                            values[valuesById[9] = "GLS_EXPRESS"] = 9;
+                            values[valuesById[10] = "GLS_PRIVATE"] = 10;
+                            values[valuesById[11] = "COLISSIMO_DOMICILE"] = 11;
+                            values[valuesById[12] = "DHL_EXPRESS_12AM"] = 12;
+                            values[valuesById[13] = "DHL_EXPRESS_9AM"] = 13;
+                            values[valuesById[14] = "GEODIS_EXPRESS"] = 14;
+                            values[valuesById[15] = "GEODIS_PACK_30"] = 15;
+                            values[valuesById[16] = "GEODIS_SAME_DAY"] = 16;
+                            values[valuesById[17] = "GEODIS_TOP_24"] = 17;
+                            values[valuesById[18] = "TNT_ESSENTIEL_24H"] = 18;
+                            values[valuesById[19] = "TNT_ESSENTIEL_FLEXIBILITE"] = 19;
+                            values[valuesById[20] = "FEDEX_GROUND"] = 20;
+                            values[valuesById[21] = "FEDEX_HOME_DELIVERY"] = 21;
+                            values[valuesById[22] = "FEDEX_EXPRESS_SAVER"] = 22;
+                            values[valuesById[23] = "FEDEX_FIRST_OVERNIGHT"] = 23;
+                            values[valuesById[24] = "FEDEX_PRIORITY_OVERNIGHT"] = 24;
+                            values[valuesById[25] = "FEDEX_STANDARD_OVERNIGHT"] = 25;
+                            values[valuesById[26] = "FEDEX_2DAY"] = 26;
+                            values[valuesById[27] = "UPS_2ND_DAY_AIR"] = 27;
+                            values[valuesById[28] = "UPS_2ND_DAY_AM"] = 28;
+                            values[valuesById[29] = "UPS_3_DAY_SELECT"] = 29;
+                            values[valuesById[30] = "UPS_GROUND"] = 30;
+                            values[valuesById[31] = "UPS_NEXT_DAY_AIR"] = 31;
+                            values[valuesById[32] = "UPS_NEXT_DAY_AIR_EARLY_AM"] = 32;
+                            values[valuesById[33] = "UPS_NEXT_DAY_AIR_SAVER"] = 33;
+                            values[valuesById[34] = "USPS_PRIORITY_MAIL_EXPRESS"] = 34;
+                            values[valuesById[35] = "USPS_MEDIA_MAIL"] = 35;
+                            values[valuesById[36] = "USPS_GROUND_ADVANTAGE_RETAIL"] = 36;
+                            values[valuesById[37] = "USPS_PRIORITY_MAIL"] = 37;
+                            values[valuesById[38] = "USPS_GROUND_ADVANTAGE_COMMERCIAL"] = 38;
+                            values[valuesById[39] = "USPS_FIRST_CLASS_MAIL"] = 39;
+                            return values;
+                        })();
+    
                         v1.ProductAttributes = (function() {
     
                             /**
@@ -1770,6 +1860,7 @@
                              * @property {google.shopping.merchant.products.v1.IProductDimension|null} [productWidth] ProductAttributes productWidth
                              * @property {google.shopping.merchant.products.v1.IProductWeight|null} [productWeight] ProductAttributes productWeight
                              * @property {Array.<google.shopping.merchant.products.v1.IShipping>|null} [shipping] ProductAttributes shipping
+                             * @property {Array.<google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping>|null} [carrierShipping] ProductAttributes carrierShipping
                              * @property {Array.<google.shopping.merchant.products.v1.IFreeShippingThreshold>|null} [freeShippingThreshold] ProductAttributes freeShippingThreshold
                              * @property {google.shopping.merchant.products.v1.IShippingWeight|null} [shippingWeight] ProductAttributes shippingWeight
                              * @property {google.shopping.merchant.products.v1.IShippingDimension|null} [shippingLength] ProductAttributes shippingLength
@@ -1838,6 +1929,7 @@
                                 this.loyaltyPrograms = [];
                                 this.productTypes = [];
                                 this.shipping = [];
+                                this.carrierShipping = [];
                                 this.freeShippingThreshold = [];
                                 this.sizeTypes = [];
                                 this.adsLabels = [];
@@ -2177,6 +2269,14 @@
                              * @instance
                              */
                             ProductAttributes.prototype.shipping = $util.emptyArray;
+    
+                            /**
+                             * ProductAttributes carrierShipping.
+                             * @member {Array.<google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping>} carrierShipping
+                             * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                             * @instance
+                             */
+                            ProductAttributes.prototype.carrierShipping = $util.emptyArray;
     
                             /**
                              * ProductAttributes freeShippingThreshold.
@@ -3139,6 +3239,9 @@
                                 if (message.gtins != null && message.gtins.length)
                                     for (var i = 0; i < message.gtins.length; ++i)
                                         writer.uint32(/* id 140, wireType 2 =*/1122).string(message.gtins[i]);
+                                if (message.carrierShipping != null && message.carrierShipping.length)
+                                    for (var i = 0; i < message.carrierShipping.length; ++i)
+                                        $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.encode(message.carrierShipping[i], writer.uint32(/* id 142, wireType 2 =*/1138).fork()).ldelim();
                                 return writer;
                             };
     
@@ -3343,6 +3446,12 @@
                                             if (!(message.shipping && message.shipping.length))
                                                 message.shipping = [];
                                             message.shipping.push($root.google.shopping.merchant.products.v1.Shipping.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 142: {
+                                            if (!(message.carrierShipping && message.carrierShipping.length))
+                                                message.carrierShipping = [];
+                                            message.carrierShipping.push($root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.decode(reader, reader.uint32()));
                                             break;
                                         }
                                     case 135: {
@@ -3876,6 +3985,15 @@
                                         var error = $root.google.shopping.merchant.products.v1.Shipping.verify(message.shipping[i]);
                                         if (error)
                                             return "shipping." + error;
+                                    }
+                                }
+                                if (message.carrierShipping != null && message.hasOwnProperty("carrierShipping")) {
+                                    if (!Array.isArray(message.carrierShipping))
+                                        return "carrierShipping: array expected";
+                                    for (var i = 0; i < message.carrierShipping.length; ++i) {
+                                        var error = $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.verify(message.carrierShipping[i]);
+                                        if (error)
+                                            return "carrierShipping." + error;
                                     }
                                 }
                                 if (message.freeShippingThreshold != null && message.hasOwnProperty("freeShippingThreshold")) {
@@ -4574,6 +4692,16 @@
                                         message.shipping[i] = $root.google.shopping.merchant.products.v1.Shipping.fromObject(object.shipping[i]);
                                     }
                                 }
+                                if (object.carrierShipping) {
+                                    if (!Array.isArray(object.carrierShipping))
+                                        throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.carrierShipping: array expected");
+                                    message.carrierShipping = [];
+                                    for (var i = 0; i < object.carrierShipping.length; ++i) {
+                                        if (typeof object.carrierShipping[i] !== "object")
+                                            throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.carrierShipping: object expected");
+                                        message.carrierShipping[i] = $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.fromObject(object.carrierShipping[i]);
+                                    }
+                                }
                                 if (object.freeShippingThreshold) {
                                     if (!Array.isArray(object.freeShippingThreshold))
                                         throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.freeShippingThreshold: array expected");
@@ -5242,6 +5370,7 @@
                                     object.loyaltyPrograms = [];
                                     object.sustainabilityIncentives = [];
                                     object.gtins = [];
+                                    object.carrierShipping = [];
                                 }
                                 if (options.defaults) {
                                     object.expirationDate = null;
@@ -5673,6 +5802,11 @@
                                     for (var j = 0; j < message.gtins.length; ++j)
                                         object.gtins[j] = message.gtins[j];
                                 }
+                                if (message.carrierShipping && message.carrierShipping.length) {
+                                    object.carrierShipping = [];
+                                    for (var j = 0; j < message.carrierShipping.length; ++j)
+                                        object.carrierShipping[j] = $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.toObject(message.carrierShipping[j], options);
+                                }
                                 return object;
                             };
     
@@ -5701,6 +5835,1334 @@
                                 }
                                 return typeUrlPrefix + "/google.shopping.merchant.products.v1.ProductAttributes";
                             };
+    
+                            ProductAttributes.CarrierShipping = (function() {
+    
+                                /**
+                                 * Properties of a CarrierShipping.
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                                 * @interface ICarrierShipping
+                                 * @property {string|null} [country] CarrierShipping country
+                                 * @property {string|null} [region] CarrierShipping region
+                                 * @property {string|null} [postalCode] CarrierShipping postalCode
+                                 * @property {string|null} [originPostalCode] CarrierShipping originPostalCode
+                                 * @property {google.shopping.type.IPrice|null} [flatPrice] CarrierShipping flatPrice
+                                 * @property {google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|null} [carrierPrice] CarrierShipping carrierPrice
+                                 * @property {google.shopping.type.IPrice|null} [carrierPriceFlatAdjustment] CarrierShipping carrierPriceFlatAdjustment
+                                 * @property {number|null} [carrierPricePercentageAdjustment] CarrierShipping carrierPricePercentageAdjustment
+                                 * @property {number|Long|null} [minHandlingTime] CarrierShipping minHandlingTime
+                                 * @property {number|Long|null} [maxHandlingTime] CarrierShipping maxHandlingTime
+                                 * @property {number|Long|null} [fixedMinTransitTime] CarrierShipping fixedMinTransitTime
+                                 * @property {number|Long|null} [fixedMaxTransitTime] CarrierShipping fixedMaxTransitTime
+                                 * @property {google.shopping.merchant.products.v1.CarrierTransitTimeOption|null} [carrierTransitTime] CarrierShipping carrierTransitTime
+                                 */
+    
+                                /**
+                                 * Constructs a new CarrierShipping.
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes
+                                 * @classdesc Represents a CarrierShipping.
+                                 * @implements ICarrierShipping
+                                 * @constructor
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping=} [properties] Properties to set
+                                 */
+                                function CarrierShipping(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * CarrierShipping country.
+                                 * @member {string|null|undefined} country
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.country = null;
+    
+                                /**
+                                 * CarrierShipping region.
+                                 * @member {string|null|undefined} region
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.region = null;
+    
+                                /**
+                                 * CarrierShipping postalCode.
+                                 * @member {string|null|undefined} postalCode
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.postalCode = null;
+    
+                                /**
+                                 * CarrierShipping originPostalCode.
+                                 * @member {string|null|undefined} originPostalCode
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.originPostalCode = null;
+    
+                                /**
+                                 * CarrierShipping flatPrice.
+                                 * @member {google.shopping.type.IPrice|null|undefined} flatPrice
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.flatPrice = null;
+    
+                                /**
+                                 * CarrierShipping carrierPrice.
+                                 * @member {google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|null|undefined} carrierPrice
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.carrierPrice = null;
+    
+                                /**
+                                 * CarrierShipping carrierPriceFlatAdjustment.
+                                 * @member {google.shopping.type.IPrice|null|undefined} carrierPriceFlatAdjustment
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.carrierPriceFlatAdjustment = null;
+    
+                                /**
+                                 * CarrierShipping carrierPricePercentageAdjustment.
+                                 * @member {number|null|undefined} carrierPricePercentageAdjustment
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.carrierPricePercentageAdjustment = null;
+    
+                                /**
+                                 * CarrierShipping minHandlingTime.
+                                 * @member {number|Long|null|undefined} minHandlingTime
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.minHandlingTime = null;
+    
+                                /**
+                                 * CarrierShipping maxHandlingTime.
+                                 * @member {number|Long|null|undefined} maxHandlingTime
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.maxHandlingTime = null;
+    
+                                /**
+                                 * CarrierShipping fixedMinTransitTime.
+                                 * @member {number|Long|null|undefined} fixedMinTransitTime
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.fixedMinTransitTime = null;
+    
+                                /**
+                                 * CarrierShipping fixedMaxTransitTime.
+                                 * @member {number|Long|null|undefined} fixedMaxTransitTime
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.fixedMaxTransitTime = null;
+    
+                                /**
+                                 * CarrierShipping carrierTransitTime.
+                                 * @member {google.shopping.merchant.products.v1.CarrierTransitTimeOption|null|undefined} carrierTransitTime
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 */
+                                CarrierShipping.prototype.carrierTransitTime = null;
+    
+                                // OneOf field names bound to virtual getters and setters
+                                var $oneOfFields;
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_country", {
+                                    get: $util.oneOfGetter($oneOfFields = ["country"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_region", {
+                                    get: $util.oneOfGetter($oneOfFields = ["region"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_postalCode", {
+                                    get: $util.oneOfGetter($oneOfFields = ["postalCode"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_originPostalCode", {
+                                    get: $util.oneOfGetter($oneOfFields = ["originPostalCode"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_flatPrice", {
+                                    get: $util.oneOfGetter($oneOfFields = ["flatPrice"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_carrierPrice", {
+                                    get: $util.oneOfGetter($oneOfFields = ["carrierPrice"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_carrierPriceFlatAdjustment", {
+                                    get: $util.oneOfGetter($oneOfFields = ["carrierPriceFlatAdjustment"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_carrierPricePercentageAdjustment", {
+                                    get: $util.oneOfGetter($oneOfFields = ["carrierPricePercentageAdjustment"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_minHandlingTime", {
+                                    get: $util.oneOfGetter($oneOfFields = ["minHandlingTime"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_maxHandlingTime", {
+                                    get: $util.oneOfGetter($oneOfFields = ["maxHandlingTime"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_fixedMinTransitTime", {
+                                    get: $util.oneOfGetter($oneOfFields = ["fixedMinTransitTime"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_fixedMaxTransitTime", {
+                                    get: $util.oneOfGetter($oneOfFields = ["fixedMaxTransitTime"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                // Virtual OneOf for proto3 optional field
+                                Object.defineProperty(CarrierShipping.prototype, "_carrierTransitTime", {
+                                    get: $util.oneOfGetter($oneOfFields = ["carrierTransitTime"]),
+                                    set: $util.oneOfSetter($oneOfFields)
+                                });
+    
+                                /**
+                                 * Creates a new CarrierShipping instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @static
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping=} [properties] Properties to set
+                                 * @returns {google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping} CarrierShipping instance
+                                 */
+                                CarrierShipping.create = function create(properties) {
+                                    return new CarrierShipping(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified CarrierShipping message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @static
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping} message CarrierShipping message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CarrierShipping.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.country != null && Object.hasOwnProperty.call(message, "country"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.country);
+                                    if (message.region != null && Object.hasOwnProperty.call(message, "region"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.region);
+                                    if (message.postalCode != null && Object.hasOwnProperty.call(message, "postalCode"))
+                                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.postalCode);
+                                    if (message.originPostalCode != null && Object.hasOwnProperty.call(message, "originPostalCode"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.originPostalCode);
+                                    if (message.flatPrice != null && Object.hasOwnProperty.call(message, "flatPrice"))
+                                        $root.google.shopping.type.Price.encode(message.flatPrice, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
+                                    if (message.carrierPrice != null && Object.hasOwnProperty.call(message, "carrierPrice"))
+                                        writer.uint32(/* id 6, wireType 0 =*/48).int32(message.carrierPrice);
+                                    if (message.carrierPriceFlatAdjustment != null && Object.hasOwnProperty.call(message, "carrierPriceFlatAdjustment"))
+                                        $root.google.shopping.type.Price.encode(message.carrierPriceFlatAdjustment, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
+                                    if (message.carrierPricePercentageAdjustment != null && Object.hasOwnProperty.call(message, "carrierPricePercentageAdjustment"))
+                                        writer.uint32(/* id 8, wireType 1 =*/65).double(message.carrierPricePercentageAdjustment);
+                                    if (message.minHandlingTime != null && Object.hasOwnProperty.call(message, "minHandlingTime"))
+                                        writer.uint32(/* id 9, wireType 0 =*/72).int64(message.minHandlingTime);
+                                    if (message.maxHandlingTime != null && Object.hasOwnProperty.call(message, "maxHandlingTime"))
+                                        writer.uint32(/* id 10, wireType 0 =*/80).int64(message.maxHandlingTime);
+                                    if (message.fixedMinTransitTime != null && Object.hasOwnProperty.call(message, "fixedMinTransitTime"))
+                                        writer.uint32(/* id 11, wireType 0 =*/88).int64(message.fixedMinTransitTime);
+                                    if (message.fixedMaxTransitTime != null && Object.hasOwnProperty.call(message, "fixedMaxTransitTime"))
+                                        writer.uint32(/* id 12, wireType 0 =*/96).int64(message.fixedMaxTransitTime);
+                                    if (message.carrierTransitTime != null && Object.hasOwnProperty.call(message, "carrierTransitTime"))
+                                        writer.uint32(/* id 13, wireType 0 =*/104).int32(message.carrierTransitTime);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified CarrierShipping message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @static
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping} message CarrierShipping message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                CarrierShipping.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a CarrierShipping message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping} CarrierShipping
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CarrierShipping.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.country = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.region = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.postalCode = reader.string();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.originPostalCode = reader.string();
+                                                break;
+                                            }
+                                        case 5: {
+                                                message.flatPrice = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 6: {
+                                                message.carrierPrice = reader.int32();
+                                                break;
+                                            }
+                                        case 7: {
+                                                message.carrierPriceFlatAdjustment = $root.google.shopping.type.Price.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        case 8: {
+                                                message.carrierPricePercentageAdjustment = reader.double();
+                                                break;
+                                            }
+                                        case 9: {
+                                                message.minHandlingTime = reader.int64();
+                                                break;
+                                            }
+                                        case 10: {
+                                                message.maxHandlingTime = reader.int64();
+                                                break;
+                                            }
+                                        case 11: {
+                                                message.fixedMinTransitTime = reader.int64();
+                                                break;
+                                            }
+                                        case 12: {
+                                                message.fixedMaxTransitTime = reader.int64();
+                                                break;
+                                            }
+                                        case 13: {
+                                                message.carrierTransitTime = reader.int32();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a CarrierShipping message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping} CarrierShipping
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                CarrierShipping.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a CarrierShipping message.
+                                 * @function verify
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                CarrierShipping.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    var properties = {};
+                                    if (message.country != null && message.hasOwnProperty("country")) {
+                                        properties._country = 1;
+                                        if (!$util.isString(message.country))
+                                            return "country: string expected";
+                                    }
+                                    if (message.region != null && message.hasOwnProperty("region")) {
+                                        properties._region = 1;
+                                        if (!$util.isString(message.region))
+                                            return "region: string expected";
+                                    }
+                                    if (message.postalCode != null && message.hasOwnProperty("postalCode")) {
+                                        properties._postalCode = 1;
+                                        if (!$util.isString(message.postalCode))
+                                            return "postalCode: string expected";
+                                    }
+                                    if (message.originPostalCode != null && message.hasOwnProperty("originPostalCode")) {
+                                        properties._originPostalCode = 1;
+                                        if (!$util.isString(message.originPostalCode))
+                                            return "originPostalCode: string expected";
+                                    }
+                                    if (message.flatPrice != null && message.hasOwnProperty("flatPrice")) {
+                                        properties._flatPrice = 1;
+                                        {
+                                            var error = $root.google.shopping.type.Price.verify(message.flatPrice);
+                                            if (error)
+                                                return "flatPrice." + error;
+                                        }
+                                    }
+                                    if (message.carrierPrice != null && message.hasOwnProperty("carrierPrice")) {
+                                        properties._carrierPrice = 1;
+                                        switch (message.carrierPrice) {
+                                        default:
+                                            return "carrierPrice: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
+                                        case 13:
+                                        case 14:
+                                        case 15:
+                                        case 16:
+                                        case 17:
+                                        case 18:
+                                        case 19:
+                                        case 20:
+                                        case 21:
+                                        case 22:
+                                        case 23:
+                                        case 24:
+                                        case 25:
+                                        case 26:
+                                        case 27:
+                                        case 28:
+                                        case 29:
+                                        case 30:
+                                        case 31:
+                                        case 32:
+                                        case 33:
+                                        case 34:
+                                        case 35:
+                                        case 36:
+                                        case 37:
+                                        case 38:
+                                        case 39:
+                                        case 40:
+                                        case 41:
+                                        case 42:
+                                        case 43:
+                                        case 44:
+                                        case 45:
+                                        case 46:
+                                        case 47:
+                                        case 48:
+                                        case 49:
+                                        case 50:
+                                        case 51:
+                                        case 52:
+                                        case 53:
+                                        case 54:
+                                        case 55:
+                                        case 56:
+                                        case 57:
+                                        case 58:
+                                        case 59:
+                                        case 60:
+                                        case 61:
+                                            break;
+                                        }
+                                    }
+                                    if (message.carrierPriceFlatAdjustment != null && message.hasOwnProperty("carrierPriceFlatAdjustment")) {
+                                        properties._carrierPriceFlatAdjustment = 1;
+                                        {
+                                            var error = $root.google.shopping.type.Price.verify(message.carrierPriceFlatAdjustment);
+                                            if (error)
+                                                return "carrierPriceFlatAdjustment." + error;
+                                        }
+                                    }
+                                    if (message.carrierPricePercentageAdjustment != null && message.hasOwnProperty("carrierPricePercentageAdjustment")) {
+                                        properties._carrierPricePercentageAdjustment = 1;
+                                        if (typeof message.carrierPricePercentageAdjustment !== "number")
+                                            return "carrierPricePercentageAdjustment: number expected";
+                                    }
+                                    if (message.minHandlingTime != null && message.hasOwnProperty("minHandlingTime")) {
+                                        properties._minHandlingTime = 1;
+                                        if (!$util.isInteger(message.minHandlingTime) && !(message.minHandlingTime && $util.isInteger(message.minHandlingTime.low) && $util.isInteger(message.minHandlingTime.high)))
+                                            return "minHandlingTime: integer|Long expected";
+                                    }
+                                    if (message.maxHandlingTime != null && message.hasOwnProperty("maxHandlingTime")) {
+                                        properties._maxHandlingTime = 1;
+                                        if (!$util.isInteger(message.maxHandlingTime) && !(message.maxHandlingTime && $util.isInteger(message.maxHandlingTime.low) && $util.isInteger(message.maxHandlingTime.high)))
+                                            return "maxHandlingTime: integer|Long expected";
+                                    }
+                                    if (message.fixedMinTransitTime != null && message.hasOwnProperty("fixedMinTransitTime")) {
+                                        properties._fixedMinTransitTime = 1;
+                                        if (!$util.isInteger(message.fixedMinTransitTime) && !(message.fixedMinTransitTime && $util.isInteger(message.fixedMinTransitTime.low) && $util.isInteger(message.fixedMinTransitTime.high)))
+                                            return "fixedMinTransitTime: integer|Long expected";
+                                    }
+                                    if (message.fixedMaxTransitTime != null && message.hasOwnProperty("fixedMaxTransitTime")) {
+                                        properties._fixedMaxTransitTime = 1;
+                                        if (!$util.isInteger(message.fixedMaxTransitTime) && !(message.fixedMaxTransitTime && $util.isInteger(message.fixedMaxTransitTime.low) && $util.isInteger(message.fixedMaxTransitTime.high)))
+                                            return "fixedMaxTransitTime: integer|Long expected";
+                                    }
+                                    if (message.carrierTransitTime != null && message.hasOwnProperty("carrierTransitTime")) {
+                                        properties._carrierTransitTime = 1;
+                                        switch (message.carrierTransitTime) {
+                                        default:
+                                            return "carrierTransitTime: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                        case 5:
+                                        case 6:
+                                        case 7:
+                                        case 8:
+                                        case 9:
+                                        case 10:
+                                        case 11:
+                                        case 12:
+                                        case 13:
+                                        case 14:
+                                        case 15:
+                                        case 16:
+                                        case 17:
+                                        case 18:
+                                        case 19:
+                                        case 20:
+                                        case 21:
+                                        case 22:
+                                        case 23:
+                                        case 24:
+                                        case 25:
+                                        case 26:
+                                        case 27:
+                                        case 28:
+                                        case 29:
+                                        case 30:
+                                        case 31:
+                                        case 32:
+                                        case 33:
+                                        case 34:
+                                        case 35:
+                                        case 36:
+                                        case 37:
+                                        case 38:
+                                        case 39:
+                                            break;
+                                        }
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a CarrierShipping message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping} CarrierShipping
+                                 */
+                                CarrierShipping.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping)
+                                        return object;
+                                    var message = new $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping();
+                                    if (object.country != null)
+                                        message.country = String(object.country);
+                                    if (object.region != null)
+                                        message.region = String(object.region);
+                                    if (object.postalCode != null)
+                                        message.postalCode = String(object.postalCode);
+                                    if (object.originPostalCode != null)
+                                        message.originPostalCode = String(object.originPostalCode);
+                                    if (object.flatPrice != null) {
+                                        if (typeof object.flatPrice !== "object")
+                                            throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.flatPrice: object expected");
+                                        message.flatPrice = $root.google.shopping.type.Price.fromObject(object.flatPrice);
+                                    }
+                                    switch (object.carrierPrice) {
+                                    default:
+                                        if (typeof object.carrierPrice === "number") {
+                                            message.carrierPrice = object.carrierPrice;
+                                            break;
+                                        }
+                                        break;
+                                    case "CARRIER_PRICE_OPTION_UNSPECIFIED":
+                                    case 0:
+                                        message.carrierPrice = 0;
+                                        break;
+                                    case "AUSTRALIA_POST_REGULAR":
+                                    case 1:
+                                        message.carrierPrice = 1;
+                                        break;
+                                    case "AUSTRALIA_POST_EXPRESS":
+                                    case 2:
+                                        message.carrierPrice = 2;
+                                        break;
+                                    case "AUSTRALIA_POST_REGULAR_S":
+                                    case 3:
+                                        message.carrierPrice = 3;
+                                        break;
+                                    case "AUSTRALIA_POST_REGULAR_M":
+                                    case 4:
+                                        message.carrierPrice = 4;
+                                        break;
+                                    case "AUSTRALIA_POST_REGULAR_L":
+                                    case 5:
+                                        message.carrierPrice = 5;
+                                        break;
+                                    case "AUSTRALIA_POST_REGULAR_XL":
+                                    case 6:
+                                        message.carrierPrice = 6;
+                                        break;
+                                    case "AUSTRALIA_POST_EXPRESS_S":
+                                    case 7:
+                                        message.carrierPrice = 7;
+                                        break;
+                                    case "AUSTRALIA_POST_EXPRESS_M":
+                                    case 8:
+                                        message.carrierPrice = 8;
+                                        break;
+                                    case "AUSTRALIA_POST_EXPRESS_L":
+                                    case 9:
+                                        message.carrierPrice = 9;
+                                        break;
+                                    case "AUSTRALIA_POST_EXPRESS_XL":
+                                    case 10:
+                                        message.carrierPrice = 10;
+                                        break;
+                                    case "TNT_ROAD_EXPRESS":
+                                    case 11:
+                                        message.carrierPrice = 11;
+                                        break;
+                                    case "TNT_OVERNIGHT_EXPRESS":
+                                    case 12:
+                                        message.carrierPrice = 12;
+                                        break;
+                                    case "TOLL_ROAD_DELIVERY":
+                                    case 13:
+                                        message.carrierPrice = 13;
+                                        break;
+                                    case "TOLL_OVERNIGHT_PRIORITY":
+                                    case 14:
+                                        message.carrierPrice = 14;
+                                        break;
+                                    case "DHL_PAKET":
+                                    case 15:
+                                        message.carrierPrice = 15;
+                                        break;
+                                    case "DHL_PACKCHEN":
+                                    case 16:
+                                        message.carrierPrice = 16;
+                                        break;
+                                    case "DPD_EXPRESS_12":
+                                    case 17:
+                                        message.carrierPrice = 17;
+                                        break;
+                                    case "DPD_EXPRESS":
+                                    case 18:
+                                        message.carrierPrice = 18;
+                                        break;
+                                    case "DPD_CLASSIC_PARCEL":
+                                    case 19:
+                                        message.carrierPrice = 19;
+                                        break;
+                                    case "HERMES_PACKCHEN":
+                                    case 20:
+                                        message.carrierPrice = 20;
+                                        break;
+                                    case "HERMES_PAKETKLASSE_S":
+                                    case 21:
+                                        message.carrierPrice = 21;
+                                        break;
+                                    case "HERMES_PAKETKLASSE_M":
+                                    case 22:
+                                        message.carrierPrice = 22;
+                                        break;
+                                    case "HERMES_PAKETKLASSE_L":
+                                    case 23:
+                                        message.carrierPrice = 23;
+                                        break;
+                                    case "UPS_EXPRESS":
+                                    case 24:
+                                        message.carrierPrice = 24;
+                                        break;
+                                    case "UPS_EXPRESS_SAVER":
+                                    case 25:
+                                        message.carrierPrice = 25;
+                                        break;
+                                    case "UPS_EXPRESS_STANDARD":
+                                    case 26:
+                                        message.carrierPrice = 26;
+                                        break;
+                                    case "DHL_EXPRESS":
+                                    case 27:
+                                        message.carrierPrice = 27;
+                                        break;
+                                    case "DHL_EXPRESS_12":
+                                    case 28:
+                                        message.carrierPrice = 28;
+                                        break;
+                                    case "DPD_NEXT_DAY":
+                                    case 29:
+                                        message.carrierPrice = 29;
+                                        break;
+                                    case "DPD_STANDARD_NEXT_DAY":
+                                    case 30:
+                                        message.carrierPrice = 30;
+                                        break;
+                                    case "DPD_STANDARD_TWO_DAY":
+                                    case 31:
+                                        message.carrierPrice = 31;
+                                        break;
+                                    case "RMG_1ST_CLASS_SMALL":
+                                    case 32:
+                                        message.carrierPrice = 32;
+                                        break;
+                                    case "RMG_1ST_CLASS_MEDIUM":
+                                    case 33:
+                                        message.carrierPrice = 33;
+                                        break;
+                                    case "RMG_2ND_CLASS_SMALL":
+                                    case 34:
+                                        message.carrierPrice = 34;
+                                        break;
+                                    case "RMG_2ND_CLASS_MEDIUM":
+                                    case 35:
+                                        message.carrierPrice = 35;
+                                        break;
+                                    case "TNT_EXPRESS":
+                                    case 36:
+                                        message.carrierPrice = 36;
+                                        break;
+                                    case "TNT_EXPRESS_10":
+                                    case 37:
+                                        message.carrierPrice = 37;
+                                        break;
+                                    case "TNT_EXPRESS_12":
+                                    case 38:
+                                        message.carrierPrice = 38;
+                                        break;
+                                    case "YODEL_B2C_48HR":
+                                    case 39:
+                                        message.carrierPrice = 39;
+                                        break;
+                                    case "YODEL_B2C_72HR":
+                                    case 40:
+                                        message.carrierPrice = 40;
+                                        break;
+                                    case "YODEL_B2C_PACKET":
+                                    case 41:
+                                        message.carrierPrice = 41;
+                                        break;
+                                    case "FEDEX_GROUND":
+                                    case 42:
+                                        message.carrierPrice = 42;
+                                        break;
+                                    case "FEDEX_HOME_DELIVERY":
+                                    case 43:
+                                        message.carrierPrice = 43;
+                                        break;
+                                    case "FEDEX_EXPRESS_SAVER":
+                                    case 44:
+                                        message.carrierPrice = 44;
+                                        break;
+                                    case "FEDEX_FIRST_OVERNIGHT":
+                                    case 45:
+                                        message.carrierPrice = 45;
+                                        break;
+                                    case "FEDEX_PRIORITY_OVERNIGHT":
+                                    case 46:
+                                        message.carrierPrice = 46;
+                                        break;
+                                    case "FEDEX_STANDARD_OVERNIGHT":
+                                    case 47:
+                                        message.carrierPrice = 47;
+                                        break;
+                                    case "FEDEX_2DAY":
+                                    case 48:
+                                        message.carrierPrice = 48;
+                                        break;
+                                    case "UPS_STANDARD":
+                                    case 49:
+                                        message.carrierPrice = 49;
+                                        break;
+                                    case "UPS_2ND_DAY_AIR":
+                                    case 50:
+                                        message.carrierPrice = 50;
+                                        break;
+                                    case "UPS_2ND_DAY_AM":
+                                    case 51:
+                                        message.carrierPrice = 51;
+                                        break;
+                                    case "UPS_3_DAY_SELECT":
+                                    case 52:
+                                        message.carrierPrice = 52;
+                                        break;
+                                    case "UPS_GROUND":
+                                    case 53:
+                                        message.carrierPrice = 53;
+                                        break;
+                                    case "UPS_NEXT_DAY_AIR":
+                                    case 54:
+                                        message.carrierPrice = 54;
+                                        break;
+                                    case "UPS_NEXT_DAY_AIR_EARLY_AM":
+                                    case 55:
+                                        message.carrierPrice = 55;
+                                        break;
+                                    case "UPS_NEXT_DAY_AIR_SAVER":
+                                    case 56:
+                                        message.carrierPrice = 56;
+                                        break;
+                                    case "USPS_PRIORITY_MAIL_EXPRESS":
+                                    case 57:
+                                        message.carrierPrice = 57;
+                                        break;
+                                    case "USPS_MEDIA_MAIL":
+                                    case 58:
+                                        message.carrierPrice = 58;
+                                        break;
+                                    case "USPS_GROUND_ADVANTAGE_RETAIL":
+                                    case 59:
+                                        message.carrierPrice = 59;
+                                        break;
+                                    case "USPS_PRIORITY_MAIL":
+                                    case 60:
+                                        message.carrierPrice = 60;
+                                        break;
+                                    case "USPS_GROUND_ADVANTAGE_COMMERCIAL":
+                                    case 61:
+                                        message.carrierPrice = 61;
+                                        break;
+                                    }
+                                    if (object.carrierPriceFlatAdjustment != null) {
+                                        if (typeof object.carrierPriceFlatAdjustment !== "object")
+                                            throw TypeError(".google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.carrierPriceFlatAdjustment: object expected");
+                                        message.carrierPriceFlatAdjustment = $root.google.shopping.type.Price.fromObject(object.carrierPriceFlatAdjustment);
+                                    }
+                                    if (object.carrierPricePercentageAdjustment != null)
+                                        message.carrierPricePercentageAdjustment = Number(object.carrierPricePercentageAdjustment);
+                                    if (object.minHandlingTime != null)
+                                        if ($util.Long)
+                                            (message.minHandlingTime = $util.Long.fromValue(object.minHandlingTime)).unsigned = false;
+                                        else if (typeof object.minHandlingTime === "string")
+                                            message.minHandlingTime = parseInt(object.minHandlingTime, 10);
+                                        else if (typeof object.minHandlingTime === "number")
+                                            message.minHandlingTime = object.minHandlingTime;
+                                        else if (typeof object.minHandlingTime === "object")
+                                            message.minHandlingTime = new $util.LongBits(object.minHandlingTime.low >>> 0, object.minHandlingTime.high >>> 0).toNumber();
+                                    if (object.maxHandlingTime != null)
+                                        if ($util.Long)
+                                            (message.maxHandlingTime = $util.Long.fromValue(object.maxHandlingTime)).unsigned = false;
+                                        else if (typeof object.maxHandlingTime === "string")
+                                            message.maxHandlingTime = parseInt(object.maxHandlingTime, 10);
+                                        else if (typeof object.maxHandlingTime === "number")
+                                            message.maxHandlingTime = object.maxHandlingTime;
+                                        else if (typeof object.maxHandlingTime === "object")
+                                            message.maxHandlingTime = new $util.LongBits(object.maxHandlingTime.low >>> 0, object.maxHandlingTime.high >>> 0).toNumber();
+                                    if (object.fixedMinTransitTime != null)
+                                        if ($util.Long)
+                                            (message.fixedMinTransitTime = $util.Long.fromValue(object.fixedMinTransitTime)).unsigned = false;
+                                        else if (typeof object.fixedMinTransitTime === "string")
+                                            message.fixedMinTransitTime = parseInt(object.fixedMinTransitTime, 10);
+                                        else if (typeof object.fixedMinTransitTime === "number")
+                                            message.fixedMinTransitTime = object.fixedMinTransitTime;
+                                        else if (typeof object.fixedMinTransitTime === "object")
+                                            message.fixedMinTransitTime = new $util.LongBits(object.fixedMinTransitTime.low >>> 0, object.fixedMinTransitTime.high >>> 0).toNumber();
+                                    if (object.fixedMaxTransitTime != null)
+                                        if ($util.Long)
+                                            (message.fixedMaxTransitTime = $util.Long.fromValue(object.fixedMaxTransitTime)).unsigned = false;
+                                        else if (typeof object.fixedMaxTransitTime === "string")
+                                            message.fixedMaxTransitTime = parseInt(object.fixedMaxTransitTime, 10);
+                                        else if (typeof object.fixedMaxTransitTime === "number")
+                                            message.fixedMaxTransitTime = object.fixedMaxTransitTime;
+                                        else if (typeof object.fixedMaxTransitTime === "object")
+                                            message.fixedMaxTransitTime = new $util.LongBits(object.fixedMaxTransitTime.low >>> 0, object.fixedMaxTransitTime.high >>> 0).toNumber();
+                                    switch (object.carrierTransitTime) {
+                                    default:
+                                        if (typeof object.carrierTransitTime === "number") {
+                                            message.carrierTransitTime = object.carrierTransitTime;
+                                            break;
+                                        }
+                                        break;
+                                    case "CARRIER_TRANSIT_TIME_OPTION_UNSPECIFIED":
+                                    case 0:
+                                        message.carrierTransitTime = 0;
+                                        break;
+                                    case "DHL_PAKET":
+                                    case 1:
+                                        message.carrierTransitTime = 1;
+                                        break;
+                                    case "DHL_PACKCHEN":
+                                    case 2:
+                                        message.carrierTransitTime = 2;
+                                        break;
+                                    case "DHL_EXPRESSEASY":
+                                    case 3:
+                                        message.carrierTransitTime = 3;
+                                        break;
+                                    case "DPD_EXPRESS":
+                                    case 4:
+                                        message.carrierTransitTime = 4;
+                                        break;
+                                    case "DPD_CLASSIC_PARCEL":
+                                    case 5:
+                                        message.carrierTransitTime = 5;
+                                        break;
+                                    case "HERMES_HAUSTUR":
+                                    case 6:
+                                        message.carrierTransitTime = 6;
+                                        break;
+                                    case "HERMES_PAKETSHOP":
+                                    case 7:
+                                        message.carrierTransitTime = 7;
+                                        break;
+                                    case "GLS_BUSINESS":
+                                    case 8:
+                                        message.carrierTransitTime = 8;
+                                        break;
+                                    case "GLS_EXPRESS":
+                                    case 9:
+                                        message.carrierTransitTime = 9;
+                                        break;
+                                    case "GLS_PRIVATE":
+                                    case 10:
+                                        message.carrierTransitTime = 10;
+                                        break;
+                                    case "COLISSIMO_DOMICILE":
+                                    case 11:
+                                        message.carrierTransitTime = 11;
+                                        break;
+                                    case "DHL_EXPRESS_12AM":
+                                    case 12:
+                                        message.carrierTransitTime = 12;
+                                        break;
+                                    case "DHL_EXPRESS_9AM":
+                                    case 13:
+                                        message.carrierTransitTime = 13;
+                                        break;
+                                    case "GEODIS_EXPRESS":
+                                    case 14:
+                                        message.carrierTransitTime = 14;
+                                        break;
+                                    case "GEODIS_PACK_30":
+                                    case 15:
+                                        message.carrierTransitTime = 15;
+                                        break;
+                                    case "GEODIS_SAME_DAY":
+                                    case 16:
+                                        message.carrierTransitTime = 16;
+                                        break;
+                                    case "GEODIS_TOP_24":
+                                    case 17:
+                                        message.carrierTransitTime = 17;
+                                        break;
+                                    case "TNT_ESSENTIEL_24H":
+                                    case 18:
+                                        message.carrierTransitTime = 18;
+                                        break;
+                                    case "TNT_ESSENTIEL_FLEXIBILITE":
+                                    case 19:
+                                        message.carrierTransitTime = 19;
+                                        break;
+                                    case "FEDEX_GROUND":
+                                    case 20:
+                                        message.carrierTransitTime = 20;
+                                        break;
+                                    case "FEDEX_HOME_DELIVERY":
+                                    case 21:
+                                        message.carrierTransitTime = 21;
+                                        break;
+                                    case "FEDEX_EXPRESS_SAVER":
+                                    case 22:
+                                        message.carrierTransitTime = 22;
+                                        break;
+                                    case "FEDEX_FIRST_OVERNIGHT":
+                                    case 23:
+                                        message.carrierTransitTime = 23;
+                                        break;
+                                    case "FEDEX_PRIORITY_OVERNIGHT":
+                                    case 24:
+                                        message.carrierTransitTime = 24;
+                                        break;
+                                    case "FEDEX_STANDARD_OVERNIGHT":
+                                    case 25:
+                                        message.carrierTransitTime = 25;
+                                        break;
+                                    case "FEDEX_2DAY":
+                                    case 26:
+                                        message.carrierTransitTime = 26;
+                                        break;
+                                    case "UPS_2ND_DAY_AIR":
+                                    case 27:
+                                        message.carrierTransitTime = 27;
+                                        break;
+                                    case "UPS_2ND_DAY_AM":
+                                    case 28:
+                                        message.carrierTransitTime = 28;
+                                        break;
+                                    case "UPS_3_DAY_SELECT":
+                                    case 29:
+                                        message.carrierTransitTime = 29;
+                                        break;
+                                    case "UPS_GROUND":
+                                    case 30:
+                                        message.carrierTransitTime = 30;
+                                        break;
+                                    case "UPS_NEXT_DAY_AIR":
+                                    case 31:
+                                        message.carrierTransitTime = 31;
+                                        break;
+                                    case "UPS_NEXT_DAY_AIR_EARLY_AM":
+                                    case 32:
+                                        message.carrierTransitTime = 32;
+                                        break;
+                                    case "UPS_NEXT_DAY_AIR_SAVER":
+                                    case 33:
+                                        message.carrierTransitTime = 33;
+                                        break;
+                                    case "USPS_PRIORITY_MAIL_EXPRESS":
+                                    case 34:
+                                        message.carrierTransitTime = 34;
+                                        break;
+                                    case "USPS_MEDIA_MAIL":
+                                    case 35:
+                                        message.carrierTransitTime = 35;
+                                        break;
+                                    case "USPS_GROUND_ADVANTAGE_RETAIL":
+                                    case 36:
+                                        message.carrierTransitTime = 36;
+                                        break;
+                                    case "USPS_PRIORITY_MAIL":
+                                    case 37:
+                                        message.carrierTransitTime = 37;
+                                        break;
+                                    case "USPS_GROUND_ADVANTAGE_COMMERCIAL":
+                                    case 38:
+                                        message.carrierTransitTime = 38;
+                                        break;
+                                    case "USPS_FIRST_CLASS_MAIL":
+                                    case 39:
+                                        message.carrierTransitTime = 39;
+                                        break;
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a CarrierShipping message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @static
+                                 * @param {google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping} message CarrierShipping
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                CarrierShipping.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (message.country != null && message.hasOwnProperty("country")) {
+                                        object.country = message.country;
+                                        if (options.oneofs)
+                                            object._country = "country";
+                                    }
+                                    if (message.region != null && message.hasOwnProperty("region")) {
+                                        object.region = message.region;
+                                        if (options.oneofs)
+                                            object._region = "region";
+                                    }
+                                    if (message.postalCode != null && message.hasOwnProperty("postalCode")) {
+                                        object.postalCode = message.postalCode;
+                                        if (options.oneofs)
+                                            object._postalCode = "postalCode";
+                                    }
+                                    if (message.originPostalCode != null && message.hasOwnProperty("originPostalCode")) {
+                                        object.originPostalCode = message.originPostalCode;
+                                        if (options.oneofs)
+                                            object._originPostalCode = "originPostalCode";
+                                    }
+                                    if (message.flatPrice != null && message.hasOwnProperty("flatPrice")) {
+                                        object.flatPrice = $root.google.shopping.type.Price.toObject(message.flatPrice, options);
+                                        if (options.oneofs)
+                                            object._flatPrice = "flatPrice";
+                                    }
+                                    if (message.carrierPrice != null && message.hasOwnProperty("carrierPrice")) {
+                                        object.carrierPrice = options.enums === String ? $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption[message.carrierPrice] === undefined ? message.carrierPrice : $root.google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption[message.carrierPrice] : message.carrierPrice;
+                                        if (options.oneofs)
+                                            object._carrierPrice = "carrierPrice";
+                                    }
+                                    if (message.carrierPriceFlatAdjustment != null && message.hasOwnProperty("carrierPriceFlatAdjustment")) {
+                                        object.carrierPriceFlatAdjustment = $root.google.shopping.type.Price.toObject(message.carrierPriceFlatAdjustment, options);
+                                        if (options.oneofs)
+                                            object._carrierPriceFlatAdjustment = "carrierPriceFlatAdjustment";
+                                    }
+                                    if (message.carrierPricePercentageAdjustment != null && message.hasOwnProperty("carrierPricePercentageAdjustment")) {
+                                        object.carrierPricePercentageAdjustment = options.json && !isFinite(message.carrierPricePercentageAdjustment) ? String(message.carrierPricePercentageAdjustment) : message.carrierPricePercentageAdjustment;
+                                        if (options.oneofs)
+                                            object._carrierPricePercentageAdjustment = "carrierPricePercentageAdjustment";
+                                    }
+                                    if (message.minHandlingTime != null && message.hasOwnProperty("minHandlingTime")) {
+                                        if (typeof message.minHandlingTime === "number")
+                                            object.minHandlingTime = options.longs === String ? String(message.minHandlingTime) : message.minHandlingTime;
+                                        else
+                                            object.minHandlingTime = options.longs === String ? $util.Long.prototype.toString.call(message.minHandlingTime) : options.longs === Number ? new $util.LongBits(message.minHandlingTime.low >>> 0, message.minHandlingTime.high >>> 0).toNumber() : message.minHandlingTime;
+                                        if (options.oneofs)
+                                            object._minHandlingTime = "minHandlingTime";
+                                    }
+                                    if (message.maxHandlingTime != null && message.hasOwnProperty("maxHandlingTime")) {
+                                        if (typeof message.maxHandlingTime === "number")
+                                            object.maxHandlingTime = options.longs === String ? String(message.maxHandlingTime) : message.maxHandlingTime;
+                                        else
+                                            object.maxHandlingTime = options.longs === String ? $util.Long.prototype.toString.call(message.maxHandlingTime) : options.longs === Number ? new $util.LongBits(message.maxHandlingTime.low >>> 0, message.maxHandlingTime.high >>> 0).toNumber() : message.maxHandlingTime;
+                                        if (options.oneofs)
+                                            object._maxHandlingTime = "maxHandlingTime";
+                                    }
+                                    if (message.fixedMinTransitTime != null && message.hasOwnProperty("fixedMinTransitTime")) {
+                                        if (typeof message.fixedMinTransitTime === "number")
+                                            object.fixedMinTransitTime = options.longs === String ? String(message.fixedMinTransitTime) : message.fixedMinTransitTime;
+                                        else
+                                            object.fixedMinTransitTime = options.longs === String ? $util.Long.prototype.toString.call(message.fixedMinTransitTime) : options.longs === Number ? new $util.LongBits(message.fixedMinTransitTime.low >>> 0, message.fixedMinTransitTime.high >>> 0).toNumber() : message.fixedMinTransitTime;
+                                        if (options.oneofs)
+                                            object._fixedMinTransitTime = "fixedMinTransitTime";
+                                    }
+                                    if (message.fixedMaxTransitTime != null && message.hasOwnProperty("fixedMaxTransitTime")) {
+                                        if (typeof message.fixedMaxTransitTime === "number")
+                                            object.fixedMaxTransitTime = options.longs === String ? String(message.fixedMaxTransitTime) : message.fixedMaxTransitTime;
+                                        else
+                                            object.fixedMaxTransitTime = options.longs === String ? $util.Long.prototype.toString.call(message.fixedMaxTransitTime) : options.longs === Number ? new $util.LongBits(message.fixedMaxTransitTime.low >>> 0, message.fixedMaxTransitTime.high >>> 0).toNumber() : message.fixedMaxTransitTime;
+                                        if (options.oneofs)
+                                            object._fixedMaxTransitTime = "fixedMaxTransitTime";
+                                    }
+                                    if (message.carrierTransitTime != null && message.hasOwnProperty("carrierTransitTime")) {
+                                        object.carrierTransitTime = options.enums === String ? $root.google.shopping.merchant.products.v1.CarrierTransitTimeOption[message.carrierTransitTime] === undefined ? message.carrierTransitTime : $root.google.shopping.merchant.products.v1.CarrierTransitTimeOption[message.carrierTransitTime] : message.carrierTransitTime;
+                                        if (options.oneofs)
+                                            object._carrierTransitTime = "carrierTransitTime";
+                                    }
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this CarrierShipping to JSON.
+                                 * @function toJSON
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                CarrierShipping.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for CarrierShipping
+                                 * @function getTypeUrl
+                                 * @memberof google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                CarrierShipping.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping";
+                                };
+    
+                                return CarrierShipping;
+                            })();
+    
+                            /**
+                             * CarrierPriceOption enum.
+                             * @name google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption
+                             * @enum {number}
+                             * @property {number} CARRIER_PRICE_OPTION_UNSPECIFIED=0 CARRIER_PRICE_OPTION_UNSPECIFIED value
+                             * @property {number} AUSTRALIA_POST_REGULAR=1 AUSTRALIA_POST_REGULAR value
+                             * @property {number} AUSTRALIA_POST_EXPRESS=2 AUSTRALIA_POST_EXPRESS value
+                             * @property {number} AUSTRALIA_POST_REGULAR_S=3 AUSTRALIA_POST_REGULAR_S value
+                             * @property {number} AUSTRALIA_POST_REGULAR_M=4 AUSTRALIA_POST_REGULAR_M value
+                             * @property {number} AUSTRALIA_POST_REGULAR_L=5 AUSTRALIA_POST_REGULAR_L value
+                             * @property {number} AUSTRALIA_POST_REGULAR_XL=6 AUSTRALIA_POST_REGULAR_XL value
+                             * @property {number} AUSTRALIA_POST_EXPRESS_S=7 AUSTRALIA_POST_EXPRESS_S value
+                             * @property {number} AUSTRALIA_POST_EXPRESS_M=8 AUSTRALIA_POST_EXPRESS_M value
+                             * @property {number} AUSTRALIA_POST_EXPRESS_L=9 AUSTRALIA_POST_EXPRESS_L value
+                             * @property {number} AUSTRALIA_POST_EXPRESS_XL=10 AUSTRALIA_POST_EXPRESS_XL value
+                             * @property {number} TNT_ROAD_EXPRESS=11 TNT_ROAD_EXPRESS value
+                             * @property {number} TNT_OVERNIGHT_EXPRESS=12 TNT_OVERNIGHT_EXPRESS value
+                             * @property {number} TOLL_ROAD_DELIVERY=13 TOLL_ROAD_DELIVERY value
+                             * @property {number} TOLL_OVERNIGHT_PRIORITY=14 TOLL_OVERNIGHT_PRIORITY value
+                             * @property {number} DHL_PAKET=15 DHL_PAKET value
+                             * @property {number} DHL_PACKCHEN=16 DHL_PACKCHEN value
+                             * @property {number} DPD_EXPRESS_12=17 DPD_EXPRESS_12 value
+                             * @property {number} DPD_EXPRESS=18 DPD_EXPRESS value
+                             * @property {number} DPD_CLASSIC_PARCEL=19 DPD_CLASSIC_PARCEL value
+                             * @property {number} HERMES_PACKCHEN=20 HERMES_PACKCHEN value
+                             * @property {number} HERMES_PAKETKLASSE_S=21 HERMES_PAKETKLASSE_S value
+                             * @property {number} HERMES_PAKETKLASSE_M=22 HERMES_PAKETKLASSE_M value
+                             * @property {number} HERMES_PAKETKLASSE_L=23 HERMES_PAKETKLASSE_L value
+                             * @property {number} UPS_EXPRESS=24 UPS_EXPRESS value
+                             * @property {number} UPS_EXPRESS_SAVER=25 UPS_EXPRESS_SAVER value
+                             * @property {number} UPS_EXPRESS_STANDARD=26 UPS_EXPRESS_STANDARD value
+                             * @property {number} DHL_EXPRESS=27 DHL_EXPRESS value
+                             * @property {number} DHL_EXPRESS_12=28 DHL_EXPRESS_12 value
+                             * @property {number} DPD_NEXT_DAY=29 DPD_NEXT_DAY value
+                             * @property {number} DPD_STANDARD_NEXT_DAY=30 DPD_STANDARD_NEXT_DAY value
+                             * @property {number} DPD_STANDARD_TWO_DAY=31 DPD_STANDARD_TWO_DAY value
+                             * @property {number} RMG_1ST_CLASS_SMALL=32 RMG_1ST_CLASS_SMALL value
+                             * @property {number} RMG_1ST_CLASS_MEDIUM=33 RMG_1ST_CLASS_MEDIUM value
+                             * @property {number} RMG_2ND_CLASS_SMALL=34 RMG_2ND_CLASS_SMALL value
+                             * @property {number} RMG_2ND_CLASS_MEDIUM=35 RMG_2ND_CLASS_MEDIUM value
+                             * @property {number} TNT_EXPRESS=36 TNT_EXPRESS value
+                             * @property {number} TNT_EXPRESS_10=37 TNT_EXPRESS_10 value
+                             * @property {number} TNT_EXPRESS_12=38 TNT_EXPRESS_12 value
+                             * @property {number} YODEL_B2C_48HR=39 YODEL_B2C_48HR value
+                             * @property {number} YODEL_B2C_72HR=40 YODEL_B2C_72HR value
+                             * @property {number} YODEL_B2C_PACKET=41 YODEL_B2C_PACKET value
+                             * @property {number} FEDEX_GROUND=42 FEDEX_GROUND value
+                             * @property {number} FEDEX_HOME_DELIVERY=43 FEDEX_HOME_DELIVERY value
+                             * @property {number} FEDEX_EXPRESS_SAVER=44 FEDEX_EXPRESS_SAVER value
+                             * @property {number} FEDEX_FIRST_OVERNIGHT=45 FEDEX_FIRST_OVERNIGHT value
+                             * @property {number} FEDEX_PRIORITY_OVERNIGHT=46 FEDEX_PRIORITY_OVERNIGHT value
+                             * @property {number} FEDEX_STANDARD_OVERNIGHT=47 FEDEX_STANDARD_OVERNIGHT value
+                             * @property {number} FEDEX_2DAY=48 FEDEX_2DAY value
+                             * @property {number} UPS_STANDARD=49 UPS_STANDARD value
+                             * @property {number} UPS_2ND_DAY_AIR=50 UPS_2ND_DAY_AIR value
+                             * @property {number} UPS_2ND_DAY_AM=51 UPS_2ND_DAY_AM value
+                             * @property {number} UPS_3_DAY_SELECT=52 UPS_3_DAY_SELECT value
+                             * @property {number} UPS_GROUND=53 UPS_GROUND value
+                             * @property {number} UPS_NEXT_DAY_AIR=54 UPS_NEXT_DAY_AIR value
+                             * @property {number} UPS_NEXT_DAY_AIR_EARLY_AM=55 UPS_NEXT_DAY_AIR_EARLY_AM value
+                             * @property {number} UPS_NEXT_DAY_AIR_SAVER=56 UPS_NEXT_DAY_AIR_SAVER value
+                             * @property {number} USPS_PRIORITY_MAIL_EXPRESS=57 USPS_PRIORITY_MAIL_EXPRESS value
+                             * @property {number} USPS_MEDIA_MAIL=58 USPS_MEDIA_MAIL value
+                             * @property {number} USPS_GROUND_ADVANTAGE_RETAIL=59 USPS_GROUND_ADVANTAGE_RETAIL value
+                             * @property {number} USPS_PRIORITY_MAIL=60 USPS_PRIORITY_MAIL value
+                             * @property {number} USPS_GROUND_ADVANTAGE_COMMERCIAL=61 USPS_GROUND_ADVANTAGE_COMMERCIAL value
+                             */
+                            ProductAttributes.CarrierPriceOption = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "CARRIER_PRICE_OPTION_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "AUSTRALIA_POST_REGULAR"] = 1;
+                                values[valuesById[2] = "AUSTRALIA_POST_EXPRESS"] = 2;
+                                values[valuesById[3] = "AUSTRALIA_POST_REGULAR_S"] = 3;
+                                values[valuesById[4] = "AUSTRALIA_POST_REGULAR_M"] = 4;
+                                values[valuesById[5] = "AUSTRALIA_POST_REGULAR_L"] = 5;
+                                values[valuesById[6] = "AUSTRALIA_POST_REGULAR_XL"] = 6;
+                                values[valuesById[7] = "AUSTRALIA_POST_EXPRESS_S"] = 7;
+                                values[valuesById[8] = "AUSTRALIA_POST_EXPRESS_M"] = 8;
+                                values[valuesById[9] = "AUSTRALIA_POST_EXPRESS_L"] = 9;
+                                values[valuesById[10] = "AUSTRALIA_POST_EXPRESS_XL"] = 10;
+                                values[valuesById[11] = "TNT_ROAD_EXPRESS"] = 11;
+                                values[valuesById[12] = "TNT_OVERNIGHT_EXPRESS"] = 12;
+                                values[valuesById[13] = "TOLL_ROAD_DELIVERY"] = 13;
+                                values[valuesById[14] = "TOLL_OVERNIGHT_PRIORITY"] = 14;
+                                values[valuesById[15] = "DHL_PAKET"] = 15;
+                                values[valuesById[16] = "DHL_PACKCHEN"] = 16;
+                                values[valuesById[17] = "DPD_EXPRESS_12"] = 17;
+                                values[valuesById[18] = "DPD_EXPRESS"] = 18;
+                                values[valuesById[19] = "DPD_CLASSIC_PARCEL"] = 19;
+                                values[valuesById[20] = "HERMES_PACKCHEN"] = 20;
+                                values[valuesById[21] = "HERMES_PAKETKLASSE_S"] = 21;
+                                values[valuesById[22] = "HERMES_PAKETKLASSE_M"] = 22;
+                                values[valuesById[23] = "HERMES_PAKETKLASSE_L"] = 23;
+                                values[valuesById[24] = "UPS_EXPRESS"] = 24;
+                                values[valuesById[25] = "UPS_EXPRESS_SAVER"] = 25;
+                                values[valuesById[26] = "UPS_EXPRESS_STANDARD"] = 26;
+                                values[valuesById[27] = "DHL_EXPRESS"] = 27;
+                                values[valuesById[28] = "DHL_EXPRESS_12"] = 28;
+                                values[valuesById[29] = "DPD_NEXT_DAY"] = 29;
+                                values[valuesById[30] = "DPD_STANDARD_NEXT_DAY"] = 30;
+                                values[valuesById[31] = "DPD_STANDARD_TWO_DAY"] = 31;
+                                values[valuesById[32] = "RMG_1ST_CLASS_SMALL"] = 32;
+                                values[valuesById[33] = "RMG_1ST_CLASS_MEDIUM"] = 33;
+                                values[valuesById[34] = "RMG_2ND_CLASS_SMALL"] = 34;
+                                values[valuesById[35] = "RMG_2ND_CLASS_MEDIUM"] = 35;
+                                values[valuesById[36] = "TNT_EXPRESS"] = 36;
+                                values[valuesById[37] = "TNT_EXPRESS_10"] = 37;
+                                values[valuesById[38] = "TNT_EXPRESS_12"] = 38;
+                                values[valuesById[39] = "YODEL_B2C_48HR"] = 39;
+                                values[valuesById[40] = "YODEL_B2C_72HR"] = 40;
+                                values[valuesById[41] = "YODEL_B2C_PACKET"] = 41;
+                                values[valuesById[42] = "FEDEX_GROUND"] = 42;
+                                values[valuesById[43] = "FEDEX_HOME_DELIVERY"] = 43;
+                                values[valuesById[44] = "FEDEX_EXPRESS_SAVER"] = 44;
+                                values[valuesById[45] = "FEDEX_FIRST_OVERNIGHT"] = 45;
+                                values[valuesById[46] = "FEDEX_PRIORITY_OVERNIGHT"] = 46;
+                                values[valuesById[47] = "FEDEX_STANDARD_OVERNIGHT"] = 47;
+                                values[valuesById[48] = "FEDEX_2DAY"] = 48;
+                                values[valuesById[49] = "UPS_STANDARD"] = 49;
+                                values[valuesById[50] = "UPS_2ND_DAY_AIR"] = 50;
+                                values[valuesById[51] = "UPS_2ND_DAY_AM"] = 51;
+                                values[valuesById[52] = "UPS_3_DAY_SELECT"] = 52;
+                                values[valuesById[53] = "UPS_GROUND"] = 53;
+                                values[valuesById[54] = "UPS_NEXT_DAY_AIR"] = 54;
+                                values[valuesById[55] = "UPS_NEXT_DAY_AIR_EARLY_AM"] = 55;
+                                values[valuesById[56] = "UPS_NEXT_DAY_AIR_SAVER"] = 56;
+                                values[valuesById[57] = "USPS_PRIORITY_MAIL_EXPRESS"] = 57;
+                                values[valuesById[58] = "USPS_MEDIA_MAIL"] = 58;
+                                values[valuesById[59] = "USPS_GROUND_ADVANTAGE_RETAIL"] = 59;
+                                values[valuesById[60] = "USPS_PRIORITY_MAIL"] = 60;
+                                values[valuesById[61] = "USPS_GROUND_ADVANTAGE_COMMERCIAL"] = 61;
+                                return values;
+                            })();
     
                             return ProductAttributes;
                         })();

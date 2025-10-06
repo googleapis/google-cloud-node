@@ -730,6 +730,50 @@ export namespace google {
                         DEFAULT = 2
                     }
 
+                    /** CarrierTransitTimeOption enum. */
+                    enum CarrierTransitTimeOption {
+                        CARRIER_TRANSIT_TIME_OPTION_UNSPECIFIED = 0,
+                        DHL_PAKET = 1,
+                        DHL_PACKCHEN = 2,
+                        DHL_EXPRESSEASY = 3,
+                        DPD_EXPRESS = 4,
+                        DPD_CLASSIC_PARCEL = 5,
+                        HERMES_HAUSTUR = 6,
+                        HERMES_PAKETSHOP = 7,
+                        GLS_BUSINESS = 8,
+                        GLS_EXPRESS = 9,
+                        GLS_PRIVATE = 10,
+                        COLISSIMO_DOMICILE = 11,
+                        DHL_EXPRESS_12AM = 12,
+                        DHL_EXPRESS_9AM = 13,
+                        GEODIS_EXPRESS = 14,
+                        GEODIS_PACK_30 = 15,
+                        GEODIS_SAME_DAY = 16,
+                        GEODIS_TOP_24 = 17,
+                        TNT_ESSENTIEL_24H = 18,
+                        TNT_ESSENTIEL_FLEXIBILITE = 19,
+                        FEDEX_GROUND = 20,
+                        FEDEX_HOME_DELIVERY = 21,
+                        FEDEX_EXPRESS_SAVER = 22,
+                        FEDEX_FIRST_OVERNIGHT = 23,
+                        FEDEX_PRIORITY_OVERNIGHT = 24,
+                        FEDEX_STANDARD_OVERNIGHT = 25,
+                        FEDEX_2DAY = 26,
+                        UPS_2ND_DAY_AIR = 27,
+                        UPS_2ND_DAY_AM = 28,
+                        UPS_3_DAY_SELECT = 29,
+                        UPS_GROUND = 30,
+                        UPS_NEXT_DAY_AIR = 31,
+                        UPS_NEXT_DAY_AIR_EARLY_AM = 32,
+                        UPS_NEXT_DAY_AIR_SAVER = 33,
+                        USPS_PRIORITY_MAIL_EXPRESS = 34,
+                        USPS_MEDIA_MAIL = 35,
+                        USPS_GROUND_ADVANTAGE_RETAIL = 36,
+                        USPS_PRIORITY_MAIL = 37,
+                        USPS_GROUND_ADVANTAGE_COMMERCIAL = 38,
+                        USPS_FIRST_CLASS_MAIL = 39
+                    }
+
                     /** Properties of a ProductAttributes. */
                     interface IProductAttributes {
 
@@ -852,6 +896,9 @@ export namespace google {
 
                         /** ProductAttributes shipping */
                         shipping?: (google.shopping.merchant.products.v1.IShipping[]|null);
+
+                        /** ProductAttributes carrierShipping */
+                        carrierShipping?: (google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping[]|null);
 
                         /** ProductAttributes freeShippingThreshold */
                         freeShippingThreshold?: (google.shopping.merchant.products.v1.IFreeShippingThreshold[]|null);
@@ -1139,6 +1186,9 @@ export namespace google {
                         /** ProductAttributes shipping. */
                         public shipping: google.shopping.merchant.products.v1.IShipping[];
 
+                        /** ProductAttributes carrierShipping. */
+                        public carrierShipping: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping[];
+
                         /** ProductAttributes freeShippingThreshold. */
                         public freeShippingThreshold: google.shopping.merchant.products.v1.IFreeShippingThreshold[];
 
@@ -1371,6 +1421,244 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ProductAttributes {
+
+                        /** Properties of a CarrierShipping. */
+                        interface ICarrierShipping {
+
+                            /** CarrierShipping country */
+                            country?: (string|null);
+
+                            /** CarrierShipping region */
+                            region?: (string|null);
+
+                            /** CarrierShipping postalCode */
+                            postalCode?: (string|null);
+
+                            /** CarrierShipping originPostalCode */
+                            originPostalCode?: (string|null);
+
+                            /** CarrierShipping flatPrice */
+                            flatPrice?: (google.shopping.type.IPrice|null);
+
+                            /** CarrierShipping carrierPrice */
+                            carrierPrice?: (google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|null);
+
+                            /** CarrierShipping carrierPriceFlatAdjustment */
+                            carrierPriceFlatAdjustment?: (google.shopping.type.IPrice|null);
+
+                            /** CarrierShipping carrierPricePercentageAdjustment */
+                            carrierPricePercentageAdjustment?: (number|null);
+
+                            /** CarrierShipping minHandlingTime */
+                            minHandlingTime?: (number|Long|string|null);
+
+                            /** CarrierShipping maxHandlingTime */
+                            maxHandlingTime?: (number|Long|string|null);
+
+                            /** CarrierShipping fixedMinTransitTime */
+                            fixedMinTransitTime?: (number|Long|string|null);
+
+                            /** CarrierShipping fixedMaxTransitTime */
+                            fixedMaxTransitTime?: (number|Long|string|null);
+
+                            /** CarrierShipping carrierTransitTime */
+                            carrierTransitTime?: (google.shopping.merchant.products.v1.CarrierTransitTimeOption|keyof typeof google.shopping.merchant.products.v1.CarrierTransitTimeOption|null);
+                        }
+
+                        /** Represents a CarrierShipping. */
+                        class CarrierShipping implements ICarrierShipping {
+
+                            /**
+                             * Constructs a new CarrierShipping.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping);
+
+                            /** CarrierShipping country. */
+                            public country?: (string|null);
+
+                            /** CarrierShipping region. */
+                            public region?: (string|null);
+
+                            /** CarrierShipping postalCode. */
+                            public postalCode?: (string|null);
+
+                            /** CarrierShipping originPostalCode. */
+                            public originPostalCode?: (string|null);
+
+                            /** CarrierShipping flatPrice. */
+                            public flatPrice?: (google.shopping.type.IPrice|null);
+
+                            /** CarrierShipping carrierPrice. */
+                            public carrierPrice?: (google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|null);
+
+                            /** CarrierShipping carrierPriceFlatAdjustment. */
+                            public carrierPriceFlatAdjustment?: (google.shopping.type.IPrice|null);
+
+                            /** CarrierShipping carrierPricePercentageAdjustment. */
+                            public carrierPricePercentageAdjustment?: (number|null);
+
+                            /** CarrierShipping minHandlingTime. */
+                            public minHandlingTime?: (number|Long|string|null);
+
+                            /** CarrierShipping maxHandlingTime. */
+                            public maxHandlingTime?: (number|Long|string|null);
+
+                            /** CarrierShipping fixedMinTransitTime. */
+                            public fixedMinTransitTime?: (number|Long|string|null);
+
+                            /** CarrierShipping fixedMaxTransitTime. */
+                            public fixedMaxTransitTime?: (number|Long|string|null);
+
+                            /** CarrierShipping carrierTransitTime. */
+                            public carrierTransitTime?: (google.shopping.merchant.products.v1.CarrierTransitTimeOption|keyof typeof google.shopping.merchant.products.v1.CarrierTransitTimeOption|null);
+
+                            /**
+                             * Creates a new CarrierShipping instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CarrierShipping instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping): google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping;
+
+                            /**
+                             * Encodes the specified CarrierShipping message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.verify|verify} messages.
+                             * @param message CarrierShipping message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CarrierShipping message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.verify|verify} messages.
+                             * @param message CarrierShipping message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CarrierShipping message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CarrierShipping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping;
+
+                            /**
+                             * Decodes a CarrierShipping message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CarrierShipping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping;
+
+                            /**
+                             * Verifies a CarrierShipping message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CarrierShipping message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CarrierShipping
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping;
+
+                            /**
+                             * Creates a plain object from a CarrierShipping message. Also converts values to other types if specified.
+                             * @param message CarrierShipping
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CarrierShipping to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CarrierShipping
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** CarrierPriceOption enum. */
+                        enum CarrierPriceOption {
+                            CARRIER_PRICE_OPTION_UNSPECIFIED = 0,
+                            AUSTRALIA_POST_REGULAR = 1,
+                            AUSTRALIA_POST_EXPRESS = 2,
+                            AUSTRALIA_POST_REGULAR_S = 3,
+                            AUSTRALIA_POST_REGULAR_M = 4,
+                            AUSTRALIA_POST_REGULAR_L = 5,
+                            AUSTRALIA_POST_REGULAR_XL = 6,
+                            AUSTRALIA_POST_EXPRESS_S = 7,
+                            AUSTRALIA_POST_EXPRESS_M = 8,
+                            AUSTRALIA_POST_EXPRESS_L = 9,
+                            AUSTRALIA_POST_EXPRESS_XL = 10,
+                            TNT_ROAD_EXPRESS = 11,
+                            TNT_OVERNIGHT_EXPRESS = 12,
+                            TOLL_ROAD_DELIVERY = 13,
+                            TOLL_OVERNIGHT_PRIORITY = 14,
+                            DHL_PAKET = 15,
+                            DHL_PACKCHEN = 16,
+                            DPD_EXPRESS_12 = 17,
+                            DPD_EXPRESS = 18,
+                            DPD_CLASSIC_PARCEL = 19,
+                            HERMES_PACKCHEN = 20,
+                            HERMES_PAKETKLASSE_S = 21,
+                            HERMES_PAKETKLASSE_M = 22,
+                            HERMES_PAKETKLASSE_L = 23,
+                            UPS_EXPRESS = 24,
+                            UPS_EXPRESS_SAVER = 25,
+                            UPS_EXPRESS_STANDARD = 26,
+                            DHL_EXPRESS = 27,
+                            DHL_EXPRESS_12 = 28,
+                            DPD_NEXT_DAY = 29,
+                            DPD_STANDARD_NEXT_DAY = 30,
+                            DPD_STANDARD_TWO_DAY = 31,
+                            RMG_1ST_CLASS_SMALL = 32,
+                            RMG_1ST_CLASS_MEDIUM = 33,
+                            RMG_2ND_CLASS_SMALL = 34,
+                            RMG_2ND_CLASS_MEDIUM = 35,
+                            TNT_EXPRESS = 36,
+                            TNT_EXPRESS_10 = 37,
+                            TNT_EXPRESS_12 = 38,
+                            YODEL_B2C_48HR = 39,
+                            YODEL_B2C_72HR = 40,
+                            YODEL_B2C_PACKET = 41,
+                            FEDEX_GROUND = 42,
+                            FEDEX_HOME_DELIVERY = 43,
+                            FEDEX_EXPRESS_SAVER = 44,
+                            FEDEX_FIRST_OVERNIGHT = 45,
+                            FEDEX_PRIORITY_OVERNIGHT = 46,
+                            FEDEX_STANDARD_OVERNIGHT = 47,
+                            FEDEX_2DAY = 48,
+                            UPS_STANDARD = 49,
+                            UPS_2ND_DAY_AIR = 50,
+                            UPS_2ND_DAY_AM = 51,
+                            UPS_3_DAY_SELECT = 52,
+                            UPS_GROUND = 53,
+                            UPS_NEXT_DAY_AIR = 54,
+                            UPS_NEXT_DAY_AIR_EARLY_AM = 55,
+                            UPS_NEXT_DAY_AIR_SAVER = 56,
+                            USPS_PRIORITY_MAIL_EXPRESS = 57,
+                            USPS_MEDIA_MAIL = 58,
+                            USPS_GROUND_ADVANTAGE_RETAIL = 59,
+                            USPS_PRIORITY_MAIL = 60,
+                            USPS_GROUND_ADVANTAGE_COMMERCIAL = 61
+                        }
                     }
 
                     /** Properties of a ShippingWeight. */
