@@ -37,10 +37,12 @@ export {{ '{' + service.name.toPascalCase() + 'Client}' }} from './{{ service.na
 const CLIENT_EXTRACTION_REGEX = /export\s*{\s*(\w+Client)\s*}/g;
 
 /**
- * Represents a parsed version, breaking it down into components for comparison.
+ * Represents a parsed version of a library, breaking it down into components
+ * that can be used for comparison to determine release precedence.
+ *
  * @property {string} version - The original version string (e.g., 'v1', 'v2beta1').
- * @property {number} major - The major version number.
- * @property {number} precedence - The numerical precedence of the release type (e.g., stable > beta > alpha).
+ * @property {number} major - The major version number (e.g., the '1' in 'v1').
+ * @property {number} precedence - The numerical precedence of the release type, where stable > beta > alpha.
  * @property {number} preReleaseQualifier - The qualifier for pre-releases (e.g., the '2' in 'beta2').
  */
 interface VersionSpec {
@@ -48,6 +50,13 @@ interface VersionSpec {
   major: number;
   precedence: number;
   preReleaseQualifier: number;
+}
+
+export interface LibraryConfigOptions {
+  sourcePath: string;
+  destinationPath: string;
+  defaultVersion?: string;
+  isEsm?: boolean;
 }
 
 /**
@@ -73,12 +82,12 @@ export class LibraryConfig {
    * @param sourcePath The path where the library is read from.
    * @param destinationPath The path where the library is written to.
    */
-  constructor(
-    sourcePath: string,
-    destinationPath: string,
-    defaultVersion?: string,
-    isEsm?: boolean,
-  ) {
+  constructor({
+    sourcePath,
+    destinationPath,
+    defaultVersion,
+    isEsm,
+  }: LibraryConfigOptions) {
     this.isEsm = isEsm ?? false;
     this.srcPath = isEsm ? ESM_SRC_PATH : SRC_PATH;
     this.sourcePath = sourcePath;

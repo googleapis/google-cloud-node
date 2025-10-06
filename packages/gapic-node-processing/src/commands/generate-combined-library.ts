@@ -67,12 +67,12 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
     // Since we're 'transforming' a library, we're going to assume that the user wants to overwrite the library
     // unless otherwise specified
     const destinationPath = argv['destination-path'] || argv['source-path'];
-    const library = new LibraryConfig(
-      argv['source-path'],
+    const library = new LibraryConfig({
+      sourcePath: argv['source-path'],
       destinationPath,
-      argv['default-version'],
-      argv['is-esm'],
-    );
+      defaultVersion: argv['default-version'],
+      isEsm: argv['is-esm'],
+    });
     await library.initialize();
     console.log(library);
     console.log(

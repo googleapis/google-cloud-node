@@ -28,21 +28,20 @@ describe('LibraryConfig', () => {
   });
   describe('constructor', () => {
     it('should set directory and destDirectory', () => {
-      const libraryConfig = new LibraryConfig(
-        FAKE_DIRECTORY,
-        FAKE_DEST_DIRECTORY,
-      );
+      const libraryConfig = new LibraryConfig({
+        sourcePath: FAKE_DIRECTORY,
+        destinationPath: FAKE_DEST_DIRECTORY,
+      });
       assert.strictEqual(libraryConfig.sourcePath, FAKE_DIRECTORY);
       assert.strictEqual(libraryConfig.destinationPath, FAKE_DEST_DIRECTORY);
     });
 
     it('should set whether isEsm and the appropriate srcPath', () => {
-      const libraryConfig = new LibraryConfig(
-        FAKE_DIRECTORY,
-        FAKE_DEST_DIRECTORY,
-        undefined,
-        true,
-      );
+      const libraryConfig = new LibraryConfig({
+        sourcePath: FAKE_DIRECTORY,
+        destinationPath: FAKE_DEST_DIRECTORY,
+        isEsm: true,
+      });
       assert.strictEqual(libraryConfig.isEsm, true);
       assert.strictEqual(libraryConfig.srcPath, ESM_SRC_PATH);
     });
@@ -50,10 +49,10 @@ describe('LibraryConfig', () => {
   describe('getHighestVersionWithPrecedence', () => {
     it('should return the highest major version', () => {
       const versions = ['v1', 'v2', 'v3'];
-      const libraryConfig = new LibraryConfig(
-        FAKE_DIRECTORY,
-        FAKE_DEST_DIRECTORY,
-      );
+      const libraryConfig = new LibraryConfig({
+        sourcePath: FAKE_DIRECTORY,
+        destinationPath: FAKE_DEST_DIRECTORY,
+      });
       const highestVersion =
         libraryConfig.getHighestVersionWithPrecedence(versions);
       assert.strictEqual(highestVersion, 'v3');
@@ -61,10 +60,10 @@ describe('LibraryConfig', () => {
 
     it('should return the stable version over beta or alpha', () => {
       const versions = ['v1beta1', 'v1', 'v1alpha1'];
-      const libraryConfig = new LibraryConfig(
-        FAKE_DIRECTORY,
-        FAKE_DEST_DIRECTORY,
-      );
+      const libraryConfig = new LibraryConfig({
+        sourcePath: FAKE_DIRECTORY,
+        destinationPath: FAKE_DEST_DIRECTORY,
+      });
       const highestVersion =
         libraryConfig.getHighestVersionWithPrecedence(versions);
       assert.strictEqual(highestVersion, 'v1');
@@ -72,10 +71,10 @@ describe('LibraryConfig', () => {
 
     it('should return the highest beta version', () => {
       const versions = ['v1beta1', 'v1beta2', 'v1alpha1'];
-      const libraryConfig = new LibraryConfig(
-        FAKE_DIRECTORY,
-        FAKE_DEST_DIRECTORY,
-      );
+      const libraryConfig = new LibraryConfig({
+        sourcePath: FAKE_DIRECTORY,
+        destinationPath: FAKE_DEST_DIRECTORY,
+      });
       const highestVersion =
         libraryConfig.getHighestVersionWithPrecedence(versions);
       assert.strictEqual(highestVersion, 'v1beta2');
@@ -83,10 +82,10 @@ describe('LibraryConfig', () => {
 
     it('should throw an error if no versions are provided', () => {
       const versions: string[] = [];
-      const libraryConfig = new LibraryConfig(
-        FAKE_DIRECTORY,
-        FAKE_DEST_DIRECTORY,
-      );
+      const libraryConfig = new LibraryConfig({
+        sourcePath: FAKE_DIRECTORY,
+        destinationPath: FAKE_DEST_DIRECTORY,
+      });
       assert.throws(
         () => libraryConfig.getHighestVersionWithPrecedence(versions),
         Error,
@@ -124,10 +123,10 @@ describe('LibraryConfig', () => {
         )
         .resolves("export { V2Client } from './v2_client';");
 
-      const libraryConfig = new LibraryConfig(
-        FAKE_DIRECTORY,
-        FAKE_DEST_DIRECTORY,
-      );
+      const libraryConfig = new LibraryConfig({
+        sourcePath: FAKE_DIRECTORY,
+        destinationPath: FAKE_DEST_DIRECTORY,
+      });
       await libraryConfig.initialize();
 
       assert.deepStrictEqual(libraryConfig.versions, ['v1', 'v2']);
@@ -166,11 +165,11 @@ describe('LibraryConfig', () => {
         )
         .resolves("export { V2Client } from './v2_client';");
 
-      const libraryConfig = new LibraryConfig(
-        FAKE_DIRECTORY,
-        FAKE_DEST_DIRECTORY,
-        'v1',
-      );
+      const libraryConfig = new LibraryConfig({
+        sourcePath: FAKE_DIRECTORY,
+        destinationPath: FAKE_DEST_DIRECTORY,
+        defaultVersion: 'v1',
+      });
       await libraryConfig.initialize();
 
       assert.deepStrictEqual(libraryConfig.versions, ['v1', 'v2']);
