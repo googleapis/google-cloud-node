@@ -1,0 +1,6 @@
+[
+  "../../protos/google/shopping/merchant/products/v1beta/productinputs.proto",
+  "../../protos/google/shopping/merchant/products/v1beta/products.proto",
+  "../../protos/google/shopping/merchant/products/v1beta/products_common.proto",
+  "../../protos/google/shopping/type/types.proto"
+]
