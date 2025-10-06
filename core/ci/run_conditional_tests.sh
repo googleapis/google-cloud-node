@@ -73,6 +73,7 @@ fi
 subdirs=(
     dev-packages
     .github/scripts
+    packages
 )
 
 RETVAL=0
