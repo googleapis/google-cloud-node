@@ -22,7 +22,7 @@
     "prelint": "npm run prelint --ws",
     "lint": "npm run lint --ws",
     "fix": "npm run fix --ws",
-    "docs": "npm run docs"
+    "docs": "npm run docs --ws"
   },
   "workspaces": [
     "dev-packages/*",
