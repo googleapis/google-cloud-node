@@ -21,7 +21,8 @@
     "system-test": "npm run system-test --ws",
     "prelint": "npm run prelint --ws",
     "lint": "npm run lint --ws",
-    "fix": "npm run fix --ws"
+    "fix": "npm run fix --ws",
+    "docs": "npm run docs"
   },
   "workspaces": [
     "dev-packages/*",
