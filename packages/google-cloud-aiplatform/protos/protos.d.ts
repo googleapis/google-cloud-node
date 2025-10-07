@@ -85509,6 +85509,9 @@ export namespace google {
 
                     /** PredictRequest parameters */
                     parameters?: (google.protobuf.IValue|null);
+
+                    /** PredictRequest labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a PredictRequest. */
@@ -85528,6 +85531,9 @@ export namespace google {
 
                     /** PredictRequest parameters. */
                     public parameters?: (google.protobuf.IValue|null);
+
+                    /** PredictRequest labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new PredictRequest instance using the specified properties.

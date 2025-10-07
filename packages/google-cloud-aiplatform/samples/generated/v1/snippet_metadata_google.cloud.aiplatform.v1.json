@@ -11322,7 +11322,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 76,
+          "end": 81,
           "type": "FULL"
         }
       ],
@@ -11342,6 +11342,10 @@
           {
             "name": "parameters",
             "type": ".google.protobuf.Value"
+          },
+          {
+            "name": "labels",
+            "type": "TYPE_MESSAGE[]"
           }
         ],
         "resultType": ".google.cloud.aiplatform.v1.PredictResponse",

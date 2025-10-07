@@ -54,6 +54,11 @@ function main(endpoint, instances) {
    *  parameters_schema_uri google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri.
    */
   // const parameters = {}
+  /**
+   *  Optional. The user labels for Imagen billing usage only. Only Imagen
+   *  supports labels. For other use cases, it will be ignored.
+   */
+  // const labels = [1,2,3,4]
 
   // Imports the Aiplatform library
   const {PredictionServiceClient} = require('@google-cloud/aiplatform').v1;
