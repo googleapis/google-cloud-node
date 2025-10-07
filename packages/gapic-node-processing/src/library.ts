@@ -153,6 +153,8 @@ export class LibraryConfig {
           const clientsRegexMatch = Array.from(
             fileContent.matchAll(CLIENT_EXTRACTION_REGEX),
           );
+          // ensures we don't have any duplicates in the regex matching
+          // creates an array from the set which is what the client type is
           clientsAndVersions.push({
             version,
             clients: Array.from(
