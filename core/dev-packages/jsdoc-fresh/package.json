@@ -7,7 +7,7 @@
     "lint": "gts check",
     "test": "echo no tests",
     "fix": "gts fix",
-    "docs": "mkdir docs && touch docs/noop.html",
+    "docs": "echo no docs needed",
     "system-test": "echo no system test",
     "samples-test": "echo no samples test",
     "docs-test": "echo no docs tests",

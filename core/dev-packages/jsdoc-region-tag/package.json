@@ -7,7 +7,7 @@
     "test": "c8 mocha test/test.js",
     "lint": "gts check",
     "fix": "gts fix",
-    "docs": "mkdir docs && touch docs/noop.html",
+    "docs": "echo no docs needed",
     "docs-test": "echo 🙈",
     "samples-test": "echo no samples test",
     "system-test": "echo no system test",
