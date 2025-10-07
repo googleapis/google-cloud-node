@@ -207,8 +207,11 @@ export class LibraryConfig {
       alpha: 1,
     };
 
+    // use the "best" version found so far, version[0] as a starting point
+    // initialize other values to -1, guaranteed to be overwritten at first comparison
+    // all will be updated as we traverse the versions
     let currentVersionSpec: VersionSpec = {
-      version: versions[0], // Stores the "best" version found so far
+      version: versions[0],
       major: -1,
       precedence: -1,
       preReleaseQualifier: -1, // For e.g., beta1 vs beta2
