@@ -561,7 +561,7 @@ describe('v1beta.WorkloadIdentityPoolsClient', () => {
             assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
         });
 
-        it.only('invokes createWorkloadIdentityPool with call error', async () => {
+        it('invokes createWorkloadIdentityPool with call error', async () => {
             const client = new workloadidentitypoolsModule.v1beta.WorkloadIdentityPoolsClient({
               credentials: {client_email: 'bogus', private_key: 'bogus'},
               projectId: 'bogus',
