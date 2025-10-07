@@ -1,2423 +1,2423 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-admin",
-        "version": "9.0.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.analytics.admin.v1beta",
-                "version": "v1beta"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetAccount_async",
-            "title": "AnalyticsAdminService getAccount Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lookup for a single Account.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_account.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAccount",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetAccount",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.Account",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetAccount",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetAccount",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListAccounts_async",
-            "title": "AnalyticsAdminService listAccounts Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns all accounts accessible by the caller. Note that these accounts might not currently have GA properties. Soft-deleted (ie: \"trashed\") accounts are excluded by default. Returns an empty list if no relevant accounts are found.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_accounts.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAccounts",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListAccounts",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "show_deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListAccountsResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListAccounts",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListAccounts",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteAccount_async",
-            "title": "AnalyticsAdminService deleteAccount Sample",
-            "origin": "API_DEFINITION",
-            "description": " Marks target Account as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted accounts. However, they can be restored using the Trash Can UI. If the accounts are not restored before the expiration time, the account and all child resources (eg: Properties, GoogleAdsLinks, Streams, AccessBindings) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found.",
-            "canonical": true,
-            "file": "analytics_admin_service.delete_account.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAccount",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteAccount",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteAccount",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteAccount",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateAccount_async",
-            "title": "AnalyticsAdminService updateAccount Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an account.",
-            "canonical": true,
-            "file": "analytics_admin_service.update_account.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateAccount",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateAccount",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "account",
-                        "type": ".google.analytics.admin.v1beta.Account"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.Account",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateAccount",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateAccount",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ProvisionAccountTicket_async",
-            "title": "AnalyticsAdminService provisionAccountTicket Sample",
-            "origin": "API_DEFINITION",
-            "description": " Requests a ticket for creating an account.",
-            "canonical": true,
-            "file": "analytics_admin_service.provision_account_ticket.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ProvisionAccountTicket",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ProvisionAccountTicket",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "account",
-                        "type": ".google.analytics.admin.v1beta.Account"
-                    },
-                    {
-                        "name": "redirect_uri",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ProvisionAccountTicketResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ProvisionAccountTicket",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ProvisionAccountTicket",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListAccountSummaries_async",
-            "title": "AnalyticsAdminService listAccountSummaries Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns summaries of all accounts accessible by the caller.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_account_summaries.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAccountSummaries",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListAccountSummaries",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListAccountSummariesResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListAccountSummaries",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListAccountSummaries",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetProperty_async",
-            "title": "AnalyticsAdminService getProperty Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lookup for a single GA Property.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_property.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetProperty",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetProperty",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.Property",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetProperty",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetProperty",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListProperties_async",
-            "title": "AnalyticsAdminService listProperties Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns child Properties under the specified parent Account. Properties will be excluded if the caller does not have access. Soft-deleted (ie: \"trashed\") properties are excluded by default. Returns an empty list if no relevant properties are found.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_properties.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 89,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListProperties",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListProperties",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "show_deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListPropertiesResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListProperties",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListProperties",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateProperty_async",
-            "title": "AnalyticsAdminService createProperty Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Google Analytics property with the specified location and attributes.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_property.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateProperty",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateProperty",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": ".google.analytics.admin.v1beta.Property"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.Property",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateProperty",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateProperty",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteProperty_async",
-            "title": "AnalyticsAdminService deleteProperty Sample",
-            "origin": "API_DEFINITION",
-            "description": " Marks target Property as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted properties. However, they can be restored using the Trash Can UI. If the properties are not restored before the expiration time, the Property and all child resources (eg: GoogleAdsLinks, Streams, AccessBindings) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found.",
-            "canonical": true,
-            "file": "analytics_admin_service.delete_property.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteProperty",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteProperty",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.Property",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteProperty",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteProperty",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateProperty_async",
-            "title": "AnalyticsAdminService updateProperty Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.update_property.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateProperty",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateProperty",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": ".google.analytics.admin.v1beta.Property"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.Property",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateProperty",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateProperty",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateFirebaseLink_async",
-            "title": "AnalyticsAdminService createFirebaseLink Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a FirebaseLink. Properties can have at most one FirebaseLink.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_firebase_link.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateFirebaseLink",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateFirebaseLink",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "firebase_link",
-                        "type": ".google.analytics.admin.v1beta.FirebaseLink"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.FirebaseLink",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateFirebaseLink",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateFirebaseLink",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteFirebaseLink_async",
-            "title": "AnalyticsAdminService deleteFirebaseLink Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a FirebaseLink on a property",
-            "canonical": true,
-            "file": "analytics_admin_service.delete_firebase_link.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteFirebaseLink",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteFirebaseLink",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteFirebaseLink",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteFirebaseLink",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListFirebaseLinks_async",
-            "title": "AnalyticsAdminService listFirebaseLinks Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists FirebaseLinks on a property. Properties can have at most one FirebaseLink.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_firebase_links.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListFirebaseLinks",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListFirebaseLinks",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListFirebaseLinksResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListFirebaseLinks",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListFirebaseLinks",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateGoogleAdsLink_async",
-            "title": "AnalyticsAdminService createGoogleAdsLink Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a GoogleAdsLink.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_google_ads_link.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateGoogleAdsLink",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateGoogleAdsLink",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "google_ads_link",
-                        "type": ".google.analytics.admin.v1beta.GoogleAdsLink"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.GoogleAdsLink",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateGoogleAdsLink",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateGoogleAdsLink",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateGoogleAdsLink_async",
-            "title": "AnalyticsAdminService updateGoogleAdsLink Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a GoogleAdsLink on a property",
-            "canonical": true,
-            "file": "analytics_admin_service.update_google_ads_link.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateGoogleAdsLink",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateGoogleAdsLink",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "google_ads_link",
-                        "type": ".google.analytics.admin.v1beta.GoogleAdsLink"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.GoogleAdsLink",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateGoogleAdsLink",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateGoogleAdsLink",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteGoogleAdsLink_async",
-            "title": "AnalyticsAdminService deleteGoogleAdsLink Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a GoogleAdsLink on a property",
-            "canonical": true,
-            "file": "analytics_admin_service.delete_google_ads_link.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteGoogleAdsLink",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteGoogleAdsLink",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteGoogleAdsLink",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteGoogleAdsLink",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListGoogleAdsLinks_async",
-            "title": "AnalyticsAdminService listGoogleAdsLinks Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists GoogleAdsLinks on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_google_ads_links.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListGoogleAdsLinks",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListGoogleAdsLinks",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListGoogleAdsLinksResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListGoogleAdsLinks",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListGoogleAdsLinks",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataSharingSettings_async",
-            "title": "AnalyticsAdminService getDataSharingSettings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get data sharing settings on an account. Data sharing settings are singletons.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_data_sharing_settings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDataSharingSettings",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataSharingSettings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.DataSharingSettings",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetDataSharingSettings",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataSharingSettings",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetMeasurementProtocolSecret_async",
-            "title": "AnalyticsAdminService getMeasurementProtocolSecret Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lookup for a single MeasurementProtocolSecret.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_measurement_protocol_secret.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetMeasurementProtocolSecret",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetMeasurementProtocolSecret",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.MeasurementProtocolSecret",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetMeasurementProtocolSecret",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetMeasurementProtocolSecret",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListMeasurementProtocolSecrets_async",
-            "title": "AnalyticsAdminService listMeasurementProtocolSecrets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns child MeasurementProtocolSecrets under the specified parent Property.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_measurement_protocol_secrets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListMeasurementProtocolSecrets",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListMeasurementProtocolSecrets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListMeasurementProtocolSecretsResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListMeasurementProtocolSecrets",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListMeasurementProtocolSecrets",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateMeasurementProtocolSecret_async",
-            "title": "AnalyticsAdminService createMeasurementProtocolSecret Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a measurement protocol secret.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_measurement_protocol_secret.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateMeasurementProtocolSecret",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateMeasurementProtocolSecret",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "measurement_protocol_secret",
-                        "type": ".google.analytics.admin.v1beta.MeasurementProtocolSecret"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.MeasurementProtocolSecret",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateMeasurementProtocolSecret",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateMeasurementProtocolSecret",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteMeasurementProtocolSecret_async",
-            "title": "AnalyticsAdminService deleteMeasurementProtocolSecret Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes target MeasurementProtocolSecret.",
-            "canonical": true,
-            "file": "analytics_admin_service.delete_measurement_protocol_secret.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteMeasurementProtocolSecret",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteMeasurementProtocolSecret",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteMeasurementProtocolSecret",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteMeasurementProtocolSecret",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateMeasurementProtocolSecret_async",
-            "title": "AnalyticsAdminService updateMeasurementProtocolSecret Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a measurement protocol secret.",
-            "canonical": true,
-            "file": "analytics_admin_service.update_measurement_protocol_secret.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateMeasurementProtocolSecret",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateMeasurementProtocolSecret",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "measurement_protocol_secret",
-                        "type": ".google.analytics.admin.v1beta.MeasurementProtocolSecret"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.MeasurementProtocolSecret",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateMeasurementProtocolSecret",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateMeasurementProtocolSecret",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_AcknowledgeUserDataCollection_async",
-            "title": "AnalyticsAdminService acknowledgeUserDataCollection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Acknowledges the terms of user data collection for the specified property. This acknowledgement must be completed (either in the Google Analytics UI or through this API) before MeasurementProtocolSecret resources may be created.",
-            "canonical": true,
-            "file": "analytics_admin_service.acknowledge_user_data_collection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AcknowledgeUserDataCollection",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.AcknowledgeUserDataCollection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "property",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "acknowledgement",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.AcknowledgeUserDataCollectionResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "AcknowledgeUserDataCollection",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.AcknowledgeUserDataCollection",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_SearchChangeHistoryEvents_async",
-            "title": "AnalyticsAdminService searchChangeHistoryEvents Sample",
-            "origin": "API_DEFINITION",
-            "description": " Searches through all changes to an account or its children given the specified set of filters. Only returns the subset of changes supported by the API. The UI may return additional changes.",
-            "canonical": true,
-            "file": "analytics_admin_service.search_change_history_events.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 106,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SearchChangeHistoryEvents",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.SearchChangeHistoryEvents",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "account",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "property",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "resource_type",
-                        "type": "TYPE_ENUM[]"
-                    },
-                    {
-                        "name": "action",
-                        "type": "TYPE_ENUM[]"
-                    },
-                    {
-                        "name": "actor_email",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "earliest_change_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "latest_change_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.SearchChangeHistoryEventsResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "SearchChangeHistoryEvents",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.SearchChangeHistoryEvents",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateConversionEvent_async",
-            "title": "AnalyticsAdminService createConversionEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deprecated: Use `CreateKeyEvent` instead. Creates a conversion event with the specified attributes.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_conversion_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConversionEvent",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateConversionEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "conversion_event",
-                        "type": ".google.analytics.admin.v1beta.ConversionEvent"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ConversionEvent",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateConversionEvent",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateConversionEvent",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateConversionEvent_async",
-            "title": "AnalyticsAdminService updateConversionEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deprecated: Use `UpdateKeyEvent` instead. Updates a conversion event with the specified attributes.",
-            "canonical": true,
-            "file": "analytics_admin_service.update_conversion_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConversionEvent",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateConversionEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "conversion_event",
-                        "type": ".google.analytics.admin.v1beta.ConversionEvent"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ConversionEvent",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateConversionEvent",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateConversionEvent",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetConversionEvent_async",
-            "title": "AnalyticsAdminService getConversionEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deprecated: Use `GetKeyEvent` instead. Retrieve a single conversion event.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_conversion_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConversionEvent",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetConversionEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ConversionEvent",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetConversionEvent",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetConversionEvent",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteConversionEvent_async",
-            "title": "AnalyticsAdminService deleteConversionEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deprecated: Use `DeleteKeyEvent` instead. Deletes a conversion event in a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.delete_conversion_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConversionEvent",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteConversionEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteConversionEvent",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteConversionEvent",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListConversionEvents_async",
-            "title": "AnalyticsAdminService listConversionEvents Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deprecated: Use `ListKeyEvents` instead. Returns a list of conversion events in the specified parent property. Returns an empty list if no conversion events are found.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_conversion_events.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConversionEvents",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListConversionEvents",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListConversionEventsResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListConversionEvents",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListConversionEvents",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateKeyEvent_async",
-            "title": "AnalyticsAdminService createKeyEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Key Event.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_key_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateKeyEvent",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateKeyEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "key_event",
-                        "type": ".google.analytics.admin.v1beta.KeyEvent"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.KeyEvent",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateKeyEvent",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateKeyEvent",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateKeyEvent_async",
-            "title": "AnalyticsAdminService updateKeyEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a Key Event.",
-            "canonical": true,
-            "file": "analytics_admin_service.update_key_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateKeyEvent",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateKeyEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "key_event",
-                        "type": ".google.analytics.admin.v1beta.KeyEvent"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.KeyEvent",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateKeyEvent",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateKeyEvent",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetKeyEvent_async",
-            "title": "AnalyticsAdminService getKeyEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieve a single Key Event.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_key_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetKeyEvent",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetKeyEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.KeyEvent",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetKeyEvent",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetKeyEvent",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteKeyEvent_async",
-            "title": "AnalyticsAdminService deleteKeyEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a Key Event.",
-            "canonical": true,
-            "file": "analytics_admin_service.delete_key_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteKeyEvent",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteKeyEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteKeyEvent",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteKeyEvent",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListKeyEvents_async",
-            "title": "AnalyticsAdminService listKeyEvents Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of Key Events in the specified parent property. Returns an empty list if no Key Events are found.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_key_events.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListKeyEvents",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListKeyEvents",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListKeyEventsResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListKeyEvents",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListKeyEvents",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateCustomDimension_async",
-            "title": "AnalyticsAdminService createCustomDimension Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a CustomDimension.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_custom_dimension.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCustomDimension",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateCustomDimension",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "custom_dimension",
-                        "type": ".google.analytics.admin.v1beta.CustomDimension"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.CustomDimension",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateCustomDimension",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateCustomDimension",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateCustomDimension_async",
-            "title": "AnalyticsAdminService updateCustomDimension Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a CustomDimension on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.update_custom_dimension.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCustomDimension",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateCustomDimension",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "custom_dimension",
-                        "type": ".google.analytics.admin.v1beta.CustomDimension"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.CustomDimension",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateCustomDimension",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateCustomDimension",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListCustomDimensions_async",
-            "title": "AnalyticsAdminService listCustomDimensions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists CustomDimensions on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_custom_dimensions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCustomDimensions",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListCustomDimensions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListCustomDimensionsResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListCustomDimensions",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListCustomDimensions",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ArchiveCustomDimension_async",
-            "title": "AnalyticsAdminService archiveCustomDimension Sample",
-            "origin": "API_DEFINITION",
-            "description": " Archives a CustomDimension on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.archive_custom_dimension.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ArchiveCustomDimension",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ArchiveCustomDimension",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ArchiveCustomDimension",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ArchiveCustomDimension",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetCustomDimension_async",
-            "title": "AnalyticsAdminService getCustomDimension Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lookup for a single CustomDimension.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_custom_dimension.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCustomDimension",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetCustomDimension",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.CustomDimension",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetCustomDimension",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetCustomDimension",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateCustomMetric_async",
-            "title": "AnalyticsAdminService createCustomMetric Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a CustomMetric.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_custom_metric.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCustomMetric",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateCustomMetric",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "custom_metric",
-                        "type": ".google.analytics.admin.v1beta.CustomMetric"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.CustomMetric",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateCustomMetric",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateCustomMetric",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateCustomMetric_async",
-            "title": "AnalyticsAdminService updateCustomMetric Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a CustomMetric on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.update_custom_metric.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCustomMetric",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateCustomMetric",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "custom_metric",
-                        "type": ".google.analytics.admin.v1beta.CustomMetric"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.CustomMetric",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateCustomMetric",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateCustomMetric",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListCustomMetrics_async",
-            "title": "AnalyticsAdminService listCustomMetrics Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists CustomMetrics on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_custom_metrics.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCustomMetrics",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListCustomMetrics",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListCustomMetricsResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListCustomMetrics",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListCustomMetrics",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ArchiveCustomMetric_async",
-            "title": "AnalyticsAdminService archiveCustomMetric Sample",
-            "origin": "API_DEFINITION",
-            "description": " Archives a CustomMetric on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.archive_custom_metric.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ArchiveCustomMetric",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ArchiveCustomMetric",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ArchiveCustomMetric",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ArchiveCustomMetric",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetCustomMetric_async",
-            "title": "AnalyticsAdminService getCustomMetric Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lookup for a single CustomMetric.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_custom_metric.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCustomMetric",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetCustomMetric",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.CustomMetric",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetCustomMetric",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetCustomMetric",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataRetentionSettings_async",
-            "title": "AnalyticsAdminService getDataRetentionSettings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the singleton data retention settings for this property.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_data_retention_settings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDataRetentionSettings",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataRetentionSettings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.DataRetentionSettings",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetDataRetentionSettings",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataRetentionSettings",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateDataRetentionSettings_async",
-            "title": "AnalyticsAdminService updateDataRetentionSettings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the singleton data retention settings for this property.",
-            "canonical": true,
-            "file": "analytics_admin_service.update_data_retention_settings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateDataRetentionSettings",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateDataRetentionSettings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "data_retention_settings",
-                        "type": ".google.analytics.admin.v1beta.DataRetentionSettings"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.DataRetentionSettings",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateDataRetentionSettings",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateDataRetentionSettings",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateDataStream_async",
-            "title": "AnalyticsAdminService createDataStream Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a DataStream.",
-            "canonical": true,
-            "file": "analytics_admin_service.create_data_stream.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateDataStream",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateDataStream",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "data_stream",
-                        "type": ".google.analytics.admin.v1beta.DataStream"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.DataStream",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateDataStream",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateDataStream",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteDataStream_async",
-            "title": "AnalyticsAdminService deleteDataStream Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a DataStream on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.delete_data_stream.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteDataStream",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteDataStream",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteDataStream",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteDataStream",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateDataStream_async",
-            "title": "AnalyticsAdminService updateDataStream Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a DataStream on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.update_data_stream.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateDataStream",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateDataStream",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "data_stream",
-                        "type": ".google.analytics.admin.v1beta.DataStream"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.DataStream",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateDataStream",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateDataStream",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListDataStreams_async",
-            "title": "AnalyticsAdminService listDataStreams Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists DataStreams on a property.",
-            "canonical": true,
-            "file": "analytics_admin_service.list_data_streams.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDataStreams",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListDataStreams",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.ListDataStreamsResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListDataStreams",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListDataStreams",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataStream_async",
-            "title": "AnalyticsAdminService getDataStream Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lookup for a single DataStream.",
-            "canonical": true,
-            "file": "analytics_admin_service.get_data_stream.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDataStream",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataStream",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.DataStream",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetDataStream",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataStream",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_RunAccessReport_async",
-            "title": "AnalyticsAdminService runAccessReport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a customized report of data access records. The report provides records of each time a user reads Google Analytics reporting data. Access records are retained for up to 2 years. Data Access Reports can be requested for a property. Reports may be requested for any property, but dimensions that aren't related to quota can only be requested on Google Analytics 360 properties. This method is only available to Administrators. These data access records include GA UI Reporting, GA UI Explorations, GA Data API, and other products like Firebase & Admob that can retrieve data from Google Analytics through a linkage. These records don't include property configuration changes like adding a stream or changing a property's time zone. For configuration change history, see [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents). To give your feedback on this API, complete the [Google Analytics Access Reports feedback](https://docs.google.com/forms/d/e/1FAIpQLSdmEBUrMzAEdiEKk5TV5dEHvDUZDRlgWYdQdAeSdtR4hVjEhw/viewform) form.",
-            "canonical": true,
-            "file": "analytics_admin_service.run_access_report.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 146,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RunAccessReport",
-                "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.RunAccessReport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "entity",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "dimensions",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "metrics",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "date_ranges",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "dimension_filter",
-                        "type": ".google.analytics.admin.v1beta.AccessFilterExpression"
-                    },
-                    {
-                        "name": "metric_filter",
-                        "type": ".google.analytics.admin.v1beta.AccessFilterExpression"
-                    },
-                    {
-                        "name": "offset",
-                        "type": "TYPE_INT64"
-                    },
-                    {
-                        "name": "limit",
-                        "type": "TYPE_INT64"
-                    },
-                    {
-                        "name": "time_zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_bys",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "return_entity_quota",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "include_all_users",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "expand_groups",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.analytics.admin.v1beta.RunAccessReportResponse",
-                "client": {
-                    "shortName": "AnalyticsAdminServiceClient",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "RunAccessReport",
-                    "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.RunAccessReport",
-                    "service": {
-                        "shortName": "AnalyticsAdminService",
-                        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-admin",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.analytics.admin.v1beta",
+        "version": "v1beta"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetAccount_async",
+      "title": "AnalyticsAdminService getAccount Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup for a single Account.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_account.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAccount",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetAccount",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.Account",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetAccount",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetAccount",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListAccounts_async",
+      "title": "AnalyticsAdminService listAccounts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns all accounts accessible by the caller. Note that these accounts might not currently have GA properties. Soft-deleted (ie: \"trashed\") accounts are excluded by default. Returns an empty list if no relevant accounts are found.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_accounts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAccounts",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListAccounts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "show_deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListAccountsResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListAccounts",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListAccounts",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteAccount_async",
+      "title": "AnalyticsAdminService deleteAccount Sample",
+      "origin": "API_DEFINITION",
+      "description": " Marks target Account as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted accounts. However, they can be restored using the Trash Can UI. If the accounts are not restored before the expiration time, the account and all child resources (eg: Properties, GoogleAdsLinks, Streams, AccessBindings) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found.",
+      "canonical": true,
+      "file": "analytics_admin_service.delete_account.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAccount",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteAccount",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAccount",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteAccount",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateAccount_async",
+      "title": "AnalyticsAdminService updateAccount Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an account.",
+      "canonical": true,
+      "file": "analytics_admin_service.update_account.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAccount",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateAccount",
+        "async": true,
+        "parameters": [
+          {
+            "name": "account",
+            "type": ".google.analytics.admin.v1beta.Account"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.Account",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateAccount",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateAccount",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ProvisionAccountTicket_async",
+      "title": "AnalyticsAdminService provisionAccountTicket Sample",
+      "origin": "API_DEFINITION",
+      "description": " Requests a ticket for creating an account.",
+      "canonical": true,
+      "file": "analytics_admin_service.provision_account_ticket.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ProvisionAccountTicket",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ProvisionAccountTicket",
+        "async": true,
+        "parameters": [
+          {
+            "name": "account",
+            "type": ".google.analytics.admin.v1beta.Account"
+          },
+          {
+            "name": "redirect_uri",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ProvisionAccountTicketResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ProvisionAccountTicket",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ProvisionAccountTicket",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListAccountSummaries_async",
+      "title": "AnalyticsAdminService listAccountSummaries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns summaries of all accounts accessible by the caller.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_account_summaries.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAccountSummaries",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListAccountSummaries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListAccountSummariesResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListAccountSummaries",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListAccountSummaries",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetProperty_async",
+      "title": "AnalyticsAdminService getProperty Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup for a single GA Property.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_property.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProperty",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetProperty",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.Property",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetProperty",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetProperty",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListProperties_async",
+      "title": "AnalyticsAdminService listProperties Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns child Properties under the specified parent Account. Properties will be excluded if the caller does not have access. Soft-deleted (ie: \"trashed\") properties are excluded by default. Returns an empty list if no relevant properties are found.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_properties.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProperties",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListProperties",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "show_deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListPropertiesResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListProperties",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListProperties",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateProperty_async",
+      "title": "AnalyticsAdminService createProperty Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Google Analytics property with the specified location and attributes.",
+      "canonical": true,
+      "file": "analytics_admin_service.create_property.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateProperty",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateProperty",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": ".google.analytics.admin.v1beta.Property"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.Property",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateProperty",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateProperty",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteProperty_async",
+      "title": "AnalyticsAdminService deleteProperty Sample",
+      "origin": "API_DEFINITION",
+      "description": " Marks target Property as soft-deleted (ie: \"trashed\") and returns it. This API does not have a method to restore soft-deleted properties. However, they can be restored using the Trash Can UI. If the properties are not restored before the expiration time, the Property and all child resources (eg: GoogleAdsLinks, Streams, AccessBindings) will be permanently purged. https://support.google.com/analytics/answer/6154772 Returns an error if the target is not found.",
+      "canonical": true,
+      "file": "analytics_admin_service.delete_property.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteProperty",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteProperty",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.Property",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteProperty",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteProperty",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateProperty_async",
+      "title": "AnalyticsAdminService updateProperty Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.update_property.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateProperty",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateProperty",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": ".google.analytics.admin.v1beta.Property"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.Property",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateProperty",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateProperty",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateFirebaseLink_async",
+      "title": "AnalyticsAdminService createFirebaseLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a FirebaseLink. Properties can have at most one FirebaseLink.",
+      "canonical": true,
+      "file": "analytics_admin_service.create_firebase_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateFirebaseLink",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateFirebaseLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "firebase_link",
+            "type": ".google.analytics.admin.v1beta.FirebaseLink"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.FirebaseLink",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateFirebaseLink",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateFirebaseLink",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteFirebaseLink_async",
+      "title": "AnalyticsAdminService deleteFirebaseLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a FirebaseLink on a property",
+      "canonical": true,
+      "file": "analytics_admin_service.delete_firebase_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteFirebaseLink",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteFirebaseLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteFirebaseLink",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteFirebaseLink",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListFirebaseLinks_async",
+      "title": "AnalyticsAdminService listFirebaseLinks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists FirebaseLinks on a property. Properties can have at most one FirebaseLink.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_firebase_links.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListFirebaseLinks",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListFirebaseLinks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListFirebaseLinksResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListFirebaseLinks",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListFirebaseLinks",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateGoogleAdsLink_async",
+      "title": "AnalyticsAdminService createGoogleAdsLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a GoogleAdsLink.",
+      "canonical": true,
+      "file": "analytics_admin_service.create_google_ads_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateGoogleAdsLink",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateGoogleAdsLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "google_ads_link",
+            "type": ".google.analytics.admin.v1beta.GoogleAdsLink"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.GoogleAdsLink",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateGoogleAdsLink",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateGoogleAdsLink",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateGoogleAdsLink_async",
+      "title": "AnalyticsAdminService updateGoogleAdsLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a GoogleAdsLink on a property",
+      "canonical": true,
+      "file": "analytics_admin_service.update_google_ads_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGoogleAdsLink",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateGoogleAdsLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "google_ads_link",
+            "type": ".google.analytics.admin.v1beta.GoogleAdsLink"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.GoogleAdsLink",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateGoogleAdsLink",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateGoogleAdsLink",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteGoogleAdsLink_async",
+      "title": "AnalyticsAdminService deleteGoogleAdsLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a GoogleAdsLink on a property",
+      "canonical": true,
+      "file": "analytics_admin_service.delete_google_ads_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteGoogleAdsLink",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteGoogleAdsLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteGoogleAdsLink",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteGoogleAdsLink",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListGoogleAdsLinks_async",
+      "title": "AnalyticsAdminService listGoogleAdsLinks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists GoogleAdsLinks on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_google_ads_links.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGoogleAdsLinks",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListGoogleAdsLinks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListGoogleAdsLinksResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListGoogleAdsLinks",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListGoogleAdsLinks",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataSharingSettings_async",
+      "title": "AnalyticsAdminService getDataSharingSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get data sharing settings on an account. Data sharing settings are singletons.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_data_sharing_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataSharingSettings",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataSharingSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.DataSharingSettings",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataSharingSettings",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataSharingSettings",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetMeasurementProtocolSecret_async",
+      "title": "AnalyticsAdminService getMeasurementProtocolSecret Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup for a single MeasurementProtocolSecret.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_measurement_protocol_secret.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMeasurementProtocolSecret",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetMeasurementProtocolSecret",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.MeasurementProtocolSecret",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetMeasurementProtocolSecret",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetMeasurementProtocolSecret",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListMeasurementProtocolSecrets_async",
+      "title": "AnalyticsAdminService listMeasurementProtocolSecrets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns child MeasurementProtocolSecrets under the specified parent Property.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_measurement_protocol_secrets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMeasurementProtocolSecrets",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListMeasurementProtocolSecrets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListMeasurementProtocolSecretsResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListMeasurementProtocolSecrets",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListMeasurementProtocolSecrets",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateMeasurementProtocolSecret_async",
+      "title": "AnalyticsAdminService createMeasurementProtocolSecret Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a measurement protocol secret.",
+      "canonical": true,
+      "file": "analytics_admin_service.create_measurement_protocol_secret.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMeasurementProtocolSecret",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateMeasurementProtocolSecret",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "measurement_protocol_secret",
+            "type": ".google.analytics.admin.v1beta.MeasurementProtocolSecret"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.MeasurementProtocolSecret",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateMeasurementProtocolSecret",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateMeasurementProtocolSecret",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteMeasurementProtocolSecret_async",
+      "title": "AnalyticsAdminService deleteMeasurementProtocolSecret Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes target MeasurementProtocolSecret.",
+      "canonical": true,
+      "file": "analytics_admin_service.delete_measurement_protocol_secret.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMeasurementProtocolSecret",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteMeasurementProtocolSecret",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteMeasurementProtocolSecret",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteMeasurementProtocolSecret",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateMeasurementProtocolSecret_async",
+      "title": "AnalyticsAdminService updateMeasurementProtocolSecret Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a measurement protocol secret.",
+      "canonical": true,
+      "file": "analytics_admin_service.update_measurement_protocol_secret.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMeasurementProtocolSecret",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateMeasurementProtocolSecret",
+        "async": true,
+        "parameters": [
+          {
+            "name": "measurement_protocol_secret",
+            "type": ".google.analytics.admin.v1beta.MeasurementProtocolSecret"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.MeasurementProtocolSecret",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateMeasurementProtocolSecret",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateMeasurementProtocolSecret",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_AcknowledgeUserDataCollection_async",
+      "title": "AnalyticsAdminService acknowledgeUserDataCollection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Acknowledges the terms of user data collection for the specified property. This acknowledgement must be completed (either in the Google Analytics UI or through this API) before MeasurementProtocolSecret resources may be created.",
+      "canonical": true,
+      "file": "analytics_admin_service.acknowledge_user_data_collection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AcknowledgeUserDataCollection",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.AcknowledgeUserDataCollection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "acknowledgement",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.AcknowledgeUserDataCollectionResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "AcknowledgeUserDataCollection",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.AcknowledgeUserDataCollection",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_SearchChangeHistoryEvents_async",
+      "title": "AnalyticsAdminService searchChangeHistoryEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Searches through all changes to an account or its children given the specified set of filters. Only returns the subset of changes supported by the API. The UI may return additional changes.",
+      "canonical": true,
+      "file": "analytics_admin_service.search_change_history_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 106,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchChangeHistoryEvents",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.SearchChangeHistoryEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "account",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource_type",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "action",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "actor_email",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "earliest_change_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "latest_change_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.SearchChangeHistoryEventsResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "SearchChangeHistoryEvents",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.SearchChangeHistoryEvents",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateConversionEvent_async",
+      "title": "AnalyticsAdminService createConversionEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprecated: Use `CreateKeyEvent` instead. Creates a conversion event with the specified attributes.",
+      "canonical": true,
+      "file": "analytics_admin_service.create_conversion_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConversionEvent",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateConversionEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "conversion_event",
+            "type": ".google.analytics.admin.v1beta.ConversionEvent"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ConversionEvent",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateConversionEvent",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateConversionEvent",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateConversionEvent_async",
+      "title": "AnalyticsAdminService updateConversionEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprecated: Use `UpdateKeyEvent` instead. Updates a conversion event with the specified attributes.",
+      "canonical": true,
+      "file": "analytics_admin_service.update_conversion_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConversionEvent",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateConversionEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "conversion_event",
+            "type": ".google.analytics.admin.v1beta.ConversionEvent"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ConversionEvent",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateConversionEvent",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateConversionEvent",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetConversionEvent_async",
+      "title": "AnalyticsAdminService getConversionEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprecated: Use `GetKeyEvent` instead. Retrieve a single conversion event.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_conversion_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConversionEvent",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetConversionEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ConversionEvent",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetConversionEvent",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetConversionEvent",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteConversionEvent_async",
+      "title": "AnalyticsAdminService deleteConversionEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprecated: Use `DeleteKeyEvent` instead. Deletes a conversion event in a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.delete_conversion_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConversionEvent",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteConversionEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteConversionEvent",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteConversionEvent",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListConversionEvents_async",
+      "title": "AnalyticsAdminService listConversionEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deprecated: Use `ListKeyEvents` instead. Returns a list of conversion events in the specified parent property. Returns an empty list if no conversion events are found.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_conversion_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConversionEvents",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListConversionEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListConversionEventsResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListConversionEvents",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListConversionEvents",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateKeyEvent_async",
+      "title": "AnalyticsAdminService createKeyEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Key Event.",
+      "canonical": true,
+      "file": "analytics_admin_service.create_key_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateKeyEvent",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateKeyEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "key_event",
+            "type": ".google.analytics.admin.v1beta.KeyEvent"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.KeyEvent",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateKeyEvent",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateKeyEvent",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateKeyEvent_async",
+      "title": "AnalyticsAdminService updateKeyEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a Key Event.",
+      "canonical": true,
+      "file": "analytics_admin_service.update_key_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKeyEvent",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateKeyEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "key_event",
+            "type": ".google.analytics.admin.v1beta.KeyEvent"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.KeyEvent",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateKeyEvent",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateKeyEvent",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetKeyEvent_async",
+      "title": "AnalyticsAdminService getKeyEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieve a single Key Event.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_key_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetKeyEvent",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetKeyEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.KeyEvent",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetKeyEvent",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetKeyEvent",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteKeyEvent_async",
+      "title": "AnalyticsAdminService deleteKeyEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Key Event.",
+      "canonical": true,
+      "file": "analytics_admin_service.delete_key_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteKeyEvent",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteKeyEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteKeyEvent",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteKeyEvent",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListKeyEvents_async",
+      "title": "AnalyticsAdminService listKeyEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of Key Events in the specified parent property. Returns an empty list if no Key Events are found.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_key_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListKeyEvents",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListKeyEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListKeyEventsResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListKeyEvents",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListKeyEvents",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateCustomDimension_async",
+      "title": "AnalyticsAdminService createCustomDimension Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a CustomDimension.",
+      "canonical": true,
+      "file": "analytics_admin_service.create_custom_dimension.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCustomDimension",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateCustomDimension",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "custom_dimension",
+            "type": ".google.analytics.admin.v1beta.CustomDimension"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.CustomDimension",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateCustomDimension",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateCustomDimension",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateCustomDimension_async",
+      "title": "AnalyticsAdminService updateCustomDimension Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a CustomDimension on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.update_custom_dimension.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCustomDimension",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateCustomDimension",
+        "async": true,
+        "parameters": [
+          {
+            "name": "custom_dimension",
+            "type": ".google.analytics.admin.v1beta.CustomDimension"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.CustomDimension",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCustomDimension",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateCustomDimension",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListCustomDimensions_async",
+      "title": "AnalyticsAdminService listCustomDimensions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists CustomDimensions on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_custom_dimensions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCustomDimensions",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListCustomDimensions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListCustomDimensionsResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListCustomDimensions",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListCustomDimensions",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ArchiveCustomDimension_async",
+      "title": "AnalyticsAdminService archiveCustomDimension Sample",
+      "origin": "API_DEFINITION",
+      "description": " Archives a CustomDimension on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.archive_custom_dimension.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ArchiveCustomDimension",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ArchiveCustomDimension",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ArchiveCustomDimension",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ArchiveCustomDimension",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetCustomDimension_async",
+      "title": "AnalyticsAdminService getCustomDimension Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup for a single CustomDimension.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_custom_dimension.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCustomDimension",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetCustomDimension",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.CustomDimension",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetCustomDimension",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetCustomDimension",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateCustomMetric_async",
+      "title": "AnalyticsAdminService createCustomMetric Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a CustomMetric.",
+      "canonical": true,
+      "file": "analytics_admin_service.create_custom_metric.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCustomMetric",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateCustomMetric",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "custom_metric",
+            "type": ".google.analytics.admin.v1beta.CustomMetric"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.CustomMetric",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateCustomMetric",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateCustomMetric",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateCustomMetric_async",
+      "title": "AnalyticsAdminService updateCustomMetric Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a CustomMetric on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.update_custom_metric.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCustomMetric",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateCustomMetric",
+        "async": true,
+        "parameters": [
+          {
+            "name": "custom_metric",
+            "type": ".google.analytics.admin.v1beta.CustomMetric"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.CustomMetric",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCustomMetric",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateCustomMetric",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListCustomMetrics_async",
+      "title": "AnalyticsAdminService listCustomMetrics Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists CustomMetrics on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_custom_metrics.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCustomMetrics",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListCustomMetrics",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListCustomMetricsResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListCustomMetrics",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListCustomMetrics",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ArchiveCustomMetric_async",
+      "title": "AnalyticsAdminService archiveCustomMetric Sample",
+      "origin": "API_DEFINITION",
+      "description": " Archives a CustomMetric on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.archive_custom_metric.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ArchiveCustomMetric",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ArchiveCustomMetric",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ArchiveCustomMetric",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ArchiveCustomMetric",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetCustomMetric_async",
+      "title": "AnalyticsAdminService getCustomMetric Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup for a single CustomMetric.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_custom_metric.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCustomMetric",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetCustomMetric",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.CustomMetric",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetCustomMetric",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetCustomMetric",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataRetentionSettings_async",
+      "title": "AnalyticsAdminService getDataRetentionSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the singleton data retention settings for this property.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_data_retention_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataRetentionSettings",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataRetentionSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.DataRetentionSettings",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataRetentionSettings",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataRetentionSettings",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateDataRetentionSettings_async",
+      "title": "AnalyticsAdminService updateDataRetentionSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the singleton data retention settings for this property.",
+      "canonical": true,
+      "file": "analytics_admin_service.update_data_retention_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataRetentionSettings",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateDataRetentionSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "data_retention_settings",
+            "type": ".google.analytics.admin.v1beta.DataRetentionSettings"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.DataRetentionSettings",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDataRetentionSettings",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateDataRetentionSettings",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_CreateDataStream_async",
+      "title": "AnalyticsAdminService createDataStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a DataStream.",
+      "canonical": true,
+      "file": "analytics_admin_service.create_data_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDataStream",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateDataStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_stream",
+            "type": ".google.analytics.admin.v1beta.DataStream"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.DataStream",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDataStream",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.CreateDataStream",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_DeleteDataStream_async",
+      "title": "AnalyticsAdminService deleteDataStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a DataStream on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.delete_data_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataStream",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteDataStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDataStream",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.DeleteDataStream",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_UpdateDataStream_async",
+      "title": "AnalyticsAdminService updateDataStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a DataStream on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.update_data_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataStream",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateDataStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "data_stream",
+            "type": ".google.analytics.admin.v1beta.DataStream"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.DataStream",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDataStream",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.UpdateDataStream",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_ListDataStreams_async",
+      "title": "AnalyticsAdminService listDataStreams Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists DataStreams on a property.",
+      "canonical": true,
+      "file": "analytics_admin_service.list_data_streams.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDataStreams",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListDataStreams",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.ListDataStreamsResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListDataStreams",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.ListDataStreams",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_GetDataStream_async",
+      "title": "AnalyticsAdminService getDataStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup for a single DataStream.",
+      "canonical": true,
+      "file": "analytics_admin_service.get_data_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataStream",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.DataStream",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataStream",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.GetDataStream",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticsadmin_v1beta_generated_AnalyticsAdminService_RunAccessReport_async",
+      "title": "AnalyticsAdminService runAccessReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a customized report of data access records. The report provides records of each time a user reads Google Analytics reporting data. Access records are retained for up to 2 years. Data Access Reports can be requested for a property. Reports may be requested for any property, but dimensions that aren't related to quota can only be requested on Google Analytics 360 properties. This method is only available to Administrators. These data access records include GA UI Reporting, GA UI Explorations, GA Data API, and other products like Firebase & Admob that can retrieve data from Google Analytics through a linkage. These records don't include property configuration changes like adding a stream or changing a property's time zone. For configuration change history, see [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents). To give your feedback on this API, complete the [Google Analytics Access Reports feedback](https://docs.google.com/forms/d/e/1FAIpQLSdmEBUrMzAEdiEKk5TV5dEHvDUZDRlgWYdQdAeSdtR4hVjEhw/viewform) form.",
+      "canonical": true,
+      "file": "analytics_admin_service.run_access_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 146,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunAccessReport",
+        "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.RunAccessReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "entity",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dimensions",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "metrics",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "date_ranges",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "dimension_filter",
+            "type": ".google.analytics.admin.v1beta.AccessFilterExpression"
+          },
+          {
+            "name": "metric_filter",
+            "type": ".google.analytics.admin.v1beta.AccessFilterExpression"
+          },
+          {
+            "name": "offset",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "limit",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "time_zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_bys",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "return_entity_quota",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "include_all_users",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "expand_groups",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.analytics.admin.v1beta.RunAccessReportResponse",
+        "client": {
+          "shortName": "AnalyticsAdminServiceClient",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminServiceClient"
+        },
+        "method": {
+          "shortName": "RunAccessReport",
+          "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService.RunAccessReport",
+          "service": {
+            "shortName": "AnalyticsAdminService",
+            "fullName": "google.analytics.admin.v1beta.AnalyticsAdminService"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Web Risk API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-webrisk)
+# [Web Risk API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/web-risk.svg)](https://www.npmjs.org/package/@google-cloud/web-risk)
-
-
-
 
 Web Risk API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-webrisk/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Web Risk API Node.js Client API Reference][client-docs]
-* [Web Risk API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-webrisk](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-webrisk)
+* [Web Risk API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/webrisk/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +28,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,70 +44,31 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Web Risk API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/web-risk
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * Check a URI against the WebRisk API.
- * @param {string} uri A URI to pass to the Web Risk API.
- */
-async function quickstart(uri) {
-  // Create the WebRisk client library.
-  const {WebRiskServiceClient, protos} = require('@google-cloud/web-risk');
-  const client = new WebRiskServiceClient();
-
-  // Create an API request to check for malware, social engineering,
-  // and unwanted software.
-  const request = {
-    uri: uri,
-    threatTypes: [
-      protos.google.cloud.webrisk.v1.ThreatType.MALWARE,
-      protos.google.cloud.webrisk.v1.ThreatType.SOCIAL_ENGINEERING,
-      protos.google.cloud.webrisk.v1.ThreatType.UNWANTED_SOFTWARE,
-    ],
-  };
-
-  // call the WebRisk searchUris API.
-  const {threat} = (await client.searchUris(request))[0];
-  if (threat) {
-    console.info(threat);
-  } else {
-    console.info('no threats found');
-  }
-}
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-webrisk/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Web_risk_service.compute_threat_list_diff | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.compute_threat_list_diff.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.compute_threat_list_diff.js,packages/google-cloud-webrisk/samples/README.md) |
-| Web_risk_service.create_submission | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.create_submission.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.create_submission.js,packages/google-cloud-webrisk/samples/README.md) |
-| Web_risk_service.search_hashes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.search_hashes.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.search_hashes.js,packages/google-cloud-webrisk/samples/README.md) |
-| Web_risk_service.search_uris | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.search_uris.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.search_uris.js,packages/google-cloud-webrisk/samples/README.md) |
-| Web_risk_service.submit_uri | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.submit_uri.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.submit_uri.js,packages/google-cloud-webrisk/samples/README.md) |
-| Web_risk_service_v1_beta1.compute_threat_list_diff | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.compute_threat_list_diff.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.compute_threat_list_diff.js,packages/google-cloud-webrisk/samples/README.md) |
-| Web_risk_service_v1_beta1.search_hashes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.search_hashes.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.search_hashes.js,packages/google-cloud-webrisk/samples/README.md) |
-| Web_risk_service_v1_beta1.search_uris | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.search_uris.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.search_uris.js,packages/google-cloud-webrisk/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-webrisk/samples/quickstart.js,packages/google-cloud-webrisk/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/snippet_metadata_google.cloud.webrisk.v1.json) |
+| compute threat list diff | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.compute_threat_list_diff.js) |
+| create submission | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.create_submission.js) |
+| search hashes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.search_hashes.js) |
+| search uris | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.search_uris.js) |
+| submit uri | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1/web_risk_service.submit_uri.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/snippet_metadata_google.cloud.webrisk.v1beta1.json) |
+| compute threat list diff | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.compute_threat_list_diff.js) |
+| search hashes | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.search_hashes.js) |
+| search uris | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples/generated/v1beta1/web_risk_service_v1_beta1.search_uris.js) |
 
-
-
-The [Web Risk API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -136,45 +95,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/LICENSE)
 
-[client-docs]: https://googleapis.dev/nodejs/web-risk/latest
-[product-docs]: https://cloud.google.com/web-risk/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=webrisk.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-webrisk

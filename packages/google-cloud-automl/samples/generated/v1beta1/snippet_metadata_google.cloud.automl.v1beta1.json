@@ -1,1195 +1,1195 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-automl",
-        "version": "5.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.automl.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_CreateDataset_async",
-            "title": "automl createDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a dataset.",
-            "canonical": true,
-            "file": "auto_ml.create_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateDataset",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.CreateDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "dataset",
-                        "type": ".google.cloud.automl.v1beta1.Dataset"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.Dataset",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "CreateDataset",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.CreateDataset",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_GetDataset_async",
-            "title": "automl getDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a dataset.",
-            "canonical": true,
-            "file": "auto_ml.get_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDataset",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.GetDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.Dataset",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "GetDataset",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.GetDataset",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_ListDatasets_async",
-            "title": "automl listDatasets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists datasets in a project.",
-            "canonical": true,
-            "file": "auto_ml.list_datasets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDatasets",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.ListDatasets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.ListDatasetsResponse",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "ListDatasets",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.ListDatasets",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_UpdateDataset_async",
-            "title": "automl updateDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a dataset.",
-            "canonical": true,
-            "file": "auto_ml.update_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateDataset",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "dataset",
-                        "type": ".google.cloud.automl.v1beta1.Dataset"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.Dataset",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "UpdateDataset",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateDataset",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_DeleteDataset_async",
-            "title": "automl deleteDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a dataset and all of its contents. Returns empty response in the [response][google.longrunning.Operation.response] field when it completes, and `delete_details` in the [metadata][google.longrunning.Operation.metadata] field.",
-            "canonical": true,
-            "file": "auto_ml.delete_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteDataset",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.DeleteDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "DeleteDataset",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.DeleteDataset",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_ImportData_async",
-            "title": "automl importData Sample",
-            "origin": "API_DEFINITION",
-            "description": " Imports data into a dataset. For Tables this method can only be called on an empty Dataset. For Tables: *   A [schema_inference_version][google.cloud.automl.v1beta1.InputConfig.params]     parameter must be explicitly set. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
-            "canonical": true,
-            "file": "auto_ml.import_data.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ImportData",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.ImportData",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "input_config",
-                        "type": ".google.cloud.automl.v1beta1.InputConfig"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "ImportData",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.ImportData",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_ExportData_async",
-            "title": "automl exportData Sample",
-            "origin": "API_DEFINITION",
-            "description": " Exports dataset's data to the provided output location. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
-            "canonical": true,
-            "file": "auto_ml.export_data.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExportData",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportData",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "output_config",
-                        "type": ".google.cloud.automl.v1beta1.OutputConfig"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "ExportData",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportData",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_GetAnnotationSpec_async",
-            "title": "automl getAnnotationSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an annotation spec.",
-            "canonical": true,
-            "file": "auto_ml.get_annotation_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAnnotationSpec",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.GetAnnotationSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.AnnotationSpec",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "GetAnnotationSpec",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.GetAnnotationSpec",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_GetTableSpec_async",
-            "title": "automl getTableSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a table spec.",
-            "canonical": true,
-            "file": "auto_ml.get_table_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetTableSpec",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.GetTableSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "field_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.TableSpec",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "GetTableSpec",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.GetTableSpec",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_ListTableSpecs_async",
-            "title": "automl listTableSpecs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists table specs in a dataset.",
-            "canonical": true,
-            "file": "auto_ml.list_table_specs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListTableSpecs",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.ListTableSpecs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "field_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.ListTableSpecsResponse",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "ListTableSpecs",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.ListTableSpecs",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_UpdateTableSpec_async",
-            "title": "automl updateTableSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a table spec.",
-            "canonical": true,
-            "file": "auto_ml.update_table_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateTableSpec",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateTableSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "table_spec",
-                        "type": ".google.cloud.automl.v1beta1.TableSpec"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.TableSpec",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "UpdateTableSpec",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateTableSpec",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_GetColumnSpec_async",
-            "title": "automl getColumnSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a column spec.",
-            "canonical": true,
-            "file": "auto_ml.get_column_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetColumnSpec",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.GetColumnSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "field_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.ColumnSpec",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "GetColumnSpec",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.GetColumnSpec",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_ListColumnSpecs_async",
-            "title": "automl listColumnSpecs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists column specs in a table spec.",
-            "canonical": true,
-            "file": "auto_ml.list_column_specs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListColumnSpecs",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.ListColumnSpecs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "field_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.ListColumnSpecsResponse",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "ListColumnSpecs",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.ListColumnSpecs",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_UpdateColumnSpec_async",
-            "title": "automl updateColumnSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a column spec.",
-            "canonical": true,
-            "file": "auto_ml.update_column_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateColumnSpec",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateColumnSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "column_spec",
-                        "type": ".google.cloud.automl.v1beta1.ColumnSpec"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.ColumnSpec",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "UpdateColumnSpec",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateColumnSpec",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_CreateModel_async",
-            "title": "automl createModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a model. Returns a Model in the [response][google.longrunning.Operation.response] field when it completes. When you create a model, several model evaluations are created for it: a global evaluation, and one evaluation for each annotation spec.",
-            "canonical": true,
-            "file": "auto_ml.create_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateModel",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.CreateModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "model",
-                        "type": ".google.cloud.automl.v1beta1.Model"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "CreateModel",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.CreateModel",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_GetModel_async",
-            "title": "automl getModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a model.",
-            "canonical": true,
-            "file": "auto_ml.get_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetModel",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.GetModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.Model",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "GetModel",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.GetModel",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_ListModels_async",
-            "title": "automl listModels Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists models.",
-            "canonical": true,
-            "file": "auto_ml.list_models.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListModels",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.ListModels",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.ListModelsResponse",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "ListModels",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.ListModels",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_DeleteModel_async",
-            "title": "automl deleteModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a model. Returns `google.protobuf.Empty` in the [response][google.longrunning.Operation.response] field when it completes, and `delete_details` in the [metadata][google.longrunning.Operation.metadata] field.",
-            "canonical": true,
-            "file": "auto_ml.delete_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteModel",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.DeleteModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "DeleteModel",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.DeleteModel",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_DeployModel_async",
-            "title": "automl deployModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deploys a model. If a model is already deployed, deploying it with the same parameters has no effect. Deploying with different parametrs (as e.g. changing [node_number][google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata.node_number])  will reset the deployment state without pausing the model's availability. Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage deployment automatically. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
-            "canonical": true,
-            "file": "auto_ml.deploy_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeployModel",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.DeployModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "image_object_detection_model_deployment_metadata",
-                        "type": ".google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata"
-                    },
-                    {
-                        "name": "image_classification_model_deployment_metadata",
-                        "type": ".google.cloud.automl.v1beta1.ImageClassificationModelDeploymentMetadata"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "DeployModel",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.DeployModel",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_UndeployModel_async",
-            "title": "automl undeployModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Undeploys a model. If the model is not deployed this method has no effect. Only applicable for Text Classification, Image Object Detection and Tables; all other domains manage deployment automatically. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
-            "canonical": true,
-            "file": "auto_ml.undeploy_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UndeployModel",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.UndeployModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "UndeployModel",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.UndeployModel",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_ExportModel_async",
-            "title": "automl exportModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Exports a trained, \"export-able\", model to a user specified Google Cloud Storage location. A model is considered export-able if and only if it has an export format defined for it in [ModelExportOutputConfig][google.cloud.automl.v1beta1.ModelExportOutputConfig]. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
-            "canonical": true,
-            "file": "auto_ml.export_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExportModel",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "output_config",
-                        "type": ".google.cloud.automl.v1beta1.ModelExportOutputConfig"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "ExportModel",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportModel",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_ExportEvaluatedExamples_async",
-            "title": "automl exportEvaluatedExamples Sample",
-            "origin": "API_DEFINITION",
-            "description": " Exports examples on which the model was evaluated (i.e. which were in the TEST set of the dataset the model was created from), together with their ground truth annotations and the annotations created (predicted) by the model. The examples, ground truth and predictions are exported in the state they were at the moment the model was evaluated. This export is available only for 30 days since the model evaluation is created. Currently only available for Tables. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
-            "canonical": true,
-            "file": "auto_ml.export_evaluated_examples.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExportEvaluatedExamples",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportEvaluatedExamples",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "output_config",
-                        "type": ".google.cloud.automl.v1beta1.ExportEvaluatedExamplesOutputConfig"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "ExportEvaluatedExamples",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportEvaluatedExamples",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_GetModelEvaluation_async",
-            "title": "automl getModelEvaluation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a model evaluation.",
-            "canonical": true,
-            "file": "auto_ml.get_model_evaluation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetModelEvaluation",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.GetModelEvaluation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.ModelEvaluation",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "GetModelEvaluation",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.GetModelEvaluation",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_AutoMl_ListModelEvaluations_async",
-            "title": "automl listModelEvaluations Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists model evaluations.",
-            "canonical": true,
-            "file": "auto_ml.list_model_evaluations.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListModelEvaluations",
-                "fullName": "google.cloud.automl.v1beta1.AutoMl.ListModelEvaluations",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.ListModelEvaluationsResponse",
-                "client": {
-                    "shortName": "AutoMlClient",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
-                },
-                "method": {
-                    "shortName": "ListModelEvaluations",
-                    "fullName": "google.cloud.automl.v1beta1.AutoMl.ListModelEvaluations",
-                    "service": {
-                        "shortName": "AutoMl",
-                        "fullName": "google.cloud.automl.v1beta1.AutoMl"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_PredictionService_Predict_async",
-            "title": "automl predict Sample",
-            "origin": "API_DEFINITION",
-            "description": " Perform an online prediction. The prediction result will be directly returned in the response. Available for following ML problems, and their expected request payloads: * Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes                          up to 30MB. * Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes                            up to 30MB. * Text Classification - TextSnippet, content up to 60,000 characters,                         UTF-8 encoded. * Text Extraction - TextSnippet, content up to 30,000 characters,                     UTF-8 NFC encoded. * Translation - TextSnippet, content up to 25,000 characters, UTF-8                 encoded. * Tables - Row, with column values matching the columns of the model,            up to 5MB. Not available for FORECASTING [prediction_type][google.cloud.automl.v1beta1.TablesModelMetadata.prediction_type]. * Text Sentiment - TextSnippet, content up 500 characters, UTF-8                     encoded.",
-            "canonical": true,
-            "file": "prediction_service.predict.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Predict",
-                "fullName": "google.cloud.automl.v1beta1.PredictionService.Predict",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "payload",
-                        "type": ".google.cloud.automl.v1beta1.ExamplePayload"
-                    },
-                    {
-                        "name": "params",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.automl.v1beta1.PredictResponse",
-                "client": {
-                    "shortName": "PredictionServiceClient",
-                    "fullName": "google.cloud.automl.v1beta1.PredictionServiceClient"
-                },
-                "method": {
-                    "shortName": "Predict",
-                    "fullName": "google.cloud.automl.v1beta1.PredictionService.Predict",
-                    "service": {
-                        "shortName": "PredictionService",
-                        "fullName": "google.cloud.automl.v1beta1.PredictionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "automl_v1beta1_generated_PredictionService_BatchPredict_async",
-            "title": "automl batchPredict Sample",
-            "origin": "API_DEFINITION",
-            "description": " Perform a batch prediction. Unlike the online [Predict][google.cloud.automl.v1beta1.PredictionService.Predict], batch prediction result won't be immediately available in the response. Instead, a long running operation object is returned. User can poll the operation result via [GetOperation][google.longrunning.Operations.GetOperation] method. Once the operation is done, [BatchPredictResult][google.cloud.automl.v1beta1.BatchPredictResult] is returned in the [response][google.longrunning.Operation.response] field. Available for following ML problems: * Image Classification * Image Object Detection * Video Classification * Video Object Tracking * Text Extraction * Tables",
-            "canonical": true,
-            "file": "prediction_service.batch_predict.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 127,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchPredict",
-                "fullName": "google.cloud.automl.v1beta1.PredictionService.BatchPredict",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "input_config",
-                        "type": ".google.cloud.automl.v1beta1.BatchPredictInputConfig"
-                    },
-                    {
-                        "name": "output_config",
-                        "type": ".google.cloud.automl.v1beta1.BatchPredictOutputConfig"
-                    },
-                    {
-                        "name": "params",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "PredictionServiceClient",
-                    "fullName": "google.cloud.automl.v1beta1.PredictionServiceClient"
-                },
-                "method": {
-                    "shortName": "BatchPredict",
-                    "fullName": "google.cloud.automl.v1beta1.PredictionService.BatchPredict",
-                    "service": {
-                        "shortName": "PredictionService",
-                        "fullName": "google.cloud.automl.v1beta1.PredictionService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-automl",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.automl.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_CreateDataset_async",
+      "title": "automl createDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a dataset.",
+      "canonical": true,
+      "file": "auto_ml.create_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDataset",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.CreateDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset",
+            "type": ".google.cloud.automl.v1beta1.Dataset"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.Dataset",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "CreateDataset",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.CreateDataset",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_GetDataset_async",
+      "title": "automl getDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a dataset.",
+      "canonical": true,
+      "file": "auto_ml.get_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataset",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.GetDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.Dataset",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "GetDataset",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.GetDataset",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_ListDatasets_async",
+      "title": "automl listDatasets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists datasets in a project.",
+      "canonical": true,
+      "file": "auto_ml.list_datasets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDatasets",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.ListDatasets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.ListDatasetsResponse",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "ListDatasets",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.ListDatasets",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_UpdateDataset_async",
+      "title": "automl updateDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a dataset.",
+      "canonical": true,
+      "file": "auto_ml.update_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataset",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "dataset",
+            "type": ".google.cloud.automl.v1beta1.Dataset"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.Dataset",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "UpdateDataset",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateDataset",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_DeleteDataset_async",
+      "title": "automl deleteDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a dataset and all of its contents. Returns empty response in the [response][google.longrunning.Operation.response] field when it completes, and `delete_details` in the [metadata][google.longrunning.Operation.metadata] field.",
+      "canonical": true,
+      "file": "auto_ml.delete_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataset",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.DeleteDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "DeleteDataset",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.DeleteDataset",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_ImportData_async",
+      "title": "automl importData Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports data into a dataset. For Tables this method can only be called on an empty Dataset. For Tables: *   A [schema_inference_version][google.cloud.automl.v1beta1.InputConfig.params]     parameter must be explicitly set. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
+      "canonical": true,
+      "file": "auto_ml.import_data.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportData",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.ImportData",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_config",
+            "type": ".google.cloud.automl.v1beta1.InputConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "ImportData",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.ImportData",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_ExportData_async",
+      "title": "automl exportData Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports dataset's data to the provided output location. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
+      "canonical": true,
+      "file": "auto_ml.export_data.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportData",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportData",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "output_config",
+            "type": ".google.cloud.automl.v1beta1.OutputConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "ExportData",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportData",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_GetAnnotationSpec_async",
+      "title": "automl getAnnotationSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an annotation spec.",
+      "canonical": true,
+      "file": "auto_ml.get_annotation_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAnnotationSpec",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.GetAnnotationSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.AnnotationSpec",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "GetAnnotationSpec",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.GetAnnotationSpec",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_GetTableSpec_async",
+      "title": "automl getTableSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a table spec.",
+      "canonical": true,
+      "file": "auto_ml.get_table_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTableSpec",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.GetTableSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "field_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.TableSpec",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "GetTableSpec",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.GetTableSpec",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_ListTableSpecs_async",
+      "title": "automl listTableSpecs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists table specs in a dataset.",
+      "canonical": true,
+      "file": "auto_ml.list_table_specs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTableSpecs",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.ListTableSpecs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "field_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.ListTableSpecsResponse",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "ListTableSpecs",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.ListTableSpecs",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_UpdateTableSpec_async",
+      "title": "automl updateTableSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a table spec.",
+      "canonical": true,
+      "file": "auto_ml.update_table_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTableSpec",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateTableSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "table_spec",
+            "type": ".google.cloud.automl.v1beta1.TableSpec"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.TableSpec",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "UpdateTableSpec",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateTableSpec",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_GetColumnSpec_async",
+      "title": "automl getColumnSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a column spec.",
+      "canonical": true,
+      "file": "auto_ml.get_column_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetColumnSpec",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.GetColumnSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "field_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.ColumnSpec",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "GetColumnSpec",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.GetColumnSpec",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_ListColumnSpecs_async",
+      "title": "automl listColumnSpecs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists column specs in a table spec.",
+      "canonical": true,
+      "file": "auto_ml.list_column_specs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListColumnSpecs",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.ListColumnSpecs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "field_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.ListColumnSpecsResponse",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "ListColumnSpecs",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.ListColumnSpecs",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_UpdateColumnSpec_async",
+      "title": "automl updateColumnSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a column spec.",
+      "canonical": true,
+      "file": "auto_ml.update_column_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateColumnSpec",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateColumnSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "column_spec",
+            "type": ".google.cloud.automl.v1beta1.ColumnSpec"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.ColumnSpec",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "UpdateColumnSpec",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.UpdateColumnSpec",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_CreateModel_async",
+      "title": "automl createModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a model. Returns a Model in the [response][google.longrunning.Operation.response] field when it completes. When you create a model, several model evaluations are created for it: a global evaluation, and one evaluation for each annotation spec.",
+      "canonical": true,
+      "file": "auto_ml.create_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateModel",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.CreateModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model",
+            "type": ".google.cloud.automl.v1beta1.Model"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "CreateModel",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.CreateModel",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_GetModel_async",
+      "title": "automl getModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a model.",
+      "canonical": true,
+      "file": "auto_ml.get_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetModel",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.GetModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.Model",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "GetModel",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.GetModel",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_ListModels_async",
+      "title": "automl listModels Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists models.",
+      "canonical": true,
+      "file": "auto_ml.list_models.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListModels",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.ListModels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.ListModelsResponse",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "ListModels",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.ListModels",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_DeleteModel_async",
+      "title": "automl deleteModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a model. Returns `google.protobuf.Empty` in the [response][google.longrunning.Operation.response] field when it completes, and `delete_details` in the [metadata][google.longrunning.Operation.metadata] field.",
+      "canonical": true,
+      "file": "auto_ml.delete_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteModel",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.DeleteModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "DeleteModel",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.DeleteModel",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_DeployModel_async",
+      "title": "automl deployModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deploys a model. If a model is already deployed, deploying it with the same parameters has no effect. Deploying with different parametrs (as e.g. changing [node_number][google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata.node_number])  will reset the deployment state without pausing the model's availability. Only applicable for Text Classification, Image Object Detection , Tables, and Image Segmentation; all other domains manage deployment automatically. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
+      "canonical": true,
+      "file": "auto_ml.deploy_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeployModel",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.DeployModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "image_object_detection_model_deployment_metadata",
+            "type": ".google.cloud.automl.v1beta1.ImageObjectDetectionModelDeploymentMetadata"
+          },
+          {
+            "name": "image_classification_model_deployment_metadata",
+            "type": ".google.cloud.automl.v1beta1.ImageClassificationModelDeploymentMetadata"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "DeployModel",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.DeployModel",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_UndeployModel_async",
+      "title": "automl undeployModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Undeploys a model. If the model is not deployed this method has no effect. Only applicable for Text Classification, Image Object Detection and Tables; all other domains manage deployment automatically. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
+      "canonical": true,
+      "file": "auto_ml.undeploy_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UndeployModel",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.UndeployModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "UndeployModel",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.UndeployModel",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_ExportModel_async",
+      "title": "automl exportModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports a trained, \"export-able\", model to a user specified Google Cloud Storage location. A model is considered export-able if and only if it has an export format defined for it in [ModelExportOutputConfig][google.cloud.automl.v1beta1.ModelExportOutputConfig]. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
+      "canonical": true,
+      "file": "auto_ml.export_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportModel",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "output_config",
+            "type": ".google.cloud.automl.v1beta1.ModelExportOutputConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "ExportModel",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportModel",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_ExportEvaluatedExamples_async",
+      "title": "automl exportEvaluatedExamples Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports examples on which the model was evaluated (i.e. which were in the TEST set of the dataset the model was created from), together with their ground truth annotations and the annotations created (predicted) by the model. The examples, ground truth and predictions are exported in the state they were at the moment the model was evaluated. This export is available only for 30 days since the model evaluation is created. Currently only available for Tables. Returns an empty response in the [response][google.longrunning.Operation.response] field when it completes.",
+      "canonical": true,
+      "file": "auto_ml.export_evaluated_examples.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportEvaluatedExamples",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportEvaluatedExamples",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "output_config",
+            "type": ".google.cloud.automl.v1beta1.ExportEvaluatedExamplesOutputConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "ExportEvaluatedExamples",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.ExportEvaluatedExamples",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_GetModelEvaluation_async",
+      "title": "automl getModelEvaluation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a model evaluation.",
+      "canonical": true,
+      "file": "auto_ml.get_model_evaluation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetModelEvaluation",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.GetModelEvaluation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.ModelEvaluation",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "GetModelEvaluation",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.GetModelEvaluation",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_AutoMl_ListModelEvaluations_async",
+      "title": "automl listModelEvaluations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists model evaluations.",
+      "canonical": true,
+      "file": "auto_ml.list_model_evaluations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListModelEvaluations",
+        "fullName": "google.cloud.automl.v1beta1.AutoMl.ListModelEvaluations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.ListModelEvaluationsResponse",
+        "client": {
+          "shortName": "AutoMlClient",
+          "fullName": "google.cloud.automl.v1beta1.AutoMlClient"
+        },
+        "method": {
+          "shortName": "ListModelEvaluations",
+          "fullName": "google.cloud.automl.v1beta1.AutoMl.ListModelEvaluations",
+          "service": {
+            "shortName": "AutoMl",
+            "fullName": "google.cloud.automl.v1beta1.AutoMl"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_PredictionService_Predict_async",
+      "title": "automl predict Sample",
+      "origin": "API_DEFINITION",
+      "description": " Perform an online prediction. The prediction result will be directly returned in the response. Available for following ML problems, and their expected request payloads: * Image Classification - Image in .JPEG, .GIF or .PNG format, image_bytes                          up to 30MB. * Image Object Detection - Image in .JPEG, .GIF or .PNG format, image_bytes                            up to 30MB. * Text Classification - TextSnippet, content up to 60,000 characters,                         UTF-8 encoded. * Text Extraction - TextSnippet, content up to 30,000 characters,                     UTF-8 NFC encoded. * Translation - TextSnippet, content up to 25,000 characters, UTF-8                 encoded. * Tables - Row, with column values matching the columns of the model,            up to 5MB. Not available for FORECASTING [prediction_type][google.cloud.automl.v1beta1.TablesModelMetadata.prediction_type]. * Text Sentiment - TextSnippet, content up 500 characters, UTF-8                     encoded.",
+      "canonical": true,
+      "file": "prediction_service.predict.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Predict",
+        "fullName": "google.cloud.automl.v1beta1.PredictionService.Predict",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "payload",
+            "type": ".google.cloud.automl.v1beta1.ExamplePayload"
+          },
+          {
+            "name": "params",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.automl.v1beta1.PredictResponse",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.automl.v1beta1.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "Predict",
+          "fullName": "google.cloud.automl.v1beta1.PredictionService.Predict",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.automl.v1beta1.PredictionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "automl_v1beta1_generated_PredictionService_BatchPredict_async",
+      "title": "automl batchPredict Sample",
+      "origin": "API_DEFINITION",
+      "description": " Perform a batch prediction. Unlike the online [Predict][google.cloud.automl.v1beta1.PredictionService.Predict], batch prediction result won't be immediately available in the response. Instead, a long running operation object is returned. User can poll the operation result via [GetOperation][google.longrunning.Operations.GetOperation] method. Once the operation is done, [BatchPredictResult][google.cloud.automl.v1beta1.BatchPredictResult] is returned in the [response][google.longrunning.Operation.response] field. Available for following ML problems: * Image Classification * Image Object Detection * Video Classification * Video Object Tracking * Text Extraction * Tables",
+      "canonical": true,
+      "file": "prediction_service.batch_predict.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 127,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchPredict",
+        "fullName": "google.cloud.automl.v1beta1.PredictionService.BatchPredict",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_config",
+            "type": ".google.cloud.automl.v1beta1.BatchPredictInputConfig"
+          },
+          {
+            "name": "output_config",
+            "type": ".google.cloud.automl.v1beta1.BatchPredictOutputConfig"
+          },
+          {
+            "name": "params",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.automl.v1beta1.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "BatchPredict",
+          "fullName": "google.cloud.automl.v1beta1.PredictionService.BatchPredict",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.automl.v1beta1.PredictionService"
+          }
+        }
+      }
+    }
+  ]
 }

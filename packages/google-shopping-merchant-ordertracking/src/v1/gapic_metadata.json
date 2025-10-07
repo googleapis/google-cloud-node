@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.shopping.merchant.ordertracking.v1",
-  "libraryPackage": "@google-cloud/ordertracking",
+  "libraryPackage": "@google-shopping/ordertracking",
   "services": {
     "OrderTrackingSignalsService": {
       "clients": {

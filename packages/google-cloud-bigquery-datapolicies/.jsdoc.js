@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2025 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/bigquery-datapolicies',
+    systemName: '@google-cloud/datapolicies',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

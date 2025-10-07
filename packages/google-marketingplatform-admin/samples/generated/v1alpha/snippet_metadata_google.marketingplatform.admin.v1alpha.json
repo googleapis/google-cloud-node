@@ -1,235 +1,235 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-admin",
-        "version": "0.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.marketingplatform.admin.v1alpha",
-                "version": "v1alpha"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_GetOrganization_async",
-            "title": "MarketingplatformAdminService getOrganization Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lookup for a single organization.",
-            "canonical": true,
-            "file": "marketingplatform_admin_service.get_organization.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetOrganization",
-                "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.GetOrganization",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.marketingplatform.admin.v1alpha.Organization",
-                "client": {
-                    "shortName": "MarketingplatformAdminServiceClient",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "GetOrganization",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.GetOrganization",
-                    "service": {
-                        "shortName": "MarketingplatformAdminService",
-                        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_ListAnalyticsAccountLinks_async",
-            "title": "MarketingplatformAdminService listAnalyticsAccountLinks Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the Google Analytics accounts link to the specified Google Marketing Platform organization.",
-            "canonical": true,
-            "file": "marketingplatform_admin_service.list_analytics_account_links.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAnalyticsAccountLinks",
-                "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListAnalyticsAccountLinks",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.marketingplatform.admin.v1alpha.ListAnalyticsAccountLinksResponse",
-                "client": {
-                    "shortName": "MarketingplatformAdminServiceClient",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "ListAnalyticsAccountLinks",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListAnalyticsAccountLinks",
-                    "service": {
-                        "shortName": "MarketingplatformAdminService",
-                        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_CreateAnalyticsAccountLink_async",
-            "title": "MarketingplatformAdminService createAnalyticsAccountLink Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates the link between the Analytics account and the Google Marketing Platform organization. User needs to be an org user, and admin on the Analytics account to create the link. If the account is already linked to an organization, user needs to unlink the account from the current organization, then try link again.",
-            "canonical": true,
-            "file": "marketingplatform_admin_service.create_analytics_account_link.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAnalyticsAccountLink",
-                "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.CreateAnalyticsAccountLink",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "analytics_account_link",
-                        "type": ".google.marketingplatform.admin.v1alpha.AnalyticsAccountLink"
-                    }
-                ],
-                "resultType": ".google.marketingplatform.admin.v1alpha.AnalyticsAccountLink",
-                "client": {
-                    "shortName": "MarketingplatformAdminServiceClient",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateAnalyticsAccountLink",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.CreateAnalyticsAccountLink",
-                    "service": {
-                        "shortName": "MarketingplatformAdminService",
-                        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_DeleteAnalyticsAccountLink_async",
-            "title": "MarketingplatformAdminService deleteAnalyticsAccountLink Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the AnalyticsAccountLink, which detaches the Analytics account from the Google Marketing Platform organization. User needs to be an org user, and admin on the Analytics account in order to delete the link.",
-            "canonical": true,
-            "file": "marketingplatform_admin_service.delete_analytics_account_link.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAnalyticsAccountLink",
-                "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.DeleteAnalyticsAccountLink",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "MarketingplatformAdminServiceClient",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteAnalyticsAccountLink",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.DeleteAnalyticsAccountLink",
-                    "service": {
-                        "shortName": "MarketingplatformAdminService",
-                        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_SetPropertyServiceLevel_async",
-            "title": "MarketingplatformAdminService setPropertyServiceLevel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the service level for an Analytics property.",
-            "canonical": true,
-            "file": "marketingplatform_admin_service.set_property_service_level.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetPropertyServiceLevel",
-                "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.SetPropertyServiceLevel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "analytics_account_link",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "analytics_property",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service_level",
-                        "type": ".google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel"
-                    }
-                ],
-                "resultType": ".google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelResponse",
-                "client": {
-                    "shortName": "MarketingplatformAdminServiceClient",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
-                },
-                "method": {
-                    "shortName": "SetPropertyServiceLevel",
-                    "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.SetPropertyServiceLevel",
-                    "service": {
-                        "shortName": "MarketingplatformAdminService",
-                        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-admin",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.marketingplatform.admin.v1alpha",
+        "version": "v1alpha"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_GetOrganization_async",
+      "title": "MarketingplatformAdminService getOrganization Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup for a single organization.",
+      "canonical": true,
+      "file": "marketingplatform_admin_service.get_organization.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetOrganization",
+        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.GetOrganization",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.marketingplatform.admin.v1alpha.Organization",
+        "client": {
+          "shortName": "MarketingplatformAdminServiceClient",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
+        },
+        "method": {
+          "shortName": "GetOrganization",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.GetOrganization",
+          "service": {
+            "shortName": "MarketingplatformAdminService",
+            "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_ListAnalyticsAccountLinks_async",
+      "title": "MarketingplatformAdminService listAnalyticsAccountLinks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the Google Analytics accounts link to the specified Google Marketing Platform organization.",
+      "canonical": true,
+      "file": "marketingplatform_admin_service.list_analytics_account_links.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAnalyticsAccountLinks",
+        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListAnalyticsAccountLinks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.marketingplatform.admin.v1alpha.ListAnalyticsAccountLinksResponse",
+        "client": {
+          "shortName": "MarketingplatformAdminServiceClient",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
+        },
+        "method": {
+          "shortName": "ListAnalyticsAccountLinks",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.ListAnalyticsAccountLinks",
+          "service": {
+            "shortName": "MarketingplatformAdminService",
+            "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_CreateAnalyticsAccountLink_async",
+      "title": "MarketingplatformAdminService createAnalyticsAccountLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates the link between the Analytics account and the Google Marketing Platform organization. User needs to be an org user, and admin on the Analytics account to create the link. If the account is already linked to an organization, user needs to unlink the account from the current organization, then try link again.",
+      "canonical": true,
+      "file": "marketingplatform_admin_service.create_analytics_account_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAnalyticsAccountLink",
+        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.CreateAnalyticsAccountLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "analytics_account_link",
+            "type": ".google.marketingplatform.admin.v1alpha.AnalyticsAccountLink"
+          }
+        ],
+        "resultType": ".google.marketingplatform.admin.v1alpha.AnalyticsAccountLink",
+        "client": {
+          "shortName": "MarketingplatformAdminServiceClient",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
+        },
+        "method": {
+          "shortName": "CreateAnalyticsAccountLink",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.CreateAnalyticsAccountLink",
+          "service": {
+            "shortName": "MarketingplatformAdminService",
+            "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_DeleteAnalyticsAccountLink_async",
+      "title": "MarketingplatformAdminService deleteAnalyticsAccountLink Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the AnalyticsAccountLink, which detaches the Analytics account from the Google Marketing Platform organization. User needs to be an org user, and admin on the Analytics account in order to delete the link.",
+      "canonical": true,
+      "file": "marketingplatform_admin_service.delete_analytics_account_link.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAnalyticsAccountLink",
+        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.DeleteAnalyticsAccountLink",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "MarketingplatformAdminServiceClient",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAnalyticsAccountLink",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.DeleteAnalyticsAccountLink",
+          "service": {
+            "shortName": "MarketingplatformAdminService",
+            "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "marketingplatformadmin_v1alpha_generated_MarketingplatformAdminService_SetPropertyServiceLevel_async",
+      "title": "MarketingplatformAdminService setPropertyServiceLevel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the service level for an Analytics property.",
+      "canonical": true,
+      "file": "marketingplatform_admin_service.set_property_service_level.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetPropertyServiceLevel",
+        "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.SetPropertyServiceLevel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "analytics_account_link",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "analytics_property",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_level",
+            "type": ".google.marketingplatform.admin.v1alpha.AnalyticsServiceLevel"
+          }
+        ],
+        "resultType": ".google.marketingplatform.admin.v1alpha.SetPropertyServiceLevelResponse",
+        "client": {
+          "shortName": "MarketingplatformAdminServiceClient",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminServiceClient"
+        },
+        "method": {
+          "shortName": "SetPropertyServiceLevel",
+          "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService.SetPropertyServiceLevel",
+          "service": {
+            "shortName": "MarketingplatformAdminService",
+            "fullName": "google.marketingplatform.admin.v1alpha.MarketingplatformAdminService"
+          }
+        }
+      }
+    }
+  ]
 }

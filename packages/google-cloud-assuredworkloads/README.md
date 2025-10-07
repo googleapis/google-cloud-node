@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Assured Workloads for Government: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-assuredworkloads)
+# [Assured Workloads API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/assured-workloads.svg)](https://www.npmjs.org/package/@google-cloud/assured-workloads)
 
+Assured Workloads API client for Node.js
 
-
-
-Assured Workloads client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-assuredworkloads/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Assured Workloads for Government Node.js Client API Reference][client-docs]
-* [Assured Workloads for Government Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-assuredworkloads](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-assuredworkloads)
+* [Assured Workloads API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/assuredworkloads/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,89 +28,55 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Assured Workloads for Government API][enable_api].
+1.  [Enable the Assured Workloads API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/assured-workloads
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * TODO(developer): Uncomment these variables before running the sample.
- */
-// const projectId = 'my-project';
-
-// Imports the Google Cloud Some API library
-const {
-  AssuredWorkloadsServiceClient,
-} = require('@google-cloud/assured-workloads');
-const client = new AssuredWorkloadsServiceClient();
-async function listWorkloads() {
-  const [workloads] = await client.listWorkloads({
-    parent: `organizations/${projectId}`,
-  });
-  for (const workload of workloads) {
-    console.info(workload);
-  }
-}
-listWorkloads();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-assuredworkloads/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Assured_workloads_service.acknowledge_violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.acknowledge_violation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.acknowledge_violation.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.create_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.create_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.create_workload.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.delete_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.delete_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.delete_workload.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.get_violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.get_violation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.get_violation.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.get_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.get_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.get_workload.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.list_violations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.list_violations.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.list_violations.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.list_workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.list_workloads.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.list_workloads.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.restrict_allowed_resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.restrict_allowed_resources.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.restrict_allowed_resources.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.update_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.update_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.update_workload.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.analyze_workload_move | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.analyze_workload_move.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.analyze_workload_move.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.create_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.create_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.create_workload.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.delete_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.delete_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.delete_workload.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.get_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.get_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.get_workload.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.list_workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.list_workloads.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.list_workloads.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.restrict_allowed_resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.restrict_allowed_resources.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.restrict_allowed_resources.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.restrict_allowed_services | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.restrict_allowed_services.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.restrict_allowed_services.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Assured_workloads_service.update_workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.update_workload.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.update_workload.js,packages/google-cloud-assuredworkloads/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-assuredworkloads/samples/quickstart.js,packages/google-cloud-assuredworkloads/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| acknowledge violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.acknowledge_violation.js) |
+| create workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.create_workload.js) |
+| delete workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.delete_workload.js) |
+| get violation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.get_violation.js) |
+| get workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.get_workload.js) |
+| list violations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.list_violations.js) |
+| list workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.list_workloads.js) |
+| restrict allowed resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.restrict_allowed_resources.js) |
+| update workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/assured_workloads_service.update_workload.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1/snippet_metadata_google.cloud.assuredworkloads.v1.json) |
+| analyze workload move | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.analyze_workload_move.js) |
+| create workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.create_workload.js) |
+| delete workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.delete_workload.js) |
+| get workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.get_workload.js) |
+| list workloads | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.list_workloads.js) |
+| restrict allowed resources | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.restrict_allowed_resources.js) |
+| update workload | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/assured_workloads_service.update_workload.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples/generated/v1beta1/snippet_metadata_google.cloud.assuredworkloads.v1beta1.json) |
 
-
-
-The [Assured Workloads for Government Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -136,45 +103,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/assured-workloads/latest
-[product-docs]: https://cloud.google.com/assured-workloads/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=assuredworkloads.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-assuredworkloads

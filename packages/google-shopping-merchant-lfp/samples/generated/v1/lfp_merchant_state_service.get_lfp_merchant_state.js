@@ -36,7 +36,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Lfp library
-  const {LfpMerchantStateServiceClient} = require('@google-cloud/lfp').v1;
+  const {LfpMerchantStateServiceClient} = require('@google-shopping/lfp').v1;
 
   // Instantiates a client
   const lfpClient = new LfpMerchantStateServiceClient();

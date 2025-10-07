@@ -1,25 +1,25 @@
-[//]: # "partials.introduction"
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Cloud Tasks: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-tasks)
+# [Cloud Tasks API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/tasks.svg)](https://www.npmjs.org/package/@google-cloud/tasks)
-
-
-
 
 Cloud Tasks API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-tasks/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Cloud Tasks Node.js Client API Reference][client-docs]
-* [Cloud Tasks Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-tasks](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-tasks)
+* [Cloud Tasks API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/tasks/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -28,102 +28,93 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
-* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Cloud Tasks API][enable_api].
-1.  [Set up authentication with a service account][auth] so you can access the
+1.  [Enable the Cloud Tasks API API][enable_api].
+1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/tasks
 ```
 
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-tasks/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Cloud_tasks.create_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.create_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.create_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.create_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.create_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.create_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.delete_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.delete_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.delete_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.delete_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.delete_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.delete_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.get_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.get_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.get_iam_policy.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.get_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.get_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.get_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.get_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.get_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.get_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.list_queues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.list_queues.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.list_queues.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.list_tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.list_tasks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.list_tasks.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.pause_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.pause_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.pause_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.purge_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.purge_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.purge_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.resume_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.resume_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.resume_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.run_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.run_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.run_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.set_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.set_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.set_iam_policy.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.test_iam_permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.test_iam_permissions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.test_iam_permissions.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.update_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.update_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.update_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.acknowledge_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.acknowledge_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.acknowledge_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.buffer_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.buffer_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.buffer_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.cancel_lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.cancel_lease.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.cancel_lease.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.create_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.create_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.create_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.create_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.create_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.create_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.delete_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.delete_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.delete_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.delete_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.delete_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.delete_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.get_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.get_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.get_iam_policy.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.get_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.get_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.get_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.get_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.get_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.get_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.lease_tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.lease_tasks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.lease_tasks.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.list_queues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.list_queues.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.list_queues.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.list_tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.list_tasks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.list_tasks.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.pause_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.pause_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.pause_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.purge_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.purge_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.purge_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.renew_lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.renew_lease.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.renew_lease.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.resume_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.resume_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.resume_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.run_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.run_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.run_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.set_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.set_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.set_iam_policy.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.test_iam_permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.test_iam_permissions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.test_iam_permissions.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.update_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.update_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.update_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.upload_queue_yaml | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.upload_queue_yaml.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.upload_queue_yaml.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.buffer_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.buffer_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.buffer_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.create_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.create_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.create_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.create_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.create_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.create_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.delete_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.delete_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.delete_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.delete_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.delete_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.delete_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.get_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.get_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.get_iam_policy.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.get_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.get_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.get_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.get_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.get_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.get_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.list_queues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.list_queues.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.list_queues.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.list_tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.list_tasks.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.list_tasks.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.pause_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.pause_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.pause_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.purge_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.purge_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.purge_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.resume_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.resume_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.resume_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.run_task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.run_task.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.run_task.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.set_iam_policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.set_iam_policy.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.set_iam_policy.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.test_iam_permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.test_iam_permissions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.test_iam_permissions.js,packages/google-cloud-tasks/samples/README.md) |
-| Cloud_tasks.update_queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.update_queue.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.update_queue.js,packages/google-cloud-tasks/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-tasks/samples/quickstart.js,packages/google-cloud-tasks/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| create queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.create_queue.js) |
+| create task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.create_task.js) |
+| delete queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.delete_queue.js) |
+| delete task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.delete_task.js) |
+| get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.get_iam_policy.js) |
+| get queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.get_queue.js) |
+| get task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.get_task.js) |
+| list queues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.list_queues.js) |
+| list tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.list_tasks.js) |
+| pause queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.pause_queue.js) |
+| purge queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.purge_queue.js) |
+| resume queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.resume_queue.js) |
+| run task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.run_task.js) |
+| set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.set_iam_policy.js) |
+| test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.test_iam_permissions.js) |
+| update queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/cloud_tasks.update_queue.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2/snippet_metadata_google.cloud.tasks.v2.json) |
+| acknowledge task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.acknowledge_task.js) |
+| cancel lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.cancel_lease.js) |
+| create queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.create_queue.js) |
+| create task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.create_task.js) |
+| delete queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.delete_queue.js) |
+| delete task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.delete_task.js) |
+| get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.get_iam_policy.js) |
+| get queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.get_queue.js) |
+| get task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.get_task.js) |
+| lease tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.lease_tasks.js) |
+| list queues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.list_queues.js) |
+| list tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.list_tasks.js) |
+| pause queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.pause_queue.js) |
+| purge queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.purge_queue.js) |
+| renew lease | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.renew_lease.js) |
+| resume queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.resume_queue.js) |
+| run task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.run_task.js) |
+| set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.set_iam_policy.js) |
+| test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.test_iam_permissions.js) |
+| update queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.update_queue.js) |
+| upload queue yaml | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/cloud_tasks.upload_queue_yaml.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta2/snippet_metadata_google.cloud.tasks.v2beta2.json) |
+| create queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.create_queue.js) |
+| create task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.create_task.js) |
+| delete queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.delete_queue.js) |
+| delete task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.delete_task.js) |
+| get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.get_iam_policy.js) |
+| get queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.get_queue.js) |
+| get task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.get_task.js) |
+| list queues | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.list_queues.js) |
+| list tasks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.list_tasks.js) |
+| pause queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.pause_queue.js) |
+| purge queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.purge_queue.js) |
+| resume queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.resume_queue.js) |
+| run task | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.run_task.js) |
+| set iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.set_iam_policy.js) |
+| test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.test_iam_permissions.js) |
+| update queue | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/cloud_tasks.update_queue.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples/generated/v2beta3/snippet_metadata_google.cloud.tasks.v2beta3.json) |
 
-
-
-The [Cloud Tasks Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -150,42 +141,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/tasks/latest
-[product-docs]: https://cloud.google.com/tasks/docs/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=cloudtasks.googleapis.com
-[auth]: https://cloud.google.com/docs/authentication/getting-started
+[auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-tasks

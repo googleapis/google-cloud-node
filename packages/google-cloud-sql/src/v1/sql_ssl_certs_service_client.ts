@@ -18,14 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -107,41 +100,20 @@ export class SqlSslCertsServiceClient {
    *     const client = new SqlSslCertsServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SqlSslCertsServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'sqladmin.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class SqlSslCertsServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -183,9 +155,13 @@ export class SqlSslCertsServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -204,11 +180,8 @@ export class SqlSslCertsServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.sql.v1.SqlSslCertsService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.sql.v1.SqlSslCertsService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -239,35 +212,31 @@ export class SqlSslCertsServiceClient {
     // Put together the "service stub" for
     // google.cloud.sql.v1.SqlSslCertsService.
     this.sqlSslCertsServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.sql.v1.SqlSslCertsService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.sql.v1.SqlSslCertsService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.sql.v1.SqlSslCertsService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const sqlSslCertsServiceStubMethods = ['delete', 'get', 'insert', 'list'];
+    const sqlSslCertsServiceStubMethods =
+        ['delete', 'get', 'insert', 'list'];
     for (const methodName of sqlSslCertsServiceStubMethods) {
       const callPromise = this.sqlSslCertsServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -287,14 +256,8 @@ export class SqlSslCertsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'sqladmin.googleapis.com';
   }
@@ -305,14 +268,8 @@ export class SqlSslCertsServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'sqladmin.googleapis.com';
   }
@@ -345,7 +302,7 @@ export class SqlSslCertsServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/sqlservice.admin',
+      'https://www.googleapis.com/auth/sqlservice.admin'
     ];
   }
 
@@ -355,9 +312,8 @@ export class SqlSslCertsServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -368,536 +324,408 @@ export class SqlSslCertsServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Deletes the SSL certificate. For First Generation instances, the
-   * certificate remains valid until the instance is restarted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {string} request.sha1Fingerprint
-   *   Sha1 FingerPrint.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.delete.js</caption>
-   * region_tag:sqladmin_v1_generated_SqlSslCertsService_Delete_async
-   */
+/**
+ * Deletes the SSL certificate. For First Generation instances, the
+ * certificate remains valid until the instance is restarted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {string} request.sha1Fingerprint
+ *   Sha1 FingerPrint.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.Operation|Operation}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.delete.js</caption>
+ * region_tag:sqladmin_v1_generated_SqlSslCertsService_Delete_async
+ */
   delete(
-    request?: protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.IOperation,
-      protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1.IOperation,
+        protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest|undefined, {}|undefined
+      ]>;
   delete(
-    request: protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1.IOperation,
-      protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request: protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1.IOperation,
-      protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request?: protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1.IOperation,
-          | protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1.IOperation,
-      protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.IOperation,
-      protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request: protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request?: protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1.IOperation,
+          protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1.IOperation,
+        protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-        sha1_fingerprint: request.sha1Fingerprint ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+      'sha1_fingerprint': request.sha1Fingerprint ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('delete request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1.IOperation,
-          | protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1.IOperation,
+        protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('delete response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .delete(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1.IOperation,
-          protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('delete response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.delete(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1.IOperation,
+        protos.google.cloud.sql.v1.ISqlSslCertsDeleteRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('delete response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Retrieves a particular SSL certificate.  Does not include the private key
-   * (required for usage).  The private key must be saved from the response to
-   * initial creation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {string} request.sha1Fingerprint
-   *   Sha1 FingerPrint.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.SslCert|SslCert}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.get.js</caption>
-   * region_tag:sqladmin_v1_generated_SqlSslCertsService_Get_async
-   */
+/**
+ * Retrieves a particular SSL certificate.  Does not include the private key
+ * (required for usage).  The private key must be saved from the response to
+ * initial creation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {string} request.sha1Fingerprint
+ *   Sha1 FingerPrint.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.SslCert|SslCert}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.get.js</caption>
+ * region_tag:sqladmin_v1_generated_SqlSslCertsService_Get_async
+ */
   get(
-    request?: protos.google.cloud.sql.v1.ISqlSslCertsGetRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.ISslCert,
-      protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1.ISqlSslCertsGetRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1.ISslCert,
+        protos.google.cloud.sql.v1.ISqlSslCertsGetRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.sql.v1.ISqlSslCertsGetRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1.ISslCert,
-      protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.sql.v1.ISqlSslCertsGetRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1.ISslCert,
-      protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request?: protos.google.cloud.sql.v1.ISqlSslCertsGetRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1.ISqlSslCertsGetRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1.ISslCert,
-          protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1.ISslCert,
-      protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.ISslCert,
-      protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1.ISqlSslCertsGetRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.sql.v1.ISqlSslCertsGetRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1.ISslCert,
+          protos.google.cloud.sql.v1.ISqlSslCertsGetRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request?: protos.google.cloud.sql.v1.ISqlSslCertsGetRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1.ISslCert,
+          protos.google.cloud.sql.v1.ISqlSslCertsGetRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1.ISslCert,
+          protos.google.cloud.sql.v1.ISqlSslCertsGetRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1.ISslCert,
+        protos.google.cloud.sql.v1.ISqlSslCertsGetRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-        sha1_fingerprint: request.sha1Fingerprint ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
+      'sha1_fingerprint': request.sha1Fingerprint ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('get request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1.ISslCert,
-          protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1.ISslCert,
+        protos.google.cloud.sql.v1.ISqlSslCertsGetRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('get response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .get(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1.ISslCert,
-          protos.google.cloud.sql.v1.ISqlSslCertsGetRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('get response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.get(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1.ISslCert,
+        protos.google.cloud.sql.v1.ISqlSslCertsGetRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('get response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Creates an SSL certificate and returns it along with the private key and
-   * server certificate authority.  The new certificate will not be usable until
-   * the instance is restarted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {google.cloud.sql.v1.SslCertsInsertRequest} request.body
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.SslCertsInsertResponse|SslCertsInsertResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.insert.js</caption>
-   * region_tag:sqladmin_v1_generated_SqlSslCertsService_Insert_async
-   */
+/**
+ * Creates an SSL certificate and returns it along with the private key and
+ * server certificate authority.  The new certificate will not be usable until
+ * the instance is restarted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {google.cloud.sql.v1.SslCertsInsertRequest} request.body
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.SslCertsInsertResponse|SslCertsInsertResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.insert.js</caption>
+ * region_tag:sqladmin_v1_generated_SqlSslCertsService_Insert_async
+ */
   insert(
-    request?: protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.ISslCertsInsertResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1.ISslCertsInsertResponse,
+        protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest|undefined, {}|undefined
+      ]>;
   insert(
-    request: protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1.ISslCertsInsertResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request: protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1.ISslCertsInsertResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request?: protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1.ISslCertsInsertResponse,
-          | protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1.ISslCertsInsertResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.ISslCertsInsertResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request: protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1.ISslCertsInsertResponse,
+          protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request?: protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1.ISslCertsInsertResponse,
+          protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1.ISslCertsInsertResponse,
+          protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1.ISslCertsInsertResponse,
+        protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('insert request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1.ISslCertsInsertResponse,
-          | protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1.ISslCertsInsertResponse,
+        protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('insert response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .insert(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1.ISslCertsInsertResponse,
-          protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('insert response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.insert(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1.ISslCertsInsertResponse,
+        protos.google.cloud.sql.v1.ISqlSslCertsInsertRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('insert response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Lists all of the current SSL certificates for the instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.SslCertsListResponse|SslCertsListResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.list.js</caption>
-   * region_tag:sqladmin_v1_generated_SqlSslCertsService_List_async
-   */
+/**
+ * Lists all of the current SSL certificates for the instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.SslCertsListResponse|SslCertsListResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/sql_ssl_certs_service.list.js</caption>
+ * region_tag:sqladmin_v1_generated_SqlSslCertsService_List_async
+ */
   list(
-    request?: protos.google.cloud.sql.v1.ISqlSslCertsListRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.ISslCertsListResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsListRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1.ISqlSslCertsListRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1.ISslCertsListResponse,
+        protos.google.cloud.sql.v1.ISqlSslCertsListRequest|undefined, {}|undefined
+      ]>;
   list(
-    request: protos.google.cloud.sql.v1.ISqlSslCertsListRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1.ISslCertsListResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsListRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.sql.v1.ISqlSslCertsListRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1.ISslCertsListResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsListRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request?: protos.google.cloud.sql.v1.ISqlSslCertsListRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1.ISqlSslCertsListRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1.ISslCertsListResponse,
-          protos.google.cloud.sql.v1.ISqlSslCertsListRequest | null | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1.ISslCertsListResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsListRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.ISslCertsListResponse,
-      protos.google.cloud.sql.v1.ISqlSslCertsListRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1.ISqlSslCertsListRequest|null|undefined,
+          {}|null|undefined>): void;
+  list(
+      request: protos.google.cloud.sql.v1.ISqlSslCertsListRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1.ISslCertsListResponse,
+          protos.google.cloud.sql.v1.ISqlSslCertsListRequest|null|undefined,
+          {}|null|undefined>): void;
+  list(
+      request?: protos.google.cloud.sql.v1.ISqlSslCertsListRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1.ISslCertsListResponse,
+          protos.google.cloud.sql.v1.ISqlSslCertsListRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1.ISslCertsListResponse,
+          protos.google.cloud.sql.v1.ISqlSslCertsListRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1.ISslCertsListResponse,
+        protos.google.cloud.sql.v1.ISqlSslCertsListRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('list request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1.ISslCertsListResponse,
-          protos.google.cloud.sql.v1.ISqlSslCertsListRequest | null | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1.ISslCertsListResponse,
+        protos.google.cloud.sql.v1.ISqlSslCertsListRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('list response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .list(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1.ISslCertsListResponse,
-          protos.google.cloud.sql.v1.ISqlSslCertsListRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('list response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.list(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1.ISslCertsListResponse,
+        protos.google.cloud.sql.v1.ISqlSslCertsListRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('list response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -937,7 +765,7 @@ export class SqlSslCertsServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -975,6 +803,7 @@ export class SqlSslCertsServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+
   /**
    * Terminate the gRPC channel and close the client.
    *
@@ -987,9 +816,7 @@ export class SqlSslCertsServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

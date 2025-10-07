@@ -1,2039 +1,2039 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-kms",
-        "version": "5.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.kms.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "cloudkms_v1_generated_Autokey_CreateKeyHandle_async",
-            "title": "Autokey createKeyHandle Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new [KeyHandle][google.cloud.kms.v1.KeyHandle], triggering the provisioning of a new [CryptoKey][google.cloud.kms.v1.CryptoKey] for CMEK use with the given resource type in the configured key project and the same location. [GetOperation][google.longrunning.Operations.GetOperation] should be used to resolve the resulting long-running operation and get the resulting [KeyHandle][google.cloud.kms.v1.KeyHandle] and [CryptoKey][google.cloud.kms.v1.CryptoKey].",
-            "canonical": true,
-            "file": "autokey.create_key_handle.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateKeyHandle",
-                "fullName": "google.cloud.kms.v1.Autokey.CreateKeyHandle",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "key_handle_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "key_handle",
-                        "type": ".google.cloud.kms.v1.KeyHandle"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AutokeyClient",
-                    "fullName": "google.cloud.kms.v1.AutokeyClient"
-                },
-                "method": {
-                    "shortName": "CreateKeyHandle",
-                    "fullName": "google.cloud.kms.v1.Autokey.CreateKeyHandle",
-                    "service": {
-                        "shortName": "Autokey",
-                        "fullName": "google.cloud.kms.v1.Autokey"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_Autokey_GetKeyHandle_async",
-            "title": "Autokey getKeyHandle Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the [KeyHandle][google.cloud.kms.v1.KeyHandle].",
-            "canonical": true,
-            "file": "autokey.get_key_handle.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetKeyHandle",
-                "fullName": "google.cloud.kms.v1.Autokey.GetKeyHandle",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.KeyHandle",
-                "client": {
-                    "shortName": "AutokeyClient",
-                    "fullName": "google.cloud.kms.v1.AutokeyClient"
-                },
-                "method": {
-                    "shortName": "GetKeyHandle",
-                    "fullName": "google.cloud.kms.v1.Autokey.GetKeyHandle",
-                    "service": {
-                        "shortName": "Autokey",
-                        "fullName": "google.cloud.kms.v1.Autokey"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_Autokey_ListKeyHandles_async",
-            "title": "Autokey listKeyHandles Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists [KeyHandles][google.cloud.kms.v1.KeyHandle].",
-            "canonical": true,
-            "file": "autokey.list_key_handles.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListKeyHandles",
-                "fullName": "google.cloud.kms.v1.Autokey.ListKeyHandles",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.ListKeyHandlesResponse",
-                "client": {
-                    "shortName": "AutokeyClient",
-                    "fullName": "google.cloud.kms.v1.AutokeyClient"
-                },
-                "method": {
-                    "shortName": "ListKeyHandles",
-                    "fullName": "google.cloud.kms.v1.Autokey.ListKeyHandles",
-                    "service": {
-                        "shortName": "Autokey",
-                        "fullName": "google.cloud.kms.v1.Autokey"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_AutokeyAdmin_UpdateAutokeyConfig_async",
-            "title": "Autokey updateAutokeyConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder. The caller must have both `cloudkms.autokeyConfigs.update` permission on the parent folder and `cloudkms.cryptoKeys.setIamPolicy` permission on the provided key project. A [KeyHandle][google.cloud.kms.v1.KeyHandle] creation in the folder's descendant projects will use this configuration to determine where to create the resulting [CryptoKey][google.cloud.kms.v1.CryptoKey].",
-            "canonical": true,
-            "file": "autokey_admin.update_autokey_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateAutokeyConfig",
-                "fullName": "google.cloud.kms.v1.AutokeyAdmin.UpdateAutokeyConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "autokey_config",
-                        "type": ".google.cloud.kms.v1.AutokeyConfig"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.AutokeyConfig",
-                "client": {
-                    "shortName": "AutokeyAdminClient",
-                    "fullName": "google.cloud.kms.v1.AutokeyAdminClient"
-                },
-                "method": {
-                    "shortName": "UpdateAutokeyConfig",
-                    "fullName": "google.cloud.kms.v1.AutokeyAdmin.UpdateAutokeyConfig",
-                    "service": {
-                        "shortName": "AutokeyAdmin",
-                        "fullName": "google.cloud.kms.v1.AutokeyAdmin"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_AutokeyAdmin_GetAutokeyConfig_async",
-            "title": "Autokey getAutokeyConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder.",
-            "canonical": true,
-            "file": "autokey_admin.get_autokey_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAutokeyConfig",
-                "fullName": "google.cloud.kms.v1.AutokeyAdmin.GetAutokeyConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.AutokeyConfig",
-                "client": {
-                    "shortName": "AutokeyAdminClient",
-                    "fullName": "google.cloud.kms.v1.AutokeyAdminClient"
-                },
-                "method": {
-                    "shortName": "GetAutokeyConfig",
-                    "fullName": "google.cloud.kms.v1.AutokeyAdmin.GetAutokeyConfig",
-                    "service": {
-                        "shortName": "AutokeyAdmin",
-                        "fullName": "google.cloud.kms.v1.AutokeyAdmin"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_AutokeyAdmin_ShowEffectiveAutokeyConfig_async",
-            "title": "Autokey showEffectiveAutokeyConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the effective Cloud KMS Autokey configuration for a given project.",
-            "canonical": true,
-            "file": "autokey_admin.show_effective_autokey_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ShowEffectiveAutokeyConfig",
-                "fullName": "google.cloud.kms.v1.AutokeyAdmin.ShowEffectiveAutokeyConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse",
-                "client": {
-                    "shortName": "AutokeyAdminClient",
-                    "fullName": "google.cloud.kms.v1.AutokeyAdminClient"
-                },
-                "method": {
-                    "shortName": "ShowEffectiveAutokeyConfig",
-                    "fullName": "google.cloud.kms.v1.AutokeyAdmin.ShowEffectiveAutokeyConfig",
-                    "service": {
-                        "shortName": "AutokeyAdmin",
-                        "fullName": "google.cloud.kms.v1.AutokeyAdmin"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_EkmService_ListEkmConnections_async",
-            "title": "Autokey listEkmConnections Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists [EkmConnections][google.cloud.kms.v1.EkmConnection].",
-            "canonical": true,
-            "file": "ekm_service.list_ekm_connections.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 86,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListEkmConnections",
-                "fullName": "google.cloud.kms.v1.EkmService.ListEkmConnections",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.ListEkmConnectionsResponse",
-                "client": {
-                    "shortName": "EkmServiceClient",
-                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
-                },
-                "method": {
-                    "shortName": "ListEkmConnections",
-                    "fullName": "google.cloud.kms.v1.EkmService.ListEkmConnections",
-                    "service": {
-                        "shortName": "EkmService",
-                        "fullName": "google.cloud.kms.v1.EkmService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_EkmService_GetEkmConnection_async",
-            "title": "Autokey getEkmConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns metadata for a given [EkmConnection][google.cloud.kms.v1.EkmConnection].",
-            "canonical": true,
-            "file": "ekm_service.get_ekm_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetEkmConnection",
-                "fullName": "google.cloud.kms.v1.EkmService.GetEkmConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.EkmConnection",
-                "client": {
-                    "shortName": "EkmServiceClient",
-                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
-                },
-                "method": {
-                    "shortName": "GetEkmConnection",
-                    "fullName": "google.cloud.kms.v1.EkmService.GetEkmConnection",
-                    "service": {
-                        "shortName": "EkmService",
-                        "fullName": "google.cloud.kms.v1.EkmService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_EkmService_CreateEkmConnection_async",
-            "title": "Autokey createEkmConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new [EkmConnection][google.cloud.kms.v1.EkmConnection] in a given Project and Location.",
-            "canonical": true,
-            "file": "ekm_service.create_ekm_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateEkmConnection",
-                "fullName": "google.cloud.kms.v1.EkmService.CreateEkmConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ekm_connection_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ekm_connection",
-                        "type": ".google.cloud.kms.v1.EkmConnection"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.EkmConnection",
-                "client": {
-                    "shortName": "EkmServiceClient",
-                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateEkmConnection",
-                    "fullName": "google.cloud.kms.v1.EkmService.CreateEkmConnection",
-                    "service": {
-                        "shortName": "EkmService",
-                        "fullName": "google.cloud.kms.v1.EkmService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_EkmService_UpdateEkmConnection_async",
-            "title": "Autokey updateEkmConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an [EkmConnection][google.cloud.kms.v1.EkmConnection]'s metadata.",
-            "canonical": true,
-            "file": "ekm_service.update_ekm_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateEkmConnection",
-                "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "ekm_connection",
-                        "type": ".google.cloud.kms.v1.EkmConnection"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.EkmConnection",
-                "client": {
-                    "shortName": "EkmServiceClient",
-                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateEkmConnection",
-                    "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConnection",
-                    "service": {
-                        "shortName": "EkmService",
-                        "fullName": "google.cloud.kms.v1.EkmService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_EkmService_GetEkmConfig_async",
-            "title": "Autokey getEkmConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource for a given project and location.",
-            "canonical": true,
-            "file": "ekm_service.get_ekm_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetEkmConfig",
-                "fullName": "google.cloud.kms.v1.EkmService.GetEkmConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.EkmConfig",
-                "client": {
-                    "shortName": "EkmServiceClient",
-                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
-                },
-                "method": {
-                    "shortName": "GetEkmConfig",
-                    "fullName": "google.cloud.kms.v1.EkmService.GetEkmConfig",
-                    "service": {
-                        "shortName": "EkmService",
-                        "fullName": "google.cloud.kms.v1.EkmService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_EkmService_UpdateEkmConfig_async",
-            "title": "Autokey updateEkmConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource for a given project and location.",
-            "canonical": true,
-            "file": "ekm_service.update_ekm_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateEkmConfig",
-                "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "ekm_config",
-                        "type": ".google.cloud.kms.v1.EkmConfig"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.EkmConfig",
-                "client": {
-                    "shortName": "EkmServiceClient",
-                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateEkmConfig",
-                    "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConfig",
-                    "service": {
-                        "shortName": "EkmService",
-                        "fullName": "google.cloud.kms.v1.EkmService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_EkmService_VerifyConnectivity_async",
-            "title": "Autokey verifyConnectivity Sample",
-            "origin": "API_DEFINITION",
-            "description": " Verifies that Cloud KMS can successfully connect to the external key manager specified by an [EkmConnection][google.cloud.kms.v1.EkmConnection]. If there is an error connecting to the EKM, this method returns a FAILED_PRECONDITION status containing structured information as described at https://cloud.google.com/kms/docs/reference/ekm_errors.",
-            "canonical": true,
-            "file": "ekm_service.verify_connectivity.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "VerifyConnectivity",
-                "fullName": "google.cloud.kms.v1.EkmService.VerifyConnectivity",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.VerifyConnectivityResponse",
-                "client": {
-                    "shortName": "EkmServiceClient",
-                    "fullName": "google.cloud.kms.v1.EkmServiceClient"
-                },
-                "method": {
-                    "shortName": "VerifyConnectivity",
-                    "fullName": "google.cloud.kms.v1.EkmService.VerifyConnectivity",
-                    "service": {
-                        "shortName": "EkmService",
-                        "fullName": "google.cloud.kms.v1.EkmService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_ListKeyRings_async",
-            "title": "Autokey listKeyRings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists [KeyRings][google.cloud.kms.v1.KeyRing].",
-            "canonical": true,
-            "file": "key_management_service.list_key_rings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 86,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListKeyRings",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.ListKeyRings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.ListKeyRingsResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "ListKeyRings",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.ListKeyRings",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_ListCryptoKeys_async",
-            "title": "Autokey listCryptoKeys Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists [CryptoKeys][google.cloud.kms.v1.CryptoKey].",
-            "canonical": true,
-            "file": "key_management_service.list_crypto_keys.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 89,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCryptoKeys",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.ListCryptoKeys",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "version_view",
-                        "type": ".google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.ListCryptoKeysResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "ListCryptoKeys",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.ListCryptoKeys",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_ListCryptoKeyVersions_async",
-            "title": "Autokey listCryptoKeyVersions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion].",
-            "canonical": true,
-            "file": "key_management_service.list_crypto_key_versions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 90,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCryptoKeyVersions",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.ListCryptoKeyVersions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.ListCryptoKeyVersionsResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "ListCryptoKeyVersions",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.ListCryptoKeyVersions",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_ListImportJobs_async",
-            "title": "Autokey listImportJobs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists [ImportJobs][google.cloud.kms.v1.ImportJob].",
-            "canonical": true,
-            "file": "key_management_service.list_import_jobs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 85,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListImportJobs",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.ListImportJobs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.ListImportJobsResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "ListImportJobs",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.ListImportJobs",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_GetKeyRing_async",
-            "title": "Autokey getKeyRing Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns metadata for a given [KeyRing][google.cloud.kms.v1.KeyRing].",
-            "canonical": true,
-            "file": "key_management_service.get_key_ring.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetKeyRing",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.GetKeyRing",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.KeyRing",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "GetKeyRing",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.GetKeyRing",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_GetCryptoKey_async",
-            "title": "Autokey getCryptoKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its [primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].",
-            "canonical": true,
-            "file": "key_management_service.get_crypto_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCryptoKey",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.GetCryptoKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKey",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "GetCryptoKey",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.GetCryptoKey",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_GetCryptoKeyVersion_async",
-            "title": "Autokey getCryptoKeyVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].",
-            "canonical": true,
-            "file": "key_management_service.get_crypto_key_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCryptoKeyVersion",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.GetCryptoKeyVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "GetCryptoKeyVersion",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.GetCryptoKeyVersion",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_GetPublicKey_async",
-            "title": "Autokey getPublicKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or [ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].",
-            "canonical": true,
-            "file": "key_management_service.get_public_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPublicKey",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.GetPublicKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "public_key_format",
-                        "type": ".google.cloud.kms.v1.PublicKey.PublicKeyFormat"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.PublicKey",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "GetPublicKey",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.GetPublicKey",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_GetImportJob_async",
-            "title": "Autokey getImportJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].",
-            "canonical": true,
-            "file": "key_management_service.get_import_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetImportJob",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.GetImportJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.ImportJob",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "GetImportJob",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.GetImportJob",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_CreateKeyRing_async",
-            "title": "Autokey createKeyRing Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new [KeyRing][google.cloud.kms.v1.KeyRing] in a given Project and Location.",
-            "canonical": true,
-            "file": "key_management_service.create_key_ring.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateKeyRing",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.CreateKeyRing",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "key_ring_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "key_ring",
-                        "type": ".google.cloud.kms.v1.KeyRing"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.KeyRing",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateKeyRing",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.CreateKeyRing",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_CreateCryptoKey_async",
-            "title": "Autokey createCryptoKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new [CryptoKey][google.cloud.kms.v1.CryptoKey] within a [KeyRing][google.cloud.kms.v1.KeyRing]. [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] and [CryptoKey.version_template.algorithm][google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm] are required.",
-            "canonical": true,
-            "file": "key_management_service.create_crypto_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCryptoKey",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.CreateCryptoKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "crypto_key_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "crypto_key",
-                        "type": ".google.cloud.kms.v1.CryptoKey"
-                    },
-                    {
-                        "name": "skip_initial_version_creation",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKey",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateCryptoKey",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.CreateCryptoKey",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async",
-            "title": "Autokey createCryptoKeyVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in a [CryptoKey][google.cloud.kms.v1.CryptoKey]. The server will assign the next sequential id. If unset, [state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to [ENABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED].",
-            "canonical": true,
-            "file": "key_management_service.create_crypto_key_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCryptoKeyVersion",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "crypto_key_version",
-                        "type": ".google.cloud.kms.v1.CryptoKeyVersion"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateCryptoKeyVersion",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_ImportCryptoKeyVersion_async",
-            "title": "Autokey importCryptoKeyVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Import wrapped key material into a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. All requests must specify a [CryptoKey][google.cloud.kms.v1.CryptoKey]. If a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] is additionally specified in the request, key material will be reimported into that version. Otherwise, a new version will be created, and will be assigned the next sequential id within the [CryptoKey][google.cloud.kms.v1.CryptoKey].",
-            "canonical": true,
-            "file": "key_management_service.import_crypto_key_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 139,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ImportCryptoKeyVersion",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "crypto_key_version",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "algorithm",
-                        "type": ".google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm"
-                    },
-                    {
-                        "name": "import_job",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "wrapped_key",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "rsa_aes_wrapped_key",
-                        "type": "TYPE_BYTES"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "ImportCryptoKeyVersion",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_CreateImportJob_async",
-            "title": "Autokey createImportJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new [ImportJob][google.cloud.kms.v1.ImportJob] within a [KeyRing][google.cloud.kms.v1.KeyRing]. [ImportJob.import_method][google.cloud.kms.v1.ImportJob.import_method] is required.",
-            "canonical": true,
-            "file": "key_management_service.create_import_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateImportJob",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.CreateImportJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "import_job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "import_job",
-                        "type": ".google.cloud.kms.v1.ImportJob"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.ImportJob",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateImportJob",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.CreateImportJob",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_UpdateCryptoKey_async",
-            "title": "Autokey updateCryptoKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update a [CryptoKey][google.cloud.kms.v1.CryptoKey].",
-            "canonical": true,
-            "file": "key_management_service.update_crypto_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCryptoKey",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "crypto_key",
-                        "type": ".google.cloud.kms.v1.CryptoKey"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKey",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateCryptoKey",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKey",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyVersion_async",
-            "title": "Autokey updateCryptoKeyVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]'s metadata. [state][google.cloud.kms.v1.CryptoKeyVersion.state] may be changed between [ENABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED] and [DISABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED] using this method. See [DestroyCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion] and [RestoreCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion] to move between other states.",
-            "canonical": true,
-            "file": "key_management_service.update_crypto_key_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCryptoKeyVersion",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "crypto_key_version",
-                        "type": ".google.cloud.kms.v1.CryptoKeyVersion"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateCryptoKeyVersion",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyVersion",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyPrimaryVersion_async",
-            "title": "Autokey updateCryptoKeyPrimaryVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update the version of a [CryptoKey][google.cloud.kms.v1.CryptoKey] that will be used in [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt]. Returns an error if called on a key whose purpose is not [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].",
-            "canonical": true,
-            "file": "key_management_service.update_crypto_key_primary_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCryptoKeyPrimaryVersion",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyPrimaryVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "crypto_key_version_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKey",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateCryptoKeyPrimaryVersion",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyPrimaryVersion",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_DestroyCryptoKeyVersion_async",
-            "title": "Autokey destroyCryptoKeyVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Schedule a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] for destruction. Upon calling this method, [CryptoKeyVersion.state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to [DESTROY_SCHEDULED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED], and [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] will be set to the time [destroy_scheduled_duration][google.cloud.kms.v1.CryptoKey.destroy_scheduled_duration] in the future. At that time, the [state][google.cloud.kms.v1.CryptoKeyVersion.state] will automatically change to [DESTROYED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED], and the key material will be irrevocably destroyed. Before the [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] is reached, [RestoreCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion] may be called to reverse the process.",
-            "canonical": true,
-            "file": "key_management_service.destroy_crypto_key_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DestroyCryptoKeyVersion",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "DestroyCryptoKeyVersion",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_RestoreCryptoKeyVersion_async",
-            "title": "Autokey restoreCryptoKeyVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Restore a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in the [DESTROY_SCHEDULED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED] state. Upon restoration of the CryptoKeyVersion, [state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to [DISABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED], and [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] will be cleared.",
-            "canonical": true,
-            "file": "key_management_service.restore_crypto_key_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RestoreCryptoKeyVersion",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "RestoreCryptoKeyVersion",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_Encrypt_async",
-            "title": "Autokey encrypt Sample",
-            "origin": "API_DEFINITION",
-            "description": " Encrypts data, so that it can only be recovered by a call to [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].",
-            "canonical": true,
-            "file": "key_management_service.encrypt.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 131,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Encrypt",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.Encrypt",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "plaintext",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "additional_authenticated_data",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "plaintext_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    },
-                    {
-                        "name": "additional_authenticated_data_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.EncryptResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "Encrypt",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.Encrypt",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_Decrypt_async",
-            "title": "Autokey decrypt Sample",
-            "origin": "API_DEFINITION",
-            "description": " Decrypts data that was protected by [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].",
-            "canonical": true,
-            "file": "key_management_service.decrypt.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 110,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Decrypt",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.Decrypt",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ciphertext",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "additional_authenticated_data",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "ciphertext_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    },
-                    {
-                        "name": "additional_authenticated_data_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.DecryptResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "Decrypt",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.Decrypt",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_RawEncrypt_async",
-            "title": "Autokey rawEncrypt Sample",
-            "origin": "API_DEFINITION",
-            "description": " Encrypts data using portable cryptographic primitives. Most users should choose [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt] and [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt] rather than their raw counterparts. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [RAW_ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT].",
-            "canonical": true,
-            "file": "key_management_service.raw_encrypt.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 146,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RawEncrypt",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.RawEncrypt",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "plaintext",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "additional_authenticated_data",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "plaintext_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    },
-                    {
-                        "name": "additional_authenticated_data_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    },
-                    {
-                        "name": "initialization_vector",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "initialization_vector_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.RawEncryptResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "RawEncrypt",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.RawEncrypt",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_RawDecrypt_async",
-            "title": "Autokey rawDecrypt Sample",
-            "origin": "API_DEFINITION",
-            "description": " Decrypts data that was originally encrypted using a raw cryptographic mechanism. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [RAW_ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT].",
-            "canonical": true,
-            "file": "key_management_service.raw_decrypt.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 134,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RawDecrypt",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.RawDecrypt",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ciphertext",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "additional_authenticated_data",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "initialization_vector",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "tag_length",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "ciphertext_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    },
-                    {
-                        "name": "additional_authenticated_data_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    },
-                    {
-                        "name": "initialization_vector_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.RawDecryptResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "RawDecrypt",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.RawDecrypt",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_AsymmetricSign_async",
-            "title": "Autokey asymmetricSign Sample",
-            "origin": "API_DEFINITION",
-            "description": " Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] ASYMMETRIC_SIGN, producing a signature that can be verified with the public key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey].",
-            "canonical": true,
-            "file": "key_management_service.asymmetric_sign.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 115,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AsymmetricSign",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.AsymmetricSign",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "digest",
-                        "type": ".google.cloud.kms.v1.Digest"
-                    },
-                    {
-                        "name": "digest_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    },
-                    {
-                        "name": "data",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "data_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.AsymmetricSignResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "AsymmetricSign",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.AsymmetricSign",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_AsymmetricDecrypt_async",
-            "title": "Autokey asymmetricDecrypt Sample",
-            "origin": "API_DEFINITION",
-            "description": " Decrypts data that was encrypted with a public key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey] corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] ASYMMETRIC_DECRYPT.",
-            "canonical": true,
-            "file": "key_management_service.asymmetric_decrypt.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 84,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AsymmetricDecrypt",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.AsymmetricDecrypt",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ciphertext",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "ciphertext_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.AsymmetricDecryptResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "AsymmetricDecrypt",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.AsymmetricDecrypt",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_MacSign_async",
-            "title": "Autokey macSign Sample",
-            "origin": "API_DEFINITION",
-            "description": " Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] MAC, producing a tag that can be verified by another source with the same key.",
-            "canonical": true,
-            "file": "key_management_service.mac_sign.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "MacSign",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.MacSign",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "data",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "data_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.MacSignResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "MacSign",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.MacSign",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_MacVerify_async",
-            "title": "Autokey macVerify Sample",
-            "origin": "API_DEFINITION",
-            "description": " Verifies MAC tag using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] MAC, and returns a response that indicates whether or not the verification was successful.",
-            "canonical": true,
-            "file": "key_management_service.mac_verify.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 108,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "MacVerify",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.MacVerify",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "data",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "data_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    },
-                    {
-                        "name": "mac",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "mac_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.MacVerifyResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "MacVerify",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.MacVerify",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_Decapsulate_async",
-            "title": "Autokey decapsulate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Decapsulates data that was encapsulated with a public key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey] corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] KEY_ENCAPSULATION.",
-            "canonical": true,
-            "file": "key_management_service.decapsulate.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 84,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "Decapsulate",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.Decapsulate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ciphertext",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "ciphertext_crc32c",
-                        "type": ".google.protobuf.Int64Value"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.DecapsulateResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "Decapsulate",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.Decapsulate",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudkms_v1_generated_KeyManagementService_GenerateRandomBytes_async",
-            "title": "Autokey generateRandomBytes Sample",
-            "origin": "API_DEFINITION",
-            "description": " Generate random bytes using the Cloud KMS randomness source in the provided location.",
-            "canonical": true,
-            "file": "key_management_service.generate_random_bytes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GenerateRandomBytes",
-                "fullName": "google.cloud.kms.v1.KeyManagementService.GenerateRandomBytes",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "length_bytes",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "protection_level",
-                        "type": ".google.cloud.kms.v1.ProtectionLevel"
-                    }
-                ],
-                "resultType": ".google.cloud.kms.v1.GenerateRandomBytesResponse",
-                "client": {
-                    "shortName": "KeyManagementServiceClient",
-                    "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
-                },
-                "method": {
-                    "shortName": "GenerateRandomBytes",
-                    "fullName": "google.cloud.kms.v1.KeyManagementService.GenerateRandomBytes",
-                    "service": {
-                        "shortName": "KeyManagementService",
-                        "fullName": "google.cloud.kms.v1.KeyManagementService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-kms",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.kms.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudkms_v1_generated_Autokey_CreateKeyHandle_async",
+      "title": "Autokey createKeyHandle Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new [KeyHandle][google.cloud.kms.v1.KeyHandle], triggering the provisioning of a new [CryptoKey][google.cloud.kms.v1.CryptoKey] for CMEK use with the given resource type in the configured key project and the same location. [GetOperation][google.longrunning.Operations.GetOperation] should be used to resolve the resulting long-running operation and get the resulting [KeyHandle][google.cloud.kms.v1.KeyHandle] and [CryptoKey][google.cloud.kms.v1.CryptoKey].",
+      "canonical": true,
+      "file": "autokey.create_key_handle.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateKeyHandle",
+        "fullName": "google.cloud.kms.v1.Autokey.CreateKeyHandle",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "key_handle_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "key_handle",
+            "type": ".google.cloud.kms.v1.KeyHandle"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AutokeyClient",
+          "fullName": "google.cloud.kms.v1.AutokeyClient"
+        },
+        "method": {
+          "shortName": "CreateKeyHandle",
+          "fullName": "google.cloud.kms.v1.Autokey.CreateKeyHandle",
+          "service": {
+            "shortName": "Autokey",
+            "fullName": "google.cloud.kms.v1.Autokey"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_Autokey_GetKeyHandle_async",
+      "title": "Autokey getKeyHandle Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the [KeyHandle][google.cloud.kms.v1.KeyHandle].",
+      "canonical": true,
+      "file": "autokey.get_key_handle.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetKeyHandle",
+        "fullName": "google.cloud.kms.v1.Autokey.GetKeyHandle",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.KeyHandle",
+        "client": {
+          "shortName": "AutokeyClient",
+          "fullName": "google.cloud.kms.v1.AutokeyClient"
+        },
+        "method": {
+          "shortName": "GetKeyHandle",
+          "fullName": "google.cloud.kms.v1.Autokey.GetKeyHandle",
+          "service": {
+            "shortName": "Autokey",
+            "fullName": "google.cloud.kms.v1.Autokey"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_Autokey_ListKeyHandles_async",
+      "title": "Autokey listKeyHandles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [KeyHandles][google.cloud.kms.v1.KeyHandle].",
+      "canonical": true,
+      "file": "autokey.list_key_handles.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListKeyHandles",
+        "fullName": "google.cloud.kms.v1.Autokey.ListKeyHandles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ListKeyHandlesResponse",
+        "client": {
+          "shortName": "AutokeyClient",
+          "fullName": "google.cloud.kms.v1.AutokeyClient"
+        },
+        "method": {
+          "shortName": "ListKeyHandles",
+          "fullName": "google.cloud.kms.v1.Autokey.ListKeyHandles",
+          "service": {
+            "shortName": "Autokey",
+            "fullName": "google.cloud.kms.v1.Autokey"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_AutokeyAdmin_UpdateAutokeyConfig_async",
+      "title": "Autokey updateAutokeyConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder. The caller must have both `cloudkms.autokeyConfigs.update` permission on the parent folder and `cloudkms.cryptoKeys.setIamPolicy` permission on the provided key project. A [KeyHandle][google.cloud.kms.v1.KeyHandle] creation in the folder's descendant projects will use this configuration to determine where to create the resulting [CryptoKey][google.cloud.kms.v1.CryptoKey].",
+      "canonical": true,
+      "file": "autokey_admin.update_autokey_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAutokeyConfig",
+        "fullName": "google.cloud.kms.v1.AutokeyAdmin.UpdateAutokeyConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "autokey_config",
+            "type": ".google.cloud.kms.v1.AutokeyConfig"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.AutokeyConfig",
+        "client": {
+          "shortName": "AutokeyAdminClient",
+          "fullName": "google.cloud.kms.v1.AutokeyAdminClient"
+        },
+        "method": {
+          "shortName": "UpdateAutokeyConfig",
+          "fullName": "google.cloud.kms.v1.AutokeyAdmin.UpdateAutokeyConfig",
+          "service": {
+            "shortName": "AutokeyAdmin",
+            "fullName": "google.cloud.kms.v1.AutokeyAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_AutokeyAdmin_GetAutokeyConfig_async",
+      "title": "Autokey getAutokeyConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the [AutokeyConfig][google.cloud.kms.v1.AutokeyConfig] for a folder.",
+      "canonical": true,
+      "file": "autokey_admin.get_autokey_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAutokeyConfig",
+        "fullName": "google.cloud.kms.v1.AutokeyAdmin.GetAutokeyConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.AutokeyConfig",
+        "client": {
+          "shortName": "AutokeyAdminClient",
+          "fullName": "google.cloud.kms.v1.AutokeyAdminClient"
+        },
+        "method": {
+          "shortName": "GetAutokeyConfig",
+          "fullName": "google.cloud.kms.v1.AutokeyAdmin.GetAutokeyConfig",
+          "service": {
+            "shortName": "AutokeyAdmin",
+            "fullName": "google.cloud.kms.v1.AutokeyAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_AutokeyAdmin_ShowEffectiveAutokeyConfig_async",
+      "title": "Autokey showEffectiveAutokeyConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the effective Cloud KMS Autokey configuration for a given project.",
+      "canonical": true,
+      "file": "autokey_admin.show_effective_autokey_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ShowEffectiveAutokeyConfig",
+        "fullName": "google.cloud.kms.v1.AutokeyAdmin.ShowEffectiveAutokeyConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ShowEffectiveAutokeyConfigResponse",
+        "client": {
+          "shortName": "AutokeyAdminClient",
+          "fullName": "google.cloud.kms.v1.AutokeyAdminClient"
+        },
+        "method": {
+          "shortName": "ShowEffectiveAutokeyConfig",
+          "fullName": "google.cloud.kms.v1.AutokeyAdmin.ShowEffectiveAutokeyConfig",
+          "service": {
+            "shortName": "AutokeyAdmin",
+            "fullName": "google.cloud.kms.v1.AutokeyAdmin"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_EkmService_ListEkmConnections_async",
+      "title": "Autokey listEkmConnections Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [EkmConnections][google.cloud.kms.v1.EkmConnection].",
+      "canonical": true,
+      "file": "ekm_service.list_ekm_connections.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 86,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEkmConnections",
+        "fullName": "google.cloud.kms.v1.EkmService.ListEkmConnections",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ListEkmConnectionsResponse",
+        "client": {
+          "shortName": "EkmServiceClient",
+          "fullName": "google.cloud.kms.v1.EkmServiceClient"
+        },
+        "method": {
+          "shortName": "ListEkmConnections",
+          "fullName": "google.cloud.kms.v1.EkmService.ListEkmConnections",
+          "service": {
+            "shortName": "EkmService",
+            "fullName": "google.cloud.kms.v1.EkmService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_EkmService_GetEkmConnection_async",
+      "title": "Autokey getEkmConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata for a given [EkmConnection][google.cloud.kms.v1.EkmConnection].",
+      "canonical": true,
+      "file": "ekm_service.get_ekm_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEkmConnection",
+        "fullName": "google.cloud.kms.v1.EkmService.GetEkmConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.EkmConnection",
+        "client": {
+          "shortName": "EkmServiceClient",
+          "fullName": "google.cloud.kms.v1.EkmServiceClient"
+        },
+        "method": {
+          "shortName": "GetEkmConnection",
+          "fullName": "google.cloud.kms.v1.EkmService.GetEkmConnection",
+          "service": {
+            "shortName": "EkmService",
+            "fullName": "google.cloud.kms.v1.EkmService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_EkmService_CreateEkmConnection_async",
+      "title": "Autokey createEkmConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new [EkmConnection][google.cloud.kms.v1.EkmConnection] in a given Project and Location.",
+      "canonical": true,
+      "file": "ekm_service.create_ekm_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEkmConnection",
+        "fullName": "google.cloud.kms.v1.EkmService.CreateEkmConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ekm_connection_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ekm_connection",
+            "type": ".google.cloud.kms.v1.EkmConnection"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.EkmConnection",
+        "client": {
+          "shortName": "EkmServiceClient",
+          "fullName": "google.cloud.kms.v1.EkmServiceClient"
+        },
+        "method": {
+          "shortName": "CreateEkmConnection",
+          "fullName": "google.cloud.kms.v1.EkmService.CreateEkmConnection",
+          "service": {
+            "shortName": "EkmService",
+            "fullName": "google.cloud.kms.v1.EkmService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_EkmService_UpdateEkmConnection_async",
+      "title": "Autokey updateEkmConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an [EkmConnection][google.cloud.kms.v1.EkmConnection]'s metadata.",
+      "canonical": true,
+      "file": "ekm_service.update_ekm_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEkmConnection",
+        "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "ekm_connection",
+            "type": ".google.cloud.kms.v1.EkmConnection"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.EkmConnection",
+        "client": {
+          "shortName": "EkmServiceClient",
+          "fullName": "google.cloud.kms.v1.EkmServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateEkmConnection",
+          "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConnection",
+          "service": {
+            "shortName": "EkmService",
+            "fullName": "google.cloud.kms.v1.EkmService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_EkmService_GetEkmConfig_async",
+      "title": "Autokey getEkmConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource for a given project and location.",
+      "canonical": true,
+      "file": "ekm_service.get_ekm_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEkmConfig",
+        "fullName": "google.cloud.kms.v1.EkmService.GetEkmConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.EkmConfig",
+        "client": {
+          "shortName": "EkmServiceClient",
+          "fullName": "google.cloud.kms.v1.EkmServiceClient"
+        },
+        "method": {
+          "shortName": "GetEkmConfig",
+          "fullName": "google.cloud.kms.v1.EkmService.GetEkmConfig",
+          "service": {
+            "shortName": "EkmService",
+            "fullName": "google.cloud.kms.v1.EkmService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_EkmService_UpdateEkmConfig_async",
+      "title": "Autokey updateEkmConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the [EkmConfig][google.cloud.kms.v1.EkmConfig] singleton resource for a given project and location.",
+      "canonical": true,
+      "file": "ekm_service.update_ekm_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEkmConfig",
+        "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "ekm_config",
+            "type": ".google.cloud.kms.v1.EkmConfig"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.EkmConfig",
+        "client": {
+          "shortName": "EkmServiceClient",
+          "fullName": "google.cloud.kms.v1.EkmServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateEkmConfig",
+          "fullName": "google.cloud.kms.v1.EkmService.UpdateEkmConfig",
+          "service": {
+            "shortName": "EkmService",
+            "fullName": "google.cloud.kms.v1.EkmService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_EkmService_VerifyConnectivity_async",
+      "title": "Autokey verifyConnectivity Sample",
+      "origin": "API_DEFINITION",
+      "description": " Verifies that Cloud KMS can successfully connect to the external key manager specified by an [EkmConnection][google.cloud.kms.v1.EkmConnection]. If there is an error connecting to the EKM, this method returns a FAILED_PRECONDITION status containing structured information as described at https://cloud.google.com/kms/docs/reference/ekm_errors.",
+      "canonical": true,
+      "file": "ekm_service.verify_connectivity.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "VerifyConnectivity",
+        "fullName": "google.cloud.kms.v1.EkmService.VerifyConnectivity",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.VerifyConnectivityResponse",
+        "client": {
+          "shortName": "EkmServiceClient",
+          "fullName": "google.cloud.kms.v1.EkmServiceClient"
+        },
+        "method": {
+          "shortName": "VerifyConnectivity",
+          "fullName": "google.cloud.kms.v1.EkmService.VerifyConnectivity",
+          "service": {
+            "shortName": "EkmService",
+            "fullName": "google.cloud.kms.v1.EkmService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_ListKeyRings_async",
+      "title": "Autokey listKeyRings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [KeyRings][google.cloud.kms.v1.KeyRing].",
+      "canonical": true,
+      "file": "key_management_service.list_key_rings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 86,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListKeyRings",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.ListKeyRings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ListKeyRingsResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "ListKeyRings",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.ListKeyRings",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_ListCryptoKeys_async",
+      "title": "Autokey listCryptoKeys Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [CryptoKeys][google.cloud.kms.v1.CryptoKey].",
+      "canonical": true,
+      "file": "key_management_service.list_crypto_keys.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCryptoKeys",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.ListCryptoKeys",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version_view",
+            "type": ".google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ListCryptoKeysResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "ListCryptoKeys",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.ListCryptoKeys",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_ListCryptoKeyVersions_async",
+      "title": "Autokey listCryptoKeyVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [CryptoKeyVersions][google.cloud.kms.v1.CryptoKeyVersion].",
+      "canonical": true,
+      "file": "key_management_service.list_crypto_key_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 90,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCryptoKeyVersions",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.ListCryptoKeyVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionView"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ListCryptoKeyVersionsResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "ListCryptoKeyVersions",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.ListCryptoKeyVersions",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_ListImportJobs_async",
+      "title": "Autokey listImportJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists [ImportJobs][google.cloud.kms.v1.ImportJob].",
+      "canonical": true,
+      "file": "key_management_service.list_import_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListImportJobs",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.ListImportJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ListImportJobsResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "ListImportJobs",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.ListImportJobs",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_GetKeyRing_async",
+      "title": "Autokey getKeyRing Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata for a given [KeyRing][google.cloud.kms.v1.KeyRing].",
+      "canonical": true,
+      "file": "key_management_service.get_key_ring.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetKeyRing",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.GetKeyRing",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.KeyRing",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "GetKeyRing",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.GetKeyRing",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_GetCryptoKey_async",
+      "title": "Autokey getCryptoKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata for a given [CryptoKey][google.cloud.kms.v1.CryptoKey], as well as its [primary][google.cloud.kms.v1.CryptoKey.primary] [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].",
+      "canonical": true,
+      "file": "key_management_service.get_crypto_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCryptoKey",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.GetCryptoKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKey",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "GetCryptoKey",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.GetCryptoKey",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_GetCryptoKeyVersion_async",
+      "title": "Autokey getCryptoKeyVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata for a given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion].",
+      "canonical": true,
+      "file": "key_management_service.get_crypto_key_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCryptoKeyVersion",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.GetCryptoKeyVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "GetCryptoKeyVersion",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.GetCryptoKeyVersion",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_GetPublicKey_async",
+      "title": "Autokey getPublicKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the public key for the given [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [ASYMMETRIC_SIGN][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_SIGN] or [ASYMMETRIC_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ASYMMETRIC_DECRYPT].",
+      "canonical": true,
+      "file": "key_management_service.get_public_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPublicKey",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.GetPublicKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "public_key_format",
+            "type": ".google.cloud.kms.v1.PublicKey.PublicKeyFormat"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.PublicKey",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "GetPublicKey",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.GetPublicKey",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_GetImportJob_async",
+      "title": "Autokey getImportJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns metadata for a given [ImportJob][google.cloud.kms.v1.ImportJob].",
+      "canonical": true,
+      "file": "key_management_service.get_import_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetImportJob",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.GetImportJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ImportJob",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "GetImportJob",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.GetImportJob",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_CreateKeyRing_async",
+      "title": "Autokey createKeyRing Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new [KeyRing][google.cloud.kms.v1.KeyRing] in a given Project and Location.",
+      "canonical": true,
+      "file": "key_management_service.create_key_ring.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateKeyRing",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.CreateKeyRing",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "key_ring_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "key_ring",
+            "type": ".google.cloud.kms.v1.KeyRing"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.KeyRing",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "CreateKeyRing",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.CreateKeyRing",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_CreateCryptoKey_async",
+      "title": "Autokey createCryptoKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new [CryptoKey][google.cloud.kms.v1.CryptoKey] within a [KeyRing][google.cloud.kms.v1.KeyRing]. [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] and [CryptoKey.version_template.algorithm][google.cloud.kms.v1.CryptoKeyVersionTemplate.algorithm] are required.",
+      "canonical": true,
+      "file": "key_management_service.create_crypto_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCryptoKey",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.CreateCryptoKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "crypto_key_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "crypto_key",
+            "type": ".google.cloud.kms.v1.CryptoKey"
+          },
+          {
+            "name": "skip_initial_version_creation",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKey",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "CreateCryptoKey",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.CreateCryptoKey",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_CreateCryptoKeyVersion_async",
+      "title": "Autokey createCryptoKeyVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in a [CryptoKey][google.cloud.kms.v1.CryptoKey]. The server will assign the next sequential id. If unset, [state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to [ENABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED].",
+      "canonical": true,
+      "file": "key_management_service.create_crypto_key_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCryptoKeyVersion",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "crypto_key_version",
+            "type": ".google.cloud.kms.v1.CryptoKeyVersion"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "CreateCryptoKeyVersion",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.CreateCryptoKeyVersion",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_ImportCryptoKeyVersion_async",
+      "title": "Autokey importCryptoKeyVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Import wrapped key material into a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]. All requests must specify a [CryptoKey][google.cloud.kms.v1.CryptoKey]. If a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] is additionally specified in the request, key material will be reimported into that version. Otherwise, a new version will be created, and will be assigned the next sequential id within the [CryptoKey][google.cloud.kms.v1.CryptoKey].",
+      "canonical": true,
+      "file": "key_management_service.import_crypto_key_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 139,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportCryptoKeyVersion",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "crypto_key_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "algorithm",
+            "type": ".google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm"
+          },
+          {
+            "name": "import_job",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "wrapped_key",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "rsa_aes_wrapped_key",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "ImportCryptoKeyVersion",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.ImportCryptoKeyVersion",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_CreateImportJob_async",
+      "title": "Autokey createImportJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new [ImportJob][google.cloud.kms.v1.ImportJob] within a [KeyRing][google.cloud.kms.v1.KeyRing]. [ImportJob.import_method][google.cloud.kms.v1.ImportJob.import_method] is required.",
+      "canonical": true,
+      "file": "key_management_service.create_import_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateImportJob",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.CreateImportJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "import_job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "import_job",
+            "type": ".google.cloud.kms.v1.ImportJob"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.ImportJob",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "CreateImportJob",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.CreateImportJob",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_UpdateCryptoKey_async",
+      "title": "Autokey updateCryptoKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a [CryptoKey][google.cloud.kms.v1.CryptoKey].",
+      "canonical": true,
+      "file": "key_management_service.update_crypto_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCryptoKey",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "crypto_key",
+            "type": ".google.cloud.kms.v1.CryptoKey"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKey",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCryptoKey",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKey",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyVersion_async",
+      "title": "Autokey updateCryptoKeyVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion]'s metadata. [state][google.cloud.kms.v1.CryptoKeyVersion.state] may be changed between [ENABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.ENABLED] and [DISABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED] using this method. See [DestroyCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion] and [RestoreCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion] to move between other states.",
+      "canonical": true,
+      "file": "key_management_service.update_crypto_key_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCryptoKeyVersion",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "crypto_key_version",
+            "type": ".google.cloud.kms.v1.CryptoKeyVersion"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCryptoKeyVersion",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyVersion",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_UpdateCryptoKeyPrimaryVersion_async",
+      "title": "Autokey updateCryptoKeyPrimaryVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update the version of a [CryptoKey][google.cloud.kms.v1.CryptoKey] that will be used in [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt]. Returns an error if called on a key whose purpose is not [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].",
+      "canonical": true,
+      "file": "key_management_service.update_crypto_key_primary_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCryptoKeyPrimaryVersion",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyPrimaryVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "crypto_key_version_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKey",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCryptoKeyPrimaryVersion",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.UpdateCryptoKeyPrimaryVersion",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_DestroyCryptoKeyVersion_async",
+      "title": "Autokey destroyCryptoKeyVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Schedule a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] for destruction. Upon calling this method, [CryptoKeyVersion.state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to [DESTROY_SCHEDULED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED], and [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] will be set to the time [destroy_scheduled_duration][google.cloud.kms.v1.CryptoKey.destroy_scheduled_duration] in the future. At that time, the [state][google.cloud.kms.v1.CryptoKeyVersion.state] will automatically change to [DESTROYED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROYED], and the key material will be irrevocably destroyed. Before the [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] is reached, [RestoreCryptoKeyVersion][google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion] may be called to reverse the process.",
+      "canonical": true,
+      "file": "key_management_service.destroy_crypto_key_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DestroyCryptoKeyVersion",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "DestroyCryptoKeyVersion",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.DestroyCryptoKeyVersion",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_RestoreCryptoKeyVersion_async",
+      "title": "Autokey restoreCryptoKeyVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Restore a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] in the [DESTROY_SCHEDULED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DESTROY_SCHEDULED] state. Upon restoration of the CryptoKeyVersion, [state][google.cloud.kms.v1.CryptoKeyVersion.state] will be set to [DISABLED][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionState.DISABLED], and [destroy_time][google.cloud.kms.v1.CryptoKeyVersion.destroy_time] will be cleared.",
+      "canonical": true,
+      "file": "key_management_service.restore_crypto_key_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestoreCryptoKeyVersion",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.CryptoKeyVersion",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "RestoreCryptoKeyVersion",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.RestoreCryptoKeyVersion",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_Encrypt_async",
+      "title": "Autokey encrypt Sample",
+      "origin": "API_DEFINITION",
+      "description": " Encrypts data, so that it can only be recovered by a call to [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].",
+      "canonical": true,
+      "file": "key_management_service.encrypt.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 131,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Encrypt",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.Encrypt",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "plaintext",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "additional_authenticated_data",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "plaintext_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          },
+          {
+            "name": "additional_authenticated_data_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.EncryptResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "Encrypt",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.Encrypt",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_Decrypt_async",
+      "title": "Autokey decrypt Sample",
+      "origin": "API_DEFINITION",
+      "description": " Decrypts data that was protected by [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt]. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.ENCRYPT_DECRYPT].",
+      "canonical": true,
+      "file": "key_management_service.decrypt.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 110,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Decrypt",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.Decrypt",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ciphertext",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "additional_authenticated_data",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "ciphertext_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          },
+          {
+            "name": "additional_authenticated_data_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.DecryptResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "Decrypt",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.Decrypt",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_RawEncrypt_async",
+      "title": "Autokey rawEncrypt Sample",
+      "origin": "API_DEFINITION",
+      "description": " Encrypts data using portable cryptographic primitives. Most users should choose [Encrypt][google.cloud.kms.v1.KeyManagementService.Encrypt] and [Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt] rather than their raw counterparts. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [RAW_ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT].",
+      "canonical": true,
+      "file": "key_management_service.raw_encrypt.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 146,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RawEncrypt",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.RawEncrypt",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "plaintext",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "additional_authenticated_data",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "plaintext_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          },
+          {
+            "name": "additional_authenticated_data_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          },
+          {
+            "name": "initialization_vector",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "initialization_vector_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.RawEncryptResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "RawEncrypt",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.RawEncrypt",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_RawDecrypt_async",
+      "title": "Autokey rawDecrypt Sample",
+      "origin": "API_DEFINITION",
+      "description": " Decrypts data that was originally encrypted using a raw cryptographic mechanism. The [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] must be [RAW_ENCRYPT_DECRYPT][google.cloud.kms.v1.CryptoKey.CryptoKeyPurpose.RAW_ENCRYPT_DECRYPT].",
+      "canonical": true,
+      "file": "key_management_service.raw_decrypt.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 134,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RawDecrypt",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.RawDecrypt",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ciphertext",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "additional_authenticated_data",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "initialization_vector",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "tag_length",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "ciphertext_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          },
+          {
+            "name": "additional_authenticated_data_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          },
+          {
+            "name": "initialization_vector_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.RawDecryptResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "RawDecrypt",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.RawDecrypt",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_AsymmetricSign_async",
+      "title": "Autokey asymmetricSign Sample",
+      "origin": "API_DEFINITION",
+      "description": " Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] ASYMMETRIC_SIGN, producing a signature that can be verified with the public key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey].",
+      "canonical": true,
+      "file": "key_management_service.asymmetric_sign.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 115,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AsymmetricSign",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.AsymmetricSign",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "digest",
+            "type": ".google.cloud.kms.v1.Digest"
+          },
+          {
+            "name": "digest_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          },
+          {
+            "name": "data",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "data_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.AsymmetricSignResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "AsymmetricSign",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.AsymmetricSign",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_AsymmetricDecrypt_async",
+      "title": "Autokey asymmetricDecrypt Sample",
+      "origin": "API_DEFINITION",
+      "description": " Decrypts data that was encrypted with a public key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey] corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] ASYMMETRIC_DECRYPT.",
+      "canonical": true,
+      "file": "key_management_service.asymmetric_decrypt.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AsymmetricDecrypt",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.AsymmetricDecrypt",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ciphertext",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "ciphertext_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.AsymmetricDecryptResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "AsymmetricDecrypt",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.AsymmetricDecrypt",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_MacSign_async",
+      "title": "Autokey macSign Sample",
+      "origin": "API_DEFINITION",
+      "description": " Signs data using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] MAC, producing a tag that can be verified by another source with the same key.",
+      "canonical": true,
+      "file": "key_management_service.mac_sign.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MacSign",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.MacSign",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "data_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.MacSignResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "MacSign",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.MacSign",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_MacVerify_async",
+      "title": "Autokey macVerify Sample",
+      "origin": "API_DEFINITION",
+      "description": " Verifies MAC tag using a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] MAC, and returns a response that indicates whether or not the verification was successful.",
+      "canonical": true,
+      "file": "key_management_service.mac_verify.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 108,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MacVerify",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.MacVerify",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "data_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          },
+          {
+            "name": "mac",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "mac_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.MacVerifyResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "MacVerify",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.MacVerify",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_Decapsulate_async",
+      "title": "Autokey decapsulate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Decapsulates data that was encapsulated with a public key retrieved from [GetPublicKey][google.cloud.kms.v1.KeyManagementService.GetPublicKey] corresponding to a [CryptoKeyVersion][google.cloud.kms.v1.CryptoKeyVersion] with [CryptoKey.purpose][google.cloud.kms.v1.CryptoKey.purpose] KEY_ENCAPSULATION.",
+      "canonical": true,
+      "file": "key_management_service.decapsulate.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 84,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Decapsulate",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.Decapsulate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ciphertext",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "ciphertext_crc32c",
+            "type": ".google.protobuf.Int64Value"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.DecapsulateResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "Decapsulate",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.Decapsulate",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudkms_v1_generated_KeyManagementService_GenerateRandomBytes_async",
+      "title": "Autokey generateRandomBytes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generate random bytes using the Cloud KMS randomness source in the provided location.",
+      "canonical": true,
+      "file": "key_management_service.generate_random_bytes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateRandomBytes",
+        "fullName": "google.cloud.kms.v1.KeyManagementService.GenerateRandomBytes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "length_bytes",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "protection_level",
+            "type": ".google.cloud.kms.v1.ProtectionLevel"
+          }
+        ],
+        "resultType": ".google.cloud.kms.v1.GenerateRandomBytesResponse",
+        "client": {
+          "shortName": "KeyManagementServiceClient",
+          "fullName": "google.cloud.kms.v1.KeyManagementServiceClient"
+        },
+        "method": {
+          "shortName": "GenerateRandomBytes",
+          "fullName": "google.cloud.kms.v1.KeyManagementService.GenerateRandomBytes",
+          "service": {
+            "shortName": "KeyManagementService",
+            "fullName": "google.cloud.kms.v1.KeyManagementService"
+          }
+        }
+      }
+    }
+  ]
 }

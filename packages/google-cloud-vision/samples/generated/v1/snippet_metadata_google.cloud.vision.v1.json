@@ -1,1059 +1,1059 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-vision",
-        "version": "5.3.3",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.vision.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "vision_v1_generated_ImageAnnotator_BatchAnnotateImages_async",
-            "title": "vision batchAnnotateImages Sample",
-            "origin": "API_DEFINITION",
-            "description": " Run image detection and annotation for a batch of images.",
-            "canonical": true,
-            "file": "image_annotator.batch_annotate_images.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchAnnotateImages",
-                "fullName": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateImages",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "labels",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.BatchAnnotateImagesResponse",
-                "client": {
-                    "shortName": "ImageAnnotatorClient",
-                    "fullName": "google.cloud.vision.v1.ImageAnnotatorClient"
-                },
-                "method": {
-                    "shortName": "BatchAnnotateImages",
-                    "fullName": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateImages",
-                    "service": {
-                        "shortName": "ImageAnnotator",
-                        "fullName": "google.cloud.vision.v1.ImageAnnotator"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ImageAnnotator_BatchAnnotateFiles_async",
-            "title": "vision batchAnnotateFiles Sample",
-            "origin": "API_DEFINITION",
-            "description": " Service that performs image detection and annotation for a batch of files. Now only \"application/pdf\", \"image/tiff\" and \"image/gif\" are supported. This service will extract at most 5 (customers can specify which 5 in AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each file provided and perform detection and annotation for each image extracted.",
-            "canonical": true,
-            "file": "image_annotator.batch_annotate_files.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchAnnotateFiles",
-                "fullName": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateFiles",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "labels",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.BatchAnnotateFilesResponse",
-                "client": {
-                    "shortName": "ImageAnnotatorClient",
-                    "fullName": "google.cloud.vision.v1.ImageAnnotatorClient"
-                },
-                "method": {
-                    "shortName": "BatchAnnotateFiles",
-                    "fullName": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateFiles",
-                    "service": {
-                        "shortName": "ImageAnnotator",
-                        "fullName": "google.cloud.vision.v1.ImageAnnotator"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ImageAnnotator_AsyncBatchAnnotateImages_async",
-            "title": "vision asyncBatchAnnotateImages Sample",
-            "origin": "API_DEFINITION",
-            "description": " Run asynchronous image detection and annotation for a list of images. Progress and results can be retrieved through the `google.longrunning.Operations` interface. `Operation.metadata` contains `OperationMetadata` (metadata). `Operation.response` contains `AsyncBatchAnnotateImagesResponse` (results). This service will write image annotation outputs to json files in customer GCS bucket, each json file containing BatchAnnotateImagesResponse proto.",
-            "canonical": true,
-            "file": "image_annotator.async_batch_annotate_images.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AsyncBatchAnnotateImages",
-                "fullName": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateImages",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "output_config",
-                        "type": ".google.cloud.vision.v1.OutputConfig"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "labels",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ImageAnnotatorClient",
-                    "fullName": "google.cloud.vision.v1.ImageAnnotatorClient"
-                },
-                "method": {
-                    "shortName": "AsyncBatchAnnotateImages",
-                    "fullName": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateImages",
-                    "service": {
-                        "shortName": "ImageAnnotator",
-                        "fullName": "google.cloud.vision.v1.ImageAnnotator"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async",
-            "title": "vision asyncBatchAnnotateFiles Sample",
-            "origin": "API_DEFINITION",
-            "description": " Run asynchronous image detection and annotation for a list of generic files, such as PDF files, which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the `google.longrunning.Operations` interface. `Operation.metadata` contains `OperationMetadata` (metadata). `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).",
-            "canonical": true,
-            "file": "image_annotator.async_batch_annotate_files.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AsyncBatchAnnotateFiles",
-                "fullName": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateFiles",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "labels",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ImageAnnotatorClient",
-                    "fullName": "google.cloud.vision.v1.ImageAnnotatorClient"
-                },
-                "method": {
-                    "shortName": "AsyncBatchAnnotateFiles",
-                    "fullName": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateFiles",
-                    "service": {
-                        "shortName": "ImageAnnotator",
-                        "fullName": "google.cloud.vision.v1.ImageAnnotator"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_CreateProductSet_async",
-            "title": "vision createProductSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates and returns a new ProductSet resource. Possible errors: * Returns INVALID_ARGUMENT if display_name is missing, or is longer than   4096 characters.",
-            "canonical": true,
-            "file": "product_search.create_product_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateProductSet",
-                "fullName": "google.cloud.vision.v1.ProductSearch.CreateProductSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "product_set",
-                        "type": ".google.cloud.vision.v1.ProductSet"
-                    },
-                    {
-                        "name": "product_set_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.ProductSet",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "CreateProductSet",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.CreateProductSet",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_ListProductSets_async",
-            "title": "vision listProductSets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists ProductSets in an unspecified order. Possible errors: * Returns INVALID_ARGUMENT if page_size is greater than 100, or less   than 1.",
-            "canonical": true,
-            "file": "product_search.list_product_sets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListProductSets",
-                "fullName": "google.cloud.vision.v1.ProductSearch.ListProductSets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.ListProductSetsResponse",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "ListProductSets",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.ListProductSets",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_GetProductSet_async",
-            "title": "vision getProductSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets information associated with a ProductSet. Possible errors: * Returns NOT_FOUND if the ProductSet does not exist.",
-            "canonical": true,
-            "file": "product_search.get_product_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetProductSet",
-                "fullName": "google.cloud.vision.v1.ProductSearch.GetProductSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.ProductSet",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "GetProductSet",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.GetProductSet",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_UpdateProductSet_async",
-            "title": "vision updateProductSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Makes changes to a ProductSet resource. Only display_name can be updated currently. Possible errors: * Returns NOT_FOUND if the ProductSet does not exist. * Returns INVALID_ARGUMENT if display_name is present in update_mask but   missing from the request or longer than 4096 characters.",
-            "canonical": true,
-            "file": "product_search.update_product_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateProductSet",
-                "fullName": "google.cloud.vision.v1.ProductSearch.UpdateProductSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "product_set",
-                        "type": ".google.cloud.vision.v1.ProductSet"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.ProductSet",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "UpdateProductSet",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.UpdateProductSet",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_DeleteProductSet_async",
-            "title": "vision deleteProductSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Permanently deletes a ProductSet. Products and ReferenceImages in the ProductSet are not deleted. The actual image files are not deleted from Google Cloud Storage.",
-            "canonical": true,
-            "file": "product_search.delete_product_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteProductSet",
-                "fullName": "google.cloud.vision.v1.ProductSearch.DeleteProductSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "DeleteProductSet",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.DeleteProductSet",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_CreateProduct_async",
-            "title": "vision createProduct Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates and returns a new product resource. Possible errors: * Returns INVALID_ARGUMENT if display_name is missing or longer than 4096   characters. * Returns INVALID_ARGUMENT if description is longer than 4096 characters. * Returns INVALID_ARGUMENT if product_category is missing or invalid.",
-            "canonical": true,
-            "file": "product_search.create_product.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateProduct",
-                "fullName": "google.cloud.vision.v1.ProductSearch.CreateProduct",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "product",
-                        "type": ".google.cloud.vision.v1.Product"
-                    },
-                    {
-                        "name": "product_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.Product",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "CreateProduct",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.CreateProduct",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_ListProducts_async",
-            "title": "vision listProducts Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists products in an unspecified order. Possible errors: * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.",
-            "canonical": true,
-            "file": "product_search.list_products.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListProducts",
-                "fullName": "google.cloud.vision.v1.ProductSearch.ListProducts",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.ListProductsResponse",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "ListProducts",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.ListProducts",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_GetProduct_async",
-            "title": "vision getProduct Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets information associated with a Product. Possible errors: * Returns NOT_FOUND if the Product does not exist.",
-            "canonical": true,
-            "file": "product_search.get_product.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetProduct",
-                "fullName": "google.cloud.vision.v1.ProductSearch.GetProduct",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.Product",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "GetProduct",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.GetProduct",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_UpdateProduct_async",
-            "title": "vision updateProduct Sample",
-            "origin": "API_DEFINITION",
-            "description": " Makes changes to a Product resource. Only the `display_name`, `description`, and `labels` fields can be updated right now. If labels are updated, the change will not be reflected in queries until the next index time. Possible errors: * Returns NOT_FOUND if the Product does not exist. * Returns INVALID_ARGUMENT if display_name is present in update_mask but is   missing from the request or longer than 4096 characters. * Returns INVALID_ARGUMENT if description is present in update_mask but is   longer than 4096 characters. * Returns INVALID_ARGUMENT if product_category is present in update_mask.",
-            "canonical": true,
-            "file": "product_search.update_product.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateProduct",
-                "fullName": "google.cloud.vision.v1.ProductSearch.UpdateProduct",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "product",
-                        "type": ".google.cloud.vision.v1.Product"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.Product",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "UpdateProduct",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.UpdateProduct",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_DeleteProduct_async",
-            "title": "vision deleteProduct Sample",
-            "origin": "API_DEFINITION",
-            "description": " Permanently deletes a product and its reference images. Metadata of the product and all its images will be deleted right away, but search queries against ProductSets containing the product may still work until all related caches are refreshed.",
-            "canonical": true,
-            "file": "product_search.delete_product.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteProduct",
-                "fullName": "google.cloud.vision.v1.ProductSearch.DeleteProduct",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "DeleteProduct",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.DeleteProduct",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_CreateReferenceImage_async",
-            "title": "vision createReferenceImage Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates and returns a new ReferenceImage resource. The `bounding_poly` field is optional. If `bounding_poly` is not specified, the system will try to detect regions of interest in the image that are compatible with the product_category on the parent product. If it is specified, detection is ALWAYS skipped. The system converts polygons into non-rotated rectangles. Note that the pipeline will resize the image if the image resolution is too large to process (above 50MP). Possible errors: * Returns INVALID_ARGUMENT if the image_uri is missing or longer than 4096   characters. * Returns INVALID_ARGUMENT if the product does not exist. * Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing   compatible with the parent product's product_category is detected. * Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.",
-            "canonical": true,
-            "file": "product_search.create_reference_image.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateReferenceImage",
-                "fullName": "google.cloud.vision.v1.ProductSearch.CreateReferenceImage",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "reference_image",
-                        "type": ".google.cloud.vision.v1.ReferenceImage"
-                    },
-                    {
-                        "name": "reference_image_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.ReferenceImage",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "CreateReferenceImage",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.CreateReferenceImage",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_DeleteReferenceImage_async",
-            "title": "vision deleteReferenceImage Sample",
-            "origin": "API_DEFINITION",
-            "description": " Permanently deletes a reference image. The image metadata will be deleted right away, but search queries against ProductSets containing the image may still work until all related caches are refreshed. The actual image files are not deleted from Google Cloud Storage.",
-            "canonical": true,
-            "file": "product_search.delete_reference_image.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteReferenceImage",
-                "fullName": "google.cloud.vision.v1.ProductSearch.DeleteReferenceImage",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "DeleteReferenceImage",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.DeleteReferenceImage",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_ListReferenceImages_async",
-            "title": "vision listReferenceImages Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists reference images. Possible errors: * Returns NOT_FOUND if the parent product does not exist. * Returns INVALID_ARGUMENT if the page_size is greater than 100, or less   than 1.",
-            "canonical": true,
-            "file": "product_search.list_reference_images.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListReferenceImages",
-                "fullName": "google.cloud.vision.v1.ProductSearch.ListReferenceImages",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.ListReferenceImagesResponse",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "ListReferenceImages",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.ListReferenceImages",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_GetReferenceImage_async",
-            "title": "vision getReferenceImage Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets information associated with a ReferenceImage. Possible errors: * Returns NOT_FOUND if the specified image does not exist.",
-            "canonical": true,
-            "file": "product_search.get_reference_image.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetReferenceImage",
-                "fullName": "google.cloud.vision.v1.ProductSearch.GetReferenceImage",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.ReferenceImage",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "GetReferenceImage",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.GetReferenceImage",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_AddProductToProductSet_async",
-            "title": "vision addProductToProductSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Adds a Product to the specified ProductSet. If the Product is already present, no change is made. One Product can be added to at most 100 ProductSets. Possible errors: * Returns NOT_FOUND if the Product or the ProductSet doesn't exist.",
-            "canonical": true,
-            "file": "product_search.add_product_to_product_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AddProductToProductSet",
-                "fullName": "google.cloud.vision.v1.ProductSearch.AddProductToProductSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "product",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "AddProductToProductSet",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.AddProductToProductSet",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_RemoveProductFromProductSet_async",
-            "title": "vision removeProductFromProductSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Removes a Product from the specified ProductSet.",
-            "canonical": true,
-            "file": "product_search.remove_product_from_product_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RemoveProductFromProductSet",
-                "fullName": "google.cloud.vision.v1.ProductSearch.RemoveProductFromProductSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "product",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "RemoveProductFromProductSet",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.RemoveProductFromProductSet",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_ListProductsInProductSet_async",
-            "title": "vision listProductsInProductSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the Products in a ProductSet, in an unspecified order. If the ProductSet does not exist, the products field of the response will be empty. Possible errors: * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.",
-            "canonical": true,
-            "file": "product_search.list_products_in_product_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListProductsInProductSet",
-                "fullName": "google.cloud.vision.v1.ProductSearch.ListProductsInProductSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1.ListProductsInProductSetResponse",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "ListProductsInProductSet",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.ListProductsInProductSet",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_ImportProductSets_async",
-            "title": "vision importProductSets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Asynchronous API that imports a list of reference images to specified product sets based on a list of image information. The [google.longrunning.Operation][google.longrunning.Operation] API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress) `Operation.response` contains `ImportProductSetsResponse`. (results) The input source of this method is a csv file on Google Cloud Storage. For the format of the csv file please see [ImportProductSetsGcsSource.csv_file_uri][google.cloud.vision.v1.ImportProductSetsGcsSource.csv_file_uri].",
-            "canonical": true,
-            "file": "product_search.import_product_sets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ImportProductSets",
-                "fullName": "google.cloud.vision.v1.ProductSearch.ImportProductSets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "input_config",
-                        "type": ".google.cloud.vision.v1.ImportProductSetsInputConfig"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "ImportProductSets",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.ImportProductSets",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1_generated_ProductSearch_PurgeProducts_async",
-            "title": "vision purgeProducts Sample",
-            "origin": "API_DEFINITION",
-            "description": " Asynchronous API to delete all Products in a ProductSet or all Products that are in no ProductSet. If a Product is a member of the specified ProductSet in addition to other ProductSets, the Product will still be deleted. It is recommended to not delete the specified ProductSet until after this operation has completed. It is also recommended to not add any of the Products involved in the batch delete to a new ProductSet while this operation is running because those Products may still end up deleted. It's not possible to undo the PurgeProducts operation. Therefore, it is recommended to keep the csv files used in ImportProductSets (if that was how you originally built the Product Set) before starting PurgeProducts, in case you need to re-import the data after deletion. If the plan is to purge all of the Products from a ProductSet and then re-use the empty ProductSet to re-import new Products into the empty ProductSet, you must wait until the PurgeProducts operation has finished for that ProductSet. The [google.longrunning.Operation][google.longrunning.Operation] API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress)",
-            "canonical": true,
-            "file": "product_search.purge_products.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "PurgeProducts",
-                "fullName": "google.cloud.vision.v1.ProductSearch.PurgeProducts",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "product_set_purge_config",
-                        "type": ".google.cloud.vision.v1.ProductSetPurgeConfig"
-                    },
-                    {
-                        "name": "delete_orphan_products",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ProductSearchClient",
-                    "fullName": "google.cloud.vision.v1.ProductSearchClient"
-                },
-                "method": {
-                    "shortName": "PurgeProducts",
-                    "fullName": "google.cloud.vision.v1.ProductSearch.PurgeProducts",
-                    "service": {
-                        "shortName": "ProductSearch",
-                        "fullName": "google.cloud.vision.v1.ProductSearch"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-vision",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.vision.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "vision_v1_generated_ImageAnnotator_BatchAnnotateImages_async",
+      "title": "vision batchAnnotateImages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Run image detection and annotation for a batch of images.",
+      "canonical": true,
+      "file": "image_annotator.batch_annotate_images.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchAnnotateImages",
+        "fullName": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateImages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "labels",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.BatchAnnotateImagesResponse",
+        "client": {
+          "shortName": "ImageAnnotatorClient",
+          "fullName": "google.cloud.vision.v1.ImageAnnotatorClient"
+        },
+        "method": {
+          "shortName": "BatchAnnotateImages",
+          "fullName": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateImages",
+          "service": {
+            "shortName": "ImageAnnotator",
+            "fullName": "google.cloud.vision.v1.ImageAnnotator"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ImageAnnotator_BatchAnnotateFiles_async",
+      "title": "vision batchAnnotateFiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Service that performs image detection and annotation for a batch of files. Now only \"application/pdf\", \"image/tiff\" and \"image/gif\" are supported. This service will extract at most 5 (customers can specify which 5 in AnnotateFileRequest.pages) frames (gif) or pages (pdf or tiff) from each file provided and perform detection and annotation for each image extracted.",
+      "canonical": true,
+      "file": "image_annotator.batch_annotate_files.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchAnnotateFiles",
+        "fullName": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateFiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "labels",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.BatchAnnotateFilesResponse",
+        "client": {
+          "shortName": "ImageAnnotatorClient",
+          "fullName": "google.cloud.vision.v1.ImageAnnotatorClient"
+        },
+        "method": {
+          "shortName": "BatchAnnotateFiles",
+          "fullName": "google.cloud.vision.v1.ImageAnnotator.BatchAnnotateFiles",
+          "service": {
+            "shortName": "ImageAnnotator",
+            "fullName": "google.cloud.vision.v1.ImageAnnotator"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ImageAnnotator_AsyncBatchAnnotateImages_async",
+      "title": "vision asyncBatchAnnotateImages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Run asynchronous image detection and annotation for a list of images. Progress and results can be retrieved through the `google.longrunning.Operations` interface. `Operation.metadata` contains `OperationMetadata` (metadata). `Operation.response` contains `AsyncBatchAnnotateImagesResponse` (results). This service will write image annotation outputs to json files in customer GCS bucket, each json file containing BatchAnnotateImagesResponse proto.",
+      "canonical": true,
+      "file": "image_annotator.async_batch_annotate_images.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AsyncBatchAnnotateImages",
+        "fullName": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateImages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "output_config",
+            "type": ".google.cloud.vision.v1.OutputConfig"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "labels",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ImageAnnotatorClient",
+          "fullName": "google.cloud.vision.v1.ImageAnnotatorClient"
+        },
+        "method": {
+          "shortName": "AsyncBatchAnnotateImages",
+          "fullName": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateImages",
+          "service": {
+            "shortName": "ImageAnnotator",
+            "fullName": "google.cloud.vision.v1.ImageAnnotator"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async",
+      "title": "vision asyncBatchAnnotateFiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Run asynchronous image detection and annotation for a list of generic files, such as PDF files, which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the `google.longrunning.Operations` interface. `Operation.metadata` contains `OperationMetadata` (metadata). `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).",
+      "canonical": true,
+      "file": "image_annotator.async_batch_annotate_files.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AsyncBatchAnnotateFiles",
+        "fullName": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateFiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "labels",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ImageAnnotatorClient",
+          "fullName": "google.cloud.vision.v1.ImageAnnotatorClient"
+        },
+        "method": {
+          "shortName": "AsyncBatchAnnotateFiles",
+          "fullName": "google.cloud.vision.v1.ImageAnnotator.AsyncBatchAnnotateFiles",
+          "service": {
+            "shortName": "ImageAnnotator",
+            "fullName": "google.cloud.vision.v1.ImageAnnotator"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_CreateProductSet_async",
+      "title": "vision createProductSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates and returns a new ProductSet resource. Possible errors: * Returns INVALID_ARGUMENT if display_name is missing, or is longer than   4096 characters.",
+      "canonical": true,
+      "file": "product_search.create_product_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateProductSet",
+        "fullName": "google.cloud.vision.v1.ProductSearch.CreateProductSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "product_set",
+            "type": ".google.cloud.vision.v1.ProductSet"
+          },
+          {
+            "name": "product_set_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.ProductSet",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "CreateProductSet",
+          "fullName": "google.cloud.vision.v1.ProductSearch.CreateProductSet",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_ListProductSets_async",
+      "title": "vision listProductSets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists ProductSets in an unspecified order. Possible errors: * Returns INVALID_ARGUMENT if page_size is greater than 100, or less   than 1.",
+      "canonical": true,
+      "file": "product_search.list_product_sets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProductSets",
+        "fullName": "google.cloud.vision.v1.ProductSearch.ListProductSets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.ListProductSetsResponse",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "ListProductSets",
+          "fullName": "google.cloud.vision.v1.ProductSearch.ListProductSets",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_GetProductSet_async",
+      "title": "vision getProductSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets information associated with a ProductSet. Possible errors: * Returns NOT_FOUND if the ProductSet does not exist.",
+      "canonical": true,
+      "file": "product_search.get_product_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProductSet",
+        "fullName": "google.cloud.vision.v1.ProductSearch.GetProductSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.ProductSet",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "GetProductSet",
+          "fullName": "google.cloud.vision.v1.ProductSearch.GetProductSet",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_UpdateProductSet_async",
+      "title": "vision updateProductSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Makes changes to a ProductSet resource. Only display_name can be updated currently. Possible errors: * Returns NOT_FOUND if the ProductSet does not exist. * Returns INVALID_ARGUMENT if display_name is present in update_mask but   missing from the request or longer than 4096 characters.",
+      "canonical": true,
+      "file": "product_search.update_product_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateProductSet",
+        "fullName": "google.cloud.vision.v1.ProductSearch.UpdateProductSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "product_set",
+            "type": ".google.cloud.vision.v1.ProductSet"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.ProductSet",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "UpdateProductSet",
+          "fullName": "google.cloud.vision.v1.ProductSearch.UpdateProductSet",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_DeleteProductSet_async",
+      "title": "vision deleteProductSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Permanently deletes a ProductSet. Products and ReferenceImages in the ProductSet are not deleted. The actual image files are not deleted from Google Cloud Storage.",
+      "canonical": true,
+      "file": "product_search.delete_product_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteProductSet",
+        "fullName": "google.cloud.vision.v1.ProductSearch.DeleteProductSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "DeleteProductSet",
+          "fullName": "google.cloud.vision.v1.ProductSearch.DeleteProductSet",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_CreateProduct_async",
+      "title": "vision createProduct Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates and returns a new product resource. Possible errors: * Returns INVALID_ARGUMENT if display_name is missing or longer than 4096   characters. * Returns INVALID_ARGUMENT if description is longer than 4096 characters. * Returns INVALID_ARGUMENT if product_category is missing or invalid.",
+      "canonical": true,
+      "file": "product_search.create_product.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateProduct",
+        "fullName": "google.cloud.vision.v1.ProductSearch.CreateProduct",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "product",
+            "type": ".google.cloud.vision.v1.Product"
+          },
+          {
+            "name": "product_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.Product",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "CreateProduct",
+          "fullName": "google.cloud.vision.v1.ProductSearch.CreateProduct",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_ListProducts_async",
+      "title": "vision listProducts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists products in an unspecified order. Possible errors: * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.",
+      "canonical": true,
+      "file": "product_search.list_products.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProducts",
+        "fullName": "google.cloud.vision.v1.ProductSearch.ListProducts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.ListProductsResponse",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "ListProducts",
+          "fullName": "google.cloud.vision.v1.ProductSearch.ListProducts",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_GetProduct_async",
+      "title": "vision getProduct Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets information associated with a Product. Possible errors: * Returns NOT_FOUND if the Product does not exist.",
+      "canonical": true,
+      "file": "product_search.get_product.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProduct",
+        "fullName": "google.cloud.vision.v1.ProductSearch.GetProduct",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.Product",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "GetProduct",
+          "fullName": "google.cloud.vision.v1.ProductSearch.GetProduct",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_UpdateProduct_async",
+      "title": "vision updateProduct Sample",
+      "origin": "API_DEFINITION",
+      "description": " Makes changes to a Product resource. Only the `display_name`, `description`, and `labels` fields can be updated right now. If labels are updated, the change will not be reflected in queries until the next index time. Possible errors: * Returns NOT_FOUND if the Product does not exist. * Returns INVALID_ARGUMENT if display_name is present in update_mask but is   missing from the request or longer than 4096 characters. * Returns INVALID_ARGUMENT if description is present in update_mask but is   longer than 4096 characters. * Returns INVALID_ARGUMENT if product_category is present in update_mask.",
+      "canonical": true,
+      "file": "product_search.update_product.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateProduct",
+        "fullName": "google.cloud.vision.v1.ProductSearch.UpdateProduct",
+        "async": true,
+        "parameters": [
+          {
+            "name": "product",
+            "type": ".google.cloud.vision.v1.Product"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.Product",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "UpdateProduct",
+          "fullName": "google.cloud.vision.v1.ProductSearch.UpdateProduct",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_DeleteProduct_async",
+      "title": "vision deleteProduct Sample",
+      "origin": "API_DEFINITION",
+      "description": " Permanently deletes a product and its reference images. Metadata of the product and all its images will be deleted right away, but search queries against ProductSets containing the product may still work until all related caches are refreshed.",
+      "canonical": true,
+      "file": "product_search.delete_product.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteProduct",
+        "fullName": "google.cloud.vision.v1.ProductSearch.DeleteProduct",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "DeleteProduct",
+          "fullName": "google.cloud.vision.v1.ProductSearch.DeleteProduct",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_CreateReferenceImage_async",
+      "title": "vision createReferenceImage Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates and returns a new ReferenceImage resource. The `bounding_poly` field is optional. If `bounding_poly` is not specified, the system will try to detect regions of interest in the image that are compatible with the product_category on the parent product. If it is specified, detection is ALWAYS skipped. The system converts polygons into non-rotated rectangles. Note that the pipeline will resize the image if the image resolution is too large to process (above 50MP). Possible errors: * Returns INVALID_ARGUMENT if the image_uri is missing or longer than 4096   characters. * Returns INVALID_ARGUMENT if the product does not exist. * Returns INVALID_ARGUMENT if bounding_poly is not provided, and nothing   compatible with the parent product's product_category is detected. * Returns INVALID_ARGUMENT if bounding_poly contains more than 10 polygons.",
+      "canonical": true,
+      "file": "product_search.create_reference_image.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateReferenceImage",
+        "fullName": "google.cloud.vision.v1.ProductSearch.CreateReferenceImage",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reference_image",
+            "type": ".google.cloud.vision.v1.ReferenceImage"
+          },
+          {
+            "name": "reference_image_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.ReferenceImage",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "CreateReferenceImage",
+          "fullName": "google.cloud.vision.v1.ProductSearch.CreateReferenceImage",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_DeleteReferenceImage_async",
+      "title": "vision deleteReferenceImage Sample",
+      "origin": "API_DEFINITION",
+      "description": " Permanently deletes a reference image. The image metadata will be deleted right away, but search queries against ProductSets containing the image may still work until all related caches are refreshed. The actual image files are not deleted from Google Cloud Storage.",
+      "canonical": true,
+      "file": "product_search.delete_reference_image.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteReferenceImage",
+        "fullName": "google.cloud.vision.v1.ProductSearch.DeleteReferenceImage",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "DeleteReferenceImage",
+          "fullName": "google.cloud.vision.v1.ProductSearch.DeleteReferenceImage",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_ListReferenceImages_async",
+      "title": "vision listReferenceImages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists reference images. Possible errors: * Returns NOT_FOUND if the parent product does not exist. * Returns INVALID_ARGUMENT if the page_size is greater than 100, or less   than 1.",
+      "canonical": true,
+      "file": "product_search.list_reference_images.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReferenceImages",
+        "fullName": "google.cloud.vision.v1.ProductSearch.ListReferenceImages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.ListReferenceImagesResponse",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "ListReferenceImages",
+          "fullName": "google.cloud.vision.v1.ProductSearch.ListReferenceImages",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_GetReferenceImage_async",
+      "title": "vision getReferenceImage Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets information associated with a ReferenceImage. Possible errors: * Returns NOT_FOUND if the specified image does not exist.",
+      "canonical": true,
+      "file": "product_search.get_reference_image.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetReferenceImage",
+        "fullName": "google.cloud.vision.v1.ProductSearch.GetReferenceImage",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.ReferenceImage",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "GetReferenceImage",
+          "fullName": "google.cloud.vision.v1.ProductSearch.GetReferenceImage",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_AddProductToProductSet_async",
+      "title": "vision addProductToProductSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds a Product to the specified ProductSet. If the Product is already present, no change is made. One Product can be added to at most 100 ProductSets. Possible errors: * Returns NOT_FOUND if the Product or the ProductSet doesn't exist.",
+      "canonical": true,
+      "file": "product_search.add_product_to_product_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddProductToProductSet",
+        "fullName": "google.cloud.vision.v1.ProductSearch.AddProductToProductSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "product",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "AddProductToProductSet",
+          "fullName": "google.cloud.vision.v1.ProductSearch.AddProductToProductSet",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_RemoveProductFromProductSet_async",
+      "title": "vision removeProductFromProductSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a Product from the specified ProductSet.",
+      "canonical": true,
+      "file": "product_search.remove_product_from_product_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveProductFromProductSet",
+        "fullName": "google.cloud.vision.v1.ProductSearch.RemoveProductFromProductSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "product",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "RemoveProductFromProductSet",
+          "fullName": "google.cloud.vision.v1.ProductSearch.RemoveProductFromProductSet",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_ListProductsInProductSet_async",
+      "title": "vision listProductsInProductSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the Products in a ProductSet, in an unspecified order. If the ProductSet does not exist, the products field of the response will be empty. Possible errors: * Returns INVALID_ARGUMENT if page_size is greater than 100 or less than 1.",
+      "canonical": true,
+      "file": "product_search.list_products_in_product_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProductsInProductSet",
+        "fullName": "google.cloud.vision.v1.ProductSearch.ListProductsInProductSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1.ListProductsInProductSetResponse",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "ListProductsInProductSet",
+          "fullName": "google.cloud.vision.v1.ProductSearch.ListProductsInProductSet",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_ImportProductSets_async",
+      "title": "vision importProductSets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Asynchronous API that imports a list of reference images to specified product sets based on a list of image information. The [google.longrunning.Operation][google.longrunning.Operation] API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress) `Operation.response` contains `ImportProductSetsResponse`. (results) The input source of this method is a csv file on Google Cloud Storage. For the format of the csv file please see [ImportProductSetsGcsSource.csv_file_uri][google.cloud.vision.v1.ImportProductSetsGcsSource.csv_file_uri].",
+      "canonical": true,
+      "file": "product_search.import_product_sets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportProductSets",
+        "fullName": "google.cloud.vision.v1.ProductSearch.ImportProductSets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_config",
+            "type": ".google.cloud.vision.v1.ImportProductSetsInputConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "ImportProductSets",
+          "fullName": "google.cloud.vision.v1.ProductSearch.ImportProductSets",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1_generated_ProductSearch_PurgeProducts_async",
+      "title": "vision purgeProducts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Asynchronous API to delete all Products in a ProductSet or all Products that are in no ProductSet. If a Product is a member of the specified ProductSet in addition to other ProductSets, the Product will still be deleted. It is recommended to not delete the specified ProductSet until after this operation has completed. It is also recommended to not add any of the Products involved in the batch delete to a new ProductSet while this operation is running because those Products may still end up deleted. It's not possible to undo the PurgeProducts operation. Therefore, it is recommended to keep the csv files used in ImportProductSets (if that was how you originally built the Product Set) before starting PurgeProducts, in case you need to re-import the data after deletion. If the plan is to purge all of the Products from a ProductSet and then re-use the empty ProductSet to re-import new Products into the empty ProductSet, you must wait until the PurgeProducts operation has finished for that ProductSet. The [google.longrunning.Operation][google.longrunning.Operation] API can be used to keep track of the progress and results of the request. `Operation.metadata` contains `BatchOperationMetadata`. (progress)",
+      "canonical": true,
+      "file": "product_search.purge_products.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PurgeProducts",
+        "fullName": "google.cloud.vision.v1.ProductSearch.PurgeProducts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "product_set_purge_config",
+            "type": ".google.cloud.vision.v1.ProductSetPurgeConfig"
+          },
+          {
+            "name": "delete_orphan_products",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProductSearchClient",
+          "fullName": "google.cloud.vision.v1.ProductSearchClient"
+        },
+        "method": {
+          "shortName": "PurgeProducts",
+          "fullName": "google.cloud.vision.v1.ProductSearch.PurgeProducts",
+          "service": {
+            "shortName": "ProductSearch",
+            "fullName": "google.cloud.vision.v1.ProductSearch"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.shopping.merchant.inventories.v1",
-  "libraryPackage": "@google-cloud/inventories",
+  "libraryPackage": "@google-shopping/inventories",
   "services": {
     "LocalInventoryService": {
       "clients": {

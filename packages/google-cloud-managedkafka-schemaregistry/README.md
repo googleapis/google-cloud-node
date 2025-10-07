@@ -1,24 +1,24 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Managed Service for Apache Kafka API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka-schemaregistry)
+# [Managed Service for Apache Kafka API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/managedkafka-schemaregistry.svg)](https://www.npmjs.org/package/@google-cloud/managedkafka-schemaregistry)
-
-
-
 
 Managed Service for Apache Kafka API client for Node.js
 
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka-schemaregistry/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Managed Service for Apache Kafka API Node.js Client API Reference][client-docs]
-* [Managed Service for Apache Kafka API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-managedkafka-schemaregistry](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka-schemaregistry)
+* [Managed Service for Apache Kafka API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/schemaregistry/latest)
+* [Managed Service for Apache Kafka API Documentation](https://cloud.google.com/managed-service-for-apache-kafka/docs)
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +27,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,103 +43,49 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Managed Service for Apache Kafka API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/managedkafka-schemaregistry
 ```
 
-
-### Using the client library
-
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The schema whose schema versions are to be listed. Structured
- *  like:
- *  `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/schemas/ids/{schema}`
- *  or
- *  `projects/{project}/locations/{location}/schemaRegistries/{schema_registry}/contexts/{context}/schemas/ids/{schema}`
- */
-// const parent = 'abc123'
-/**
- *  Optional. The subject to filter the subjects by.
- */
-// const subject = 'abc123'
-/**
- *  Optional. If true, the response will include soft-deleted versions of the
- *  schema, even if the subject is soft-deleted. The default is false.
- */
-// const deleted = true
-
-// Imports the Schemaregistry library
-const {ManagedSchemaRegistryClient} = require('@google-cloud/managedkafka-schemaregistry').v1;
-
-// Instantiates a client
-const schemaregistryClient = new ManagedSchemaRegistryClient();
-
-async function callListSchemaVersions() {
-  // Construct request
-  const request = {
-    parent,
-  };
-
-  // Run request
-  const response = await schemaregistryClient.listSchemaVersions(request);
-  console.log(response);
-}
-
-callListSchemaVersions();
-
-```
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-managedkafka-schemaregistry/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Managed_schema_registry.check_compatibility | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.check_compatibility.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.check_compatibility.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.create_schema_registry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.create_schema_registry.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.create_schema_registry.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.create_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.create_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.create_version.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.delete_schema_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_schema_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_schema_config.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.delete_schema_mode | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_schema_mode.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_schema_mode.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.delete_schema_registry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_schema_registry.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_schema_registry.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.delete_subject | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_subject.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_subject.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.delete_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_version.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.get_context | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_context.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_context.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.get_raw_schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_raw_schema.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_raw_schema.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.get_raw_schema_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_raw_schema_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_raw_schema_version.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.get_schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.get_schema_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema_config.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.get_schema_mode | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema_mode.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema_mode.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.get_schema_registry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema_registry.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema_registry.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.get_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_version.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.list_contexts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_contexts.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_contexts.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.list_referenced_schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_referenced_schemas.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_referenced_schemas.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.list_schema_registries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_schema_registries.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_schema_registries.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.list_schema_types | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_schema_types.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_schema_types.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.list_schema_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_schema_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_schema_versions.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.list_subjects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_subjects.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_subjects.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.list_subjects_by_schema_id | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_subjects_by_schema_id.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_subjects_by_schema_id.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.list_versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_versions.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_versions.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.lookup_version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.lookup_version.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.lookup_version.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.update_schema_config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.update_schema_config.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.update_schema_config.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Managed_schema_registry.update_schema_mode | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.update_schema_mode.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.update_schema_mode.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-managedkafka-schemaregistry/samples/quickstart.js,packages/google-cloud-managedkafka-schemaregistry/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| check compatibility | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.check_compatibility.js) |
+| create schema registry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.create_schema_registry.js) |
+| create version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.create_version.js) |
+| delete schema config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_schema_config.js) |
+| delete schema mode | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_schema_mode.js) |
+| delete schema registry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_schema_registry.js) |
+| delete subject | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_subject.js) |
+| delete version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.delete_version.js) |
+| get context | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_context.js) |
+| get raw schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_raw_schema.js) |
+| get raw schema version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_raw_schema_version.js) |
+| get schema | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema.js) |
+| get schema config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema_config.js) |
+| get schema mode | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema_mode.js) |
+| get schema registry | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_schema_registry.js) |
+| get version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.get_version.js) |
+| list contexts | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_contexts.js) |
+| list referenced schemas | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_referenced_schemas.js) |
+| list schema registries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_schema_registries.js) |
+| list schema types | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_schema_types.js) |
+| list schema versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_schema_versions.js) |
+| list subjects | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_subjects.js) |
+| list subjects by schema id | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_subjects_by_schema_id.js) |
+| list versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.list_versions.js) |
+| lookup version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.lookup_version.js) |
+| update schema config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.update_schema_config.js) |
+| update schema mode | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/managed_schema_registry.update_schema_mode.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples/generated/v1/snippet_metadata_google.cloud.managedkafka.schemaregistry.v1.json) |
 
-
-
-The [Managed Service for Apache Kafka API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -169,44 +112,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-
-
-
-
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/managedkafka/latest
-[product-docs]: https://cloud.google.com/managed-service-for-apache-kafka/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=managedkafka.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-managedkafka-schemaregistry

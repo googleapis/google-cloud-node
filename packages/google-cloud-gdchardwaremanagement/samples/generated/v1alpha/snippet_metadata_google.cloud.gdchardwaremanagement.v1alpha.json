@@ -1,1795 +1,1795 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-gdchardwaremanagement",
-        "version": "0.9.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.gdchardwaremanagement.v1alpha",
-                "version": "v1alpha"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListOrders_async",
-            "title": "GDCHardwareManagement listOrders Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists orders in a given project and location.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.list_orders.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListOrders",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListOrders",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListOrdersResponse",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "ListOrders",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListOrders",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetOrder_async",
-            "title": "GDCHardwareManagement getOrder Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of an order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.get_order.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetOrder",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetOrder",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Order",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "GetOrder",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetOrder",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateOrder_async",
-            "title": "GDCHardwareManagement createOrder Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new order in a given project and location.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.create_order.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateOrder",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateOrder",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.Order"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "CreateOrder",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateOrder",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateOrder_async",
-            "title": "GDCHardwareManagement updateOrder Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of an order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.update_order.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateOrder",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateOrder",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "order",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.Order"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "UpdateOrder",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateOrder",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteOrder_async",
-            "title": "GDCHardwareManagement deleteOrder Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.delete_order.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteOrder",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteOrder",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "DeleteOrder",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteOrder",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SubmitOrder_async",
-            "title": "GDCHardwareManagement submitOrder Sample",
-            "origin": "API_DEFINITION",
-            "description": " Submits an order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.submit_order.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SubmitOrder",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SubmitOrder",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "type",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "SubmitOrder",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SubmitOrder",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CancelOrder_async",
-            "title": "GDCHardwareManagement cancelOrder Sample",
-            "origin": "API_DEFINITION",
-            "description": " Cancels an order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.cancel_order.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CancelOrder",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CancelOrder",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "CancelOrder",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CancelOrder",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSites_async",
-            "title": "GDCHardwareManagement listSites Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists sites in a given project and location.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.list_sites.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSites",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSites",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListSitesResponse",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "ListSites",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSites",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSite_async",
-            "title": "GDCHardwareManagement getSite Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a site.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.get_site.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSite",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSite",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Site",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "GetSite",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSite",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateSite_async",
-            "title": "GDCHardwareManagement createSite Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new site in a given project and location.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.create_site.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateSite",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateSite",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "site_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "site",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.Site"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "CreateSite",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateSite",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateSite_async",
-            "title": "GDCHardwareManagement updateSite Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a site.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.update_site.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSite",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateSite",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "site",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.Site"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "UpdateSite",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateSite",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async",
-            "title": "GDCHardwareManagement deleteSite Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a site.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.delete_site.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSite",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "DeleteSite",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardwareGroups_async",
-            "title": "GDCHardwareManagement listHardwareGroups Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists hardware groups in a given order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.list_hardware_groups.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListHardwareGroups",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardwareGroups",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsResponse",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "ListHardwareGroups",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardwareGroups",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardwareGroup_async",
-            "title": "GDCHardwareManagement getHardwareGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a hardware group.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.get_hardware_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetHardwareGroup",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardwareGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "GetHardwareGroup",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardwareGroup",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardwareGroup_async",
-            "title": "GDCHardwareManagement createHardwareGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new hardware group in a given order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.create_hardware_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateHardwareGroup",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardwareGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "hardware_group_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "hardware_group",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "CreateHardwareGroup",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardwareGroup",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardwareGroup_async",
-            "title": "GDCHardwareManagement updateHardwareGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a hardware group.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.update_hardware_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateHardwareGroup",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardwareGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "hardware_group",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "UpdateHardwareGroup",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardwareGroup",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardwareGroup_async",
-            "title": "GDCHardwareManagement deleteHardwareGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a hardware group.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.delete_hardware_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteHardwareGroup",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardwareGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "DeleteHardwareGroup",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardwareGroup",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardware_async",
-            "title": "GDCHardwareManagement listHardware Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists hardware in a given project and location.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.list_hardware.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListHardware",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardware",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListHardwareResponse",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "ListHardware",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardware",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardware_async",
-            "title": "GDCHardwareManagement getHardware Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets hardware details.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.get_hardware.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetHardware",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardware",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Hardware",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "GetHardware",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardware",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardware_async",
-            "title": "GDCHardwareManagement createHardware Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates new hardware in a given project and location.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.create_hardware.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateHardware",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardware",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "hardware_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "hardware",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.Hardware"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "CreateHardware",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardware",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardware_async",
-            "title": "GDCHardwareManagement updateHardware Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates hardware parameters.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.update_hardware.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateHardware",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardware",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "hardware",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.Hardware"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "UpdateHardware",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardware",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardware_async",
-            "title": "GDCHardwareManagement deleteHardware Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes hardware.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.delete_hardware.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteHardware",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardware",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "DeleteHardware",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardware",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListComments_async",
-            "title": "GDCHardwareManagement listComments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the comments on an order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.list_comments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListComments",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListComments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListCommentsResponse",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "ListComments",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListComments",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetComment_async",
-            "title": "GDCHardwareManagement getComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the content of a comment.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.get_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetComment",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Comment",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "GetComment",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetComment",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateComment_async",
-            "title": "GDCHardwareManagement createComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new comment on an order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.create_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateComment",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "comment_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "comment",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.Comment"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "CreateComment",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateComment",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_async",
-            "title": "GDCHardwareManagement recordActionOnComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Record Action on a Comment. If the Action specified in the request is READ, the viewed time in the comment is set to the time the request was received. If the comment is already marked as read, subsequent calls will be ignored. If the Action is UNREAD, the viewed time is cleared from the comment.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.record_action_on_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RecordActionOnComment",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "action_type",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Comment",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "RecordActionOnComment",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnComment",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListChangeLogEntries_async",
-            "title": "GDCHardwareManagement listChangeLogEntries Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the changes made to an order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.list_change_log_entries.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListChangeLogEntries",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListChangeLogEntries",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesResponse",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "ListChangeLogEntries",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListChangeLogEntries",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetChangeLogEntry_async",
-            "title": "GDCHardwareManagement getChangeLogEntry Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a change to an order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.get_change_log_entry.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetChangeLogEntry",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetChangeLogEntry",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "GetChangeLogEntry",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetChangeLogEntry",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSkus_async",
-            "title": "GDCHardwareManagement listSkus Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists SKUs for a given project and location.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.list_skus.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSkus",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSkus",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListSkusResponse",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "ListSkus",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSkus",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSku_async",
-            "title": "GDCHardwareManagement getSku Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of an SKU.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.get_sku.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSku",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSku",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Sku",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "GetSku",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSku",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListZones_async",
-            "title": "GDCHardwareManagement listZones Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists zones in a given project and location.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.list_zones.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListZones",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListZones",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListZonesResponse",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "ListZones",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListZones",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetZone_async",
-            "title": "GDCHardwareManagement getZone Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a zone.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.get_zone.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetZone",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetZone",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Zone",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "GetZone",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetZone",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateZone_async",
-            "title": "GDCHardwareManagement createZone Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new zone in a given project and location.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.create_zone.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateZone",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateZone",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.Zone"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "CreateZone",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateZone",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateZone_async",
-            "title": "GDCHardwareManagement updateZone Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a zone.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.update_zone.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateZone",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateZone",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "zone",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.Zone"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "UpdateZone",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateZone",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteZone_async",
-            "title": "GDCHardwareManagement deleteZone Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a zone.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.delete_zone.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteZone",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteZone",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "DeleteZone",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteZone",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SignalZoneState_async",
-            "title": "GDCHardwareManagement signalZoneState Sample",
-            "origin": "API_DEFINITION",
-            "description": " Signals the state of a zone.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.signal_zone_state.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 54,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SignalZoneState",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SignalZoneState",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "state_signal",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal"
-                    },
-                    {
-                        "name": "provisioning_state_signal",
-                        "type": ".google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal"
-                    },
-                    {
-                        "name": "step",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "details",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "SignalZoneState",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SignalZoneState",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RequestOrderDateChange_async",
-            "title": "GDCHardwareManagement requestOrderDateChange Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the requested date change of a single Order.",
-            "canonical": true,
-            "file": "g_d_c_hardware_management.request_order_date_change.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RequestOrderDateChange",
-                "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RequestOrderDateChange",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "requested_date",
-                        "type": ".google.type.Date"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "GDCHardwareManagementClient",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
-                },
-                "method": {
-                    "shortName": "RequestOrderDateChange",
-                    "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RequestOrderDateChange",
-                    "service": {
-                        "shortName": "GDCHardwareManagement",
-                        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-gdchardwaremanagement",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.gdchardwaremanagement.v1alpha",
+        "version": "v1alpha"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListOrders_async",
+      "title": "GDCHardwareManagement listOrders Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists orders in a given project and location.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.list_orders.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListOrders",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListOrders",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListOrdersResponse",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "ListOrders",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListOrders",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetOrder_async",
+      "title": "GDCHardwareManagement getOrder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of an order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.get_order.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetOrder",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetOrder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Order",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "GetOrder",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetOrder",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateOrder_async",
+      "title": "GDCHardwareManagement createOrder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new order in a given project and location.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.create_order.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateOrder",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateOrder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.Order"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "CreateOrder",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateOrder",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateOrder_async",
+      "title": "GDCHardwareManagement updateOrder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of an order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.update_order.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateOrder",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateOrder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "order",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.Order"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "UpdateOrder",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateOrder",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteOrder_async",
+      "title": "GDCHardwareManagement deleteOrder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.delete_order.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteOrder",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteOrder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "DeleteOrder",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteOrder",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SubmitOrder_async",
+      "title": "GDCHardwareManagement submitOrder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Submits an order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.submit_order.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SubmitOrder",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SubmitOrder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "type",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.SubmitOrderRequest.Type"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "SubmitOrder",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SubmitOrder",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CancelOrder_async",
+      "title": "GDCHardwareManagement cancelOrder Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancels an order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.cancel_order.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelOrder",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CancelOrder",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "CancelOrder",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CancelOrder",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSites_async",
+      "title": "GDCHardwareManagement listSites Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists sites in a given project and location.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.list_sites.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSites",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSites",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListSitesResponse",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "ListSites",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSites",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSite_async",
+      "title": "GDCHardwareManagement getSite Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a site.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.get_site.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSite",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSite",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Site",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "GetSite",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSite",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateSite_async",
+      "title": "GDCHardwareManagement createSite Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new site in a given project and location.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.create_site.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSite",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateSite",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "site_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "site",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.Site"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "CreateSite",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateSite",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateSite_async",
+      "title": "GDCHardwareManagement updateSite Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a site.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.update_site.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSite",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateSite",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "site",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.Site"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "UpdateSite",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateSite",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteSite_async",
+      "title": "GDCHardwareManagement deleteSite Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a site.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.delete_site.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSite",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "DeleteSite",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteSite",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardwareGroups_async",
+      "title": "GDCHardwareManagement listHardwareGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists hardware groups in a given order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.list_hardware_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListHardwareGroups",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardwareGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListHardwareGroupsResponse",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "ListHardwareGroups",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardwareGroups",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardwareGroup_async",
+      "title": "GDCHardwareManagement getHardwareGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a hardware group.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.get_hardware_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetHardwareGroup",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardwareGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "GetHardwareGroup",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardwareGroup",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardwareGroup_async",
+      "title": "GDCHardwareManagement createHardwareGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new hardware group in a given order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.create_hardware_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateHardwareGroup",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardwareGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "hardware_group_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "hardware_group",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "CreateHardwareGroup",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardwareGroup",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardwareGroup_async",
+      "title": "GDCHardwareManagement updateHardwareGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a hardware group.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.update_hardware_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateHardwareGroup",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardwareGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "hardware_group",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.HardwareGroup"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "UpdateHardwareGroup",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardwareGroup",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardwareGroup_async",
+      "title": "GDCHardwareManagement deleteHardwareGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a hardware group.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.delete_hardware_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteHardwareGroup",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardwareGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "DeleteHardwareGroup",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardwareGroup",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListHardware_async",
+      "title": "GDCHardwareManagement listHardware Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists hardware in a given project and location.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.list_hardware.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListHardware",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardware",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListHardwareResponse",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "ListHardware",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListHardware",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetHardware_async",
+      "title": "GDCHardwareManagement getHardware Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets hardware details.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.get_hardware.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetHardware",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardware",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Hardware",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "GetHardware",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetHardware",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateHardware_async",
+      "title": "GDCHardwareManagement createHardware Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates new hardware in a given project and location.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.create_hardware.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateHardware",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardware",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "hardware_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "hardware",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.Hardware"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "CreateHardware",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateHardware",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateHardware_async",
+      "title": "GDCHardwareManagement updateHardware Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates hardware parameters.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.update_hardware.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateHardware",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardware",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "hardware",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.Hardware"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "UpdateHardware",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateHardware",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteHardware_async",
+      "title": "GDCHardwareManagement deleteHardware Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes hardware.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.delete_hardware.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteHardware",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardware",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "DeleteHardware",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteHardware",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListComments_async",
+      "title": "GDCHardwareManagement listComments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the comments on an order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.list_comments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListComments",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListComments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListCommentsResponse",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "ListComments",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListComments",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetComment_async",
+      "title": "GDCHardwareManagement getComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the content of a comment.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.get_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetComment",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Comment",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "GetComment",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetComment",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateComment_async",
+      "title": "GDCHardwareManagement createComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new comment on an order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.create_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateComment",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "comment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "comment",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.Comment"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "CreateComment",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateComment",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RecordActionOnComment_async",
+      "title": "GDCHardwareManagement recordActionOnComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Record Action on a Comment. If the Action specified in the request is READ, the viewed time in the comment is set to the time the request was received. If the comment is already marked as read, subsequent calls will be ignored. If the Action is UNREAD, the viewed time is cleared from the comment.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.record_action_on_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RecordActionOnComment",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "action_type",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.RecordActionOnCommentRequest.ActionType"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Comment",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "RecordActionOnComment",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RecordActionOnComment",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListChangeLogEntries_async",
+      "title": "GDCHardwareManagement listChangeLogEntries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the changes made to an order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.list_change_log_entries.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListChangeLogEntries",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListChangeLogEntries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListChangeLogEntriesResponse",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "ListChangeLogEntries",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListChangeLogEntries",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetChangeLogEntry_async",
+      "title": "GDCHardwareManagement getChangeLogEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a change to an order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.get_change_log_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetChangeLogEntry",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetChangeLogEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ChangeLogEntry",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "GetChangeLogEntry",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetChangeLogEntry",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListSkus_async",
+      "title": "GDCHardwareManagement listSkus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists SKUs for a given project and location.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.list_skus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSkus",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSkus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListSkusResponse",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "ListSkus",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListSkus",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetSku_async",
+      "title": "GDCHardwareManagement getSku Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of an SKU.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.get_sku.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSku",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSku",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Sku",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "GetSku",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetSku",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_ListZones_async",
+      "title": "GDCHardwareManagement listZones Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists zones in a given project and location.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.list_zones.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListZones",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListZones",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.ListZonesResponse",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "ListZones",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.ListZones",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_GetZone_async",
+      "title": "GDCHardwareManagement getZone Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a zone.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.get_zone.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetZone",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetZone",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.gdchardwaremanagement.v1alpha.Zone",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "GetZone",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.GetZone",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_CreateZone_async",
+      "title": "GDCHardwareManagement createZone Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new zone in a given project and location.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.create_zone.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateZone",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateZone",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.Zone"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "CreateZone",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.CreateZone",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_UpdateZone_async",
+      "title": "GDCHardwareManagement updateZone Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a zone.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.update_zone.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateZone",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateZone",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "zone",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.Zone"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "UpdateZone",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.UpdateZone",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_DeleteZone_async",
+      "title": "GDCHardwareManagement deleteZone Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a zone.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.delete_zone.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteZone",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteZone",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "DeleteZone",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.DeleteZone",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_SignalZoneState_async",
+      "title": "GDCHardwareManagement signalZoneState Sample",
+      "origin": "API_DEFINITION",
+      "description": " Signals the state of a zone.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.signal_zone_state.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 54,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SignalZoneState",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SignalZoneState",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "state_signal",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.StateSignal"
+          },
+          {
+            "name": "provisioning_state_signal",
+            "type": ".google.cloud.gdchardwaremanagement.v1alpha.SignalZoneStateRequest.ProvisioningStateSignal"
+          },
+          {
+            "name": "step",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "details",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "SignalZoneState",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.SignalZoneState",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "gdchardwaremanagement_v1alpha_generated_GDCHardwareManagement_RequestOrderDateChange_async",
+      "title": "GDCHardwareManagement requestOrderDateChange Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the requested date change of a single Order.",
+      "canonical": true,
+      "file": "g_d_c_hardware_management.request_order_date_change.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RequestOrderDateChange",
+        "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RequestOrderDateChange",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requested_date",
+            "type": ".google.type.Date"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "GDCHardwareManagementClient",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagementClient"
+        },
+        "method": {
+          "shortName": "RequestOrderDateChange",
+          "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement.RequestOrderDateChange",
+          "service": {
+            "shortName": "GDCHardwareManagement",
+            "fullName": "google.cloud.gdchardwaremanagement.v1alpha.GDCHardwareManagement"
+          }
+        }
+      }
+    }
+  ]
 }

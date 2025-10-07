@@ -1,715 +1,715 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-meet",
-        "version": "0.7.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.apps.meet.v2",
-                "version": "v2"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_GetConferenceRecord_async",
-            "title": "ConferenceRecordsService getConferenceRecord Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a conference record by conference ID.",
-            "canonical": true,
-            "file": "conference_records_service.get_conference_record.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConferenceRecord",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetConferenceRecord",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.ConferenceRecord",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetConferenceRecord",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetConferenceRecord",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_ListConferenceRecords_async",
-            "title": "ConferenceRecordsService listConferenceRecords Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the conference records. By default, ordered by start time and in descending order.",
-            "canonical": true,
-            "file": "conference_records_service.list_conference_records.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConferenceRecords",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListConferenceRecords",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.ListConferenceRecordsResponse",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListConferenceRecords",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListConferenceRecords",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_GetParticipant_async",
-            "title": "ConferenceRecordsService getParticipant Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a participant by participant ID.",
-            "canonical": true,
-            "file": "conference_records_service.get_participant.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetParticipant",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetParticipant",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.Participant",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetParticipant",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetParticipant",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_ListParticipants_async",
-            "title": "ConferenceRecordsService listParticipants Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the participants in a conference record. By default, ordered by join time and in descending order. This API supports `fields` as standard parameters like every other API. However, when the `fields` request parameter is omitted, this API defaults to `'participants/*, next_page_token'`.",
-            "canonical": true,
-            "file": "conference_records_service.list_participants.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListParticipants",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListParticipants",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.ListParticipantsResponse",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListParticipants",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListParticipants",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_GetParticipantSession_async",
-            "title": "ConferenceRecordsService getParticipantSession Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a participant session by participant session ID.",
-            "canonical": true,
-            "file": "conference_records_service.get_participant_session.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetParticipantSession",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetParticipantSession",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.ParticipantSession",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetParticipantSession",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetParticipantSession",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_ListParticipantSessions_async",
-            "title": "ConferenceRecordsService listParticipantSessions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the participant sessions of a participant in a conference record. By default, ordered by join time and in descending order. This API supports `fields` as standard parameters like every other API. However, when the `fields` request parameter is omitted this API defaults to `'participantsessions/*, next_page_token'`.",
-            "canonical": true,
-            "file": "conference_records_service.list_participant_sessions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListParticipantSessions",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListParticipantSessions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.ListParticipantSessionsResponse",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListParticipantSessions",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListParticipantSessions",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_GetRecording_async",
-            "title": "ConferenceRecordsService getRecording Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a recording by recording ID.",
-            "canonical": true,
-            "file": "conference_records_service.get_recording.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetRecording",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetRecording",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.Recording",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetRecording",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetRecording",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_ListRecordings_async",
-            "title": "ConferenceRecordsService listRecordings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the recording resources from the conference record. By default, ordered by start time and in ascending order.",
-            "canonical": true,
-            "file": "conference_records_service.list_recordings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListRecordings",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListRecordings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.ListRecordingsResponse",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListRecordings",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListRecordings",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_GetTranscript_async",
-            "title": "ConferenceRecordsService getTranscript Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a transcript by transcript ID.",
-            "canonical": true,
-            "file": "conference_records_service.get_transcript.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetTranscript",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetTranscript",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.Transcript",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetTranscript",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetTranscript",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_ListTranscripts_async",
-            "title": "ConferenceRecordsService listTranscripts Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the set of transcripts from the conference record. By default, ordered by start time and in ascending order.",
-            "canonical": true,
-            "file": "conference_records_service.list_transcripts.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListTranscripts",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListTranscripts",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.ListTranscriptsResponse",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListTranscripts",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListTranscripts",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_GetTranscriptEntry_async",
-            "title": "ConferenceRecordsService getTranscriptEntry Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a `TranscriptEntry` resource by entry ID. Note: The transcript entries returned by the Google Meet API might not match the transcription found in the Google Docs transcript file. This can occur when the Google Docs transcript file is modified after generation.",
-            "canonical": true,
-            "file": "conference_records_service.get_transcript_entry.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetTranscriptEntry",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetTranscriptEntry",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.TranscriptEntry",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetTranscriptEntry",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetTranscriptEntry",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_ConferenceRecordsService_ListTranscriptEntries_async",
-            "title": "ConferenceRecordsService listTranscriptEntries Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the structured transcript entries per transcript. By default, ordered by start time and in ascending order. Note: The transcript entries returned by the Google Meet API might not match the transcription found in the Google Docs transcript file. This can occur when the Google Docs transcript file is modified after generation.",
-            "canonical": true,
-            "file": "conference_records_service.list_transcript_entries.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListTranscriptEntries",
-                "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListTranscriptEntries",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.ListTranscriptEntriesResponse",
-                "client": {
-                    "shortName": "ConferenceRecordsServiceClient",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListTranscriptEntries",
-                    "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListTranscriptEntries",
-                    "service": {
-                        "shortName": "ConferenceRecordsService",
-                        "fullName": "google.apps.meet.v2.ConferenceRecordsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_SpacesService_CreateSpace_async",
-            "title": "ConferenceRecordsService createSpace Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a space.",
-            "canonical": true,
-            "file": "spaces_service.create_space.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateSpace",
-                "fullName": "google.apps.meet.v2.SpacesService.CreateSpace",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "space",
-                        "type": ".google.apps.meet.v2.Space"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.Space",
-                "client": {
-                    "shortName": "SpacesServiceClient",
-                    "fullName": "google.apps.meet.v2.SpacesServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateSpace",
-                    "fullName": "google.apps.meet.v2.SpacesService.CreateSpace",
-                    "service": {
-                        "shortName": "SpacesService",
-                        "fullName": "google.apps.meet.v2.SpacesService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_SpacesService_GetSpace_async",
-            "title": "ConferenceRecordsService getSpace Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details about a meeting space. For an example, see [Get a meeting space](https://developers.google.com/meet/api/guides/meeting-spaces#get-meeting-space).",
-            "canonical": true,
-            "file": "spaces_service.get_space.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSpace",
-                "fullName": "google.apps.meet.v2.SpacesService.GetSpace",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.Space",
-                "client": {
-                    "shortName": "SpacesServiceClient",
-                    "fullName": "google.apps.meet.v2.SpacesServiceClient"
-                },
-                "method": {
-                    "shortName": "GetSpace",
-                    "fullName": "google.apps.meet.v2.SpacesService.GetSpace",
-                    "service": {
-                        "shortName": "SpacesService",
-                        "fullName": "google.apps.meet.v2.SpacesService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_SpacesService_UpdateSpace_async",
-            "title": "ConferenceRecordsService updateSpace Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates details about a meeting space. For an example, see [Update a meeting space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).",
-            "canonical": true,
-            "file": "spaces_service.update_space.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSpace",
-                "fullName": "google.apps.meet.v2.SpacesService.UpdateSpace",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "space",
-                        "type": ".google.apps.meet.v2.Space"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.apps.meet.v2.Space",
-                "client": {
-                    "shortName": "SpacesServiceClient",
-                    "fullName": "google.apps.meet.v2.SpacesServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateSpace",
-                    "fullName": "google.apps.meet.v2.SpacesService.UpdateSpace",
-                    "service": {
-                        "shortName": "SpacesService",
-                        "fullName": "google.apps.meet.v2.SpacesService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "meet_v2_generated_SpacesService_EndActiveConference_async",
-            "title": "ConferenceRecordsService endActiveConference Sample",
-            "origin": "API_DEFINITION",
-            "description": " Ends an active conference (if there's one). For an example, see [End active conference](https://developers.google.com/meet/api/guides/meeting-spaces#end-active-conference).",
-            "canonical": true,
-            "file": "spaces_service.end_active_conference.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "EndActiveConference",
-                "fullName": "google.apps.meet.v2.SpacesService.EndActiveConference",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "SpacesServiceClient",
-                    "fullName": "google.apps.meet.v2.SpacesServiceClient"
-                },
-                "method": {
-                    "shortName": "EndActiveConference",
-                    "fullName": "google.apps.meet.v2.SpacesService.EndActiveConference",
-                    "service": {
-                        "shortName": "SpacesService",
-                        "fullName": "google.apps.meet.v2.SpacesService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-meet",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.apps.meet.v2",
+        "version": "v2"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_GetConferenceRecord_async",
+      "title": "ConferenceRecordsService getConferenceRecord Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a conference record by conference ID.",
+      "canonical": true,
+      "file": "conference_records_service.get_conference_record.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConferenceRecord",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetConferenceRecord",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.ConferenceRecord",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "GetConferenceRecord",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetConferenceRecord",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_ListConferenceRecords_async",
+      "title": "ConferenceRecordsService listConferenceRecords Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the conference records. By default, ordered by start time and in descending order.",
+      "canonical": true,
+      "file": "conference_records_service.list_conference_records.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConferenceRecords",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListConferenceRecords",
+        "async": true,
+        "parameters": [
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.ListConferenceRecordsResponse",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "ListConferenceRecords",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListConferenceRecords",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_GetParticipant_async",
+      "title": "ConferenceRecordsService getParticipant Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a participant by participant ID.",
+      "canonical": true,
+      "file": "conference_records_service.get_participant.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetParticipant",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetParticipant",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.Participant",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "GetParticipant",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetParticipant",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_ListParticipants_async",
+      "title": "ConferenceRecordsService listParticipants Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the participants in a conference record. By default, ordered by join time and in descending order. This API supports `fields` as standard parameters like every other API. However, when the `fields` request parameter is omitted, this API defaults to `'participants/*, next_page_token'`.",
+      "canonical": true,
+      "file": "conference_records_service.list_participants.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListParticipants",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListParticipants",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.ListParticipantsResponse",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "ListParticipants",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListParticipants",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_GetParticipantSession_async",
+      "title": "ConferenceRecordsService getParticipantSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a participant session by participant session ID.",
+      "canonical": true,
+      "file": "conference_records_service.get_participant_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetParticipantSession",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetParticipantSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.ParticipantSession",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "GetParticipantSession",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetParticipantSession",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_ListParticipantSessions_async",
+      "title": "ConferenceRecordsService listParticipantSessions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the participant sessions of a participant in a conference record. By default, ordered by join time and in descending order. This API supports `fields` as standard parameters like every other API. However, when the `fields` request parameter is omitted this API defaults to `'participantsessions/*, next_page_token'`.",
+      "canonical": true,
+      "file": "conference_records_service.list_participant_sessions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListParticipantSessions",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListParticipantSessions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.ListParticipantSessionsResponse",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "ListParticipantSessions",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListParticipantSessions",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_GetRecording_async",
+      "title": "ConferenceRecordsService getRecording Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a recording by recording ID.",
+      "canonical": true,
+      "file": "conference_records_service.get_recording.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRecording",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetRecording",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.Recording",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "GetRecording",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetRecording",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_ListRecordings_async",
+      "title": "ConferenceRecordsService listRecordings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the recording resources from the conference record. By default, ordered by start time and in ascending order.",
+      "canonical": true,
+      "file": "conference_records_service.list_recordings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRecordings",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListRecordings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.ListRecordingsResponse",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "ListRecordings",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListRecordings",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_GetTranscript_async",
+      "title": "ConferenceRecordsService getTranscript Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a transcript by transcript ID.",
+      "canonical": true,
+      "file": "conference_records_service.get_transcript.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTranscript",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetTranscript",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.Transcript",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "GetTranscript",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetTranscript",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_ListTranscripts_async",
+      "title": "ConferenceRecordsService listTranscripts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the set of transcripts from the conference record. By default, ordered by start time and in ascending order.",
+      "canonical": true,
+      "file": "conference_records_service.list_transcripts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTranscripts",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListTranscripts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.ListTranscriptsResponse",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "ListTranscripts",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListTranscripts",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_GetTranscriptEntry_async",
+      "title": "ConferenceRecordsService getTranscriptEntry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a `TranscriptEntry` resource by entry ID. Note: The transcript entries returned by the Google Meet API might not match the transcription found in the Google Docs transcript file. This can occur when the Google Docs transcript file is modified after generation.",
+      "canonical": true,
+      "file": "conference_records_service.get_transcript_entry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTranscriptEntry",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetTranscriptEntry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.TranscriptEntry",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "GetTranscriptEntry",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.GetTranscriptEntry",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_ConferenceRecordsService_ListTranscriptEntries_async",
+      "title": "ConferenceRecordsService listTranscriptEntries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the structured transcript entries per transcript. By default, ordered by start time and in ascending order. Note: The transcript entries returned by the Google Meet API might not match the transcription found in the Google Docs transcript file. This can occur when the Google Docs transcript file is modified after generation.",
+      "canonical": true,
+      "file": "conference_records_service.list_transcript_entries.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTranscriptEntries",
+        "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListTranscriptEntries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.ListTranscriptEntriesResponse",
+        "client": {
+          "shortName": "ConferenceRecordsServiceClient",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsServiceClient"
+        },
+        "method": {
+          "shortName": "ListTranscriptEntries",
+          "fullName": "google.apps.meet.v2.ConferenceRecordsService.ListTranscriptEntries",
+          "service": {
+            "shortName": "ConferenceRecordsService",
+            "fullName": "google.apps.meet.v2.ConferenceRecordsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_SpacesService_CreateSpace_async",
+      "title": "ConferenceRecordsService createSpace Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a space.",
+      "canonical": true,
+      "file": "spaces_service.create_space.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSpace",
+        "fullName": "google.apps.meet.v2.SpacesService.CreateSpace",
+        "async": true,
+        "parameters": [
+          {
+            "name": "space",
+            "type": ".google.apps.meet.v2.Space"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.Space",
+        "client": {
+          "shortName": "SpacesServiceClient",
+          "fullName": "google.apps.meet.v2.SpacesServiceClient"
+        },
+        "method": {
+          "shortName": "CreateSpace",
+          "fullName": "google.apps.meet.v2.SpacesService.CreateSpace",
+          "service": {
+            "shortName": "SpacesService",
+            "fullName": "google.apps.meet.v2.SpacesService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_SpacesService_GetSpace_async",
+      "title": "ConferenceRecordsService getSpace Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details about a meeting space. For an example, see [Get a meeting space](https://developers.google.com/meet/api/guides/meeting-spaces#get-meeting-space).",
+      "canonical": true,
+      "file": "spaces_service.get_space.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSpace",
+        "fullName": "google.apps.meet.v2.SpacesService.GetSpace",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.Space",
+        "client": {
+          "shortName": "SpacesServiceClient",
+          "fullName": "google.apps.meet.v2.SpacesServiceClient"
+        },
+        "method": {
+          "shortName": "GetSpace",
+          "fullName": "google.apps.meet.v2.SpacesService.GetSpace",
+          "service": {
+            "shortName": "SpacesService",
+            "fullName": "google.apps.meet.v2.SpacesService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_SpacesService_UpdateSpace_async",
+      "title": "ConferenceRecordsService updateSpace Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates details about a meeting space. For an example, see [Update a meeting space](https://developers.google.com/meet/api/guides/meeting-spaces#update-meeting-space).",
+      "canonical": true,
+      "file": "spaces_service.update_space.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSpace",
+        "fullName": "google.apps.meet.v2.SpacesService.UpdateSpace",
+        "async": true,
+        "parameters": [
+          {
+            "name": "space",
+            "type": ".google.apps.meet.v2.Space"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.apps.meet.v2.Space",
+        "client": {
+          "shortName": "SpacesServiceClient",
+          "fullName": "google.apps.meet.v2.SpacesServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateSpace",
+          "fullName": "google.apps.meet.v2.SpacesService.UpdateSpace",
+          "service": {
+            "shortName": "SpacesService",
+            "fullName": "google.apps.meet.v2.SpacesService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "meet_v2_generated_SpacesService_EndActiveConference_async",
+      "title": "ConferenceRecordsService endActiveConference Sample",
+      "origin": "API_DEFINITION",
+      "description": " Ends an active conference (if there's one). For an example, see [End active conference](https://developers.google.com/meet/api/guides/meeting-spaces#end-active-conference).",
+      "canonical": true,
+      "file": "spaces_service.end_active_conference.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EndActiveConference",
+        "fullName": "google.apps.meet.v2.SpacesService.EndActiveConference",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "SpacesServiceClient",
+          "fullName": "google.apps.meet.v2.SpacesServiceClient"
+        },
+        "method": {
+          "shortName": "EndActiveConference",
+          "fullName": "google.apps.meet.v2.SpacesService.EndActiveConference",
+          "service": {
+            "shortName": "SpacesService",
+            "fullName": "google.apps.meet.v2.SpacesService"
+          }
+        }
+      }
+    }
+  ]
 }

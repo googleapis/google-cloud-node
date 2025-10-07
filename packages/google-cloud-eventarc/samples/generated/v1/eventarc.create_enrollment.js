@@ -38,7 +38,7 @@ function main(parent, enrollment, enrollmentId) {
   // const enrollment = {}
   /**
    *  Required. The user-provided ID to be assigned to the Enrollment. It should
-   *  match the format (^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$).
+   *  match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
    */
   // const enrollmentId = 'abc123'
   /**

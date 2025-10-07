@@ -1,1915 +1,1915 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-eventarc",
-        "version": "4.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.eventarc.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_GetTrigger_async",
-            "title": "Eventarc getTrigger Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a single trigger.",
-            "canonical": true,
-            "file": "eventarc.get_trigger.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetTrigger",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.GetTrigger",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.Trigger",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "GetTrigger",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetTrigger",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_ListTriggers_async",
-            "title": "Eventarc listTriggers Sample",
-            "origin": "API_DEFINITION",
-            "description": " List triggers.",
-            "canonical": true,
-            "file": "eventarc.list_triggers.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListTriggers",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.ListTriggers",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ListTriggersResponse",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "ListTriggers",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.ListTriggers",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_CreateTrigger_async",
-            "title": "Eventarc createTrigger Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new trigger in a particular project and location.",
-            "canonical": true,
-            "file": "eventarc.create_trigger.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateTrigger",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.CreateTrigger",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "trigger",
-                        "type": ".google.cloud.eventarc.v1.Trigger"
-                    },
-                    {
-                        "name": "trigger_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "CreateTrigger",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.CreateTrigger",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_UpdateTrigger_async",
-            "title": "Eventarc updateTrigger Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update a single trigger.",
-            "canonical": true,
-            "file": "eventarc.update_trigger.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateTrigger",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateTrigger",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "trigger",
-                        "type": ".google.cloud.eventarc.v1.Trigger"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "UpdateTrigger",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateTrigger",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_DeleteTrigger_async",
-            "title": "Eventarc deleteTrigger Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a single trigger.",
-            "canonical": true,
-            "file": "eventarc.delete_trigger.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteTrigger",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteTrigger",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "DeleteTrigger",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteTrigger",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_GetChannel_async",
-            "title": "Eventarc getChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a single Channel.",
-            "canonical": true,
-            "file": "eventarc.get_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetChannel",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.GetChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.Channel",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "GetChannel",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetChannel",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_ListChannels_async",
-            "title": "Eventarc listChannels Sample",
-            "origin": "API_DEFINITION",
-            "description": " List channels.",
-            "canonical": true,
-            "file": "eventarc.list_channels.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListChannels",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.ListChannels",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ListChannelsResponse",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "ListChannels",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.ListChannels",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_CreateChannel_async",
-            "title": "Eventarc createChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new channel in a particular project and location.",
-            "canonical": true,
-            "file": "eventarc.create_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateChannel",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.CreateChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "channel",
-                        "type": ".google.cloud.eventarc.v1.Channel"
-                    },
-                    {
-                        "name": "channel_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "CreateChannel",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.CreateChannel",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_UpdateChannel_async",
-            "title": "Eventarc updateChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update a single channel.",
-            "canonical": true,
-            "file": "eventarc.update_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateChannel",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "channel",
-                        "type": ".google.cloud.eventarc.v1.Channel"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "UpdateChannel",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateChannel",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_DeleteChannel_async",
-            "title": "Eventarc deleteChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a single channel.",
-            "canonical": true,
-            "file": "eventarc.delete_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteChannel",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "DeleteChannel",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteChannel",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_GetProvider_async",
-            "title": "Eventarc getProvider Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a single Provider.",
-            "canonical": true,
-            "file": "eventarc.get_provider.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetProvider",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.GetProvider",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.Provider",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "GetProvider",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetProvider",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_ListProviders_async",
-            "title": "Eventarc listProviders Sample",
-            "origin": "API_DEFINITION",
-            "description": " List providers.",
-            "canonical": true,
-            "file": "eventarc.list_providers.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListProviders",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.ListProviders",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ListProvidersResponse",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "ListProviders",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.ListProviders",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_GetChannelConnection_async",
-            "title": "Eventarc getChannelConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a single ChannelConnection.",
-            "canonical": true,
-            "file": "eventarc.get_channel_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetChannelConnection",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.GetChannelConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ChannelConnection",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "GetChannelConnection",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetChannelConnection",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_ListChannelConnections_async",
-            "title": "Eventarc listChannelConnections Sample",
-            "origin": "API_DEFINITION",
-            "description": " List channel connections.",
-            "canonical": true,
-            "file": "eventarc.list_channel_connections.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListChannelConnections",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.ListChannelConnections",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ListChannelConnectionsResponse",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "ListChannelConnections",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.ListChannelConnections",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_CreateChannelConnection_async",
-            "title": "Eventarc createChannelConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new ChannelConnection in a particular project and location.",
-            "canonical": true,
-            "file": "eventarc.create_channel_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateChannelConnection",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.CreateChannelConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "channel_connection",
-                        "type": ".google.cloud.eventarc.v1.ChannelConnection"
-                    },
-                    {
-                        "name": "channel_connection_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "CreateChannelConnection",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.CreateChannelConnection",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_DeleteChannelConnection_async",
-            "title": "Eventarc deleteChannelConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a single ChannelConnection.",
-            "canonical": true,
-            "file": "eventarc.delete_channel_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteChannelConnection",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteChannelConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "DeleteChannelConnection",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteChannelConnection",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_GetGoogleChannelConfig_async",
-            "title": "Eventarc getGoogleChannelConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a GoogleChannelConfig",
-            "canonical": true,
-            "file": "eventarc.get_google_channel_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetGoogleChannelConfig",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.GoogleChannelConfig",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "GetGoogleChannelConfig",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfig",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_UpdateGoogleChannelConfig_async",
-            "title": "Eventarc updateGoogleChannelConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update a single GoogleChannelConfig",
-            "canonical": true,
-            "file": "eventarc.update_google_channel_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateGoogleChannelConfig",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "google_channel_config",
-                        "type": ".google.cloud.eventarc.v1.GoogleChannelConfig"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.GoogleChannelConfig",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "UpdateGoogleChannelConfig",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfig",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_GetMessageBus_async",
-            "title": "Eventarc getMessageBus Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a single MessageBus.",
-            "canonical": true,
-            "file": "eventarc.get_message_bus.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetMessageBus",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.GetMessageBus",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.MessageBus",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "GetMessageBus",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetMessageBus",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_ListMessageBuses_async",
-            "title": "Eventarc listMessageBuses Sample",
-            "origin": "API_DEFINITION",
-            "description": " List message buses.",
-            "canonical": true,
-            "file": "eventarc.list_message_buses.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListMessageBuses",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.ListMessageBuses",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ListMessageBusesResponse",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "ListMessageBuses",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.ListMessageBuses",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_ListMessageBusEnrollments_async",
-            "title": "Eventarc listMessageBusEnrollments Sample",
-            "origin": "API_DEFINITION",
-            "description": " List message bus enrollments.",
-            "canonical": true,
-            "file": "eventarc.list_message_bus_enrollments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListMessageBusEnrollments",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.ListMessageBusEnrollments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "ListMessageBusEnrollments",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.ListMessageBusEnrollments",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_CreateMessageBus_async",
-            "title": "Eventarc createMessageBus Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new MessageBus in a particular project and location.",
-            "canonical": true,
-            "file": "eventarc.create_message_bus.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateMessageBus",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.CreateMessageBus",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "message_bus",
-                        "type": ".google.cloud.eventarc.v1.MessageBus"
-                    },
-                    {
-                        "name": "message_bus_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "CreateMessageBus",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.CreateMessageBus",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_UpdateMessageBus_async",
-            "title": "Eventarc updateMessageBus Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update a single message bus.",
-            "canonical": true,
-            "file": "eventarc.update_message_bus.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateMessageBus",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateMessageBus",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "message_bus",
-                        "type": ".google.cloud.eventarc.v1.MessageBus"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "UpdateMessageBus",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateMessageBus",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_DeleteMessageBus_async",
-            "title": "Eventarc deleteMessageBus Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a single message bus.",
-            "canonical": true,
-            "file": "eventarc.delete_message_bus.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteMessageBus",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteMessageBus",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "DeleteMessageBus",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteMessageBus",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_GetEnrollment_async",
-            "title": "Eventarc getEnrollment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a single Enrollment.",
-            "canonical": true,
-            "file": "eventarc.get_enrollment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetEnrollment",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.GetEnrollment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.Enrollment",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "GetEnrollment",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetEnrollment",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_ListEnrollments_async",
-            "title": "Eventarc listEnrollments Sample",
-            "origin": "API_DEFINITION",
-            "description": " List Enrollments.",
-            "canonical": true,
-            "file": "eventarc.list_enrollments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListEnrollments",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.ListEnrollments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ListEnrollmentsResponse",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "ListEnrollments",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.ListEnrollments",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_CreateEnrollment_async",
-            "title": "Eventarc createEnrollment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new Enrollment in a particular project and location.",
-            "canonical": true,
-            "file": "eventarc.create_enrollment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateEnrollment",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.CreateEnrollment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "enrollment",
-                        "type": ".google.cloud.eventarc.v1.Enrollment"
-                    },
-                    {
-                        "name": "enrollment_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "CreateEnrollment",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.CreateEnrollment",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_UpdateEnrollment_async",
-            "title": "Eventarc updateEnrollment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update a single Enrollment.",
-            "canonical": true,
-            "file": "eventarc.update_enrollment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateEnrollment",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateEnrollment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "enrollment",
-                        "type": ".google.cloud.eventarc.v1.Enrollment"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "UpdateEnrollment",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateEnrollment",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_DeleteEnrollment_async",
-            "title": "Eventarc deleteEnrollment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a single Enrollment.",
-            "canonical": true,
-            "file": "eventarc.delete_enrollment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteEnrollment",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteEnrollment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "DeleteEnrollment",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteEnrollment",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_GetPipeline_async",
-            "title": "Eventarc getPipeline Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a single Pipeline.",
-            "canonical": true,
-            "file": "eventarc.get_pipeline.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPipeline",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.GetPipeline",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.Pipeline",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "GetPipeline",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetPipeline",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_ListPipelines_async",
-            "title": "Eventarc listPipelines Sample",
-            "origin": "API_DEFINITION",
-            "description": " List pipelines.",
-            "canonical": true,
-            "file": "eventarc.list_pipelines.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPipelines",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.ListPipelines",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ListPipelinesResponse",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "ListPipelines",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.ListPipelines",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_CreatePipeline_async",
-            "title": "Eventarc createPipeline Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new Pipeline in a particular project and location.",
-            "canonical": true,
-            "file": "eventarc.create_pipeline.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreatePipeline",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.CreatePipeline",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "pipeline",
-                        "type": ".google.cloud.eventarc.v1.Pipeline"
-                    },
-                    {
-                        "name": "pipeline_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "CreatePipeline",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.CreatePipeline",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_UpdatePipeline_async",
-            "title": "Eventarc updatePipeline Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update a single pipeline.",
-            "canonical": true,
-            "file": "eventarc.update_pipeline.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdatePipeline",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.UpdatePipeline",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "pipeline",
-                        "type": ".google.cloud.eventarc.v1.Pipeline"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "UpdatePipeline",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.UpdatePipeline",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_DeletePipeline_async",
-            "title": "Eventarc deletePipeline Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a single pipeline.",
-            "canonical": true,
-            "file": "eventarc.delete_pipeline.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeletePipeline",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.DeletePipeline",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "DeletePipeline",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.DeletePipeline",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_GetGoogleApiSource_async",
-            "title": "Eventarc getGoogleApiSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a single GoogleApiSource.",
-            "canonical": true,
-            "file": "eventarc.get_google_api_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetGoogleApiSource",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleApiSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.GoogleApiSource",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "GetGoogleApiSource",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleApiSource",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_ListGoogleApiSources_async",
-            "title": "Eventarc listGoogleApiSources Sample",
-            "origin": "API_DEFINITION",
-            "description": " List GoogleApiSources.",
-            "canonical": true,
-            "file": "eventarc.list_google_api_sources.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListGoogleApiSources",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.ListGoogleApiSources",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.eventarc.v1.ListGoogleApiSourcesResponse",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "ListGoogleApiSources",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.ListGoogleApiSources",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_CreateGoogleApiSource_async",
-            "title": "Eventarc createGoogleApiSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new GoogleApiSource in a particular project and location.",
-            "canonical": true,
-            "file": "eventarc.create_google_api_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateGoogleApiSource",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.CreateGoogleApiSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "google_api_source",
-                        "type": ".google.cloud.eventarc.v1.GoogleApiSource"
-                    },
-                    {
-                        "name": "google_api_source_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "CreateGoogleApiSource",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.CreateGoogleApiSource",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_UpdateGoogleApiSource_async",
-            "title": "Eventarc updateGoogleApiSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update a single GoogleApiSource.",
-            "canonical": true,
-            "file": "eventarc.update_google_api_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateGoogleApiSource",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleApiSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "google_api_source",
-                        "type": ".google.cloud.eventarc.v1.GoogleApiSource"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "UpdateGoogleApiSource",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleApiSource",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "eventarc_v1_generated_Eventarc_DeleteGoogleApiSource_async",
-            "title": "Eventarc deleteGoogleApiSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a single GoogleApiSource.",
-            "canonical": true,
-            "file": "eventarc.delete_google_api_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteGoogleApiSource",
-                "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteGoogleApiSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EventarcClient",
-                    "fullName": "google.cloud.eventarc.v1.EventarcClient"
-                },
-                "method": {
-                    "shortName": "DeleteGoogleApiSource",
-                    "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteGoogleApiSource",
-                    "service": {
-                        "shortName": "Eventarc",
-                        "fullName": "google.cloud.eventarc.v1.Eventarc"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-eventarc",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.eventarc.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_GetTrigger_async",
+      "title": "Eventarc getTrigger Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a single trigger.",
+      "canonical": true,
+      "file": "eventarc.get_trigger.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTrigger",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.GetTrigger",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.Trigger",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "GetTrigger",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.GetTrigger",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_ListTriggers_async",
+      "title": "Eventarc listTriggers Sample",
+      "origin": "API_DEFINITION",
+      "description": " List triggers.",
+      "canonical": true,
+      "file": "eventarc.list_triggers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListTriggers",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.ListTriggers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ListTriggersResponse",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "ListTriggers",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.ListTriggers",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_CreateTrigger_async",
+      "title": "Eventarc createTrigger Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new trigger in a particular project and location.",
+      "canonical": true,
+      "file": "eventarc.create_trigger.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateTrigger",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.CreateTrigger",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trigger",
+            "type": ".google.cloud.eventarc.v1.Trigger"
+          },
+          {
+            "name": "trigger_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "CreateTrigger",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.CreateTrigger",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_UpdateTrigger_async",
+      "title": "Eventarc updateTrigger Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a single trigger.",
+      "canonical": true,
+      "file": "eventarc.update_trigger.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateTrigger",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateTrigger",
+        "async": true,
+        "parameters": [
+          {
+            "name": "trigger",
+            "type": ".google.cloud.eventarc.v1.Trigger"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "UpdateTrigger",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateTrigger",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_DeleteTrigger_async",
+      "title": "Eventarc deleteTrigger Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a single trigger.",
+      "canonical": true,
+      "file": "eventarc.delete_trigger.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteTrigger",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteTrigger",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "DeleteTrigger",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteTrigger",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_GetChannel_async",
+      "title": "Eventarc getChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a single Channel.",
+      "canonical": true,
+      "file": "eventarc.get_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetChannel",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.GetChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.Channel",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "GetChannel",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.GetChannel",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_ListChannels_async",
+      "title": "Eventarc listChannels Sample",
+      "origin": "API_DEFINITION",
+      "description": " List channels.",
+      "canonical": true,
+      "file": "eventarc.list_channels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListChannels",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.ListChannels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ListChannelsResponse",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "ListChannels",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.ListChannels",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_CreateChannel_async",
+      "title": "Eventarc createChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new channel in a particular project and location.",
+      "canonical": true,
+      "file": "eventarc.create_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateChannel",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.CreateChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "channel",
+            "type": ".google.cloud.eventarc.v1.Channel"
+          },
+          {
+            "name": "channel_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "CreateChannel",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.CreateChannel",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_UpdateChannel_async",
+      "title": "Eventarc updateChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a single channel.",
+      "canonical": true,
+      "file": "eventarc.update_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateChannel",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "channel",
+            "type": ".google.cloud.eventarc.v1.Channel"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "UpdateChannel",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateChannel",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_DeleteChannel_async",
+      "title": "Eventarc deleteChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a single channel.",
+      "canonical": true,
+      "file": "eventarc.delete_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteChannel",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "DeleteChannel",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteChannel",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_GetProvider_async",
+      "title": "Eventarc getProvider Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a single Provider.",
+      "canonical": true,
+      "file": "eventarc.get_provider.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProvider",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.GetProvider",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.Provider",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "GetProvider",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.GetProvider",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_ListProviders_async",
+      "title": "Eventarc listProviders Sample",
+      "origin": "API_DEFINITION",
+      "description": " List providers.",
+      "canonical": true,
+      "file": "eventarc.list_providers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProviders",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.ListProviders",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ListProvidersResponse",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "ListProviders",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.ListProviders",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_GetChannelConnection_async",
+      "title": "Eventarc getChannelConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a single ChannelConnection.",
+      "canonical": true,
+      "file": "eventarc.get_channel_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetChannelConnection",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.GetChannelConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ChannelConnection",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "GetChannelConnection",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.GetChannelConnection",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_ListChannelConnections_async",
+      "title": "Eventarc listChannelConnections Sample",
+      "origin": "API_DEFINITION",
+      "description": " List channel connections.",
+      "canonical": true,
+      "file": "eventarc.list_channel_connections.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListChannelConnections",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.ListChannelConnections",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ListChannelConnectionsResponse",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "ListChannelConnections",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.ListChannelConnections",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_CreateChannelConnection_async",
+      "title": "Eventarc createChannelConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new ChannelConnection in a particular project and location.",
+      "canonical": true,
+      "file": "eventarc.create_channel_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateChannelConnection",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.CreateChannelConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "channel_connection",
+            "type": ".google.cloud.eventarc.v1.ChannelConnection"
+          },
+          {
+            "name": "channel_connection_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "CreateChannelConnection",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.CreateChannelConnection",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_DeleteChannelConnection_async",
+      "title": "Eventarc deleteChannelConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a single ChannelConnection.",
+      "canonical": true,
+      "file": "eventarc.delete_channel_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteChannelConnection",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteChannelConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "DeleteChannelConnection",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteChannelConnection",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_GetGoogleChannelConfig_async",
+      "title": "Eventarc getGoogleChannelConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a GoogleChannelConfig. The name of the GoogleChannelConfig in the response is ALWAYS coded with projectID.",
+      "canonical": true,
+      "file": "eventarc.get_google_channel_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGoogleChannelConfig",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.GoogleChannelConfig",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "GetGoogleChannelConfig",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleChannelConfig",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_UpdateGoogleChannelConfig_async",
+      "title": "Eventarc updateGoogleChannelConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a single GoogleChannelConfig",
+      "canonical": true,
+      "file": "eventarc.update_google_channel_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGoogleChannelConfig",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "google_channel_config",
+            "type": ".google.cloud.eventarc.v1.GoogleChannelConfig"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.GoogleChannelConfig",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "UpdateGoogleChannelConfig",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleChannelConfig",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_GetMessageBus_async",
+      "title": "Eventarc getMessageBus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a single MessageBus.",
+      "canonical": true,
+      "file": "eventarc.get_message_bus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMessageBus",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.GetMessageBus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.MessageBus",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "GetMessageBus",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.GetMessageBus",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_ListMessageBuses_async",
+      "title": "Eventarc listMessageBuses Sample",
+      "origin": "API_DEFINITION",
+      "description": " List message buses.",
+      "canonical": true,
+      "file": "eventarc.list_message_buses.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMessageBuses",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.ListMessageBuses",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ListMessageBusesResponse",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "ListMessageBuses",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.ListMessageBuses",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_ListMessageBusEnrollments_async",
+      "title": "Eventarc listMessageBusEnrollments Sample",
+      "origin": "API_DEFINITION",
+      "description": " List message bus enrollments.",
+      "canonical": true,
+      "file": "eventarc.list_message_bus_enrollments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMessageBusEnrollments",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.ListMessageBusEnrollments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ListMessageBusEnrollmentsResponse",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "ListMessageBusEnrollments",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.ListMessageBusEnrollments",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_CreateMessageBus_async",
+      "title": "Eventarc createMessageBus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new MessageBus in a particular project and location.",
+      "canonical": true,
+      "file": "eventarc.create_message_bus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateMessageBus",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.CreateMessageBus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "message_bus",
+            "type": ".google.cloud.eventarc.v1.MessageBus"
+          },
+          {
+            "name": "message_bus_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "CreateMessageBus",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.CreateMessageBus",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_UpdateMessageBus_async",
+      "title": "Eventarc updateMessageBus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a single message bus.",
+      "canonical": true,
+      "file": "eventarc.update_message_bus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMessageBus",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateMessageBus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "message_bus",
+            "type": ".google.cloud.eventarc.v1.MessageBus"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "UpdateMessageBus",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateMessageBus",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_DeleteMessageBus_async",
+      "title": "Eventarc deleteMessageBus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a single message bus.",
+      "canonical": true,
+      "file": "eventarc.delete_message_bus.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteMessageBus",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteMessageBus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "DeleteMessageBus",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteMessageBus",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_GetEnrollment_async",
+      "title": "Eventarc getEnrollment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a single Enrollment.",
+      "canonical": true,
+      "file": "eventarc.get_enrollment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEnrollment",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.GetEnrollment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.Enrollment",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "GetEnrollment",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.GetEnrollment",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_ListEnrollments_async",
+      "title": "Eventarc listEnrollments Sample",
+      "origin": "API_DEFINITION",
+      "description": " List Enrollments.",
+      "canonical": true,
+      "file": "eventarc.list_enrollments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEnrollments",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.ListEnrollments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ListEnrollmentsResponse",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "ListEnrollments",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.ListEnrollments",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_CreateEnrollment_async",
+      "title": "Eventarc createEnrollment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new Enrollment in a particular project and location.",
+      "canonical": true,
+      "file": "eventarc.create_enrollment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEnrollment",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.CreateEnrollment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "enrollment",
+            "type": ".google.cloud.eventarc.v1.Enrollment"
+          },
+          {
+            "name": "enrollment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "CreateEnrollment",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.CreateEnrollment",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_UpdateEnrollment_async",
+      "title": "Eventarc updateEnrollment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a single Enrollment.",
+      "canonical": true,
+      "file": "eventarc.update_enrollment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEnrollment",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateEnrollment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "enrollment",
+            "type": ".google.cloud.eventarc.v1.Enrollment"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "UpdateEnrollment",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateEnrollment",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_DeleteEnrollment_async",
+      "title": "Eventarc deleteEnrollment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a single Enrollment.",
+      "canonical": true,
+      "file": "eventarc.delete_enrollment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEnrollment",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteEnrollment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "DeleteEnrollment",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteEnrollment",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_GetPipeline_async",
+      "title": "Eventarc getPipeline Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a single Pipeline.",
+      "canonical": true,
+      "file": "eventarc.get_pipeline.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPipeline",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.GetPipeline",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.Pipeline",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "GetPipeline",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.GetPipeline",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_ListPipelines_async",
+      "title": "Eventarc listPipelines Sample",
+      "origin": "API_DEFINITION",
+      "description": " List pipelines.",
+      "canonical": true,
+      "file": "eventarc.list_pipelines.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPipelines",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.ListPipelines",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ListPipelinesResponse",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "ListPipelines",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.ListPipelines",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_CreatePipeline_async",
+      "title": "Eventarc createPipeline Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new Pipeline in a particular project and location.",
+      "canonical": true,
+      "file": "eventarc.create_pipeline.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePipeline",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.CreatePipeline",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "pipeline",
+            "type": ".google.cloud.eventarc.v1.Pipeline"
+          },
+          {
+            "name": "pipeline_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "CreatePipeline",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.CreatePipeline",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_UpdatePipeline_async",
+      "title": "Eventarc updatePipeline Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a single pipeline.",
+      "canonical": true,
+      "file": "eventarc.update_pipeline.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePipeline",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.UpdatePipeline",
+        "async": true,
+        "parameters": [
+          {
+            "name": "pipeline",
+            "type": ".google.cloud.eventarc.v1.Pipeline"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "UpdatePipeline",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.UpdatePipeline",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_DeletePipeline_async",
+      "title": "Eventarc deletePipeline Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a single pipeline.",
+      "canonical": true,
+      "file": "eventarc.delete_pipeline.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePipeline",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.DeletePipeline",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "DeletePipeline",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.DeletePipeline",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_GetGoogleApiSource_async",
+      "title": "Eventarc getGoogleApiSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a single GoogleApiSource.",
+      "canonical": true,
+      "file": "eventarc.get_google_api_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGoogleApiSource",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleApiSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.GoogleApiSource",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "GetGoogleApiSource",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.GetGoogleApiSource",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_ListGoogleApiSources_async",
+      "title": "Eventarc listGoogleApiSources Sample",
+      "origin": "API_DEFINITION",
+      "description": " List GoogleApiSources.",
+      "canonical": true,
+      "file": "eventarc.list_google_api_sources.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGoogleApiSources",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.ListGoogleApiSources",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.eventarc.v1.ListGoogleApiSourcesResponse",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "ListGoogleApiSources",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.ListGoogleApiSources",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_CreateGoogleApiSource_async",
+      "title": "Eventarc createGoogleApiSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new GoogleApiSource in a particular project and location.",
+      "canonical": true,
+      "file": "eventarc.create_google_api_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateGoogleApiSource",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.CreateGoogleApiSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "google_api_source",
+            "type": ".google.cloud.eventarc.v1.GoogleApiSource"
+          },
+          {
+            "name": "google_api_source_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "CreateGoogleApiSource",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.CreateGoogleApiSource",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_UpdateGoogleApiSource_async",
+      "title": "Eventarc updateGoogleApiSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update a single GoogleApiSource.",
+      "canonical": true,
+      "file": "eventarc.update_google_api_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGoogleApiSource",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleApiSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "google_api_source",
+            "type": ".google.cloud.eventarc.v1.GoogleApiSource"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "UpdateGoogleApiSource",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.UpdateGoogleApiSource",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "eventarc_v1_generated_Eventarc_DeleteGoogleApiSource_async",
+      "title": "Eventarc deleteGoogleApiSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a single GoogleApiSource.",
+      "canonical": true,
+      "file": "eventarc.delete_google_api_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteGoogleApiSource",
+        "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteGoogleApiSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EventarcClient",
+          "fullName": "google.cloud.eventarc.v1.EventarcClient"
+        },
+        "method": {
+          "shortName": "DeleteGoogleApiSource",
+          "fullName": "google.cloud.eventarc.v1.Eventarc.DeleteGoogleApiSource",
+          "service": {
+            "shortName": "Eventarc",
+            "fullName": "google.cloud.eventarc.v1.Eventarc"
+          }
+        }
+      }
+    }
+  ]
 }

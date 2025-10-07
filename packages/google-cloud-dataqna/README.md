@@ -1,24 +1,24 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Data QnA: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataqna)
+# [Data QnA API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be in **preview**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
 [![npm version](https://img.shields.io/npm/v/@google-cloud/data-qna.svg)](https://www.npmjs.org/package/@google-cloud/data-qna)
 
+Data QnA API client for Node.js
 
-
-
-Dataqna client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataqna/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Data QnA Node.js Client API Reference][client-docs]
-* [Data QnA Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-cloud-dataqna](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataqna)
+* [Data QnA API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/dataqna/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,53 +27,44 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
 
-* [Samples](#samples)
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
 1.  [Enable billing for your project][billing].
-1.  [Enable the Data QnA API][enable_api].
+1.  [Enable the Data QnA API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @google-cloud/data-qna
 ```
 
-
-
+[//]: # "partials.body"
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-cloud-dataqna/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Auto_suggestion_service.suggest_queries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js,packages/google-cloud-dataqna/samples/README.md) |
-| Question_service.create_question | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.create_question.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.create_question.js,packages/google-cloud-dataqna/samples/README.md) |
-| Question_service.execute_question | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.execute_question.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.execute_question.js,packages/google-cloud-dataqna/samples/README.md) |
-| Question_service.get_question | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_question.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_question.js,packages/google-cloud-dataqna/samples/README.md) |
-| Question_service.get_user_feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_user_feedback.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_user_feedback.js,packages/google-cloud-dataqna/samples/README.md) |
-| Question_service.update_user_feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.update_user_feedback.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.update_user_feedback.js,packages/google-cloud-dataqna/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-dataqna/samples/quickstart.js,packages/google-cloud-dataqna/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| suggest queries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/auto_suggestion_service.suggest_queries.js) |
+| create question | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.create_question.js) |
+| execute question | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.execute_question.js) |
+| get question | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_question.js) |
+| get user feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.get_user_feedback.js) |
+| update user feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/question_service.update_user_feedback.js) |
+| cloud | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples/generated/v1alpha/snippet_metadata_google.cloud.dataqna.v1alpha.json) |
 
-
-
-The [Data QnA Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -100,44 +91,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-
-
-
-
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/data-qna/latest
-[product-docs]: https://cloud.google.com/bigquery/docs
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=dataqna.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dataqna
