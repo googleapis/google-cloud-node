@@ -35,7 +35,7 @@ function main() {
   // const accessTuple = {}
 
   // Imports the Iam library
-  const {PolicyTroubleshooterClient} = require('@google-cloud/iam').v3;
+  const {PolicyTroubleshooterClient} = require('@google-cloud/policy-troubleshooter-iam').v3;
 
   // Instantiates a client
   const iamClient = new PolicyTroubleshooterClient();

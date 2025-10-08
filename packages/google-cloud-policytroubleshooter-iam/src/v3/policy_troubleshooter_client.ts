@@ -49,7 +49,7 @@ export class PolicyTroubleshooterClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('iam');
+  private _log = logging.log('policy-troubleshooter-iam');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {

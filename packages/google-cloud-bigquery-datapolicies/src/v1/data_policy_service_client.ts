@@ -47,7 +47,7 @@ export class DataPolicyServiceClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('datapolicies');
+  private _log = logging.log('bigquery-datapolicies');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {

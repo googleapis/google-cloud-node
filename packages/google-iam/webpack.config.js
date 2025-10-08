@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'Policies',
-    filename: './policies.js',
+    library: 'WorkloadIdentityPools',
+    filename: './workload-identity-pools.js',
   },
   node: {
     child_process: 'empty',

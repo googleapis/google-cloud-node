@@ -21,7 +21,7 @@
 const iam = require('@google-cloud/iam');
 
 function main() {
-  const policiesClient = new iam.PoliciesClient();
+  const workloadIdentityPoolsClient = new iam.WorkloadIdentityPoolsClient();
 }
 
 main();

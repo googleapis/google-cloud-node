@@ -47,7 +47,7 @@ export class GatewayControlClient {
   private _defaults: {[method: string]: gax.CallSettings};
   private _universeDomain: string;
   private _servicePath: string;
-  private _log = logging.log('gateway');
+  private _log = logging.log('gke-connect-gateway');
 
   auth: gax.GoogleAuth;
   descriptors: Descriptors = {

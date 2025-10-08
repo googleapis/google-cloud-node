@@ -39,7 +39,7 @@ function main(name, newDataPolicyId) {
   // const newDataPolicyId = 'abc123'
 
   // Imports the Datapolicies library
-  const {DataPolicyServiceClient} = require('@google-cloud/datapolicies').v1;
+  const {DataPolicyServiceClient} = require('@google-cloud/bigquery-datapolicies').v1;
 
   // Instantiates a client
   const datapoliciesClient = new DataPolicyServiceClient();

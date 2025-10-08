@@ -68,7 +68,7 @@ function main(filter) {
   // const showDeleted = true
 
   // Imports the Admin library
-  const {AnalyticsAdminServiceClient} = require('@google-cloud/admin').v1beta;
+  const {AnalyticsAdminServiceClient} = require('@google-analytics/admin').v1beta;
 
   // Instantiates a client
   const adminClient = new AnalyticsAdminServiceClient();
