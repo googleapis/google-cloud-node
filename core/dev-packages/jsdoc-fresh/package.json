@@ -1,6 +1,6 @@
 {
   "name": "jsdoc-fresh",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "Fresh JSDoc 3 Template",
   "scripts": {
     "prelint": "echo no prelint needed",

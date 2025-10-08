@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.1](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-region-tag-v4.0.0...jsdoc-region-tag-v4.0.1) (2025-10-07)
+
+
+### Bug Fixes
+
+* Lint and docs ([#77](https://github.com/googleapis/google-cloud-node-core/issues/77)) ([eba0f27](https://github.com/googleapis/google-cloud-node-core/commit/eba0f276f31f8d86f959f1cd673c7e581d1bcd6a))
+
 ## [4.0.0](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-region-tag-v3.0.0...jsdoc-region-tag-v4.0.0) (2025-10-02)
 
 

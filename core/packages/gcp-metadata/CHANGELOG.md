@@ -4,6 +4,22 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [8.1.0](https://github.com/googleapis/google-cloud-node-core/compare/gcp-metadata-v8.0.0...gcp-metadata-v8.1.0) (2025-10-07)
+
+
+### Features
+
+* Remove gts extension from tsconfig in gcp-metadata ([#66](https://github.com/googleapis/google-cloud-node-core/issues/66)) ([25cbd89](https://github.com/googleapis/google-cloud-node-core/commit/25cbd891347c78aab387903f7fc419d1af78dbe3))
+
+
+### Bug Fixes
+
+* Gcp-metadata sample tests ([#76](https://github.com/googleapis/google-cloud-node-core/issues/76)) ([d11dfa9](https://github.com/googleapis/google-cloud-node-core/commit/d11dfa908a13ff8b756a2eaed6c92ba09e59905d))
+* Increase time in gcp-metadata system-test ([#75](https://github.com/googleapis/google-cloud-node-core/issues/75)) ([9b19752](https://github.com/googleapis/google-cloud-node-core/commit/9b197525814e442823575d8b77121ba0f4b342cd))
+* Lint and docs ([#77](https://github.com/googleapis/google-cloud-node-core/issues/77)) ([eba0f27](https://github.com/googleapis/google-cloud-node-core/commit/eba0f276f31f8d86f959f1cd673c7e581d1bcd6a))
+* Lint and docs scripts ([#73](https://github.com/googleapis/google-cloud-node-core/issues/73)) ([b09bbcb](https://github.com/googleapis/google-cloud-node-core/commit/b09bbcbcc0846553443366998a9b174442d98cbd))
+* Tsconfig in gcp-metadata ([#68](https://github.com/googleapis/google-cloud-node-core/issues/68)) ([80a338c](https://github.com/googleapis/google-cloud-node-core/commit/80a338c41b8a6bc2d139621b426e6097df0f3606))
+
 ## [8.0.0](https://github.com/googleapis/google-cloud-node-core/compare/gcp-metadata-v7.0.1...gcp-metadata-v8.0.0) (2025-10-02)
 
 

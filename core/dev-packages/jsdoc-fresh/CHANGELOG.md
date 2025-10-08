@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.0.2](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-fresh-v5.0.1...jsdoc-fresh-v5.0.2) (2025-10-07)
+
+
+### Bug Fixes
+
+* Lint and docs ([#77](https://github.com/googleapis/google-cloud-node-core/issues/77)) ([eba0f27](https://github.com/googleapis/google-cloud-node-core/commit/eba0f276f31f8d86f959f1cd673c7e581d1bcd6a))
+* Lint and docs scripts ([#73](https://github.com/googleapis/google-cloud-node-core/issues/73)) ([b09bbcb](https://github.com/googleapis/google-cloud-node-core/commit/b09bbcbcc0846553443366998a9b174442d98cbd))
+
 ## [5.0.1](https://github.com/googleapis/google-cloud-node-core/compare/jsdoc-fresh-v5.0.0...jsdoc-fresh-v5.0.1) (2025-09-30)
 
 
