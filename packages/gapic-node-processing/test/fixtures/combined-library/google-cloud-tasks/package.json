@@ -1,7 +1,6 @@
 {
   "name": "@google-cloud/tasks",
   "version": "0.1.0",
-  "private": true,
   "description": "Tasks client for Node.js",
   "repository": "googleapis/nodejs-tasks",
   "license": "Apache-2.0",

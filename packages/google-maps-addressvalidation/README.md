@@ -1,24 +1,25 @@
 [//]: # "This README.md file is auto-generated, all changes to this file will be lost."
-[//]: # "To regenerate it, use `python -m synthtool`."
+[//]: # "The comments you see below are used to generate those parts of the template in later states."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# [Address Validation API: Node.js Client](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-addressvalidation)
+# [Address Validation API: Nodejs Client][homepage]
 
-[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority
+
 [![npm version](https://img.shields.io/npm/v/@googlemaps/addressvalidation.svg)](https://www.npmjs.org/package/@googlemaps/addressvalidation)
 
+Address Validation API client for Node.js
 
-
-
- client for Node.js
-
+[//]: # "partials.introduction"
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-addressvalidation/CHANGELOG.md).
+[the CHANGELOG][homepage_changelog].
 
-* [Address Validation API Node.js Client API Reference][client-docs]
-* [Address Validation API Documentation][product-docs]
-* [github.com/googleapis/google-cloud-node/packages/google-maps-addressvalidation](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-addressvalidation)
+* [Address Validation API Nodejs Client API Reference](https://cloud.google.com/nodejs/docs/reference/addressvalidation/latest)
+
 
 Read more about the client libraries for Cloud APIs, including the older
 Google APIs Client Libraries, in [Client Libraries Explained][explained].
@@ -27,18 +28,15 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
 **Table of contents:**
 
-
 * [Quickstart](#quickstart)
   * [Before you begin](#before-you-begin)
   * [Installing the client library](#installing-the-client-library)
-  * [Using the client library](#using-the-client-library)
-* [Samples](#samples)
+
 * [Versioning](#versioning)
 * [Contributing](#contributing)
 * [License](#license)
 
 ## Quickstart
-
 ### Before you begin
 
 1.  [Select or create a Cloud Platform project][projects].
@@ -46,106 +44,44 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 1.  [Enable the Address Validation API API][enable_api].
 1.  [Set up authentication][auth] so you can access the
     API from your local workstation.
-
 ### Installing the client library
 
 ```bash
 npm install @googlemaps/addressvalidation
 ```
 
+## Terms of Service
 
-### Using the client library
+`@google-cloud/addressvalidation` uses Google Maps Platform services. Use of Google
+Maps Platform services through this library is subject to the
+[Google Maps Platform Terms of Service][gmp-tos].
 
-```javascript
-/**
- * This snippet has been automatically generated and should be regarded as a code template only.
- * It will require modifications to work.
- * It may require correct/in-range values for request initialization.
- * TODO(developer): Uncomment these variables before running the sample.
- */
-/**
- *  Required. The address being validated. Unformatted addresses should be
- *  submitted via `address_lines` google.type.PostalAddress.address_lines.
- *  The total length of the fields in this input must not exceed 300
- *  characters.
- *  Supported regions can be found in the
- *  FAQ (https://developers.google.com/maps/documentation/address-validation/faq#which_regions_are_currently_supported).
- *  The language_code google.type.PostalAddress.language_code  value in the
- *  input address is reserved for future uses and is ignored today. The
- *  validated address result will be populated based on the preferred language
- *  for the given address, as identified by the system.
- *  The Address Validation API ignores the values in
- *  recipients google.type.PostalAddress.recipients  and
- *  organization google.type.PostalAddress.organization. Any values in those
- *  fields will be discarded and not returned. Please do not set them.
- */
-// const address = {}
-/**
- *  This field must be empty for the first address validation request. If
- *  more requests are necessary to fully validate a single address (for
- *  example if the changes the user makes after the initial validation need to
- *  be re-validated), then each followup request must populate this field with
- *  the
- *  response_id google.maps.addressvalidation.v1.ValidateAddressResponse.response_id
- *  from the very first response in the validation sequence.
- */
-// const previousResponseId = 'abc123'
-/**
- *  Enables USPS CASS compatible mode. This affects _only_ the
- *  google.maps.addressvalidation.v1.ValidationResult.usps_data  field of
- *  google.maps.addressvalidation.v1.ValidationResult. Note: for USPS CASS
- *  enabled requests for addresses in Puerto Rico, a
- *  google.type.PostalAddress.region_code  of the `address` must be provided
- *  as "PR", or an google.type.PostalAddress.administrative_area  of the
- *  `address` must be provided as "Puerto Rico" (case-insensitive) or "PR".
- *  It's recommended to use a componentized `address`, or alternatively specify
- *  at least two google.type.PostalAddress.address_lines  where the first line
- *  contains the street number and name and the second line contains the city,
- *  state, and zip code.
- */
-// const enableUspsCass = true
+This library is not a Google Maps Platform Core Service.
+Therefore, the Google Maps Platform Terms of Service (e.g., Technical
+Support Services, Service Level Agreements, and Deprecation Policy)
+do not apply to this library.
 
-// Imports the Addressvalidation library
-// eslint-disable-next-line node/no-missing-require
-const {AddressValidationClient} = require('@googlemaps/addressvalidation').v1;
+### European Economic Area (EEA) developers
 
-// Instantiates a client
-const addressvalidationClient = new AddressValidationClient();
+If your billing address is in the European Economic Area, effective on
+8 July 2025, the [Google Maps Platform EEA Terms of Service][gmp-tos-eea]
+will apply to your use of the Services. Functionality varies by region.
+[Learn more][gmp-tos-eea-faq].
 
-async function callValidateAddress() {
-  // Construct request
-  const request = {
-    address: {
-      regionCode: 'US',
-      addressLines: ['1600 Amphitheatre Pkwy', 'Mountain View CA 94040'],
-    },
-  };
-
-  // Run request
-  const response = await addressvalidationClient.validateAddress(request);
-  console.log(response);
-}
-
-callValidateAddress();
-
-```
-
-
+[gmp-tos]: https://cloud.google.com/maps-platform/terms
+[gmp-tos-eea]: https://cloud.google.com/terms/maps-platform/eea
+[gmp-tos-eea-faq]: https://developers.google.com/maps/comms/eea/faq
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/google-cloud-node/tree/main/packages/google-maps-addressvalidation/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`][homepage_samples] directory. Each sample's `README.md` has instructions for running its sample.
 
-| Sample                      | Source Code                       | Try it |
-| --------------------------- | --------------------------------- | ------ |
-| Address_validation.provide_validation_feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.provide_validation_feedback.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-addressvalidation/samples/generated/v1/address_validation.provide_validation_feedback.js,packages/google-maps-addressvalidation/samples/README.md) |
-| Address_validation.validate_address | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.validate_address.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-addressvalidation/samples/generated/v1/address_validation.validate_address.js,packages/google-maps-addressvalidation/samples/README.md) |
-| Quickstart | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-maps-addressvalidation/samples/quickstart.js,packages/google-maps-addressvalidation/samples/README.md) |
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| provide validation feedback | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.provide_validation_feedback.js) |
+| validate address | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/address_validation.validate_address.js) |
+| maps | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples/generated/v1/snippet_metadata_google.maps.addressvalidation.v1.json) |
 
-
-
-The [Address Validation API Node.js Client API Reference][client-docs] documentation
-also contains samples.
 
 ## Supported Node.js Versions
 
@@ -172,45 +108,29 @@ for versions compatible with Node.js 8.
 
 This library follows [Semantic Versioning](http://semver.org/).
 
-
-
-This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
-unless absolutely necessary (e.g. because of critical security issues) or with
-an extensive deprecation period. Issues and requests against **stable** libraries
-are addressed with the highest priority.
-
-
-
-
-
-
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 [launch_stages]: https://cloud.google.com/terms/launch-stages
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this `README.md`
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its templates in
-[directory](https://github.com/googleapis/synthtool).
+are generated from a central template.
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/LICENSE)
 
-[client-docs]: https://cloud.google.com/nodejs/docs/reference/addressvalidation/latest
-[product-docs]: https://mapsplatform.google.com/maps-products/address-validation/
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [projects]: https://console.cloud.google.com/project
 [billing]: https://support.google.com/cloud/answer/6293499#enable-billing
 [enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=addressvalidation.googleapis.com
 [auth]: https://cloud.google.com/docs/authentication/external/set-up-adc-local
-
-
-[//]: # "partials.introduction"
+[homepage_samples]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/samples
+[homepage_changelog]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation/CHANGELOG.md
+[homepage]: https://github.com/googleapis/google-cloud-node/blob/main/packages/google-maps-addressvalidation

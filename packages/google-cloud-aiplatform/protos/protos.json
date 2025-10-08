@@ -23385,6 +23385,14 @@
                         "parameters": {
                           "type": "google.protobuf.Value",
                           "id": 3
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },
@@ -77617,6 +77625,14 @@
                         "parameters": {
                           "type": "google.protobuf.Value",
                           "id": 3
+                        },
+                        "labels": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       }
                     },

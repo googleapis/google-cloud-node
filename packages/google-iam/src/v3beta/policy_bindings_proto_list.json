@@ -1,0 +1,7 @@
+[
+  "../../protos/google/iam/v3beta/operation_metadata.proto",
+  "../../protos/google/iam/v3beta/policy_binding_resources.proto",
+  "../../protos/google/iam/v3beta/policy_bindings_service.proto",
+  "../../protos/google/iam/v3beta/principal_access_boundary_policies_service.proto",
+  "../../protos/google/iam/v3beta/principal_access_boundary_policy_resources.proto"
+]

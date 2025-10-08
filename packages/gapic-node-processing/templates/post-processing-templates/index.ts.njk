@@ -18,9 +18,9 @@
 
 {% for version in versions %}import * as {{ version }} from './{{ version }}{% if isEsm %}/index.js{% endif %}';{{ "
 " }}{% endfor %}
-{% for client in defaultClientAndVersions.clients %}const {{ client }} = {{ defaultClientAndVersions.version }}.{{ client }};
-type {{ client }} = {{ defaultClientAndVersions.version }}.{{ client }};{{ "\n" }}{% endfor %}
-export {{ "{" }}{{ versions|join(', ')}}, {{ defaultClientAndVersions.clients|join(', ')}}{{ "}" }};
-export default {{ "{" }}{{ versions|join(', ')}}, {{ defaultClientAndVersions.clients|join(', ')}}{{ "}" }};
+{% for client in defaultVersionAndClients.clients %}const {{ client }} = {{ defaultVersionAndClients.version }}.{{ client }};
+type {{ client }} = {{ defaultVersionAndClients.version }}.{{ client }};{{ "\n" }}{% endfor %}
+export {{ "{" }}{{ versions|join(', ')}}, {{ defaultVersionAndClients.clients|join(', ')}}{{ "}" }};
+export default {{ "{" }}{{ versions|join(', ')}}, {{ defaultVersionAndClients.clients|join(', ')}}{{ "}" }};
 import * as protos from '{% if isEsm %}../../protos/protos.js{% else %}../protos/protos{% endif %}';
 export {protos};

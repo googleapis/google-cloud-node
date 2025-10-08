@@ -70,7 +70,10 @@ function getReplacementStringReleaseLevel(argv: CliArgsReadme) {
   return stringToReplaceForReleaseLevel;
 }
 
-function generateArgsForInitialReadme(argv: CliArgsReadme, writeDestination: string) {
+function generateArgsForInitialReadme(
+  argv: CliArgsReadme,
+  writeDestination: string,
+) {
   const stringToReplaceForSampleTable = getReplacementStringSamples(argv);
   const stringToReplaceForReleaseLevel = getReplacementStringReleaseLevel(argv);
   return {

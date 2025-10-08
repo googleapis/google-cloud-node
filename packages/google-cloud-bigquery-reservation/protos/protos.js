@@ -833,6 +833,237 @@
                              * @variation 2
                              */
     
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|getIamPolicy}.
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @typedef GetIamPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.Policy} [response] Policy
+                             */
+    
+                            /**
+                             * Calls GetIamPolicy.
+                             * @function getIamPolicy
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationService.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReservationService.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                                return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            }, "name", { value: "GetIamPolicy" });
+    
+                            /**
+                             * Calls GetIamPolicy.
+                             * @function getIamPolicy
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                             * @returns {Promise<google.iam.v1.Policy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|setIamPolicy}.
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @typedef SetIamPolicyCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.Policy} [response] Policy
+                             */
+    
+                            /**
+                             * Calls SetIamPolicy.
+                             * @function setIamPolicy
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationService.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReservationService.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                                return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                            }, "name", { value: "SetIamPolicy" });
+    
+                            /**
+                             * Calls SetIamPolicy.
+                             * @function setIamPolicy
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                             * @returns {Promise<google.iam.v1.Policy>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|testIamPermissions}.
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @typedef TestIamPermissionsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                             */
+    
+                            /**
+                             * Calls TestIamPermissions.
+                             * @function testIamPermissions
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationService.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReservationService.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                                return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                            }, "name", { value: "TestIamPermissions" });
+    
+                            /**
+                             * Calls TestIamPermissions.
+                             * @function testIamPermissions
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                             * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|createReservationGroup}.
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @typedef CreateReservationGroupCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationGroup} [response] ReservationGroup
+                             */
+    
+                            /**
+                             * Calls CreateReservationGroup.
+                             * @function createReservationGroup
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest} request CreateReservationGroupRequest message or plain object
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationService.CreateReservationGroupCallback} callback Node-style callback called with the error, if any, and ReservationGroup
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReservationService.prototype.createReservationGroup = function createReservationGroup(request, callback) {
+                                return this.rpcCall(createReservationGroup, $root.google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest, $root.google.cloud.bigquery.reservation.v1.ReservationGroup, request, callback);
+                            }, "name", { value: "CreateReservationGroup" });
+    
+                            /**
+                             * Calls CreateReservationGroup.
+                             * @function createReservationGroup
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest} request CreateReservationGroupRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.reservation.v1.ReservationGroup>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|getReservationGroup}.
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @typedef GetReservationGroupCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationGroup} [response] ReservationGroup
+                             */
+    
+                            /**
+                             * Calls GetReservationGroup.
+                             * @function getReservationGroup
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest} request GetReservationGroupRequest message or plain object
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationService.GetReservationGroupCallback} callback Node-style callback called with the error, if any, and ReservationGroup
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReservationService.prototype.getReservationGroup = function getReservationGroup(request, callback) {
+                                return this.rpcCall(getReservationGroup, $root.google.cloud.bigquery.reservation.v1.GetReservationGroupRequest, $root.google.cloud.bigquery.reservation.v1.ReservationGroup, request, callback);
+                            }, "name", { value: "GetReservationGroup" });
+    
+                            /**
+                             * Calls GetReservationGroup.
+                             * @function getReservationGroup
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest} request GetReservationGroupRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.reservation.v1.ReservationGroup>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|deleteReservationGroup}.
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @typedef DeleteReservationGroupCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.protobuf.Empty} [response] Empty
+                             */
+    
+                            /**
+                             * Calls DeleteReservationGroup.
+                             * @function deleteReservationGroup
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest} request DeleteReservationGroupRequest message or plain object
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationService.DeleteReservationGroupCallback} callback Node-style callback called with the error, if any, and Empty
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReservationService.prototype.deleteReservationGroup = function deleteReservationGroup(request, callback) {
+                                return this.rpcCall(deleteReservationGroup, $root.google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest, $root.google.protobuf.Empty, request, callback);
+                            }, "name", { value: "DeleteReservationGroup" });
+    
+                            /**
+                             * Calls DeleteReservationGroup.
+                             * @function deleteReservationGroup
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest} request DeleteReservationGroupRequest message or plain object
+                             * @returns {Promise<google.protobuf.Empty>} Promise
+                             * @variation 2
+                             */
+    
+                            /**
+                             * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|listReservationGroups}.
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @typedef ListReservationGroupsCallback
+                             * @type {function}
+                             * @param {Error|null} error Error, if any
+                             * @param {google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse} [response] ListReservationGroupsResponse
+                             */
+    
+                            /**
+                             * Calls ListReservationGroups.
+                             * @function listReservationGroups
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest} request ListReservationGroupsRequest message or plain object
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationService.ListReservationGroupsCallback} callback Node-style callback called with the error, if any, and ListReservationGroupsResponse
+                             * @returns {undefined}
+                             * @variation 1
+                             */
+                            Object.defineProperty(ReservationService.prototype.listReservationGroups = function listReservationGroups(request, callback) {
+                                return this.rpcCall(listReservationGroups, $root.google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest, $root.google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse, request, callback);
+                            }, "name", { value: "ListReservationGroups" });
+    
+                            /**
+                             * Calls ListReservationGroups.
+                             * @function listReservationGroups
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationService
+                             * @instance
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest} request ListReservationGroupsRequest message or plain object
+                             * @returns {Promise<google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse>} Promise
+                             * @variation 2
+                             */
+    
                             return ReservationService;
                         })();
     
@@ -856,7 +1087,10 @@
                              * @property {string|null} [originalPrimaryLocation] Reservation originalPrimaryLocation
                              * @property {number|Long|null} [maxSlots] Reservation maxSlots
                              * @property {google.cloud.bigquery.reservation.v1.Reservation.ScalingMode|null} [scalingMode] Reservation scalingMode
+                             * @property {Object.<string,string>|null} [labels] Reservation labels
+                             * @property {string|null} [reservationGroup] Reservation reservationGroup
                              * @property {google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus|null} [replicationStatus] Reservation replicationStatus
+                             * @property {google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null} [schedulingPolicy] Reservation schedulingPolicy
                              */
     
                             /**
@@ -868,6 +1102,7 @@
                              * @param {google.cloud.bigquery.reservation.v1.IReservation=} [properties] Properties to set
                              */
                             function Reservation(properties) {
+                                this.labels = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -987,12 +1222,36 @@
                             Reservation.prototype.scalingMode = 0;
     
                             /**
+                             * Reservation labels.
+                             * @member {Object.<string,string>} labels
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.labels = $util.emptyObject;
+    
+                            /**
+                             * Reservation reservationGroup.
+                             * @member {string} reservationGroup
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.reservationGroup = "";
+    
+                            /**
                              * Reservation replicationStatus.
                              * @member {google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus|null|undefined} replicationStatus
                              * @memberof google.cloud.bigquery.reservation.v1.Reservation
                              * @instance
                              */
                             Reservation.prototype.replicationStatus = null;
+    
+                            /**
+                             * Reservation schedulingPolicy.
+                             * @member {google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null|undefined} schedulingPolicy
+                             * @memberof google.cloud.bigquery.reservation.v1.Reservation
+                             * @instance
+                             */
+                            Reservation.prototype.schedulingPolicy = null;
     
                             // OneOf field names bound to virtual getters and setters
                             var $oneOfFields;
@@ -1055,8 +1314,15 @@
                                     writer.uint32(/* id 21, wireType 0 =*/168).int64(message.maxSlots);
                                 if (message.scalingMode != null && Object.hasOwnProperty.call(message, "scalingMode"))
                                     writer.uint32(/* id 22, wireType 0 =*/176).int32(message.scalingMode);
+                                if (message.labels != null && Object.hasOwnProperty.call(message, "labels"))
+                                    for (var keys = Object.keys(message.labels), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 23, wireType 2 =*/186).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.labels[keys[i]]).ldelim();
                                 if (message.replicationStatus != null && Object.hasOwnProperty.call(message, "replicationStatus"))
                                     $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.encode(message.replicationStatus, writer.uint32(/* id 24, wireType 2 =*/194).fork()).ldelim();
+                                if (message.reservationGroup != null && Object.hasOwnProperty.call(message, "reservationGroup"))
+                                    writer.uint32(/* id 25, wireType 2 =*/202).string(message.reservationGroup);
+                                if (message.schedulingPolicy != null && Object.hasOwnProperty.call(message, "schedulingPolicy"))
+                                    $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.encode(message.schedulingPolicy, writer.uint32(/* id 27, wireType 2 =*/218).fork()).ldelim();
                                 return writer;
                             };
     
@@ -1087,7 +1353,7 @@
                             Reservation.decode = function decode(reader, length, error) {
                                 if (!(reader instanceof $Reader))
                                     reader = $Reader.create(reader);
-                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.Reservation();
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.Reservation(), key, value;
                                 while (reader.pos < end) {
                                     var tag = reader.uint32();
                                     if (tag === error)
@@ -1149,8 +1415,39 @@
                                             message.scalingMode = reader.int32();
                                             break;
                                         }
+                                    case 23: {
+                                            if (message.labels === $util.emptyObject)
+                                                message.labels = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.labels[key] = value;
+                                            break;
+                                        }
+                                    case 25: {
+                                            message.reservationGroup = reader.string();
+                                            break;
+                                        }
                                     case 24: {
                                             message.replicationStatus = $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 27: {
+                                            message.schedulingPolicy = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.decode(reader, reader.uint32());
                                             break;
                                         }
                                     default:
@@ -1253,10 +1550,26 @@
                                     case 3:
                                         break;
                                     }
+                                if (message.labels != null && message.hasOwnProperty("labels")) {
+                                    if (!$util.isObject(message.labels))
+                                        return "labels: object expected";
+                                    var key = Object.keys(message.labels);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.labels[key[i]]))
+                                            return "labels: string{k:string} expected";
+                                }
+                                if (message.reservationGroup != null && message.hasOwnProperty("reservationGroup"))
+                                    if (!$util.isString(message.reservationGroup))
+                                        return "reservationGroup: string expected";
                                 if (message.replicationStatus != null && message.hasOwnProperty("replicationStatus")) {
                                     var error = $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.verify(message.replicationStatus);
                                     if (error)
                                         return "replicationStatus." + error;
+                                }
+                                if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy")) {
+                                    var error = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.verify(message.schedulingPolicy);
+                                    if (error)
+                                        return "schedulingPolicy." + error;
                                 }
                                 return null;
                             };
@@ -1375,10 +1688,24 @@
                                     message.scalingMode = 3;
                                     break;
                                 }
+                                if (object.labels) {
+                                    if (typeof object.labels !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.labels: object expected");
+                                    message.labels = {};
+                                    for (var keys = Object.keys(object.labels), i = 0; i < keys.length; ++i)
+                                        message.labels[keys[i]] = String(object.labels[keys[i]]);
+                                }
+                                if (object.reservationGroup != null)
+                                    message.reservationGroup = String(object.reservationGroup);
                                 if (object.replicationStatus != null) {
                                     if (typeof object.replicationStatus !== "object")
                                         throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.replicationStatus: object expected");
                                     message.replicationStatus = $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.fromObject(object.replicationStatus);
+                                }
+                                if (object.schedulingPolicy != null) {
+                                    if (typeof object.schedulingPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.Reservation.schedulingPolicy: object expected");
+                                    message.schedulingPolicy = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.fromObject(object.schedulingPolicy);
                                 }
                                 return message;
                             };
@@ -1396,6 +1723,8 @@
                                 if (!options)
                                     options = {};
                                 var object = {};
+                                if (options.objects || options.defaults)
+                                    object.labels = {};
                                 if (options.defaults) {
                                     object.name = "";
                                     if ($util.Long) {
@@ -1419,6 +1748,8 @@
                                     object.originalPrimaryLocation = "";
                                     object.scalingMode = options.enums === String ? "SCALING_MODE_UNSPECIFIED" : 0;
                                     object.replicationStatus = null;
+                                    object.reservationGroup = "";
+                                    object.schedulingPolicy = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -1460,8 +1791,18 @@
                                 }
                                 if (message.scalingMode != null && message.hasOwnProperty("scalingMode"))
                                     object.scalingMode = options.enums === String ? $root.google.cloud.bigquery.reservation.v1.Reservation.ScalingMode[message.scalingMode] === undefined ? message.scalingMode : $root.google.cloud.bigquery.reservation.v1.Reservation.ScalingMode[message.scalingMode] : message.scalingMode;
+                                var keys2;
+                                if (message.labels && (keys2 = Object.keys(message.labels)).length) {
+                                    object.labels = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.labels[keys2[j]] = message.labels[keys2[j]];
+                                }
                                 if (message.replicationStatus != null && message.hasOwnProperty("replicationStatus"))
                                     object.replicationStatus = $root.google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus.toObject(message.replicationStatus, options);
+                                if (message.reservationGroup != null && message.hasOwnProperty("reservationGroup"))
+                                    object.reservationGroup = message.reservationGroup;
+                                if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy"))
+                                    object.schedulingPolicy = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.toObject(message.schedulingPolicy, options);
                                 return object;
                             };
     
@@ -2062,6 +2403,482 @@
                             })();
     
                             return Reservation;
+                        })();
+    
+                        v1.SchedulingPolicy = (function() {
+    
+                            /**
+                             * Properties of a SchedulingPolicy.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface ISchedulingPolicy
+                             * @property {number|Long|null} [concurrency] SchedulingPolicy concurrency
+                             * @property {number|Long|null} [maxSlots] SchedulingPolicy maxSlots
+                             */
+    
+                            /**
+                             * Constructs a new SchedulingPolicy.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a SchedulingPolicy.
+                             * @implements ISchedulingPolicy
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.ISchedulingPolicy=} [properties] Properties to set
+                             */
+                            function SchedulingPolicy(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * SchedulingPolicy concurrency.
+                             * @member {number|Long|null|undefined} concurrency
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @instance
+                             */
+                            SchedulingPolicy.prototype.concurrency = null;
+    
+                            /**
+                             * SchedulingPolicy maxSlots.
+                             * @member {number|Long|null|undefined} maxSlots
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @instance
+                             */
+                            SchedulingPolicy.prototype.maxSlots = null;
+    
+                            // OneOf field names bound to virtual getters and setters
+                            var $oneOfFields;
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(SchedulingPolicy.prototype, "_concurrency", {
+                                get: $util.oneOfGetter($oneOfFields = ["concurrency"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            // Virtual OneOf for proto3 optional field
+                            Object.defineProperty(SchedulingPolicy.prototype, "_maxSlots", {
+                                get: $util.oneOfGetter($oneOfFields = ["maxSlots"]),
+                                set: $util.oneOfSetter($oneOfFields)
+                            });
+    
+                            /**
+                             * Creates a new SchedulingPolicy instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ISchedulingPolicy=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.SchedulingPolicy} SchedulingPolicy instance
+                             */
+                            SchedulingPolicy.create = function create(properties) {
+                                return new SchedulingPolicy(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified SchedulingPolicy message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SchedulingPolicy.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ISchedulingPolicy} message SchedulingPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchedulingPolicy.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.concurrency != null && Object.hasOwnProperty.call(message, "concurrency"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).int64(message.concurrency);
+                                if (message.maxSlots != null && Object.hasOwnProperty.call(message, "maxSlots"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int64(message.maxSlots);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified SchedulingPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SchedulingPolicy.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ISchedulingPolicy} message SchedulingPolicy message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            SchedulingPolicy.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a SchedulingPolicy message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.SchedulingPolicy} SchedulingPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchedulingPolicy.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.concurrency = reader.int64();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.maxSlots = reader.int64();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a SchedulingPolicy message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.SchedulingPolicy} SchedulingPolicy
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            SchedulingPolicy.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a SchedulingPolicy message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            SchedulingPolicy.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                var properties = {};
+                                if (message.concurrency != null && message.hasOwnProperty("concurrency")) {
+                                    properties._concurrency = 1;
+                                    if (!$util.isInteger(message.concurrency) && !(message.concurrency && $util.isInteger(message.concurrency.low) && $util.isInteger(message.concurrency.high)))
+                                        return "concurrency: integer|Long expected";
+                                }
+                                if (message.maxSlots != null && message.hasOwnProperty("maxSlots")) {
+                                    properties._maxSlots = 1;
+                                    if (!$util.isInteger(message.maxSlots) && !(message.maxSlots && $util.isInteger(message.maxSlots.low) && $util.isInteger(message.maxSlots.high)))
+                                        return "maxSlots: integer|Long expected";
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a SchedulingPolicy message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.SchedulingPolicy} SchedulingPolicy
+                             */
+                            SchedulingPolicy.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy();
+                                if (object.concurrency != null)
+                                    if ($util.Long)
+                                        (message.concurrency = $util.Long.fromValue(object.concurrency)).unsigned = false;
+                                    else if (typeof object.concurrency === "string")
+                                        message.concurrency = parseInt(object.concurrency, 10);
+                                    else if (typeof object.concurrency === "number")
+                                        message.concurrency = object.concurrency;
+                                    else if (typeof object.concurrency === "object")
+                                        message.concurrency = new $util.LongBits(object.concurrency.low >>> 0, object.concurrency.high >>> 0).toNumber();
+                                if (object.maxSlots != null)
+                                    if ($util.Long)
+                                        (message.maxSlots = $util.Long.fromValue(object.maxSlots)).unsigned = false;
+                                    else if (typeof object.maxSlots === "string")
+                                        message.maxSlots = parseInt(object.maxSlots, 10);
+                                    else if (typeof object.maxSlots === "number")
+                                        message.maxSlots = object.maxSlots;
+                                    else if (typeof object.maxSlots === "object")
+                                        message.maxSlots = new $util.LongBits(object.maxSlots.low >>> 0, object.maxSlots.high >>> 0).toNumber();
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a SchedulingPolicy message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.SchedulingPolicy} message SchedulingPolicy
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            SchedulingPolicy.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (message.concurrency != null && message.hasOwnProperty("concurrency")) {
+                                    if (typeof message.concurrency === "number")
+                                        object.concurrency = options.longs === String ? String(message.concurrency) : message.concurrency;
+                                    else
+                                        object.concurrency = options.longs === String ? $util.Long.prototype.toString.call(message.concurrency) : options.longs === Number ? new $util.LongBits(message.concurrency.low >>> 0, message.concurrency.high >>> 0).toNumber() : message.concurrency;
+                                    if (options.oneofs)
+                                        object._concurrency = "concurrency";
+                                }
+                                if (message.maxSlots != null && message.hasOwnProperty("maxSlots")) {
+                                    if (typeof message.maxSlots === "number")
+                                        object.maxSlots = options.longs === String ? String(message.maxSlots) : message.maxSlots;
+                                    else
+                                        object.maxSlots = options.longs === String ? $util.Long.prototype.toString.call(message.maxSlots) : options.longs === Number ? new $util.LongBits(message.maxSlots.low >>> 0, message.maxSlots.high >>> 0).toNumber() : message.maxSlots;
+                                    if (options.oneofs)
+                                        object._maxSlots = "maxSlots";
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this SchedulingPolicy to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            SchedulingPolicy.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for SchedulingPolicy
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.reservation.v1.SchedulingPolicy
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            SchedulingPolicy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.SchedulingPolicy";
+                            };
+    
+                            return SchedulingPolicy;
+                        })();
+    
+                        v1.ReservationGroup = (function() {
+    
+                            /**
+                             * Properties of a ReservationGroup.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface IReservationGroup
+                             * @property {string|null} [name] ReservationGroup name
+                             */
+    
+                            /**
+                             * Constructs a new ReservationGroup.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a ReservationGroup.
+                             * @implements IReservationGroup
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.IReservationGroup=} [properties] Properties to set
+                             */
+                            function ReservationGroup(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ReservationGroup name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @instance
+                             */
+                            ReservationGroup.prototype.name = "";
+    
+                            /**
+                             * Creates a new ReservationGroup instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IReservationGroup=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.ReservationGroup} ReservationGroup instance
+                             */
+                            ReservationGroup.create = function create(properties) {
+                                return new ReservationGroup(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ReservationGroup message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ReservationGroup.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IReservationGroup} message ReservationGroup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReservationGroup.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ReservationGroup message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ReservationGroup.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IReservationGroup} message ReservationGroup message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ReservationGroup.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ReservationGroup message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.ReservationGroup} ReservationGroup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReservationGroup.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.ReservationGroup();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ReservationGroup message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.ReservationGroup} ReservationGroup
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ReservationGroup.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ReservationGroup message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ReservationGroup.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ReservationGroup message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.ReservationGroup} ReservationGroup
+                             */
+                            ReservationGroup.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.ReservationGroup)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.ReservationGroup();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ReservationGroup message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ReservationGroup} message ReservationGroup
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ReservationGroup.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ReservationGroup to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ReservationGroup.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ReservationGroup
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.reservation.v1.ReservationGroup
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ReservationGroup.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.ReservationGroup";
+                            };
+    
+                            return ReservationGroup;
                         })();
     
                         v1.CapacityCommitment = (function() {
@@ -4414,6 +5231,1175 @@
                             return FailoverReservationRequest;
                         })();
     
+                        v1.CreateReservationGroupRequest = (function() {
+    
+                            /**
+                             * Properties of a CreateReservationGroupRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface ICreateReservationGroupRequest
+                             * @property {string|null} [parent] CreateReservationGroupRequest parent
+                             * @property {string|null} [reservationGroupId] CreateReservationGroupRequest reservationGroupId
+                             * @property {google.cloud.bigquery.reservation.v1.IReservationGroup|null} [reservationGroup] CreateReservationGroupRequest reservationGroup
+                             */
+    
+                            /**
+                             * Constructs a new CreateReservationGroupRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a CreateReservationGroupRequest.
+                             * @implements ICreateReservationGroupRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest=} [properties] Properties to set
+                             */
+                            function CreateReservationGroupRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * CreateReservationGroupRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @instance
+                             */
+                            CreateReservationGroupRequest.prototype.parent = "";
+    
+                            /**
+                             * CreateReservationGroupRequest reservationGroupId.
+                             * @member {string} reservationGroupId
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @instance
+                             */
+                            CreateReservationGroupRequest.prototype.reservationGroupId = "";
+    
+                            /**
+                             * CreateReservationGroupRequest reservationGroup.
+                             * @member {google.cloud.bigquery.reservation.v1.IReservationGroup|null|undefined} reservationGroup
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @instance
+                             */
+                            CreateReservationGroupRequest.prototype.reservationGroup = null;
+    
+                            /**
+                             * Creates a new CreateReservationGroupRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest} CreateReservationGroupRequest instance
+                             */
+                            CreateReservationGroupRequest.create = function create(properties) {
+                                return new CreateReservationGroupRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified CreateReservationGroupRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest} message CreateReservationGroupRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateReservationGroupRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.reservationGroupId != null && Object.hasOwnProperty.call(message, "reservationGroupId"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.reservationGroupId);
+                                if (message.reservationGroup != null && Object.hasOwnProperty.call(message, "reservationGroup"))
+                                    $root.google.cloud.bigquery.reservation.v1.ReservationGroup.encode(message.reservationGroup, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified CreateReservationGroupRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest} message CreateReservationGroupRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            CreateReservationGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a CreateReservationGroupRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest} CreateReservationGroupRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateReservationGroupRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.reservationGroupId = reader.string();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.reservationGroup = $root.google.cloud.bigquery.reservation.v1.ReservationGroup.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a CreateReservationGroupRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest} CreateReservationGroupRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            CreateReservationGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a CreateReservationGroupRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            CreateReservationGroupRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.reservationGroupId != null && message.hasOwnProperty("reservationGroupId"))
+                                    if (!$util.isString(message.reservationGroupId))
+                                        return "reservationGroupId: string expected";
+                                if (message.reservationGroup != null && message.hasOwnProperty("reservationGroup")) {
+                                    var error = $root.google.cloud.bigquery.reservation.v1.ReservationGroup.verify(message.reservationGroup);
+                                    if (error)
+                                        return "reservationGroup." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a CreateReservationGroupRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest} CreateReservationGroupRequest
+                             */
+                            CreateReservationGroupRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.reservationGroupId != null)
+                                    message.reservationGroupId = String(object.reservationGroupId);
+                                if (object.reservationGroup != null) {
+                                    if (typeof object.reservationGroup !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest.reservationGroup: object expected");
+                                    message.reservationGroup = $root.google.cloud.bigquery.reservation.v1.ReservationGroup.fromObject(object.reservationGroup);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a CreateReservationGroupRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest} message CreateReservationGroupRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            CreateReservationGroupRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.reservationGroupId = "";
+                                    object.reservationGroup = null;
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.reservationGroupId != null && message.hasOwnProperty("reservationGroupId"))
+                                    object.reservationGroupId = message.reservationGroupId;
+                                if (message.reservationGroup != null && message.hasOwnProperty("reservationGroup"))
+                                    object.reservationGroup = $root.google.cloud.bigquery.reservation.v1.ReservationGroup.toObject(message.reservationGroup, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this CreateReservationGroupRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            CreateReservationGroupRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for CreateReservationGroupRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            CreateReservationGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest";
+                            };
+    
+                            return CreateReservationGroupRequest;
+                        })();
+    
+                        v1.GetReservationGroupRequest = (function() {
+    
+                            /**
+                             * Properties of a GetReservationGroupRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface IGetReservationGroupRequest
+                             * @property {string|null} [name] GetReservationGroupRequest name
+                             */
+    
+                            /**
+                             * Constructs a new GetReservationGroupRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a GetReservationGroupRequest.
+                             * @implements IGetReservationGroupRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest=} [properties] Properties to set
+                             */
+                            function GetReservationGroupRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * GetReservationGroupRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @instance
+                             */
+                            GetReservationGroupRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new GetReservationGroupRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.GetReservationGroupRequest} GetReservationGroupRequest instance
+                             */
+                            GetReservationGroupRequest.create = function create(properties) {
+                                return new GetReservationGroupRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified GetReservationGroupRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.GetReservationGroupRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest} message GetReservationGroupRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetReservationGroupRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified GetReservationGroupRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.GetReservationGroupRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest} message GetReservationGroupRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            GetReservationGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a GetReservationGroupRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.GetReservationGroupRequest} GetReservationGroupRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetReservationGroupRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.GetReservationGroupRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a GetReservationGroupRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.GetReservationGroupRequest} GetReservationGroupRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            GetReservationGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a GetReservationGroupRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            GetReservationGroupRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a GetReservationGroupRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.GetReservationGroupRequest} GetReservationGroupRequest
+                             */
+                            GetReservationGroupRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.GetReservationGroupRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.GetReservationGroupRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a GetReservationGroupRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.GetReservationGroupRequest} message GetReservationGroupRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            GetReservationGroupRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this GetReservationGroupRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            GetReservationGroupRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for GetReservationGroupRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.reservation.v1.GetReservationGroupRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            GetReservationGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.GetReservationGroupRequest";
+                            };
+    
+                            return GetReservationGroupRequest;
+                        })();
+    
+                        v1.ListReservationGroupsRequest = (function() {
+    
+                            /**
+                             * Properties of a ListReservationGroupsRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface IListReservationGroupsRequest
+                             * @property {string|null} [parent] ListReservationGroupsRequest parent
+                             * @property {number|null} [pageSize] ListReservationGroupsRequest pageSize
+                             * @property {string|null} [pageToken] ListReservationGroupsRequest pageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListReservationGroupsRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a ListReservationGroupsRequest.
+                             * @implements IListReservationGroupsRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest=} [properties] Properties to set
+                             */
+                            function ListReservationGroupsRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListReservationGroupsRequest parent.
+                             * @member {string} parent
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @instance
+                             */
+                            ListReservationGroupsRequest.prototype.parent = "";
+    
+                            /**
+                             * ListReservationGroupsRequest pageSize.
+                             * @member {number} pageSize
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @instance
+                             */
+                            ListReservationGroupsRequest.prototype.pageSize = 0;
+    
+                            /**
+                             * ListReservationGroupsRequest pageToken.
+                             * @member {string} pageToken
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @instance
+                             */
+                            ListReservationGroupsRequest.prototype.pageToken = "";
+    
+                            /**
+                             * Creates a new ListReservationGroupsRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest} ListReservationGroupsRequest instance
+                             */
+                            ListReservationGroupsRequest.create = function create(properties) {
+                                return new ListReservationGroupsRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListReservationGroupsRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest} message ListReservationGroupsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListReservationGroupsRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.parent != null && Object.hasOwnProperty.call(message, "parent"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.parent);
+                                if (message.pageSize != null && Object.hasOwnProperty.call(message, "pageSize"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).int32(message.pageSize);
+                                if (message.pageToken != null && Object.hasOwnProperty.call(message, "pageToken"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.pageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListReservationGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest} message ListReservationGroupsRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListReservationGroupsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListReservationGroupsRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest} ListReservationGroupsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListReservationGroupsRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.parent = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.pageSize = reader.int32();
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.pageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListReservationGroupsRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest} ListReservationGroupsRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListReservationGroupsRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListReservationGroupsRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListReservationGroupsRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    if (!$util.isString(message.parent))
+                                        return "parent: string expected";
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    if (!$util.isInteger(message.pageSize))
+                                        return "pageSize: integer expected";
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    if (!$util.isString(message.pageToken))
+                                        return "pageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListReservationGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest} ListReservationGroupsRequest
+                             */
+                            ListReservationGroupsRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest();
+                                if (object.parent != null)
+                                    message.parent = String(object.parent);
+                                if (object.pageSize != null)
+                                    message.pageSize = object.pageSize | 0;
+                                if (object.pageToken != null)
+                                    message.pageToken = String(object.pageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListReservationGroupsRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest} message ListReservationGroupsRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListReservationGroupsRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.parent = "";
+                                    object.pageSize = 0;
+                                    object.pageToken = "";
+                                }
+                                if (message.parent != null && message.hasOwnProperty("parent"))
+                                    object.parent = message.parent;
+                                if (message.pageSize != null && message.hasOwnProperty("pageSize"))
+                                    object.pageSize = message.pageSize;
+                                if (message.pageToken != null && message.hasOwnProperty("pageToken"))
+                                    object.pageToken = message.pageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListReservationGroupsRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListReservationGroupsRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListReservationGroupsRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListReservationGroupsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest";
+                            };
+    
+                            return ListReservationGroupsRequest;
+                        })();
+    
+                        v1.ListReservationGroupsResponse = (function() {
+    
+                            /**
+                             * Properties of a ListReservationGroupsResponse.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface IListReservationGroupsResponse
+                             * @property {Array.<google.cloud.bigquery.reservation.v1.IReservationGroup>|null} [reservationGroups] ListReservationGroupsResponse reservationGroups
+                             * @property {string|null} [nextPageToken] ListReservationGroupsResponse nextPageToken
+                             */
+    
+                            /**
+                             * Constructs a new ListReservationGroupsResponse.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a ListReservationGroupsResponse.
+                             * @implements IListReservationGroupsResponse
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse=} [properties] Properties to set
+                             */
+                            function ListReservationGroupsResponse(properties) {
+                                this.reservationGroups = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ListReservationGroupsResponse reservationGroups.
+                             * @member {Array.<google.cloud.bigquery.reservation.v1.IReservationGroup>} reservationGroups
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @instance
+                             */
+                            ListReservationGroupsResponse.prototype.reservationGroups = $util.emptyArray;
+    
+                            /**
+                             * ListReservationGroupsResponse nextPageToken.
+                             * @member {string} nextPageToken
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @instance
+                             */
+                            ListReservationGroupsResponse.prototype.nextPageToken = "";
+    
+                            /**
+                             * Creates a new ListReservationGroupsResponse instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse} ListReservationGroupsResponse instance
+                             */
+                            ListReservationGroupsResponse.create = function create(properties) {
+                                return new ListReservationGroupsResponse(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ListReservationGroupsResponse message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse} message ListReservationGroupsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListReservationGroupsResponse.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.reservationGroups != null && message.reservationGroups.length)
+                                    for (var i = 0; i < message.reservationGroups.length; ++i)
+                                        $root.google.cloud.bigquery.reservation.v1.ReservationGroup.encode(message.reservationGroups[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
+                                    writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ListReservationGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse} message ListReservationGroupsResponse message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ListReservationGroupsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ListReservationGroupsResponse message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse} ListReservationGroupsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListReservationGroupsResponse.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.reservationGroups && message.reservationGroups.length))
+                                                message.reservationGroups = [];
+                                            message.reservationGroups.push($root.google.cloud.bigquery.reservation.v1.ReservationGroup.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.nextPageToken = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ListReservationGroupsResponse message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse} ListReservationGroupsResponse
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ListReservationGroupsResponse.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ListReservationGroupsResponse message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ListReservationGroupsResponse.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.reservationGroups != null && message.hasOwnProperty("reservationGroups")) {
+                                    if (!Array.isArray(message.reservationGroups))
+                                        return "reservationGroups: array expected";
+                                    for (var i = 0; i < message.reservationGroups.length; ++i) {
+                                        var error = $root.google.cloud.bigquery.reservation.v1.ReservationGroup.verify(message.reservationGroups[i]);
+                                        if (error)
+                                            return "reservationGroups." + error;
+                                    }
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    if (!$util.isString(message.nextPageToken))
+                                        return "nextPageToken: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ListReservationGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse} ListReservationGroupsResponse
+                             */
+                            ListReservationGroupsResponse.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse();
+                                if (object.reservationGroups) {
+                                    if (!Array.isArray(object.reservationGroups))
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse.reservationGroups: array expected");
+                                    message.reservationGroups = [];
+                                    for (var i = 0; i < object.reservationGroups.length; ++i) {
+                                        if (typeof object.reservationGroups[i] !== "object")
+                                            throw TypeError(".google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse.reservationGroups: object expected");
+                                        message.reservationGroups[i] = $root.google.cloud.bigquery.reservation.v1.ReservationGroup.fromObject(object.reservationGroups[i]);
+                                    }
+                                }
+                                if (object.nextPageToken != null)
+                                    message.nextPageToken = String(object.nextPageToken);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ListReservationGroupsResponse message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse} message ListReservationGroupsResponse
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ListReservationGroupsResponse.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.reservationGroups = [];
+                                if (options.defaults)
+                                    object.nextPageToken = "";
+                                if (message.reservationGroups && message.reservationGroups.length) {
+                                    object.reservationGroups = [];
+                                    for (var j = 0; j < message.reservationGroups.length; ++j)
+                                        object.reservationGroups[j] = $root.google.cloud.bigquery.reservation.v1.ReservationGroup.toObject(message.reservationGroups[j], options);
+                                }
+                                if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
+                                    object.nextPageToken = message.nextPageToken;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ListReservationGroupsResponse to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ListReservationGroupsResponse.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ListReservationGroupsResponse
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ListReservationGroupsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse";
+                            };
+    
+                            return ListReservationGroupsResponse;
+                        })();
+    
+                        v1.DeleteReservationGroupRequest = (function() {
+    
+                            /**
+                             * Properties of a DeleteReservationGroupRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @interface IDeleteReservationGroupRequest
+                             * @property {string|null} [name] DeleteReservationGroupRequest name
+                             */
+    
+                            /**
+                             * Constructs a new DeleteReservationGroupRequest.
+                             * @memberof google.cloud.bigquery.reservation.v1
+                             * @classdesc Represents a DeleteReservationGroupRequest.
+                             * @implements IDeleteReservationGroupRequest
+                             * @constructor
+                             * @param {google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest=} [properties] Properties to set
+                             */
+                            function DeleteReservationGroupRequest(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * DeleteReservationGroupRequest name.
+                             * @member {string} name
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @instance
+                             */
+                            DeleteReservationGroupRequest.prototype.name = "";
+    
+                            /**
+                             * Creates a new DeleteReservationGroupRequest instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest} DeleteReservationGroupRequest instance
+                             */
+                            DeleteReservationGroupRequest.create = function create(properties) {
+                                return new DeleteReservationGroupRequest(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteReservationGroupRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest} message DeleteReservationGroupRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteReservationGroupRequest.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.name != null && Object.hasOwnProperty.call(message, "name"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.name);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified DeleteReservationGroupRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest} message DeleteReservationGroupRequest message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            DeleteReservationGroupRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a DeleteReservationGroupRequest message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest} DeleteReservationGroupRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteReservationGroupRequest.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.name = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a DeleteReservationGroupRequest message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest} DeleteReservationGroupRequest
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            DeleteReservationGroupRequest.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a DeleteReservationGroupRequest message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            DeleteReservationGroupRequest.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    if (!$util.isString(message.name))
+                                        return "name: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a DeleteReservationGroupRequest message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest} DeleteReservationGroupRequest
+                             */
+                            DeleteReservationGroupRequest.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest();
+                                if (object.name != null)
+                                    message.name = String(object.name);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a DeleteReservationGroupRequest message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @static
+                             * @param {google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest} message DeleteReservationGroupRequest
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            DeleteReservationGroupRequest.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults)
+                                    object.name = "";
+                                if (message.name != null && message.hasOwnProperty("name"))
+                                    object.name = message.name;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this DeleteReservationGroupRequest to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            DeleteReservationGroupRequest.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for DeleteReservationGroupRequest
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            DeleteReservationGroupRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest";
+                            };
+    
+                            return DeleteReservationGroupRequest;
+                        })();
+    
                         v1.CreateCapacityCommitmentRequest = (function() {
     
                             /**
@@ -6359,6 +8345,7 @@
                              * @interface IMergeCapacityCommitmentsRequest
                              * @property {string|null} [parent] MergeCapacityCommitmentsRequest parent
                              * @property {Array.<string>|null} [capacityCommitmentIds] MergeCapacityCommitmentsRequest capacityCommitmentIds
+                             * @property {string|null} [capacityCommitmentId] MergeCapacityCommitmentsRequest capacityCommitmentId
                              */
     
                             /**
@@ -6394,6 +8381,14 @@
                             MergeCapacityCommitmentsRequest.prototype.capacityCommitmentIds = $util.emptyArray;
     
                             /**
+                             * MergeCapacityCommitmentsRequest capacityCommitmentId.
+                             * @member {string} capacityCommitmentId
+                             * @memberof google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest
+                             * @instance
+                             */
+                            MergeCapacityCommitmentsRequest.prototype.capacityCommitmentId = "";
+    
+                            /**
                              * Creates a new MergeCapacityCommitmentsRequest instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.MergeCapacityCommitmentsRequest
@@ -6422,6 +8417,8 @@
                                 if (message.capacityCommitmentIds != null && message.capacityCommitmentIds.length)
                                     for (var i = 0; i < message.capacityCommitmentIds.length; ++i)
                                         writer.uint32(/* id 2, wireType 2 =*/18).string(message.capacityCommitmentIds[i]);
+                                if (message.capacityCommitmentId != null && Object.hasOwnProperty.call(message, "capacityCommitmentId"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.capacityCommitmentId);
                                 return writer;
                             };
     
@@ -6466,6 +8463,10 @@
                                             if (!(message.capacityCommitmentIds && message.capacityCommitmentIds.length))
                                                 message.capacityCommitmentIds = [];
                                             message.capacityCommitmentIds.push(reader.string());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.capacityCommitmentId = reader.string();
                                             break;
                                         }
                                     default:
@@ -6513,6 +8514,9 @@
                                         if (!$util.isString(message.capacityCommitmentIds[i]))
                                             return "capacityCommitmentIds: string[] expected";
                                 }
+                                if (message.capacityCommitmentId != null && message.hasOwnProperty("capacityCommitmentId"))
+                                    if (!$util.isString(message.capacityCommitmentId))
+                                        return "capacityCommitmentId: string expected";
                                 return null;
                             };
     
@@ -6537,6 +8541,8 @@
                                     for (var i = 0; i < object.capacityCommitmentIds.length; ++i)
                                         message.capacityCommitmentIds[i] = String(object.capacityCommitmentIds[i]);
                                 }
+                                if (object.capacityCommitmentId != null)
+                                    message.capacityCommitmentId = String(object.capacityCommitmentId);
                                 return message;
                             };
     
@@ -6555,8 +8561,10 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.capacityCommitmentIds = [];
-                                if (options.defaults)
+                                if (options.defaults) {
                                     object.parent = "";
+                                    object.capacityCommitmentId = "";
+                                }
                                 if (message.parent != null && message.hasOwnProperty("parent"))
                                     object.parent = message.parent;
                                 if (message.capacityCommitmentIds && message.capacityCommitmentIds.length) {
@@ -6564,6 +8572,8 @@
                                     for (var j = 0; j < message.capacityCommitmentIds.length; ++j)
                                         object.capacityCommitmentIds[j] = message.capacityCommitmentIds[j];
                                 }
+                                if (message.capacityCommitmentId != null && message.hasOwnProperty("capacityCommitmentId"))
+                                    object.capacityCommitmentId = message.capacityCommitmentId;
                                 return object;
                             };
     
@@ -6607,6 +8617,7 @@
                              * @property {google.cloud.bigquery.reservation.v1.Assignment.JobType|null} [jobType] Assignment jobType
                              * @property {google.cloud.bigquery.reservation.v1.Assignment.State|null} [state] Assignment state
                              * @property {boolean|null} [enableGeminiInBigquery] Assignment enableGeminiInBigquery
+                             * @property {google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null} [schedulingPolicy] Assignment schedulingPolicy
                              */
     
                             /**
@@ -6665,6 +8676,14 @@
                             Assignment.prototype.enableGeminiInBigquery = false;
     
                             /**
+                             * Assignment schedulingPolicy.
+                             * @member {google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null|undefined} schedulingPolicy
+                             * @memberof google.cloud.bigquery.reservation.v1.Assignment
+                             * @instance
+                             */
+                            Assignment.prototype.schedulingPolicy = null;
+    
+                            /**
                              * Creates a new Assignment instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.reservation.v1.Assignment
@@ -6698,6 +8717,8 @@
                                     writer.uint32(/* id 6, wireType 0 =*/48).int32(message.state);
                                 if (message.enableGeminiInBigquery != null && Object.hasOwnProperty.call(message, "enableGeminiInBigquery"))
                                     writer.uint32(/* id 10, wireType 0 =*/80).bool(message.enableGeminiInBigquery);
+                                if (message.schedulingPolicy != null && Object.hasOwnProperty.call(message, "schedulingPolicy"))
+                                    $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.encode(message.schedulingPolicy, writer.uint32(/* id 11, wireType 2 =*/90).fork()).ldelim();
                                 return writer;
                             };
     
@@ -6754,6 +8775,10 @@
                                             message.enableGeminiInBigquery = reader.bool();
                                             break;
                                         }
+                                    case 11: {
+                                            message.schedulingPolicy = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.decode(reader, reader.uint32());
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -6805,6 +8830,9 @@
                                     case 3:
                                     case 4:
                                     case 6:
+                                    case 7:
+                                    case 8:
+                                    case 9:
                                         break;
                                     }
                                 if (message.state != null && message.hasOwnProperty("state"))
@@ -6819,6 +8847,11 @@
                                 if (message.enableGeminiInBigquery != null && message.hasOwnProperty("enableGeminiInBigquery"))
                                     if (typeof message.enableGeminiInBigquery !== "boolean")
                                         return "enableGeminiInBigquery: boolean expected";
+                                if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy")) {
+                                    var error = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.verify(message.schedulingPolicy);
+                                    if (error)
+                                        return "schedulingPolicy." + error;
+                                }
                                 return null;
                             };
     
@@ -6869,6 +8902,18 @@
                                 case 6:
                                     message.jobType = 6;
                                     break;
+                                case "BACKGROUND_CHANGE_DATA_CAPTURE":
+                                case 7:
+                                    message.jobType = 7;
+                                    break;
+                                case "BACKGROUND_COLUMN_METADATA_INDEX":
+                                case 8:
+                                    message.jobType = 8;
+                                    break;
+                                case "BACKGROUND_SEARCH_INDEX_REFRESH":
+                                case 9:
+                                    message.jobType = 9;
+                                    break;
                                 }
                                 switch (object.state) {
                                 default:
@@ -6892,6 +8937,11 @@
                                 }
                                 if (object.enableGeminiInBigquery != null)
                                     message.enableGeminiInBigquery = Boolean(object.enableGeminiInBigquery);
+                                if (object.schedulingPolicy != null) {
+                                    if (typeof object.schedulingPolicy !== "object")
+                                        throw TypeError(".google.cloud.bigquery.reservation.v1.Assignment.schedulingPolicy: object expected");
+                                    message.schedulingPolicy = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.fromObject(object.schedulingPolicy);
+                                }
                                 return message;
                             };
     
@@ -6914,6 +8964,7 @@
                                     object.assignee = "";
                                     object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
                                     object.enableGeminiInBigquery = false;
+                                    object.schedulingPolicy = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -6925,6 +8976,8 @@
                                     object.state = options.enums === String ? $root.google.cloud.bigquery.reservation.v1.Assignment.State[message.state] === undefined ? message.state : $root.google.cloud.bigquery.reservation.v1.Assignment.State[message.state] : message.state;
                                 if (message.enableGeminiInBigquery != null && message.hasOwnProperty("enableGeminiInBigquery"))
                                     object.enableGeminiInBigquery = message.enableGeminiInBigquery;
+                                if (message.schedulingPolicy != null && message.hasOwnProperty("schedulingPolicy"))
+                                    object.schedulingPolicy = $root.google.cloud.bigquery.reservation.v1.SchedulingPolicy.toObject(message.schedulingPolicy, options);
                                 return object;
                             };
     
@@ -6964,6 +9017,9 @@
                              * @property {number} ML_EXTERNAL=3 ML_EXTERNAL value
                              * @property {number} BACKGROUND=4 BACKGROUND value
                              * @property {number} CONTINUOUS=6 CONTINUOUS value
+                             * @property {number} BACKGROUND_CHANGE_DATA_CAPTURE=7 BACKGROUND_CHANGE_DATA_CAPTURE value
+                             * @property {number} BACKGROUND_COLUMN_METADATA_INDEX=8 BACKGROUND_COLUMN_METADATA_INDEX value
+                             * @property {number} BACKGROUND_SEARCH_INDEX_REFRESH=9 BACKGROUND_SEARCH_INDEX_REFRESH value
                              */
                             Assignment.JobType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -6973,6 +9029,9 @@
                                 values[valuesById[3] = "ML_EXTERNAL"] = 3;
                                 values[valuesById[4] = "BACKGROUND"] = 4;
                                 values[valuesById[6] = "CONTINUOUS"] = 6;
+                                values[valuesById[7] = "BACKGROUND_CHANGE_DATA_CAPTURE"] = 7;
+                                values[valuesById[8] = "BACKGROUND_COLUMN_METADATA_INDEX"] = 8;
+                                values[valuesById[9] = "BACKGROUND_SEARCH_INDEX_REFRESH"] = 9;
                                 return values;
                             })();
     
@@ -28557,183 +30616,6 @@
                 return Duration;
             })();
     
-            protobuf.Empty = (function() {
-    
-                /**
-                 * Properties of an Empty.
-                 * @memberof google.protobuf
-                 * @interface IEmpty
-                 */
-    
-                /**
-                 * Constructs a new Empty.
-                 * @memberof google.protobuf
-                 * @classdesc Represents an Empty.
-                 * @implements IEmpty
-                 * @constructor
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 */
-                function Empty(properties) {
-                    if (properties)
-                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                            if (properties[keys[i]] != null)
-                                this[keys[i]] = properties[keys[i]];
-                }
-    
-                /**
-                 * Creates a new Empty instance using the specified properties.
-                 * @function create
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
-                 * @returns {google.protobuf.Empty} Empty instance
-                 */
-                Empty.create = function create(properties) {
-                    return new Empty(properties);
-                };
-    
-                /**
-                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encode = function encode(message, writer) {
-                    if (!writer)
-                        writer = $Writer.create();
-                    return writer;
-                };
-    
-                /**
-                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-                 * @function encodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
-                 * @param {$protobuf.Writer} [writer] Writer to encode to
-                 * @returns {$protobuf.Writer} Writer
-                 */
-                Empty.encodeDelimited = function encodeDelimited(message, writer) {
-                    return this.encode(message, writer).ldelim();
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer.
-                 * @function decode
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @param {number} [length] Message length if known beforehand
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decode = function decode(reader, length, error) {
-                    if (!(reader instanceof $Reader))
-                        reader = $Reader.create(reader);
-                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
-                    while (reader.pos < end) {
-                        var tag = reader.uint32();
-                        if (tag === error)
-                            break;
-                        switch (tag >>> 3) {
-                        default:
-                            reader.skipType(tag & 7);
-                            break;
-                        }
-                    }
-                    return message;
-                };
-    
-                /**
-                 * Decodes an Empty message from the specified reader or buffer, length delimited.
-                 * @function decodeDelimited
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                 * @returns {google.protobuf.Empty} Empty
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                Empty.decodeDelimited = function decodeDelimited(reader) {
-                    if (!(reader instanceof $Reader))
-                        reader = new $Reader(reader);
-                    return this.decode(reader, reader.uint32());
-                };
-    
-                /**
-                 * Verifies an Empty message.
-                 * @function verify
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} message Plain object to verify
-                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                 */
-                Empty.verify = function verify(message) {
-                    if (typeof message !== "object" || message === null)
-                        return "object expected";
-                    return null;
-                };
-    
-                /**
-                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-                 * @function fromObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {Object.<string,*>} object Plain object
-                 * @returns {google.protobuf.Empty} Empty
-                 */
-                Empty.fromObject = function fromObject(object) {
-                    if (object instanceof $root.google.protobuf.Empty)
-                        return object;
-                    return new $root.google.protobuf.Empty();
-                };
-    
-                /**
-                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
-                 * @function toObject
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {google.protobuf.Empty} message Empty
-                 * @param {$protobuf.IConversionOptions} [options] Conversion options
-                 * @returns {Object.<string,*>} Plain object
-                 */
-                Empty.toObject = function toObject() {
-                    return {};
-                };
-    
-                /**
-                 * Converts this Empty to JSON.
-                 * @function toJSON
-                 * @memberof google.protobuf.Empty
-                 * @instance
-                 * @returns {Object.<string,*>} JSON object
-                 */
-                Empty.prototype.toJSON = function toJSON() {
-                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                };
-    
-                /**
-                 * Gets the default type url for Empty
-                 * @function getTypeUrl
-                 * @memberof google.protobuf.Empty
-                 * @static
-                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns {string} The default type url
-                 */
-                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                    if (typeUrlPrefix === undefined) {
-                        typeUrlPrefix = "type.googleapis.com";
-                    }
-                    return typeUrlPrefix + "/google.protobuf.Empty";
-                };
-    
-                return Empty;
-            })();
-    
             protobuf.FieldMask = (function() {
     
                 /**
@@ -28953,6 +30835,183 @@
                 };
     
                 return FieldMask;
+            })();
+    
+            protobuf.Empty = (function() {
+    
+                /**
+                 * Properties of an Empty.
+                 * @memberof google.protobuf
+                 * @interface IEmpty
+                 */
+    
+                /**
+                 * Constructs a new Empty.
+                 * @memberof google.protobuf
+                 * @classdesc Represents an Empty.
+                 * @implements IEmpty
+                 * @constructor
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 */
+                function Empty(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Creates a new Empty instance using the specified properties.
+                 * @function create
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty=} [properties] Properties to set
+                 * @returns {google.protobuf.Empty} Empty instance
+                 */
+                Empty.create = function create(properties) {
+                    return new Empty(properties);
+                };
+    
+                /**
+                 * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.IEmpty} message Empty message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Empty.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.protobuf.Empty();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Empty message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.protobuf.Empty} Empty
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Empty.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Empty message.
+                 * @function verify
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Empty.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.protobuf.Empty} Empty
+                 */
+                Empty.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.protobuf.Empty)
+                        return object;
+                    return new $root.google.protobuf.Empty();
+                };
+    
+                /**
+                 * Creates a plain object from an Empty message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {google.protobuf.Empty} message Empty
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Empty.toObject = function toObject() {
+                    return {};
+                };
+    
+                /**
+                 * Converts this Empty to JSON.
+                 * @function toJSON
+                 * @memberof google.protobuf.Empty
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Empty.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Empty
+                 * @function getTypeUrl
+                 * @memberof google.protobuf.Empty
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Empty.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.protobuf.Empty";
+                };
+    
+                return Empty;
             })();
     
             protobuf.Timestamp = (function() {
@@ -29437,6 +31496,3668 @@
             })();
     
             return protobuf;
+        })();
+    
+        google.iam = (function() {
+    
+            /**
+             * Namespace iam.
+             * @memberof google
+             * @namespace
+             */
+            var iam = {};
+    
+            iam.v1 = (function() {
+    
+                /**
+                 * Namespace v1.
+                 * @memberof google.iam
+                 * @namespace
+                 */
+                var v1 = {};
+    
+                v1.IAMPolicy = (function() {
+    
+                    /**
+                     * Constructs a new IAMPolicy service.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a IAMPolicy
+                     * @extends $protobuf.rpc.Service
+                     * @constructor
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    function IAMPolicy(rpcImpl, requestDelimited, responseDelimited) {
+                        $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+                    }
+    
+                    (IAMPolicy.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = IAMPolicy;
+    
+                    /**
+                     * Creates new IAMPolicy service using the specified rpc implementation.
+                     * @function create
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @static
+                     * @param {$protobuf.RPCImpl} rpcImpl RPC implementation
+                     * @param {boolean} [requestDelimited=false] Whether requests are length-delimited
+                     * @param {boolean} [responseDelimited=false] Whether responses are length-delimited
+                     * @returns {IAMPolicy} RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    IAMPolicy.create = function create(rpcImpl, requestDelimited, responseDelimited) {
+                        return new this(rpcImpl, requestDelimited, responseDelimited);
+                    };
+    
+                    /**
+                     * Callback as used by {@link google.iam.v1.IAMPolicy|setIamPolicy}.
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @typedef SetIamPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v1.Policy} [response] Policy
+                     */
+    
+                    /**
+                     * Calls SetIamPolicy.
+                     * @function setIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                     * @param {google.iam.v1.IAMPolicy.SetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(IAMPolicy.prototype.setIamPolicy = function setIamPolicy(request, callback) {
+                        return this.rpcCall(setIamPolicy, $root.google.iam.v1.SetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                    }, "name", { value: "SetIamPolicy" });
+    
+                    /**
+                     * Calls SetIamPolicy.
+                     * @function setIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ISetIamPolicyRequest} request SetIamPolicyRequest message or plain object
+                     * @returns {Promise<google.iam.v1.Policy>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v1.IAMPolicy|getIamPolicy}.
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @typedef GetIamPolicyCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v1.Policy} [response] Policy
+                     */
+    
+                    /**
+                     * Calls GetIamPolicy.
+                     * @function getIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                     * @param {google.iam.v1.IAMPolicy.GetIamPolicyCallback} callback Node-style callback called with the error, if any, and Policy
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(IAMPolicy.prototype.getIamPolicy = function getIamPolicy(request, callback) {
+                        return this.rpcCall(getIamPolicy, $root.google.iam.v1.GetIamPolicyRequest, $root.google.iam.v1.Policy, request, callback);
+                    }, "name", { value: "GetIamPolicy" });
+    
+                    /**
+                     * Calls GetIamPolicy.
+                     * @function getIamPolicy
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.IGetIamPolicyRequest} request GetIamPolicyRequest message or plain object
+                     * @returns {Promise<google.iam.v1.Policy>} Promise
+                     * @variation 2
+                     */
+    
+                    /**
+                     * Callback as used by {@link google.iam.v1.IAMPolicy|testIamPermissions}.
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @typedef TestIamPermissionsCallback
+                     * @type {function}
+                     * @param {Error|null} error Error, if any
+                     * @param {google.iam.v1.TestIamPermissionsResponse} [response] TestIamPermissionsResponse
+                     */
+    
+                    /**
+                     * Calls TestIamPermissions.
+                     * @function testIamPermissions
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                     * @param {google.iam.v1.IAMPolicy.TestIamPermissionsCallback} callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                     * @returns {undefined}
+                     * @variation 1
+                     */
+                    Object.defineProperty(IAMPolicy.prototype.testIamPermissions = function testIamPermissions(request, callback) {
+                        return this.rpcCall(testIamPermissions, $root.google.iam.v1.TestIamPermissionsRequest, $root.google.iam.v1.TestIamPermissionsResponse, request, callback);
+                    }, "name", { value: "TestIamPermissions" });
+    
+                    /**
+                     * Calls TestIamPermissions.
+                     * @function testIamPermissions
+                     * @memberof google.iam.v1.IAMPolicy
+                     * @instance
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} request TestIamPermissionsRequest message or plain object
+                     * @returns {Promise<google.iam.v1.TestIamPermissionsResponse>} Promise
+                     * @variation 2
+                     */
+    
+                    return IAMPolicy;
+                })();
+    
+                v1.SetIamPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a SetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @interface ISetIamPolicyRequest
+                     * @property {string|null} [resource] SetIamPolicyRequest resource
+                     * @property {google.iam.v1.IPolicy|null} [policy] SetIamPolicyRequest policy
+                     * @property {google.protobuf.IFieldMask|null} [updateMask] SetIamPolicyRequest updateMask
+                     */
+    
+                    /**
+                     * Constructs a new SetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a SetIamPolicyRequest.
+                     * @implements ISetIamPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
+                     */
+                    function SetIamPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * SetIamPolicyRequest resource.
+                     * @member {string} resource
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     */
+                    SetIamPolicyRequest.prototype.resource = "";
+    
+                    /**
+                     * SetIamPolicyRequest policy.
+                     * @member {google.iam.v1.IPolicy|null|undefined} policy
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     */
+                    SetIamPolicyRequest.prototype.policy = null;
+    
+                    /**
+                     * SetIamPolicyRequest updateMask.
+                     * @member {google.protobuf.IFieldMask|null|undefined} updateMask
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     */
+                    SetIamPolicyRequest.prototype.updateMask = null;
+    
+                    /**
+                     * Creates a new SetIamPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.ISetIamPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest instance
+                     */
+                    SetIamPolicyRequest.create = function create(properties) {
+                        return new SetIamPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified SetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SetIamPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                        if (message.policy != null && Object.hasOwnProperty.call(message, "policy"))
+                            $root.google.iam.v1.Policy.encode(message.policy, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        if (message.updateMask != null && Object.hasOwnProperty.call(message, "updateMask"))
+                            $root.google.protobuf.FieldMask.encode(message.updateMask, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified SetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.ISetIamPolicyRequest} message SetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    SetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SetIamPolicyRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.SetIamPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.resource = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.policy = $root.google.iam.v1.Policy.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 3: {
+                                    message.updateMask = $root.google.protobuf.FieldMask.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a SetIamPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    SetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a SetIamPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    SetIamPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.policy != null && message.hasOwnProperty("policy")) {
+                            var error = $root.google.iam.v1.Policy.verify(message.policy);
+                            if (error)
+                                return "policy." + error;
+                        }
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask")) {
+                            var error = $root.google.protobuf.FieldMask.verify(message.updateMask);
+                            if (error)
+                                return "updateMask." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a SetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.SetIamPolicyRequest} SetIamPolicyRequest
+                     */
+                    SetIamPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.SetIamPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v1.SetIamPolicyRequest();
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        if (object.policy != null) {
+                            if (typeof object.policy !== "object")
+                                throw TypeError(".google.iam.v1.SetIamPolicyRequest.policy: object expected");
+                            message.policy = $root.google.iam.v1.Policy.fromObject(object.policy);
+                        }
+                        if (object.updateMask != null) {
+                            if (typeof object.updateMask !== "object")
+                                throw TypeError(".google.iam.v1.SetIamPolicyRequest.updateMask: object expected");
+                            message.updateMask = $root.google.protobuf.FieldMask.fromObject(object.updateMask);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a SetIamPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.SetIamPolicyRequest} message SetIamPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    SetIamPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.resource = "";
+                            object.policy = null;
+                            object.updateMask = null;
+                        }
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.policy != null && message.hasOwnProperty("policy"))
+                            object.policy = $root.google.iam.v1.Policy.toObject(message.policy, options);
+                        if (message.updateMask != null && message.hasOwnProperty("updateMask"))
+                            object.updateMask = $root.google.protobuf.FieldMask.toObject(message.updateMask, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this SetIamPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    SetIamPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for SetIamPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.SetIamPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    SetIamPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.SetIamPolicyRequest";
+                    };
+    
+                    return SetIamPolicyRequest;
+                })();
+    
+                v1.GetIamPolicyRequest = (function() {
+    
+                    /**
+                     * Properties of a GetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @interface IGetIamPolicyRequest
+                     * @property {string|null} [resource] GetIamPolicyRequest resource
+                     * @property {google.iam.v1.IGetPolicyOptions|null} [options] GetIamPolicyRequest options
+                     */
+    
+                    /**
+                     * Constructs a new GetIamPolicyRequest.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a GetIamPolicyRequest.
+                     * @implements IGetIamPolicyRequest
+                     * @constructor
+                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
+                     */
+                    function GetIamPolicyRequest(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetIamPolicyRequest resource.
+                     * @member {string} resource
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @instance
+                     */
+                    GetIamPolicyRequest.prototype.resource = "";
+    
+                    /**
+                     * GetIamPolicyRequest options.
+                     * @member {google.iam.v1.IGetPolicyOptions|null|undefined} options
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @instance
+                     */
+                    GetIamPolicyRequest.prototype.options = null;
+    
+                    /**
+                     * Creates a new GetIamPolicyRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.IGetIamPolicyRequest=} [properties] Properties to set
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest instance
+                     */
+                    GetIamPolicyRequest.create = function create(properties) {
+                        return new GetIamPolicyRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetIamPolicyRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                        if (message.options != null && Object.hasOwnProperty.call(message, "options"))
+                            $root.google.iam.v1.GetPolicyOptions.encode(message.options, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.IGetIamPolicyRequest} message GetIamPolicyRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetIamPolicyRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetIamPolicyRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetIamPolicyRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.resource = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    message.options = $root.google.iam.v1.GetPolicyOptions.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetIamPolicyRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetIamPolicyRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetIamPolicyRequest message.
+                     * @function verify
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetIamPolicyRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.options != null && message.hasOwnProperty("options")) {
+                            var error = $root.google.iam.v1.GetPolicyOptions.verify(message.options);
+                            if (error)
+                                return "options." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.GetIamPolicyRequest} GetIamPolicyRequest
+                     */
+                    GetIamPolicyRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.GetIamPolicyRequest)
+                            return object;
+                        var message = new $root.google.iam.v1.GetIamPolicyRequest();
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        if (object.options != null) {
+                            if (typeof object.options !== "object")
+                                throw TypeError(".google.iam.v1.GetIamPolicyRequest.options: object expected");
+                            message.options = $root.google.iam.v1.GetPolicyOptions.fromObject(object.options);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetIamPolicyRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {google.iam.v1.GetIamPolicyRequest} message GetIamPolicyRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetIamPolicyRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.resource = "";
+                            object.options = null;
+                        }
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.options != null && message.hasOwnProperty("options"))
+                            object.options = $root.google.iam.v1.GetPolicyOptions.toObject(message.options, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetIamPolicyRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetIamPolicyRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetIamPolicyRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.GetIamPolicyRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetIamPolicyRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.GetIamPolicyRequest";
+                    };
+    
+                    return GetIamPolicyRequest;
+                })();
+    
+                v1.TestIamPermissionsRequest = (function() {
+    
+                    /**
+                     * Properties of a TestIamPermissionsRequest.
+                     * @memberof google.iam.v1
+                     * @interface ITestIamPermissionsRequest
+                     * @property {string|null} [resource] TestIamPermissionsRequest resource
+                     * @property {Array.<string>|null} [permissions] TestIamPermissionsRequest permissions
+                     */
+    
+                    /**
+                     * Constructs a new TestIamPermissionsRequest.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a TestIamPermissionsRequest.
+                     * @implements ITestIamPermissionsRequest
+                     * @constructor
+                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
+                     */
+                    function TestIamPermissionsRequest(properties) {
+                        this.permissions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TestIamPermissionsRequest resource.
+                     * @member {string} resource
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @instance
+                     */
+                    TestIamPermissionsRequest.prototype.resource = "";
+    
+                    /**
+                     * TestIamPermissionsRequest permissions.
+                     * @member {Array.<string>} permissions
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @instance
+                     */
+                    TestIamPermissionsRequest.prototype.permissions = $util.emptyArray;
+    
+                    /**
+                     * Creates a new TestIamPermissionsRequest instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsRequest=} [properties] Properties to set
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest instance
+                     */
+                    TestIamPermissionsRequest.create = function create(properties) {
+                        return new TestIamPermissionsRequest(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsRequest message. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsRequest.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.resource != null && Object.hasOwnProperty.call(message, "resource"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.resource);
+                        if (message.permissions != null && message.permissions.length)
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.permissions[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsRequest message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsRequest} message TestIamPermissionsRequest message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsRequest.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsRequest.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsRequest();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.resource = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.permissions && message.permissions.length))
+                                        message.permissions = [];
+                                    message.permissions.push(reader.string());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsRequest message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsRequest.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TestIamPermissionsRequest message.
+                     * @function verify
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TestIamPermissionsRequest.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            if (!$util.isString(message.resource))
+                                return "resource: string expected";
+                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                            if (!Array.isArray(message.permissions))
+                                return "permissions: array expected";
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                if (!$util.isString(message.permissions[i]))
+                                    return "permissions: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TestIamPermissionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.TestIamPermissionsRequest} TestIamPermissionsRequest
+                     */
+                    TestIamPermissionsRequest.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.TestIamPermissionsRequest)
+                            return object;
+                        var message = new $root.google.iam.v1.TestIamPermissionsRequest();
+                        if (object.resource != null)
+                            message.resource = String(object.resource);
+                        if (object.permissions) {
+                            if (!Array.isArray(object.permissions))
+                                throw TypeError(".google.iam.v1.TestIamPermissionsRequest.permissions: array expected");
+                            message.permissions = [];
+                            for (var i = 0; i < object.permissions.length; ++i)
+                                message.permissions[i] = String(object.permissions[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TestIamPermissionsRequest message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {google.iam.v1.TestIamPermissionsRequest} message TestIamPermissionsRequest
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TestIamPermissionsRequest.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.permissions = [];
+                        if (options.defaults)
+                            object.resource = "";
+                        if (message.resource != null && message.hasOwnProperty("resource"))
+                            object.resource = message.resource;
+                        if (message.permissions && message.permissions.length) {
+                            object.permissions = [];
+                            for (var j = 0; j < message.permissions.length; ++j)
+                                object.permissions[j] = message.permissions[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TestIamPermissionsRequest to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TestIamPermissionsRequest.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for TestIamPermissionsRequest
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.TestIamPermissionsRequest
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TestIamPermissionsRequest.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.TestIamPermissionsRequest";
+                    };
+    
+                    return TestIamPermissionsRequest;
+                })();
+    
+                v1.TestIamPermissionsResponse = (function() {
+    
+                    /**
+                     * Properties of a TestIamPermissionsResponse.
+                     * @memberof google.iam.v1
+                     * @interface ITestIamPermissionsResponse
+                     * @property {Array.<string>|null} [permissions] TestIamPermissionsResponse permissions
+                     */
+    
+                    /**
+                     * Constructs a new TestIamPermissionsResponse.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a TestIamPermissionsResponse.
+                     * @implements ITestIamPermissionsResponse
+                     * @constructor
+                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
+                     */
+                    function TestIamPermissionsResponse(properties) {
+                        this.permissions = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * TestIamPermissionsResponse permissions.
+                     * @member {Array.<string>} permissions
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @instance
+                     */
+                    TestIamPermissionsResponse.prototype.permissions = $util.emptyArray;
+    
+                    /**
+                     * Creates a new TestIamPermissionsResponse instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsResponse=} [properties] Properties to set
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse instance
+                     */
+                    TestIamPermissionsResponse.create = function create(properties) {
+                        return new TestIamPermissionsResponse(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsResponse message. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsResponse.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.permissions != null && message.permissions.length)
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                writer.uint32(/* id 1, wireType 2 =*/10).string(message.permissions[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified TestIamPermissionsResponse message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.ITestIamPermissionsResponse} message TestIamPermissionsResponse message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    TestIamPermissionsResponse.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsResponse.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.TestIamPermissionsResponse();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.permissions && message.permissions.length))
+                                        message.permissions = [];
+                                    message.permissions.push(reader.string());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a TestIamPermissionsResponse message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    TestIamPermissionsResponse.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a TestIamPermissionsResponse message.
+                     * @function verify
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    TestIamPermissionsResponse.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.permissions != null && message.hasOwnProperty("permissions")) {
+                            if (!Array.isArray(message.permissions))
+                                return "permissions: array expected";
+                            for (var i = 0; i < message.permissions.length; ++i)
+                                if (!$util.isString(message.permissions[i]))
+                                    return "permissions: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a TestIamPermissionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.TestIamPermissionsResponse} TestIamPermissionsResponse
+                     */
+                    TestIamPermissionsResponse.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.TestIamPermissionsResponse)
+                            return object;
+                        var message = new $root.google.iam.v1.TestIamPermissionsResponse();
+                        if (object.permissions) {
+                            if (!Array.isArray(object.permissions))
+                                throw TypeError(".google.iam.v1.TestIamPermissionsResponse.permissions: array expected");
+                            message.permissions = [];
+                            for (var i = 0; i < object.permissions.length; ++i)
+                                message.permissions[i] = String(object.permissions[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a TestIamPermissionsResponse message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {google.iam.v1.TestIamPermissionsResponse} message TestIamPermissionsResponse
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    TestIamPermissionsResponse.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.permissions = [];
+                        if (message.permissions && message.permissions.length) {
+                            object.permissions = [];
+                            for (var j = 0; j < message.permissions.length; ++j)
+                                object.permissions[j] = message.permissions[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this TestIamPermissionsResponse to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    TestIamPermissionsResponse.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for TestIamPermissionsResponse
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.TestIamPermissionsResponse
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    TestIamPermissionsResponse.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.TestIamPermissionsResponse";
+                    };
+    
+                    return TestIamPermissionsResponse;
+                })();
+    
+                v1.GetPolicyOptions = (function() {
+    
+                    /**
+                     * Properties of a GetPolicyOptions.
+                     * @memberof google.iam.v1
+                     * @interface IGetPolicyOptions
+                     * @property {number|null} [requestedPolicyVersion] GetPolicyOptions requestedPolicyVersion
+                     */
+    
+                    /**
+                     * Constructs a new GetPolicyOptions.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a GetPolicyOptions.
+                     * @implements IGetPolicyOptions
+                     * @constructor
+                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
+                     */
+                    function GetPolicyOptions(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * GetPolicyOptions requestedPolicyVersion.
+                     * @member {number} requestedPolicyVersion
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @instance
+                     */
+                    GetPolicyOptions.prototype.requestedPolicyVersion = 0;
+    
+                    /**
+                     * Creates a new GetPolicyOptions instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.IGetPolicyOptions=} [properties] Properties to set
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions instance
+                     */
+                    GetPolicyOptions.create = function create(properties) {
+                        return new GetPolicyOptions(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified GetPolicyOptions message. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPolicyOptions.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.requestedPolicyVersion != null && Object.hasOwnProperty.call(message, "requestedPolicyVersion"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.requestedPolicyVersion);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified GetPolicyOptions message, length delimited. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.IGetPolicyOptions} message GetPolicyOptions message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    GetPolicyOptions.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a GetPolicyOptions message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPolicyOptions.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.GetPolicyOptions();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.requestedPolicyVersion = reader.int32();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a GetPolicyOptions message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    GetPolicyOptions.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a GetPolicyOptions message.
+                     * @function verify
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    GetPolicyOptions.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
+                            if (!$util.isInteger(message.requestedPolicyVersion))
+                                return "requestedPolicyVersion: integer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a GetPolicyOptions message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.GetPolicyOptions} GetPolicyOptions
+                     */
+                    GetPolicyOptions.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.GetPolicyOptions)
+                            return object;
+                        var message = new $root.google.iam.v1.GetPolicyOptions();
+                        if (object.requestedPolicyVersion != null)
+                            message.requestedPolicyVersion = object.requestedPolicyVersion | 0;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a GetPolicyOptions message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {google.iam.v1.GetPolicyOptions} message GetPolicyOptions
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    GetPolicyOptions.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults)
+                            object.requestedPolicyVersion = 0;
+                        if (message.requestedPolicyVersion != null && message.hasOwnProperty("requestedPolicyVersion"))
+                            object.requestedPolicyVersion = message.requestedPolicyVersion;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this GetPolicyOptions to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    GetPolicyOptions.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for GetPolicyOptions
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.GetPolicyOptions
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    GetPolicyOptions.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.GetPolicyOptions";
+                    };
+    
+                    return GetPolicyOptions;
+                })();
+    
+                v1.Policy = (function() {
+    
+                    /**
+                     * Properties of a Policy.
+                     * @memberof google.iam.v1
+                     * @interface IPolicy
+                     * @property {number|null} [version] Policy version
+                     * @property {Array.<google.iam.v1.IBinding>|null} [bindings] Policy bindings
+                     * @property {Array.<google.iam.v1.IAuditConfig>|null} [auditConfigs] Policy auditConfigs
+                     * @property {Uint8Array|null} [etag] Policy etag
+                     */
+    
+                    /**
+                     * Constructs a new Policy.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a Policy.
+                     * @implements IPolicy
+                     * @constructor
+                     * @param {google.iam.v1.IPolicy=} [properties] Properties to set
+                     */
+                    function Policy(properties) {
+                        this.bindings = [];
+                        this.auditConfigs = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Policy version.
+                     * @member {number} version
+                     * @memberof google.iam.v1.Policy
+                     * @instance
+                     */
+                    Policy.prototype.version = 0;
+    
+                    /**
+                     * Policy bindings.
+                     * @member {Array.<google.iam.v1.IBinding>} bindings
+                     * @memberof google.iam.v1.Policy
+                     * @instance
+                     */
+                    Policy.prototype.bindings = $util.emptyArray;
+    
+                    /**
+                     * Policy auditConfigs.
+                     * @member {Array.<google.iam.v1.IAuditConfig>} auditConfigs
+                     * @memberof google.iam.v1.Policy
+                     * @instance
+                     */
+                    Policy.prototype.auditConfigs = $util.emptyArray;
+    
+                    /**
+                     * Policy etag.
+                     * @member {Uint8Array} etag
+                     * @memberof google.iam.v1.Policy
+                     * @instance
+                     */
+                    Policy.prototype.etag = $util.newBuffer([]);
+    
+                    /**
+                     * Creates a new Policy instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.Policy
+                     * @static
+                     * @param {google.iam.v1.IPolicy=} [properties] Properties to set
+                     * @returns {google.iam.v1.Policy} Policy instance
+                     */
+                    Policy.create = function create(properties) {
+                        return new Policy(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Policy message. Does not implicitly {@link google.iam.v1.Policy.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.Policy
+                     * @static
+                     * @param {google.iam.v1.IPolicy} message Policy message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Policy.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.version != null && Object.hasOwnProperty.call(message, "version"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.version);
+                        if (message.etag != null && Object.hasOwnProperty.call(message, "etag"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).bytes(message.etag);
+                        if (message.bindings != null && message.bindings.length)
+                            for (var i = 0; i < message.bindings.length; ++i)
+                                $root.google.iam.v1.Binding.encode(message.bindings[i], writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        if (message.auditConfigs != null && message.auditConfigs.length)
+                            for (var i = 0; i < message.auditConfigs.length; ++i)
+                                $root.google.iam.v1.AuditConfig.encode(message.auditConfigs[i], writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Policy message, length delimited. Does not implicitly {@link google.iam.v1.Policy.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.Policy
+                     * @static
+                     * @param {google.iam.v1.IPolicy} message Policy message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Policy.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Policy message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.Policy
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.Policy} Policy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Policy.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.Policy();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.version = reader.int32();
+                                    break;
+                                }
+                            case 4: {
+                                    if (!(message.bindings && message.bindings.length))
+                                        message.bindings = [];
+                                    message.bindings.push($root.google.iam.v1.Binding.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 6: {
+                                    if (!(message.auditConfigs && message.auditConfigs.length))
+                                        message.auditConfigs = [];
+                                    message.auditConfigs.push($root.google.iam.v1.AuditConfig.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 3: {
+                                    message.etag = reader.bytes();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Policy message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.Policy
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.Policy} Policy
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Policy.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Policy message.
+                     * @function verify
+                     * @memberof google.iam.v1.Policy
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Policy.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            if (!$util.isInteger(message.version))
+                                return "version: integer expected";
+                        if (message.bindings != null && message.hasOwnProperty("bindings")) {
+                            if (!Array.isArray(message.bindings))
+                                return "bindings: array expected";
+                            for (var i = 0; i < message.bindings.length; ++i) {
+                                var error = $root.google.iam.v1.Binding.verify(message.bindings[i]);
+                                if (error)
+                                    return "bindings." + error;
+                            }
+                        }
+                        if (message.auditConfigs != null && message.hasOwnProperty("auditConfigs")) {
+                            if (!Array.isArray(message.auditConfigs))
+                                return "auditConfigs: array expected";
+                            for (var i = 0; i < message.auditConfigs.length; ++i) {
+                                var error = $root.google.iam.v1.AuditConfig.verify(message.auditConfigs[i]);
+                                if (error)
+                                    return "auditConfigs." + error;
+                            }
+                        }
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            if (!(message.etag && typeof message.etag.length === "number" || $util.isString(message.etag)))
+                                return "etag: buffer expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Policy message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.Policy
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.Policy} Policy
+                     */
+                    Policy.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.Policy)
+                            return object;
+                        var message = new $root.google.iam.v1.Policy();
+                        if (object.version != null)
+                            message.version = object.version | 0;
+                        if (object.bindings) {
+                            if (!Array.isArray(object.bindings))
+                                throw TypeError(".google.iam.v1.Policy.bindings: array expected");
+                            message.bindings = [];
+                            for (var i = 0; i < object.bindings.length; ++i) {
+                                if (typeof object.bindings[i] !== "object")
+                                    throw TypeError(".google.iam.v1.Policy.bindings: object expected");
+                                message.bindings[i] = $root.google.iam.v1.Binding.fromObject(object.bindings[i]);
+                            }
+                        }
+                        if (object.auditConfigs) {
+                            if (!Array.isArray(object.auditConfigs))
+                                throw TypeError(".google.iam.v1.Policy.auditConfigs: array expected");
+                            message.auditConfigs = [];
+                            for (var i = 0; i < object.auditConfigs.length; ++i) {
+                                if (typeof object.auditConfigs[i] !== "object")
+                                    throw TypeError(".google.iam.v1.Policy.auditConfigs: object expected");
+                                message.auditConfigs[i] = $root.google.iam.v1.AuditConfig.fromObject(object.auditConfigs[i]);
+                            }
+                        }
+                        if (object.etag != null)
+                            if (typeof object.etag === "string")
+                                $util.base64.decode(object.etag, message.etag = $util.newBuffer($util.base64.length(object.etag)), 0);
+                            else if (object.etag.length >= 0)
+                                message.etag = object.etag;
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Policy message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.Policy
+                     * @static
+                     * @param {google.iam.v1.Policy} message Policy
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Policy.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.bindings = [];
+                            object.auditConfigs = [];
+                        }
+                        if (options.defaults) {
+                            object.version = 0;
+                            if (options.bytes === String)
+                                object.etag = "";
+                            else {
+                                object.etag = [];
+                                if (options.bytes !== Array)
+                                    object.etag = $util.newBuffer(object.etag);
+                            }
+                        }
+                        if (message.version != null && message.hasOwnProperty("version"))
+                            object.version = message.version;
+                        if (message.etag != null && message.hasOwnProperty("etag"))
+                            object.etag = options.bytes === String ? $util.base64.encode(message.etag, 0, message.etag.length) : options.bytes === Array ? Array.prototype.slice.call(message.etag) : message.etag;
+                        if (message.bindings && message.bindings.length) {
+                            object.bindings = [];
+                            for (var j = 0; j < message.bindings.length; ++j)
+                                object.bindings[j] = $root.google.iam.v1.Binding.toObject(message.bindings[j], options);
+                        }
+                        if (message.auditConfigs && message.auditConfigs.length) {
+                            object.auditConfigs = [];
+                            for (var j = 0; j < message.auditConfigs.length; ++j)
+                                object.auditConfigs[j] = $root.google.iam.v1.AuditConfig.toObject(message.auditConfigs[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Policy to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.Policy
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Policy.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Policy
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.Policy
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Policy.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.Policy";
+                    };
+    
+                    return Policy;
+                })();
+    
+                v1.Binding = (function() {
+    
+                    /**
+                     * Properties of a Binding.
+                     * @memberof google.iam.v1
+                     * @interface IBinding
+                     * @property {string|null} [role] Binding role
+                     * @property {Array.<string>|null} [members] Binding members
+                     * @property {google.type.IExpr|null} [condition] Binding condition
+                     */
+    
+                    /**
+                     * Constructs a new Binding.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a Binding.
+                     * @implements IBinding
+                     * @constructor
+                     * @param {google.iam.v1.IBinding=} [properties] Properties to set
+                     */
+                    function Binding(properties) {
+                        this.members = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * Binding role.
+                     * @member {string} role
+                     * @memberof google.iam.v1.Binding
+                     * @instance
+                     */
+                    Binding.prototype.role = "";
+    
+                    /**
+                     * Binding members.
+                     * @member {Array.<string>} members
+                     * @memberof google.iam.v1.Binding
+                     * @instance
+                     */
+                    Binding.prototype.members = $util.emptyArray;
+    
+                    /**
+                     * Binding condition.
+                     * @member {google.type.IExpr|null|undefined} condition
+                     * @memberof google.iam.v1.Binding
+                     * @instance
+                     */
+                    Binding.prototype.condition = null;
+    
+                    /**
+                     * Creates a new Binding instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.Binding
+                     * @static
+                     * @param {google.iam.v1.IBinding=} [properties] Properties to set
+                     * @returns {google.iam.v1.Binding} Binding instance
+                     */
+                    Binding.create = function create(properties) {
+                        return new Binding(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified Binding message. Does not implicitly {@link google.iam.v1.Binding.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.Binding
+                     * @static
+                     * @param {google.iam.v1.IBinding} message Binding message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Binding.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.role);
+                        if (message.members != null && message.members.length)
+                            for (var i = 0; i < message.members.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.members[i]);
+                        if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                            $root.google.type.Expr.encode(message.condition, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified Binding message, length delimited. Does not implicitly {@link google.iam.v1.Binding.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.Binding
+                     * @static
+                     * @param {google.iam.v1.IBinding} message Binding message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    Binding.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a Binding message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.Binding
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.Binding} Binding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Binding.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.Binding();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.role = reader.string();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.members && message.members.length))
+                                        message.members = [];
+                                    message.members.push(reader.string());
+                                    break;
+                                }
+                            case 3: {
+                                    message.condition = $root.google.type.Expr.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a Binding message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.Binding
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.Binding} Binding
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    Binding.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a Binding message.
+                     * @function verify
+                     * @memberof google.iam.v1.Binding
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    Binding.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.role != null && message.hasOwnProperty("role"))
+                            if (!$util.isString(message.role))
+                                return "role: string expected";
+                        if (message.members != null && message.hasOwnProperty("members")) {
+                            if (!Array.isArray(message.members))
+                                return "members: array expected";
+                            for (var i = 0; i < message.members.length; ++i)
+                                if (!$util.isString(message.members[i]))
+                                    return "members: string[] expected";
+                        }
+                        if (message.condition != null && message.hasOwnProperty("condition")) {
+                            var error = $root.google.type.Expr.verify(message.condition);
+                            if (error)
+                                return "condition." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a Binding message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.Binding
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.Binding} Binding
+                     */
+                    Binding.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.Binding)
+                            return object;
+                        var message = new $root.google.iam.v1.Binding();
+                        if (object.role != null)
+                            message.role = String(object.role);
+                        if (object.members) {
+                            if (!Array.isArray(object.members))
+                                throw TypeError(".google.iam.v1.Binding.members: array expected");
+                            message.members = [];
+                            for (var i = 0; i < object.members.length; ++i)
+                                message.members[i] = String(object.members[i]);
+                        }
+                        if (object.condition != null) {
+                            if (typeof object.condition !== "object")
+                                throw TypeError(".google.iam.v1.Binding.condition: object expected");
+                            message.condition = $root.google.type.Expr.fromObject(object.condition);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a Binding message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.Binding
+                     * @static
+                     * @param {google.iam.v1.Binding} message Binding
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    Binding.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.members = [];
+                        if (options.defaults) {
+                            object.role = "";
+                            object.condition = null;
+                        }
+                        if (message.role != null && message.hasOwnProperty("role"))
+                            object.role = message.role;
+                        if (message.members && message.members.length) {
+                            object.members = [];
+                            for (var j = 0; j < message.members.length; ++j)
+                                object.members[j] = message.members[j];
+                        }
+                        if (message.condition != null && message.hasOwnProperty("condition"))
+                            object.condition = $root.google.type.Expr.toObject(message.condition, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this Binding to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.Binding
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    Binding.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for Binding
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.Binding
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    Binding.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.Binding";
+                    };
+    
+                    return Binding;
+                })();
+    
+                v1.AuditConfig = (function() {
+    
+                    /**
+                     * Properties of an AuditConfig.
+                     * @memberof google.iam.v1
+                     * @interface IAuditConfig
+                     * @property {string|null} [service] AuditConfig service
+                     * @property {Array.<google.iam.v1.IAuditLogConfig>|null} [auditLogConfigs] AuditConfig auditLogConfigs
+                     */
+    
+                    /**
+                     * Constructs a new AuditConfig.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents an AuditConfig.
+                     * @implements IAuditConfig
+                     * @constructor
+                     * @param {google.iam.v1.IAuditConfig=} [properties] Properties to set
+                     */
+                    function AuditConfig(properties) {
+                        this.auditLogConfigs = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AuditConfig service.
+                     * @member {string} service
+                     * @memberof google.iam.v1.AuditConfig
+                     * @instance
+                     */
+                    AuditConfig.prototype.service = "";
+    
+                    /**
+                     * AuditConfig auditLogConfigs.
+                     * @member {Array.<google.iam.v1.IAuditLogConfig>} auditLogConfigs
+                     * @memberof google.iam.v1.AuditConfig
+                     * @instance
+                     */
+                    AuditConfig.prototype.auditLogConfigs = $util.emptyArray;
+    
+                    /**
+                     * Creates a new AuditConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.AuditConfig
+                     * @static
+                     * @param {google.iam.v1.IAuditConfig=} [properties] Properties to set
+                     * @returns {google.iam.v1.AuditConfig} AuditConfig instance
+                     */
+                    AuditConfig.create = function create(properties) {
+                        return new AuditConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AuditConfig message. Does not implicitly {@link google.iam.v1.AuditConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.AuditConfig
+                     * @static
+                     * @param {google.iam.v1.IAuditConfig} message AuditConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AuditConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.service);
+                        if (message.auditLogConfigs != null && message.auditLogConfigs.length)
+                            for (var i = 0; i < message.auditLogConfigs.length; ++i)
+                                $root.google.iam.v1.AuditLogConfig.encode(message.auditLogConfigs[i], writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AuditConfig message, length delimited. Does not implicitly {@link google.iam.v1.AuditConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.AuditConfig
+                     * @static
+                     * @param {google.iam.v1.IAuditConfig} message AuditConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AuditConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AuditConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.AuditConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.AuditConfig} AuditConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AuditConfig.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.service = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    if (!(message.auditLogConfigs && message.auditLogConfigs.length))
+                                        message.auditLogConfigs = [];
+                                    message.auditLogConfigs.push($root.google.iam.v1.AuditLogConfig.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AuditConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.AuditConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.AuditConfig} AuditConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AuditConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AuditConfig message.
+                     * @function verify
+                     * @memberof google.iam.v1.AuditConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AuditConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.service != null && message.hasOwnProperty("service"))
+                            if (!$util.isString(message.service))
+                                return "service: string expected";
+                        if (message.auditLogConfigs != null && message.hasOwnProperty("auditLogConfigs")) {
+                            if (!Array.isArray(message.auditLogConfigs))
+                                return "auditLogConfigs: array expected";
+                            for (var i = 0; i < message.auditLogConfigs.length; ++i) {
+                                var error = $root.google.iam.v1.AuditLogConfig.verify(message.auditLogConfigs[i]);
+                                if (error)
+                                    return "auditLogConfigs." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AuditConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.AuditConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.AuditConfig} AuditConfig
+                     */
+                    AuditConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.AuditConfig)
+                            return object;
+                        var message = new $root.google.iam.v1.AuditConfig();
+                        if (object.service != null)
+                            message.service = String(object.service);
+                        if (object.auditLogConfigs) {
+                            if (!Array.isArray(object.auditLogConfigs))
+                                throw TypeError(".google.iam.v1.AuditConfig.auditLogConfigs: array expected");
+                            message.auditLogConfigs = [];
+                            for (var i = 0; i < object.auditLogConfigs.length; ++i) {
+                                if (typeof object.auditLogConfigs[i] !== "object")
+                                    throw TypeError(".google.iam.v1.AuditConfig.auditLogConfigs: object expected");
+                                message.auditLogConfigs[i] = $root.google.iam.v1.AuditLogConfig.fromObject(object.auditLogConfigs[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AuditConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.AuditConfig
+                     * @static
+                     * @param {google.iam.v1.AuditConfig} message AuditConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AuditConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.auditLogConfigs = [];
+                        if (options.defaults)
+                            object.service = "";
+                        if (message.service != null && message.hasOwnProperty("service"))
+                            object.service = message.service;
+                        if (message.auditLogConfigs && message.auditLogConfigs.length) {
+                            object.auditLogConfigs = [];
+                            for (var j = 0; j < message.auditLogConfigs.length; ++j)
+                                object.auditLogConfigs[j] = $root.google.iam.v1.AuditLogConfig.toObject(message.auditLogConfigs[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AuditConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.AuditConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AuditConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AuditConfig
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.AuditConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AuditConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.AuditConfig";
+                    };
+    
+                    return AuditConfig;
+                })();
+    
+                v1.AuditLogConfig = (function() {
+    
+                    /**
+                     * Properties of an AuditLogConfig.
+                     * @memberof google.iam.v1
+                     * @interface IAuditLogConfig
+                     * @property {google.iam.v1.AuditLogConfig.LogType|null} [logType] AuditLogConfig logType
+                     * @property {Array.<string>|null} [exemptedMembers] AuditLogConfig exemptedMembers
+                     */
+    
+                    /**
+                     * Constructs a new AuditLogConfig.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents an AuditLogConfig.
+                     * @implements IAuditLogConfig
+                     * @constructor
+                     * @param {google.iam.v1.IAuditLogConfig=} [properties] Properties to set
+                     */
+                    function AuditLogConfig(properties) {
+                        this.exemptedMembers = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AuditLogConfig logType.
+                     * @member {google.iam.v1.AuditLogConfig.LogType} logType
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @instance
+                     */
+                    AuditLogConfig.prototype.logType = 0;
+    
+                    /**
+                     * AuditLogConfig exemptedMembers.
+                     * @member {Array.<string>} exemptedMembers
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @instance
+                     */
+                    AuditLogConfig.prototype.exemptedMembers = $util.emptyArray;
+    
+                    /**
+                     * Creates a new AuditLogConfig instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @static
+                     * @param {google.iam.v1.IAuditLogConfig=} [properties] Properties to set
+                     * @returns {google.iam.v1.AuditLogConfig} AuditLogConfig instance
+                     */
+                    AuditLogConfig.create = function create(properties) {
+                        return new AuditLogConfig(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AuditLogConfig message. Does not implicitly {@link google.iam.v1.AuditLogConfig.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @static
+                     * @param {google.iam.v1.IAuditLogConfig} message AuditLogConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AuditLogConfig.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.logType != null && Object.hasOwnProperty.call(message, "logType"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.logType);
+                        if (message.exemptedMembers != null && message.exemptedMembers.length)
+                            for (var i = 0; i < message.exemptedMembers.length; ++i)
+                                writer.uint32(/* id 2, wireType 2 =*/18).string(message.exemptedMembers[i]);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AuditLogConfig message, length delimited. Does not implicitly {@link google.iam.v1.AuditLogConfig.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @static
+                     * @param {google.iam.v1.IAuditLogConfig} message AuditLogConfig message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AuditLogConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AuditLogConfig message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.AuditLogConfig} AuditLogConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AuditLogConfig.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditLogConfig();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.logType = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.exemptedMembers && message.exemptedMembers.length))
+                                        message.exemptedMembers = [];
+                                    message.exemptedMembers.push(reader.string());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AuditLogConfig message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.AuditLogConfig} AuditLogConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AuditLogConfig.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AuditLogConfig message.
+                     * @function verify
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AuditLogConfig.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.logType != null && message.hasOwnProperty("logType"))
+                            switch (message.logType) {
+                            default:
+                                return "logType: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                            case 3:
+                                break;
+                            }
+                        if (message.exemptedMembers != null && message.hasOwnProperty("exemptedMembers")) {
+                            if (!Array.isArray(message.exemptedMembers))
+                                return "exemptedMembers: array expected";
+                            for (var i = 0; i < message.exemptedMembers.length; ++i)
+                                if (!$util.isString(message.exemptedMembers[i]))
+                                    return "exemptedMembers: string[] expected";
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AuditLogConfig message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.AuditLogConfig} AuditLogConfig
+                     */
+                    AuditLogConfig.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.AuditLogConfig)
+                            return object;
+                        var message = new $root.google.iam.v1.AuditLogConfig();
+                        switch (object.logType) {
+                        default:
+                            if (typeof object.logType === "number") {
+                                message.logType = object.logType;
+                                break;
+                            }
+                            break;
+                        case "LOG_TYPE_UNSPECIFIED":
+                        case 0:
+                            message.logType = 0;
+                            break;
+                        case "ADMIN_READ":
+                        case 1:
+                            message.logType = 1;
+                            break;
+                        case "DATA_WRITE":
+                        case 2:
+                            message.logType = 2;
+                            break;
+                        case "DATA_READ":
+                        case 3:
+                            message.logType = 3;
+                            break;
+                        }
+                        if (object.exemptedMembers) {
+                            if (!Array.isArray(object.exemptedMembers))
+                                throw TypeError(".google.iam.v1.AuditLogConfig.exemptedMembers: array expected");
+                            message.exemptedMembers = [];
+                            for (var i = 0; i < object.exemptedMembers.length; ++i)
+                                message.exemptedMembers[i] = String(object.exemptedMembers[i]);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AuditLogConfig message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @static
+                     * @param {google.iam.v1.AuditLogConfig} message AuditLogConfig
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AuditLogConfig.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults)
+                            object.exemptedMembers = [];
+                        if (options.defaults)
+                            object.logType = options.enums === String ? "LOG_TYPE_UNSPECIFIED" : 0;
+                        if (message.logType != null && message.hasOwnProperty("logType"))
+                            object.logType = options.enums === String ? $root.google.iam.v1.AuditLogConfig.LogType[message.logType] === undefined ? message.logType : $root.google.iam.v1.AuditLogConfig.LogType[message.logType] : message.logType;
+                        if (message.exemptedMembers && message.exemptedMembers.length) {
+                            object.exemptedMembers = [];
+                            for (var j = 0; j < message.exemptedMembers.length; ++j)
+                                object.exemptedMembers[j] = message.exemptedMembers[j];
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AuditLogConfig to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AuditLogConfig.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AuditLogConfig
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.AuditLogConfig
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AuditLogConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.AuditLogConfig";
+                    };
+    
+                    /**
+                     * LogType enum.
+                     * @name google.iam.v1.AuditLogConfig.LogType
+                     * @enum {number}
+                     * @property {number} LOG_TYPE_UNSPECIFIED=0 LOG_TYPE_UNSPECIFIED value
+                     * @property {number} ADMIN_READ=1 ADMIN_READ value
+                     * @property {number} DATA_WRITE=2 DATA_WRITE value
+                     * @property {number} DATA_READ=3 DATA_READ value
+                     */
+                    AuditLogConfig.LogType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "LOG_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ADMIN_READ"] = 1;
+                        values[valuesById[2] = "DATA_WRITE"] = 2;
+                        values[valuesById[3] = "DATA_READ"] = 3;
+                        return values;
+                    })();
+    
+                    return AuditLogConfig;
+                })();
+    
+                v1.PolicyDelta = (function() {
+    
+                    /**
+                     * Properties of a PolicyDelta.
+                     * @memberof google.iam.v1
+                     * @interface IPolicyDelta
+                     * @property {Array.<google.iam.v1.IBindingDelta>|null} [bindingDeltas] PolicyDelta bindingDeltas
+                     * @property {Array.<google.iam.v1.IAuditConfigDelta>|null} [auditConfigDeltas] PolicyDelta auditConfigDeltas
+                     */
+    
+                    /**
+                     * Constructs a new PolicyDelta.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a PolicyDelta.
+                     * @implements IPolicyDelta
+                     * @constructor
+                     * @param {google.iam.v1.IPolicyDelta=} [properties] Properties to set
+                     */
+                    function PolicyDelta(properties) {
+                        this.bindingDeltas = [];
+                        this.auditConfigDeltas = [];
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * PolicyDelta bindingDeltas.
+                     * @member {Array.<google.iam.v1.IBindingDelta>} bindingDeltas
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @instance
+                     */
+                    PolicyDelta.prototype.bindingDeltas = $util.emptyArray;
+    
+                    /**
+                     * PolicyDelta auditConfigDeltas.
+                     * @member {Array.<google.iam.v1.IAuditConfigDelta>} auditConfigDeltas
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @instance
+                     */
+                    PolicyDelta.prototype.auditConfigDeltas = $util.emptyArray;
+    
+                    /**
+                     * Creates a new PolicyDelta instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @static
+                     * @param {google.iam.v1.IPolicyDelta=} [properties] Properties to set
+                     * @returns {google.iam.v1.PolicyDelta} PolicyDelta instance
+                     */
+                    PolicyDelta.create = function create(properties) {
+                        return new PolicyDelta(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified PolicyDelta message. Does not implicitly {@link google.iam.v1.PolicyDelta.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @static
+                     * @param {google.iam.v1.IPolicyDelta} message PolicyDelta message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PolicyDelta.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.bindingDeltas != null && message.bindingDeltas.length)
+                            for (var i = 0; i < message.bindingDeltas.length; ++i)
+                                $root.google.iam.v1.BindingDelta.encode(message.bindingDeltas[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                        if (message.auditConfigDeltas != null && message.auditConfigDeltas.length)
+                            for (var i = 0; i < message.auditConfigDeltas.length; ++i)
+                                $root.google.iam.v1.AuditConfigDelta.encode(message.auditConfigDeltas[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified PolicyDelta message, length delimited. Does not implicitly {@link google.iam.v1.PolicyDelta.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @static
+                     * @param {google.iam.v1.IPolicyDelta} message PolicyDelta message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    PolicyDelta.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a PolicyDelta message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.PolicyDelta} PolicyDelta
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PolicyDelta.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.PolicyDelta();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    if (!(message.bindingDeltas && message.bindingDeltas.length))
+                                        message.bindingDeltas = [];
+                                    message.bindingDeltas.push($root.google.iam.v1.BindingDelta.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            case 2: {
+                                    if (!(message.auditConfigDeltas && message.auditConfigDeltas.length))
+                                        message.auditConfigDeltas = [];
+                                    message.auditConfigDeltas.push($root.google.iam.v1.AuditConfigDelta.decode(reader, reader.uint32()));
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a PolicyDelta message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.PolicyDelta} PolicyDelta
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    PolicyDelta.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a PolicyDelta message.
+                     * @function verify
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    PolicyDelta.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.bindingDeltas != null && message.hasOwnProperty("bindingDeltas")) {
+                            if (!Array.isArray(message.bindingDeltas))
+                                return "bindingDeltas: array expected";
+                            for (var i = 0; i < message.bindingDeltas.length; ++i) {
+                                var error = $root.google.iam.v1.BindingDelta.verify(message.bindingDeltas[i]);
+                                if (error)
+                                    return "bindingDeltas." + error;
+                            }
+                        }
+                        if (message.auditConfigDeltas != null && message.hasOwnProperty("auditConfigDeltas")) {
+                            if (!Array.isArray(message.auditConfigDeltas))
+                                return "auditConfigDeltas: array expected";
+                            for (var i = 0; i < message.auditConfigDeltas.length; ++i) {
+                                var error = $root.google.iam.v1.AuditConfigDelta.verify(message.auditConfigDeltas[i]);
+                                if (error)
+                                    return "auditConfigDeltas." + error;
+                            }
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a PolicyDelta message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.PolicyDelta} PolicyDelta
+                     */
+                    PolicyDelta.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.PolicyDelta)
+                            return object;
+                        var message = new $root.google.iam.v1.PolicyDelta();
+                        if (object.bindingDeltas) {
+                            if (!Array.isArray(object.bindingDeltas))
+                                throw TypeError(".google.iam.v1.PolicyDelta.bindingDeltas: array expected");
+                            message.bindingDeltas = [];
+                            for (var i = 0; i < object.bindingDeltas.length; ++i) {
+                                if (typeof object.bindingDeltas[i] !== "object")
+                                    throw TypeError(".google.iam.v1.PolicyDelta.bindingDeltas: object expected");
+                                message.bindingDeltas[i] = $root.google.iam.v1.BindingDelta.fromObject(object.bindingDeltas[i]);
+                            }
+                        }
+                        if (object.auditConfigDeltas) {
+                            if (!Array.isArray(object.auditConfigDeltas))
+                                throw TypeError(".google.iam.v1.PolicyDelta.auditConfigDeltas: array expected");
+                            message.auditConfigDeltas = [];
+                            for (var i = 0; i < object.auditConfigDeltas.length; ++i) {
+                                if (typeof object.auditConfigDeltas[i] !== "object")
+                                    throw TypeError(".google.iam.v1.PolicyDelta.auditConfigDeltas: object expected");
+                                message.auditConfigDeltas[i] = $root.google.iam.v1.AuditConfigDelta.fromObject(object.auditConfigDeltas[i]);
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a PolicyDelta message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @static
+                     * @param {google.iam.v1.PolicyDelta} message PolicyDelta
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    PolicyDelta.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.arrays || options.defaults) {
+                            object.bindingDeltas = [];
+                            object.auditConfigDeltas = [];
+                        }
+                        if (message.bindingDeltas && message.bindingDeltas.length) {
+                            object.bindingDeltas = [];
+                            for (var j = 0; j < message.bindingDeltas.length; ++j)
+                                object.bindingDeltas[j] = $root.google.iam.v1.BindingDelta.toObject(message.bindingDeltas[j], options);
+                        }
+                        if (message.auditConfigDeltas && message.auditConfigDeltas.length) {
+                            object.auditConfigDeltas = [];
+                            for (var j = 0; j < message.auditConfigDeltas.length; ++j)
+                                object.auditConfigDeltas[j] = $root.google.iam.v1.AuditConfigDelta.toObject(message.auditConfigDeltas[j], options);
+                        }
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this PolicyDelta to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    PolicyDelta.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for PolicyDelta
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.PolicyDelta
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    PolicyDelta.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.PolicyDelta";
+                    };
+    
+                    return PolicyDelta;
+                })();
+    
+                v1.BindingDelta = (function() {
+    
+                    /**
+                     * Properties of a BindingDelta.
+                     * @memberof google.iam.v1
+                     * @interface IBindingDelta
+                     * @property {google.iam.v1.BindingDelta.Action|null} [action] BindingDelta action
+                     * @property {string|null} [role] BindingDelta role
+                     * @property {string|null} [member] BindingDelta member
+                     * @property {google.type.IExpr|null} [condition] BindingDelta condition
+                     */
+    
+                    /**
+                     * Constructs a new BindingDelta.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents a BindingDelta.
+                     * @implements IBindingDelta
+                     * @constructor
+                     * @param {google.iam.v1.IBindingDelta=} [properties] Properties to set
+                     */
+                    function BindingDelta(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * BindingDelta action.
+                     * @member {google.iam.v1.BindingDelta.Action} action
+                     * @memberof google.iam.v1.BindingDelta
+                     * @instance
+                     */
+                    BindingDelta.prototype.action = 0;
+    
+                    /**
+                     * BindingDelta role.
+                     * @member {string} role
+                     * @memberof google.iam.v1.BindingDelta
+                     * @instance
+                     */
+                    BindingDelta.prototype.role = "";
+    
+                    /**
+                     * BindingDelta member.
+                     * @member {string} member
+                     * @memberof google.iam.v1.BindingDelta
+                     * @instance
+                     */
+                    BindingDelta.prototype.member = "";
+    
+                    /**
+                     * BindingDelta condition.
+                     * @member {google.type.IExpr|null|undefined} condition
+                     * @memberof google.iam.v1.BindingDelta
+                     * @instance
+                     */
+                    BindingDelta.prototype.condition = null;
+    
+                    /**
+                     * Creates a new BindingDelta instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.BindingDelta
+                     * @static
+                     * @param {google.iam.v1.IBindingDelta=} [properties] Properties to set
+                     * @returns {google.iam.v1.BindingDelta} BindingDelta instance
+                     */
+                    BindingDelta.create = function create(properties) {
+                        return new BindingDelta(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified BindingDelta message. Does not implicitly {@link google.iam.v1.BindingDelta.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.BindingDelta
+                     * @static
+                     * @param {google.iam.v1.IBindingDelta} message BindingDelta message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BindingDelta.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.action);
+                        if (message.role != null && Object.hasOwnProperty.call(message, "role"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.role);
+                        if (message.member != null && Object.hasOwnProperty.call(message, "member"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.member);
+                        if (message.condition != null && Object.hasOwnProperty.call(message, "condition"))
+                            $root.google.type.Expr.encode(message.condition, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified BindingDelta message, length delimited. Does not implicitly {@link google.iam.v1.BindingDelta.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.BindingDelta
+                     * @static
+                     * @param {google.iam.v1.IBindingDelta} message BindingDelta message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    BindingDelta.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes a BindingDelta message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.BindingDelta
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.BindingDelta} BindingDelta
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BindingDelta.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.BindingDelta();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.action = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.role = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.member = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.condition = $root.google.type.Expr.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes a BindingDelta message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.BindingDelta
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.BindingDelta} BindingDelta
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    BindingDelta.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies a BindingDelta message.
+                     * @function verify
+                     * @memberof google.iam.v1.BindingDelta
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    BindingDelta.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.action != null && message.hasOwnProperty("action"))
+                            switch (message.action) {
+                            default:
+                                return "action: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.role != null && message.hasOwnProperty("role"))
+                            if (!$util.isString(message.role))
+                                return "role: string expected";
+                        if (message.member != null && message.hasOwnProperty("member"))
+                            if (!$util.isString(message.member))
+                                return "member: string expected";
+                        if (message.condition != null && message.hasOwnProperty("condition")) {
+                            var error = $root.google.type.Expr.verify(message.condition);
+                            if (error)
+                                return "condition." + error;
+                        }
+                        return null;
+                    };
+    
+                    /**
+                     * Creates a BindingDelta message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.BindingDelta
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.BindingDelta} BindingDelta
+                     */
+                    BindingDelta.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.BindingDelta)
+                            return object;
+                        var message = new $root.google.iam.v1.BindingDelta();
+                        switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
+                        case "ACTION_UNSPECIFIED":
+                        case 0:
+                            message.action = 0;
+                            break;
+                        case "ADD":
+                        case 1:
+                            message.action = 1;
+                            break;
+                        case "REMOVE":
+                        case 2:
+                            message.action = 2;
+                            break;
+                        }
+                        if (object.role != null)
+                            message.role = String(object.role);
+                        if (object.member != null)
+                            message.member = String(object.member);
+                        if (object.condition != null) {
+                            if (typeof object.condition !== "object")
+                                throw TypeError(".google.iam.v1.BindingDelta.condition: object expected");
+                            message.condition = $root.google.type.Expr.fromObject(object.condition);
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from a BindingDelta message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.BindingDelta
+                     * @static
+                     * @param {google.iam.v1.BindingDelta} message BindingDelta
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    BindingDelta.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.action = options.enums === String ? "ACTION_UNSPECIFIED" : 0;
+                            object.role = "";
+                            object.member = "";
+                            object.condition = null;
+                        }
+                        if (message.action != null && message.hasOwnProperty("action"))
+                            object.action = options.enums === String ? $root.google.iam.v1.BindingDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.BindingDelta.Action[message.action] : message.action;
+                        if (message.role != null && message.hasOwnProperty("role"))
+                            object.role = message.role;
+                        if (message.member != null && message.hasOwnProperty("member"))
+                            object.member = message.member;
+                        if (message.condition != null && message.hasOwnProperty("condition"))
+                            object.condition = $root.google.type.Expr.toObject(message.condition, options);
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this BindingDelta to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.BindingDelta
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    BindingDelta.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for BindingDelta
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.BindingDelta
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    BindingDelta.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.BindingDelta";
+                    };
+    
+                    /**
+                     * Action enum.
+                     * @name google.iam.v1.BindingDelta.Action
+                     * @enum {number}
+                     * @property {number} ACTION_UNSPECIFIED=0 ACTION_UNSPECIFIED value
+                     * @property {number} ADD=1 ADD value
+                     * @property {number} REMOVE=2 REMOVE value
+                     */
+                    BindingDelta.Action = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ACTION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ADD"] = 1;
+                        values[valuesById[2] = "REMOVE"] = 2;
+                        return values;
+                    })();
+    
+                    return BindingDelta;
+                })();
+    
+                v1.AuditConfigDelta = (function() {
+    
+                    /**
+                     * Properties of an AuditConfigDelta.
+                     * @memberof google.iam.v1
+                     * @interface IAuditConfigDelta
+                     * @property {google.iam.v1.AuditConfigDelta.Action|null} [action] AuditConfigDelta action
+                     * @property {string|null} [service] AuditConfigDelta service
+                     * @property {string|null} [exemptedMember] AuditConfigDelta exemptedMember
+                     * @property {string|null} [logType] AuditConfigDelta logType
+                     */
+    
+                    /**
+                     * Constructs a new AuditConfigDelta.
+                     * @memberof google.iam.v1
+                     * @classdesc Represents an AuditConfigDelta.
+                     * @implements IAuditConfigDelta
+                     * @constructor
+                     * @param {google.iam.v1.IAuditConfigDelta=} [properties] Properties to set
+                     */
+                    function AuditConfigDelta(properties) {
+                        if (properties)
+                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                if (properties[keys[i]] != null)
+                                    this[keys[i]] = properties[keys[i]];
+                    }
+    
+                    /**
+                     * AuditConfigDelta action.
+                     * @member {google.iam.v1.AuditConfigDelta.Action} action
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @instance
+                     */
+                    AuditConfigDelta.prototype.action = 0;
+    
+                    /**
+                     * AuditConfigDelta service.
+                     * @member {string} service
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @instance
+                     */
+                    AuditConfigDelta.prototype.service = "";
+    
+                    /**
+                     * AuditConfigDelta exemptedMember.
+                     * @member {string} exemptedMember
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @instance
+                     */
+                    AuditConfigDelta.prototype.exemptedMember = "";
+    
+                    /**
+                     * AuditConfigDelta logType.
+                     * @member {string} logType
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @instance
+                     */
+                    AuditConfigDelta.prototype.logType = "";
+    
+                    /**
+                     * Creates a new AuditConfigDelta instance using the specified properties.
+                     * @function create
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @static
+                     * @param {google.iam.v1.IAuditConfigDelta=} [properties] Properties to set
+                     * @returns {google.iam.v1.AuditConfigDelta} AuditConfigDelta instance
+                     */
+                    AuditConfigDelta.create = function create(properties) {
+                        return new AuditConfigDelta(properties);
+                    };
+    
+                    /**
+                     * Encodes the specified AuditConfigDelta message. Does not implicitly {@link google.iam.v1.AuditConfigDelta.verify|verify} messages.
+                     * @function encode
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @static
+                     * @param {google.iam.v1.IAuditConfigDelta} message AuditConfigDelta message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AuditConfigDelta.encode = function encode(message, writer) {
+                        if (!writer)
+                            writer = $Writer.create();
+                        if (message.action != null && Object.hasOwnProperty.call(message, "action"))
+                            writer.uint32(/* id 1, wireType 0 =*/8).int32(message.action);
+                        if (message.service != null && Object.hasOwnProperty.call(message, "service"))
+                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.service);
+                        if (message.exemptedMember != null && Object.hasOwnProperty.call(message, "exemptedMember"))
+                            writer.uint32(/* id 3, wireType 2 =*/26).string(message.exemptedMember);
+                        if (message.logType != null && Object.hasOwnProperty.call(message, "logType"))
+                            writer.uint32(/* id 4, wireType 2 =*/34).string(message.logType);
+                        return writer;
+                    };
+    
+                    /**
+                     * Encodes the specified AuditConfigDelta message, length delimited. Does not implicitly {@link google.iam.v1.AuditConfigDelta.verify|verify} messages.
+                     * @function encodeDelimited
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @static
+                     * @param {google.iam.v1.IAuditConfigDelta} message AuditConfigDelta message or plain object to encode
+                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                     * @returns {$protobuf.Writer} Writer
+                     */
+                    AuditConfigDelta.encodeDelimited = function encodeDelimited(message, writer) {
+                        return this.encode(message, writer).ldelim();
+                    };
+    
+                    /**
+                     * Decodes an AuditConfigDelta message from the specified reader or buffer.
+                     * @function decode
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @param {number} [length] Message length if known beforehand
+                     * @returns {google.iam.v1.AuditConfigDelta} AuditConfigDelta
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AuditConfigDelta.decode = function decode(reader, length, error) {
+                        if (!(reader instanceof $Reader))
+                            reader = $Reader.create(reader);
+                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.iam.v1.AuditConfigDelta();
+                        while (reader.pos < end) {
+                            var tag = reader.uint32();
+                            if (tag === error)
+                                break;
+                            switch (tag >>> 3) {
+                            case 1: {
+                                    message.action = reader.int32();
+                                    break;
+                                }
+                            case 2: {
+                                    message.service = reader.string();
+                                    break;
+                                }
+                            case 3: {
+                                    message.exemptedMember = reader.string();
+                                    break;
+                                }
+                            case 4: {
+                                    message.logType = reader.string();
+                                    break;
+                                }
+                            default:
+                                reader.skipType(tag & 7);
+                                break;
+                            }
+                        }
+                        return message;
+                    };
+    
+                    /**
+                     * Decodes an AuditConfigDelta message from the specified reader or buffer, length delimited.
+                     * @function decodeDelimited
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @static
+                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                     * @returns {google.iam.v1.AuditConfigDelta} AuditConfigDelta
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    AuditConfigDelta.decodeDelimited = function decodeDelimited(reader) {
+                        if (!(reader instanceof $Reader))
+                            reader = new $Reader(reader);
+                        return this.decode(reader, reader.uint32());
+                    };
+    
+                    /**
+                     * Verifies an AuditConfigDelta message.
+                     * @function verify
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @static
+                     * @param {Object.<string,*>} message Plain object to verify
+                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                     */
+                    AuditConfigDelta.verify = function verify(message) {
+                        if (typeof message !== "object" || message === null)
+                            return "object expected";
+                        if (message.action != null && message.hasOwnProperty("action"))
+                            switch (message.action) {
+                            default:
+                                return "action: enum value expected";
+                            case 0:
+                            case 1:
+                            case 2:
+                                break;
+                            }
+                        if (message.service != null && message.hasOwnProperty("service"))
+                            if (!$util.isString(message.service))
+                                return "service: string expected";
+                        if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))
+                            if (!$util.isString(message.exemptedMember))
+                                return "exemptedMember: string expected";
+                        if (message.logType != null && message.hasOwnProperty("logType"))
+                            if (!$util.isString(message.logType))
+                                return "logType: string expected";
+                        return null;
+                    };
+    
+                    /**
+                     * Creates an AuditConfigDelta message from a plain object. Also converts values to their respective internal types.
+                     * @function fromObject
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @static
+                     * @param {Object.<string,*>} object Plain object
+                     * @returns {google.iam.v1.AuditConfigDelta} AuditConfigDelta
+                     */
+                    AuditConfigDelta.fromObject = function fromObject(object) {
+                        if (object instanceof $root.google.iam.v1.AuditConfigDelta)
+                            return object;
+                        var message = new $root.google.iam.v1.AuditConfigDelta();
+                        switch (object.action) {
+                        default:
+                            if (typeof object.action === "number") {
+                                message.action = object.action;
+                                break;
+                            }
+                            break;
+                        case "ACTION_UNSPECIFIED":
+                        case 0:
+                            message.action = 0;
+                            break;
+                        case "ADD":
+                        case 1:
+                            message.action = 1;
+                            break;
+                        case "REMOVE":
+                        case 2:
+                            message.action = 2;
+                            break;
+                        }
+                        if (object.service != null)
+                            message.service = String(object.service);
+                        if (object.exemptedMember != null)
+                            message.exemptedMember = String(object.exemptedMember);
+                        if (object.logType != null)
+                            message.logType = String(object.logType);
+                        return message;
+                    };
+    
+                    /**
+                     * Creates a plain object from an AuditConfigDelta message. Also converts values to other types if specified.
+                     * @function toObject
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @static
+                     * @param {google.iam.v1.AuditConfigDelta} message AuditConfigDelta
+                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                     * @returns {Object.<string,*>} Plain object
+                     */
+                    AuditConfigDelta.toObject = function toObject(message, options) {
+                        if (!options)
+                            options = {};
+                        var object = {};
+                        if (options.defaults) {
+                            object.action = options.enums === String ? "ACTION_UNSPECIFIED" : 0;
+                            object.service = "";
+                            object.exemptedMember = "";
+                            object.logType = "";
+                        }
+                        if (message.action != null && message.hasOwnProperty("action"))
+                            object.action = options.enums === String ? $root.google.iam.v1.AuditConfigDelta.Action[message.action] === undefined ? message.action : $root.google.iam.v1.AuditConfigDelta.Action[message.action] : message.action;
+                        if (message.service != null && message.hasOwnProperty("service"))
+                            object.service = message.service;
+                        if (message.exemptedMember != null && message.hasOwnProperty("exemptedMember"))
+                            object.exemptedMember = message.exemptedMember;
+                        if (message.logType != null && message.hasOwnProperty("logType"))
+                            object.logType = message.logType;
+                        return object;
+                    };
+    
+                    /**
+                     * Converts this AuditConfigDelta to JSON.
+                     * @function toJSON
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @instance
+                     * @returns {Object.<string,*>} JSON object
+                     */
+                    AuditConfigDelta.prototype.toJSON = function toJSON() {
+                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                    };
+    
+                    /**
+                     * Gets the default type url for AuditConfigDelta
+                     * @function getTypeUrl
+                     * @memberof google.iam.v1.AuditConfigDelta
+                     * @static
+                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns {string} The default type url
+                     */
+                    AuditConfigDelta.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                        if (typeUrlPrefix === undefined) {
+                            typeUrlPrefix = "type.googleapis.com";
+                        }
+                        return typeUrlPrefix + "/google.iam.v1.AuditConfigDelta";
+                    };
+    
+                    /**
+                     * Action enum.
+                     * @name google.iam.v1.AuditConfigDelta.Action
+                     * @enum {number}
+                     * @property {number} ACTION_UNSPECIFIED=0 ACTION_UNSPECIFIED value
+                     * @property {number} ADD=1 ADD value
+                     * @property {number} REMOVE=2 REMOVE value
+                     */
+                    AuditConfigDelta.Action = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "ACTION_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "ADD"] = 1;
+                        values[valuesById[2] = "REMOVE"] = 2;
+                        return values;
+                    })();
+    
+                    return AuditConfigDelta;
+                })();
+    
+                return v1;
+            })();
+    
+            return iam;
+        })();
+    
+        google.type = (function() {
+    
+            /**
+             * Namespace type.
+             * @memberof google
+             * @namespace
+             */
+            var type = {};
+    
+            type.Expr = (function() {
+    
+                /**
+                 * Properties of an Expr.
+                 * @memberof google.type
+                 * @interface IExpr
+                 * @property {string|null} [expression] Expr expression
+                 * @property {string|null} [title] Expr title
+                 * @property {string|null} [description] Expr description
+                 * @property {string|null} [location] Expr location
+                 */
+    
+                /**
+                 * Constructs a new Expr.
+                 * @memberof google.type
+                 * @classdesc Represents an Expr.
+                 * @implements IExpr
+                 * @constructor
+                 * @param {google.type.IExpr=} [properties] Properties to set
+                 */
+                function Expr(properties) {
+                    if (properties)
+                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                            if (properties[keys[i]] != null)
+                                this[keys[i]] = properties[keys[i]];
+                }
+    
+                /**
+                 * Expr expression.
+                 * @member {string} expression
+                 * @memberof google.type.Expr
+                 * @instance
+                 */
+                Expr.prototype.expression = "";
+    
+                /**
+                 * Expr title.
+                 * @member {string} title
+                 * @memberof google.type.Expr
+                 * @instance
+                 */
+                Expr.prototype.title = "";
+    
+                /**
+                 * Expr description.
+                 * @member {string} description
+                 * @memberof google.type.Expr
+                 * @instance
+                 */
+                Expr.prototype.description = "";
+    
+                /**
+                 * Expr location.
+                 * @member {string} location
+                 * @memberof google.type.Expr
+                 * @instance
+                 */
+                Expr.prototype.location = "";
+    
+                /**
+                 * Creates a new Expr instance using the specified properties.
+                 * @function create
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {google.type.IExpr=} [properties] Properties to set
+                 * @returns {google.type.Expr} Expr instance
+                 */
+                Expr.create = function create(properties) {
+                    return new Expr(properties);
+                };
+    
+                /**
+                 * Encodes the specified Expr message. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+                 * @function encode
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {google.type.IExpr} message Expr message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Expr.encode = function encode(message, writer) {
+                    if (!writer)
+                        writer = $Writer.create();
+                    if (message.expression != null && Object.hasOwnProperty.call(message, "expression"))
+                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.expression);
+                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.title);
+                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                        writer.uint32(/* id 3, wireType 2 =*/26).string(message.description);
+                    if (message.location != null && Object.hasOwnProperty.call(message, "location"))
+                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.location);
+                    return writer;
+                };
+    
+                /**
+                 * Encodes the specified Expr message, length delimited. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+                 * @function encodeDelimited
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {google.type.IExpr} message Expr message or plain object to encode
+                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                 * @returns {$protobuf.Writer} Writer
+                 */
+                Expr.encodeDelimited = function encodeDelimited(message, writer) {
+                    return this.encode(message, writer).ldelim();
+                };
+    
+                /**
+                 * Decodes an Expr message from the specified reader or buffer.
+                 * @function decode
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @param {number} [length] Message length if known beforehand
+                 * @returns {google.type.Expr} Expr
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Expr.decode = function decode(reader, length, error) {
+                    if (!(reader instanceof $Reader))
+                        reader = $Reader.create(reader);
+                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.type.Expr();
+                    while (reader.pos < end) {
+                        var tag = reader.uint32();
+                        if (tag === error)
+                            break;
+                        switch (tag >>> 3) {
+                        case 1: {
+                                message.expression = reader.string();
+                                break;
+                            }
+                        case 2: {
+                                message.title = reader.string();
+                                break;
+                            }
+                        case 3: {
+                                message.description = reader.string();
+                                break;
+                            }
+                        case 4: {
+                                message.location = reader.string();
+                                break;
+                            }
+                        default:
+                            reader.skipType(tag & 7);
+                            break;
+                        }
+                    }
+                    return message;
+                };
+    
+                /**
+                 * Decodes an Expr message from the specified reader or buffer, length delimited.
+                 * @function decodeDelimited
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                 * @returns {google.type.Expr} Expr
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                Expr.decodeDelimited = function decodeDelimited(reader) {
+                    if (!(reader instanceof $Reader))
+                        reader = new $Reader(reader);
+                    return this.decode(reader, reader.uint32());
+                };
+    
+                /**
+                 * Verifies an Expr message.
+                 * @function verify
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {Object.<string,*>} message Plain object to verify
+                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                 */
+                Expr.verify = function verify(message) {
+                    if (typeof message !== "object" || message === null)
+                        return "object expected";
+                    if (message.expression != null && message.hasOwnProperty("expression"))
+                        if (!$util.isString(message.expression))
+                            return "expression: string expected";
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        if (!$util.isString(message.title))
+                            return "title: string expected";
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        if (!$util.isString(message.description))
+                            return "description: string expected";
+                    if (message.location != null && message.hasOwnProperty("location"))
+                        if (!$util.isString(message.location))
+                            return "location: string expected";
+                    return null;
+                };
+    
+                /**
+                 * Creates an Expr message from a plain object. Also converts values to their respective internal types.
+                 * @function fromObject
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {Object.<string,*>} object Plain object
+                 * @returns {google.type.Expr} Expr
+                 */
+                Expr.fromObject = function fromObject(object) {
+                    if (object instanceof $root.google.type.Expr)
+                        return object;
+                    var message = new $root.google.type.Expr();
+                    if (object.expression != null)
+                        message.expression = String(object.expression);
+                    if (object.title != null)
+                        message.title = String(object.title);
+                    if (object.description != null)
+                        message.description = String(object.description);
+                    if (object.location != null)
+                        message.location = String(object.location);
+                    return message;
+                };
+    
+                /**
+                 * Creates a plain object from an Expr message. Also converts values to other types if specified.
+                 * @function toObject
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {google.type.Expr} message Expr
+                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                 * @returns {Object.<string,*>} Plain object
+                 */
+                Expr.toObject = function toObject(message, options) {
+                    if (!options)
+                        options = {};
+                    var object = {};
+                    if (options.defaults) {
+                        object.expression = "";
+                        object.title = "";
+                        object.description = "";
+                        object.location = "";
+                    }
+                    if (message.expression != null && message.hasOwnProperty("expression"))
+                        object.expression = message.expression;
+                    if (message.title != null && message.hasOwnProperty("title"))
+                        object.title = message.title;
+                    if (message.description != null && message.hasOwnProperty("description"))
+                        object.description = message.description;
+                    if (message.location != null && message.hasOwnProperty("location"))
+                        object.location = message.location;
+                    return object;
+                };
+    
+                /**
+                 * Converts this Expr to JSON.
+                 * @function toJSON
+                 * @memberof google.type.Expr
+                 * @instance
+                 * @returns {Object.<string,*>} JSON object
+                 */
+                Expr.prototype.toJSON = function toJSON() {
+                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                };
+    
+                /**
+                 * Gets the default type url for Expr
+                 * @function getTypeUrl
+                 * @memberof google.type.Expr
+                 * @static
+                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns {string} The default type url
+                 */
+                Expr.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                    if (typeUrlPrefix === undefined) {
+                        typeUrlPrefix = "type.googleapis.com";
+                    }
+                    return typeUrlPrefix + "/google.type.Expr";
+                };
+    
+                return Expr;
+            })();
+    
+            return type;
         })();
     
         google.rpc = (function() {

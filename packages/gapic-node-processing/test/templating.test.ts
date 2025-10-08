@@ -12,14 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// eslint-disable-next-line node/no-unpublished-import
+// eslint-disable-next-line n/no-unpublished-import
 import {describe, it} from 'mocha';
 import {compileTemplates} from '../src/templating';
 
 import {join} from 'path';
 import {execSync} from 'child_process';
 import {mkdirSync, readdirSync, readFileSync} from 'fs';
-// eslint-disable-next-line node/no-unpublished-import
+// eslint-disable-next-line n/no-unpublished-import
 import snapshot from 'snap-shot-it';
 import * as assert from 'assert';
 import {TemplateVars} from '../src/get-bootstrap-template-vars';

@@ -544,6 +544,9 @@ export class PredictionServiceClient {
  *   ][google.cloud.aiplatform.v1.DeployedModel.model]
  *   {@link protos.google.cloud.aiplatform.v1.Model.predict_schemata|PredictSchemata's}
  *   {@link protos.google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri|parameters_schema_uri}.
+ * @param {number[]} [request.labels]
+ *   Optional. The user labels for Imagen billing usage only. Only Imagen
+ *   supports labels. For other use cases, it will be ignored.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

@@ -1,839 +1,839 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-osconfig",
-        "version": "4.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.osconfig.v1beta",
-                "version": "v1beta"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_ExecutePatchJob_async",
-            "title": "OsConfigService executePatchJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Patch VM instances by creating and running a patch job.",
-            "canonical": true,
-            "file": "os_config_service.execute_patch_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 87,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExecutePatchJob",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ExecutePatchJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "description",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance_filter",
-                        "type": ".google.cloud.osconfig.v1beta.PatchInstanceFilter"
-                    },
-                    {
-                        "name": "patch_config",
-                        "type": ".google.cloud.osconfig.v1beta.PatchConfig"
-                    },
-                    {
-                        "name": "duration",
-                        "type": ".google.protobuf.Duration"
-                    },
-                    {
-                        "name": "dry_run",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "display_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "rollout",
-                        "type": ".google.cloud.osconfig.v1beta.PatchRollout"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.PatchJob",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "ExecutePatchJob",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ExecutePatchJob",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_GetPatchJob_async",
-            "title": "OsConfigService getPatchJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the patch job. This can be used to track the progress of an ongoing patch job or review the details of completed jobs.",
-            "canonical": true,
-            "file": "os_config_service.get_patch_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPatchJob",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetPatchJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.PatchJob",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "GetPatchJob",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetPatchJob",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_CancelPatchJob_async",
-            "title": "OsConfigService cancelPatchJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Cancel a patch job. The patch job must be active. Canceled patch jobs cannot be restarted.",
-            "canonical": true,
-            "file": "os_config_service.cancel_patch_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CancelPatchJob",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CancelPatchJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.PatchJob",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "CancelPatchJob",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CancelPatchJob",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_ListPatchJobs_async",
-            "title": "OsConfigService listPatchJobs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a list of patch jobs.",
-            "canonical": true,
-            "file": "os_config_service.list_patch_jobs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPatchJobs",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchJobs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.ListPatchJobsResponse",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "ListPatchJobs",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchJobs",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_ListPatchJobInstanceDetails_async",
-            "title": "OsConfigService listPatchJobInstanceDetails Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a list of instance details for a given patch job.",
-            "canonical": true,
-            "file": "os_config_service.list_patch_job_instance_details.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPatchJobInstanceDetails",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchJobInstanceDetails",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.ListPatchJobInstanceDetailsResponse",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "ListPatchJobInstanceDetails",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchJobInstanceDetails",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_CreatePatchDeployment_async",
-            "title": "OsConfigService createPatchDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create an OS Config patch deployment.",
-            "canonical": true,
-            "file": "os_config_service.create_patch_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreatePatchDeployment",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CreatePatchDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "patch_deployment_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "patch_deployment",
-                        "type": ".google.cloud.osconfig.v1beta.PatchDeployment"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "CreatePatchDeployment",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CreatePatchDeployment",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_GetPatchDeployment_async",
-            "title": "OsConfigService getPatchDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get an OS Config patch deployment.",
-            "canonical": true,
-            "file": "os_config_service.get_patch_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPatchDeployment",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetPatchDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "GetPatchDeployment",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetPatchDeployment",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_ListPatchDeployments_async",
-            "title": "OsConfigService listPatchDeployments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a page of OS Config patch deployments.",
-            "canonical": true,
-            "file": "os_config_service.list_patch_deployments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPatchDeployments",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchDeployments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.ListPatchDeploymentsResponse",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "ListPatchDeployments",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchDeployments",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_DeletePatchDeployment_async",
-            "title": "OsConfigService deletePatchDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete an OS Config patch deployment.",
-            "canonical": true,
-            "file": "os_config_service.delete_patch_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeletePatchDeployment",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.DeletePatchDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "DeletePatchDeployment",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.DeletePatchDeployment",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_UpdatePatchDeployment_async",
-            "title": "OsConfigService updatePatchDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update an OS Config patch deployment.",
-            "canonical": true,
-            "file": "os_config_service.update_patch_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdatePatchDeployment",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.UpdatePatchDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "patch_deployment",
-                        "type": ".google.cloud.osconfig.v1beta.PatchDeployment"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdatePatchDeployment",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.UpdatePatchDeployment",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_PausePatchDeployment_async",
-            "title": "OsConfigService pausePatchDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Change state of patch deployment to \"PAUSED\". Patch deployment in paused state doesn't generate patch jobs.",
-            "canonical": true,
-            "file": "os_config_service.pause_patch_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "PausePatchDeployment",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.PausePatchDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "PausePatchDeployment",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.PausePatchDeployment",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_ResumePatchDeployment_async",
-            "title": "OsConfigService resumePatchDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Change state of patch deployment back to \"ACTIVE\". Patch deployment in active state continues to generate patch jobs.",
-            "canonical": true,
-            "file": "os_config_service.resume_patch_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResumePatchDeployment",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ResumePatchDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "ResumePatchDeployment",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ResumePatchDeployment",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_CreateGuestPolicy_async",
-            "title": "OsConfigService createGuestPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create an OS Config guest policy.",
-            "canonical": true,
-            "file": "os_config_service.create_guest_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateGuestPolicy",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CreateGuestPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "guest_policy_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "guest_policy",
-                        "type": ".google.cloud.osconfig.v1beta.GuestPolicy"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.GuestPolicy",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateGuestPolicy",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CreateGuestPolicy",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_GetGuestPolicy_async",
-            "title": "OsConfigService getGuestPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get an OS Config guest policy.",
-            "canonical": true,
-            "file": "os_config_service.get_guest_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetGuestPolicy",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetGuestPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.GuestPolicy",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "GetGuestPolicy",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetGuestPolicy",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_ListGuestPolicies_async",
-            "title": "OsConfigService listGuestPolicies Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a page of OS Config guest policies.",
-            "canonical": true,
-            "file": "os_config_service.list_guest_policies.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListGuestPolicies",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListGuestPolicies",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.ListGuestPoliciesResponse",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "ListGuestPolicies",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListGuestPolicies",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_UpdateGuestPolicy_async",
-            "title": "OsConfigService updateGuestPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update an OS Config guest policy.",
-            "canonical": true,
-            "file": "os_config_service.update_guest_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateGuestPolicy",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.UpdateGuestPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "guest_policy",
-                        "type": ".google.cloud.osconfig.v1beta.GuestPolicy"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.GuestPolicy",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateGuestPolicy",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.UpdateGuestPolicy",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_DeleteGuestPolicy_async",
-            "title": "OsConfigService deleteGuestPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete an OS Config guest policy.",
-            "canonical": true,
-            "file": "os_config_service.delete_guest_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteGuestPolicy",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.DeleteGuestPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteGuestPolicy",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.DeleteGuestPolicy",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "osconfig_v1beta_generated_OsConfigService_LookupEffectiveGuestPolicy_async",
-            "title": "OsConfigService lookupEffectiveGuestPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lookup the effective guest policy that applies to a VM instance. This lookup merges all policies that are assigned to the instance ancestry.",
-            "canonical": true,
-            "file": "os_config_service.lookup_effective_guest_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LookupEffectiveGuestPolicy",
-                "fullName": "google.cloud.osconfig.v1beta.OsConfigService.LookupEffectiveGuestPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "instance",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "os_short_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "os_version",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "os_architecture",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.osconfig.v1beta.EffectiveGuestPolicy",
-                "client": {
-                    "shortName": "OsConfigServiceClient",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
-                },
-                "method": {
-                    "shortName": "LookupEffectiveGuestPolicy",
-                    "fullName": "google.cloud.osconfig.v1beta.OsConfigService.LookupEffectiveGuestPolicy",
-                    "service": {
-                        "shortName": "OsConfigService",
-                        "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-osconfig",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.osconfig.v1beta",
+        "version": "v1beta"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_ExecutePatchJob_async",
+      "title": "OsConfigService executePatchJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Patch VM instances by creating and running a patch job.",
+      "canonical": true,
+      "file": "os_config_service.execute_patch_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 87,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExecutePatchJob",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ExecutePatchJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "description",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance_filter",
+            "type": ".google.cloud.osconfig.v1beta.PatchInstanceFilter"
+          },
+          {
+            "name": "patch_config",
+            "type": ".google.cloud.osconfig.v1beta.PatchConfig"
+          },
+          {
+            "name": "duration",
+            "type": ".google.protobuf.Duration"
+          },
+          {
+            "name": "dry_run",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "display_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout",
+            "type": ".google.cloud.osconfig.v1beta.PatchRollout"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.PatchJob",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "ExecutePatchJob",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ExecutePatchJob",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_GetPatchJob_async",
+      "title": "OsConfigService getPatchJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the patch job. This can be used to track the progress of an ongoing patch job or review the details of completed jobs.",
+      "canonical": true,
+      "file": "os_config_service.get_patch_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPatchJob",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetPatchJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.PatchJob",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "GetPatchJob",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetPatchJob",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_CancelPatchJob_async",
+      "title": "OsConfigService cancelPatchJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancel a patch job. The patch job must be active. Canceled patch jobs cannot be restarted.",
+      "canonical": true,
+      "file": "os_config_service.cancel_patch_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelPatchJob",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CancelPatchJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.PatchJob",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "CancelPatchJob",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CancelPatchJob",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_ListPatchJobs_async",
+      "title": "OsConfigService listPatchJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a list of patch jobs.",
+      "canonical": true,
+      "file": "os_config_service.list_patch_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPatchJobs",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.ListPatchJobsResponse",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "ListPatchJobs",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchJobs",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_ListPatchJobInstanceDetails_async",
+      "title": "OsConfigService listPatchJobInstanceDetails Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a list of instance details for a given patch job.",
+      "canonical": true,
+      "file": "os_config_service.list_patch_job_instance_details.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPatchJobInstanceDetails",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchJobInstanceDetails",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.ListPatchJobInstanceDetailsResponse",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "ListPatchJobInstanceDetails",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchJobInstanceDetails",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_CreatePatchDeployment_async",
+      "title": "OsConfigService createPatchDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create an OS Config patch deployment.",
+      "canonical": true,
+      "file": "os_config_service.create_patch_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePatchDeployment",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CreatePatchDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "patch_deployment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "patch_deployment",
+            "type": ".google.cloud.osconfig.v1beta.PatchDeployment"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "CreatePatchDeployment",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CreatePatchDeployment",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_GetPatchDeployment_async",
+      "title": "OsConfigService getPatchDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get an OS Config patch deployment.",
+      "canonical": true,
+      "file": "os_config_service.get_patch_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPatchDeployment",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetPatchDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "GetPatchDeployment",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetPatchDeployment",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_ListPatchDeployments_async",
+      "title": "OsConfigService listPatchDeployments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a page of OS Config patch deployments.",
+      "canonical": true,
+      "file": "os_config_service.list_patch_deployments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPatchDeployments",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchDeployments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.ListPatchDeploymentsResponse",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "ListPatchDeployments",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListPatchDeployments",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_DeletePatchDeployment_async",
+      "title": "OsConfigService deletePatchDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete an OS Config patch deployment.",
+      "canonical": true,
+      "file": "os_config_service.delete_patch_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePatchDeployment",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.DeletePatchDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "DeletePatchDeployment",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.DeletePatchDeployment",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_UpdatePatchDeployment_async",
+      "title": "OsConfigService updatePatchDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update an OS Config patch deployment.",
+      "canonical": true,
+      "file": "os_config_service.update_patch_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePatchDeployment",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.UpdatePatchDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "patch_deployment",
+            "type": ".google.cloud.osconfig.v1beta.PatchDeployment"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "UpdatePatchDeployment",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.UpdatePatchDeployment",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_PausePatchDeployment_async",
+      "title": "OsConfigService pausePatchDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Change state of patch deployment to \"PAUSED\". Patch deployment in paused state doesn't generate patch jobs.",
+      "canonical": true,
+      "file": "os_config_service.pause_patch_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PausePatchDeployment",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.PausePatchDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "PausePatchDeployment",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.PausePatchDeployment",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_ResumePatchDeployment_async",
+      "title": "OsConfigService resumePatchDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Change state of patch deployment back to \"ACTIVE\". Patch deployment in active state continues to generate patch jobs.",
+      "canonical": true,
+      "file": "os_config_service.resume_patch_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResumePatchDeployment",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ResumePatchDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.PatchDeployment",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "ResumePatchDeployment",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ResumePatchDeployment",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_CreateGuestPolicy_async",
+      "title": "OsConfigService createGuestPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create an OS Config guest policy.",
+      "canonical": true,
+      "file": "os_config_service.create_guest_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateGuestPolicy",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CreateGuestPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "guest_policy_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "guest_policy",
+            "type": ".google.cloud.osconfig.v1beta.GuestPolicy"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.GuestPolicy",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "CreateGuestPolicy",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.CreateGuestPolicy",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_GetGuestPolicy_async",
+      "title": "OsConfigService getGuestPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get an OS Config guest policy.",
+      "canonical": true,
+      "file": "os_config_service.get_guest_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGuestPolicy",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetGuestPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.GuestPolicy",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "GetGuestPolicy",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.GetGuestPolicy",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_ListGuestPolicies_async",
+      "title": "OsConfigService listGuestPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a page of OS Config guest policies.",
+      "canonical": true,
+      "file": "os_config_service.list_guest_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGuestPolicies",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListGuestPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.ListGuestPoliciesResponse",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "ListGuestPolicies",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.ListGuestPolicies",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_UpdateGuestPolicy_async",
+      "title": "OsConfigService updateGuestPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update an OS Config guest policy.",
+      "canonical": true,
+      "file": "os_config_service.update_guest_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGuestPolicy",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.UpdateGuestPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "guest_policy",
+            "type": ".google.cloud.osconfig.v1beta.GuestPolicy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.GuestPolicy",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateGuestPolicy",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.UpdateGuestPolicy",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_DeleteGuestPolicy_async",
+      "title": "OsConfigService deleteGuestPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete an OS Config guest policy.",
+      "canonical": true,
+      "file": "os_config_service.delete_guest_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteGuestPolicy",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.DeleteGuestPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteGuestPolicy",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.DeleteGuestPolicy",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "osconfig_v1beta_generated_OsConfigService_LookupEffectiveGuestPolicy_async",
+      "title": "OsConfigService lookupEffectiveGuestPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup the effective guest policy that applies to a VM instance. This lookup merges all policies that are assigned to the instance ancestry.",
+      "canonical": true,
+      "file": "os_config_service.lookup_effective_guest_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupEffectiveGuestPolicy",
+        "fullName": "google.cloud.osconfig.v1beta.OsConfigService.LookupEffectiveGuestPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "os_short_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "os_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "os_architecture",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.osconfig.v1beta.EffectiveGuestPolicy",
+        "client": {
+          "shortName": "OsConfigServiceClient",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigServiceClient"
+        },
+        "method": {
+          "shortName": "LookupEffectiveGuestPolicy",
+          "fullName": "google.cloud.osconfig.v1beta.OsConfigService.LookupEffectiveGuestPolicy",
+          "service": {
+            "shortName": "OsConfigService",
+            "fullName": "google.cloud.osconfig.v1beta.OsConfigService"
+          }
+        }
+      }
+    }
+  ]
 }

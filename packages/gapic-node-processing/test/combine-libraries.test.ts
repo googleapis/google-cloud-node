@@ -82,11 +82,15 @@ describe('combine libraries', () => {
       path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
     );
 
-    assert.ok(await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION)));
+    assert.ok(
+      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION)),
+    );
     // We won't assert very specific library structure, but we will assert
     // the top-level folders
     assert.ok(
-      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'protos')),
+      await fs.stat(
+        path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'protos'),
+      ),
     );
     assert.ok(
       await fs.stat(
@@ -94,7 +98,9 @@ describe('combine libraries', () => {
       ),
     );
     assert.ok(
-      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src')),
+      await fs.stat(
+        path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'src'),
+      ),
     );
     assert.ok(
       await fs.stat(
@@ -102,7 +108,9 @@ describe('combine libraries', () => {
       ),
     );
     assert.ok(
-      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'test')),
+      await fs.stat(
+        path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION, 'test'),
+      ),
     );
     try {
       await fs.rm(path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION), {
@@ -113,7 +121,7 @@ describe('combine libraries', () => {
     }
   });
 
-    it('should create a combined ESM library', async () => {
+  it('should create a combined ESM library', async () => {
     // Even though the library combination should delete the current library,
     // this allows us to ensure that our output is expected.
     try {
@@ -128,11 +136,15 @@ describe('combine libraries', () => {
       path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
     );
 
-    assert.ok(await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM)));
+    assert.ok(
+      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM)),
+    );
     // We won't assert very specific library structure, but we will assert
     // the top-level folders
     assert.ok(
-      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'protos')),
+      await fs.stat(
+        path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'protos'),
+      ),
     );
     assert.ok(
       await fs.stat(
@@ -140,15 +152,34 @@ describe('combine libraries', () => {
       ),
     );
     assert.ok(
-      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'src')),
-    );
-    assert.ok(
       await fs.stat(
-        path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'system-test'),
+        path.resolve(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION_ESM,
+          'esm',
+          'src',
+        ),
       ),
     );
     assert.ok(
-      await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM, 'esm', 'test')),
+      await fs.stat(
+        path.resolve(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION_ESM,
+          'esm',
+          'system-test',
+        ),
+      ),
+    );
+    assert.ok(
+      await fs.stat(
+        path.resolve(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION_ESM,
+          'esm',
+          'test',
+        ),
+      ),
     );
     try {
       await fs.rm(path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM), {

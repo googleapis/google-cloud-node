@@ -18,7 +18,6 @@ import {describe, it} from 'mocha';
 import * as sinon from 'sinon';
 import * as combineLibraries from '../src/combine-libraries';
 import * as generateIndexTs from '../src/generate-index';
-import * as templates from '../src/templating';
 import path from 'path';
 import {TEST_FIXTURES_PATH} from './combine-libraries.test';
 
@@ -55,8 +54,10 @@ describe('tests running build trigger', () => {
     assert.ok(
       generateIndexTsStub.calledOnceWithExactly(
         path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-        undefined,
-        undefined,
+        ['v1', 'v1p1beta1', 'v2'],
+        {version: 'v2', clients: ['SpeechClient']},
+        false,
+        'src',
       ),
     );
   });
@@ -83,8 +84,10 @@ describe('tests running build trigger', () => {
     assert.ok(
       generateIndexTsStub.calledOnceWithExactly(
         'different-path',
-        undefined,
-        undefined,
+        ['v1', 'v1p1beta1', 'v2'],
+        {version: 'v2', clients: ['SpeechClient']},
+        false,
+        'src',
       ),
     );
   });
@@ -111,8 +114,10 @@ describe('tests running build trigger', () => {
     assert.ok(
       generateIndexTsStub.calledOnceWithExactly(
         path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-        'v1',
-        undefined,
+        ['v1', 'v1p1beta1', 'v2'],
+        {version: 'v1', clients: ['AdaptationClient', 'SpeechClient']},
+        false,
+        'src',
       ),
     );
   });
@@ -177,11 +182,8 @@ describe('tests running build trigger', () => {
 
   it('it should generate a full library with isEsm', async () => {
     await generateCombinedLibraries.handler({
-      'source-path': path.join(
-        TEST_FIXTURES_PATH,
-        'google-cloud-speech-nodejs'
-      ),
-      sourcePath: path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+      'source-path': path.join(TEST_FIXTURES_PATH, 'google-cloud-tasks-nodejs'),
+      sourcePath: path.join(TEST_FIXTURES_PATH, 'google-cloud-tasks-nodejs'),
       'is-esm': true,
       isEsm: true,
       _: [],
@@ -190,16 +192,18 @@ describe('tests running build trigger', () => {
 
     assert.ok(
       combineLibrariesStub.calledOnceWithExactly(
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs')
-      )
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-tasks-nodejs'),
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-tasks-nodejs'),
+      ),
     );
     assert.ok(
       generateIndexTsStub.calledOnceWithExactly(
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-        undefined,
-        true
-      )
+        path.join(TEST_FIXTURES_PATH, 'google-cloud-tasks-nodejs'),
+        ['v2', 'v2beta2'],
+        {version: 'v2', clients: ['CloudTasksClient']},
+        true,
+        'esm/src',
+      ),
     );
   });
 });

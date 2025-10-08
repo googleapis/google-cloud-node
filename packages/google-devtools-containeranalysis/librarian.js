@@ -35,18 +35,22 @@ function replaceInFile(filePath, pattern, replacement) {
 /**
  * Finds files in a directory that match a specific extension.
  * @param {string} dirPath The directory to search.
- * @param {string} extension The file extension to match (e.g., '.ts').
+ * @param {string|string[]} extensions The file extension(s) to match (e.g., '.ts' or ['.ts', '.js'] or '*').
  * @param {RegExp} [fileNamePattern] An optional regex to match file names.
  * @returns {string[]} An array of matching file paths.
  */
-function findFilesByExtension(dirPath, extension, fileNamePattern = null) {
+function findFilesByExtension(dirPath, extensions, fileNamePattern = null) {
   const files = [];
   try {
     const items = fs.readdirSync(dirPath, { withFileTypes: true });
     for (const item of items) {
-      if (item.isFile() && path.extname(item.name) === extension) {
-        if (!fileNamePattern || fileNamePattern.test(item.name)) {
-          files.push(path.join(dirPath, item.name));
+      if (item.isFile()) {
+        const ext = path.extname(item.name);
+        const match = Array.isArray(extensions) ? extensions.includes(ext) : (extensions === '*' || ext === extensions);
+        if (match) {
+          if (!fileNamePattern || fileNamePattern.test(item.name)) {
+            files.push(path.join(dirPath, item.name));
+          }
         }
       }
     }
@@ -95,7 +99,7 @@ try {
 
 // Fix Grafeas client files
 const grafeasV1beta1Dir = path.resolve('packages/google-devtools-containeranalysis/src/v1beta1');
-const grafeasV1beta1Files = findFilesByExtension(grafeasV1beta1Dir, '.ts', /^grafeas_v1_beta1_client/);
+const grafeasV1beta1Files = findFilesByExtension(grafeasV1beta1Dir, '*', /^grafeas_v1_beta1_client/);
 grafeasV1beta1Files.forEach(file => {
   replaceInFile(file, /google\.devtools\.containeranalysis/g, 'grafeas');
 });

@@ -1,331 +1,331 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-policysimulator",
-        "version": "0.8.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.policysimulator.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "policysimulator_v1_generated_OrgPolicyViolationsPreviewService_ListOrgPolicyViolationsPreviews_async",
-            "title": "OrgPolicy listOrgPolicyViolationsPreviews Sample",
-            "origin": "API_DEFINITION",
-            "description": " ListOrgPolicyViolationsPreviews lists each [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview] in an organization. Each [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview] is available for at least 7 days.",
-            "canonical": true,
-            "file": "org_policy_violations_preview_service.list_org_policy_violations_previews.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListOrgPolicyViolationsPreviews",
-                "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolationsPreviews",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse",
-                "client": {
-                    "shortName": "OrgPolicyViolationsPreviewServiceClient",
-                    "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewServiceClient"
-                },
-                "method": {
-                    "shortName": "ListOrgPolicyViolationsPreviews",
-                    "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolationsPreviews",
-                    "service": {
-                        "shortName": "OrgPolicyViolationsPreviewService",
-                        "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "policysimulator_v1_generated_OrgPolicyViolationsPreviewService_GetOrgPolicyViolationsPreview_async",
-            "title": "OrgPolicy getOrgPolicyViolationsPreview Sample",
-            "origin": "API_DEFINITION",
-            "description": " GetOrgPolicyViolationsPreview gets the specified [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview]. Each [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview] is available for at least 7 days.",
-            "canonical": true,
-            "file": "org_policy_violations_preview_service.get_org_policy_violations_preview.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetOrgPolicyViolationsPreview",
-                "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.GetOrgPolicyViolationsPreview",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.policysimulator.v1.OrgPolicyViolationsPreview",
-                "client": {
-                    "shortName": "OrgPolicyViolationsPreviewServiceClient",
-                    "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewServiceClient"
-                },
-                "method": {
-                    "shortName": "GetOrgPolicyViolationsPreview",
-                    "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.GetOrgPolicyViolationsPreview",
-                    "service": {
-                        "shortName": "OrgPolicyViolationsPreviewService",
-                        "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "policysimulator_v1_generated_OrgPolicyViolationsPreviewService_CreateOrgPolicyViolationsPreview_async",
-            "title": "OrgPolicy createOrgPolicyViolationsPreview Sample",
-            "origin": "API_DEFINITION",
-            "description": " CreateOrgPolicyViolationsPreview creates an [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview] for the proposed changes in the provided [OrgPolicyViolationsPreview.OrgPolicyOverlay][]. The changes to OrgPolicy are specified by this `OrgPolicyOverlay`. The resources to scan are inferred from these specified changes.",
-            "canonical": true,
-            "file": "org_policy_violations_preview_service.create_org_policy_violations_preview.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateOrgPolicyViolationsPreview",
-                "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.CreateOrgPolicyViolationsPreview",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "org_policy_violations_preview",
-                        "type": ".google.cloud.policysimulator.v1.OrgPolicyViolationsPreview"
-                    },
-                    {
-                        "name": "org_policy_violations_preview_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "OrgPolicyViolationsPreviewServiceClient",
-                    "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateOrgPolicyViolationsPreview",
-                    "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.CreateOrgPolicyViolationsPreview",
-                    "service": {
-                        "shortName": "OrgPolicyViolationsPreviewService",
-                        "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "policysimulator_v1_generated_OrgPolicyViolationsPreviewService_ListOrgPolicyViolations_async",
-            "title": "OrgPolicy listOrgPolicyViolations Sample",
-            "origin": "API_DEFINITION",
-            "description": " ListOrgPolicyViolations lists the [OrgPolicyViolations][] that are present in an [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview].",
-            "canonical": true,
-            "file": "org_policy_violations_preview_service.list_org_policy_violations.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListOrgPolicyViolations",
-                "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolations",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse",
-                "client": {
-                    "shortName": "OrgPolicyViolationsPreviewServiceClient",
-                    "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewServiceClient"
-                },
-                "method": {
-                    "shortName": "ListOrgPolicyViolations",
-                    "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolations",
-                    "service": {
-                        "shortName": "OrgPolicyViolationsPreviewService",
-                        "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "policysimulator_v1_generated_Simulator_GetReplay_async",
-            "title": "OrgPolicy getReplay Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the specified [Replay][google.cloud.policysimulator.v1.Replay]. Each `Replay` is available for at least 7 days.",
-            "canonical": true,
-            "file": "simulator.get_replay.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetReplay",
-                "fullName": "google.cloud.policysimulator.v1.Simulator.GetReplay",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.policysimulator.v1.Replay",
-                "client": {
-                    "shortName": "SimulatorClient",
-                    "fullName": "google.cloud.policysimulator.v1.SimulatorClient"
-                },
-                "method": {
-                    "shortName": "GetReplay",
-                    "fullName": "google.cloud.policysimulator.v1.Simulator.GetReplay",
-                    "service": {
-                        "shortName": "Simulator",
-                        "fullName": "google.cloud.policysimulator.v1.Simulator"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "policysimulator_v1_generated_Simulator_CreateReplay_async",
-            "title": "OrgPolicy createReplay Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates and starts a [Replay][google.cloud.policysimulator.v1.Replay] using the given [ReplayConfig][google.cloud.policysimulator.v1.ReplayConfig].",
-            "canonical": true,
-            "file": "simulator.create_replay.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateReplay",
-                "fullName": "google.cloud.policysimulator.v1.Simulator.CreateReplay",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "replay",
-                        "type": ".google.cloud.policysimulator.v1.Replay"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SimulatorClient",
-                    "fullName": "google.cloud.policysimulator.v1.SimulatorClient"
-                },
-                "method": {
-                    "shortName": "CreateReplay",
-                    "fullName": "google.cloud.policysimulator.v1.Simulator.CreateReplay",
-                    "service": {
-                        "shortName": "Simulator",
-                        "fullName": "google.cloud.policysimulator.v1.Simulator"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "policysimulator_v1_generated_Simulator_ListReplayResults_async",
-            "title": "OrgPolicy listReplayResults Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the results of running a [Replay][google.cloud.policysimulator.v1.Replay].",
-            "canonical": true,
-            "file": "simulator.list_replay_results.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListReplayResults",
-                "fullName": "google.cloud.policysimulator.v1.Simulator.ListReplayResults",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.policysimulator.v1.ListReplayResultsResponse",
-                "client": {
-                    "shortName": "SimulatorClient",
-                    "fullName": "google.cloud.policysimulator.v1.SimulatorClient"
-                },
-                "method": {
-                    "shortName": "ListReplayResults",
-                    "fullName": "google.cloud.policysimulator.v1.Simulator.ListReplayResults",
-                    "service": {
-                        "shortName": "Simulator",
-                        "fullName": "google.cloud.policysimulator.v1.Simulator"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-policysimulator",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.policysimulator.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "policysimulator_v1_generated_OrgPolicyViolationsPreviewService_ListOrgPolicyViolationsPreviews_async",
+      "title": "OrgPolicy listOrgPolicyViolationsPreviews Sample",
+      "origin": "API_DEFINITION",
+      "description": " ListOrgPolicyViolationsPreviews lists each [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview] in an organization. Each [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview] is available for at least 7 days.",
+      "canonical": true,
+      "file": "org_policy_violations_preview_service.list_org_policy_violations_previews.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListOrgPolicyViolationsPreviews",
+        "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolationsPreviews",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.policysimulator.v1.ListOrgPolicyViolationsPreviewsResponse",
+        "client": {
+          "shortName": "OrgPolicyViolationsPreviewServiceClient",
+          "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewServiceClient"
+        },
+        "method": {
+          "shortName": "ListOrgPolicyViolationsPreviews",
+          "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolationsPreviews",
+          "service": {
+            "shortName": "OrgPolicyViolationsPreviewService",
+            "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "policysimulator_v1_generated_OrgPolicyViolationsPreviewService_GetOrgPolicyViolationsPreview_async",
+      "title": "OrgPolicy getOrgPolicyViolationsPreview Sample",
+      "origin": "API_DEFINITION",
+      "description": " GetOrgPolicyViolationsPreview gets the specified [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview]. Each [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview] is available for at least 7 days.",
+      "canonical": true,
+      "file": "org_policy_violations_preview_service.get_org_policy_violations_preview.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetOrgPolicyViolationsPreview",
+        "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.GetOrgPolicyViolationsPreview",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.policysimulator.v1.OrgPolicyViolationsPreview",
+        "client": {
+          "shortName": "OrgPolicyViolationsPreviewServiceClient",
+          "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewServiceClient"
+        },
+        "method": {
+          "shortName": "GetOrgPolicyViolationsPreview",
+          "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.GetOrgPolicyViolationsPreview",
+          "service": {
+            "shortName": "OrgPolicyViolationsPreviewService",
+            "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "policysimulator_v1_generated_OrgPolicyViolationsPreviewService_CreateOrgPolicyViolationsPreview_async",
+      "title": "OrgPolicy createOrgPolicyViolationsPreview Sample",
+      "origin": "API_DEFINITION",
+      "description": " CreateOrgPolicyViolationsPreview creates an [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview] for the proposed changes in the provided [OrgPolicyViolationsPreview.OrgPolicyOverlay][]. The changes to OrgPolicy are specified by this `OrgPolicyOverlay`. The resources to scan are inferred from these specified changes.",
+      "canonical": true,
+      "file": "org_policy_violations_preview_service.create_org_policy_violations_preview.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateOrgPolicyViolationsPreview",
+        "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.CreateOrgPolicyViolationsPreview",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "org_policy_violations_preview",
+            "type": ".google.cloud.policysimulator.v1.OrgPolicyViolationsPreview"
+          },
+          {
+            "name": "org_policy_violations_preview_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "OrgPolicyViolationsPreviewServiceClient",
+          "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewServiceClient"
+        },
+        "method": {
+          "shortName": "CreateOrgPolicyViolationsPreview",
+          "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.CreateOrgPolicyViolationsPreview",
+          "service": {
+            "shortName": "OrgPolicyViolationsPreviewService",
+            "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "policysimulator_v1_generated_OrgPolicyViolationsPreviewService_ListOrgPolicyViolations_async",
+      "title": "OrgPolicy listOrgPolicyViolations Sample",
+      "origin": "API_DEFINITION",
+      "description": " ListOrgPolicyViolations lists the [OrgPolicyViolations][] that are present in an [OrgPolicyViolationsPreview][google.cloud.policysimulator.v1.OrgPolicyViolationsPreview].",
+      "canonical": true,
+      "file": "org_policy_violations_preview_service.list_org_policy_violations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListOrgPolicyViolations",
+        "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.policysimulator.v1.ListOrgPolicyViolationsResponse",
+        "client": {
+          "shortName": "OrgPolicyViolationsPreviewServiceClient",
+          "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewServiceClient"
+        },
+        "method": {
+          "shortName": "ListOrgPolicyViolations",
+          "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService.ListOrgPolicyViolations",
+          "service": {
+            "shortName": "OrgPolicyViolationsPreviewService",
+            "fullName": "google.cloud.policysimulator.v1.OrgPolicyViolationsPreviewService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "policysimulator_v1_generated_Simulator_GetReplay_async",
+      "title": "OrgPolicy getReplay Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified [Replay][google.cloud.policysimulator.v1.Replay]. Each `Replay` is available for at least 7 days.",
+      "canonical": true,
+      "file": "simulator.get_replay.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetReplay",
+        "fullName": "google.cloud.policysimulator.v1.Simulator.GetReplay",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.policysimulator.v1.Replay",
+        "client": {
+          "shortName": "SimulatorClient",
+          "fullName": "google.cloud.policysimulator.v1.SimulatorClient"
+        },
+        "method": {
+          "shortName": "GetReplay",
+          "fullName": "google.cloud.policysimulator.v1.Simulator.GetReplay",
+          "service": {
+            "shortName": "Simulator",
+            "fullName": "google.cloud.policysimulator.v1.Simulator"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "policysimulator_v1_generated_Simulator_CreateReplay_async",
+      "title": "OrgPolicy createReplay Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates and starts a [Replay][google.cloud.policysimulator.v1.Replay] using the given [ReplayConfig][google.cloud.policysimulator.v1.ReplayConfig].",
+      "canonical": true,
+      "file": "simulator.create_replay.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateReplay",
+        "fullName": "google.cloud.policysimulator.v1.Simulator.CreateReplay",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "replay",
+            "type": ".google.cloud.policysimulator.v1.Replay"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SimulatorClient",
+          "fullName": "google.cloud.policysimulator.v1.SimulatorClient"
+        },
+        "method": {
+          "shortName": "CreateReplay",
+          "fullName": "google.cloud.policysimulator.v1.Simulator.CreateReplay",
+          "service": {
+            "shortName": "Simulator",
+            "fullName": "google.cloud.policysimulator.v1.Simulator"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "policysimulator_v1_generated_Simulator_ListReplayResults_async",
+      "title": "OrgPolicy listReplayResults Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the results of running a [Replay][google.cloud.policysimulator.v1.Replay].",
+      "canonical": true,
+      "file": "simulator.list_replay_results.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReplayResults",
+        "fullName": "google.cloud.policysimulator.v1.Simulator.ListReplayResults",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.policysimulator.v1.ListReplayResultsResponse",
+        "client": {
+          "shortName": "SimulatorClient",
+          "fullName": "google.cloud.policysimulator.v1.SimulatorClient"
+        },
+        "method": {
+          "shortName": "ListReplayResults",
+          "fullName": "google.cloud.policysimulator.v1.Simulator.ListReplayResults",
+          "service": {
+            "shortName": "Simulator",
+            "fullName": "google.cloud.policysimulator.v1.Simulator"
+          }
+        }
+      }
+    }
+  ]
 }
