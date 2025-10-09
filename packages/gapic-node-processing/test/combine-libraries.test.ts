@@ -222,6 +222,30 @@ describe('combine libraries', () => {
       ),
       /SpeechClient/,
     );
+
+        assert.match(
+      await fs.readFile(
+        path.resolve(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION,
+          'system-test/fixtures/sample/src/index.ts',
+        ),
+        'utf-8',
+      ),
+      /AdaptationClient/,
+    );
+
+    assert.match(
+      await fs.readFile(
+        path.resolve(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION,
+          'system-test/fixtures/sample/src/index.ts',
+        ),
+        'utf-8',
+      ),
+      /SpeechClient/,
+    );
   });
 
   it('should create a directory and write files', async () => {
