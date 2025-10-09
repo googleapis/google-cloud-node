@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// @ts-ignore
 import {packNTest} from 'pack-n-play';
 import {describe, it} from 'mocha';
 
@@ -50,7 +51,7 @@ assert.deepStrictEqual(serialized, json);
         dependencies: ['protobufjs@^7.4.0'],
       },
     };
-    await packNTest(options).catch(err => {
+    await packNTest(options).catch((err: any) => {
       console.error(err);
       throw err;
     });
