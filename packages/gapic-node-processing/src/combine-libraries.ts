@@ -198,7 +198,7 @@ export function setOnlyDefaultSystemTests(
   filePaths: FilePaths[],
 ) {
   const systemTestRegex = new RegExp(
-    'system-test/fixtures/sample/src/index.ts',
+    'system-test/fixtures/sample/src',
   );
 
   for (const filePathObj of filePaths) {
