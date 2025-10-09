@@ -3131,6 +3131,19 @@
                         "chunkedDocument": {
                           "type": "ChunkedDocument",
                           "id": 18
+                        },
+                        "entityValidationOutput": {
+                          "type": "EntityValidationOutput",
+                          "id": 21
+                        },
+                        "entitiesRevisions": {
+                          "rule": "repeated",
+                          "type": "EntitiesRevision",
+                          "id": 22
+                        },
+                        "entitiesRevisionId": {
+                          "type": "string",
+                          "id": 23
                         }
                       },
                       "nested": {
@@ -4363,6 +4376,69 @@
                                   }
                                 }
                               }
+                            }
+                          }
+                        },
+                        "EntityValidationOutput": {
+                          "fields": {
+                            "validationResults": {
+                              "rule": "repeated",
+                              "type": "ValidationResult",
+                              "id": 1
+                            },
+                            "passAllRules": {
+                              "type": "bool",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "ValidationResult": {
+                              "fields": {
+                                "ruleName": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "ruleDescription": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "validationResultType": {
+                                  "type": "ValidationResultType",
+                                  "id": 3
+                                },
+                                "validationDetails": {
+                                  "type": "string",
+                                  "id": 4
+                                }
+                              },
+                              "nested": {
+                                "ValidationResultType": {
+                                  "values": {
+                                    "VALIDATION_RESULT_TYPE_UNSPECIFIED": 0,
+                                    "VALIDATION_RESULT_TYPE_VALID": 1,
+                                    "VALIDATION_RESULT_TYPE_INVALID": 2,
+                                    "VALIDATION_RESULT_TYPE_SKIPPED": 3,
+                                    "VALIDATION_RESULT_TYPE_NOT_APPLICABLE": 4
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "EntitiesRevision": {
+                          "fields": {
+                            "revisionId": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "entities": {
+                              "rule": "repeated",
+                              "type": "Entity",
+                              "id": 2
+                            },
+                            "entityValidationOutput": {
+                              "type": "EntityValidationOutput",
+                              "id": 3
                             }
                           }
                         }

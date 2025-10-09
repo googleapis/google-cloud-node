@@ -32584,6 +32584,9 @@
                          * @property {Array.<google.cloud.documentai.v1.Document.IRevision>|null} [revisions] Document revisions
                          * @property {google.cloud.documentai.v1.Document.IDocumentLayout|null} [documentLayout] Document documentLayout
                          * @property {google.cloud.documentai.v1.Document.IChunkedDocument|null} [chunkedDocument] Document chunkedDocument
+                         * @property {google.cloud.documentai.v1.Document.IEntityValidationOutput|null} [entityValidationOutput] Document entityValidationOutput
+                         * @property {Array.<google.cloud.documentai.v1.Document.IEntitiesRevision>|null} [entitiesRevisions] Document entitiesRevisions
+                         * @property {string|null} [entitiesRevisionId] Document entitiesRevisionId
                          */
     
                         /**
@@ -32601,6 +32604,7 @@
                             this.entityRelations = [];
                             this.textChanges = [];
                             this.revisions = [];
+                            this.entitiesRevisions = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -32727,6 +32731,30 @@
                          */
                         Document.prototype.chunkedDocument = null;
     
+                        /**
+                         * Document entityValidationOutput.
+                         * @member {google.cloud.documentai.v1.Document.IEntityValidationOutput|null|undefined} entityValidationOutput
+                         * @memberof google.cloud.documentai.v1.Document
+                         * @instance
+                         */
+                        Document.prototype.entityValidationOutput = null;
+    
+                        /**
+                         * Document entitiesRevisions.
+                         * @member {Array.<google.cloud.documentai.v1.Document.IEntitiesRevision>} entitiesRevisions
+                         * @memberof google.cloud.documentai.v1.Document
+                         * @instance
+                         */
+                        Document.prototype.entitiesRevisions = $util.emptyArray;
+    
+                        /**
+                         * Document entitiesRevisionId.
+                         * @member {string} entitiesRevisionId
+                         * @memberof google.cloud.documentai.v1.Document
+                         * @instance
+                         */
+                        Document.prototype.entitiesRevisionId = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -32801,6 +32829,13 @@
                                 $root.google.cloud.documentai.v1.Document.DocumentLayout.encode(message.documentLayout, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             if (message.chunkedDocument != null && Object.hasOwnProperty.call(message, "chunkedDocument"))
                                 $root.google.cloud.documentai.v1.Document.ChunkedDocument.encode(message.chunkedDocument, writer.uint32(/* id 18, wireType 2 =*/146).fork()).ldelim();
+                            if (message.entityValidationOutput != null && Object.hasOwnProperty.call(message, "entityValidationOutput"))
+                                $root.google.cloud.documentai.v1.Document.EntityValidationOutput.encode(message.entityValidationOutput, writer.uint32(/* id 21, wireType 2 =*/170).fork()).ldelim();
+                            if (message.entitiesRevisions != null && message.entitiesRevisions.length)
+                                for (var i = 0; i < message.entitiesRevisions.length; ++i)
+                                    $root.google.cloud.documentai.v1.Document.EntitiesRevision.encode(message.entitiesRevisions[i], writer.uint32(/* id 22, wireType 2 =*/178).fork()).ldelim();
+                            if (message.entitiesRevisionId != null && Object.hasOwnProperty.call(message, "entitiesRevisionId"))
+                                writer.uint32(/* id 23, wireType 2 =*/186).string(message.entitiesRevisionId);
                             return writer;
                         };
     
@@ -32907,6 +32942,20 @@
                                     }
                                 case 18: {
                                         message.chunkedDocument = $root.google.cloud.documentai.v1.Document.ChunkedDocument.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 21: {
+                                        message.entityValidationOutput = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 22: {
+                                        if (!(message.entitiesRevisions && message.entitiesRevisions.length))
+                                            message.entitiesRevisions = [];
+                                        message.entitiesRevisions.push($root.google.cloud.documentai.v1.Document.EntitiesRevision.decode(reader, reader.uint32()));
+                                        break;
+                                    }
+                                case 23: {
+                                        message.entitiesRevisionId = reader.string();
                                         break;
                                     }
                                 default:
@@ -33040,6 +33089,23 @@
                                 if (error)
                                     return "chunkedDocument." + error;
                             }
+                            if (message.entityValidationOutput != null && message.hasOwnProperty("entityValidationOutput")) {
+                                var error = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.verify(message.entityValidationOutput);
+                                if (error)
+                                    return "entityValidationOutput." + error;
+                            }
+                            if (message.entitiesRevisions != null && message.hasOwnProperty("entitiesRevisions")) {
+                                if (!Array.isArray(message.entitiesRevisions))
+                                    return "entitiesRevisions: array expected";
+                                for (var i = 0; i < message.entitiesRevisions.length; ++i) {
+                                    var error = $root.google.cloud.documentai.v1.Document.EntitiesRevision.verify(message.entitiesRevisions[i]);
+                                    if (error)
+                                        return "entitiesRevisions." + error;
+                                }
+                            }
+                            if (message.entitiesRevisionId != null && message.hasOwnProperty("entitiesRevisionId"))
+                                if (!$util.isString(message.entitiesRevisionId))
+                                    return "entitiesRevisionId: string expected";
                             return null;
                         };
     
@@ -33148,6 +33214,23 @@
                                     throw TypeError(".google.cloud.documentai.v1.Document.chunkedDocument: object expected");
                                 message.chunkedDocument = $root.google.cloud.documentai.v1.Document.ChunkedDocument.fromObject(object.chunkedDocument);
                             }
+                            if (object.entityValidationOutput != null) {
+                                if (typeof object.entityValidationOutput !== "object")
+                                    throw TypeError(".google.cloud.documentai.v1.Document.entityValidationOutput: object expected");
+                                message.entityValidationOutput = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.fromObject(object.entityValidationOutput);
+                            }
+                            if (object.entitiesRevisions) {
+                                if (!Array.isArray(object.entitiesRevisions))
+                                    throw TypeError(".google.cloud.documentai.v1.Document.entitiesRevisions: array expected");
+                                message.entitiesRevisions = [];
+                                for (var i = 0; i < object.entitiesRevisions.length; ++i) {
+                                    if (typeof object.entitiesRevisions[i] !== "object")
+                                        throw TypeError(".google.cloud.documentai.v1.Document.entitiesRevisions: object expected");
+                                    message.entitiesRevisions[i] = $root.google.cloud.documentai.v1.Document.EntitiesRevision.fromObject(object.entitiesRevisions[i]);
+                                }
+                            }
+                            if (object.entitiesRevisionId != null)
+                                message.entitiesRevisionId = String(object.entitiesRevisionId);
                             return message;
                         };
     
@@ -33171,6 +33254,7 @@
                                 object.entityRelations = [];
                                 object.revisions = [];
                                 object.textChanges = [];
+                                object.entitiesRevisions = [];
                             }
                             if (options.defaults) {
                                 object.mimeType = "";
@@ -33180,6 +33264,8 @@
                                 object.docid = "";
                                 object.documentLayout = null;
                                 object.chunkedDocument = null;
+                                object.entityValidationOutput = null;
+                                object.entitiesRevisionId = "";
                             }
                             if (message.uri != null && message.hasOwnProperty("uri")) {
                                 object.uri = message.uri;
@@ -33235,6 +33321,15 @@
                                 object.documentLayout = $root.google.cloud.documentai.v1.Document.DocumentLayout.toObject(message.documentLayout, options);
                             if (message.chunkedDocument != null && message.hasOwnProperty("chunkedDocument"))
                                 object.chunkedDocument = $root.google.cloud.documentai.v1.Document.ChunkedDocument.toObject(message.chunkedDocument, options);
+                            if (message.entityValidationOutput != null && message.hasOwnProperty("entityValidationOutput"))
+                                object.entityValidationOutput = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.toObject(message.entityValidationOutput, options);
+                            if (message.entitiesRevisions && message.entitiesRevisions.length) {
+                                object.entitiesRevisions = [];
+                                for (var j = 0; j < message.entitiesRevisions.length; ++j)
+                                    object.entitiesRevisions[j] = $root.google.cloud.documentai.v1.Document.EntitiesRevision.toObject(message.entitiesRevisions[j], options);
+                            }
+                            if (message.entitiesRevisionId != null && message.hasOwnProperty("entitiesRevisionId"))
+                                object.entitiesRevisionId = message.entitiesRevisionId;
                             return object;
                         };
     
@@ -48587,6 +48682,864 @@
                             })();
     
                             return ChunkedDocument;
+                        })();
+    
+                        Document.EntityValidationOutput = (function() {
+    
+                            /**
+                             * Properties of an EntityValidationOutput.
+                             * @memberof google.cloud.documentai.v1.Document
+                             * @interface IEntityValidationOutput
+                             * @property {Array.<google.cloud.documentai.v1.Document.EntityValidationOutput.IValidationResult>|null} [validationResults] EntityValidationOutput validationResults
+                             * @property {boolean|null} [passAllRules] EntityValidationOutput passAllRules
+                             */
+    
+                            /**
+                             * Constructs a new EntityValidationOutput.
+                             * @memberof google.cloud.documentai.v1.Document
+                             * @classdesc Represents an EntityValidationOutput.
+                             * @implements IEntityValidationOutput
+                             * @constructor
+                             * @param {google.cloud.documentai.v1.Document.IEntityValidationOutput=} [properties] Properties to set
+                             */
+                            function EntityValidationOutput(properties) {
+                                this.validationResults = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EntityValidationOutput validationResults.
+                             * @member {Array.<google.cloud.documentai.v1.Document.EntityValidationOutput.IValidationResult>} validationResults
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @instance
+                             */
+                            EntityValidationOutput.prototype.validationResults = $util.emptyArray;
+    
+                            /**
+                             * EntityValidationOutput passAllRules.
+                             * @member {boolean} passAllRules
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @instance
+                             */
+                            EntityValidationOutput.prototype.passAllRules = false;
+    
+                            /**
+                             * Creates a new EntityValidationOutput instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IEntityValidationOutput=} [properties] Properties to set
+                             * @returns {google.cloud.documentai.v1.Document.EntityValidationOutput} EntityValidationOutput instance
+                             */
+                            EntityValidationOutput.create = function create(properties) {
+                                return new EntityValidationOutput(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EntityValidationOutput message. Does not implicitly {@link google.cloud.documentai.v1.Document.EntityValidationOutput.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IEntityValidationOutput} message EntityValidationOutput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EntityValidationOutput.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.validationResults != null && message.validationResults.length)
+                                    for (var i = 0; i < message.validationResults.length; ++i)
+                                        $root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.encode(message.validationResults[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
+                                if (message.passAllRules != null && Object.hasOwnProperty.call(message, "passAllRules"))
+                                    writer.uint32(/* id 2, wireType 0 =*/16).bool(message.passAllRules);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EntityValidationOutput message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.EntityValidationOutput.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IEntityValidationOutput} message EntityValidationOutput message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EntityValidationOutput.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EntityValidationOutput message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.documentai.v1.Document.EntityValidationOutput} EntityValidationOutput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EntityValidationOutput.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.EntityValidationOutput();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            if (!(message.validationResults && message.validationResults.length))
+                                                message.validationResults = [];
+                                            message.validationResults.push($root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.passAllRules = reader.bool();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EntityValidationOutput message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.documentai.v1.Document.EntityValidationOutput} EntityValidationOutput
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EntityValidationOutput.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EntityValidationOutput message.
+                             * @function verify
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EntityValidationOutput.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.validationResults != null && message.hasOwnProperty("validationResults")) {
+                                    if (!Array.isArray(message.validationResults))
+                                        return "validationResults: array expected";
+                                    for (var i = 0; i < message.validationResults.length; ++i) {
+                                        var error = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.verify(message.validationResults[i]);
+                                        if (error)
+                                            return "validationResults." + error;
+                                    }
+                                }
+                                if (message.passAllRules != null && message.hasOwnProperty("passAllRules"))
+                                    if (typeof message.passAllRules !== "boolean")
+                                        return "passAllRules: boolean expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EntityValidationOutput message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.documentai.v1.Document.EntityValidationOutput} EntityValidationOutput
+                             */
+                            EntityValidationOutput.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.documentai.v1.Document.EntityValidationOutput)
+                                    return object;
+                                var message = new $root.google.cloud.documentai.v1.Document.EntityValidationOutput();
+                                if (object.validationResults) {
+                                    if (!Array.isArray(object.validationResults))
+                                        throw TypeError(".google.cloud.documentai.v1.Document.EntityValidationOutput.validationResults: array expected");
+                                    message.validationResults = [];
+                                    for (var i = 0; i < object.validationResults.length; ++i) {
+                                        if (typeof object.validationResults[i] !== "object")
+                                            throw TypeError(".google.cloud.documentai.v1.Document.EntityValidationOutput.validationResults: object expected");
+                                        message.validationResults[i] = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.fromObject(object.validationResults[i]);
+                                    }
+                                }
+                                if (object.passAllRules != null)
+                                    message.passAllRules = Boolean(object.passAllRules);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EntityValidationOutput message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.EntityValidationOutput} message EntityValidationOutput
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EntityValidationOutput.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.validationResults = [];
+                                if (options.defaults)
+                                    object.passAllRules = false;
+                                if (message.validationResults && message.validationResults.length) {
+                                    object.validationResults = [];
+                                    for (var j = 0; j < message.validationResults.length; ++j)
+                                        object.validationResults[j] = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.toObject(message.validationResults[j], options);
+                                }
+                                if (message.passAllRules != null && message.hasOwnProperty("passAllRules"))
+                                    object.passAllRules = message.passAllRules;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EntityValidationOutput to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EntityValidationOutput.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EntityValidationOutput
+                             * @function getTypeUrl
+                             * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EntityValidationOutput.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.documentai.v1.Document.EntityValidationOutput";
+                            };
+    
+                            EntityValidationOutput.ValidationResult = (function() {
+    
+                                /**
+                                 * Properties of a ValidationResult.
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                                 * @interface IValidationResult
+                                 * @property {string|null} [ruleName] ValidationResult ruleName
+                                 * @property {string|null} [ruleDescription] ValidationResult ruleDescription
+                                 * @property {google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.ValidationResultType|null} [validationResultType] ValidationResult validationResultType
+                                 * @property {string|null} [validationDetails] ValidationResult validationDetails
+                                 */
+    
+                                /**
+                                 * Constructs a new ValidationResult.
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput
+                                 * @classdesc Represents a ValidationResult.
+                                 * @implements IValidationResult
+                                 * @constructor
+                                 * @param {google.cloud.documentai.v1.Document.EntityValidationOutput.IValidationResult=} [properties] Properties to set
+                                 */
+                                function ValidationResult(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * ValidationResult ruleName.
+                                 * @member {string} ruleName
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @instance
+                                 */
+                                ValidationResult.prototype.ruleName = "";
+    
+                                /**
+                                 * ValidationResult ruleDescription.
+                                 * @member {string} ruleDescription
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @instance
+                                 */
+                                ValidationResult.prototype.ruleDescription = "";
+    
+                                /**
+                                 * ValidationResult validationResultType.
+                                 * @member {google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.ValidationResultType} validationResultType
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @instance
+                                 */
+                                ValidationResult.prototype.validationResultType = 0;
+    
+                                /**
+                                 * ValidationResult validationDetails.
+                                 * @member {string} validationDetails
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @instance
+                                 */
+                                ValidationResult.prototype.validationDetails = "";
+    
+                                /**
+                                 * Creates a new ValidationResult instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.EntityValidationOutput.IValidationResult=} [properties] Properties to set
+                                 * @returns {google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult} ValidationResult instance
+                                 */
+                                ValidationResult.create = function create(properties) {
+                                    return new ValidationResult(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified ValidationResult message. Does not implicitly {@link google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.EntityValidationOutput.IValidationResult} message ValidationResult message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ValidationResult.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.ruleName != null && Object.hasOwnProperty.call(message, "ruleName"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.ruleName);
+                                    if (message.ruleDescription != null && Object.hasOwnProperty.call(message, "ruleDescription"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.ruleDescription);
+                                    if (message.validationResultType != null && Object.hasOwnProperty.call(message, "validationResultType"))
+                                        writer.uint32(/* id 3, wireType 0 =*/24).int32(message.validationResultType);
+                                    if (message.validationDetails != null && Object.hasOwnProperty.call(message, "validationDetails"))
+                                        writer.uint32(/* id 4, wireType 2 =*/34).string(message.validationDetails);
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified ValidationResult message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.EntityValidationOutput.IValidationResult} message ValidationResult message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                ValidationResult.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a ValidationResult message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult} ValidationResult
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ValidationResult.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.ruleName = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.ruleDescription = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.validationResultType = reader.int32();
+                                                break;
+                                            }
+                                        case 4: {
+                                                message.validationDetails = reader.string();
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a ValidationResult message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult} ValidationResult
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                ValidationResult.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a ValidationResult message.
+                                 * @function verify
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                ValidationResult.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.ruleName != null && message.hasOwnProperty("ruleName"))
+                                        if (!$util.isString(message.ruleName))
+                                            return "ruleName: string expected";
+                                    if (message.ruleDescription != null && message.hasOwnProperty("ruleDescription"))
+                                        if (!$util.isString(message.ruleDescription))
+                                            return "ruleDescription: string expected";
+                                    if (message.validationResultType != null && message.hasOwnProperty("validationResultType"))
+                                        switch (message.validationResultType) {
+                                        default:
+                                            return "validationResultType: enum value expected";
+                                        case 0:
+                                        case 1:
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            break;
+                                        }
+                                    if (message.validationDetails != null && message.hasOwnProperty("validationDetails"))
+                                        if (!$util.isString(message.validationDetails))
+                                            return "validationDetails: string expected";
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a ValidationResult message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult} ValidationResult
+                                 */
+                                ValidationResult.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult)
+                                        return object;
+                                    var message = new $root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult();
+                                    if (object.ruleName != null)
+                                        message.ruleName = String(object.ruleName);
+                                    if (object.ruleDescription != null)
+                                        message.ruleDescription = String(object.ruleDescription);
+                                    switch (object.validationResultType) {
+                                    default:
+                                        if (typeof object.validationResultType === "number") {
+                                            message.validationResultType = object.validationResultType;
+                                            break;
+                                        }
+                                        break;
+                                    case "VALIDATION_RESULT_TYPE_UNSPECIFIED":
+                                    case 0:
+                                        message.validationResultType = 0;
+                                        break;
+                                    case "VALIDATION_RESULT_TYPE_VALID":
+                                    case 1:
+                                        message.validationResultType = 1;
+                                        break;
+                                    case "VALIDATION_RESULT_TYPE_INVALID":
+                                    case 2:
+                                        message.validationResultType = 2;
+                                        break;
+                                    case "VALIDATION_RESULT_TYPE_SKIPPED":
+                                    case 3:
+                                        message.validationResultType = 3;
+                                        break;
+                                    case "VALIDATION_RESULT_TYPE_NOT_APPLICABLE":
+                                    case 4:
+                                        message.validationResultType = 4;
+                                        break;
+                                    }
+                                    if (object.validationDetails != null)
+                                        message.validationDetails = String(object.validationDetails);
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a ValidationResult message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @static
+                                 * @param {google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult} message ValidationResult
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                ValidationResult.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.ruleName = "";
+                                        object.ruleDescription = "";
+                                        object.validationResultType = options.enums === String ? "VALIDATION_RESULT_TYPE_UNSPECIFIED" : 0;
+                                        object.validationDetails = "";
+                                    }
+                                    if (message.ruleName != null && message.hasOwnProperty("ruleName"))
+                                        object.ruleName = message.ruleName;
+                                    if (message.ruleDescription != null && message.hasOwnProperty("ruleDescription"))
+                                        object.ruleDescription = message.ruleDescription;
+                                    if (message.validationResultType != null && message.hasOwnProperty("validationResultType"))
+                                        object.validationResultType = options.enums === String ? $root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.ValidationResultType[message.validationResultType] === undefined ? message.validationResultType : $root.google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.ValidationResultType[message.validationResultType] : message.validationResultType;
+                                    if (message.validationDetails != null && message.hasOwnProperty("validationDetails"))
+                                        object.validationDetails = message.validationDetails;
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this ValidationResult to JSON.
+                                 * @function toJSON
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                ValidationResult.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for ValidationResult
+                                 * @function getTypeUrl
+                                 * @memberof google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                ValidationResult.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult";
+                                };
+    
+                                /**
+                                 * ValidationResultType enum.
+                                 * @name google.cloud.documentai.v1.Document.EntityValidationOutput.ValidationResult.ValidationResultType
+                                 * @enum {number}
+                                 * @property {number} VALIDATION_RESULT_TYPE_UNSPECIFIED=0 VALIDATION_RESULT_TYPE_UNSPECIFIED value
+                                 * @property {number} VALIDATION_RESULT_TYPE_VALID=1 VALIDATION_RESULT_TYPE_VALID value
+                                 * @property {number} VALIDATION_RESULT_TYPE_INVALID=2 VALIDATION_RESULT_TYPE_INVALID value
+                                 * @property {number} VALIDATION_RESULT_TYPE_SKIPPED=3 VALIDATION_RESULT_TYPE_SKIPPED value
+                                 * @property {number} VALIDATION_RESULT_TYPE_NOT_APPLICABLE=4 VALIDATION_RESULT_TYPE_NOT_APPLICABLE value
+                                 */
+                                ValidationResult.ValidationResultType = (function() {
+                                    var valuesById = {}, values = Object.create(valuesById);
+                                    values[valuesById[0] = "VALIDATION_RESULT_TYPE_UNSPECIFIED"] = 0;
+                                    values[valuesById[1] = "VALIDATION_RESULT_TYPE_VALID"] = 1;
+                                    values[valuesById[2] = "VALIDATION_RESULT_TYPE_INVALID"] = 2;
+                                    values[valuesById[3] = "VALIDATION_RESULT_TYPE_SKIPPED"] = 3;
+                                    values[valuesById[4] = "VALIDATION_RESULT_TYPE_NOT_APPLICABLE"] = 4;
+                                    return values;
+                                })();
+    
+                                return ValidationResult;
+                            })();
+    
+                            return EntityValidationOutput;
+                        })();
+    
+                        Document.EntitiesRevision = (function() {
+    
+                            /**
+                             * Properties of an EntitiesRevision.
+                             * @memberof google.cloud.documentai.v1.Document
+                             * @interface IEntitiesRevision
+                             * @property {string|null} [revisionId] EntitiesRevision revisionId
+                             * @property {Array.<google.cloud.documentai.v1.Document.IEntity>|null} [entities] EntitiesRevision entities
+                             * @property {google.cloud.documentai.v1.Document.IEntityValidationOutput|null} [entityValidationOutput] EntitiesRevision entityValidationOutput
+                             */
+    
+                            /**
+                             * Constructs a new EntitiesRevision.
+                             * @memberof google.cloud.documentai.v1.Document
+                             * @classdesc Represents an EntitiesRevision.
+                             * @implements IEntitiesRevision
+                             * @constructor
+                             * @param {google.cloud.documentai.v1.Document.IEntitiesRevision=} [properties] Properties to set
+                             */
+                            function EntitiesRevision(properties) {
+                                this.entities = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * EntitiesRevision revisionId.
+                             * @member {string} revisionId
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @instance
+                             */
+                            EntitiesRevision.prototype.revisionId = "";
+    
+                            /**
+                             * EntitiesRevision entities.
+                             * @member {Array.<google.cloud.documentai.v1.Document.IEntity>} entities
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @instance
+                             */
+                            EntitiesRevision.prototype.entities = $util.emptyArray;
+    
+                            /**
+                             * EntitiesRevision entityValidationOutput.
+                             * @member {google.cloud.documentai.v1.Document.IEntityValidationOutput|null|undefined} entityValidationOutput
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @instance
+                             */
+                            EntitiesRevision.prototype.entityValidationOutput = null;
+    
+                            /**
+                             * Creates a new EntitiesRevision instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IEntitiesRevision=} [properties] Properties to set
+                             * @returns {google.cloud.documentai.v1.Document.EntitiesRevision} EntitiesRevision instance
+                             */
+                            EntitiesRevision.create = function create(properties) {
+                                return new EntitiesRevision(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified EntitiesRevision message. Does not implicitly {@link google.cloud.documentai.v1.Document.EntitiesRevision.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IEntitiesRevision} message EntitiesRevision message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EntitiesRevision.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.revisionId != null && Object.hasOwnProperty.call(message, "revisionId"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.revisionId);
+                                if (message.entities != null && message.entities.length)
+                                    for (var i = 0; i < message.entities.length; ++i)
+                                        $root.google.cloud.documentai.v1.Document.Entity.encode(message.entities[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.entityValidationOutput != null && Object.hasOwnProperty.call(message, "entityValidationOutput"))
+                                    $root.google.cloud.documentai.v1.Document.EntityValidationOutput.encode(message.entityValidationOutput, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified EntitiesRevision message, length delimited. Does not implicitly {@link google.cloud.documentai.v1.Document.EntitiesRevision.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.IEntitiesRevision} message EntitiesRevision message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            EntitiesRevision.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes an EntitiesRevision message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.documentai.v1.Document.EntitiesRevision} EntitiesRevision
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EntitiesRevision.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.documentai.v1.Document.EntitiesRevision();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.revisionId = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.entities && message.entities.length))
+                                                message.entities = [];
+                                            message.entities.push($root.google.cloud.documentai.v1.Document.Entity.decode(reader, reader.uint32()));
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.entityValidationOutput = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes an EntitiesRevision message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.documentai.v1.Document.EntitiesRevision} EntitiesRevision
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            EntitiesRevision.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies an EntitiesRevision message.
+                             * @function verify
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            EntitiesRevision.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                    if (!$util.isString(message.revisionId))
+                                        return "revisionId: string expected";
+                                if (message.entities != null && message.hasOwnProperty("entities")) {
+                                    if (!Array.isArray(message.entities))
+                                        return "entities: array expected";
+                                    for (var i = 0; i < message.entities.length; ++i) {
+                                        var error = $root.google.cloud.documentai.v1.Document.Entity.verify(message.entities[i]);
+                                        if (error)
+                                            return "entities." + error;
+                                    }
+                                }
+                                if (message.entityValidationOutput != null && message.hasOwnProperty("entityValidationOutput")) {
+                                    var error = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.verify(message.entityValidationOutput);
+                                    if (error)
+                                        return "entityValidationOutput." + error;
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates an EntitiesRevision message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.documentai.v1.Document.EntitiesRevision} EntitiesRevision
+                             */
+                            EntitiesRevision.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.documentai.v1.Document.EntitiesRevision)
+                                    return object;
+                                var message = new $root.google.cloud.documentai.v1.Document.EntitiesRevision();
+                                if (object.revisionId != null)
+                                    message.revisionId = String(object.revisionId);
+                                if (object.entities) {
+                                    if (!Array.isArray(object.entities))
+                                        throw TypeError(".google.cloud.documentai.v1.Document.EntitiesRevision.entities: array expected");
+                                    message.entities = [];
+                                    for (var i = 0; i < object.entities.length; ++i) {
+                                        if (typeof object.entities[i] !== "object")
+                                            throw TypeError(".google.cloud.documentai.v1.Document.EntitiesRevision.entities: object expected");
+                                        message.entities[i] = $root.google.cloud.documentai.v1.Document.Entity.fromObject(object.entities[i]);
+                                    }
+                                }
+                                if (object.entityValidationOutput != null) {
+                                    if (typeof object.entityValidationOutput !== "object")
+                                        throw TypeError(".google.cloud.documentai.v1.Document.EntitiesRevision.entityValidationOutput: object expected");
+                                    message.entityValidationOutput = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.fromObject(object.entityValidationOutput);
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from an EntitiesRevision message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @static
+                             * @param {google.cloud.documentai.v1.Document.EntitiesRevision} message EntitiesRevision
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            EntitiesRevision.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.entities = [];
+                                if (options.defaults) {
+                                    object.revisionId = "";
+                                    object.entityValidationOutput = null;
+                                }
+                                if (message.revisionId != null && message.hasOwnProperty("revisionId"))
+                                    object.revisionId = message.revisionId;
+                                if (message.entities && message.entities.length) {
+                                    object.entities = [];
+                                    for (var j = 0; j < message.entities.length; ++j)
+                                        object.entities[j] = $root.google.cloud.documentai.v1.Document.Entity.toObject(message.entities[j], options);
+                                }
+                                if (message.entityValidationOutput != null && message.hasOwnProperty("entityValidationOutput"))
+                                    object.entityValidationOutput = $root.google.cloud.documentai.v1.Document.EntityValidationOutput.toObject(message.entityValidationOutput, options);
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this EntitiesRevision to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            EntitiesRevision.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for EntitiesRevision
+                             * @function getTypeUrl
+                             * @memberof google.cloud.documentai.v1.Document.EntitiesRevision
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            EntitiesRevision.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.documentai.v1.Document.EntitiesRevision";
+                            };
+    
+                            return EntitiesRevision;
                         })();
     
                         return Document;
