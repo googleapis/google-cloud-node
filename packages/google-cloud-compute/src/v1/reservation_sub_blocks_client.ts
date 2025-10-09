@@ -223,7 +223,7 @@ export class ReservationSubBlocksClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const reservationSubBlocksStubMethods =
-        ['get', 'list', 'performMaintenance'];
+        ['get', 'list', 'performMaintenance', 'reportFaulty'];
     for (const methodName of reservationSubBlocksStubMethods) {
       const callPromise = this.reservationSubBlocksStub.then(
         stub => (...args: Array<{}>) => {
@@ -525,6 +525,117 @@ export class ReservationSubBlocksClient {
         }
       : undefined;
     return this.innerApiCalls.performMaintenance(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Allows customers to report a faulty subBlock.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parentName
+ *   The name of the parent reservation and parent block. In the format of reservations/{reservation_name}/reservationBlocks/{reservation_block_name}
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+ * @param {string} request.reservationSubBlock
+ *   The name of the reservation subBlock. Name should conform to RFC1035 or be a resource ID.
+ * @param {google.cloud.compute.v1.ReservationSubBlocksReportFaultyRequest} request.reservationSubBlocksReportFaultyRequestResource
+ *   The body resource for this request
+ * @param {string} request.zone
+ *   Name of the zone for this request. Zone name should conform to RFC1035.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ *   This method is considered to be in beta. This means while
+ *   stable it is still a work-in-progress and under active development,
+ *   and might get backwards-incompatible changes at any time.
+ *   `.promise()` is not supported yet.
+ * @example <caption>include:samples/generated/v1/reservation_sub_blocks.report_faulty.js</caption>
+ * region_tag:compute_v1_generated_ReservationSubBlocks_ReportFaulty_async
+ */
+  reportFaulty(
+      request?: protos.google.cloud.compute.v1.IReportFaultyReservationSubBlockRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>;
+  reportFaulty(
+      request: protos.google.cloud.compute.v1.IReportFaultyReservationSubBlockRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IReportFaultyReservationSubBlockRequest|null|undefined,
+          {}|null|undefined>): void;
+  reportFaulty(
+      request: protos.google.cloud.compute.v1.IReportFaultyReservationSubBlockRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IReportFaultyReservationSubBlockRequest|null|undefined,
+          {}|null|undefined>): void;
+  reportFaulty(
+      request?: protos.google.cloud.compute.v1.IReportFaultyReservationSubBlockRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IReportFaultyReservationSubBlockRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IReportFaultyReservationSubBlockRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+        protos.google.cloud.compute.v1.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'zone': request.zone ?? '',
+      'parent_name': request.parentName ?? '',
+      'reservation_sub_block': request.reservationSubBlock ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('reportFaulty request %j', request);
+    const wrappedCallback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IReportFaultyReservationSubBlockRequest|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('reportFaulty response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls.reportFaulty(request, options, wrappedCallback)
       ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
         return [
           { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
