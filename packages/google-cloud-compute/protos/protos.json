@@ -111775,6 +111775,54 @@
                         }
                       }
                     },
+                    "AddAssociationRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networkPolicyAssociationResource": {
+                          "type": "NetworkPolicyAssociation",
+                          "id": 84002920,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "AddHealthCheckTargetPoolRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -112663,6 +112711,54 @@
                         }
                       }
                     },
+                    "AddTrafficClassificationRuleRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networkPolicyTrafficClassificationRuleResource": {
+                          "type": "NetworkPolicyTrafficClassificationRule",
+                          "id": 464294582,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "Address": {
                       "oneofs": {
                         "_address": {
@@ -112688,6 +112784,11 @@
                         "_id": {
                           "oneof": [
                             "id"
+                          ]
+                        },
+                        "_ipCollection": {
+                          "oneof": [
+                            "ipCollection"
                           ]
                         },
                         "_ipVersion": {
@@ -112788,6 +112889,13 @@
                         "id": {
                           "type": "uint64",
                           "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ipCollection": {
+                          "type": "string",
+                          "id": 176818358,
                           "options": {
                             "proto3_optional": true
                           }
@@ -115732,6 +115840,200 @@
                       }
                     },
                     "AggregatedListRegionCommitmentsRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        },
+                        "_serviceProjectNumber": {
+                          "oneof": [
+                            "serviceProjectNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProjectNumber": {
+                          "type": "int64",
+                          "id": 316757497,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AggregatedListRegionHealthSourcesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_includeAllScopes": {
+                          "oneof": [
+                            "includeAllScopes"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        },
+                        "_serviceProjectNumber": {
+                          "oneof": [
+                            "serviceProjectNumber"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "includeAllScopes": {
+                          "type": "bool",
+                          "id": 391327988,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "serviceProjectNumber": {
+                          "type": "int64",
+                          "id": 316757497,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AggregatedListRegionNetworkPoliciesRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -127673,6 +127975,47 @@
                         }
                       }
                     },
+                    "DeleteRegionHealthSourceRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthSource": {
+                          "type": "string",
+                          "id": 376521566,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "DeleteRegionInstanceGroupManagerRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -127938,6 +128281,47 @@
                         "firewallPolicy": {
                           "type": "string",
                           "id": 498173265,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "DeleteRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -135798,6 +136182,45 @@
                         }
                       }
                     },
+                    "GetAssociationRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetAutoscalerRequest": {
                       "fields": {
                         "autoscaler": {
@@ -138661,6 +139084,31 @@
                         }
                       }
                     },
+                    "GetRegionHealthSourceRequest": {
+                      "fields": {
+                        "healthSource": {
+                          "type": "string",
+                          "id": 376521566,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetRegionInstanceGroupManagerRequest": {
                       "fields": {
                         "instanceGroupManager": {
@@ -138872,6 +139320,31 @@
                         "firewallPolicy": {
                           "type": "string",
                           "id": 498173265,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetRegionNetworkPolicyRequest": {
+                      "fields": {
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -140146,6 +140619,45 @@
                         "targetVpnGateway": {
                           "type": "string",
                           "id": 532512843,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetTrafficClassificationRuleRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_priority": {
+                          "oneof": [
+                            "priority"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "priority": {
+                          "type": "int32",
+                          "id": 445151652,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -141832,6 +142344,322 @@
                         }
                       }
                     },
+                    "HealthSource": {
+                      "oneofs": {
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_fingerprint": {
+                          "oneof": [
+                            "fingerprint"
+                          ]
+                        },
+                        "_healthAggregationPolicy": {
+                          "oneof": [
+                            "healthAggregationPolicy"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        },
+                        "_sourceType": {
+                          "oneof": [
+                            "sourceType"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "fingerprint": {
+                          "type": "string",
+                          "id": 234678500,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "healthAggregationPolicy": {
+                          "type": "string",
+                          "id": 240314354,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sourceType": {
+                          "type": "string",
+                          "id": 452245726,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "sources": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 125606840
+                        }
+                      },
+                      "nested": {
+                        "SourceType": {
+                          "values": {
+                            "UNDEFINED_SOURCE_TYPE": 0,
+                            "BACKEND_SERVICE": 285792202
+                          }
+                        }
+                      }
+                    },
+                    "HealthSourceAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "HealthSourcesScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "HealthSourceList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "HealthSource",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "HealthSourcesScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthSources": {
+                          "rule": "repeated",
+                          "type": "HealthSource",
+                          "id": 397879509
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "HealthStatus": {
                       "oneofs": {
                         "_forwardingRule": {
@@ -142986,6 +143814,11 @@
                             "name"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_rawDisk": {
                           "oneof": [
                             "rawDisk"
@@ -143187,6 +144020,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "ImageParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -143433,6 +144273,15 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "ImageParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -145306,6 +146155,47 @@
                         }
                       }
                     },
+                    "InsertRegionHealthSourceRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthSourceResource": {
+                          "type": "HealthSource",
+                          "id": 357735375,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "InsertRegionInstanceGroupManagerRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -145571,6 +146461,47 @@
                         "firewallPolicyResource": {
                           "type": "FirewallPolicy",
                           "id": 495049532,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InsertRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkPolicyResource": {
+                          "type": "NetworkPolicy",
+                          "id": 437886058,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -152366,6 +153297,11 @@
                           "oneof": [
                             "state"
                           ]
+                        },
+                        "_subzone": {
+                          "oneof": [
+                            "subzone"
+                          ]
                         }
                       },
                       "fields": {
@@ -152586,6 +153522,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "subzone": {
+                          "type": "string",
+                          "id": 280084972,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "wireGroups": {
                           "rule": "repeated",
                           "type": "string",
@@ -152631,6 +153574,13 @@
                             "UNDEFINED_STATE": 0,
                             "ACTIVE": 314733318,
                             "UNPROVISIONED": 517333979
+                          }
+                        },
+                        "Subzone": {
+                          "values": {
+                            "UNDEFINED_SUBZONE": 0,
+                            "SUBZONE_A": 291575438,
+                            "SUBZONE_B": 291575439
                           }
                         }
                       }
@@ -163592,6 +164542,86 @@
                         }
                       }
                     },
+                    "ListRegionHealthSourcesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListRegionInstanceGroupManagerResizeRequestsRequest": {
                       "oneofs": {
                         "_filter": {
@@ -164182,6 +165212,86 @@
                       }
                     },
                     "ListRegionNetworkFirewallPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListRegionNetworkPoliciesRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -172545,6 +173655,586 @@
                         }
                       }
                     },
+                    "NetworkPoliciesScopedList": {
+                      "oneofs": {
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkPolicies": {
+                          "rule": "repeated",
+                          "type": "NetworkPolicy",
+                          "id": 473193537
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPolicy": {
+                      "oneofs": {
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_region": {
+                          "oneof": [
+                            "region"
+                          ]
+                        },
+                        "_ruleTupleCount": {
+                          "oneof": [
+                            "ruleTupleCount"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_selfLinkWithId": {
+                          "oneof": [
+                            "selfLinkWithId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "associations": {
+                          "rule": "repeated",
+                          "type": "NetworkPolicyAssociation",
+                          "id": 508736530
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ruleTupleCount": {
+                          "type": "int32",
+                          "id": 388342037,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLinkWithId": {
+                          "type": "string",
+                          "id": 44520962,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "trafficClassificationRules": {
+                          "rule": "repeated",
+                          "type": "NetworkPolicyTrafficClassificationRule",
+                          "id": 291759200
+                        }
+                      }
+                    },
+                    "NetworkPolicyAggregatedList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "keyType": "string",
+                          "type": "NetworkPoliciesScopedList",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPolicyAssociation": {
+                      "oneofs": {
+                        "_attachmentTarget": {
+                          "oneof": [
+                            "attachmentTarget"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "attachmentTarget": {
+                          "type": "string",
+                          "id": 175773741,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPolicyList": {
+                      "oneofs": {
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "NetworkPolicy",
+                          "id": 100526016
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPolicyTrafficClassificationRule": {
+                      "oneofs": {
+                        "_action": {
+                          "oneof": [
+                            "action"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_disabled": {
+                          "oneof": [
+                            "disabled"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_match": {
+                          "oneof": [
+                            "match"
+                          ]
+                        },
+                        "_priority": {
+                          "oneof": [
+                            "priority"
+                          ]
+                        },
+                        "_ruleName": {
+                          "oneof": [
+                            "ruleName"
+                          ]
+                        },
+                        "_ruleTupleCount": {
+                          "oneof": [
+                            "ruleTupleCount"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "action": {
+                          "type": "NetworkPolicyTrafficClassificationRuleAction",
+                          "id": 187661878,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "disabled": {
+                          "type": "bool",
+                          "id": 270940796,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "match": {
+                          "type": "NetworkPolicyTrafficClassificationRuleMatcher",
+                          "id": 103668165,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "priority": {
+                          "type": "int32",
+                          "id": 445151652,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ruleName": {
+                          "type": "string",
+                          "id": 55286254,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ruleTupleCount": {
+                          "type": "int32",
+                          "id": 388342037,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "targetSecureTags": {
+                          "rule": "repeated",
+                          "type": "NetworkPolicyTrafficClassificationRuleSecureTag",
+                          "id": 468132403
+                        },
+                        "targetServiceAccounts": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 457639710
+                        }
+                      }
+                    },
+                    "NetworkPolicyTrafficClassificationRuleAction": {
+                      "oneofs": {
+                        "_dscpMode": {
+                          "oneof": [
+                            "dscpMode"
+                          ]
+                        },
+                        "_dscpValue": {
+                          "oneof": [
+                            "dscpValue"
+                          ]
+                        },
+                        "_trafficClass": {
+                          "oneof": [
+                            "trafficClass"
+                          ]
+                        },
+                        "_type": {
+                          "oneof": [
+                            "type"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "dscpMode": {
+                          "type": "string",
+                          "id": 242755270,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "dscpValue": {
+                          "type": "int32",
+                          "id": 17123502,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "trafficClass": {
+                          "type": "string",
+                          "id": 198180022,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "type": {
+                          "type": "string",
+                          "id": 3575610,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "DscpMode": {
+                          "values": {
+                            "UNDEFINED_DSCP_MODE": 0,
+                            "AUTO": 2020783,
+                            "CUSTOM": 388595569
+                          }
+                        },
+                        "TrafficClass": {
+                          "values": {
+                            "UNDEFINED_TRAFFIC_CLASS": 0,
+                            "TC1": 82850,
+                            "TC2": 82851,
+                            "TC3": 82852,
+                            "TC4": 82853,
+                            "TC5": 82854,
+                            "TC6": 82855
+                          }
+                        }
+                      }
+                    },
+                    "NetworkPolicyTrafficClassificationRuleMatcher": {
+                      "fields": {
+                        "destIpRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 337357713
+                        },
+                        "layer4Configs": {
+                          "rule": "repeated",
+                          "type": "NetworkPolicyTrafficClassificationRuleMatcherLayer4Config",
+                          "id": 373534261
+                        },
+                        "srcIpRanges": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 432128083
+                        }
+                      }
+                    },
+                    "NetworkPolicyTrafficClassificationRuleMatcherLayer4Config": {
+                      "oneofs": {
+                        "_ipProtocol": {
+                          "oneof": [
+                            "ipProtocol"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "ipProtocol": {
+                          "type": "string",
+                          "id": 475958960,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "ports": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 106854418
+                        }
+                      }
+                    },
+                    "NetworkPolicyTrafficClassificationRuleSecureTag": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_state": {
+                          "oneof": [
+                            "state"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "state": {
+                          "type": "string",
+                          "id": 109757585,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "UNDEFINED_STATE": 0,
+                            "EFFECTIVE": 244201863,
+                            "INEFFECTIVE": 304458242,
+                            "STATE_UNSPECIFIED": 470755401
+                          }
+                        }
+                      }
+                    },
                     "NetworkProfile": {
                       "oneofs": {
                         "_creationTimestamp": {
@@ -178620,6 +180310,54 @@
                         }
                       }
                     },
+                    "PatchRegionHealthSourceRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "healthSource": {
+                          "type": "string",
+                          "id": 376521566,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "healthSourceResource": {
+                          "type": "HealthSource",
+                          "id": 357735375,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "PatchRegionInstanceGroupManagerRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -178687,6 +180425,54 @@
                         "firewallPolicyResource": {
                           "type": "FirewallPolicy",
                           "id": 495049532,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PatchRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networkPolicyResource": {
+                          "type": "NetworkPolicy",
+                          "id": 437886058,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -179838,6 +181624,66 @@
                           "id": 433657473,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "PatchTrafficClassificationRuleRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_priority": {
+                          "oneof": [
+                            "priority"
+                          ]
+                        },
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "networkPolicyTrafficClassificationRuleResource": {
+                          "type": "NetworkPolicyTrafficClassificationRule",
+                          "id": 464294582,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "priority": {
+                          "type": "int32",
+                          "id": 445151652,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
                           }
                         }
                       }
@@ -181774,6 +183620,11 @@
                             "description"
                           ]
                         },
+                        "_enableEnhancedIpv4Allocation": {
+                          "oneof": [
+                            "enableEnhancedIpv4Allocation"
+                          ]
+                        },
                         "_fingerprint": {
                           "oneof": [
                             "fingerprint"
@@ -181855,6 +183706,13 @@
                         "description": {
                           "type": "string",
                           "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableEnhancedIpv4Allocation": {
+                          "type": "bool",
+                          "id": 54582253,
                           "options": {
                             "proto3_optional": true
                           }
@@ -182135,6 +183993,11 @@
                             "description"
                           ]
                         },
+                        "_enableEnhancedIpv4Allocation": {
+                          "oneof": [
+                            "enableEnhancedIpv4Allocation"
+                          ]
+                        },
                         "_ipCidrRange": {
                           "oneof": [
                             "ipCidrRange"
@@ -182184,6 +184047,13 @@
                         "description": {
                           "type": "string",
                           "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "enableEnhancedIpv4Allocation": {
+                          "type": "bool",
+                          "id": 54582253,
                           "options": {
                             "proto3_optional": true
                           }
@@ -184390,6 +186260,59 @@
                         }
                       }
                     },
+                    "RemoveAssociationRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "RemoveHealthCheckTargetPoolRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -185042,6 +186965,114 @@
                           "id": 171082513,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveTrafficClassificationRuleRegionNetworkPolicyRequest": {
+                      "oneofs": {
+                        "_priority": {
+                          "oneof": [
+                            "priority"
+                          ]
+                        },
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "networkPolicy": {
+                          "type": "string",
+                          "id": 504961123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "priority": {
+                          "type": "int32",
+                          "id": 445151652,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "region"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReportFaultyReservationSubBlockRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 22750491,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reservationSubBlocksReportFaultyRequestResource": {
+                          "type": "ReservationSubBlocksReportFaultyRequest",
+                          "id": 450847938,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
                           }
                         }
                       }
@@ -186580,6 +188611,99 @@
                           "id": 50704284,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReservationSubBlocksReportFaultyRequest": {
+                      "oneofs": {
+                        "_disruptionSchedule": {
+                          "oneof": [
+                            "disruptionSchedule"
+                          ]
+                        },
+                        "_failureComponent": {
+                          "oneof": [
+                            "failureComponent"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disruptionSchedule": {
+                          "type": "string",
+                          "id": 95871619,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "failureComponent": {
+                          "type": "string",
+                          "id": 25912456,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "faultReasons": {
+                          "rule": "repeated",
+                          "type": "ReservationSubBlocksReportFaultyRequestFaultReason",
+                          "id": 168056210
+                        }
+                      },
+                      "nested": {
+                        "DisruptionSchedule": {
+                          "values": {
+                            "UNDEFINED_DISRUPTION_SCHEDULE": 0,
+                            "DISRUPTION_SCHEDULE_UNSPECIFIED": 332543835,
+                            "IMMEDIATE": 152881041
+                          }
+                        },
+                        "FailureComponent": {
+                          "values": {
+                            "UNDEFINED_FAILURE_COMPONENT": 0,
+                            "FAILURE_COMPONENT_UNSPECIFIED": 332003744,
+                            "MULTIPLE_FAULTY_HOSTS": 423545298,
+                            "NVLINK_SWITCH": 239107153
+                          }
+                        }
+                      }
+                    },
+                    "ReservationSubBlocksReportFaultyRequestFaultReason": {
+                      "oneofs": {
+                        "_behavior": {
+                          "oneof": [
+                            "behavior"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "behavior": {
+                          "type": "string",
+                          "id": 437170770,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Behavior": {
+                          "values": {
+                            "UNDEFINED_BEHAVIOR": 0,
+                            "FAULT_BEHAVIOR_UNSPECIFIED": 447660743,
+                            "GPU_ERROR": 198817909,
+                            "PERFORMANCE": 135701520,
+                            "SWITCH_FAILURE": 254909279
                           }
                         }
                       }
@@ -199299,6 +201423,11 @@
                             "name"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_region": {
                           "oneof": [
                             "region"
@@ -199512,6 +201641,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "SnapshotParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -199844,6 +201980,15 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "SnapshotParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -208030,6 +210175,38 @@
                       }
                     },
                     "TestIamPermissionsRegionHealthCheckServiceRequest": {
+                      "fields": {
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "region": {
+                          "type": "string",
+                          "id": 138946292,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "resource": {
+                          "type": "string",
+                          "id": 195806222,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "testPermissionsRequestResource": {
+                          "type": "TestPermissionsRequest",
+                          "id": 439214758,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TestIamPermissionsRegionHealthSourceRequest": {
                       "fields": {
                         "project": {
                           "type": "string",
@@ -226866,6 +229043,158 @@
                         }
                       }
                     },
+                    "RegionHealthSources": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "AggregatedList": {
+                          "requestType": "AggregatedListRegionHealthSourcesRequest",
+                          "responseType": "HealthSourceAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/aggregated/healthSources",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/aggregated/healthSources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Delete": {
+                          "requestType": "DeleteRegionHealthSourceRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/beta/projects/{project}/regions/{region}/healthSources/{health_source}",
+                            "(google.api.method_signature)": "project,region,health_source",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/beta/projects/{project}/regions/{region}/healthSources/{health_source}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,health_source"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRegionHealthSourceRequest",
+                          "responseType": "HealthSource",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/healthSources/{health_source}",
+                            "(google.api.method_signature)": "project,region,health_source"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/healthSources/{health_source}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,health_source"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertRegionHealthSourceRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "health_source_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/healthSources",
+                            "(google.api.method_signature)": "project,region,health_source_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "health_source_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/healthSources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,health_source_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRegionHealthSourcesRequest",
+                          "responseType": "HealthSourceList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/healthSources",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/healthSources"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchRegionHealthSourceRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "health_source_resource",
+                            "(google.api.http).patch": "/compute/beta/projects/{project}/regions/{region}/healthSources/{health_source}",
+                            "(google.api.method_signature)": "project,region,health_source,health_source_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "health_source_resource",
+                                "patch": "/compute/beta/projects/{project}/regions/{region}/healthSources/{health_source}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,health_source,health_source_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "TestIamPermissions": {
+                          "requestType": "TestIamPermissionsRegionHealthSourceRequest",
+                          "responseType": "TestPermissionsResponse",
+                          "options": {
+                            "(google.api.http).body": "test_permissions_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/healthSources/{resource}/testIamPermissions",
+                            "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "test_permissions_request_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/healthSources/{resource}/testIamPermissions"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "RegionInstanceGroupManagerResizeRequests": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -228632,6 +230961,290 @@
                         }
                       }
                     },
+                    "RegionNetworkPolicies": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "AddAssociation": {
+                          "requestType": "AddAssociationRegionNetworkPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "network_policy_association_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/addAssociation",
+                            "(google.api.method_signature)": "project,region,network_policy,network_policy_association_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "network_policy_association_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/addAssociation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy,network_policy_association_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "AddTrafficClassificationRule": {
+                          "requestType": "AddTrafficClassificationRuleRegionNetworkPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "network_policy_traffic_classification_rule_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/addTrafficClassificationRule",
+                            "(google.api.method_signature)": "project,region,network_policy,network_policy_traffic_classification_rule_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "network_policy_traffic_classification_rule_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/addTrafficClassificationRule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy,network_policy_traffic_classification_rule_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "AggregatedList": {
+                          "requestType": "AggregatedListRegionNetworkPoliciesRequest",
+                          "responseType": "NetworkPolicyAggregatedList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/aggregated/networkPolicies",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/aggregated/networkPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Delete": {
+                          "requestType": "DeleteRegionNetworkPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}",
+                            "(google.api.method_signature)": "project,region,network_policy",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetRegionNetworkPolicyRequest",
+                          "responseType": "NetworkPolicy",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}",
+                            "(google.api.method_signature)": "project,region,network_policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy"
+                            }
+                          ]
+                        },
+                        "GetAssociation": {
+                          "requestType": "GetAssociationRegionNetworkPolicyRequest",
+                          "responseType": "NetworkPolicyAssociation",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/getAssociation",
+                            "(google.api.method_signature)": "project,region,network_policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/getAssociation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy"
+                            }
+                          ]
+                        },
+                        "GetTrafficClassificationRule": {
+                          "requestType": "GetTrafficClassificationRuleRegionNetworkPolicyRequest",
+                          "responseType": "NetworkPolicyTrafficClassificationRule",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/getTrafficClassificationRule",
+                            "(google.api.method_signature)": "project,region,network_policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/getTrafficClassificationRule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertRegionNetworkPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "network_policy_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies",
+                            "(google.api.method_signature)": "project,region,network_policy_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "network_policy_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListRegionNetworkPoliciesRequest",
+                          "responseType": "NetworkPolicyList",
+                          "options": {
+                            "(google.api.http).get": "/compute/beta/projects/{project}/regions/{region}/networkPolicies",
+                            "(google.api.method_signature)": "project,region"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/beta/projects/{project}/regions/{region}/networkPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchRegionNetworkPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "network_policy_resource",
+                            "(google.api.http).patch": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}",
+                            "(google.api.method_signature)": "project,region,network_policy,network_policy_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "network_policy_resource",
+                                "patch": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy,network_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "PatchTrafficClassificationRule": {
+                          "requestType": "PatchTrafficClassificationRuleRegionNetworkPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "network_policy_traffic_classification_rule_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/patchTrafficClassificationRule",
+                            "(google.api.method_signature)": "project,region,network_policy,network_policy_traffic_classification_rule_resource",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "network_policy_traffic_classification_rule_resource",
+                                "post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/patchTrafficClassificationRule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy,network_policy_traffic_classification_rule_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "RemoveAssociation": {
+                          "requestType": "RemoveAssociationRegionNetworkPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/removeAssociation",
+                            "(google.api.method_signature)": "project,region,network_policy",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/removeAssociation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        },
+                        "RemoveTrafficClassificationRule": {
+                          "requestType": "RemoveTrafficClassificationRuleRegionNetworkPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/removeTrafficClassificationRule",
+                            "(google.api.method_signature)": "project,region,network_policy",
+                            "(google.cloud.operation_service)": "RegionOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/beta/projects/{project}/regions/{region}/networkPolicies/{network_policy}/removeTrafficClassificationRule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,region,network_policy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "RegionOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "RegionNotificationEndpoints": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -230360,6 +232973,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "ReportFaulty": {
+                          "requestType": "ReportFaultyReservationSubBlockRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "reservation_sub_blocks_report_faulty_request_resource",
+                            "(google.api.http).post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/reportFaulty",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block,reservation_sub_blocks_report_faulty_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "reservation_sub_blocks_report_faulty_request_resource",
+                                "post": "/compute/beta/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/reportFaulty"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block,reservation_sub_blocks_report_faulty_request_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "ZoneOperations"

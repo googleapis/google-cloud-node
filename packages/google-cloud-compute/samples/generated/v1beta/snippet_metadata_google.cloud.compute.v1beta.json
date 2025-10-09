@@ -30160,6 +30160,398 @@
       }
     },
     {
+      "regionTag": "compute_v1beta_generated_RegionHealthSources_AggregatedList_async",
+      "title": "AcceleratorTypes aggregatedList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the list of all HealthSource resources (all regional) available to the specified project. To prevent failure, Google recommends that you set the `returnPartialSuccess` parameter to `true`.",
+      "canonical": true,
+      "file": "region_health_sources.aggregated_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AggregatedList",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthSources.AggregatedList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "include_all_scopes",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "service_project_number",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.HealthSourceAggregatedList",
+        "client": {
+          "shortName": "RegionHealthSourcesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSourcesClient"
+        },
+        "method": {
+          "shortName": "AggregatedList",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSources.AggregatedList",
+          "service": {
+            "shortName": "RegionHealthSources",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionHealthSources_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified HealthSource in the given region",
+      "canonical": true,
+      "file": "region_health_sources.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthSources.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_source",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionHealthSourcesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSourcesClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSources.Delete",
+          "service": {
+            "shortName": "RegionHealthSources",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionHealthSources_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified HealthSource resource in the given region.",
+      "canonical": true,
+      "file": "region_health_sources.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthSources.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_source",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.HealthSource",
+        "client": {
+          "shortName": "RegionHealthSourcesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSourcesClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSources.Get",
+          "service": {
+            "shortName": "RegionHealthSources",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionHealthSources_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a HealthSource in the specified project in the given region using the parameters that are included in the request.",
+      "canonical": true,
+      "file": "region_health_sources.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthSources.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_source_resource",
+            "type": ".google.cloud.compute.v1beta.HealthSource"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionHealthSourcesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSourcesClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSources.Insert",
+          "service": {
+            "shortName": "RegionHealthSources",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionHealthSources_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the HealthSources for a project in the given region.",
+      "canonical": true,
+      "file": "region_health_sources.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthSources.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.HealthSourceList",
+        "client": {
+          "shortName": "RegionHealthSourcesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSourcesClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSources.List",
+          "service": {
+            "shortName": "RegionHealthSources",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionHealthSources_Patch_async",
+      "title": "AcceleratorTypes patch Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified regional HealthSource resource with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.",
+      "canonical": true,
+      "file": "region_health_sources.patch.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Patch",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthSources.Patch",
+        "async": true,
+        "parameters": [
+          {
+            "name": "health_source",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "health_source_resource",
+            "type": ".google.cloud.compute.v1beta.HealthSource"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionHealthSourcesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSourcesClient"
+        },
+        "method": {
+          "shortName": "Patch",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSources.Patch",
+          "service": {
+            "shortName": "RegionHealthSources",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionHealthSources_TestIamPermissions_async",
+      "title": "AcceleratorTypes testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource.",
+      "canonical": true,
+      "file": "region_health_sources.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.compute.v1beta.RegionHealthSources.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "test_permissions_request_resource",
+            "type": ".google.cloud.compute.v1beta.TestPermissionsRequest"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.TestPermissionsResponse",
+        "client": {
+          "shortName": "RegionHealthSourcesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSourcesClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.compute.v1beta.RegionHealthSources.TestIamPermissions",
+          "service": {
+            "shortName": "RegionHealthSources",
+            "fullName": "google.cloud.compute.v1beta.RegionHealthSources"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "compute_v1beta_generated_RegionInstanceGroupManagerResizeRequests_Cancel_async",
       "title": "AcceleratorTypes cancel Sample",
       "origin": "API_DEFINITION",
@@ -34571,6 +34963,734 @@
           "service": {
             "shortName": "RegionNetworkFirewallPolicies",
             "fullName": "google.cloud.compute.v1beta.RegionNetworkFirewallPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_AddAssociation_async",
+      "title": "AcceleratorTypes addAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Inserts an association for the specified network policy.",
+      "canonical": true,
+      "file": "region_network_policies.add_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddAssociation",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.AddAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "network_policy_association_resource",
+            "type": ".google.cloud.compute.v1beta.NetworkPolicyAssociation"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "AddAssociation",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.AddAssociation",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_AddTrafficClassificationRule_async",
+      "title": "AcceleratorTypes addTrafficClassificationRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Inserts a rule into a network policy.",
+      "canonical": true,
+      "file": "region_network_policies.add_traffic_classification_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddTrafficClassificationRule",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.AddTrafficClassificationRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "network_policy_traffic_classification_rule_resource",
+            "type": ".google.cloud.compute.v1beta.NetworkPolicyTrafficClassificationRule"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "AddTrafficClassificationRule",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.AddTrafficClassificationRule",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_AggregatedList_async",
+      "title": "AcceleratorTypes aggregatedList Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves an aggregated list of network policies. To prevent failure, it's recommended that you set the `returnPartialSuccess` parameter to `true`.",
+      "canonical": true,
+      "file": "region_network_policies.aggregated_list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AggregatedList",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.AggregatedList",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "include_all_scopes",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "service_project_number",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.NetworkPolicyAggregatedList",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "AggregatedList",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.AggregatedList",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_Delete_async",
+      "title": "AcceleratorTypes delete Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified policy.",
+      "canonical": true,
+      "file": "region_network_policies.delete.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Delete",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.Delete",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "Delete",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.Delete",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_Get_async",
+      "title": "AcceleratorTypes get Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified network policy.",
+      "canonical": true,
+      "file": "region_network_policies.get.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Get",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.Get",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.NetworkPolicy",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "Get",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.Get",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_GetAssociation_async",
+      "title": "AcceleratorTypes getAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an association with the specified name.",
+      "canonical": true,
+      "file": "region_network_policies.get_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAssociation",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.GetAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.NetworkPolicyAssociation",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "GetAssociation",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.GetAssociation",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_GetTrafficClassificationRule_async",
+      "title": "AcceleratorTypes getTrafficClassificationRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a rule of the specified priority.",
+      "canonical": true,
+      "file": "region_network_policies.get_traffic_classification_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetTrafficClassificationRule",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.GetTrafficClassificationRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "priority",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.NetworkPolicyTrafficClassificationRule",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "GetTrafficClassificationRule",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.GetTrafficClassificationRule",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_Insert_async",
+      "title": "AcceleratorTypes insert Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new policy in the specified project using the data included in the request.",
+      "canonical": true,
+      "file": "region_network_policies.insert.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Insert",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.Insert",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network_policy_resource",
+            "type": ".google.cloud.compute.v1beta.NetworkPolicy"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "Insert",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.Insert",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_List_async",
+      "title": "AcceleratorTypes list Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the policies that have been configured for the specified project in the given region.",
+      "canonical": true,
+      "file": "region_network_policies.list.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "List",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.List",
+        "async": true,
+        "parameters": [
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": "TYPE_UINT32"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "return_partial_success",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.NetworkPolicyList",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "List",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.List",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_Patch_async",
+      "title": "AcceleratorTypes patch Sample",
+      "origin": "API_DEFINITION",
+      "description": " Patches the specified policy with the data included in the request.",
+      "canonical": true,
+      "file": "region_network_policies.patch.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "Patch",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.Patch",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "network_policy_resource",
+            "type": ".google.cloud.compute.v1beta.NetworkPolicy"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "Patch",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.Patch",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_PatchTrafficClassificationRule_async",
+      "title": "AcceleratorTypes patchTrafficClassificationRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Patches a rule of the specified priority.",
+      "canonical": true,
+      "file": "region_network_policies.patch_traffic_classification_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PatchTrafficClassificationRule",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.PatchTrafficClassificationRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "network_policy_traffic_classification_rule_resource",
+            "type": ".google.cloud.compute.v1beta.NetworkPolicyTrafficClassificationRule"
+          },
+          {
+            "name": "priority",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "PatchTrafficClassificationRule",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.PatchTrafficClassificationRule",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_RemoveAssociation_async",
+      "title": "AcceleratorTypes removeAssociation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes an association for the specified network policy.",
+      "canonical": true,
+      "file": "region_network_policies.remove_association.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveAssociation",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.RemoveAssociation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "RemoveAssociation",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.RemoveAssociation",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_RegionNetworkPolicies_RemoveTrafficClassificationRule_async",
+      "title": "AcceleratorTypes removeTrafficClassificationRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a rule of the specified priority.",
+      "canonical": true,
+      "file": "region_network_policies.remove_traffic_classification_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveTrafficClassificationRule",
+        "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.RemoveTrafficClassificationRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network_policy",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "priority",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "RegionNetworkPoliciesClient",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPoliciesClient"
+        },
+        "method": {
+          "shortName": "RemoveTrafficClassificationRule",
+          "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies.RemoveTrafficClassificationRule",
+          "service": {
+            "shortName": "RegionNetworkPolicies",
+            "fullName": "google.cloud.compute.v1beta.RegionNetworkPolicies"
           }
         }
       }
@@ -39448,6 +40568,66 @@
         "method": {
           "shortName": "PerformMaintenance",
           "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks.PerformMaintenance",
+          "service": {
+            "shortName": "ReservationSubBlocks",
+            "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "compute_v1beta_generated_ReservationSubBlocks_ReportFaulty_async",
+      "title": "AcceleratorTypes reportFaulty Sample",
+      "origin": "API_DEFINITION",
+      "description": " Allows customers to report a faulty subBlock.",
+      "canonical": true,
+      "file": "reservation_sub_blocks.report_faulty.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReportFaulty",
+        "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks.ReportFaulty",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_sub_block",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "reservation_sub_blocks_report_faulty_request_resource",
+            "type": ".google.cloud.compute.v1beta.ReservationSubBlocksReportFaultyRequest"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.compute.v1beta.Operation",
+        "client": {
+          "shortName": "ReservationSubBlocksClient",
+          "fullName": "google.cloud.compute.v1beta.ReservationSubBlocksClient"
+        },
+        "method": {
+          "shortName": "ReportFaulty",
+          "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks.ReportFaulty",
           "service": {
             "shortName": "ReservationSubBlocks",
             "fullName": "google.cloud.compute.v1beta.ReservationSubBlocks"
