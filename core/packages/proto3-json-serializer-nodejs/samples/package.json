@@ -1,0 +1,25 @@
+{
+  "description": "Samples for proto3-json-serializer.",
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=18"
+  },
+  "repository": "googleapis/proto3-json-serializer-nodejs",
+  "private": true,
+  "scripts": {
+    "test": "c8 mocha system-test"
+  },
+  "files": [
+    "*.js"
+  ],
+  "dependencies": {
+    "google-proto-files": "^5.0.0",
+    "proto3-json-serializer": "^3.0.2",
+    "protobufjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "c8": "^9.0.0",
+    "mocha": "^9.0.0"
+  }
+}
