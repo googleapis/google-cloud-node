@@ -39606,6 +39606,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "initialReplicaCount": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
                         "autoscalingMetricSpecs": {
                           "rule": "repeated",
                           "type": "AutoscalingMetricSpec",
@@ -39626,6 +39633,33 @@
                           "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "scaleToZeroSpec": {
+                          "type": "ScaleToZeroSpec",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ScaleToZeroSpec": {
+                          "fields": {
+                            "minScaleupPeriod": {
+                              "type": "google.protobuf.Duration",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "idleScaledownPeriod": {
+                              "type": "google.protobuf.Duration",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
                           }
                         }
                       }

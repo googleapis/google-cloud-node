@@ -148073,6 +148073,9 @@ export namespace google {
                     /** DedicatedResources requiredReplicaCount */
                     requiredReplicaCount?: (number|null);
 
+                    /** DedicatedResources initialReplicaCount */
+                    initialReplicaCount?: (number|null);
+
                     /** DedicatedResources autoscalingMetricSpecs */
                     autoscalingMetricSpecs?: (google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec[]|null);
 
@@ -148081,6 +148084,9 @@ export namespace google {
 
                     /** DedicatedResources flexStart */
                     flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
+
+                    /** DedicatedResources scaleToZeroSpec */
+                    scaleToZeroSpec?: (google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec|null);
                 }
 
                 /** Represents a DedicatedResources. */
@@ -148104,6 +148110,9 @@ export namespace google {
                     /** DedicatedResources requiredReplicaCount. */
                     public requiredReplicaCount: number;
 
+                    /** DedicatedResources initialReplicaCount. */
+                    public initialReplicaCount: number;
+
                     /** DedicatedResources autoscalingMetricSpecs. */
                     public autoscalingMetricSpecs: google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec[];
 
@@ -148112,6 +148121,9 @@ export namespace google {
 
                     /** DedicatedResources flexStart. */
                     public flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
+
+                    /** DedicatedResources scaleToZeroSpec. */
+                    public scaleToZeroSpec?: (google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec|null);
 
                     /**
                      * Creates a new DedicatedResources instance using the specified properties.
@@ -148189,6 +148201,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DedicatedResources {
+
+                    /** Properties of a ScaleToZeroSpec. */
+                    interface IScaleToZeroSpec {
+
+                        /** ScaleToZeroSpec minScaleupPeriod */
+                        minScaleupPeriod?: (google.protobuf.IDuration|null);
+
+                        /** ScaleToZeroSpec idleScaledownPeriod */
+                        idleScaledownPeriod?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a ScaleToZeroSpec. */
+                    class ScaleToZeroSpec implements IScaleToZeroSpec {
+
+                        /**
+                         * Constructs a new ScaleToZeroSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec);
+
+                        /** ScaleToZeroSpec minScaleupPeriod. */
+                        public minScaleupPeriod?: (google.protobuf.IDuration|null);
+
+                        /** ScaleToZeroSpec idleScaledownPeriod. */
+                        public idleScaledownPeriod?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new ScaleToZeroSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ScaleToZeroSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec): google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec;
+
+                        /**
+                         * Encodes the specified ScaleToZeroSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec.verify|verify} messages.
+                         * @param message ScaleToZeroSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ScaleToZeroSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec.verify|verify} messages.
+                         * @param message ScaleToZeroSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ScaleToZeroSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ScaleToZeroSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec;
+
+                        /**
+                         * Decodes a ScaleToZeroSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ScaleToZeroSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec;
+
+                        /**
+                         * Verifies a ScaleToZeroSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ScaleToZeroSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ScaleToZeroSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec;
+
+                        /**
+                         * Creates a plain object from a ScaleToZeroSpec message. Also converts values to other types if specified.
+                         * @param message ScaleToZeroSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ScaleToZeroSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ScaleToZeroSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of an AutomaticResources. */
