@@ -21,6 +21,7 @@ import {describe, it} from 'mocha';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import * as assert from 'assert';
+import {LibraryConfig} from '../src/library';
 // import { generateReadMe } from '../src/generate-readme';
 export const TEST_FIXTURES_PATH = path.resolve(
   'test/fixtures/combined-library',
@@ -31,17 +32,30 @@ export const LIB_PRE_COMBINATION = 'google-cloud-speech-nodejs';
 export const LIB_POST_COMBINATION_ESM = 'google-cloud-tasks';
 export const LIB_POST_COMBINATION = 'google-cloud-speech';
 
+const libraryConfigCJS = new LibraryConfig({
+  sourcePath: path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION),
+  destinationPath: path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
+  defaultVersion: 'v1',
+  isEsm: false,
+});
+const libraryConfigError = new LibraryConfig({
+  sourcePath: path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
+  destinationPath: path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
+  defaultVersion: 'v1',
+  isEsm: false,
+});
+const libraryConfigESM = new LibraryConfig({
+  sourcePath: path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION_ESM),
+  destinationPath: path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
+  defaultVersion: 'v1',
+  isEsm: true,
+});
+
 describe('combine libraries', () => {
   it('should throw an error if the library is not in a "pre" combo state', async () => {
-    await combineLibraries(
-      path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION),
-      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
-    );
+    await combineLibraries(libraryConfigCJS);
     await assert.rejects(
-      () =>
-        generateFinalDirectoryPath(
-          path.join(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
-        ),
+      () => generateFinalDirectoryPath(libraryConfigError),
       /Unexpected library format/,
     );
     try {
@@ -54,9 +68,7 @@ describe('combine libraries', () => {
   });
 
   it('should generate unique final directory paths', async () => {
-    const libraryPaths = await generateFinalDirectoryPath(
-      path.join(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION),
-    );
+    const libraryPaths = await generateFinalDirectoryPath(libraryConfigCJS);
     // This should be the amount of unique file paths in the tree directory
     assert.deepStrictEqual(libraryPaths.length, 103);
 
@@ -77,10 +89,7 @@ describe('combine libraries', () => {
     } catch (err) {
       console.log(`Could not delete ${LIB_POST_COMBINATION} directory`);
     }
-    await combineLibraries(
-      path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION),
-      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
-    );
+    await combineLibraries(libraryConfigCJS);
 
     assert.ok(
       await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION)),
@@ -131,10 +140,7 @@ describe('combine libraries', () => {
     } catch (err) {
       console.log(`Could not delete ${LIB_POST_COMBINATION_ESM} directory`);
     }
-    await combineLibraries(
-      path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION_ESM),
-      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
-    );
+    await combineLibraries(libraryConfigESM);
 
     assert.ok(
       await fs.stat(path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM)),
@@ -188,6 +194,34 @@ describe('combine libraries', () => {
     } catch (err) {
       console.log(`Could not delete ${LIB_POST_COMBINATION_ESM} directory`);
     }
+  });
+
+  it('should only have default system tests', async () => {
+    await combineLibraries(libraryConfigCJS);
+
+    assert.match(
+      await fs.readFile(
+        path.resolve(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION,
+          'system-test/fixtures/sample/src/index.js',
+        ),
+        'utf-8',
+      ),
+      /AdaptationClient/,
+    );
+
+    assert.match(
+      await fs.readFile(
+        path.resolve(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION,
+          'system-test/fixtures/sample/src/index.js',
+        ),
+        'utf-8',
+      ),
+      /SpeechClient/,
+    );
   });
 
   it('should create a directory and write files', async () => {

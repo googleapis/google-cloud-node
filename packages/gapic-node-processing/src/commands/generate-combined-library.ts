@@ -79,7 +79,7 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
       `Combining libraries in ${argv['source-path']} ${argv['destination-path'] ? `to ${argv['destination-path']}` : ''}`,
     );
     try {
-      await combineLibraries(library.sourcePath, library.destinationPath);
+      await combineLibraries(library);
     } catch (err) {
       if (!(err as any).message.includes('Unexpected library format')) {
         throw err;

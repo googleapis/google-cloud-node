@@ -20,6 +20,7 @@ import * as combineLibraries from '../src/combine-libraries';
 import * as generateIndexTs from '../src/generate-index';
 import path from 'path';
 import {TEST_FIXTURES_PATH} from './combine-libraries.test';
+import {LibraryConfig} from '../src/library';
 
 describe('tests running build trigger', () => {
   let combineLibrariesStub: sinon.SinonStub;
@@ -44,13 +45,20 @@ describe('tests running build trigger', () => {
       _: [],
       $0: 'foo',
     });
-
-    assert.ok(
-      combineLibrariesStub.calledOnceWithExactly(
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+    const expectedLibrary = new LibraryConfig({
+      sourcePath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
       ),
-    );
+      destinationPath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
+      ),
+      defaultVersion: 'v2',
+      isEsm: false,
+    });
+    await expectedLibrary.initialize();
+    assert.ok(combineLibrariesStub.calledOnceWithExactly(expectedLibrary));
     assert.ok(
       generateIndexTsStub.calledOnceWithExactly(
         path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
@@ -74,13 +82,17 @@ describe('tests running build trigger', () => {
       _: [],
       $0: 'foo',
     });
-
-    assert.ok(
-      combineLibrariesStub.calledOnceWithExactly(
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-        'different-path',
+    const expectedLibrary = new LibraryConfig({
+      sourcePath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
       ),
-    );
+      destinationPath: 'different-path',
+      defaultVersion: 'v2',
+      isEsm: false,
+    });
+    await expectedLibrary.initialize();
+    assert.ok(combineLibrariesStub.calledOnceWithExactly(expectedLibrary));
     assert.ok(
       generateIndexTsStub.calledOnceWithExactly(
         'different-path',
@@ -104,13 +116,20 @@ describe('tests running build trigger', () => {
       _: [],
       $0: 'foo',
     });
-
-    assert.ok(
-      combineLibrariesStub.calledOnceWithExactly(
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+    const expectedLibrary = new LibraryConfig({
+      sourcePath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
       ),
-    );
+      destinationPath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
+      ),
+      defaultVersion: 'v1',
+      isEsm: false,
+    });
+    await expectedLibrary.initialize();
+    assert.ok(combineLibrariesStub.calledOnceWithExactly(expectedLibrary));
     assert.ok(
       generateIndexTsStub.calledOnceWithExactly(
         path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
@@ -138,13 +157,21 @@ describe('tests running build trigger', () => {
         $0: 'foo',
       }),
     );
-    // Assertions to prove the code continued executing after the handled error.
-    assert.ok(
-      combineLibrariesStub.calledOnceWithExactly(
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+    const expectedLibrary = new LibraryConfig({
+      sourcePath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
       ),
-    );
+      destinationPath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
+      ),
+      defaultVersion: 'v2',
+      isEsm: false,
+    });
+    await expectedLibrary.initialize();
+    // Assertions to prove the code continued executing after the handled error.
+    assert.ok(combineLibrariesStub.calledOnceWithExactly(expectedLibrary));
     assert.ok(generateIndexTsStub.calledOnce);
   });
 
@@ -170,13 +197,21 @@ describe('tests running build trigger', () => {
         }),
       /A different kind of error/, // Use a regex to match the error message.
     );
-    // Assertions to prove the code stopped executing.
-    assert.ok(
-      combineLibrariesStub.calledOnceWithExactly(
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-speech-nodejs'),
+    const expectedLibrary = new LibraryConfig({
+      sourcePath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
       ),
-    );
+      destinationPath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-speech-nodejs',
+      ),
+      defaultVersion: 'v2',
+      isEsm: false,
+    });
+    await expectedLibrary.initialize();
+    // Assertions to prove the code stopped executing.
+    assert.ok(combineLibrariesStub.calledOnceWithExactly(expectedLibrary));
     assert.ok(generateIndexTsStub.notCalled);
   });
 
@@ -189,13 +224,17 @@ describe('tests running build trigger', () => {
       _: [],
       $0: 'foo',
     });
-
-    assert.ok(
-      combineLibrariesStub.calledOnceWithExactly(
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-tasks-nodejs'),
-        path.join(TEST_FIXTURES_PATH, 'google-cloud-tasks-nodejs'),
+    const expectedLibrary = new LibraryConfig({
+      sourcePath: path.resolve(TEST_FIXTURES_PATH, 'google-cloud-tasks-nodejs'),
+      destinationPath: path.resolve(
+        TEST_FIXTURES_PATH,
+        'google-cloud-tasks-nodejs',
       ),
-    );
+      defaultVersion: 'v2',
+      isEsm: true,
+    });
+    await expectedLibrary.initialize();
+    assert.ok(combineLibrariesStub.calledOnceWithExactly(expectedLibrary));
     assert.ok(
       generateIndexTsStub.calledOnceWithExactly(
         path.join(TEST_FIXTURES_PATH, 'google-cloud-tasks-nodejs'),

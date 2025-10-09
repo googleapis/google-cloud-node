@@ -25,12 +25,20 @@ import {
   LIB_PRE_COMBINATION_ESM,
 } from './combine-libraries.test';
 import {combineLibraries} from '../src/combine-libraries';
+import {LibraryConfig} from '../src/library';
 const TEST_FIXTURES_PATH = path.resolve('test/fixtures/combined-library');
 describe('generate index.ts', () => {
   beforeEach(async () => {
     await combineLibraries(
-      path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION),
-      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION),
+      new LibraryConfig({
+        sourcePath: path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION_ESM),
+        destinationPath: path.resolve(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION_ESM,
+        ),
+        defaultVersion: 'v2',
+        isEsm: false,
+      }),
     );
   });
 
@@ -96,8 +104,15 @@ describe('generate index.ts', () => {
       console.log(`Could not delete ${LIB_POST_COMBINATION_ESM} directory`);
     }
     await combineLibraries(
-      path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION_ESM),
-      path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),
+      new LibraryConfig({
+        sourcePath: path.resolve(TEST_FIXTURES_PATH, LIB_PRE_COMBINATION_ESM),
+        destinationPath: path.resolve(
+          TEST_FIXTURES_PATH,
+          LIB_POST_COMBINATION_ESM,
+        ),
+        defaultVersion: 'v2',
+        isEsm: false,
+      }),
     );
     await generateIndexTs(
       path.resolve(TEST_FIXTURES_PATH, LIB_POST_COMBINATION_ESM),

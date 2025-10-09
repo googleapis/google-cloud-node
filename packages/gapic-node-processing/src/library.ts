@@ -70,7 +70,7 @@ export class LibraryConfig {
   public srcPath: string;
   public sourcePath: string;
   public destinationPath: string;
-  public defaultVersion?: string = '';
+  public defaultVersion = '';
   public defaultVersionAndClients: VersionsAndClients = {
     version: '',
     clients: [],
@@ -92,7 +92,7 @@ export class LibraryConfig {
     this.srcPath = isEsm ? ESM_SRC_PATH : SRC_PATH;
     this.sourcePath = sourcePath;
     this.destinationPath = destinationPath;
-    this.defaultVersion = defaultVersion;
+    this.defaultVersion = defaultVersion ?? '';
   }
 
   /**
@@ -223,9 +223,7 @@ export class LibraryConfig {
       if (match) {
         const majorVersion = parseInt(match[1], 10);
         // patch version is not used for sorting, but it is part of the regex
-        const preReleaseType = match[3]
-          ? alphaOrBetaPrecedence(match[3])
-          : ''; // Stable releases have highest precedence
+        const preReleaseType = match[3] ? alphaOrBetaPrecedence(match[3]) : ''; // Stable releases have highest precedence
         const preReleaseQualifier = match[5] ? parseInt(match[5], 10) : 0; // For beta1, beta2 etc.
 
         const currentPrecedence = precedence[preReleaseType];
@@ -251,10 +249,10 @@ export class LibraryConfig {
 function alphaOrBetaPrecedence(preRelease: string): '' | 'beta' | 'alpha' {
   console.log(preRelease);
   if (preRelease.startsWith('beta')) {
-    console.log('beta')
+    console.log('beta');
     return 'beta';
   } else if (preRelease.startsWith('alpha')) {
-    console.log('alpha')
+    console.log('alpha');
     return 'alpha';
   } else {
     throw new Error(`Unknown pre-release type: ${preRelease}`);
