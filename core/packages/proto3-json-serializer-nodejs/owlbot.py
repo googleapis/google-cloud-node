@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import synthtool.languages.node as node
+import synthtool.languages.node_mono_repo as node
 
-node.owlbot_main(templates_excludes=["LICENSE", "README.md"])
+node.owlbot_main(relative_dir="packages/proto3-json-serializer-nodejs",templates_excludes=["LICENSE", "README.md"])

@@ -3,9 +3,10 @@
   "initial-version": "0.1.0",
   "packages": {
     "dev-packages/jsdoc-fresh": {},
-    "dev-packages/pack-n-play": {},
     "dev-packages/jsdoc-region-tag": {},
-    "packages/gcp-metadata": {}
+    "dev-packages/pack-n-play": {},
+    "packages/gcp-metadata": {},
+    "packages/proto3-json-serializer-nodejs": {}
   },
   "plugins": [
     {
