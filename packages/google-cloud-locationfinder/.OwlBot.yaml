@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /google/cloud/locationfinder/(.*)/.*-nodejs
-      dest: /owl-bot-staging/google-cloud-locationfinder/$1
+  - source: /google/cloud/locationfinder/google-cloud-locationfinder-nodejs
+    dest: /owl-bot-staging/google-cloud-locationfinder/$1
 
 api-name: locationfinder

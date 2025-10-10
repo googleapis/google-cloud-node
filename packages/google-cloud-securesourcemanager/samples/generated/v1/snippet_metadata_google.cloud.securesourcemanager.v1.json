@@ -1,2355 +1,2355 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-securesourcemanager",
-        "version": "0.8.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.securesourcemanager.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListInstances_async",
-            "title": "SecureSourceManager listInstances Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Instances in a given project and location.",
-            "canonical": true,
-            "file": "secure_source_manager.list_instances.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListInstances",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListInstances",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.ListInstancesResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListInstances",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListInstances",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetInstance_async",
-            "title": "SecureSourceManager getInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single instance.",
-            "canonical": true,
-            "file": "secure_source_manager.get_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetInstance",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.Instance",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetInstance",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetInstance",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateInstance_async",
-            "title": "SecureSourceManager createInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new instance in a given project and location.",
-            "canonical": true,
-            "file": "secure_source_manager.create_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateInstance",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance",
-                        "type": ".google.cloud.securesourcemanager.v1.Instance"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateInstance",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateInstance",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteInstance_async",
-            "title": "SecureSourceManager deleteInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single instance.",
-            "canonical": true,
-            "file": "secure_source_manager.delete_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteInstance",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteInstance",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteInstance",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListRepositories_async",
-            "title": "SecureSourceManager listRepositories Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Repositories in a given project and location. The instance field is required in the query parameter for requests using the securesourcemanager.googleapis.com endpoint.",
-            "canonical": true,
-            "file": "secure_source_manager.list_repositories.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListRepositories",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListRepositories",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.ListRepositoriesResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListRepositories",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListRepositories",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetRepository_async",
-            "title": "SecureSourceManager getRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets metadata of a repository.",
-            "canonical": true,
-            "file": "secure_source_manager.get_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetRepository",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.Repository",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetRepository",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetRepository",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateRepository_async",
-            "title": "SecureSourceManager createRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new repository in a given project and location. The Repository.Instance field is required in the request body for requests using the securesourcemanager.googleapis.com endpoint.",
-            "canonical": true,
-            "file": "secure_source_manager.create_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateRepository",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "repository",
-                        "type": ".google.cloud.securesourcemanager.v1.Repository"
-                    },
-                    {
-                        "name": "repository_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateRepository",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateRepository",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateRepository_async",
-            "title": "SecureSourceManager updateRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the metadata of a repository.",
-            "canonical": true,
-            "file": "secure_source_manager.update_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateRepository",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "repository",
-                        "type": ".google.cloud.securesourcemanager.v1.Repository"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateRepository",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateRepository",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteRepository_async",
-            "title": "SecureSourceManager deleteRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a Repository.",
-            "canonical": true,
-            "file": "secure_source_manager.delete_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteRepository",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteRepository",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteRepository",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListHooks_async",
-            "title": "SecureSourceManager listHooks Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists hooks in a given repository.",
-            "canonical": true,
-            "file": "secure_source_manager.list_hooks.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListHooks",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListHooks",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.ListHooksResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListHooks",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListHooks",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetHook_async",
-            "title": "SecureSourceManager getHook Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets metadata of a hook.",
-            "canonical": true,
-            "file": "secure_source_manager.get_hook.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetHook",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetHook",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.Hook",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetHook",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetHook",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateHook_async",
-            "title": "SecureSourceManager createHook Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new hook in a given repository.",
-            "canonical": true,
-            "file": "secure_source_manager.create_hook.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateHook",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateHook",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "hook",
-                        "type": ".google.cloud.securesourcemanager.v1.Hook"
-                    },
-                    {
-                        "name": "hook_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateHook",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateHook",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateHook_async",
-            "title": "SecureSourceManager updateHook Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the metadata of a hook.",
-            "canonical": true,
-            "file": "secure_source_manager.update_hook.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateHook",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateHook",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "hook",
-                        "type": ".google.cloud.securesourcemanager.v1.Hook"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateHook",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateHook",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteHook_async",
-            "title": "SecureSourceManager deleteHook Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a Hook.",
-            "canonical": true,
-            "file": "secure_source_manager.delete_hook.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteHook",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteHook",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteHook",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteHook",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetIamPolicyRepo_async",
-            "title": "SecureSourceManager getIamPolicyRepo Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get IAM policy for a repository.",
-            "canonical": true,
-            "file": "secure_source_manager.get_iam_policy_repo.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIamPolicyRepo",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIamPolicyRepo",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "options",
-                        "type": ".google.iam.v1.GetPolicyOptions"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetIamPolicyRepo",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIamPolicyRepo",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_SetIamPolicyRepo_async",
-            "title": "SecureSourceManager setIamPolicyRepo Sample",
-            "origin": "API_DEFINITION",
-            "description": " Set IAM policy on a repository.",
-            "canonical": true,
-            "file": "secure_source_manager.set_iam_policy_repo.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetIamPolicyRepo",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.SetIamPolicyRepo",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "policy",
-                        "type": ".google.iam.v1.Policy"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "SetIamPolicyRepo",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.SetIamPolicyRepo",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_TestIamPermissionsRepo_async",
-            "title": "SecureSourceManager testIamPermissionsRepo Sample",
-            "origin": "API_DEFINITION",
-            "description": " Test IAM permissions on a repository. IAM permission checks are not required on this method.",
-            "canonical": true,
-            "file": "secure_source_manager.test_iam_permissions_repo.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "TestIamPermissionsRepo",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.TestIamPermissionsRepo",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "permissions",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.iam.v1.TestIamPermissionsResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "TestIamPermissionsRepo",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.TestIamPermissionsRepo",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_async",
-            "title": "SecureSourceManager createBranchRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " CreateBranchRule creates a branch rule in a given repository.",
-            "canonical": true,
-            "file": "secure_source_manager.create_branch_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBranchRule",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateBranchRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "branch_rule",
-                        "type": ".google.cloud.securesourcemanager.v1.BranchRule"
-                    },
-                    {
-                        "name": "branch_rule_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateBranchRule",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateBranchRule",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListBranchRules_async",
-            "title": "SecureSourceManager listBranchRules Sample",
-            "origin": "API_DEFINITION",
-            "description": " ListBranchRules lists branch rules in a given repository.",
-            "canonical": true,
-            "file": "secure_source_manager.list_branch_rules.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBranchRules",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListBranchRules",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.ListBranchRulesResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListBranchRules",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListBranchRules",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetBranchRule_async",
-            "title": "SecureSourceManager getBranchRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " GetBranchRule gets a branch rule.",
-            "canonical": true,
-            "file": "secure_source_manager.get_branch_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBranchRule",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetBranchRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.BranchRule",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetBranchRule",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetBranchRule",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_async",
-            "title": "SecureSourceManager updateBranchRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " UpdateBranchRule updates a branch rule.",
-            "canonical": true,
-            "file": "secure_source_manager.update_branch_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateBranchRule",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateBranchRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "branch_rule",
-                        "type": ".google.cloud.securesourcemanager.v1.BranchRule"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateBranchRule",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateBranchRule",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async",
-            "title": "SecureSourceManager deleteBranchRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " DeleteBranchRule deletes a branch rule.",
-            "canonical": true,
-            "file": "secure_source_manager.delete_branch_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteBranchRule",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteBranchRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteBranchRule",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteBranchRule",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequest_async",
-            "title": "SecureSourceManager createPullRequest Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a pull request.",
-            "canonical": true,
-            "file": "secure_source_manager.create_pull_request.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreatePullRequest",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequest",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "pull_request",
-                        "type": ".google.cloud.securesourcemanager.v1.PullRequest"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreatePullRequest",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequest",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetPullRequest_async",
-            "title": "SecureSourceManager getPullRequest Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a pull request.",
-            "canonical": true,
-            "file": "secure_source_manager.get_pull_request.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPullRequest",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequest",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.PullRequest",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetPullRequest",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequest",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListPullRequests_async",
-            "title": "SecureSourceManager listPullRequests Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists pull requests in a repository.",
-            "canonical": true,
-            "file": "secure_source_manager.list_pull_requests.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPullRequests",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequests",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.ListPullRequestsResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListPullRequests",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequests",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequest_async",
-            "title": "SecureSourceManager updatePullRequest Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a pull request.",
-            "canonical": true,
-            "file": "secure_source_manager.update_pull_request.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdatePullRequest",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequest",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "pull_request",
-                        "type": ".google.cloud.securesourcemanager.v1.PullRequest"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdatePullRequest",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequest",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_MergePullRequest_async",
-            "title": "SecureSourceManager mergePullRequest Sample",
-            "origin": "API_DEFINITION",
-            "description": " Merges a pull request.",
-            "canonical": true,
-            "file": "secure_source_manager.merge_pull_request.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "MergePullRequest",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.MergePullRequest",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "MergePullRequest",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.MergePullRequest",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_OpenPullRequest_async",
-            "title": "SecureSourceManager openPullRequest Sample",
-            "origin": "API_DEFINITION",
-            "description": " Opens a pull request.",
-            "canonical": true,
-            "file": "secure_source_manager.open_pull_request.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "OpenPullRequest",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenPullRequest",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "OpenPullRequest",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenPullRequest",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ClosePullRequest_async",
-            "title": "SecureSourceManager closePullRequest Sample",
-            "origin": "API_DEFINITION",
-            "description": " Closes a pull request without merging.",
-            "canonical": true,
-            "file": "secure_source_manager.close_pull_request.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ClosePullRequest",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ClosePullRequest",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ClosePullRequest",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ClosePullRequest",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestFileDiffs_async",
-            "title": "SecureSourceManager listPullRequestFileDiffs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists a pull request's file diffs.",
-            "canonical": true,
-            "file": "secure_source_manager.list_pull_request_file_diffs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPullRequestFileDiffs",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestFileDiffs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListPullRequestFileDiffs",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestFileDiffs",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_FetchTree_async",
-            "title": "SecureSourceManager fetchTree Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a tree from a repository.",
-            "canonical": true,
-            "file": "secure_source_manager.fetch_tree.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchTree",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchTree",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "repository",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ref",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "recursive",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.FetchTreeResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "FetchTree",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchTree",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_FetchBlob_async",
-            "title": "SecureSourceManager fetchBlob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a blob from a repository.",
-            "canonical": true,
-            "file": "secure_source_manager.fetch_blob.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchBlob",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchBlob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "repository",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "sha",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.FetchBlobResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "FetchBlob",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchBlob",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateIssue_async",
-            "title": "SecureSourceManager createIssue Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an issue.",
-            "canonical": true,
-            "file": "secure_source_manager.create_issue.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateIssue",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssue",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "issue",
-                        "type": ".google.cloud.securesourcemanager.v1.Issue"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateIssue",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssue",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetIssue_async",
-            "title": "SecureSourceManager getIssue Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an issue.",
-            "canonical": true,
-            "file": "secure_source_manager.get_issue.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIssue",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssue",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.Issue",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetIssue",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssue",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListIssues_async",
-            "title": "SecureSourceManager listIssues Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists issues in a repository.",
-            "canonical": true,
-            "file": "secure_source_manager.list_issues.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListIssues",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssues",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.ListIssuesResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListIssues",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssues",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateIssue_async",
-            "title": "SecureSourceManager updateIssue Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a issue.",
-            "canonical": true,
-            "file": "secure_source_manager.update_issue.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateIssue",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssue",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "issue",
-                        "type": ".google.cloud.securesourcemanager.v1.Issue"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateIssue",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssue",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteIssue_async",
-            "title": "SecureSourceManager deleteIssue Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an issue.",
-            "canonical": true,
-            "file": "secure_source_manager.delete_issue.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteIssue",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssue",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteIssue",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssue",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_OpenIssue_async",
-            "title": "SecureSourceManager openIssue Sample",
-            "origin": "API_DEFINITION",
-            "description": " Opens an issue.",
-            "canonical": true,
-            "file": "secure_source_manager.open_issue.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "OpenIssue",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenIssue",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "OpenIssue",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenIssue",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CloseIssue_async",
-            "title": "SecureSourceManager closeIssue Sample",
-            "origin": "API_DEFINITION",
-            "description": " Closes an issue.",
-            "canonical": true,
-            "file": "secure_source_manager.close_issue.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CloseIssue",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CloseIssue",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "CloseIssue",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CloseIssue",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetPullRequestComment_async",
-            "title": "SecureSourceManager getPullRequestComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a pull request comment.",
-            "canonical": true,
-            "file": "secure_source_manager.get_pull_request_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPullRequestComment",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequestComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.PullRequestComment",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetPullRequestComment",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequestComment",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestComments_async",
-            "title": "SecureSourceManager listPullRequestComments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists pull request comments.",
-            "canonical": true,
-            "file": "secure_source_manager.list_pull_request_comments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPullRequestComments",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestComments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListPullRequestComments",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestComments",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequestComment_async",
-            "title": "SecureSourceManager createPullRequestComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a pull request comment. This function is used to create a single PullRequestComment of type Comment, or a single PullRequestComment of type Code that's replying to another PullRequestComment of type Code. Use BatchCreatePullRequestComments to create multiple PullRequestComments for code reviews.",
-            "canonical": true,
-            "file": "secure_source_manager.create_pull_request_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreatePullRequestComment",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequestComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "pull_request_comment",
-                        "type": ".google.cloud.securesourcemanager.v1.PullRequestComment"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreatePullRequestComment",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequestComment",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequestComment_async",
-            "title": "SecureSourceManager updatePullRequestComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a pull request comment.",
-            "canonical": true,
-            "file": "secure_source_manager.update_pull_request_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdatePullRequestComment",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequestComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "pull_request_comment",
-                        "type": ".google.cloud.securesourcemanager.v1.PullRequestComment"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdatePullRequestComment",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequestComment",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeletePullRequestComment_async",
-            "title": "SecureSourceManager deletePullRequestComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a pull request comment.",
-            "canonical": true,
-            "file": "secure_source_manager.delete_pull_request_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeletePullRequestComment",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeletePullRequestComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "DeletePullRequestComment",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeletePullRequestComment",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_BatchCreatePullRequestComments_async",
-            "title": "SecureSourceManager batchCreatePullRequestComments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Batch creates pull request comments. This function is used to create multiple PullRequestComments for code review. There needs to be exactly one PullRequestComment of type Review, and at most 100 PullRequestComments of type Code per request. The Postition of the code comments must be unique within the request.",
-            "canonical": true,
-            "file": "secure_source_manager.batch_create_pull_request_comments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchCreatePullRequestComments",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.BatchCreatePullRequestComments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "BatchCreatePullRequestComments",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.BatchCreatePullRequestComments",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ResolvePullRequestComments_async",
-            "title": "SecureSourceManager resolvePullRequestComments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Resolves pull request comments. A list of PullRequestComment names must be provided. The PullRequestComment names must be in the same conversation thread. If auto_fill is set, all comments in the conversation thread will be resolved.",
-            "canonical": true,
-            "file": "secure_source_manager.resolve_pull_request_comments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResolvePullRequestComments",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ResolvePullRequestComments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "names",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "auto_fill",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ResolvePullRequestComments",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ResolvePullRequestComments",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UnresolvePullRequestComments_async",
-            "title": "SecureSourceManager unresolvePullRequestComments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Unresolves pull request comments. A list of PullRequestComment names must be provided. The PullRequestComment names must be in the same conversation thread. If auto_fill is set, all comments in the conversation thread will be unresolved.",
-            "canonical": true,
-            "file": "secure_source_manager.unresolve_pull_request_comments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UnresolvePullRequestComments",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UnresolvePullRequestComments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "names",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "auto_fill",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "UnresolvePullRequestComments",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UnresolvePullRequestComments",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateIssueComment_async",
-            "title": "SecureSourceManager createIssueComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an issue comment.",
-            "canonical": true,
-            "file": "secure_source_manager.create_issue_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateIssueComment",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssueComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "issue_comment",
-                        "type": ".google.cloud.securesourcemanager.v1.IssueComment"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateIssueComment",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssueComment",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetIssueComment_async",
-            "title": "SecureSourceManager getIssueComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an issue comment.",
-            "canonical": true,
-            "file": "secure_source_manager.get_issue_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIssueComment",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssueComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.IssueComment",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetIssueComment",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssueComment",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListIssueComments_async",
-            "title": "SecureSourceManager listIssueComments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists comments in an issue.",
-            "canonical": true,
-            "file": "secure_source_manager.list_issue_comments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListIssueComments",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssueComments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.securesourcemanager.v1.ListIssueCommentsResponse",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListIssueComments",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssueComments",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateIssueComment_async",
-            "title": "SecureSourceManager updateIssueComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an issue comment.",
-            "canonical": true,
-            "file": "secure_source_manager.update_issue_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateIssueComment",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssueComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "issue_comment",
-                        "type": ".google.cloud.securesourcemanager.v1.IssueComment"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateIssueComment",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssueComment",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteIssueComment_async",
-            "title": "SecureSourceManager deleteIssueComment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an issue comment.",
-            "canonical": true,
-            "file": "secure_source_manager.delete_issue_comment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteIssueComment",
-                "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssueComment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "SecureSourceManagerClient",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteIssueComment",
-                    "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssueComment",
-                    "service": {
-                        "shortName": "SecureSourceManager",
-                        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-securesourcemanager",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.securesourcemanager.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListInstances_async",
+      "title": "SecureSourceManager listInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Instances in a given project and location.",
+      "canonical": true,
+      "file": "secure_source_manager.list_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInstances",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.ListInstancesResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ListInstances",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListInstances",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetInstance_async",
+      "title": "SecureSourceManager getInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single instance.",
+      "canonical": true,
+      "file": "secure_source_manager.get_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInstance",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.Instance",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "GetInstance",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetInstance",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateInstance_async",
+      "title": "SecureSourceManager createInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new instance in a given project and location.",
+      "canonical": true,
+      "file": "secure_source_manager.create_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInstance",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance",
+            "type": ".google.cloud.securesourcemanager.v1.Instance"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateInstance",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateInstance",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteInstance_async",
+      "title": "SecureSourceManager deleteInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single instance.",
+      "canonical": true,
+      "file": "secure_source_manager.delete_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInstance",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteInstance",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteInstance",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListRepositories_async",
+      "title": "SecureSourceManager listRepositories Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Repositories in a given project and location. The instance field is required in the query parameter for requests using the securesourcemanager.googleapis.com endpoint.",
+      "canonical": true,
+      "file": "secure_source_manager.list_repositories.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRepositories",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListRepositories",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.ListRepositoriesResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ListRepositories",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListRepositories",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetRepository_async",
+      "title": "SecureSourceManager getRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets metadata of a repository.",
+      "canonical": true,
+      "file": "secure_source_manager.get_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRepository",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.Repository",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "GetRepository",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetRepository",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateRepository_async",
+      "title": "SecureSourceManager createRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new repository in a given project and location. The Repository.Instance field is required in the request body for requests using the securesourcemanager.googleapis.com endpoint.",
+      "canonical": true,
+      "file": "secure_source_manager.create_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRepository",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "repository",
+            "type": ".google.cloud.securesourcemanager.v1.Repository"
+          },
+          {
+            "name": "repository_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateRepository",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateRepository",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateRepository_async",
+      "title": "SecureSourceManager updateRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the metadata of a repository.",
+      "canonical": true,
+      "file": "secure_source_manager.update_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateRepository",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "repository",
+            "type": ".google.cloud.securesourcemanager.v1.Repository"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateRepository",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateRepository",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteRepository_async",
+      "title": "SecureSourceManager deleteRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Repository.",
+      "canonical": true,
+      "file": "secure_source_manager.delete_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteRepository",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteRepository",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteRepository",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListHooks_async",
+      "title": "SecureSourceManager listHooks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists hooks in a given repository.",
+      "canonical": true,
+      "file": "secure_source_manager.list_hooks.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListHooks",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListHooks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.ListHooksResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ListHooks",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListHooks",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetHook_async",
+      "title": "SecureSourceManager getHook Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets metadata of a hook.",
+      "canonical": true,
+      "file": "secure_source_manager.get_hook.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetHook",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetHook",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.Hook",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "GetHook",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetHook",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateHook_async",
+      "title": "SecureSourceManager createHook Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new hook in a given repository.",
+      "canonical": true,
+      "file": "secure_source_manager.create_hook.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateHook",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateHook",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "hook",
+            "type": ".google.cloud.securesourcemanager.v1.Hook"
+          },
+          {
+            "name": "hook_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateHook",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateHook",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateHook_async",
+      "title": "SecureSourceManager updateHook Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the metadata of a hook.",
+      "canonical": true,
+      "file": "secure_source_manager.update_hook.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateHook",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateHook",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "hook",
+            "type": ".google.cloud.securesourcemanager.v1.Hook"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateHook",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateHook",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteHook_async",
+      "title": "SecureSourceManager deleteHook Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Hook.",
+      "canonical": true,
+      "file": "secure_source_manager.delete_hook.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteHook",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteHook",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteHook",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteHook",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetIamPolicyRepo_async",
+      "title": "SecureSourceManager getIamPolicyRepo Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get IAM policy for a repository.",
+      "canonical": true,
+      "file": "secure_source_manager.get_iam_policy_repo.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicyRepo",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIamPolicyRepo",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicyRepo",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIamPolicyRepo",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_SetIamPolicyRepo_async",
+      "title": "SecureSourceManager setIamPolicyRepo Sample",
+      "origin": "API_DEFINITION",
+      "description": " Set IAM policy on a repository.",
+      "canonical": true,
+      "file": "secure_source_manager.set_iam_policy_repo.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicyRepo",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.SetIamPolicyRepo",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicyRepo",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.SetIamPolicyRepo",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_TestIamPermissionsRepo_async",
+      "title": "SecureSourceManager testIamPermissionsRepo Sample",
+      "origin": "API_DEFINITION",
+      "description": " Test IAM permissions on a repository. IAM permission checks are not required on this method.",
+      "canonical": true,
+      "file": "secure_source_manager.test_iam_permissions_repo.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissionsRepo",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.TestIamPermissionsRepo",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissionsRepo",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.TestIamPermissionsRepo",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateBranchRule_async",
+      "title": "SecureSourceManager createBranchRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " CreateBranchRule creates a branch rule in a given repository.",
+      "canonical": true,
+      "file": "secure_source_manager.create_branch_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBranchRule",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateBranchRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "branch_rule",
+            "type": ".google.cloud.securesourcemanager.v1.BranchRule"
+          },
+          {
+            "name": "branch_rule_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateBranchRule",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateBranchRule",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListBranchRules_async",
+      "title": "SecureSourceManager listBranchRules Sample",
+      "origin": "API_DEFINITION",
+      "description": " ListBranchRules lists branch rules in a given repository.",
+      "canonical": true,
+      "file": "secure_source_manager.list_branch_rules.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBranchRules",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListBranchRules",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.ListBranchRulesResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ListBranchRules",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListBranchRules",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetBranchRule_async",
+      "title": "SecureSourceManager getBranchRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " GetBranchRule gets a branch rule.",
+      "canonical": true,
+      "file": "secure_source_manager.get_branch_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBranchRule",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetBranchRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.BranchRule",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "GetBranchRule",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetBranchRule",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateBranchRule_async",
+      "title": "SecureSourceManager updateBranchRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " UpdateBranchRule updates a branch rule.",
+      "canonical": true,
+      "file": "secure_source_manager.update_branch_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBranchRule",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateBranchRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "branch_rule",
+            "type": ".google.cloud.securesourcemanager.v1.BranchRule"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateBranchRule",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateBranchRule",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteBranchRule_async",
+      "title": "SecureSourceManager deleteBranchRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " DeleteBranchRule deletes a branch rule.",
+      "canonical": true,
+      "file": "secure_source_manager.delete_branch_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBranchRule",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteBranchRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteBranchRule",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteBranchRule",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequest_async",
+      "title": "SecureSourceManager createPullRequest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a pull request.",
+      "canonical": true,
+      "file": "secure_source_manager.create_pull_request.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePullRequest",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "pull_request",
+            "type": ".google.cloud.securesourcemanager.v1.PullRequest"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "CreatePullRequest",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequest",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetPullRequest_async",
+      "title": "SecureSourceManager getPullRequest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a pull request.",
+      "canonical": true,
+      "file": "secure_source_manager.get_pull_request.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPullRequest",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.PullRequest",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "GetPullRequest",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequest",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListPullRequests_async",
+      "title": "SecureSourceManager listPullRequests Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists pull requests in a repository.",
+      "canonical": true,
+      "file": "secure_source_manager.list_pull_requests.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPullRequests",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequests",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.ListPullRequestsResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ListPullRequests",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequests",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequest_async",
+      "title": "SecureSourceManager updatePullRequest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a pull request.",
+      "canonical": true,
+      "file": "secure_source_manager.update_pull_request.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePullRequest",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "pull_request",
+            "type": ".google.cloud.securesourcemanager.v1.PullRequest"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "UpdatePullRequest",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequest",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_MergePullRequest_async",
+      "title": "SecureSourceManager mergePullRequest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Merges a pull request.",
+      "canonical": true,
+      "file": "secure_source_manager.merge_pull_request.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MergePullRequest",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.MergePullRequest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "MergePullRequest",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.MergePullRequest",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_OpenPullRequest_async",
+      "title": "SecureSourceManager openPullRequest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Opens a pull request.",
+      "canonical": true,
+      "file": "secure_source_manager.open_pull_request.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "OpenPullRequest",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenPullRequest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "OpenPullRequest",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenPullRequest",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ClosePullRequest_async",
+      "title": "SecureSourceManager closePullRequest Sample",
+      "origin": "API_DEFINITION",
+      "description": " Closes a pull request without merging.",
+      "canonical": true,
+      "file": "secure_source_manager.close_pull_request.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ClosePullRequest",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ClosePullRequest",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ClosePullRequest",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ClosePullRequest",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestFileDiffs_async",
+      "title": "SecureSourceManager listPullRequestFileDiffs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists a pull request's file diffs.",
+      "canonical": true,
+      "file": "secure_source_manager.list_pull_request_file_diffs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPullRequestFileDiffs",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestFileDiffs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.ListPullRequestFileDiffsResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ListPullRequestFileDiffs",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestFileDiffs",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_FetchTree_async",
+      "title": "SecureSourceManager fetchTree Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a tree from a repository.",
+      "canonical": true,
+      "file": "secure_source_manager.fetch_tree.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchTree",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchTree",
+        "async": true,
+        "parameters": [
+          {
+            "name": "repository",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ref",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "recursive",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.FetchTreeResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "FetchTree",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchTree",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_FetchBlob_async",
+      "title": "SecureSourceManager fetchBlob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a blob from a repository.",
+      "canonical": true,
+      "file": "secure_source_manager.fetch_blob.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchBlob",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchBlob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "repository",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "sha",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.FetchBlobResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "FetchBlob",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.FetchBlob",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateIssue_async",
+      "title": "SecureSourceManager createIssue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an issue.",
+      "canonical": true,
+      "file": "secure_source_manager.create_issue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateIssue",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "issue",
+            "type": ".google.cloud.securesourcemanager.v1.Issue"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateIssue",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssue",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetIssue_async",
+      "title": "SecureSourceManager getIssue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an issue.",
+      "canonical": true,
+      "file": "secure_source_manager.get_issue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIssue",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.Issue",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "GetIssue",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssue",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListIssues_async",
+      "title": "SecureSourceManager listIssues Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists issues in a repository.",
+      "canonical": true,
+      "file": "secure_source_manager.list_issues.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListIssues",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssues",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.ListIssuesResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ListIssues",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssues",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateIssue_async",
+      "title": "SecureSourceManager updateIssue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a issue.",
+      "canonical": true,
+      "file": "secure_source_manager.update_issue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateIssue",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "issue",
+            "type": ".google.cloud.securesourcemanager.v1.Issue"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateIssue",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssue",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteIssue_async",
+      "title": "SecureSourceManager deleteIssue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an issue.",
+      "canonical": true,
+      "file": "secure_source_manager.delete_issue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteIssue",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteIssue",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssue",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_OpenIssue_async",
+      "title": "SecureSourceManager openIssue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Opens an issue.",
+      "canonical": true,
+      "file": "secure_source_manager.open_issue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "OpenIssue",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenIssue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "OpenIssue",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.OpenIssue",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CloseIssue_async",
+      "title": "SecureSourceManager closeIssue Sample",
+      "origin": "API_DEFINITION",
+      "description": " Closes an issue.",
+      "canonical": true,
+      "file": "secure_source_manager.close_issue.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CloseIssue",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CloseIssue",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "CloseIssue",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CloseIssue",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetPullRequestComment_async",
+      "title": "SecureSourceManager getPullRequestComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a pull request comment.",
+      "canonical": true,
+      "file": "secure_source_manager.get_pull_request_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPullRequestComment",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequestComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.PullRequestComment",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "GetPullRequestComment",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetPullRequestComment",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListPullRequestComments_async",
+      "title": "SecureSourceManager listPullRequestComments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists pull request comments.",
+      "canonical": true,
+      "file": "secure_source_manager.list_pull_request_comments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPullRequestComments",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestComments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.ListPullRequestCommentsResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ListPullRequestComments",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListPullRequestComments",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreatePullRequestComment_async",
+      "title": "SecureSourceManager createPullRequestComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a pull request comment. This function is used to create a single PullRequestComment of type Comment, or a single PullRequestComment of type Code that's replying to another PullRequestComment of type Code. Use BatchCreatePullRequestComments to create multiple PullRequestComments for code reviews.",
+      "canonical": true,
+      "file": "secure_source_manager.create_pull_request_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePullRequestComment",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequestComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "pull_request_comment",
+            "type": ".google.cloud.securesourcemanager.v1.PullRequestComment"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "CreatePullRequestComment",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreatePullRequestComment",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdatePullRequestComment_async",
+      "title": "SecureSourceManager updatePullRequestComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a pull request comment.",
+      "canonical": true,
+      "file": "secure_source_manager.update_pull_request_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePullRequestComment",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequestComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "pull_request_comment",
+            "type": ".google.cloud.securesourcemanager.v1.PullRequestComment"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "UpdatePullRequestComment",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdatePullRequestComment",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeletePullRequestComment_async",
+      "title": "SecureSourceManager deletePullRequestComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a pull request comment.",
+      "canonical": true,
+      "file": "secure_source_manager.delete_pull_request_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePullRequestComment",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeletePullRequestComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "DeletePullRequestComment",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeletePullRequestComment",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_BatchCreatePullRequestComments_async",
+      "title": "SecureSourceManager batchCreatePullRequestComments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Batch creates pull request comments. This function is used to create multiple PullRequestComments for code review. There needs to be exactly one PullRequestComment of type Review, and at most 100 PullRequestComments of type Code per request. The Postition of the code comments must be unique within the request.",
+      "canonical": true,
+      "file": "secure_source_manager.batch_create_pull_request_comments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreatePullRequestComments",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.BatchCreatePullRequestComments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "BatchCreatePullRequestComments",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.BatchCreatePullRequestComments",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ResolvePullRequestComments_async",
+      "title": "SecureSourceManager resolvePullRequestComments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resolves pull request comments. A list of PullRequestComment names must be provided. The PullRequestComment names must be in the same conversation thread. If auto_fill is set, all comments in the conversation thread will be resolved.",
+      "canonical": true,
+      "file": "secure_source_manager.resolve_pull_request_comments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResolvePullRequestComments",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ResolvePullRequestComments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "auto_fill",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ResolvePullRequestComments",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ResolvePullRequestComments",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UnresolvePullRequestComments_async",
+      "title": "SecureSourceManager unresolvePullRequestComments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Unresolves pull request comments. A list of PullRequestComment names must be provided. The PullRequestComment names must be in the same conversation thread. If auto_fill is set, all comments in the conversation thread will be unresolved.",
+      "canonical": true,
+      "file": "secure_source_manager.unresolve_pull_request_comments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UnresolvePullRequestComments",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UnresolvePullRequestComments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "auto_fill",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "UnresolvePullRequestComments",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UnresolvePullRequestComments",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_CreateIssueComment_async",
+      "title": "SecureSourceManager createIssueComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an issue comment.",
+      "canonical": true,
+      "file": "secure_source_manager.create_issue_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateIssueComment",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssueComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "issue_comment",
+            "type": ".google.cloud.securesourcemanager.v1.IssueComment"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateIssueComment",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.CreateIssueComment",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_GetIssueComment_async",
+      "title": "SecureSourceManager getIssueComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an issue comment.",
+      "canonical": true,
+      "file": "secure_source_manager.get_issue_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIssueComment",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssueComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.IssueComment",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "GetIssueComment",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.GetIssueComment",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_ListIssueComments_async",
+      "title": "SecureSourceManager listIssueComments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists comments in an issue.",
+      "canonical": true,
+      "file": "secure_source_manager.list_issue_comments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListIssueComments",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssueComments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.securesourcemanager.v1.ListIssueCommentsResponse",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "ListIssueComments",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.ListIssueComments",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_UpdateIssueComment_async",
+      "title": "SecureSourceManager updateIssueComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an issue comment.",
+      "canonical": true,
+      "file": "secure_source_manager.update_issue_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateIssueComment",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssueComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "issue_comment",
+            "type": ".google.cloud.securesourcemanager.v1.IssueComment"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateIssueComment",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.UpdateIssueComment",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "securesourcemanager_v1_generated_SecureSourceManager_DeleteIssueComment_async",
+      "title": "SecureSourceManager deleteIssueComment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an issue comment.",
+      "canonical": true,
+      "file": "secure_source_manager.delete_issue_comment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteIssueComment",
+        "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssueComment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "SecureSourceManagerClient",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteIssueComment",
+          "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager.DeleteIssueComment",
+          "service": {
+            "shortName": "SecureSourceManager",
+            "fullName": "google.cloud.securesourcemanager.v1.SecureSourceManager"
+          }
+        }
+      }
+    }
+  ]
 }

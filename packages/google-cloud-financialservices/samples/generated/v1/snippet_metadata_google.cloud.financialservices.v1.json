@@ -1,1831 +1,1831 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-financialservices",
-        "version": "0.4.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.financialservices.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "financialservices_v1_generated_AML_ListInstances_async",
-            "title": "AML listInstances Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists instances.",
-            "canonical": true,
-            "file": "a_m_l.list_instances.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListInstances",
-                "fullName": "google.cloud.financialservices.v1.AML.ListInstances",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.ListInstancesResponse",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ListInstances",
-                    "fullName": "google.cloud.financialservices.v1.AML.ListInstances",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_GetInstance_async",
-            "title": "AML getInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an instance.",
-            "canonical": true,
-            "file": "a_m_l.get_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetInstance",
-                "fullName": "google.cloud.financialservices.v1.AML.GetInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.Instance",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "GetInstance",
-                    "fullName": "google.cloud.financialservices.v1.AML.GetInstance",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_CreateInstance_async",
-            "title": "AML createInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an instance.",
-            "canonical": true,
-            "file": "a_m_l.create_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateInstance",
-                "fullName": "google.cloud.financialservices.v1.AML.CreateInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance",
-                        "type": ".google.cloud.financialservices.v1.Instance"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "CreateInstance",
-                    "fullName": "google.cloud.financialservices.v1.AML.CreateInstance",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_UpdateInstance_async",
-            "title": "AML updateInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single Instance.",
-            "canonical": true,
-            "file": "a_m_l.update_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateInstance",
-                "fullName": "google.cloud.financialservices.v1.AML.UpdateInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "instance",
-                        "type": ".google.cloud.financialservices.v1.Instance"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "UpdateInstance",
-                    "fullName": "google.cloud.financialservices.v1.AML.UpdateInstance",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_DeleteInstance_async",
-            "title": "AML deleteInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an instance.",
-            "canonical": true,
-            "file": "a_m_l.delete_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteInstance",
-                "fullName": "google.cloud.financialservices.v1.AML.DeleteInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "DeleteInstance",
-                    "fullName": "google.cloud.financialservices.v1.AML.DeleteInstance",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ImportRegisteredParties_async",
-            "title": "AML importRegisteredParties Sample",
-            "origin": "API_DEFINITION",
-            "description": " Imports the list of registered parties. See [Create and manage instances](https://cloud.google.com/financial-services/anti-money-laundering/docs/create-and-manage-instances#import-registered-parties) for information on the input schema and response for this method.",
-            "canonical": true,
-            "file": "a_m_l.import_registered_parties.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ImportRegisteredParties",
-                "fullName": "google.cloud.financialservices.v1.AML.ImportRegisteredParties",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "party_tables",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "mode",
-                        "type": ".google.cloud.financialservices.v1.ImportRegisteredPartiesRequest.UpdateMode"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "line_of_business",
-                        "type": ".google.cloud.financialservices.v1.LineOfBusiness"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ImportRegisteredParties",
-                    "fullName": "google.cloud.financialservices.v1.AML.ImportRegisteredParties",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ExportRegisteredParties_async",
-            "title": "AML exportRegisteredParties Sample",
-            "origin": "API_DEFINITION",
-            "description": " Exports the list of registered parties. See [Create and manage instances](https://cloud.google.com/financial-services/anti-money-laundering/docs/create-and-manage-instances#export-registered-parties) for information on the output schema for this method.",
-            "canonical": true,
-            "file": "a_m_l.export_registered_parties.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExportRegisteredParties",
-                "fullName": "google.cloud.financialservices.v1.AML.ExportRegisteredParties",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "dataset",
-                        "type": ".google.cloud.financialservices.v1.BigQueryDestination"
-                    },
-                    {
-                        "name": "line_of_business",
-                        "type": ".google.cloud.financialservices.v1.LineOfBusiness"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ExportRegisteredParties",
-                    "fullName": "google.cloud.financialservices.v1.AML.ExportRegisteredParties",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ListDatasets_async",
-            "title": "AML listDatasets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists datasets.",
-            "canonical": true,
-            "file": "a_m_l.list_datasets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDatasets",
-                "fullName": "google.cloud.financialservices.v1.AML.ListDatasets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.ListDatasetsResponse",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ListDatasets",
-                    "fullName": "google.cloud.financialservices.v1.AML.ListDatasets",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_GetDataset_async",
-            "title": "AML getDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a dataset.",
-            "canonical": true,
-            "file": "a_m_l.get_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDataset",
-                "fullName": "google.cloud.financialservices.v1.AML.GetDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.Dataset",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "GetDataset",
-                    "fullName": "google.cloud.financialservices.v1.AML.GetDataset",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_CreateDataset_async",
-            "title": "AML createDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a dataset.",
-            "canonical": true,
-            "file": "a_m_l.create_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateDataset",
-                "fullName": "google.cloud.financialservices.v1.AML.CreateDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "dataset_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "dataset",
-                        "type": ".google.cloud.financialservices.v1.Dataset"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "CreateDataset",
-                    "fullName": "google.cloud.financialservices.v1.AML.CreateDataset",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_UpdateDataset_async",
-            "title": "AML updateDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single Dataset.",
-            "canonical": true,
-            "file": "a_m_l.update_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateDataset",
-                "fullName": "google.cloud.financialservices.v1.AML.UpdateDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "dataset",
-                        "type": ".google.cloud.financialservices.v1.Dataset"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "UpdateDataset",
-                    "fullName": "google.cloud.financialservices.v1.AML.UpdateDataset",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_DeleteDataset_async",
-            "title": "AML deleteDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a dataset.",
-            "canonical": true,
-            "file": "a_m_l.delete_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteDataset",
-                "fullName": "google.cloud.financialservices.v1.AML.DeleteDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "DeleteDataset",
-                    "fullName": "google.cloud.financialservices.v1.AML.DeleteDataset",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ListModels_async",
-            "title": "AML listModels Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists models.",
-            "canonical": true,
-            "file": "a_m_l.list_models.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListModels",
-                "fullName": "google.cloud.financialservices.v1.AML.ListModels",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.ListModelsResponse",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ListModels",
-                    "fullName": "google.cloud.financialservices.v1.AML.ListModels",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_GetModel_async",
-            "title": "AML getModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a model.",
-            "canonical": true,
-            "file": "a_m_l.get_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetModel",
-                "fullName": "google.cloud.financialservices.v1.AML.GetModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.Model",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "GetModel",
-                    "fullName": "google.cloud.financialservices.v1.AML.GetModel",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_CreateModel_async",
-            "title": "AML createModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a model.",
-            "canonical": true,
-            "file": "a_m_l.create_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateModel",
-                "fullName": "google.cloud.financialservices.v1.AML.CreateModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "model_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "model",
-                        "type": ".google.cloud.financialservices.v1.Model"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "CreateModel",
-                    "fullName": "google.cloud.financialservices.v1.AML.CreateModel",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_UpdateModel_async",
-            "title": "AML updateModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single Model.",
-            "canonical": true,
-            "file": "a_m_l.update_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateModel",
-                "fullName": "google.cloud.financialservices.v1.AML.UpdateModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "model",
-                        "type": ".google.cloud.financialservices.v1.Model"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "UpdateModel",
-                    "fullName": "google.cloud.financialservices.v1.AML.UpdateModel",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ExportModelMetadata_async",
-            "title": "AML exportModelMetadata Sample",
-            "origin": "API_DEFINITION",
-            "description": " Export governance information for a Model resource. For information on the exported fields, see [AML output data model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#model).",
-            "canonical": true,
-            "file": "a_m_l.export_model_metadata.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExportModelMetadata",
-                "fullName": "google.cloud.financialservices.v1.AML.ExportModelMetadata",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "model",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "structured_metadata_destination",
-                        "type": ".google.cloud.financialservices.v1.BigQueryDestination"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ExportModelMetadata",
-                    "fullName": "google.cloud.financialservices.v1.AML.ExportModelMetadata",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_DeleteModel_async",
-            "title": "AML deleteModel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a model.",
-            "canonical": true,
-            "file": "a_m_l.delete_model.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteModel",
-                "fullName": "google.cloud.financialservices.v1.AML.DeleteModel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "DeleteModel",
-                    "fullName": "google.cloud.financialservices.v1.AML.DeleteModel",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ListEngineConfigs_async",
-            "title": "AML listEngineConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists engine configs.",
-            "canonical": true,
-            "file": "a_m_l.list_engine_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListEngineConfigs",
-                "fullName": "google.cloud.financialservices.v1.AML.ListEngineConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.ListEngineConfigsResponse",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ListEngineConfigs",
-                    "fullName": "google.cloud.financialservices.v1.AML.ListEngineConfigs",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_GetEngineConfig_async",
-            "title": "AML getEngineConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an engine config.",
-            "canonical": true,
-            "file": "a_m_l.get_engine_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetEngineConfig",
-                "fullName": "google.cloud.financialservices.v1.AML.GetEngineConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.EngineConfig",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "GetEngineConfig",
-                    "fullName": "google.cloud.financialservices.v1.AML.GetEngineConfig",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_CreateEngineConfig_async",
-            "title": "AML createEngineConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an engine config.",
-            "canonical": true,
-            "file": "a_m_l.create_engine_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateEngineConfig",
-                "fullName": "google.cloud.financialservices.v1.AML.CreateEngineConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "engine_config_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "engine_config",
-                        "type": ".google.cloud.financialservices.v1.EngineConfig"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "CreateEngineConfig",
-                    "fullName": "google.cloud.financialservices.v1.AML.CreateEngineConfig",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_UpdateEngineConfig_async",
-            "title": "AML updateEngineConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single EngineConfig.",
-            "canonical": true,
-            "file": "a_m_l.update_engine_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateEngineConfig",
-                "fullName": "google.cloud.financialservices.v1.AML.UpdateEngineConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "engine_config",
-                        "type": ".google.cloud.financialservices.v1.EngineConfig"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "UpdateEngineConfig",
-                    "fullName": "google.cloud.financialservices.v1.AML.UpdateEngineConfig",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ExportEngineConfigMetadata_async",
-            "title": "AML exportEngineConfigMetadata Sample",
-            "origin": "API_DEFINITION",
-            "description": " Export governance information for an EngineConfig resource. For information on the exported fields, see [AML output data model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#engine-config).",
-            "canonical": true,
-            "file": "a_m_l.export_engine_config_metadata.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExportEngineConfigMetadata",
-                "fullName": "google.cloud.financialservices.v1.AML.ExportEngineConfigMetadata",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "engine_config",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "structured_metadata_destination",
-                        "type": ".google.cloud.financialservices.v1.BigQueryDestination"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ExportEngineConfigMetadata",
-                    "fullName": "google.cloud.financialservices.v1.AML.ExportEngineConfigMetadata",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_DeleteEngineConfig_async",
-            "title": "AML deleteEngineConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an engine config.",
-            "canonical": true,
-            "file": "a_m_l.delete_engine_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteEngineConfig",
-                "fullName": "google.cloud.financialservices.v1.AML.DeleteEngineConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "DeleteEngineConfig",
-                    "fullName": "google.cloud.financialservices.v1.AML.DeleteEngineConfig",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_GetEngineVersion_async",
-            "title": "AML getEngineVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a single EngineVersion.",
-            "canonical": true,
-            "file": "a_m_l.get_engine_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetEngineVersion",
-                "fullName": "google.cloud.financialservices.v1.AML.GetEngineVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.EngineVersion",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "GetEngineVersion",
-                    "fullName": "google.cloud.financialservices.v1.AML.GetEngineVersion",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ListEngineVersions_async",
-            "title": "AML listEngineVersions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists EngineVersions for given location.",
-            "canonical": true,
-            "file": "a_m_l.list_engine_versions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListEngineVersions",
-                "fullName": "google.cloud.financialservices.v1.AML.ListEngineVersions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.ListEngineVersionsResponse",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ListEngineVersions",
-                    "fullName": "google.cloud.financialservices.v1.AML.ListEngineVersions",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ListPredictionResults_async",
-            "title": "AML listPredictionResults Sample",
-            "origin": "API_DEFINITION",
-            "description": " List PredictionResults.",
-            "canonical": true,
-            "file": "a_m_l.list_prediction_results.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPredictionResults",
-                "fullName": "google.cloud.financialservices.v1.AML.ListPredictionResults",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.ListPredictionResultsResponse",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ListPredictionResults",
-                    "fullName": "google.cloud.financialservices.v1.AML.ListPredictionResults",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_GetPredictionResult_async",
-            "title": "AML getPredictionResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a PredictionResult.",
-            "canonical": true,
-            "file": "a_m_l.get_prediction_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPredictionResult",
-                "fullName": "google.cloud.financialservices.v1.AML.GetPredictionResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.PredictionResult",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "GetPredictionResult",
-                    "fullName": "google.cloud.financialservices.v1.AML.GetPredictionResult",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_CreatePredictionResult_async",
-            "title": "AML createPredictionResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a PredictionResult.",
-            "canonical": true,
-            "file": "a_m_l.create_prediction_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreatePredictionResult",
-                "fullName": "google.cloud.financialservices.v1.AML.CreatePredictionResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "prediction_result_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "prediction_result",
-                        "type": ".google.cloud.financialservices.v1.PredictionResult"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "CreatePredictionResult",
-                    "fullName": "google.cloud.financialservices.v1.AML.CreatePredictionResult",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_UpdatePredictionResult_async",
-            "title": "AML updatePredictionResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single PredictionResult.",
-            "canonical": true,
-            "file": "a_m_l.update_prediction_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdatePredictionResult",
-                "fullName": "google.cloud.financialservices.v1.AML.UpdatePredictionResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "prediction_result",
-                        "type": ".google.cloud.financialservices.v1.PredictionResult"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "UpdatePredictionResult",
-                    "fullName": "google.cloud.financialservices.v1.AML.UpdatePredictionResult",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ExportPredictionResultMetadata_async",
-            "title": "AML exportPredictionResultMetadata Sample",
-            "origin": "API_DEFINITION",
-            "description": " Export governance information for a PredictionResult resource. For information on the exported fields, see [AML output data model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#prediction-results).",
-            "canonical": true,
-            "file": "a_m_l.export_prediction_result_metadata.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExportPredictionResultMetadata",
-                "fullName": "google.cloud.financialservices.v1.AML.ExportPredictionResultMetadata",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "prediction_result",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "structured_metadata_destination",
-                        "type": ".google.cloud.financialservices.v1.BigQueryDestination"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ExportPredictionResultMetadata",
-                    "fullName": "google.cloud.financialservices.v1.AML.ExportPredictionResultMetadata",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_DeletePredictionResult_async",
-            "title": "AML deletePredictionResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a PredictionResult.",
-            "canonical": true,
-            "file": "a_m_l.delete_prediction_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeletePredictionResult",
-                "fullName": "google.cloud.financialservices.v1.AML.DeletePredictionResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "DeletePredictionResult",
-                    "fullName": "google.cloud.financialservices.v1.AML.DeletePredictionResult",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ListBacktestResults_async",
-            "title": "AML listBacktestResults Sample",
-            "origin": "API_DEFINITION",
-            "description": " List BacktestResults.",
-            "canonical": true,
-            "file": "a_m_l.list_backtest_results.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBacktestResults",
-                "fullName": "google.cloud.financialservices.v1.AML.ListBacktestResults",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.ListBacktestResultsResponse",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ListBacktestResults",
-                    "fullName": "google.cloud.financialservices.v1.AML.ListBacktestResults",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_GetBacktestResult_async",
-            "title": "AML getBacktestResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a BacktestResult.",
-            "canonical": true,
-            "file": "a_m_l.get_backtest_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBacktestResult",
-                "fullName": "google.cloud.financialservices.v1.AML.GetBacktestResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.financialservices.v1.BacktestResult",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "GetBacktestResult",
-                    "fullName": "google.cloud.financialservices.v1.AML.GetBacktestResult",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_CreateBacktestResult_async",
-            "title": "AML createBacktestResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a BacktestResult.",
-            "canonical": true,
-            "file": "a_m_l.create_backtest_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBacktestResult",
-                "fullName": "google.cloud.financialservices.v1.AML.CreateBacktestResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "backtest_result_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "backtest_result",
-                        "type": ".google.cloud.financialservices.v1.BacktestResult"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "CreateBacktestResult",
-                    "fullName": "google.cloud.financialservices.v1.AML.CreateBacktestResult",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_UpdateBacktestResult_async",
-            "title": "AML updateBacktestResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single BacktestResult.",
-            "canonical": true,
-            "file": "a_m_l.update_backtest_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateBacktestResult",
-                "fullName": "google.cloud.financialservices.v1.AML.UpdateBacktestResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "backtest_result",
-                        "type": ".google.cloud.financialservices.v1.BacktestResult"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "UpdateBacktestResult",
-                    "fullName": "google.cloud.financialservices.v1.AML.UpdateBacktestResult",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_ExportBacktestResultMetadata_async",
-            "title": "AML exportBacktestResultMetadata Sample",
-            "origin": "API_DEFINITION",
-            "description": " Export governance information for a BacktestResult resource. For information on the exported fields, see [AML output data model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#backtest-results).",
-            "canonical": true,
-            "file": "a_m_l.export_backtest_result_metadata.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExportBacktestResultMetadata",
-                "fullName": "google.cloud.financialservices.v1.AML.ExportBacktestResultMetadata",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "backtest_result",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "structured_metadata_destination",
-                        "type": ".google.cloud.financialservices.v1.BigQueryDestination"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "ExportBacktestResultMetadata",
-                    "fullName": "google.cloud.financialservices.v1.AML.ExportBacktestResultMetadata",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "financialservices_v1_generated_AML_DeleteBacktestResult_async",
-            "title": "AML deleteBacktestResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a BacktestResult.",
-            "canonical": true,
-            "file": "a_m_l.delete_backtest_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteBacktestResult",
-                "fullName": "google.cloud.financialservices.v1.AML.DeleteBacktestResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AMLClient",
-                    "fullName": "google.cloud.financialservices.v1.AMLClient"
-                },
-                "method": {
-                    "shortName": "DeleteBacktestResult",
-                    "fullName": "google.cloud.financialservices.v1.AML.DeleteBacktestResult",
-                    "service": {
-                        "shortName": "AML",
-                        "fullName": "google.cloud.financialservices.v1.AML"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-financialservices",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.financialservices.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "financialservices_v1_generated_AML_ListInstances_async",
+      "title": "AML listInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists instances.",
+      "canonical": true,
+      "file": "a_m_l.list_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInstances",
+        "fullName": "google.cloud.financialservices.v1.AML.ListInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.ListInstancesResponse",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ListInstances",
+          "fullName": "google.cloud.financialservices.v1.AML.ListInstances",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_GetInstance_async",
+      "title": "AML getInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an instance.",
+      "canonical": true,
+      "file": "a_m_l.get_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInstance",
+        "fullName": "google.cloud.financialservices.v1.AML.GetInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.Instance",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "GetInstance",
+          "fullName": "google.cloud.financialservices.v1.AML.GetInstance",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_CreateInstance_async",
+      "title": "AML createInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an instance.",
+      "canonical": true,
+      "file": "a_m_l.create_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInstance",
+        "fullName": "google.cloud.financialservices.v1.AML.CreateInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance",
+            "type": ".google.cloud.financialservices.v1.Instance"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "CreateInstance",
+          "fullName": "google.cloud.financialservices.v1.AML.CreateInstance",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_UpdateInstance_async",
+      "title": "AML updateInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Instance.",
+      "canonical": true,
+      "file": "a_m_l.update_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateInstance",
+        "fullName": "google.cloud.financialservices.v1.AML.UpdateInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "instance",
+            "type": ".google.cloud.financialservices.v1.Instance"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "UpdateInstance",
+          "fullName": "google.cloud.financialservices.v1.AML.UpdateInstance",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_DeleteInstance_async",
+      "title": "AML deleteInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an instance.",
+      "canonical": true,
+      "file": "a_m_l.delete_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInstance",
+        "fullName": "google.cloud.financialservices.v1.AML.DeleteInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "DeleteInstance",
+          "fullName": "google.cloud.financialservices.v1.AML.DeleteInstance",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ImportRegisteredParties_async",
+      "title": "AML importRegisteredParties Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports the list of registered parties. See [Create and manage instances](https://cloud.google.com/financial-services/anti-money-laundering/docs/create-and-manage-instances#import-registered-parties) for information on the input schema and response for this method.",
+      "canonical": true,
+      "file": "a_m_l.import_registered_parties.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportRegisteredParties",
+        "fullName": "google.cloud.financialservices.v1.AML.ImportRegisteredParties",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "party_tables",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "mode",
+            "type": ".google.cloud.financialservices.v1.ImportRegisteredPartiesRequest.UpdateMode"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "line_of_business",
+            "type": ".google.cloud.financialservices.v1.LineOfBusiness"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ImportRegisteredParties",
+          "fullName": "google.cloud.financialservices.v1.AML.ImportRegisteredParties",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ExportRegisteredParties_async",
+      "title": "AML exportRegisteredParties Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports the list of registered parties. See [Create and manage instances](https://cloud.google.com/financial-services/anti-money-laundering/docs/create-and-manage-instances#export-registered-parties) for information on the output schema for this method.",
+      "canonical": true,
+      "file": "a_m_l.export_registered_parties.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportRegisteredParties",
+        "fullName": "google.cloud.financialservices.v1.AML.ExportRegisteredParties",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset",
+            "type": ".google.cloud.financialservices.v1.BigQueryDestination"
+          },
+          {
+            "name": "line_of_business",
+            "type": ".google.cloud.financialservices.v1.LineOfBusiness"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ExportRegisteredParties",
+          "fullName": "google.cloud.financialservices.v1.AML.ExportRegisteredParties",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ListDatasets_async",
+      "title": "AML listDatasets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists datasets.",
+      "canonical": true,
+      "file": "a_m_l.list_datasets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDatasets",
+        "fullName": "google.cloud.financialservices.v1.AML.ListDatasets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.ListDatasetsResponse",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ListDatasets",
+          "fullName": "google.cloud.financialservices.v1.AML.ListDatasets",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_GetDataset_async",
+      "title": "AML getDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a dataset.",
+      "canonical": true,
+      "file": "a_m_l.get_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataset",
+        "fullName": "google.cloud.financialservices.v1.AML.GetDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.Dataset",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "GetDataset",
+          "fullName": "google.cloud.financialservices.v1.AML.GetDataset",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_CreateDataset_async",
+      "title": "AML createDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a dataset.",
+      "canonical": true,
+      "file": "a_m_l.create_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDataset",
+        "fullName": "google.cloud.financialservices.v1.AML.CreateDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset",
+            "type": ".google.cloud.financialservices.v1.Dataset"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "CreateDataset",
+          "fullName": "google.cloud.financialservices.v1.AML.CreateDataset",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_UpdateDataset_async",
+      "title": "AML updateDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Dataset.",
+      "canonical": true,
+      "file": "a_m_l.update_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataset",
+        "fullName": "google.cloud.financialservices.v1.AML.UpdateDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "dataset",
+            "type": ".google.cloud.financialservices.v1.Dataset"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "UpdateDataset",
+          "fullName": "google.cloud.financialservices.v1.AML.UpdateDataset",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_DeleteDataset_async",
+      "title": "AML deleteDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a dataset.",
+      "canonical": true,
+      "file": "a_m_l.delete_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataset",
+        "fullName": "google.cloud.financialservices.v1.AML.DeleteDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "DeleteDataset",
+          "fullName": "google.cloud.financialservices.v1.AML.DeleteDataset",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ListModels_async",
+      "title": "AML listModels Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists models.",
+      "canonical": true,
+      "file": "a_m_l.list_models.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListModels",
+        "fullName": "google.cloud.financialservices.v1.AML.ListModels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.ListModelsResponse",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ListModels",
+          "fullName": "google.cloud.financialservices.v1.AML.ListModels",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_GetModel_async",
+      "title": "AML getModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a model.",
+      "canonical": true,
+      "file": "a_m_l.get_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetModel",
+        "fullName": "google.cloud.financialservices.v1.AML.GetModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.Model",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "GetModel",
+          "fullName": "google.cloud.financialservices.v1.AML.GetModel",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_CreateModel_async",
+      "title": "AML createModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a model.",
+      "canonical": true,
+      "file": "a_m_l.create_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateModel",
+        "fullName": "google.cloud.financialservices.v1.AML.CreateModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "model",
+            "type": ".google.cloud.financialservices.v1.Model"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "CreateModel",
+          "fullName": "google.cloud.financialservices.v1.AML.CreateModel",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_UpdateModel_async",
+      "title": "AML updateModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Model.",
+      "canonical": true,
+      "file": "a_m_l.update_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateModel",
+        "fullName": "google.cloud.financialservices.v1.AML.UpdateModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "model",
+            "type": ".google.cloud.financialservices.v1.Model"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "UpdateModel",
+          "fullName": "google.cloud.financialservices.v1.AML.UpdateModel",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ExportModelMetadata_async",
+      "title": "AML exportModelMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Export governance information for a Model resource. For information on the exported fields, see [AML output data model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#model).",
+      "canonical": true,
+      "file": "a_m_l.export_model_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportModelMetadata",
+        "fullName": "google.cloud.financialservices.v1.AML.ExportModelMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "model",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "structured_metadata_destination",
+            "type": ".google.cloud.financialservices.v1.BigQueryDestination"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ExportModelMetadata",
+          "fullName": "google.cloud.financialservices.v1.AML.ExportModelMetadata",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_DeleteModel_async",
+      "title": "AML deleteModel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a model.",
+      "canonical": true,
+      "file": "a_m_l.delete_model.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteModel",
+        "fullName": "google.cloud.financialservices.v1.AML.DeleteModel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "DeleteModel",
+          "fullName": "google.cloud.financialservices.v1.AML.DeleteModel",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ListEngineConfigs_async",
+      "title": "AML listEngineConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists engine configs.",
+      "canonical": true,
+      "file": "a_m_l.list_engine_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEngineConfigs",
+        "fullName": "google.cloud.financialservices.v1.AML.ListEngineConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.ListEngineConfigsResponse",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ListEngineConfigs",
+          "fullName": "google.cloud.financialservices.v1.AML.ListEngineConfigs",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_GetEngineConfig_async",
+      "title": "AML getEngineConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an engine config.",
+      "canonical": true,
+      "file": "a_m_l.get_engine_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEngineConfig",
+        "fullName": "google.cloud.financialservices.v1.AML.GetEngineConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.EngineConfig",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "GetEngineConfig",
+          "fullName": "google.cloud.financialservices.v1.AML.GetEngineConfig",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_CreateEngineConfig_async",
+      "title": "AML createEngineConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an engine config.",
+      "canonical": true,
+      "file": "a_m_l.create_engine_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEngineConfig",
+        "fullName": "google.cloud.financialservices.v1.AML.CreateEngineConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "engine_config_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "engine_config",
+            "type": ".google.cloud.financialservices.v1.EngineConfig"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "CreateEngineConfig",
+          "fullName": "google.cloud.financialservices.v1.AML.CreateEngineConfig",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_UpdateEngineConfig_async",
+      "title": "AML updateEngineConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single EngineConfig.",
+      "canonical": true,
+      "file": "a_m_l.update_engine_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEngineConfig",
+        "fullName": "google.cloud.financialservices.v1.AML.UpdateEngineConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "engine_config",
+            "type": ".google.cloud.financialservices.v1.EngineConfig"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "UpdateEngineConfig",
+          "fullName": "google.cloud.financialservices.v1.AML.UpdateEngineConfig",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ExportEngineConfigMetadata_async",
+      "title": "AML exportEngineConfigMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Export governance information for an EngineConfig resource. For information on the exported fields, see [AML output data model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#engine-config).",
+      "canonical": true,
+      "file": "a_m_l.export_engine_config_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportEngineConfigMetadata",
+        "fullName": "google.cloud.financialservices.v1.AML.ExportEngineConfigMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "engine_config",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "structured_metadata_destination",
+            "type": ".google.cloud.financialservices.v1.BigQueryDestination"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ExportEngineConfigMetadata",
+          "fullName": "google.cloud.financialservices.v1.AML.ExportEngineConfigMetadata",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_DeleteEngineConfig_async",
+      "title": "AML deleteEngineConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an engine config.",
+      "canonical": true,
+      "file": "a_m_l.delete_engine_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEngineConfig",
+        "fullName": "google.cloud.financialservices.v1.AML.DeleteEngineConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "DeleteEngineConfig",
+          "fullName": "google.cloud.financialservices.v1.AML.DeleteEngineConfig",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_GetEngineVersion_async",
+      "title": "AML getEngineVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a single EngineVersion.",
+      "canonical": true,
+      "file": "a_m_l.get_engine_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEngineVersion",
+        "fullName": "google.cloud.financialservices.v1.AML.GetEngineVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.EngineVersion",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "GetEngineVersion",
+          "fullName": "google.cloud.financialservices.v1.AML.GetEngineVersion",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ListEngineVersions_async",
+      "title": "AML listEngineVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists EngineVersions for given location.",
+      "canonical": true,
+      "file": "a_m_l.list_engine_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEngineVersions",
+        "fullName": "google.cloud.financialservices.v1.AML.ListEngineVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.ListEngineVersionsResponse",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ListEngineVersions",
+          "fullName": "google.cloud.financialservices.v1.AML.ListEngineVersions",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ListPredictionResults_async",
+      "title": "AML listPredictionResults Sample",
+      "origin": "API_DEFINITION",
+      "description": " List PredictionResults.",
+      "canonical": true,
+      "file": "a_m_l.list_prediction_results.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPredictionResults",
+        "fullName": "google.cloud.financialservices.v1.AML.ListPredictionResults",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.ListPredictionResultsResponse",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ListPredictionResults",
+          "fullName": "google.cloud.financialservices.v1.AML.ListPredictionResults",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_GetPredictionResult_async",
+      "title": "AML getPredictionResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a PredictionResult.",
+      "canonical": true,
+      "file": "a_m_l.get_prediction_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPredictionResult",
+        "fullName": "google.cloud.financialservices.v1.AML.GetPredictionResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.PredictionResult",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "GetPredictionResult",
+          "fullName": "google.cloud.financialservices.v1.AML.GetPredictionResult",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_CreatePredictionResult_async",
+      "title": "AML createPredictionResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a PredictionResult.",
+      "canonical": true,
+      "file": "a_m_l.create_prediction_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePredictionResult",
+        "fullName": "google.cloud.financialservices.v1.AML.CreatePredictionResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "prediction_result_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "prediction_result",
+            "type": ".google.cloud.financialservices.v1.PredictionResult"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "CreatePredictionResult",
+          "fullName": "google.cloud.financialservices.v1.AML.CreatePredictionResult",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_UpdatePredictionResult_async",
+      "title": "AML updatePredictionResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single PredictionResult.",
+      "canonical": true,
+      "file": "a_m_l.update_prediction_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePredictionResult",
+        "fullName": "google.cloud.financialservices.v1.AML.UpdatePredictionResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "prediction_result",
+            "type": ".google.cloud.financialservices.v1.PredictionResult"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "UpdatePredictionResult",
+          "fullName": "google.cloud.financialservices.v1.AML.UpdatePredictionResult",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ExportPredictionResultMetadata_async",
+      "title": "AML exportPredictionResultMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Export governance information for a PredictionResult resource. For information on the exported fields, see [AML output data model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#prediction-results).",
+      "canonical": true,
+      "file": "a_m_l.export_prediction_result_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportPredictionResultMetadata",
+        "fullName": "google.cloud.financialservices.v1.AML.ExportPredictionResultMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "prediction_result",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "structured_metadata_destination",
+            "type": ".google.cloud.financialservices.v1.BigQueryDestination"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ExportPredictionResultMetadata",
+          "fullName": "google.cloud.financialservices.v1.AML.ExportPredictionResultMetadata",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_DeletePredictionResult_async",
+      "title": "AML deletePredictionResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a PredictionResult.",
+      "canonical": true,
+      "file": "a_m_l.delete_prediction_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePredictionResult",
+        "fullName": "google.cloud.financialservices.v1.AML.DeletePredictionResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "DeletePredictionResult",
+          "fullName": "google.cloud.financialservices.v1.AML.DeletePredictionResult",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ListBacktestResults_async",
+      "title": "AML listBacktestResults Sample",
+      "origin": "API_DEFINITION",
+      "description": " List BacktestResults.",
+      "canonical": true,
+      "file": "a_m_l.list_backtest_results.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBacktestResults",
+        "fullName": "google.cloud.financialservices.v1.AML.ListBacktestResults",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.ListBacktestResultsResponse",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ListBacktestResults",
+          "fullName": "google.cloud.financialservices.v1.AML.ListBacktestResults",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_GetBacktestResult_async",
+      "title": "AML getBacktestResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a BacktestResult.",
+      "canonical": true,
+      "file": "a_m_l.get_backtest_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBacktestResult",
+        "fullName": "google.cloud.financialservices.v1.AML.GetBacktestResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.financialservices.v1.BacktestResult",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "GetBacktestResult",
+          "fullName": "google.cloud.financialservices.v1.AML.GetBacktestResult",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_CreateBacktestResult_async",
+      "title": "AML createBacktestResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a BacktestResult.",
+      "canonical": true,
+      "file": "a_m_l.create_backtest_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBacktestResult",
+        "fullName": "google.cloud.financialservices.v1.AML.CreateBacktestResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backtest_result_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backtest_result",
+            "type": ".google.cloud.financialservices.v1.BacktestResult"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "CreateBacktestResult",
+          "fullName": "google.cloud.financialservices.v1.AML.CreateBacktestResult",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_UpdateBacktestResult_async",
+      "title": "AML updateBacktestResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single BacktestResult.",
+      "canonical": true,
+      "file": "a_m_l.update_backtest_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBacktestResult",
+        "fullName": "google.cloud.financialservices.v1.AML.UpdateBacktestResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "backtest_result",
+            "type": ".google.cloud.financialservices.v1.BacktestResult"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "UpdateBacktestResult",
+          "fullName": "google.cloud.financialservices.v1.AML.UpdateBacktestResult",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_ExportBacktestResultMetadata_async",
+      "title": "AML exportBacktestResultMetadata Sample",
+      "origin": "API_DEFINITION",
+      "description": " Export governance information for a BacktestResult resource. For information on the exported fields, see [AML output data model](https://cloud.google.com/financial-services/anti-money-laundering/docs/reference/schemas/aml-output-data-model#backtest-results).",
+      "canonical": true,
+      "file": "a_m_l.export_backtest_result_metadata.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportBacktestResultMetadata",
+        "fullName": "google.cloud.financialservices.v1.AML.ExportBacktestResultMetadata",
+        "async": true,
+        "parameters": [
+          {
+            "name": "backtest_result",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "structured_metadata_destination",
+            "type": ".google.cloud.financialservices.v1.BigQueryDestination"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "ExportBacktestResultMetadata",
+          "fullName": "google.cloud.financialservices.v1.AML.ExportBacktestResultMetadata",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "financialservices_v1_generated_AML_DeleteBacktestResult_async",
+      "title": "AML deleteBacktestResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a BacktestResult.",
+      "canonical": true,
+      "file": "a_m_l.delete_backtest_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBacktestResult",
+        "fullName": "google.cloud.financialservices.v1.AML.DeleteBacktestResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AMLClient",
+          "fullName": "google.cloud.financialservices.v1.AMLClient"
+        },
+        "method": {
+          "shortName": "DeleteBacktestResult",
+          "fullName": "google.cloud.financialservices.v1.AML.DeleteBacktestResult",
+          "service": {
+            "shortName": "AML",
+            "fullName": "google.cloud.financialservices.v1.AML"
+          }
+        }
+      }
+    }
+  ]
 }

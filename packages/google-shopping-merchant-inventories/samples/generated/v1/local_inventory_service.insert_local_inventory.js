@@ -41,7 +41,7 @@ function main(parent, localInventory) {
   // const localInventory = {}
 
   // Imports the Inventories library
-  const {LocalInventoryServiceClient} = require('@google-cloud/inventories').v1;
+  const {LocalInventoryServiceClient} = require('@google-shopping/inventories').v1;
 
   // Instantiates a client
   const inventoriesClient = new LocalInventoryServiceClient();

@@ -1,607 +1,607 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-css",
-        "version": "0.10.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.shopping.css.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "css_v1_generated_AccountLabelsService_ListAccountLabels_async",
-            "title": "AccountLabelsService listAccountLabels Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the labels owned by an account.",
-            "canonical": true,
-            "file": "account_labels_service.list_account_labels.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAccountLabels",
-                "fullName": "google.shopping.css.v1.AccountLabelsService.ListAccountLabels",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.ListAccountLabelsResponse",
-                "client": {
-                    "shortName": "AccountLabelsServiceClient",
-                    "fullName": "google.shopping.css.v1.AccountLabelsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListAccountLabels",
-                    "fullName": "google.shopping.css.v1.AccountLabelsService.ListAccountLabels",
-                    "service": {
-                        "shortName": "AccountLabelsService",
-                        "fullName": "google.shopping.css.v1.AccountLabelsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_AccountLabelsService_CreateAccountLabel_async",
-            "title": "AccountLabelsService createAccountLabel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new label, not assigned to any account.",
-            "canonical": true,
-            "file": "account_labels_service.create_account_label.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAccountLabel",
-                "fullName": "google.shopping.css.v1.AccountLabelsService.CreateAccountLabel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "account_label",
-                        "type": ".google.shopping.css.v1.AccountLabel"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.AccountLabel",
-                "client": {
-                    "shortName": "AccountLabelsServiceClient",
-                    "fullName": "google.shopping.css.v1.AccountLabelsServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateAccountLabel",
-                    "fullName": "google.shopping.css.v1.AccountLabelsService.CreateAccountLabel",
-                    "service": {
-                        "shortName": "AccountLabelsService",
-                        "fullName": "google.shopping.css.v1.AccountLabelsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_AccountLabelsService_UpdateAccountLabel_async",
-            "title": "AccountLabelsService updateAccountLabel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a label.",
-            "canonical": true,
-            "file": "account_labels_service.update_account_label.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateAccountLabel",
-                "fullName": "google.shopping.css.v1.AccountLabelsService.UpdateAccountLabel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "account_label",
-                        "type": ".google.shopping.css.v1.AccountLabel"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.AccountLabel",
-                "client": {
-                    "shortName": "AccountLabelsServiceClient",
-                    "fullName": "google.shopping.css.v1.AccountLabelsServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateAccountLabel",
-                    "fullName": "google.shopping.css.v1.AccountLabelsService.UpdateAccountLabel",
-                    "service": {
-                        "shortName": "AccountLabelsService",
-                        "fullName": "google.shopping.css.v1.AccountLabelsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_AccountLabelsService_DeleteAccountLabel_async",
-            "title": "AccountLabelsService deleteAccountLabel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a label and removes it from all accounts to which it was assigned.",
-            "canonical": true,
-            "file": "account_labels_service.delete_account_label.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAccountLabel",
-                "fullName": "google.shopping.css.v1.AccountLabelsService.DeleteAccountLabel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AccountLabelsServiceClient",
-                    "fullName": "google.shopping.css.v1.AccountLabelsServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteAccountLabel",
-                    "fullName": "google.shopping.css.v1.AccountLabelsService.DeleteAccountLabel",
-                    "service": {
-                        "shortName": "AccountLabelsService",
-                        "fullName": "google.shopping.css.v1.AccountLabelsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_AccountsService_ListChildAccounts_async",
-            "title": "AccountLabelsService listChildAccounts Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all the accounts under the specified CSS account ID, and optionally filters by label ID and account name.",
-            "canonical": true,
-            "file": "accounts_service.list_child_accounts.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListChildAccounts",
-                "fullName": "google.shopping.css.v1.AccountsService.ListChildAccounts",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "label_id",
-                        "type": "TYPE_INT64"
-                    },
-                    {
-                        "name": "full_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.ListChildAccountsResponse",
-                "client": {
-                    "shortName": "AccountsServiceClient",
-                    "fullName": "google.shopping.css.v1.AccountsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListChildAccounts",
-                    "fullName": "google.shopping.css.v1.AccountsService.ListChildAccounts",
-                    "service": {
-                        "shortName": "AccountsService",
-                        "fullName": "google.shopping.css.v1.AccountsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_AccountsService_GetAccount_async",
-            "title": "AccountLabelsService getAccount Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves a single CSS/MC account by ID.",
-            "canonical": true,
-            "file": "accounts_service.get_account.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAccount",
-                "fullName": "google.shopping.css.v1.AccountsService.GetAccount",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.Account",
-                "client": {
-                    "shortName": "AccountsServiceClient",
-                    "fullName": "google.shopping.css.v1.AccountsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetAccount",
-                    "fullName": "google.shopping.css.v1.AccountsService.GetAccount",
-                    "service": {
-                        "shortName": "AccountsService",
-                        "fullName": "google.shopping.css.v1.AccountsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_AccountsService_UpdateLabels_async",
-            "title": "AccountLabelsService updateLabels Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates labels assigned to CSS/MC accounts by a CSS domain.",
-            "canonical": true,
-            "file": "accounts_service.update_labels.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateLabels",
-                "fullName": "google.shopping.css.v1.AccountsService.UpdateLabels",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "label_ids",
-                        "type": "TYPE_INT64[]"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.Account",
-                "client": {
-                    "shortName": "AccountsServiceClient",
-                    "fullName": "google.shopping.css.v1.AccountsServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateLabels",
-                    "fullName": "google.shopping.css.v1.AccountsService.UpdateLabels",
-                    "service": {
-                        "shortName": "AccountsService",
-                        "fullName": "google.shopping.css.v1.AccountsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_CssProductInputsService_InsertCssProductInput_async",
-            "title": "AccountLabelsService insertCssProductInput Sample",
-            "origin": "API_DEFINITION",
-            "description": " Uploads a CssProductInput to your CSS Center account. If an input with the same contentLanguage, identity, feedLabel and feedId already exists, this method replaces that entry. After inserting, updating, or deleting a CSS Product input, it may take several minutes before the processed CSS Product can be retrieved.",
-            "canonical": true,
-            "file": "css_product_inputs_service.insert_css_product_input.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "InsertCssProductInput",
-                "fullName": "google.shopping.css.v1.CssProductInputsService.InsertCssProductInput",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "css_product_input",
-                        "type": ".google.shopping.css.v1.CssProductInput"
-                    },
-                    {
-                        "name": "feed_id",
-                        "type": "TYPE_INT64"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.CssProductInput",
-                "client": {
-                    "shortName": "CssProductInputsServiceClient",
-                    "fullName": "google.shopping.css.v1.CssProductInputsServiceClient"
-                },
-                "method": {
-                    "shortName": "InsertCssProductInput",
-                    "fullName": "google.shopping.css.v1.CssProductInputsService.InsertCssProductInput",
-                    "service": {
-                        "shortName": "CssProductInputsService",
-                        "fullName": "google.shopping.css.v1.CssProductInputsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_CssProductInputsService_UpdateCssProductInput_async",
-            "title": "AccountLabelsService updateCssProductInput Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the existing Css Product input in your CSS Center account. After inserting, updating, or deleting a CSS Product input, it may take several minutes before the processed Css Product can be retrieved.",
-            "canonical": true,
-            "file": "css_product_inputs_service.update_css_product_input.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCssProductInput",
-                "fullName": "google.shopping.css.v1.CssProductInputsService.UpdateCssProductInput",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "css_product_input",
-                        "type": ".google.shopping.css.v1.CssProductInput"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.CssProductInput",
-                "client": {
-                    "shortName": "CssProductInputsServiceClient",
-                    "fullName": "google.shopping.css.v1.CssProductInputsServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateCssProductInput",
-                    "fullName": "google.shopping.css.v1.CssProductInputsService.UpdateCssProductInput",
-                    "service": {
-                        "shortName": "CssProductInputsService",
-                        "fullName": "google.shopping.css.v1.CssProductInputsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_CssProductInputsService_DeleteCssProductInput_async",
-            "title": "AccountLabelsService deleteCssProductInput Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a CSS Product input from your CSS Center account. After a delete it may take several minutes until the input is no longer available.",
-            "canonical": true,
-            "file": "css_product_inputs_service.delete_css_product_input.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteCssProductInput",
-                "fullName": "google.shopping.css.v1.CssProductInputsService.DeleteCssProductInput",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "supplemental_feed_id",
-                        "type": "TYPE_INT64"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "CssProductInputsServiceClient",
-                    "fullName": "google.shopping.css.v1.CssProductInputsServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteCssProductInput",
-                    "fullName": "google.shopping.css.v1.CssProductInputsService.DeleteCssProductInput",
-                    "service": {
-                        "shortName": "CssProductInputsService",
-                        "fullName": "google.shopping.css.v1.CssProductInputsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_CssProductsService_GetCssProduct_async",
-            "title": "AccountLabelsService getCssProduct Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves the processed CSS Product from your CSS Center account. After inserting, updating, or deleting a product input, it may take several minutes before the updated final product can be retrieved.",
-            "canonical": true,
-            "file": "css_products_service.get_css_product.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCssProduct",
-                "fullName": "google.shopping.css.v1.CssProductsService.GetCssProduct",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.CssProduct",
-                "client": {
-                    "shortName": "CssProductsServiceClient",
-                    "fullName": "google.shopping.css.v1.CssProductsServiceClient"
-                },
-                "method": {
-                    "shortName": "GetCssProduct",
-                    "fullName": "google.shopping.css.v1.CssProductsService.GetCssProduct",
-                    "service": {
-                        "shortName": "CssProductsService",
-                        "fullName": "google.shopping.css.v1.CssProductsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_CssProductsService_ListCssProducts_async",
-            "title": "AccountLabelsService listCssProducts Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the processed CSS Products in your CSS Center account. The response might contain fewer items than specified by pageSize. Rely on pageToken to determine if there are more items to be requested. After inserting, updating, or deleting a CSS product input, it may take several minutes before the updated processed CSS product can be retrieved.",
-            "canonical": true,
-            "file": "css_products_service.list_css_products.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCssProducts",
-                "fullName": "google.shopping.css.v1.CssProductsService.ListCssProducts",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.ListCssProductsResponse",
-                "client": {
-                    "shortName": "CssProductsServiceClient",
-                    "fullName": "google.shopping.css.v1.CssProductsServiceClient"
-                },
-                "method": {
-                    "shortName": "ListCssProducts",
-                    "fullName": "google.shopping.css.v1.CssProductsService.ListCssProducts",
-                    "service": {
-                        "shortName": "CssProductsService",
-                        "fullName": "google.shopping.css.v1.CssProductsService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "css_v1_generated_QuotaService_ListQuotaGroups_async",
-            "title": "AccountLabelsService listQuotaGroups Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the daily call quota and usage per group for your CSS Center account.",
-            "canonical": true,
-            "file": "quota_service.list_quota_groups.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListQuotaGroups",
-                "fullName": "google.shopping.css.v1.QuotaService.ListQuotaGroups",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.shopping.css.v1.ListQuotaGroupsResponse",
-                "client": {
-                    "shortName": "QuotaServiceClient",
-                    "fullName": "google.shopping.css.v1.QuotaServiceClient"
-                },
-                "method": {
-                    "shortName": "ListQuotaGroups",
-                    "fullName": "google.shopping.css.v1.QuotaService.ListQuotaGroups",
-                    "service": {
-                        "shortName": "QuotaService",
-                        "fullName": "google.shopping.css.v1.QuotaService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-css",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.shopping.css.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "css_v1_generated_AccountLabelsService_ListAccountLabels_async",
+      "title": "AccountLabelsService listAccountLabels Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the labels owned by an account.",
+      "canonical": true,
+      "file": "account_labels_service.list_account_labels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAccountLabels",
+        "fullName": "google.shopping.css.v1.AccountLabelsService.ListAccountLabels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.ListAccountLabelsResponse",
+        "client": {
+          "shortName": "AccountLabelsServiceClient",
+          "fullName": "google.shopping.css.v1.AccountLabelsServiceClient"
+        },
+        "method": {
+          "shortName": "ListAccountLabels",
+          "fullName": "google.shopping.css.v1.AccountLabelsService.ListAccountLabels",
+          "service": {
+            "shortName": "AccountLabelsService",
+            "fullName": "google.shopping.css.v1.AccountLabelsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_AccountLabelsService_CreateAccountLabel_async",
+      "title": "AccountLabelsService createAccountLabel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new label, not assigned to any account.",
+      "canonical": true,
+      "file": "account_labels_service.create_account_label.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAccountLabel",
+        "fullName": "google.shopping.css.v1.AccountLabelsService.CreateAccountLabel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "account_label",
+            "type": ".google.shopping.css.v1.AccountLabel"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.AccountLabel",
+        "client": {
+          "shortName": "AccountLabelsServiceClient",
+          "fullName": "google.shopping.css.v1.AccountLabelsServiceClient"
+        },
+        "method": {
+          "shortName": "CreateAccountLabel",
+          "fullName": "google.shopping.css.v1.AccountLabelsService.CreateAccountLabel",
+          "service": {
+            "shortName": "AccountLabelsService",
+            "fullName": "google.shopping.css.v1.AccountLabelsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_AccountLabelsService_UpdateAccountLabel_async",
+      "title": "AccountLabelsService updateAccountLabel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a label.",
+      "canonical": true,
+      "file": "account_labels_service.update_account_label.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAccountLabel",
+        "fullName": "google.shopping.css.v1.AccountLabelsService.UpdateAccountLabel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "account_label",
+            "type": ".google.shopping.css.v1.AccountLabel"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.AccountLabel",
+        "client": {
+          "shortName": "AccountLabelsServiceClient",
+          "fullName": "google.shopping.css.v1.AccountLabelsServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateAccountLabel",
+          "fullName": "google.shopping.css.v1.AccountLabelsService.UpdateAccountLabel",
+          "service": {
+            "shortName": "AccountLabelsService",
+            "fullName": "google.shopping.css.v1.AccountLabelsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_AccountLabelsService_DeleteAccountLabel_async",
+      "title": "AccountLabelsService deleteAccountLabel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a label and removes it from all accounts to which it was assigned.",
+      "canonical": true,
+      "file": "account_labels_service.delete_account_label.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAccountLabel",
+        "fullName": "google.shopping.css.v1.AccountLabelsService.DeleteAccountLabel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AccountLabelsServiceClient",
+          "fullName": "google.shopping.css.v1.AccountLabelsServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAccountLabel",
+          "fullName": "google.shopping.css.v1.AccountLabelsService.DeleteAccountLabel",
+          "service": {
+            "shortName": "AccountLabelsService",
+            "fullName": "google.shopping.css.v1.AccountLabelsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_AccountsService_ListChildAccounts_async",
+      "title": "AccountLabelsService listChildAccounts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the accounts under the specified CSS account ID, and optionally filters by label ID and account name.",
+      "canonical": true,
+      "file": "accounts_service.list_child_accounts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListChildAccounts",
+        "fullName": "google.shopping.css.v1.AccountsService.ListChildAccounts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "label_id",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "full_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.ListChildAccountsResponse",
+        "client": {
+          "shortName": "AccountsServiceClient",
+          "fullName": "google.shopping.css.v1.AccountsServiceClient"
+        },
+        "method": {
+          "shortName": "ListChildAccounts",
+          "fullName": "google.shopping.css.v1.AccountsService.ListChildAccounts",
+          "service": {
+            "shortName": "AccountsService",
+            "fullName": "google.shopping.css.v1.AccountsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_AccountsService_GetAccount_async",
+      "title": "AccountLabelsService getAccount Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves a single CSS/MC account by ID.",
+      "canonical": true,
+      "file": "accounts_service.get_account.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAccount",
+        "fullName": "google.shopping.css.v1.AccountsService.GetAccount",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.Account",
+        "client": {
+          "shortName": "AccountsServiceClient",
+          "fullName": "google.shopping.css.v1.AccountsServiceClient"
+        },
+        "method": {
+          "shortName": "GetAccount",
+          "fullName": "google.shopping.css.v1.AccountsService.GetAccount",
+          "service": {
+            "shortName": "AccountsService",
+            "fullName": "google.shopping.css.v1.AccountsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_AccountsService_UpdateLabels_async",
+      "title": "AccountLabelsService updateLabels Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates labels assigned to CSS/MC accounts by a CSS domain.",
+      "canonical": true,
+      "file": "accounts_service.update_labels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateLabels",
+        "fullName": "google.shopping.css.v1.AccountsService.UpdateLabels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "label_ids",
+            "type": "TYPE_INT64[]"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.Account",
+        "client": {
+          "shortName": "AccountsServiceClient",
+          "fullName": "google.shopping.css.v1.AccountsServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateLabels",
+          "fullName": "google.shopping.css.v1.AccountsService.UpdateLabels",
+          "service": {
+            "shortName": "AccountsService",
+            "fullName": "google.shopping.css.v1.AccountsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_CssProductInputsService_InsertCssProductInput_async",
+      "title": "AccountLabelsService insertCssProductInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Uploads a CssProductInput to your CSS Center account. If an input with the same contentLanguage, identity, feedLabel and feedId already exists, this method replaces that entry. After inserting, updating, or deleting a CSS Product input, it may take several minutes before the processed CSS Product can be retrieved.",
+      "canonical": true,
+      "file": "css_product_inputs_service.insert_css_product_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InsertCssProductInput",
+        "fullName": "google.shopping.css.v1.CssProductInputsService.InsertCssProductInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "css_product_input",
+            "type": ".google.shopping.css.v1.CssProductInput"
+          },
+          {
+            "name": "feed_id",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.CssProductInput",
+        "client": {
+          "shortName": "CssProductInputsServiceClient",
+          "fullName": "google.shopping.css.v1.CssProductInputsServiceClient"
+        },
+        "method": {
+          "shortName": "InsertCssProductInput",
+          "fullName": "google.shopping.css.v1.CssProductInputsService.InsertCssProductInput",
+          "service": {
+            "shortName": "CssProductInputsService",
+            "fullName": "google.shopping.css.v1.CssProductInputsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_CssProductInputsService_UpdateCssProductInput_async",
+      "title": "AccountLabelsService updateCssProductInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the existing Css Product input in your CSS Center account. After inserting, updating, or deleting a CSS Product input, it may take several minutes before the processed Css Product can be retrieved.",
+      "canonical": true,
+      "file": "css_product_inputs_service.update_css_product_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCssProductInput",
+        "fullName": "google.shopping.css.v1.CssProductInputsService.UpdateCssProductInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "css_product_input",
+            "type": ".google.shopping.css.v1.CssProductInput"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.CssProductInput",
+        "client": {
+          "shortName": "CssProductInputsServiceClient",
+          "fullName": "google.shopping.css.v1.CssProductInputsServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateCssProductInput",
+          "fullName": "google.shopping.css.v1.CssProductInputsService.UpdateCssProductInput",
+          "service": {
+            "shortName": "CssProductInputsService",
+            "fullName": "google.shopping.css.v1.CssProductInputsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_CssProductInputsService_DeleteCssProductInput_async",
+      "title": "AccountLabelsService deleteCssProductInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a CSS Product input from your CSS Center account. After a delete it may take several minutes until the input is no longer available.",
+      "canonical": true,
+      "file": "css_product_inputs_service.delete_css_product_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCssProductInput",
+        "fullName": "google.shopping.css.v1.CssProductInputsService.DeleteCssProductInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "supplemental_feed_id",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "CssProductInputsServiceClient",
+          "fullName": "google.shopping.css.v1.CssProductInputsServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteCssProductInput",
+          "fullName": "google.shopping.css.v1.CssProductInputsService.DeleteCssProductInput",
+          "service": {
+            "shortName": "CssProductInputsService",
+            "fullName": "google.shopping.css.v1.CssProductInputsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_CssProductsService_GetCssProduct_async",
+      "title": "AccountLabelsService getCssProduct Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the processed CSS Product from your CSS Center account. After inserting, updating, or deleting a product input, it may take several minutes before the updated final product can be retrieved.",
+      "canonical": true,
+      "file": "css_products_service.get_css_product.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCssProduct",
+        "fullName": "google.shopping.css.v1.CssProductsService.GetCssProduct",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.CssProduct",
+        "client": {
+          "shortName": "CssProductsServiceClient",
+          "fullName": "google.shopping.css.v1.CssProductsServiceClient"
+        },
+        "method": {
+          "shortName": "GetCssProduct",
+          "fullName": "google.shopping.css.v1.CssProductsService.GetCssProduct",
+          "service": {
+            "shortName": "CssProductsService",
+            "fullName": "google.shopping.css.v1.CssProductsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_CssProductsService_ListCssProducts_async",
+      "title": "AccountLabelsService listCssProducts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the processed CSS Products in your CSS Center account. The response might contain fewer items than specified by pageSize. Rely on pageToken to determine if there are more items to be requested. After inserting, updating, or deleting a CSS product input, it may take several minutes before the updated processed CSS product can be retrieved.",
+      "canonical": true,
+      "file": "css_products_service.list_css_products.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCssProducts",
+        "fullName": "google.shopping.css.v1.CssProductsService.ListCssProducts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.ListCssProductsResponse",
+        "client": {
+          "shortName": "CssProductsServiceClient",
+          "fullName": "google.shopping.css.v1.CssProductsServiceClient"
+        },
+        "method": {
+          "shortName": "ListCssProducts",
+          "fullName": "google.shopping.css.v1.CssProductsService.ListCssProducts",
+          "service": {
+            "shortName": "CssProductsService",
+            "fullName": "google.shopping.css.v1.CssProductsService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "css_v1_generated_QuotaService_ListQuotaGroups_async",
+      "title": "AccountLabelsService listQuotaGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the daily call quota and usage per group for your CSS Center account.",
+      "canonical": true,
+      "file": "quota_service.list_quota_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListQuotaGroups",
+        "fullName": "google.shopping.css.v1.QuotaService.ListQuotaGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.shopping.css.v1.ListQuotaGroupsResponse",
+        "client": {
+          "shortName": "QuotaServiceClient",
+          "fullName": "google.shopping.css.v1.QuotaServiceClient"
+        },
+        "method": {
+          "shortName": "ListQuotaGroups",
+          "fullName": "google.shopping.css.v1.QuotaService.ListQuotaGroups",
+          "service": {
+            "shortName": "QuotaService",
+            "fullName": "google.shopping.css.v1.QuotaService"
+          }
+        }
+      }
+    }
+  ]
 }

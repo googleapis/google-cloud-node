@@ -3,7 +3,7 @@
   "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
   "language": "typescript",
   "protoPackage": "google.cloud.compute.v1small",
-  "libraryPackage": "@google-cloud/compute-small",
+  "libraryPackage": "@google-cloud/compute",
   "services": {
     "Addresses": {
       "clients": {

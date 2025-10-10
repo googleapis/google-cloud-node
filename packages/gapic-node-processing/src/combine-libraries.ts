@@ -13,17 +13,18 @@
 // limitations under the License.
 
 import {Dirent} from 'fs';
+import {LibraryConfig} from './library';
 
 const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
 
 export interface FilePaths {
-  filePath: string
+  filePath: string;
 }
 
 export interface FilePathsAndContents {
-  filePath: string,
-  content: string
+  filePath: string;
+  content: string;
 }
 /**
  * Recursively removes a regex pattern from a specified property in an array of objects.
@@ -70,9 +71,7 @@ export function removeRegexFromNestedProperty(
  * @param filePaths An array of objects, where each object has a 'filePath' property.
  * @returns A promise that resolves when all file contents have been read and added to the array.
  */
-async function readFilesContent(
-  filePaths: FilePaths[],
-): Promise<void> {
+async function readFilesContent(filePaths: FilePaths[]): Promise<void> {
   const promises = filePaths.map(async item => {
     try {
       const content = await fs.readFile(item.filePath, 'utf-8');
@@ -135,19 +134,23 @@ export async function traverseDirectory(
  * @returns {Promise<Array<{filePath: string; content: string}>>} A promise that resolves to an array of objects, each containing a unique file path and its content.
  */
 export async function generateFinalDirectoryPath(
-  currentPath: string,
+  libraryConfig: LibraryConfig,
 ): Promise<Array<FilePathsAndContents>> {
   // Get a full list of all the file paths in all the libraries
   let fullPaths: {filePath: string}[] = [];
   let fullPathsAndContents: {filePath: string; content: string}[] = [];
-  const directories = await fs.readdir(currentPath);
+  const directories = await fs.readdir(libraryConfig.sourcePath);
   for (const directory of directories) {
-    fullPaths = await traverseDirectory(path.join(currentPath, directory), []);
+    fullPaths = await traverseDirectory(
+      path.join(libraryConfig.sourcePath, directory),
+      [],
+    );
+    setOnlyDefaultSystemTests(libraryConfig.defaultVersion, fullPaths);
     await readFilesContent(fullPaths);
     removeRegexFromNestedProperty(
       fullPaths,
       'filePath',
-      path.join(currentPath, directory),
+      path.join(libraryConfig.sourcePath, directory),
     );
     fullPathsAndContents = fullPathsAndContents.concat(
       fullPaths as FilePathsAndContents[],
@@ -190,6 +193,24 @@ export async function ensureDirectoryExists(filePath: string): Promise<void> {
   }
 }
 
+export function setOnlyDefaultSystemTests(
+  defaultVersion: string,
+  filePaths: FilePaths[],
+) {
+  const systemTestRegex = new RegExp(
+    'system-test/fixtures/sample/src',
+  );
+
+  for (const filePathObj of filePaths) {
+    if (
+      systemTestRegex.test(filePathObj.filePath) &&
+      !filePathObj.filePath.includes(defaultVersion)
+    ) {
+      filePaths.splice(filePaths.indexOf(filePathObj), 1);
+    }
+  }
+}
+
 /**
  * Combines multiple library versions into a single, unified directory.
  *
@@ -203,18 +224,21 @@ export async function ensureDirectoryExists(filePath: string): Promise<void> {
  * @returns {Promise<void>} A promise that resolves when all files have been combined and written.
  */
 export async function combineLibraries(
-  sourcePath: string,
-  destinationPath: string,
+  libraryConfig: LibraryConfig,
 ): Promise<void> {
   console.log(
-    `Generating all unique paths in all library versions from ${sourcePath} to ${destinationPath}`,
+    `Generating all unique paths in all library versions from ${libraryConfig.sourcePath} to ${libraryConfig.destinationPath}`,
   );
-  const uniquefullPathAndContent = await generateFinalDirectoryPath(sourcePath);
+  const uniquefullPathAndContent =
+    await generateFinalDirectoryPath(libraryConfig);
 
   console.log(
-    `Creating new library in ${destinationPath} with ${uniquefullPathAndContent.length} items`,
+    `Creating new library in ${libraryConfig.destinationPath} with ${uniquefullPathAndContent.length} items`,
   );
-  await writeFilesToGivenLocation(destinationPath, uniquefullPathAndContent);
+  await writeFilesToGivenLocation(
+    libraryConfig.destinationPath,
+    uniquefullPathAndContent,
+  );
 }
 
 /**

@@ -28,5 +28,4 @@ function main() {
   const networkSecurityClient = new NetworkSecurityClient();
   doStuffWithNetworkSecurityClient(networkSecurityClient);
 }
-
 main();

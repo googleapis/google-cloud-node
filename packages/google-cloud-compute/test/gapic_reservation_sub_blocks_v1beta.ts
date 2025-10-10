@@ -558,6 +558,150 @@ describe('v1beta.ReservationSubBlocksClient', () => {
         });
     });
 
+    describe('reportFaulty', () => {
+        it('invokes reportFaulty without error', async () => {
+            const client = new reservationsubblocksModule.v1beta.ReservationSubBlocksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['reservationSubBlock']);
+            request.reservationSubBlock = defaultValue4;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&parent_name=${defaultValue3 ?? '' }&reservation_sub_block=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.reportFaulty = stubSimpleCall(expectedResponse);
+            const [response] = await client.reportFaulty(request);
+            assert.deepStrictEqual(response.latestResponse, expectedResponse);
+            const actualRequest = (client.innerApiCalls.reportFaulty as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.reportFaulty as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes reportFaulty without error using callback', async () => {
+            const client = new reservationsubblocksModule.v1beta.ReservationSubBlocksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['reservationSubBlock']);
+            request.reservationSubBlock = defaultValue4;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&parent_name=${defaultValue3 ?? '' }&reservation_sub_block=${defaultValue4 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.Operation()
+            );
+            client.innerApiCalls.reportFaulty = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.reportFaulty(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.compute.v1beta.IOperation|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.reportFaulty as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.reportFaulty as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes reportFaulty with error', async () => {
+            const client = new reservationsubblocksModule.v1beta.ReservationSubBlocksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['reservationSubBlock']);
+            request.reservationSubBlock = defaultValue4;
+            const expectedHeaderRequestParams = `project=${defaultValue1 ?? '' }&zone=${defaultValue2 ?? '' }&parent_name=${defaultValue3 ?? '' }&reservation_sub_block=${defaultValue4 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.reportFaulty = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.reportFaulty(request), expectedError);
+            const actualRequest = (client.innerApiCalls.reportFaulty as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.reportFaulty as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes reportFaulty with closed client', async () => {
+            const client = new reservationsubblocksModule.v1beta.ReservationSubBlocksClient({
+              auth: googleAuth,
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['project']);
+            request.project = defaultValue1;
+            const defaultValue2 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['zone']);
+            request.zone = defaultValue2;
+            const defaultValue3 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['parentName']);
+            request.parentName = defaultValue3;
+            const defaultValue4 =
+              getTypeDefaultValue('.google.cloud.compute.v1beta.ReportFaultyReservationSubBlockRequest', ['reservationSubBlock']);
+            request.reservationSubBlock = defaultValue4;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.reportFaulty(request), expectedError);
+        });
+    });
+
     describe('list', () => {
         it('invokes list without error', async () => {
             const client = new reservationsubblocksModule.v1beta.ReservationSubBlocksClient({

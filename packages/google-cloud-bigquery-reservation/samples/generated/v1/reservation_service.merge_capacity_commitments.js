@@ -41,6 +41,13 @@ function main() {
    *  projects/myproject/locations/US/capacityCommitments/abc
    */
   // const capacityCommitmentIds = ['abc','def']
+  /**
+   *  Optional. The optional resulting capacity commitment ID. Capacity
+   *  commitment name will be generated automatically if this field is empty.
+   *  This field must only contain lower case alphanumeric characters or dashes.
+   *  The first and last character cannot be a dash. Max length is 64 characters.
+   */
+  // const capacityCommitmentId = 'abc123'
 
   // Imports the Reservation library
   const {ReservationServiceClient} = require('@google-cloud/bigquery-reservation').v1;

@@ -43,7 +43,7 @@ function main(name) {
   // const name = 'abc123'
 
   // Imports the Products library
-  const {ProductsServiceClient} = require('@google-cloud/products').v1;
+  const {ProductsServiceClient} = require('@google-shopping/products').v1;
 
   // Instantiates a client
   const productsClient = new ProductsServiceClient();

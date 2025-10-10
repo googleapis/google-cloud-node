@@ -45,7 +45,7 @@ function main(name, payload) {
   // const languageCode = 'abc123'
 
   // Imports the Issueresolution library
-  const {IssueResolutionServiceClient} = require('@google-cloud/issueresolution').v1;
+  const {IssueResolutionServiceClient} = require('@google-shopping/issueresolution').v1;
 
   // Instantiates a client
   const issueresolutionClient = new IssueResolutionServiceClient();

@@ -37,7 +37,8 @@ function main(parent, pipeline, pipelineId) {
    */
   // const pipeline = {}
   /**
-   *  Required. The user-provided ID to be assigned to the Pipeline.
+   *  Required. The user-provided ID to be assigned to the Pipeline. It should
+   *  match the format `^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$`.
    */
   // const pipelineId = 'abc123'
   /**

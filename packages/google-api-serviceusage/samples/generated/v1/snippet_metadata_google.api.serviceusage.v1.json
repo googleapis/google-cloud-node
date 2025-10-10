@@ -1,283 +1,283 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-serviceusage",
-        "version": "4.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.api.serviceusage.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "serviceusage_v1_generated_ServiceUsage_EnableService_async",
-            "title": "ServiceUsage enableService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Enable a service so that it can be used with a project.",
-            "canonical": true,
-            "file": "service_usage.enable_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "EnableService",
-                "fullName": "google.api.serviceusage.v1.ServiceUsage.EnableService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "EnableService",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsage.EnableService",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1_generated_ServiceUsage_DisableService_async",
-            "title": "ServiceUsage disableService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Disable a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a `FAILED_PRECONDITION` status if the target service is not currently enabled.",
-            "canonical": true,
-            "file": "service_usage.disable_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DisableService",
-                "fullName": "google.api.serviceusage.v1.ServiceUsage.DisableService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "disable_dependent_services",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "check_if_service_has_usage",
-                        "type": ".google.api.serviceusage.v1.DisableServiceRequest.CheckIfServiceHasUsage"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "DisableService",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsage.DisableService",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1_generated_ServiceUsage_GetService_async",
-            "title": "ServiceUsage getService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the service configuration and enabled state for a given service.",
-            "canonical": true,
-            "file": "service_usage.get_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetService",
-                "fullName": "google.api.serviceusage.v1.ServiceUsage.GetService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1.Service",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "GetService",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsage.GetService",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1_generated_ServiceUsage_ListServices_async",
-            "title": "ServiceUsage listServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " List all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project. WARNING: If you need to query enabled services frequently or across an organization, you should use [Cloud Asset Inventory API](https://cloud.google.com/asset-inventory/docs/apis), which provides higher throughput and richer filtering capability.",
-            "canonical": true,
-            "file": "service_usage.list_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListServices",
-                "fullName": "google.api.serviceusage.v1.ServiceUsage.ListServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1.ListServicesResponse",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "ListServices",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsage.ListServices",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1_generated_ServiceUsage_BatchEnableServices_async",
-            "title": "ServiceUsage batchEnableServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " Enable multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. To enable a single service, use the `EnableService` method instead.",
-            "canonical": true,
-            "file": "service_usage.batch_enable_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchEnableServices",
-                "fullName": "google.api.serviceusage.v1.ServiceUsage.BatchEnableServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service_ids",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "BatchEnableServices",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsage.BatchEnableServices",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1.ServiceUsage"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "serviceusage_v1_generated_ServiceUsage_BatchGetServices_async",
-            "title": "ServiceUsage batchGetServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the service configurations and enabled states for a given list of services.",
-            "canonical": true,
-            "file": "service_usage.batch_get_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchGetServices",
-                "fullName": "google.api.serviceusage.v1.ServiceUsage.BatchGetServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "names",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.api.serviceusage.v1.BatchGetServicesResponse",
-                "client": {
-                    "shortName": "ServiceUsageClient",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
-                },
-                "method": {
-                    "shortName": "BatchGetServices",
-                    "fullName": "google.api.serviceusage.v1.ServiceUsage.BatchGetServices",
-                    "service": {
-                        "shortName": "ServiceUsage",
-                        "fullName": "google.api.serviceusage.v1.ServiceUsage"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-serviceusage",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.api.serviceusage.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "serviceusage_v1_generated_ServiceUsage_EnableService_async",
+      "title": "ServiceUsage enableService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enable a service so that it can be used with a project.",
+      "canonical": true,
+      "file": "service_usage.enable_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EnableService",
+        "fullName": "google.api.serviceusage.v1.ServiceUsage.EnableService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "EnableService",
+          "fullName": "google.api.serviceusage.v1.ServiceUsage.EnableService",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1_generated_ServiceUsage_DisableService_async",
+      "title": "ServiceUsage disableService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Disable a service so that it can no longer be used with a project. This prevents unintended usage that may cause unexpected billing charges or security leaks. It is not valid to call the disable method on a service that is not currently enabled. Callers will receive a `FAILED_PRECONDITION` status if the target service is not currently enabled.",
+      "canonical": true,
+      "file": "service_usage.disable_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DisableService",
+        "fullName": "google.api.serviceusage.v1.ServiceUsage.DisableService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "disable_dependent_services",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "check_if_service_has_usage",
+            "type": ".google.api.serviceusage.v1.DisableServiceRequest.CheckIfServiceHasUsage"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "DisableService",
+          "fullName": "google.api.serviceusage.v1.ServiceUsage.DisableService",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1_generated_ServiceUsage_GetService_async",
+      "title": "ServiceUsage getService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the service configuration and enabled state for a given service.",
+      "canonical": true,
+      "file": "service_usage.get_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetService",
+        "fullName": "google.api.serviceusage.v1.ServiceUsage.GetService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1.Service",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "GetService",
+          "fullName": "google.api.serviceusage.v1.ServiceUsage.GetService",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1_generated_ServiceUsage_ListServices_async",
+      "title": "ServiceUsage listServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " List all services available to the specified project, and the current state of those services with respect to the project. The list includes all public services, all services for which the calling user has the `servicemanagement.services.bind` permission, and all services that have already been enabled on the project. The list can be filtered to only include services in a specific state, for example to only include services enabled on the project. WARNING: If you need to query enabled services frequently or across an organization, you should use [Cloud Asset Inventory API](https://cloud.google.com/asset-inventory/docs/apis), which provides higher throughput and richer filtering capability.",
+      "canonical": true,
+      "file": "service_usage.list_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServices",
+        "fullName": "google.api.serviceusage.v1.ServiceUsage.ListServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1.ListServicesResponse",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "ListServices",
+          "fullName": "google.api.serviceusage.v1.ServiceUsage.ListServices",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1_generated_ServiceUsage_BatchEnableServices_async",
+      "title": "ServiceUsage batchEnableServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enable multiple services on a project. The operation is atomic: if enabling any service fails, then the entire batch fails, and no state changes occur. To enable a single service, use the `EnableService` method instead.",
+      "canonical": true,
+      "file": "service_usage.batch_enable_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchEnableServices",
+        "fullName": "google.api.serviceusage.v1.ServiceUsage.BatchEnableServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_ids",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "BatchEnableServices",
+          "fullName": "google.api.serviceusage.v1.ServiceUsage.BatchEnableServices",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "serviceusage_v1_generated_ServiceUsage_BatchGetServices_async",
+      "title": "ServiceUsage batchGetServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the service configurations and enabled states for a given list of services.",
+      "canonical": true,
+      "file": "service_usage.batch_get_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchGetServices",
+        "fullName": "google.api.serviceusage.v1.ServiceUsage.BatchGetServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.api.serviceusage.v1.BatchGetServicesResponse",
+        "client": {
+          "shortName": "ServiceUsageClient",
+          "fullName": "google.api.serviceusage.v1.ServiceUsageClient"
+        },
+        "method": {
+          "shortName": "BatchGetServices",
+          "fullName": "google.api.serviceusage.v1.ServiceUsage.BatchGetServices",
+          "service": {
+            "shortName": "ServiceUsage",
+            "fullName": "google.api.serviceusage.v1.ServiceUsage"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -1,283 +1,283 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-dataqna",
-        "version": "4.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.dataqna.v1alpha",
-                "version": "v1alpha"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "dataqna_v1alpha_generated_AutoSuggestionService_SuggestQueries_async",
-            "title": "AutoSuggestionService suggestQueries Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a list of suggestions based on a prefix string. AutoSuggestion tolerance should be less than 1 second.",
-            "canonical": true,
-            "file": "auto_suggestion_service.suggest_queries.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SuggestQueries",
-                "fullName": "google.cloud.dataqna.v1alpha.AutoSuggestionService.SuggestQueries",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "scopes",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "query",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "suggestion_types",
-                        "type": "TYPE_ENUM[]"
-                    }
-                ],
-                "resultType": ".google.cloud.dataqna.v1alpha.SuggestQueriesResponse",
-                "client": {
-                    "shortName": "AutoSuggestionServiceClient",
-                    "fullName": "google.cloud.dataqna.v1alpha.AutoSuggestionServiceClient"
-                },
-                "method": {
-                    "shortName": "SuggestQueries",
-                    "fullName": "google.cloud.dataqna.v1alpha.AutoSuggestionService.SuggestQueries",
-                    "service": {
-                        "shortName": "AutoSuggestionService",
-                        "fullName": "google.cloud.dataqna.v1alpha.AutoSuggestionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataqna_v1alpha_generated_QuestionService_GetQuestion_async",
-            "title": "AutoSuggestionService getQuestion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a previously created question.",
-            "canonical": true,
-            "file": "question_service.get_question.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetQuestion",
-                "fullName": "google.cloud.dataqna.v1alpha.QuestionService.GetQuestion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "read_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.dataqna.v1alpha.Question",
-                "client": {
-                    "shortName": "QuestionServiceClient",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
-                },
-                "method": {
-                    "shortName": "GetQuestion",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionService.GetQuestion",
-                    "service": {
-                        "shortName": "QuestionService",
-                        "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataqna_v1alpha_generated_QuestionService_CreateQuestion_async",
-            "title": "AutoSuggestionService createQuestion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a question.",
-            "canonical": true,
-            "file": "question_service.create_question.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateQuestion",
-                "fullName": "google.cloud.dataqna.v1alpha.QuestionService.CreateQuestion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "question",
-                        "type": ".google.cloud.dataqna.v1alpha.Question"
-                    }
-                ],
-                "resultType": ".google.cloud.dataqna.v1alpha.Question",
-                "client": {
-                    "shortName": "QuestionServiceClient",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateQuestion",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionService.CreateQuestion",
-                    "service": {
-                        "shortName": "QuestionService",
-                        "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataqna_v1alpha_generated_QuestionService_ExecuteQuestion_async",
-            "title": "AutoSuggestionService executeQuestion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Executes an interpretation.",
-            "canonical": true,
-            "file": "question_service.execute_question.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExecuteQuestion",
-                "fullName": "google.cloud.dataqna.v1alpha.QuestionService.ExecuteQuestion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "interpretation_index",
-                        "type": "TYPE_INT32"
-                    }
-                ],
-                "resultType": ".google.cloud.dataqna.v1alpha.Question",
-                "client": {
-                    "shortName": "QuestionServiceClient",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
-                },
-                "method": {
-                    "shortName": "ExecuteQuestion",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionService.ExecuteQuestion",
-                    "service": {
-                        "shortName": "QuestionService",
-                        "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataqna_v1alpha_generated_QuestionService_GetUserFeedback_async",
-            "title": "AutoSuggestionService getUserFeedback Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets previously created user feedback.",
-            "canonical": true,
-            "file": "question_service.get_user_feedback.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetUserFeedback",
-                "fullName": "google.cloud.dataqna.v1alpha.QuestionService.GetUserFeedback",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataqna.v1alpha.UserFeedback",
-                "client": {
-                    "shortName": "QuestionServiceClient",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
-                },
-                "method": {
-                    "shortName": "GetUserFeedback",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionService.GetUserFeedback",
-                    "service": {
-                        "shortName": "QuestionService",
-                        "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataqna_v1alpha_generated_QuestionService_UpdateUserFeedback_async",
-            "title": "AutoSuggestionService updateUserFeedback Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates user feedback. This creates user feedback if there was none before (upsert).",
-            "canonical": true,
-            "file": "question_service.update_user_feedback.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateUserFeedback",
-                "fullName": "google.cloud.dataqna.v1alpha.QuestionService.UpdateUserFeedback",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "user_feedback",
-                        "type": ".google.cloud.dataqna.v1alpha.UserFeedback"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.dataqna.v1alpha.UserFeedback",
-                "client": {
-                    "shortName": "QuestionServiceClient",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateUserFeedback",
-                    "fullName": "google.cloud.dataqna.v1alpha.QuestionService.UpdateUserFeedback",
-                    "service": {
-                        "shortName": "QuestionService",
-                        "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-dataqna",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.dataqna.v1alpha",
+        "version": "v1alpha"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "dataqna_v1alpha_generated_AutoSuggestionService_SuggestQueries_async",
+      "title": "AutoSuggestionService suggestQueries Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a list of suggestions based on a prefix string. AutoSuggestion tolerance should be less than 1 second.",
+      "canonical": true,
+      "file": "auto_suggestion_service.suggest_queries.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SuggestQueries",
+        "fullName": "google.cloud.dataqna.v1alpha.AutoSuggestionService.SuggestQueries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "scopes",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "query",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "suggestion_types",
+            "type": "TYPE_ENUM[]"
+          }
+        ],
+        "resultType": ".google.cloud.dataqna.v1alpha.SuggestQueriesResponse",
+        "client": {
+          "shortName": "AutoSuggestionServiceClient",
+          "fullName": "google.cloud.dataqna.v1alpha.AutoSuggestionServiceClient"
+        },
+        "method": {
+          "shortName": "SuggestQueries",
+          "fullName": "google.cloud.dataqna.v1alpha.AutoSuggestionService.SuggestQueries",
+          "service": {
+            "shortName": "AutoSuggestionService",
+            "fullName": "google.cloud.dataqna.v1alpha.AutoSuggestionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataqna_v1alpha_generated_QuestionService_GetQuestion_async",
+      "title": "AutoSuggestionService getQuestion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a previously created question.",
+      "canonical": true,
+      "file": "question_service.get_question.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetQuestion",
+        "fullName": "google.cloud.dataqna.v1alpha.QuestionService.GetQuestion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "read_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dataqna.v1alpha.Question",
+        "client": {
+          "shortName": "QuestionServiceClient",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
+        },
+        "method": {
+          "shortName": "GetQuestion",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionService.GetQuestion",
+          "service": {
+            "shortName": "QuestionService",
+            "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataqna_v1alpha_generated_QuestionService_CreateQuestion_async",
+      "title": "AutoSuggestionService createQuestion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a question.",
+      "canonical": true,
+      "file": "question_service.create_question.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateQuestion",
+        "fullName": "google.cloud.dataqna.v1alpha.QuestionService.CreateQuestion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "question",
+            "type": ".google.cloud.dataqna.v1alpha.Question"
+          }
+        ],
+        "resultType": ".google.cloud.dataqna.v1alpha.Question",
+        "client": {
+          "shortName": "QuestionServiceClient",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
+        },
+        "method": {
+          "shortName": "CreateQuestion",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionService.CreateQuestion",
+          "service": {
+            "shortName": "QuestionService",
+            "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataqna_v1alpha_generated_QuestionService_ExecuteQuestion_async",
+      "title": "AutoSuggestionService executeQuestion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Executes an interpretation.",
+      "canonical": true,
+      "file": "question_service.execute_question.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExecuteQuestion",
+        "fullName": "google.cloud.dataqna.v1alpha.QuestionService.ExecuteQuestion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "interpretation_index",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.cloud.dataqna.v1alpha.Question",
+        "client": {
+          "shortName": "QuestionServiceClient",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
+        },
+        "method": {
+          "shortName": "ExecuteQuestion",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionService.ExecuteQuestion",
+          "service": {
+            "shortName": "QuestionService",
+            "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataqna_v1alpha_generated_QuestionService_GetUserFeedback_async",
+      "title": "AutoSuggestionService getUserFeedback Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets previously created user feedback.",
+      "canonical": true,
+      "file": "question_service.get_user_feedback.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetUserFeedback",
+        "fullName": "google.cloud.dataqna.v1alpha.QuestionService.GetUserFeedback",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataqna.v1alpha.UserFeedback",
+        "client": {
+          "shortName": "QuestionServiceClient",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
+        },
+        "method": {
+          "shortName": "GetUserFeedback",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionService.GetUserFeedback",
+          "service": {
+            "shortName": "QuestionService",
+            "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataqna_v1alpha_generated_QuestionService_UpdateUserFeedback_async",
+      "title": "AutoSuggestionService updateUserFeedback Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates user feedback. This creates user feedback if there was none before (upsert).",
+      "canonical": true,
+      "file": "question_service.update_user_feedback.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateUserFeedback",
+        "fullName": "google.cloud.dataqna.v1alpha.QuestionService.UpdateUserFeedback",
+        "async": true,
+        "parameters": [
+          {
+            "name": "user_feedback",
+            "type": ".google.cloud.dataqna.v1alpha.UserFeedback"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dataqna.v1alpha.UserFeedback",
+        "client": {
+          "shortName": "QuestionServiceClient",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateUserFeedback",
+          "fullName": "google.cloud.dataqna.v1alpha.QuestionService.UpdateUserFeedback",
+          "service": {
+            "shortName": "QuestionService",
+            "fullName": "google.cloud.dataqna.v1alpha.QuestionService"
+          }
+        }
+      }
+    }
+  ]
 }

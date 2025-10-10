@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.1.0...kms-inventory-v2.2.0) (2025-09-16)
+
+
+### Features
+
+* [kmsinventory] Support KEY_ENCAPSULATION purpose and quantum-safe algorithms ML_KEM_768, ML_KEM_1024 and KEM_XWING ([#6712](https://github.com/googleapis/google-cloud-node/issues/6712)) ([fd613db](https://github.com/googleapis/google-cloud-node/commit/fd613dbb171c6d0e5c6fcface6f96ac05dd49a44))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/kms-inventory-v2.0.1...kms-inventory-v2.1.0) (2025-07-09)
 
 

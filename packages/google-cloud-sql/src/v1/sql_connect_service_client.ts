@@ -18,14 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LocationsClient,
-  LocationProtos,
-} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, LocationsClient, LocationProtos} from 'google-gax';
 
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -107,41 +100,20 @@ export class SqlConnectServiceClient {
    *     const client = new SqlConnectServiceClient({fallback: true}, gax);
    *     ```
    */
-  constructor(
-    opts?: ClientOptions,
-    gaxInstance?: typeof gax | typeof gax.fallback
-  ) {
+  constructor(opts?: ClientOptions, gaxInstance?: typeof gax | typeof gax.fallback) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof SqlConnectServiceClient;
-    if (
-      opts?.universe_domain &&
-      opts?.universeDomain &&
-      opts?.universe_domain !== opts?.universeDomain
-    ) {
-      throw new Error(
-        'Please set either universe_domain or universeDomain, but not both.'
-      );
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
     }
-    const universeDomainEnvVar =
-      typeof process === 'object' && typeof process.env === 'object'
-        ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN']
-        : undefined;
-    this._universeDomain =
-      opts?.universeDomain ??
-      opts?.universe_domain ??
-      universeDomainEnvVar ??
-      'googleapis.com';
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
     this._servicePath = 'sqladmin.' + this._universeDomain;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || this._servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // Request numeric enum values if REST transport is used.
@@ -167,7 +139,7 @@ export class SqlConnectServiceClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set useJWTAccessWithScope on the auth object.
     this.auth.useJWTAccessWithScope = true;
@@ -183,9 +155,13 @@ export class SqlConnectServiceClient {
       this._gaxGrpc,
       opts
     );
+  
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process === 'object' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -204,11 +180,8 @@ export class SqlConnectServiceClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.sql.v1.SqlConnectService',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.sql.v1.SqlConnectService', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -239,38 +212,31 @@ export class SqlConnectServiceClient {
     // Put together the "service stub" for
     // google.cloud.sql.v1.SqlConnectService.
     this.sqlConnectServiceStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.sql.v1.SqlConnectService'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.sql.v1.SqlConnectService') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.sql.v1.SqlConnectService,
-      this._opts,
-      this._providedCustomServicePath
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const sqlConnectServiceStubMethods = [
-      'getConnectSettings',
-      'generateEphemeralCert',
-    ];
+    const sqlConnectServiceStubMethods =
+        ['getConnectSettings', 'generateEphemeralCert'];
     for (const methodName of sqlConnectServiceStubMethods) {
       const callPromise = this.sqlConnectServiceStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -290,14 +256,8 @@ export class SqlConnectServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get servicePath() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static servicePath is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static servicePath is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'sqladmin.googleapis.com';
   }
@@ -308,14 +268,8 @@ export class SqlConnectServiceClient {
    * @returns {string} The DNS address for this service.
    */
   static get apiEndpoint() {
-    if (
-      typeof process === 'object' &&
-      typeof process.emitWarning === 'function'
-    ) {
-      process.emitWarning(
-        'Static apiEndpoint is deprecated, please use the instance method instead.',
-        'DeprecationWarning'
-      );
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static apiEndpoint is deprecated, please use the instance method instead.', 'DeprecationWarning');
     }
     return 'sqladmin.googleapis.com';
   }
@@ -348,7 +302,7 @@ export class SqlConnectServiceClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/cloud-platform',
-      'https://www.googleapis.com/auth/sqlservice.admin',
+      'https://www.googleapis.com/auth/sqlservice.admin'
     ];
   }
 
@@ -358,9 +312,8 @@ export class SqlConnectServiceClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -371,291 +324,217 @@ export class SqlConnectServiceClient {
   // -------------------
   // -- Service calls --
   // -------------------
-  /**
-   * Retrieves connect settings about a Cloud SQL instance.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {google.protobuf.Timestamp} [request.readTime]
-   *   Optional. Optional snapshot read timestamp to trade freshness for
-   *   performance.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.ConnectSettings|ConnectSettings}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/sql_connect_service.get_connect_settings.js</caption>
-   * region_tag:sqladmin_v1_generated_SqlConnectService_GetConnectSettings_async
-   */
+/**
+ * Retrieves connect settings about a Cloud SQL instance.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {google.protobuf.Timestamp} [request.readTime]
+ *   Optional. Optional snapshot read timestamp to trade freshness for
+ *   performance.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.ConnectSettings|ConnectSettings}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/sql_connect_service.get_connect_settings.js</caption>
+ * region_tag:sqladmin_v1_generated_SqlConnectService_GetConnectSettings_async
+ */
   getConnectSettings(
-    request?: protos.google.cloud.sql.v1.IGetConnectSettingsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.IConnectSettings,
-      protos.google.cloud.sql.v1.IGetConnectSettingsRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1.IGetConnectSettingsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1.IConnectSettings,
+        protos.google.cloud.sql.v1.IGetConnectSettingsRequest|undefined, {}|undefined
+      ]>;
   getConnectSettings(
-    request: protos.google.cloud.sql.v1.IGetConnectSettingsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1.IConnectSettings,
-      protos.google.cloud.sql.v1.IGetConnectSettingsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnectSettings(
-    request: protos.google.cloud.sql.v1.IGetConnectSettingsRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1.IConnectSettings,
-      protos.google.cloud.sql.v1.IGetConnectSettingsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getConnectSettings(
-    request?: protos.google.cloud.sql.v1.IGetConnectSettingsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1.IGetConnectSettingsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1.IConnectSettings,
-          | protos.google.cloud.sql.v1.IGetConnectSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1.IConnectSettings,
-      protos.google.cloud.sql.v1.IGetConnectSettingsRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.IConnectSettings,
-      protos.google.cloud.sql.v1.IGetConnectSettingsRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1.IGetConnectSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnectSettings(
+      request: protos.google.cloud.sql.v1.IGetConnectSettingsRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1.IConnectSettings,
+          protos.google.cloud.sql.v1.IGetConnectSettingsRequest|null|undefined,
+          {}|null|undefined>): void;
+  getConnectSettings(
+      request?: protos.google.cloud.sql.v1.IGetConnectSettingsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1.IConnectSettings,
+          protos.google.cloud.sql.v1.IGetConnectSettingsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1.IConnectSettings,
+          protos.google.cloud.sql.v1.IGetConnectSettingsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1.IConnectSettings,
+        protos.google.cloud.sql.v1.IGetConnectSettingsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('getConnectSettings request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1.IConnectSettings,
-          | protos.google.cloud.sql.v1.IGetConnectSettingsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1.IConnectSettings,
+        protos.google.cloud.sql.v1.IGetConnectSettingsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('getConnectSettings response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .getConnectSettings(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1.IConnectSettings,
-          protos.google.cloud.sql.v1.IGetConnectSettingsRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('getConnectSettings response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.getConnectSettings(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1.IConnectSettings,
+        protos.google.cloud.sql.v1.IGetConnectSettingsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getConnectSettings response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
-  /**
-   * Generates a short-lived X509 certificate containing the provided public key
-   * and signed by a private key specific to the target instance. Users may use
-   * the certificate to authenticate as themselves when connecting to the
-   * database.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instance
-   *   Cloud SQL instance ID. This does not include the project ID.
-   * @param {string} request.project
-   *   Project ID of the project that contains the instance.
-   * @param {string} request.publicKey
-   *   PEM encoded public key to include in the signed certificate.
-   * @param {string} [request.accessToken]
-   *   Optional. Access token to include in the signed certificate.
-   * @param {google.protobuf.Timestamp} [request.readTime]
-   *   Optional. Optional snapshot read timestamp to trade freshness for
-   *   performance.
-   * @param {google.protobuf.Duration} [request.validDuration]
-   *   Optional. If set, it will contain the cert valid duration.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.GenerateEphemeralCertResponse|GenerateEphemeralCertResponse}.
-   *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/sql_connect_service.generate_ephemeral_cert.js</caption>
-   * region_tag:sqladmin_v1_generated_SqlConnectService_GenerateEphemeralCert_async
-   */
+/**
+ * Generates a short-lived X509 certificate containing the provided public key
+ * and signed by a private key specific to the target instance. Users may use
+ * the certificate to authenticate as themselves when connecting to the
+ * database.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instance
+ *   Cloud SQL instance ID. This does not include the project ID.
+ * @param {string} request.project
+ *   Project ID of the project that contains the instance.
+ * @param {string} request.publicKey
+ *   PEM encoded public key to include in the signed certificate.
+ * @param {string} [request.accessToken]
+ *   Optional. Access token to include in the signed certificate.
+ * @param {google.protobuf.Timestamp} [request.readTime]
+ *   Optional. Optional snapshot read timestamp to trade freshness for
+ *   performance.
+ * @param {google.protobuf.Duration} [request.validDuration]
+ *   Optional. If set, it will contain the cert valid duration.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.sql.v1.GenerateEphemeralCertResponse|GenerateEphemeralCertResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/sql_connect_service.generate_ephemeral_cert.js</caption>
+ * region_tag:sqladmin_v1_generated_SqlConnectService_GenerateEphemeralCert_async
+ */
   generateEphemeralCert(
-    request?: protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
-      protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest | undefined,
-      {} | undefined,
-    ]
-  >;
+      request?: protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
+        protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest|undefined, {}|undefined
+      ]>;
   generateEphemeralCert(
-    request: protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
-      | protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateEphemeralCert(
-    request: protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest,
-    callback: Callback<
-      protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
-      | protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  generateEphemeralCert(
-    request?: protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
-          | protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
-      | protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
-      protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest | undefined,
-      {} | undefined,
-    ]
-  > | void {
+          protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateEphemeralCert(
+      request: protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest,
+      callback: Callback<
+          protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
+          protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest|null|undefined,
+          {}|null|undefined>): void;
+  generateEphemeralCert(
+      request?: protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
+          protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
+          protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
+        protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project ?? '',
-        instance: request.instance ?? '',
-      });
-    this.initialize().catch(err => {
-      throw err;
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'project': request.project ?? '',
+      'instance': request.instance ?? '',
     });
+    this.initialize().catch(err => {throw err});
     this._log.info('generateEphemeralCert request %j', request);
-    const wrappedCallback:
-      | Callback<
-          protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
-          | protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >
-      | undefined = callback
+    const wrappedCallback: Callback<
+        protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
+        protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
       ? (error, response, options, rawResponse) => {
           this._log.info('generateEphemeralCert response %j', response);
           callback!(error, response, options, rawResponse); // We verified callback above.
         }
       : undefined;
-    return this.innerApiCalls
-      .generateEphemeralCert(request, options, wrappedCallback)
-      ?.then(
-        ([response, options, rawResponse]: [
-          protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
-          protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest | undefined,
-          {} | undefined,
-        ]) => {
-          this._log.info('generateEphemeralCert response %j', response);
-          return [response, options, rawResponse];
-        }
-      )
-      .catch((error: any) => {
-        if (
-          error &&
-          'statusDetails' in error &&
-          error.statusDetails instanceof Array
-        ) {
-          const protos = this._gaxModule.protobuf.Root.fromJSON(
-            jsonProtos
-          ) as unknown as gax.protobuf.Type;
-          error.statusDetails = decodeAnyProtosInArray(
-            error.statusDetails,
-            protos
-          );
+    return this.innerApiCalls.generateEphemeralCert(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.sql.v1.IGenerateEphemeralCertResponse,
+        protos.google.cloud.sql.v1.IGenerateEphemeralCertRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('generateEphemeralCert response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
         }
         throw error;
       });
   }
 
-  /**
+/**
    * Gets information about a location.
    *
    * @param {Object} request
@@ -695,7 +574,7 @@ export class SqlConnectServiceClient {
     return this.locationsClient.getLocation(request, options, callback);
   }
 
-  /**
+/**
    * Lists information about the supported locations for this service. Returns an iterable object.
    *
    * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
@@ -733,6 +612,7 @@ export class SqlConnectServiceClient {
     return this.locationsClient.listLocationsAsync(request, options);
   }
 
+
   /**
    * Terminate the gRPC channel and close the client.
    *
@@ -745,9 +625,7 @@ export class SqlConnectServiceClient {
         this._log.info('ending gRPC channel');
         this._terminated = true;
         stub.close();
-        this.locationsClient.close().catch(err => {
-          throw err;
-        });
+        this.locationsClient.close().catch(err => {throw err});
       });
     }
     return Promise.resolve();

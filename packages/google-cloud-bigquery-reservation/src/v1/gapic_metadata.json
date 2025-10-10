@@ -95,6 +95,36 @@
                 "updateBiReservation"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateReservationGroup": {
+              "methods": [
+                "createReservationGroup"
+              ]
+            },
+            "GetReservationGroup": {
+              "methods": [
+                "getReservationGroup"
+              ]
+            },
+            "DeleteReservationGroup": {
+              "methods": [
+                "deleteReservationGroup"
+              ]
+            },
             "ListReservations": {
               "methods": [
                 "listReservations",
@@ -128,6 +158,13 @@
                 "searchAllAssignments",
                 "searchAllAssignmentsStream",
                 "searchAllAssignmentsAsync"
+              ]
+            },
+            "ListReservationGroups": {
+              "methods": [
+                "listReservationGroups",
+                "listReservationGroupsStream",
+                "listReservationGroupsAsync"
               ]
             }
           }
@@ -220,6 +257,36 @@
                 "updateBiReservation"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "CreateReservationGroup": {
+              "methods": [
+                "createReservationGroup"
+              ]
+            },
+            "GetReservationGroup": {
+              "methods": [
+                "getReservationGroup"
+              ]
+            },
+            "DeleteReservationGroup": {
+              "methods": [
+                "deleteReservationGroup"
+              ]
+            },
             "ListReservations": {
               "methods": [
                 "listReservations",
@@ -253,6 +320,13 @@
                 "searchAllAssignments",
                 "searchAllAssignmentsStream",
                 "searchAllAssignmentsAsync"
+              ]
+            },
+            "ListReservationGroups": {
+              "methods": [
+                "listReservationGroups",
+                "listReservationGroupsStream",
+                "listReservationGroupsAsync"
               ]
             }
           }

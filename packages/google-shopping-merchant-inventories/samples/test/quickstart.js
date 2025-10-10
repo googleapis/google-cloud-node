@@ -19,7 +19,7 @@
 // const cp = require('child_process');
 const {describe, it, before} = require('mocha');
 // const {RegionalInventoryServiceClient} =
-//   require('@google-cloud/inventories').v1beta;
+//   require('@google-shopping/inventories').v1beta;
 // const merchantapiClient = new RegionalInventoryServiceClient();
 
 // const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});

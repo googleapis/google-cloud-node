@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.0.0...dataplex-v5.1.0) (2025-09-16)
+
+
+### Features
+
+* [dataplex] A new service `BusinessGlossaryService` is added ([#6714](https://github.com/googleapis/google-cloud-node/issues/6714)) ([cdb648d](https://github.com/googleapis/google-cloud-node/commit/cdb648d447d5bb2e25496e63da96affc1c3871c8))
+
 ## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v4.2.0...dataplex-v5.0.0) (2025-07-28)
 
 

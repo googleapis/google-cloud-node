@@ -31,6 +31,10 @@
         "PerformMaintenance": {
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "ReportFaulty": {
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
         }
       }
     }

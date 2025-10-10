@@ -56,7 +56,7 @@ function main(parent, targetAccount) {
   // const pageToken = 'abc123'
 
   // Imports the Lfp library
-  const {LfpStoreServiceClient} = require('@google-cloud/lfp').v1;
+  const {LfpStoreServiceClient} = require('@google-shopping/lfp').v1;
 
   // Instantiates a client
   const lfpClient = new LfpStoreServiceClient();

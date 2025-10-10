@@ -1,55 +1,55 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-vision",
-        "version": "5.3.3",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.vision.v1p1beta1",
-                "version": "v1p1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "vision_v1p1beta1_generated_ImageAnnotator_BatchAnnotateImages_async",
-            "title": "vision batchAnnotateImages Sample",
-            "origin": "API_DEFINITION",
-            "description": " Run image detection and annotation for a batch of images.",
-            "canonical": true,
-            "file": "image_annotator.batch_annotate_images.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchAnnotateImages",
-                "fullName": "google.cloud.vision.v1p1beta1.ImageAnnotator.BatchAnnotateImages",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse",
-                "client": {
-                    "shortName": "ImageAnnotatorClient",
-                    "fullName": "google.cloud.vision.v1p1beta1.ImageAnnotatorClient"
-                },
-                "method": {
-                    "shortName": "BatchAnnotateImages",
-                    "fullName": "google.cloud.vision.v1p1beta1.ImageAnnotator.BatchAnnotateImages",
-                    "service": {
-                        "shortName": "ImageAnnotator",
-                        "fullName": "google.cloud.vision.v1p1beta1.ImageAnnotator"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-vision",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.vision.v1p1beta1",
+        "version": "v1p1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "vision_v1p1beta1_generated_ImageAnnotator_BatchAnnotateImages_async",
+      "title": "vision batchAnnotateImages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Run image detection and annotation for a batch of images.",
+      "canonical": true,
+      "file": "image_annotator.batch_annotate_images.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchAnnotateImages",
+        "fullName": "google.cloud.vision.v1p1beta1.ImageAnnotator.BatchAnnotateImages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1p1beta1.BatchAnnotateImagesResponse",
+        "client": {
+          "shortName": "ImageAnnotatorClient",
+          "fullName": "google.cloud.vision.v1p1beta1.ImageAnnotatorClient"
+        },
+        "method": {
+          "shortName": "BatchAnnotateImages",
+          "fullName": "google.cloud.vision.v1p1beta1.ImageAnnotator.BatchAnnotateImages",
+          "service": {
+            "shortName": "ImageAnnotator",
+            "fullName": "google.cloud.vision.v1p1beta1.ImageAnnotator"
+          }
+        }
+      }
+    }
+  ]
 }

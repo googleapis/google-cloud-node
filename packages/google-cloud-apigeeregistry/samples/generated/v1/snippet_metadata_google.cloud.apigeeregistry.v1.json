@@ -1,1723 +1,1723 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-apigeeregistry",
-        "version": "2.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.apigeeregistry.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "apigeeregistry_v1_generated_Provisioning_CreateInstance_async",
-            "title": "Provisioning createInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Provisions instance resources for the Registry.",
-            "canonical": true,
-            "file": "provisioning.create_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateInstance",
-                "fullName": "google.cloud.apigeeregistry.v1.Provisioning.CreateInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instance",
-                        "type": ".google.cloud.apigeeregistry.v1.Instance"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ProvisioningClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.ProvisioningClient"
-                },
-                "method": {
-                    "shortName": "CreateInstance",
-                    "fullName": "google.cloud.apigeeregistry.v1.Provisioning.CreateInstance",
-                    "service": {
-                        "shortName": "Provisioning",
-                        "fullName": "google.cloud.apigeeregistry.v1.Provisioning"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Provisioning_DeleteInstance_async",
-            "title": "Provisioning deleteInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the Registry instance.",
-            "canonical": true,
-            "file": "provisioning.delete_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteInstance",
-                "fullName": "google.cloud.apigeeregistry.v1.Provisioning.DeleteInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ProvisioningClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.ProvisioningClient"
-                },
-                "method": {
-                    "shortName": "DeleteInstance",
-                    "fullName": "google.cloud.apigeeregistry.v1.Provisioning.DeleteInstance",
-                    "service": {
-                        "shortName": "Provisioning",
-                        "fullName": "google.cloud.apigeeregistry.v1.Provisioning"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Provisioning_GetInstance_async",
-            "title": "Provisioning getInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single Instance.",
-            "canonical": true,
-            "file": "provisioning.get_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetInstance",
-                "fullName": "google.cloud.apigeeregistry.v1.Provisioning.GetInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.Instance",
-                "client": {
-                    "shortName": "ProvisioningClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.ProvisioningClient"
-                },
-                "method": {
-                    "shortName": "GetInstance",
-                    "fullName": "google.cloud.apigeeregistry.v1.Provisioning.GetInstance",
-                    "service": {
-                        "shortName": "Provisioning",
-                        "fullName": "google.cloud.apigeeregistry.v1.Provisioning"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_ListApis_async",
-            "title": "Provisioning listApis Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns matching APIs.",
-            "canonical": true,
-            "file": "registry.list_apis.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListApis",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApis",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ListApisResponse",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "ListApis",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApis",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_GetApi_async",
-            "title": "Provisioning getApi Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a specified API.",
-            "canonical": true,
-            "file": "registry.get_api.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetApi",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApi",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.Api",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "GetApi",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApi",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_CreateApi_async",
-            "title": "Provisioning createApi Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a specified API.",
-            "canonical": true,
-            "file": "registry.create_api.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateApi",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApi",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "api",
-                        "type": ".google.cloud.apigeeregistry.v1.Api"
-                    },
-                    {
-                        "name": "api_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.Api",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "CreateApi",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApi",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApi_async",
-            "title": "Provisioning updateApi Sample",
-            "origin": "API_DEFINITION",
-            "description": " Used to modify a specified API.",
-            "canonical": true,
-            "file": "registry.update_api.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateApi",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApi",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "api",
-                        "type": ".google.cloud.apigeeregistry.v1.Api"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.Api",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "UpdateApi",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApi",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApi_async",
-            "title": "Provisioning deleteApi Sample",
-            "origin": "API_DEFINITION",
-            "description": " Removes a specified API and all of the resources that it owns.",
-            "canonical": true,
-            "file": "registry.delete_api.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteApi",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApi",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteApi",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApi",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_ListApiVersions_async",
-            "title": "Provisioning listApiVersions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns matching versions.",
-            "canonical": true,
-            "file": "registry.list_api_versions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListApiVersions",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiVersions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ListApiVersionsResponse",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "ListApiVersions",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiVersions",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_GetApiVersion_async",
-            "title": "Provisioning getApiVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a specified version.",
-            "canonical": true,
-            "file": "registry.get_api_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetApiVersion",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiVersion",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "GetApiVersion",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiVersion",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_CreateApiVersion_async",
-            "title": "Provisioning createApiVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a specified version.",
-            "canonical": true,
-            "file": "registry.create_api_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateApiVersion",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "api_version",
-                        "type": ".google.cloud.apigeeregistry.v1.ApiVersion"
-                    },
-                    {
-                        "name": "api_version_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiVersion",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "CreateApiVersion",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiVersion",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApiVersion_async",
-            "title": "Provisioning updateApiVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Used to modify a specified version.",
-            "canonical": true,
-            "file": "registry.update_api_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateApiVersion",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "api_version",
-                        "type": ".google.cloud.apigeeregistry.v1.ApiVersion"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiVersion",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "UpdateApiVersion",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiVersion",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiVersion_async",
-            "title": "Provisioning deleteApiVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Removes a specified version and all of the resources that it owns.",
-            "canonical": true,
-            "file": "registry.delete_api_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteApiVersion",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteApiVersion",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiVersion",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_ListApiSpecs_async",
-            "title": "Provisioning listApiSpecs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns matching specs.",
-            "canonical": true,
-            "file": "registry.list_api_specs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListApiSpecs",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiSpecs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ListApiSpecsResponse",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "ListApiSpecs",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiSpecs",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_GetApiSpec_async",
-            "title": "Provisioning getApiSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a specified spec.",
-            "canonical": true,
-            "file": "registry.get_api_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetApiSpec",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "GetApiSpec",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiSpec",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_GetApiSpecContents_async",
-            "title": "Provisioning getApiSpecContents Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the contents of a specified spec. If specs are stored with GZip compression, the default behavior is to return the spec uncompressed (the mime_type response field indicates the exact format returned).",
-            "canonical": true,
-            "file": "registry.get_api_spec_contents.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetApiSpecContents",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiSpecContents",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "GetApiSpecContents",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiSpecContents",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_CreateApiSpec_async",
-            "title": "Provisioning createApiSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a specified spec.",
-            "canonical": true,
-            "file": "registry.create_api_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateApiSpec",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "api_spec",
-                        "type": ".google.cloud.apigeeregistry.v1.ApiSpec"
-                    },
-                    {
-                        "name": "api_spec_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "CreateApiSpec",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiSpec",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApiSpec_async",
-            "title": "Provisioning updateApiSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Used to modify a specified spec.",
-            "canonical": true,
-            "file": "registry.update_api_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateApiSpec",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "api_spec",
-                        "type": ".google.cloud.apigeeregistry.v1.ApiSpec"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "UpdateApiSpec",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiSpec",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiSpec_async",
-            "title": "Provisioning deleteApiSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Removes a specified spec, all revisions, and all child resources (e.g., artifacts).",
-            "canonical": true,
-            "file": "registry.delete_api_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteApiSpec",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteApiSpec",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiSpec",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_TagApiSpecRevision_async",
-            "title": "Provisioning tagApiSpecRevision Sample",
-            "origin": "API_DEFINITION",
-            "description": " Adds a tag to a specified revision of a spec.",
-            "canonical": true,
-            "file": "registry.tag_api_spec_revision.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "TagApiSpecRevision",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.TagApiSpecRevision",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "tag",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "TagApiSpecRevision",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.TagApiSpecRevision",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_ListApiSpecRevisions_async",
-            "title": "Provisioning listApiSpecRevisions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all revisions of a spec. Revisions are returned in descending order of revision creation time.",
-            "canonical": true,
-            "file": "registry.list_api_spec_revisions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListApiSpecRevisions",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiSpecRevisions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ListApiSpecRevisionsResponse",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "ListApiSpecRevisions",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiSpecRevisions",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_RollbackApiSpec_async",
-            "title": "Provisioning rollbackApiSpec Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.",
-            "canonical": true,
-            "file": "registry.rollback_api_spec.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RollbackApiSpec",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.RollbackApiSpec",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "revision_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "RollbackApiSpec",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.RollbackApiSpec",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiSpecRevision_async",
-            "title": "Provisioning deleteApiSpecRevision Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a revision of a spec.",
-            "canonical": true,
-            "file": "registry.delete_api_spec_revision.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteApiSpecRevision",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiSpecRevision",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteApiSpecRevision",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiSpecRevision",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_ListApiDeployments_async",
-            "title": "Provisioning listApiDeployments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns matching deployments.",
-            "canonical": true,
-            "file": "registry.list_api_deployments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListApiDeployments",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiDeployments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ListApiDeploymentsResponse",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "ListApiDeployments",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiDeployments",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_GetApiDeployment_async",
-            "title": "Provisioning getApiDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a specified deployment.",
-            "canonical": true,
-            "file": "registry.get_api_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetApiDeployment",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "GetApiDeployment",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiDeployment",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_CreateApiDeployment_async",
-            "title": "Provisioning createApiDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a specified deployment.",
-            "canonical": true,
-            "file": "registry.create_api_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateApiDeployment",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "api_deployment",
-                        "type": ".google.cloud.apigeeregistry.v1.ApiDeployment"
-                    },
-                    {
-                        "name": "api_deployment_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "CreateApiDeployment",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiDeployment",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApiDeployment_async",
-            "title": "Provisioning updateApiDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Used to modify a specified deployment.",
-            "canonical": true,
-            "file": "registry.update_api_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateApiDeployment",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "api_deployment",
-                        "type": ".google.cloud.apigeeregistry.v1.ApiDeployment"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "UpdateApiDeployment",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiDeployment",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiDeployment_async",
-            "title": "Provisioning deleteApiDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Removes a specified deployment, all revisions, and all child resources (e.g., artifacts).",
-            "canonical": true,
-            "file": "registry.delete_api_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteApiDeployment",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteApiDeployment",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiDeployment",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_TagApiDeploymentRevision_async",
-            "title": "Provisioning tagApiDeploymentRevision Sample",
-            "origin": "API_DEFINITION",
-            "description": " Adds a tag to a specified revision of a deployment.",
-            "canonical": true,
-            "file": "registry.tag_api_deployment_revision.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "TagApiDeploymentRevision",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.TagApiDeploymentRevision",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "tag",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "TagApiDeploymentRevision",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.TagApiDeploymentRevision",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_ListApiDeploymentRevisions_async",
-            "title": "Provisioning listApiDeploymentRevisions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all revisions of a deployment. Revisions are returned in descending order of revision creation time.",
-            "canonical": true,
-            "file": "registry.list_api_deployment_revisions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListApiDeploymentRevisions",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiDeploymentRevisions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ListApiDeploymentRevisionsResponse",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "ListApiDeploymentRevisions",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiDeploymentRevisions",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_RollbackApiDeployment_async",
-            "title": "Provisioning rollbackApiDeployment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.",
-            "canonical": true,
-            "file": "registry.rollback_api_deployment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RollbackApiDeployment",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.RollbackApiDeployment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "revision_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "RollbackApiDeployment",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.RollbackApiDeployment",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiDeploymentRevision_async",
-            "title": "Provisioning deleteApiDeploymentRevision Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a revision of a deployment.",
-            "canonical": true,
-            "file": "registry.delete_api_deployment_revision.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteApiDeploymentRevision",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiDeploymentRevision",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteApiDeploymentRevision",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiDeploymentRevision",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_ListArtifacts_async",
-            "title": "Provisioning listArtifacts Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns matching artifacts.",
-            "canonical": true,
-            "file": "registry.list_artifacts.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListArtifacts",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.ListArtifacts",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.ListArtifactsResponse",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "ListArtifacts",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.ListArtifacts",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_GetArtifact_async",
-            "title": "Provisioning getArtifact Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a specified artifact.",
-            "canonical": true,
-            "file": "registry.get_artifact.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetArtifact",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.GetArtifact",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.Artifact",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "GetArtifact",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.GetArtifact",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_GetArtifactContents_async",
-            "title": "Provisioning getArtifactContents Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the contents of a specified artifact. If artifacts are stored with GZip compression, the default behavior is to return the artifact uncompressed (the mime_type response field indicates the exact format returned).",
-            "canonical": true,
-            "file": "registry.get_artifact_contents.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetArtifactContents",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.GetArtifactContents",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "GetArtifactContents",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.GetArtifactContents",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_CreateArtifact_async",
-            "title": "Provisioning createArtifact Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a specified artifact.",
-            "canonical": true,
-            "file": "registry.create_artifact.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateArtifact",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateArtifact",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "artifact",
-                        "type": ".google.cloud.apigeeregistry.v1.Artifact"
-                    },
-                    {
-                        "name": "artifact_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.Artifact",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "CreateArtifact",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateArtifact",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_ReplaceArtifact_async",
-            "title": "Provisioning replaceArtifact Sample",
-            "origin": "API_DEFINITION",
-            "description": " Used to replace a specified artifact.",
-            "canonical": true,
-            "file": "registry.replace_artifact.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ReplaceArtifact",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.ReplaceArtifact",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "artifact",
-                        "type": ".google.cloud.apigeeregistry.v1.Artifact"
-                    }
-                ],
-                "resultType": ".google.cloud.apigeeregistry.v1.Artifact",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "ReplaceArtifact",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.ReplaceArtifact",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apigeeregistry_v1_generated_Registry_DeleteArtifact_async",
-            "title": "Provisioning deleteArtifact Sample",
-            "origin": "API_DEFINITION",
-            "description": " Removes a specified artifact.",
-            "canonical": true,
-            "file": "registry.delete_artifact.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteArtifact",
-                "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteArtifact",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "RegistryClient",
-                    "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteArtifact",
-                    "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteArtifact",
-                    "service": {
-                        "shortName": "Registry",
-                        "fullName": "google.cloud.apigeeregistry.v1.Registry"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-apigeeregistry",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.apigeeregistry.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "apigeeregistry_v1_generated_Provisioning_CreateInstance_async",
+      "title": "Provisioning createInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Provisions instance resources for the Registry.",
+      "canonical": true,
+      "file": "provisioning.create_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInstance",
+        "fullName": "google.cloud.apigeeregistry.v1.Provisioning.CreateInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instance",
+            "type": ".google.cloud.apigeeregistry.v1.Instance"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProvisioningClient",
+          "fullName": "google.cloud.apigeeregistry.v1.ProvisioningClient"
+        },
+        "method": {
+          "shortName": "CreateInstance",
+          "fullName": "google.cloud.apigeeregistry.v1.Provisioning.CreateInstance",
+          "service": {
+            "shortName": "Provisioning",
+            "fullName": "google.cloud.apigeeregistry.v1.Provisioning"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Provisioning_DeleteInstance_async",
+      "title": "Provisioning deleteInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the Registry instance.",
+      "canonical": true,
+      "file": "provisioning.delete_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInstance",
+        "fullName": "google.cloud.apigeeregistry.v1.Provisioning.DeleteInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ProvisioningClient",
+          "fullName": "google.cloud.apigeeregistry.v1.ProvisioningClient"
+        },
+        "method": {
+          "shortName": "DeleteInstance",
+          "fullName": "google.cloud.apigeeregistry.v1.Provisioning.DeleteInstance",
+          "service": {
+            "shortName": "Provisioning",
+            "fullName": "google.cloud.apigeeregistry.v1.Provisioning"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Provisioning_GetInstance_async",
+      "title": "Provisioning getInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Instance.",
+      "canonical": true,
+      "file": "provisioning.get_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInstance",
+        "fullName": "google.cloud.apigeeregistry.v1.Provisioning.GetInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.Instance",
+        "client": {
+          "shortName": "ProvisioningClient",
+          "fullName": "google.cloud.apigeeregistry.v1.ProvisioningClient"
+        },
+        "method": {
+          "shortName": "GetInstance",
+          "fullName": "google.cloud.apigeeregistry.v1.Provisioning.GetInstance",
+          "service": {
+            "shortName": "Provisioning",
+            "fullName": "google.cloud.apigeeregistry.v1.Provisioning"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_ListApis_async",
+      "title": "Provisioning listApis Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns matching APIs.",
+      "canonical": true,
+      "file": "registry.list_apis.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApis",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApis",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ListApisResponse",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "ListApis",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApis",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_GetApi_async",
+      "title": "Provisioning getApi Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a specified API.",
+      "canonical": true,
+      "file": "registry.get_api.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApi",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApi",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.Api",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "GetApi",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApi",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_CreateApi_async",
+      "title": "Provisioning createApi Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a specified API.",
+      "canonical": true,
+      "file": "registry.create_api.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApi",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApi",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "api",
+            "type": ".google.cloud.apigeeregistry.v1.Api"
+          },
+          {
+            "name": "api_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.Api",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "CreateApi",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApi",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApi_async",
+      "title": "Provisioning updateApi Sample",
+      "origin": "API_DEFINITION",
+      "description": " Used to modify a specified API.",
+      "canonical": true,
+      "file": "registry.update_api.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApi",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApi",
+        "async": true,
+        "parameters": [
+          {
+            "name": "api",
+            "type": ".google.cloud.apigeeregistry.v1.Api"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.Api",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "UpdateApi",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApi",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApi_async",
+      "title": "Provisioning deleteApi Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a specified API and all of the resources that it owns.",
+      "canonical": true,
+      "file": "registry.delete_api.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApi",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApi",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteApi",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApi",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_ListApiVersions_async",
+      "title": "Provisioning listApiVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns matching versions.",
+      "canonical": true,
+      "file": "registry.list_api_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApiVersions",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ListApiVersionsResponse",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "ListApiVersions",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiVersions",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_GetApiVersion_async",
+      "title": "Provisioning getApiVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a specified version.",
+      "canonical": true,
+      "file": "registry.get_api_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApiVersion",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiVersion",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "GetApiVersion",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiVersion",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_CreateApiVersion_async",
+      "title": "Provisioning createApiVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a specified version.",
+      "canonical": true,
+      "file": "registry.create_api_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApiVersion",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "api_version",
+            "type": ".google.cloud.apigeeregistry.v1.ApiVersion"
+          },
+          {
+            "name": "api_version_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiVersion",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "CreateApiVersion",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiVersion",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApiVersion_async",
+      "title": "Provisioning updateApiVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Used to modify a specified version.",
+      "canonical": true,
+      "file": "registry.update_api_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApiVersion",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "api_version",
+            "type": ".google.cloud.apigeeregistry.v1.ApiVersion"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiVersion",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "UpdateApiVersion",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiVersion",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiVersion_async",
+      "title": "Provisioning deleteApiVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a specified version and all of the resources that it owns.",
+      "canonical": true,
+      "file": "registry.delete_api_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApiVersion",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteApiVersion",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiVersion",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_ListApiSpecs_async",
+      "title": "Provisioning listApiSpecs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns matching specs.",
+      "canonical": true,
+      "file": "registry.list_api_specs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApiSpecs",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiSpecs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ListApiSpecsResponse",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "ListApiSpecs",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiSpecs",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_GetApiSpec_async",
+      "title": "Provisioning getApiSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a specified spec.",
+      "canonical": true,
+      "file": "registry.get_api_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApiSpec",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "GetApiSpec",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiSpec",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_GetApiSpecContents_async",
+      "title": "Provisioning getApiSpecContents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the contents of a specified spec. If specs are stored with GZip compression, the default behavior is to return the spec uncompressed (the mime_type response field indicates the exact format returned).",
+      "canonical": true,
+      "file": "registry.get_api_spec_contents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApiSpecContents",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiSpecContents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "GetApiSpecContents",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiSpecContents",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_CreateApiSpec_async",
+      "title": "Provisioning createApiSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a specified spec.",
+      "canonical": true,
+      "file": "registry.create_api_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApiSpec",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "api_spec",
+            "type": ".google.cloud.apigeeregistry.v1.ApiSpec"
+          },
+          {
+            "name": "api_spec_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "CreateApiSpec",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiSpec",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApiSpec_async",
+      "title": "Provisioning updateApiSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Used to modify a specified spec.",
+      "canonical": true,
+      "file": "registry.update_api_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApiSpec",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "api_spec",
+            "type": ".google.cloud.apigeeregistry.v1.ApiSpec"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "UpdateApiSpec",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiSpec",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiSpec_async",
+      "title": "Provisioning deleteApiSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a specified spec, all revisions, and all child resources (e.g., artifacts).",
+      "canonical": true,
+      "file": "registry.delete_api_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApiSpec",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteApiSpec",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiSpec",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_TagApiSpecRevision_async",
+      "title": "Provisioning tagApiSpecRevision Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds a tag to a specified revision of a spec.",
+      "canonical": true,
+      "file": "registry.tag_api_spec_revision.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TagApiSpecRevision",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.TagApiSpecRevision",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "TagApiSpecRevision",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.TagApiSpecRevision",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_ListApiSpecRevisions_async",
+      "title": "Provisioning listApiSpecRevisions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all revisions of a spec. Revisions are returned in descending order of revision creation time.",
+      "canonical": true,
+      "file": "registry.list_api_spec_revisions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApiSpecRevisions",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiSpecRevisions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ListApiSpecRevisionsResponse",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "ListApiSpecRevisions",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiSpecRevisions",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_RollbackApiSpec_async",
+      "title": "Provisioning rollbackApiSpec Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.",
+      "canonical": true,
+      "file": "registry.rollback_api_spec.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RollbackApiSpec",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.RollbackApiSpec",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "revision_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "RollbackApiSpec",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.RollbackApiSpec",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiSpecRevision_async",
+      "title": "Provisioning deleteApiSpecRevision Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a revision of a spec.",
+      "canonical": true,
+      "file": "registry.delete_api_spec_revision.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApiSpecRevision",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiSpecRevision",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiSpec",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteApiSpecRevision",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiSpecRevision",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_ListApiDeployments_async",
+      "title": "Provisioning listApiDeployments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns matching deployments.",
+      "canonical": true,
+      "file": "registry.list_api_deployments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApiDeployments",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiDeployments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ListApiDeploymentsResponse",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "ListApiDeployments",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiDeployments",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_GetApiDeployment_async",
+      "title": "Provisioning getApiDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a specified deployment.",
+      "canonical": true,
+      "file": "registry.get_api_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApiDeployment",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "GetApiDeployment",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.GetApiDeployment",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_CreateApiDeployment_async",
+      "title": "Provisioning createApiDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a specified deployment.",
+      "canonical": true,
+      "file": "registry.create_api_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApiDeployment",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "api_deployment",
+            "type": ".google.cloud.apigeeregistry.v1.ApiDeployment"
+          },
+          {
+            "name": "api_deployment_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "CreateApiDeployment",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateApiDeployment",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_UpdateApiDeployment_async",
+      "title": "Provisioning updateApiDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Used to modify a specified deployment.",
+      "canonical": true,
+      "file": "registry.update_api_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApiDeployment",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "api_deployment",
+            "type": ".google.cloud.apigeeregistry.v1.ApiDeployment"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "UpdateApiDeployment",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.UpdateApiDeployment",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiDeployment_async",
+      "title": "Provisioning deleteApiDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a specified deployment, all revisions, and all child resources (e.g., artifacts).",
+      "canonical": true,
+      "file": "registry.delete_api_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApiDeployment",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteApiDeployment",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiDeployment",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_TagApiDeploymentRevision_async",
+      "title": "Provisioning tagApiDeploymentRevision Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds a tag to a specified revision of a deployment.",
+      "canonical": true,
+      "file": "registry.tag_api_deployment_revision.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TagApiDeploymentRevision",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.TagApiDeploymentRevision",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "tag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "TagApiDeploymentRevision",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.TagApiDeploymentRevision",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_ListApiDeploymentRevisions_async",
+      "title": "Provisioning listApiDeploymentRevisions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all revisions of a deployment. Revisions are returned in descending order of revision creation time.",
+      "canonical": true,
+      "file": "registry.list_api_deployment_revisions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApiDeploymentRevisions",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiDeploymentRevisions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ListApiDeploymentRevisionsResponse",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "ListApiDeploymentRevisions",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.ListApiDeploymentRevisions",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_RollbackApiDeployment_async",
+      "title": "Provisioning rollbackApiDeployment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the current revision to a specified prior revision. Note that this creates a new revision with a new revision ID.",
+      "canonical": true,
+      "file": "registry.rollback_api_deployment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RollbackApiDeployment",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.RollbackApiDeployment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "revision_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "RollbackApiDeployment",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.RollbackApiDeployment",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_DeleteApiDeploymentRevision_async",
+      "title": "Provisioning deleteApiDeploymentRevision Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a revision of a deployment.",
+      "canonical": true,
+      "file": "registry.delete_api_deployment_revision.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApiDeploymentRevision",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiDeploymentRevision",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ApiDeployment",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteApiDeploymentRevision",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteApiDeploymentRevision",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_ListArtifacts_async",
+      "title": "Provisioning listArtifacts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns matching artifacts.",
+      "canonical": true,
+      "file": "registry.list_artifacts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListArtifacts",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.ListArtifacts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.ListArtifactsResponse",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "ListArtifacts",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.ListArtifacts",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_GetArtifact_async",
+      "title": "Provisioning getArtifact Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a specified artifact.",
+      "canonical": true,
+      "file": "registry.get_artifact.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetArtifact",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.GetArtifact",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.Artifact",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "GetArtifact",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.GetArtifact",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_GetArtifactContents_async",
+      "title": "Provisioning getArtifactContents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the contents of a specified artifact. If artifacts are stored with GZip compression, the default behavior is to return the artifact uncompressed (the mime_type response field indicates the exact format returned).",
+      "canonical": true,
+      "file": "registry.get_artifact_contents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetArtifactContents",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.GetArtifactContents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "GetArtifactContents",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.GetArtifactContents",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_CreateArtifact_async",
+      "title": "Provisioning createArtifact Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a specified artifact.",
+      "canonical": true,
+      "file": "registry.create_artifact.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateArtifact",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateArtifact",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "artifact",
+            "type": ".google.cloud.apigeeregistry.v1.Artifact"
+          },
+          {
+            "name": "artifact_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.Artifact",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "CreateArtifact",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.CreateArtifact",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_ReplaceArtifact_async",
+      "title": "Provisioning replaceArtifact Sample",
+      "origin": "API_DEFINITION",
+      "description": " Used to replace a specified artifact.",
+      "canonical": true,
+      "file": "registry.replace_artifact.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReplaceArtifact",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.ReplaceArtifact",
+        "async": true,
+        "parameters": [
+          {
+            "name": "artifact",
+            "type": ".google.cloud.apigeeregistry.v1.Artifact"
+          }
+        ],
+        "resultType": ".google.cloud.apigeeregistry.v1.Artifact",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "ReplaceArtifact",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.ReplaceArtifact",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apigeeregistry_v1_generated_Registry_DeleteArtifact_async",
+      "title": "Provisioning deleteArtifact Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a specified artifact.",
+      "canonical": true,
+      "file": "registry.delete_artifact.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteArtifact",
+        "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteArtifact",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "RegistryClient",
+          "fullName": "google.cloud.apigeeregistry.v1.RegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteArtifact",
+          "fullName": "google.cloud.apigeeregistry.v1.Registry.DeleteArtifact",
+          "service": {
+            "shortName": "Registry",
+            "fullName": "google.cloud.apigeeregistry.v1.Registry"
+          }
+        }
+      }
+    }
+  ]
 }

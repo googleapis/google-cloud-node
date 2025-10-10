@@ -29,7 +29,7 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent collection to list triggers on.
+   *  Required. The parent collection to list message buses on.
    */
   // const parent = 'abc123'
   /**

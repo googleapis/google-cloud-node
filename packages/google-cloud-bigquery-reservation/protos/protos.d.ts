@@ -356,6 +356,104 @@ export namespace google {
                          * @returns Promise
                          */
                         public updateBiReservation(request: google.cloud.bigquery.reservation.v1.IUpdateBiReservationRequest): Promise<google.cloud.bigquery.reservation.v1.BiReservation>;
+
+                        /**
+                         * Calls GetIamPolicy.
+                         * @param request GetIamPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Policy
+                         */
+                        public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.GetIamPolicyCallback): void;
+
+                        /**
+                         * Calls GetIamPolicy.
+                         * @param request GetIamPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                        /**
+                         * Calls SetIamPolicy.
+                         * @param request SetIamPolicyRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Policy
+                         */
+                        public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.SetIamPolicyCallback): void;
+
+                        /**
+                         * Calls SetIamPolicy.
+                         * @param request SetIamPolicyRequest message or plain object
+                         * @returns Promise
+                         */
+                        public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                        /**
+                         * Calls TestIamPermissions.
+                         * @param request TestIamPermissionsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                         */
+                        public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.TestIamPermissionsCallback): void;
+
+                        /**
+                         * Calls TestIamPermissions.
+                         * @param request TestIamPermissionsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+
+                        /**
+                         * Calls CreateReservationGroup.
+                         * @param request CreateReservationGroupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ReservationGroup
+                         */
+                        public createReservationGroup(request: google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.CreateReservationGroupCallback): void;
+
+                        /**
+                         * Calls CreateReservationGroup.
+                         * @param request CreateReservationGroupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public createReservationGroup(request: google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest): Promise<google.cloud.bigquery.reservation.v1.ReservationGroup>;
+
+                        /**
+                         * Calls GetReservationGroup.
+                         * @param request GetReservationGroupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ReservationGroup
+                         */
+                        public getReservationGroup(request: google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.GetReservationGroupCallback): void;
+
+                        /**
+                         * Calls GetReservationGroup.
+                         * @param request GetReservationGroupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public getReservationGroup(request: google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest): Promise<google.cloud.bigquery.reservation.v1.ReservationGroup>;
+
+                        /**
+                         * Calls DeleteReservationGroup.
+                         * @param request DeleteReservationGroupRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and Empty
+                         */
+                        public deleteReservationGroup(request: google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.DeleteReservationGroupCallback): void;
+
+                        /**
+                         * Calls DeleteReservationGroup.
+                         * @param request DeleteReservationGroupRequest message or plain object
+                         * @returns Promise
+                         */
+                        public deleteReservationGroup(request: google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest): Promise<google.protobuf.Empty>;
+
+                        /**
+                         * Calls ListReservationGroups.
+                         * @param request ListReservationGroupsRequest message or plain object
+                         * @param callback Node-style callback called with the error, if any, and ListReservationGroupsResponse
+                         */
+                        public listReservationGroups(request: google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest, callback: google.cloud.bigquery.reservation.v1.ReservationService.ListReservationGroupsCallback): void;
+
+                        /**
+                         * Calls ListReservationGroups.
+                         * @param request ListReservationGroupsRequest message or plain object
+                         * @returns Promise
+                         */
+                        public listReservationGroups(request: google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest): Promise<google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse>;
                     }
 
                     namespace ReservationService {
@@ -513,6 +611,55 @@ export namespace google {
                          * @param [response] BiReservation
                          */
                         type UpdateBiReservationCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.BiReservation) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|getIamPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Policy
+                         */
+                        type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|setIamPolicy}.
+                         * @param error Error, if any
+                         * @param [response] Policy
+                         */
+                        type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|testIamPermissions}.
+                         * @param error Error, if any
+                         * @param [response] TestIamPermissionsResponse
+                         */
+                        type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|createReservationGroup}.
+                         * @param error Error, if any
+                         * @param [response] ReservationGroup
+                         */
+                        type CreateReservationGroupCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.ReservationGroup) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|getReservationGroup}.
+                         * @param error Error, if any
+                         * @param [response] ReservationGroup
+                         */
+                        type GetReservationGroupCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.ReservationGroup) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|deleteReservationGroup}.
+                         * @param error Error, if any
+                         * @param [response] Empty
+                         */
+                        type DeleteReservationGroupCallback = (error: (Error|null), response?: google.protobuf.Empty) => void;
+
+                        /**
+                         * Callback as used by {@link google.cloud.bigquery.reservation.v1.ReservationService|listReservationGroups}.
+                         * @param error Error, if any
+                         * @param [response] ListReservationGroupsResponse
+                         */
+                        type ListReservationGroupsCallback = (error: (Error|null), response?: google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse) => void;
                     }
 
                     /** Properties of a Reservation. */
@@ -560,8 +707,17 @@ export namespace google {
                         /** Reservation scalingMode */
                         scalingMode?: (google.cloud.bigquery.reservation.v1.Reservation.ScalingMode|keyof typeof google.cloud.bigquery.reservation.v1.Reservation.ScalingMode|null);
 
+                        /** Reservation labels */
+                        labels?: ({ [k: string]: string }|null);
+
+                        /** Reservation reservationGroup */
+                        reservationGroup?: (string|null);
+
                         /** Reservation replicationStatus */
                         replicationStatus?: (google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus|null);
+
+                        /** Reservation schedulingPolicy */
+                        schedulingPolicy?: (google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null);
                     }
 
                     /** Represents a Reservation. */
@@ -615,8 +771,17 @@ export namespace google {
                         /** Reservation scalingMode. */
                         public scalingMode: (google.cloud.bigquery.reservation.v1.Reservation.ScalingMode|keyof typeof google.cloud.bigquery.reservation.v1.Reservation.ScalingMode);
 
+                        /** Reservation labels. */
+                        public labels: { [k: string]: string };
+
+                        /** Reservation reservationGroup. */
+                        public reservationGroup: string;
+
                         /** Reservation replicationStatus. */
                         public replicationStatus?: (google.cloud.bigquery.reservation.v1.Reservation.IReplicationStatus|null);
+
+                        /** Reservation schedulingPolicy. */
+                        public schedulingPolicy?: (google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null);
 
                         /**
                          * Creates a new Reservation instance using the specified properties.
@@ -923,6 +1088,206 @@ export namespace google {
                              */
                             public static getTypeUrl(typeUrlPrefix?: string): string;
                         }
+                    }
+
+                    /** Properties of a SchedulingPolicy. */
+                    interface ISchedulingPolicy {
+
+                        /** SchedulingPolicy concurrency */
+                        concurrency?: (number|Long|string|null);
+
+                        /** SchedulingPolicy maxSlots */
+                        maxSlots?: (number|Long|string|null);
+                    }
+
+                    /** Represents a SchedulingPolicy. */
+                    class SchedulingPolicy implements ISchedulingPolicy {
+
+                        /**
+                         * Constructs a new SchedulingPolicy.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.ISchedulingPolicy);
+
+                        /** SchedulingPolicy concurrency. */
+                        public concurrency?: (number|Long|string|null);
+
+                        /** SchedulingPolicy maxSlots. */
+                        public maxSlots?: (number|Long|string|null);
+
+                        /**
+                         * Creates a new SchedulingPolicy instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SchedulingPolicy instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.ISchedulingPolicy): google.cloud.bigquery.reservation.v1.SchedulingPolicy;
+
+                        /**
+                         * Encodes the specified SchedulingPolicy message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SchedulingPolicy.verify|verify} messages.
+                         * @param message SchedulingPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.ISchedulingPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SchedulingPolicy message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.SchedulingPolicy.verify|verify} messages.
+                         * @param message SchedulingPolicy message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.ISchedulingPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SchedulingPolicy message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SchedulingPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.SchedulingPolicy;
+
+                        /**
+                         * Decodes a SchedulingPolicy message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SchedulingPolicy
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.SchedulingPolicy;
+
+                        /**
+                         * Verifies a SchedulingPolicy message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SchedulingPolicy message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SchedulingPolicy
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.SchedulingPolicy;
+
+                        /**
+                         * Creates a plain object from a SchedulingPolicy message. Also converts values to other types if specified.
+                         * @param message SchedulingPolicy
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.SchedulingPolicy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SchedulingPolicy to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SchedulingPolicy
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ReservationGroup. */
+                    interface IReservationGroup {
+
+                        /** ReservationGroup name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a ReservationGroup. */
+                    class ReservationGroup implements IReservationGroup {
+
+                        /**
+                         * Constructs a new ReservationGroup.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.IReservationGroup);
+
+                        /** ReservationGroup name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new ReservationGroup instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ReservationGroup instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.IReservationGroup): google.cloud.bigquery.reservation.v1.ReservationGroup;
+
+                        /**
+                         * Encodes the specified ReservationGroup message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ReservationGroup.verify|verify} messages.
+                         * @param message ReservationGroup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.IReservationGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ReservationGroup message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ReservationGroup.verify|verify} messages.
+                         * @param message ReservationGroup message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.IReservationGroup, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ReservationGroup message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ReservationGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.ReservationGroup;
+
+                        /**
+                         * Decodes a ReservationGroup message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ReservationGroup
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.ReservationGroup;
+
+                        /**
+                         * Verifies a ReservationGroup message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ReservationGroup message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ReservationGroup
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.ReservationGroup;
+
+                        /**
+                         * Creates a plain object from a ReservationGroup message. Also converts values to other types if specified.
+                         * @param message ReservationGroup
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.ReservationGroup, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ReservationGroup to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ReservationGroup
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
                     /** Properties of a CapacityCommitment. */
@@ -1828,6 +2193,521 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a CreateReservationGroupRequest. */
+                    interface ICreateReservationGroupRequest {
+
+                        /** CreateReservationGroupRequest parent */
+                        parent?: (string|null);
+
+                        /** CreateReservationGroupRequest reservationGroupId */
+                        reservationGroupId?: (string|null);
+
+                        /** CreateReservationGroupRequest reservationGroup */
+                        reservationGroup?: (google.cloud.bigquery.reservation.v1.IReservationGroup|null);
+                    }
+
+                    /** Represents a CreateReservationGroupRequest. */
+                    class CreateReservationGroupRequest implements ICreateReservationGroupRequest {
+
+                        /**
+                         * Constructs a new CreateReservationGroupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest);
+
+                        /** CreateReservationGroupRequest parent. */
+                        public parent: string;
+
+                        /** CreateReservationGroupRequest reservationGroupId. */
+                        public reservationGroupId: string;
+
+                        /** CreateReservationGroupRequest reservationGroup. */
+                        public reservationGroup?: (google.cloud.bigquery.reservation.v1.IReservationGroup|null);
+
+                        /**
+                         * Creates a new CreateReservationGroupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CreateReservationGroupRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest): google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest;
+
+                        /**
+                         * Encodes the specified CreateReservationGroupRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest.verify|verify} messages.
+                         * @param message CreateReservationGroupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CreateReservationGroupRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest.verify|verify} messages.
+                         * @param message CreateReservationGroupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CreateReservationGroupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CreateReservationGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest;
+
+                        /**
+                         * Decodes a CreateReservationGroupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CreateReservationGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest;
+
+                        /**
+                         * Verifies a CreateReservationGroupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CreateReservationGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CreateReservationGroupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest;
+
+                        /**
+                         * Creates a plain object from a CreateReservationGroupRequest message. Also converts values to other types if specified.
+                         * @param message CreateReservationGroupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.CreateReservationGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CreateReservationGroupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CreateReservationGroupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a GetReservationGroupRequest. */
+                    interface IGetReservationGroupRequest {
+
+                        /** GetReservationGroupRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a GetReservationGroupRequest. */
+                    class GetReservationGroupRequest implements IGetReservationGroupRequest {
+
+                        /**
+                         * Constructs a new GetReservationGroupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest);
+
+                        /** GetReservationGroupRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new GetReservationGroupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns GetReservationGroupRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest): google.cloud.bigquery.reservation.v1.GetReservationGroupRequest;
+
+                        /**
+                         * Encodes the specified GetReservationGroupRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.GetReservationGroupRequest.verify|verify} messages.
+                         * @param message GetReservationGroupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified GetReservationGroupRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.GetReservationGroupRequest.verify|verify} messages.
+                         * @param message GetReservationGroupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a GetReservationGroupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns GetReservationGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.GetReservationGroupRequest;
+
+                        /**
+                         * Decodes a GetReservationGroupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns GetReservationGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.GetReservationGroupRequest;
+
+                        /**
+                         * Verifies a GetReservationGroupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a GetReservationGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns GetReservationGroupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.GetReservationGroupRequest;
+
+                        /**
+                         * Creates a plain object from a GetReservationGroupRequest message. Also converts values to other types if specified.
+                         * @param message GetReservationGroupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.GetReservationGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this GetReservationGroupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for GetReservationGroupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListReservationGroupsRequest. */
+                    interface IListReservationGroupsRequest {
+
+                        /** ListReservationGroupsRequest parent */
+                        parent?: (string|null);
+
+                        /** ListReservationGroupsRequest pageSize */
+                        pageSize?: (number|null);
+
+                        /** ListReservationGroupsRequest pageToken */
+                        pageToken?: (string|null);
+                    }
+
+                    /** Represents a ListReservationGroupsRequest. */
+                    class ListReservationGroupsRequest implements IListReservationGroupsRequest {
+
+                        /**
+                         * Constructs a new ListReservationGroupsRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest);
+
+                        /** ListReservationGroupsRequest parent. */
+                        public parent: string;
+
+                        /** ListReservationGroupsRequest pageSize. */
+                        public pageSize: number;
+
+                        /** ListReservationGroupsRequest pageToken. */
+                        public pageToken: string;
+
+                        /**
+                         * Creates a new ListReservationGroupsRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListReservationGroupsRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest): google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest;
+
+                        /**
+                         * Encodes the specified ListReservationGroupsRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest.verify|verify} messages.
+                         * @param message ListReservationGroupsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListReservationGroupsRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest.verify|verify} messages.
+                         * @param message ListReservationGroupsRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListReservationGroupsRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListReservationGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest;
+
+                        /**
+                         * Decodes a ListReservationGroupsRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListReservationGroupsRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest;
+
+                        /**
+                         * Verifies a ListReservationGroupsRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListReservationGroupsRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListReservationGroupsRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest;
+
+                        /**
+                         * Creates a plain object from a ListReservationGroupsRequest message. Also converts values to other types if specified.
+                         * @param message ListReservationGroupsRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.ListReservationGroupsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListReservationGroupsRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListReservationGroupsRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ListReservationGroupsResponse. */
+                    interface IListReservationGroupsResponse {
+
+                        /** ListReservationGroupsResponse reservationGroups */
+                        reservationGroups?: (google.cloud.bigquery.reservation.v1.IReservationGroup[]|null);
+
+                        /** ListReservationGroupsResponse nextPageToken */
+                        nextPageToken?: (string|null);
+                    }
+
+                    /** Represents a ListReservationGroupsResponse. */
+                    class ListReservationGroupsResponse implements IListReservationGroupsResponse {
+
+                        /**
+                         * Constructs a new ListReservationGroupsResponse.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse);
+
+                        /** ListReservationGroupsResponse reservationGroups. */
+                        public reservationGroups: google.cloud.bigquery.reservation.v1.IReservationGroup[];
+
+                        /** ListReservationGroupsResponse nextPageToken. */
+                        public nextPageToken: string;
+
+                        /**
+                         * Creates a new ListReservationGroupsResponse instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ListReservationGroupsResponse instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse): google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse;
+
+                        /**
+                         * Encodes the specified ListReservationGroupsResponse message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse.verify|verify} messages.
+                         * @param message ListReservationGroupsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ListReservationGroupsResponse message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse.verify|verify} messages.
+                         * @param message ListReservationGroupsResponse message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ListReservationGroupsResponse message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ListReservationGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse;
+
+                        /**
+                         * Decodes a ListReservationGroupsResponse message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ListReservationGroupsResponse
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse;
+
+                        /**
+                         * Verifies a ListReservationGroupsResponse message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ListReservationGroupsResponse message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ListReservationGroupsResponse
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse;
+
+                        /**
+                         * Creates a plain object from a ListReservationGroupsResponse message. Also converts values to other types if specified.
+                         * @param message ListReservationGroupsResponse
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.ListReservationGroupsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ListReservationGroupsResponse to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ListReservationGroupsResponse
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a DeleteReservationGroupRequest. */
+                    interface IDeleteReservationGroupRequest {
+
+                        /** DeleteReservationGroupRequest name */
+                        name?: (string|null);
+                    }
+
+                    /** Represents a DeleteReservationGroupRequest. */
+                    class DeleteReservationGroupRequest implements IDeleteReservationGroupRequest {
+
+                        /**
+                         * Constructs a new DeleteReservationGroupRequest.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest);
+
+                        /** DeleteReservationGroupRequest name. */
+                        public name: string;
+
+                        /**
+                         * Creates a new DeleteReservationGroupRequest instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DeleteReservationGroupRequest instance
+                         */
+                        public static create(properties?: google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest): google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest;
+
+                        /**
+                         * Encodes the specified DeleteReservationGroupRequest message. Does not implicitly {@link google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest.verify|verify} messages.
+                         * @param message DeleteReservationGroupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DeleteReservationGroupRequest message, length delimited. Does not implicitly {@link google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest.verify|verify} messages.
+                         * @param message DeleteReservationGroupRequest message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DeleteReservationGroupRequest message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DeleteReservationGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest;
+
+                        /**
+                         * Decodes a DeleteReservationGroupRequest message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DeleteReservationGroupRequest
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest;
+
+                        /**
+                         * Verifies a DeleteReservationGroupRequest message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DeleteReservationGroupRequest message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DeleteReservationGroupRequest
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest;
+
+                        /**
+                         * Creates a plain object from a DeleteReservationGroupRequest message. Also converts values to other types if specified.
+                         * @param message DeleteReservationGroupRequest
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.bigquery.reservation.v1.DeleteReservationGroupRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DeleteReservationGroupRequest to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DeleteReservationGroupRequest
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Properties of a CreateCapacityCommitmentRequest. */
                     interface ICreateCapacityCommitmentRequest {
 
@@ -2672,6 +3552,9 @@ export namespace google {
 
                         /** MergeCapacityCommitmentsRequest capacityCommitmentIds */
                         capacityCommitmentIds?: (string[]|null);
+
+                        /** MergeCapacityCommitmentsRequest capacityCommitmentId */
+                        capacityCommitmentId?: (string|null);
                     }
 
                     /** Represents a MergeCapacityCommitmentsRequest. */
@@ -2688,6 +3571,9 @@ export namespace google {
 
                         /** MergeCapacityCommitmentsRequest capacityCommitmentIds. */
                         public capacityCommitmentIds: string[];
+
+                        /** MergeCapacityCommitmentsRequest capacityCommitmentId. */
+                        public capacityCommitmentId: string;
 
                         /**
                          * Creates a new MergeCapacityCommitmentsRequest instance using the specified properties.
@@ -2784,6 +3670,9 @@ export namespace google {
 
                         /** Assignment enableGeminiInBigquery */
                         enableGeminiInBigquery?: (boolean|null);
+
+                        /** Assignment schedulingPolicy */
+                        schedulingPolicy?: (google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null);
                     }
 
                     /** Represents an Assignment. */
@@ -2809,6 +3698,9 @@ export namespace google {
 
                         /** Assignment enableGeminiInBigquery. */
                         public enableGeminiInBigquery: boolean;
+
+                        /** Assignment schedulingPolicy. */
+                        public schedulingPolicy?: (google.cloud.bigquery.reservation.v1.ISchedulingPolicy|null);
 
                         /**
                          * Creates a new Assignment instance using the specified properties.
@@ -2897,7 +3789,10 @@ export namespace google {
                             QUERY = 2,
                             ML_EXTERNAL = 3,
                             BACKGROUND = 4,
-                            CONTINUOUS = 6
+                            CONTINUOUS = 6,
+                            BACKGROUND_CHANGE_DATA_CAPTURE = 7,
+                            BACKGROUND_COLUMN_METADATA_INDEX = 8,
+                            BACKGROUND_SEARCH_INDEX_REFRESH = 9
                         }
 
                         /** State enum. */
@@ -4788,9 +5683,6 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
-
-            /** CommonLanguageSettings selectiveGapicGeneration */
-            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -4807,9 +5699,6 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
-
-            /** CommonLanguageSettings selectiveGapicGeneration. */
-            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -5511,9 +6400,6 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
-
-            /** PythonSettings experimentalFeatures */
-            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -5527,9 +6413,6 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
-
-            /** PythonSettings experimentalFeatures. */
-            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -5607,118 +6490,6 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace PythonSettings {
-
-            /** Properties of an ExperimentalFeatures. */
-            interface IExperimentalFeatures {
-
-                /** ExperimentalFeatures restAsyncIoEnabled */
-                restAsyncIoEnabled?: (boolean|null);
-
-                /** ExperimentalFeatures protobufPythonicTypesEnabled */
-                protobufPythonicTypesEnabled?: (boolean|null);
-
-                /** ExperimentalFeatures unversionedPackageDisabled */
-                unversionedPackageDisabled?: (boolean|null);
-            }
-
-            /** Represents an ExperimentalFeatures. */
-            class ExperimentalFeatures implements IExperimentalFeatures {
-
-                /**
-                 * Constructs a new ExperimentalFeatures.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
-
-                /** ExperimentalFeatures restAsyncIoEnabled. */
-                public restAsyncIoEnabled: boolean;
-
-                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
-                public protobufPythonicTypesEnabled: boolean;
-
-                /** ExperimentalFeatures unversionedPackageDisabled. */
-                public unversionedPackageDisabled: boolean;
-
-                /**
-                 * Creates a new ExperimentalFeatures instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ExperimentalFeatures instance
-                 */
-                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                 * @param message ExperimentalFeatures message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                 * @param message ExperimentalFeatures message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ExperimentalFeatures
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ExperimentalFeatures
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Verifies an ExperimentalFeatures message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ExperimentalFeatures
-                 */
-                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                 * @param message ExperimentalFeatures
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ExperimentalFeatures to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ExperimentalFeatures
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
         }
 
         /** Properties of a NodeSettings. */
@@ -6047,9 +6818,6 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
-
-            /** GoSettings renamedServices */
-            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -6063,9 +6831,6 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
-
-            /** GoSettings renamedServices. */
-            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -6389,109 +7154,6 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
-        }
-
-        /** Properties of a SelectiveGapicGeneration. */
-        interface ISelectiveGapicGeneration {
-
-            /** SelectiveGapicGeneration methods */
-            methods?: (string[]|null);
-
-            /** SelectiveGapicGeneration generateOmittedAsInternal */
-            generateOmittedAsInternal?: (boolean|null);
-        }
-
-        /** Represents a SelectiveGapicGeneration. */
-        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
-
-            /**
-             * Constructs a new SelectiveGapicGeneration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ISelectiveGapicGeneration);
-
-            /** SelectiveGapicGeneration methods. */
-            public methods: string[];
-
-            /** SelectiveGapicGeneration generateOmittedAsInternal. */
-            public generateOmittedAsInternal: boolean;
-
-            /**
-             * Creates a new SelectiveGapicGeneration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns SelectiveGapicGeneration instance
-             */
-            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-             * @param message SelectiveGapicGeneration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-             * @param message SelectiveGapicGeneration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns SelectiveGapicGeneration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns SelectiveGapicGeneration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Verifies a SelectiveGapicGeneration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns SelectiveGapicGeneration
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-             * @param message SelectiveGapicGeneration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this SelectiveGapicGeneration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for SelectiveGapicGeneration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -6875,7 +7537,6 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
-            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -6905,9 +7566,6 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
-
-            /** FileDescriptorProto optionDependency */
-            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -6957,9 +7615,6 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
-
-            /** FileDescriptorProto optionDependency. */
-            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -7095,9 +7750,6 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
-
-            /** DescriptorProto visibility */
-            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -7138,9 +7790,6 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
-
-            /** DescriptorProto visibility. */
-            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -7989,9 +8638,6 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
-
-            /** EnumDescriptorProto visibility */
-            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -8017,9 +8663,6 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
-
-            /** EnumDescriptorProto visibility. */
-            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -8955,9 +9598,6 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
-            /** FieldOptions featureSupport */
-            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
-
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -9012,9 +9652,6 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
-
-            /** FieldOptions featureSupport. */
-            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -9231,121 +9868,6 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a FeatureSupport. */
-            interface IFeatureSupport {
-
-                /** FeatureSupport editionIntroduced */
-                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-
-                /** FeatureSupport editionDeprecated */
-                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-
-                /** FeatureSupport deprecationWarning */
-                deprecationWarning?: (string|null);
-
-                /** FeatureSupport editionRemoved */
-                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-            }
-
-            /** Represents a FeatureSupport. */
-            class FeatureSupport implements IFeatureSupport {
-
-                /**
-                 * Constructs a new FeatureSupport.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
-
-                /** FeatureSupport editionIntroduced. */
-                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /** FeatureSupport editionDeprecated. */
-                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /** FeatureSupport deprecationWarning. */
-                public deprecationWarning: string;
-
-                /** FeatureSupport editionRemoved. */
-                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /**
-                 * Creates a new FeatureSupport instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns FeatureSupport instance
-                 */
-                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                 * @param message FeatureSupport message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                 * @param message FeatureSupport message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a FeatureSupport message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns FeatureSupport
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns FeatureSupport
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Verifies a FeatureSupport message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns FeatureSupport
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                 * @param message FeatureSupport
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this FeatureSupport to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -9589,9 +10111,6 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
-            /** EnumValueOptions featureSupport */
-            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
-
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -9613,9 +10132,6 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
-
-            /** EnumValueOptions featureSupport. */
-            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -10206,12 +10722,6 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
-
-            /** FeatureSet enforceNamingStyle */
-            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
-
-            /** FeatureSet defaultSymbolVisibility */
-            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -10240,12 +10750,6 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
-
-            /** FeatureSet enforceNamingStyle. */
-            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
-
-            /** FeatureSet defaultSymbolVisibility. */
-            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -10369,116 +10873,6 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
-
-            /** EnforceNamingStyle enum. */
-            enum EnforceNamingStyle {
-                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
-                STYLE2024 = 1,
-                STYLE_LEGACY = 2
-            }
-
-            /** Properties of a VisibilityFeature. */
-            interface IVisibilityFeature {
-            }
-
-            /** Represents a VisibilityFeature. */
-            class VisibilityFeature implements IVisibilityFeature {
-
-                /**
-                 * Constructs a new VisibilityFeature.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
-
-                /**
-                 * Creates a new VisibilityFeature instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns VisibilityFeature instance
-                 */
-                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                 * @param message VisibilityFeature message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                 * @param message VisibilityFeature message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a VisibilityFeature message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns VisibilityFeature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns VisibilityFeature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Verifies a VisibilityFeature message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns VisibilityFeature
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                 * @param message VisibilityFeature
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this VisibilityFeature to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for VisibilityFeature
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace VisibilityFeature {
-
-                /** DefaultSymbolVisibility enum. */
-                enum DefaultSymbolVisibility {
-                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
-                    EXPORT_ALL = 1,
-                    EXPORT_TOP_LEVEL = 2,
-                    LOCAL_ALL = 3,
-                    STRICT = 4
-                }
-            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -10598,11 +10992,8 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault overridableFeatures */
-                overridableFeatures?: (google.protobuf.IFeatureSet|null);
-
-                /** FeatureSetEditionDefault fixedFeatures */
-                fixedFeatures?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -10617,11 +11008,8 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault overridableFeatures. */
-                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
-
-                /** FeatureSetEditionDefault fixedFeatures. */
-                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -11154,13 +11542,6 @@ export namespace google {
             }
         }
 
-        /** SymbolVisibility enum. */
-        enum SymbolVisibility {
-            VISIBILITY_UNSET = 0,
-            VISIBILITY_LOCAL = 1,
-            VISIBILITY_EXPORT = 2
-        }
-
         /** Properties of a Duration. */
         interface IDuration {
 
@@ -11264,97 +11645,6 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of an Empty. */
-        interface IEmpty {
-        }
-
-        /** Represents an Empty. */
-        class Empty implements IEmpty {
-
-            /**
-             * Constructs a new Empty.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IEmpty);
-
-            /**
-             * Creates a new Empty instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Empty instance
-             */
-            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
-
-            /**
-             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
-             * @param message Empty message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
-
-            /**
-             * Decodes an Empty message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Empty
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
-
-            /**
-             * Verifies an Empty message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Empty
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
-
-            /**
-             * Creates a plain object from an Empty message. Also converts values to other types if specified.
-             * @param message Empty
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Empty to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Empty
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a FieldMask. */
         interface IFieldMask {
 
@@ -11446,6 +11736,97 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of an Empty. */
+        interface IEmpty {
+        }
+
+        /** Represents an Empty. */
+        class Empty implements IEmpty {
+
+            /**
+             * Constructs a new Empty.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IEmpty);
+
+            /**
+             * Creates a new Empty instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Empty instance
+             */
+            public static create(properties?: google.protobuf.IEmpty): google.protobuf.Empty;
+
+            /**
+             * Encodes the specified Empty message. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Empty message, length delimited. Does not implicitly {@link google.protobuf.Empty.verify|verify} messages.
+             * @param message Empty message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IEmpty, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Empty;
+
+            /**
+             * Decodes an Empty message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Empty
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Empty;
+
+            /**
+             * Verifies an Empty message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Empty message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Empty
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Empty;
+
+            /**
+             * Creates a plain object from an Empty message. Also converts values to other types if specified.
+             * @param message Empty
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Empty, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Empty to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Empty
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -11652,6 +12033,1523 @@ export namespace google {
 
             /**
              * Gets the default type url for Any
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace iam. */
+    namespace iam {
+
+        /** Namespace v1. */
+        namespace v1 {
+
+            /** Represents a IAMPolicy */
+            class IAMPolicy extends $protobuf.rpc.Service {
+
+                /**
+                 * Constructs a new IAMPolicy service.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 */
+                constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                /**
+                 * Creates new IAMPolicy service using the specified rpc implementation.
+                 * @param rpcImpl RPC implementation
+                 * @param [requestDelimited=false] Whether requests are length-delimited
+                 * @param [responseDelimited=false] Whether responses are length-delimited
+                 * @returns RPC service. Useful where requests and/or responses are streamed.
+                 */
+                public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): IAMPolicy;
+
+                /**
+                 * Calls SetIamPolicy.
+                 * @param request SetIamPolicyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Policy
+                 */
+                public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest, callback: google.iam.v1.IAMPolicy.SetIamPolicyCallback): void;
+
+                /**
+                 * Calls SetIamPolicy.
+                 * @param request SetIamPolicyRequest message or plain object
+                 * @returns Promise
+                 */
+                public setIamPolicy(request: google.iam.v1.ISetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                /**
+                 * Calls GetIamPolicy.
+                 * @param request GetIamPolicyRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and Policy
+                 */
+                public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest, callback: google.iam.v1.IAMPolicy.GetIamPolicyCallback): void;
+
+                /**
+                 * Calls GetIamPolicy.
+                 * @param request GetIamPolicyRequest message or plain object
+                 * @returns Promise
+                 */
+                public getIamPolicy(request: google.iam.v1.IGetIamPolicyRequest): Promise<google.iam.v1.Policy>;
+
+                /**
+                 * Calls TestIamPermissions.
+                 * @param request TestIamPermissionsRequest message or plain object
+                 * @param callback Node-style callback called with the error, if any, and TestIamPermissionsResponse
+                 */
+                public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest, callback: google.iam.v1.IAMPolicy.TestIamPermissionsCallback): void;
+
+                /**
+                 * Calls TestIamPermissions.
+                 * @param request TestIamPermissionsRequest message or plain object
+                 * @returns Promise
+                 */
+                public testIamPermissions(request: google.iam.v1.ITestIamPermissionsRequest): Promise<google.iam.v1.TestIamPermissionsResponse>;
+            }
+
+            namespace IAMPolicy {
+
+                /**
+                 * Callback as used by {@link google.iam.v1.IAMPolicy|setIamPolicy}.
+                 * @param error Error, if any
+                 * @param [response] Policy
+                 */
+                type SetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1.IAMPolicy|getIamPolicy}.
+                 * @param error Error, if any
+                 * @param [response] Policy
+                 */
+                type GetIamPolicyCallback = (error: (Error|null), response?: google.iam.v1.Policy) => void;
+
+                /**
+                 * Callback as used by {@link google.iam.v1.IAMPolicy|testIamPermissions}.
+                 * @param error Error, if any
+                 * @param [response] TestIamPermissionsResponse
+                 */
+                type TestIamPermissionsCallback = (error: (Error|null), response?: google.iam.v1.TestIamPermissionsResponse) => void;
+            }
+
+            /** Properties of a SetIamPolicyRequest. */
+            interface ISetIamPolicyRequest {
+
+                /** SetIamPolicyRequest resource */
+                resource?: (string|null);
+
+                /** SetIamPolicyRequest policy */
+                policy?: (google.iam.v1.IPolicy|null);
+
+                /** SetIamPolicyRequest updateMask */
+                updateMask?: (google.protobuf.IFieldMask|null);
+            }
+
+            /** Represents a SetIamPolicyRequest. */
+            class SetIamPolicyRequest implements ISetIamPolicyRequest {
+
+                /**
+                 * Constructs a new SetIamPolicyRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.ISetIamPolicyRequest);
+
+                /** SetIamPolicyRequest resource. */
+                public resource: string;
+
+                /** SetIamPolicyRequest policy. */
+                public policy?: (google.iam.v1.IPolicy|null);
+
+                /** SetIamPolicyRequest updateMask. */
+                public updateMask?: (google.protobuf.IFieldMask|null);
+
+                /**
+                 * Creates a new SetIamPolicyRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns SetIamPolicyRequest instance
+                 */
+                public static create(properties?: google.iam.v1.ISetIamPolicyRequest): google.iam.v1.SetIamPolicyRequest;
+
+                /**
+                 * Encodes the specified SetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
+                 * @param message SetIamPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.ISetIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified SetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.SetIamPolicyRequest.verify|verify} messages.
+                 * @param message SetIamPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.ISetIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a SetIamPolicyRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns SetIamPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.SetIamPolicyRequest;
+
+                /**
+                 * Decodes a SetIamPolicyRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns SetIamPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.SetIamPolicyRequest;
+
+                /**
+                 * Verifies a SetIamPolicyRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a SetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns SetIamPolicyRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.SetIamPolicyRequest;
+
+                /**
+                 * Creates a plain object from a SetIamPolicyRequest message. Also converts values to other types if specified.
+                 * @param message SetIamPolicyRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.SetIamPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this SetIamPolicyRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for SetIamPolicyRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetIamPolicyRequest. */
+            interface IGetIamPolicyRequest {
+
+                /** GetIamPolicyRequest resource */
+                resource?: (string|null);
+
+                /** GetIamPolicyRequest options */
+                options?: (google.iam.v1.IGetPolicyOptions|null);
+            }
+
+            /** Represents a GetIamPolicyRequest. */
+            class GetIamPolicyRequest implements IGetIamPolicyRequest {
+
+                /**
+                 * Constructs a new GetIamPolicyRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IGetIamPolicyRequest);
+
+                /** GetIamPolicyRequest resource. */
+                public resource: string;
+
+                /** GetIamPolicyRequest options. */
+                public options?: (google.iam.v1.IGetPolicyOptions|null);
+
+                /**
+                 * Creates a new GetIamPolicyRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetIamPolicyRequest instance
+                 */
+                public static create(properties?: google.iam.v1.IGetIamPolicyRequest): google.iam.v1.GetIamPolicyRequest;
+
+                /**
+                 * Encodes the specified GetIamPolicyRequest message. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
+                 * @param message GetIamPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IGetIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetIamPolicyRequest message, length delimited. Does not implicitly {@link google.iam.v1.GetIamPolicyRequest.verify|verify} messages.
+                 * @param message GetIamPolicyRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IGetIamPolicyRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetIamPolicyRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetIamPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.GetIamPolicyRequest;
+
+                /**
+                 * Decodes a GetIamPolicyRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetIamPolicyRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.GetIamPolicyRequest;
+
+                /**
+                 * Verifies a GetIamPolicyRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetIamPolicyRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetIamPolicyRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.GetIamPolicyRequest;
+
+                /**
+                 * Creates a plain object from a GetIamPolicyRequest message. Also converts values to other types if specified.
+                 * @param message GetIamPolicyRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.GetIamPolicyRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetIamPolicyRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetIamPolicyRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a TestIamPermissionsRequest. */
+            interface ITestIamPermissionsRequest {
+
+                /** TestIamPermissionsRequest resource */
+                resource?: (string|null);
+
+                /** TestIamPermissionsRequest permissions */
+                permissions?: (string[]|null);
+            }
+
+            /** Represents a TestIamPermissionsRequest. */
+            class TestIamPermissionsRequest implements ITestIamPermissionsRequest {
+
+                /**
+                 * Constructs a new TestIamPermissionsRequest.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.ITestIamPermissionsRequest);
+
+                /** TestIamPermissionsRequest resource. */
+                public resource: string;
+
+                /** TestIamPermissionsRequest permissions. */
+                public permissions: string[];
+
+                /**
+                 * Creates a new TestIamPermissionsRequest instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns TestIamPermissionsRequest instance
+                 */
+                public static create(properties?: google.iam.v1.ITestIamPermissionsRequest): google.iam.v1.TestIamPermissionsRequest;
+
+                /**
+                 * Encodes the specified TestIamPermissionsRequest message. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
+                 * @param message TestIamPermissionsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.ITestIamPermissionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified TestIamPermissionsRequest message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsRequest.verify|verify} messages.
+                 * @param message TestIamPermissionsRequest message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.ITestIamPermissionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a TestIamPermissionsRequest message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns TestIamPermissionsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.TestIamPermissionsRequest;
+
+                /**
+                 * Decodes a TestIamPermissionsRequest message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns TestIamPermissionsRequest
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.TestIamPermissionsRequest;
+
+                /**
+                 * Verifies a TestIamPermissionsRequest message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a TestIamPermissionsRequest message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns TestIamPermissionsRequest
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.TestIamPermissionsRequest;
+
+                /**
+                 * Creates a plain object from a TestIamPermissionsRequest message. Also converts values to other types if specified.
+                 * @param message TestIamPermissionsRequest
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.TestIamPermissionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this TestIamPermissionsRequest to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for TestIamPermissionsRequest
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a TestIamPermissionsResponse. */
+            interface ITestIamPermissionsResponse {
+
+                /** TestIamPermissionsResponse permissions */
+                permissions?: (string[]|null);
+            }
+
+            /** Represents a TestIamPermissionsResponse. */
+            class TestIamPermissionsResponse implements ITestIamPermissionsResponse {
+
+                /**
+                 * Constructs a new TestIamPermissionsResponse.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.ITestIamPermissionsResponse);
+
+                /** TestIamPermissionsResponse permissions. */
+                public permissions: string[];
+
+                /**
+                 * Creates a new TestIamPermissionsResponse instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns TestIamPermissionsResponse instance
+                 */
+                public static create(properties?: google.iam.v1.ITestIamPermissionsResponse): google.iam.v1.TestIamPermissionsResponse;
+
+                /**
+                 * Encodes the specified TestIamPermissionsResponse message. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
+                 * @param message TestIamPermissionsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.ITestIamPermissionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified TestIamPermissionsResponse message, length delimited. Does not implicitly {@link google.iam.v1.TestIamPermissionsResponse.verify|verify} messages.
+                 * @param message TestIamPermissionsResponse message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.ITestIamPermissionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a TestIamPermissionsResponse message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns TestIamPermissionsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.TestIamPermissionsResponse;
+
+                /**
+                 * Decodes a TestIamPermissionsResponse message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns TestIamPermissionsResponse
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.TestIamPermissionsResponse;
+
+                /**
+                 * Verifies a TestIamPermissionsResponse message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a TestIamPermissionsResponse message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns TestIamPermissionsResponse
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.TestIamPermissionsResponse;
+
+                /**
+                 * Creates a plain object from a TestIamPermissionsResponse message. Also converts values to other types if specified.
+                 * @param message TestIamPermissionsResponse
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.TestIamPermissionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this TestIamPermissionsResponse to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for TestIamPermissionsResponse
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a GetPolicyOptions. */
+            interface IGetPolicyOptions {
+
+                /** GetPolicyOptions requestedPolicyVersion */
+                requestedPolicyVersion?: (number|null);
+            }
+
+            /** Represents a GetPolicyOptions. */
+            class GetPolicyOptions implements IGetPolicyOptions {
+
+                /**
+                 * Constructs a new GetPolicyOptions.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IGetPolicyOptions);
+
+                /** GetPolicyOptions requestedPolicyVersion. */
+                public requestedPolicyVersion: number;
+
+                /**
+                 * Creates a new GetPolicyOptions instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns GetPolicyOptions instance
+                 */
+                public static create(properties?: google.iam.v1.IGetPolicyOptions): google.iam.v1.GetPolicyOptions;
+
+                /**
+                 * Encodes the specified GetPolicyOptions message. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
+                 * @param message GetPolicyOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IGetPolicyOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified GetPolicyOptions message, length delimited. Does not implicitly {@link google.iam.v1.GetPolicyOptions.verify|verify} messages.
+                 * @param message GetPolicyOptions message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IGetPolicyOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a GetPolicyOptions message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns GetPolicyOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.GetPolicyOptions;
+
+                /**
+                 * Decodes a GetPolicyOptions message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns GetPolicyOptions
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.GetPolicyOptions;
+
+                /**
+                 * Verifies a GetPolicyOptions message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a GetPolicyOptions message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns GetPolicyOptions
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.GetPolicyOptions;
+
+                /**
+                 * Creates a plain object from a GetPolicyOptions message. Also converts values to other types if specified.
+                 * @param message GetPolicyOptions
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.GetPolicyOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this GetPolicyOptions to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for GetPolicyOptions
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a Policy. */
+            interface IPolicy {
+
+                /** Policy version */
+                version?: (number|null);
+
+                /** Policy bindings */
+                bindings?: (google.iam.v1.IBinding[]|null);
+
+                /** Policy auditConfigs */
+                auditConfigs?: (google.iam.v1.IAuditConfig[]|null);
+
+                /** Policy etag */
+                etag?: (Uint8Array|Buffer|string|null);
+            }
+
+            /** Represents a Policy. */
+            class Policy implements IPolicy {
+
+                /**
+                 * Constructs a new Policy.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IPolicy);
+
+                /** Policy version. */
+                public version: number;
+
+                /** Policy bindings. */
+                public bindings: google.iam.v1.IBinding[];
+
+                /** Policy auditConfigs. */
+                public auditConfigs: google.iam.v1.IAuditConfig[];
+
+                /** Policy etag. */
+                public etag: (Uint8Array|Buffer|string);
+
+                /**
+                 * Creates a new Policy instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Policy instance
+                 */
+                public static create(properties?: google.iam.v1.IPolicy): google.iam.v1.Policy;
+
+                /**
+                 * Encodes the specified Policy message. Does not implicitly {@link google.iam.v1.Policy.verify|verify} messages.
+                 * @param message Policy message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Policy message, length delimited. Does not implicitly {@link google.iam.v1.Policy.verify|verify} messages.
+                 * @param message Policy message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IPolicy, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Policy message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Policy
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.Policy;
+
+                /**
+                 * Decodes a Policy message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Policy
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.Policy;
+
+                /**
+                 * Verifies a Policy message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Policy message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Policy
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.Policy;
+
+                /**
+                 * Creates a plain object from a Policy message. Also converts values to other types if specified.
+                 * @param message Policy
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.Policy, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Policy to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Policy
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a Binding. */
+            interface IBinding {
+
+                /** Binding role */
+                role?: (string|null);
+
+                /** Binding members */
+                members?: (string[]|null);
+
+                /** Binding condition */
+                condition?: (google.type.IExpr|null);
+            }
+
+            /** Represents a Binding. */
+            class Binding implements IBinding {
+
+                /**
+                 * Constructs a new Binding.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IBinding);
+
+                /** Binding role. */
+                public role: string;
+
+                /** Binding members. */
+                public members: string[];
+
+                /** Binding condition. */
+                public condition?: (google.type.IExpr|null);
+
+                /**
+                 * Creates a new Binding instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Binding instance
+                 */
+                public static create(properties?: google.iam.v1.IBinding): google.iam.v1.Binding;
+
+                /**
+                 * Encodes the specified Binding message. Does not implicitly {@link google.iam.v1.Binding.verify|verify} messages.
+                 * @param message Binding message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Binding message, length delimited. Does not implicitly {@link google.iam.v1.Binding.verify|verify} messages.
+                 * @param message Binding message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IBinding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a Binding message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Binding
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.Binding;
+
+                /**
+                 * Decodes a Binding message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Binding
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.Binding;
+
+                /**
+                 * Verifies a Binding message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a Binding message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Binding
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.Binding;
+
+                /**
+                 * Creates a plain object from a Binding message. Also converts values to other types if specified.
+                 * @param message Binding
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.Binding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Binding to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for Binding
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AuditConfig. */
+            interface IAuditConfig {
+
+                /** AuditConfig service */
+                service?: (string|null);
+
+                /** AuditConfig auditLogConfigs */
+                auditLogConfigs?: (google.iam.v1.IAuditLogConfig[]|null);
+            }
+
+            /** Represents an AuditConfig. */
+            class AuditConfig implements IAuditConfig {
+
+                /**
+                 * Constructs a new AuditConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IAuditConfig);
+
+                /** AuditConfig service. */
+                public service: string;
+
+                /** AuditConfig auditLogConfigs. */
+                public auditLogConfigs: google.iam.v1.IAuditLogConfig[];
+
+                /**
+                 * Creates a new AuditConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AuditConfig instance
+                 */
+                public static create(properties?: google.iam.v1.IAuditConfig): google.iam.v1.AuditConfig;
+
+                /**
+                 * Encodes the specified AuditConfig message. Does not implicitly {@link google.iam.v1.AuditConfig.verify|verify} messages.
+                 * @param message AuditConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IAuditConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AuditConfig message, length delimited. Does not implicitly {@link google.iam.v1.AuditConfig.verify|verify} messages.
+                 * @param message AuditConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IAuditConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AuditConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AuditConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.AuditConfig;
+
+                /**
+                 * Decodes an AuditConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AuditConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.AuditConfig;
+
+                /**
+                 * Verifies an AuditConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AuditConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AuditConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.AuditConfig;
+
+                /**
+                 * Creates a plain object from an AuditConfig message. Also converts values to other types if specified.
+                 * @param message AuditConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.AuditConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AuditConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AuditConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of an AuditLogConfig. */
+            interface IAuditLogConfig {
+
+                /** AuditLogConfig logType */
+                logType?: (google.iam.v1.AuditLogConfig.LogType|keyof typeof google.iam.v1.AuditLogConfig.LogType|null);
+
+                /** AuditLogConfig exemptedMembers */
+                exemptedMembers?: (string[]|null);
+            }
+
+            /** Represents an AuditLogConfig. */
+            class AuditLogConfig implements IAuditLogConfig {
+
+                /**
+                 * Constructs a new AuditLogConfig.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IAuditLogConfig);
+
+                /** AuditLogConfig logType. */
+                public logType: (google.iam.v1.AuditLogConfig.LogType|keyof typeof google.iam.v1.AuditLogConfig.LogType);
+
+                /** AuditLogConfig exemptedMembers. */
+                public exemptedMembers: string[];
+
+                /**
+                 * Creates a new AuditLogConfig instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AuditLogConfig instance
+                 */
+                public static create(properties?: google.iam.v1.IAuditLogConfig): google.iam.v1.AuditLogConfig;
+
+                /**
+                 * Encodes the specified AuditLogConfig message. Does not implicitly {@link google.iam.v1.AuditLogConfig.verify|verify} messages.
+                 * @param message AuditLogConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IAuditLogConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AuditLogConfig message, length delimited. Does not implicitly {@link google.iam.v1.AuditLogConfig.verify|verify} messages.
+                 * @param message AuditLogConfig message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IAuditLogConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AuditLogConfig message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AuditLogConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.AuditLogConfig;
+
+                /**
+                 * Decodes an AuditLogConfig message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AuditLogConfig
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.AuditLogConfig;
+
+                /**
+                 * Verifies an AuditLogConfig message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AuditLogConfig message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AuditLogConfig
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.AuditLogConfig;
+
+                /**
+                 * Creates a plain object from an AuditLogConfig message. Also converts values to other types if specified.
+                 * @param message AuditLogConfig
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.AuditLogConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AuditLogConfig to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AuditLogConfig
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AuditLogConfig {
+
+                /** LogType enum. */
+                enum LogType {
+                    LOG_TYPE_UNSPECIFIED = 0,
+                    ADMIN_READ = 1,
+                    DATA_WRITE = 2,
+                    DATA_READ = 3
+                }
+            }
+
+            /** Properties of a PolicyDelta. */
+            interface IPolicyDelta {
+
+                /** PolicyDelta bindingDeltas */
+                bindingDeltas?: (google.iam.v1.IBindingDelta[]|null);
+
+                /** PolicyDelta auditConfigDeltas */
+                auditConfigDeltas?: (google.iam.v1.IAuditConfigDelta[]|null);
+            }
+
+            /** Represents a PolicyDelta. */
+            class PolicyDelta implements IPolicyDelta {
+
+                /**
+                 * Constructs a new PolicyDelta.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IPolicyDelta);
+
+                /** PolicyDelta bindingDeltas. */
+                public bindingDeltas: google.iam.v1.IBindingDelta[];
+
+                /** PolicyDelta auditConfigDeltas. */
+                public auditConfigDeltas: google.iam.v1.IAuditConfigDelta[];
+
+                /**
+                 * Creates a new PolicyDelta instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns PolicyDelta instance
+                 */
+                public static create(properties?: google.iam.v1.IPolicyDelta): google.iam.v1.PolicyDelta;
+
+                /**
+                 * Encodes the specified PolicyDelta message. Does not implicitly {@link google.iam.v1.PolicyDelta.verify|verify} messages.
+                 * @param message PolicyDelta message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IPolicyDelta, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified PolicyDelta message, length delimited. Does not implicitly {@link google.iam.v1.PolicyDelta.verify|verify} messages.
+                 * @param message PolicyDelta message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IPolicyDelta, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a PolicyDelta message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns PolicyDelta
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.PolicyDelta;
+
+                /**
+                 * Decodes a PolicyDelta message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns PolicyDelta
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.PolicyDelta;
+
+                /**
+                 * Verifies a PolicyDelta message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a PolicyDelta message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns PolicyDelta
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.PolicyDelta;
+
+                /**
+                 * Creates a plain object from a PolicyDelta message. Also converts values to other types if specified.
+                 * @param message PolicyDelta
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.PolicyDelta, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this PolicyDelta to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for PolicyDelta
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a BindingDelta. */
+            interface IBindingDelta {
+
+                /** BindingDelta action */
+                action?: (google.iam.v1.BindingDelta.Action|keyof typeof google.iam.v1.BindingDelta.Action|null);
+
+                /** BindingDelta role */
+                role?: (string|null);
+
+                /** BindingDelta member */
+                member?: (string|null);
+
+                /** BindingDelta condition */
+                condition?: (google.type.IExpr|null);
+            }
+
+            /** Represents a BindingDelta. */
+            class BindingDelta implements IBindingDelta {
+
+                /**
+                 * Constructs a new BindingDelta.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IBindingDelta);
+
+                /** BindingDelta action. */
+                public action: (google.iam.v1.BindingDelta.Action|keyof typeof google.iam.v1.BindingDelta.Action);
+
+                /** BindingDelta role. */
+                public role: string;
+
+                /** BindingDelta member. */
+                public member: string;
+
+                /** BindingDelta condition. */
+                public condition?: (google.type.IExpr|null);
+
+                /**
+                 * Creates a new BindingDelta instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns BindingDelta instance
+                 */
+                public static create(properties?: google.iam.v1.IBindingDelta): google.iam.v1.BindingDelta;
+
+                /**
+                 * Encodes the specified BindingDelta message. Does not implicitly {@link google.iam.v1.BindingDelta.verify|verify} messages.
+                 * @param message BindingDelta message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IBindingDelta, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified BindingDelta message, length delimited. Does not implicitly {@link google.iam.v1.BindingDelta.verify|verify} messages.
+                 * @param message BindingDelta message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IBindingDelta, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a BindingDelta message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns BindingDelta
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.BindingDelta;
+
+                /**
+                 * Decodes a BindingDelta message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns BindingDelta
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.BindingDelta;
+
+                /**
+                 * Verifies a BindingDelta message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a BindingDelta message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns BindingDelta
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.BindingDelta;
+
+                /**
+                 * Creates a plain object from a BindingDelta message. Also converts values to other types if specified.
+                 * @param message BindingDelta
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.BindingDelta, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this BindingDelta to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for BindingDelta
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace BindingDelta {
+
+                /** Action enum. */
+                enum Action {
+                    ACTION_UNSPECIFIED = 0,
+                    ADD = 1,
+                    REMOVE = 2
+                }
+            }
+
+            /** Properties of an AuditConfigDelta. */
+            interface IAuditConfigDelta {
+
+                /** AuditConfigDelta action */
+                action?: (google.iam.v1.AuditConfigDelta.Action|keyof typeof google.iam.v1.AuditConfigDelta.Action|null);
+
+                /** AuditConfigDelta service */
+                service?: (string|null);
+
+                /** AuditConfigDelta exemptedMember */
+                exemptedMember?: (string|null);
+
+                /** AuditConfigDelta logType */
+                logType?: (string|null);
+            }
+
+            /** Represents an AuditConfigDelta. */
+            class AuditConfigDelta implements IAuditConfigDelta {
+
+                /**
+                 * Constructs a new AuditConfigDelta.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.iam.v1.IAuditConfigDelta);
+
+                /** AuditConfigDelta action. */
+                public action: (google.iam.v1.AuditConfigDelta.Action|keyof typeof google.iam.v1.AuditConfigDelta.Action);
+
+                /** AuditConfigDelta service. */
+                public service: string;
+
+                /** AuditConfigDelta exemptedMember. */
+                public exemptedMember: string;
+
+                /** AuditConfigDelta logType. */
+                public logType: string;
+
+                /**
+                 * Creates a new AuditConfigDelta instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns AuditConfigDelta instance
+                 */
+                public static create(properties?: google.iam.v1.IAuditConfigDelta): google.iam.v1.AuditConfigDelta;
+
+                /**
+                 * Encodes the specified AuditConfigDelta message. Does not implicitly {@link google.iam.v1.AuditConfigDelta.verify|verify} messages.
+                 * @param message AuditConfigDelta message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.iam.v1.IAuditConfigDelta, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified AuditConfigDelta message, length delimited. Does not implicitly {@link google.iam.v1.AuditConfigDelta.verify|verify} messages.
+                 * @param message AuditConfigDelta message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.iam.v1.IAuditConfigDelta, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an AuditConfigDelta message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns AuditConfigDelta
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.iam.v1.AuditConfigDelta;
+
+                /**
+                 * Decodes an AuditConfigDelta message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns AuditConfigDelta
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.iam.v1.AuditConfigDelta;
+
+                /**
+                 * Verifies an AuditConfigDelta message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an AuditConfigDelta message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns AuditConfigDelta
+                 */
+                public static fromObject(object: { [k: string]: any }): google.iam.v1.AuditConfigDelta;
+
+                /**
+                 * Creates a plain object from an AuditConfigDelta message. Also converts values to other types if specified.
+                 * @param message AuditConfigDelta
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.iam.v1.AuditConfigDelta, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this AuditConfigDelta to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for AuditConfigDelta
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace AuditConfigDelta {
+
+                /** Action enum. */
+                enum Action {
+                    ACTION_UNSPECIFIED = 0,
+                    ADD = 1,
+                    REMOVE = 2
+                }
+            }
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of an Expr. */
+        interface IExpr {
+
+            /** Expr expression */
+            expression?: (string|null);
+
+            /** Expr title */
+            title?: (string|null);
+
+            /** Expr description */
+            description?: (string|null);
+
+            /** Expr location */
+            location?: (string|null);
+        }
+
+        /** Represents an Expr. */
+        class Expr implements IExpr {
+
+            /**
+             * Constructs a new Expr.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IExpr);
+
+            /** Expr expression. */
+            public expression: string;
+
+            /** Expr title. */
+            public title: string;
+
+            /** Expr description. */
+            public description: string;
+
+            /** Expr location. */
+            public location: string;
+
+            /**
+             * Creates a new Expr instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Expr instance
+             */
+            public static create(properties?: google.type.IExpr): google.type.Expr;
+
+            /**
+             * Encodes the specified Expr message. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+             * @param message Expr message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Expr message, length delimited. Does not implicitly {@link google.type.Expr.verify|verify} messages.
+             * @param message Expr message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IExpr, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Expr message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Expr
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Expr;
+
+            /**
+             * Decodes an Expr message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Expr
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Expr;
+
+            /**
+             * Verifies an Expr message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Expr message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Expr
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Expr;
+
+            /**
+             * Creates a plain object from an Expr message. Also converts values to other types if specified.
+             * @param message Expr
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Expr, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Expr to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Expr
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

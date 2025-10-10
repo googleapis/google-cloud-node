@@ -1,1311 +1,1311 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-datastream",
-        "version": "4.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.datastream.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "datastream_v1_generated_Datastream_ListConnectionProfiles_async",
-            "title": "Datastream listConnectionProfiles Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to list connection profiles created in a project and location.",
-            "canonical": true,
-            "file": "datastream.list_connection_profiles.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnectionProfiles",
-                "fullName": "google.cloud.datastream.v1.Datastream.ListConnectionProfiles",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.ListConnectionProfilesResponse",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "ListConnectionProfiles",
-                    "fullName": "google.cloud.datastream.v1.Datastream.ListConnectionProfiles",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_GetConnectionProfile_async",
-            "title": "Datastream getConnectionProfile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to get details about a connection profile.",
-            "canonical": true,
-            "file": "datastream.get_connection_profile.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnectionProfile",
-                "fullName": "google.cloud.datastream.v1.Datastream.GetConnectionProfile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.ConnectionProfile",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "GetConnectionProfile",
-                    "fullName": "google.cloud.datastream.v1.Datastream.GetConnectionProfile",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_CreateConnectionProfile_async",
-            "title": "Datastream createConnectionProfile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to create a connection profile in a project and location.",
-            "canonical": true,
-            "file": "datastream.create_connection_profile.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 87,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConnectionProfile",
-                "fullName": "google.cloud.datastream.v1.Datastream.CreateConnectionProfile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connection_profile_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connection_profile",
-                        "type": ".google.cloud.datastream.v1.ConnectionProfile"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "CreateConnectionProfile",
-                    "fullName": "google.cloud.datastream.v1.Datastream.CreateConnectionProfile",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_UpdateConnectionProfile_async",
-            "title": "Datastream updateConnectionProfile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to update the parameters of a connection profile.",
-            "canonical": true,
-            "file": "datastream.update_connection_profile.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 85,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConnectionProfile",
-                "fullName": "google.cloud.datastream.v1.Datastream.UpdateConnectionProfile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "connection_profile",
-                        "type": ".google.cloud.datastream.v1.ConnectionProfile"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "UpdateConnectionProfile",
-                    "fullName": "google.cloud.datastream.v1.Datastream.UpdateConnectionProfile",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_DeleteConnectionProfile_async",
-            "title": "Datastream deleteConnectionProfile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to delete a connection profile.",
-            "canonical": true,
-            "file": "datastream.delete_connection_profile.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConnectionProfile",
-                "fullName": "google.cloud.datastream.v1.Datastream.DeleteConnectionProfile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "DeleteConnectionProfile",
-                    "fullName": "google.cloud.datastream.v1.Datastream.DeleteConnectionProfile",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_DiscoverConnectionProfile_async",
-            "title": "Datastream discoverConnectionProfile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to discover a connection profile. The discover API call exposes the data objects and metadata belonging to the profile. Typically, a request returns children data objects of a parent data object that's optionally supplied in the request.",
-            "canonical": true,
-            "file": "datastream.discover_connection_profile.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 95,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DiscoverConnectionProfile",
-                "fullName": "google.cloud.datastream.v1.Datastream.DiscoverConnectionProfile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connection_profile",
-                        "type": ".google.cloud.datastream.v1.ConnectionProfile"
-                    },
-                    {
-                        "name": "connection_profile_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "full_hierarchy",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "hierarchy_depth",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "oracle_rdbms",
-                        "type": ".google.cloud.datastream.v1.OracleRdbms"
-                    },
-                    {
-                        "name": "mysql_rdbms",
-                        "type": ".google.cloud.datastream.v1.MysqlRdbms"
-                    },
-                    {
-                        "name": "postgresql_rdbms",
-                        "type": ".google.cloud.datastream.v1.PostgresqlRdbms"
-                    },
-                    {
-                        "name": "sql_server_rdbms",
-                        "type": ".google.cloud.datastream.v1.SqlServerRdbms"
-                    },
-                    {
-                        "name": "salesforce_org",
-                        "type": ".google.cloud.datastream.v1.SalesforceOrg"
-                    },
-                    {
-                        "name": "mongodb_cluster",
-                        "type": ".google.cloud.datastream.v1.MongodbCluster"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.DiscoverConnectionProfileResponse",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "DiscoverConnectionProfile",
-                    "fullName": "google.cloud.datastream.v1.Datastream.DiscoverConnectionProfile",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_ListStreams_async",
-            "title": "Datastream listStreams Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to list streams in a project and location.",
-            "canonical": true,
-            "file": "datastream.list_streams.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListStreams",
-                "fullName": "google.cloud.datastream.v1.Datastream.ListStreams",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.ListStreamsResponse",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "ListStreams",
-                    "fullName": "google.cloud.datastream.v1.Datastream.ListStreams",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_GetStream_async",
-            "title": "Datastream getStream Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to get details about a stream.",
-            "canonical": true,
-            "file": "datastream.get_stream.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetStream",
-                "fullName": "google.cloud.datastream.v1.Datastream.GetStream",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.Stream",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "GetStream",
-                    "fullName": "google.cloud.datastream.v1.Datastream.GetStream",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_CreateStream_async",
-            "title": "Datastream createStream Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to create a stream.",
-            "canonical": true,
-            "file": "datastream.create_stream.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 87,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateStream",
-                "fullName": "google.cloud.datastream.v1.Datastream.CreateStream",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "stream_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "stream",
-                        "type": ".google.cloud.datastream.v1.Stream"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "CreateStream",
-                    "fullName": "google.cloud.datastream.v1.Datastream.CreateStream",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_UpdateStream_async",
-            "title": "Datastream updateStream Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to update the configuration of a stream.",
-            "canonical": true,
-            "file": "datastream.update_stream.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 85,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateStream",
-                "fullName": "google.cloud.datastream.v1.Datastream.UpdateStream",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "stream",
-                        "type": ".google.cloud.datastream.v1.Stream"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "UpdateStream",
-                    "fullName": "google.cloud.datastream.v1.Datastream.UpdateStream",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_DeleteStream_async",
-            "title": "Datastream deleteStream Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to delete a stream.",
-            "canonical": true,
-            "file": "datastream.delete_stream.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteStream",
-                "fullName": "google.cloud.datastream.v1.Datastream.DeleteStream",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "DeleteStream",
-                    "fullName": "google.cloud.datastream.v1.Datastream.DeleteStream",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_RunStream_async",
-            "title": "Datastream runStream Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to start, resume or recover a stream with a non default CDC strategy.",
-            "canonical": true,
-            "file": "datastream.run_stream.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RunStream",
-                "fullName": "google.cloud.datastream.v1.Datastream.RunStream",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cdc_strategy",
-                        "type": ".google.cloud.datastream.v1.CdcStrategy"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "RunStream",
-                    "fullName": "google.cloud.datastream.v1.Datastream.RunStream",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_GetStreamObject_async",
-            "title": "Datastream getStreamObject Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to get details about a stream object.",
-            "canonical": true,
-            "file": "datastream.get_stream_object.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetStreamObject",
-                "fullName": "google.cloud.datastream.v1.Datastream.GetStreamObject",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.StreamObject",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "GetStreamObject",
-                    "fullName": "google.cloud.datastream.v1.Datastream.GetStreamObject",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_LookupStreamObject_async",
-            "title": "Datastream lookupStreamObject Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to look up a stream object by its source object identifier.",
-            "canonical": true,
-            "file": "datastream.lookup_stream_object.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LookupStreamObject",
-                "fullName": "google.cloud.datastream.v1.Datastream.LookupStreamObject",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "source_object_identifier",
-                        "type": ".google.cloud.datastream.v1.SourceObjectIdentifier"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.StreamObject",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "LookupStreamObject",
-                    "fullName": "google.cloud.datastream.v1.Datastream.LookupStreamObject",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_ListStreamObjects_async",
-            "title": "Datastream listStreamObjects Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to list the objects of a specific stream.",
-            "canonical": true,
-            "file": "datastream.list_stream_objects.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListStreamObjects",
-                "fullName": "google.cloud.datastream.v1.Datastream.ListStreamObjects",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.ListStreamObjectsResponse",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "ListStreamObjects",
-                    "fullName": "google.cloud.datastream.v1.Datastream.ListStreamObjects",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_StartBackfillJob_async",
-            "title": "Datastream startBackfillJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to start a backfill job for the specified stream object.",
-            "canonical": true,
-            "file": "datastream.start_backfill_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StartBackfillJob",
-                "fullName": "google.cloud.datastream.v1.Datastream.StartBackfillJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "object",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.StartBackfillJobResponse",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "StartBackfillJob",
-                    "fullName": "google.cloud.datastream.v1.Datastream.StartBackfillJob",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_StopBackfillJob_async",
-            "title": "Datastream stopBackfillJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to stop a backfill job for the specified stream object.",
-            "canonical": true,
-            "file": "datastream.stop_backfill_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StopBackfillJob",
-                "fullName": "google.cloud.datastream.v1.Datastream.StopBackfillJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "object",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.StopBackfillJobResponse",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "StopBackfillJob",
-                    "fullName": "google.cloud.datastream.v1.Datastream.StopBackfillJob",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_FetchStaticIps_async",
-            "title": "Datastream fetchStaticIps Sample",
-            "origin": "API_DEFINITION",
-            "description": " The FetchStaticIps API call exposes the static IP addresses used by Datastream.",
-            "canonical": true,
-            "file": "datastream.fetch_static_ips.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchStaticIps",
-                "fullName": "google.cloud.datastream.v1.Datastream.FetchStaticIps",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.FetchStaticIpsResponse",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "FetchStaticIps",
-                    "fullName": "google.cloud.datastream.v1.Datastream.FetchStaticIps",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_CreatePrivateConnection_async",
-            "title": "Datastream createPrivateConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to create a private connectivity configuration.",
-            "canonical": true,
-            "file": "datastream.create_private_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 88,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreatePrivateConnection",
-                "fullName": "google.cloud.datastream.v1.Datastream.CreatePrivateConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "private_connection_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "private_connection",
-                        "type": ".google.cloud.datastream.v1.PrivateConnection"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "CreatePrivateConnection",
-                    "fullName": "google.cloud.datastream.v1.Datastream.CreatePrivateConnection",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_GetPrivateConnection_async",
-            "title": "Datastream getPrivateConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to get details about a private connectivity configuration.",
-            "canonical": true,
-            "file": "datastream.get_private_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPrivateConnection",
-                "fullName": "google.cloud.datastream.v1.Datastream.GetPrivateConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.PrivateConnection",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "GetPrivateConnection",
-                    "fullName": "google.cloud.datastream.v1.Datastream.GetPrivateConnection",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_ListPrivateConnections_async",
-            "title": "Datastream listPrivateConnections Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to list private connectivity configurations in a project and location.",
-            "canonical": true,
-            "file": "datastream.list_private_connections.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 79,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPrivateConnections",
-                "fullName": "google.cloud.datastream.v1.Datastream.ListPrivateConnections",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.ListPrivateConnectionsResponse",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "ListPrivateConnections",
-                    "fullName": "google.cloud.datastream.v1.Datastream.ListPrivateConnections",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_DeletePrivateConnection_async",
-            "title": "Datastream deletePrivateConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to delete a private connectivity configuration.",
-            "canonical": true,
-            "file": "datastream.delete_private_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeletePrivateConnection",
-                "fullName": "google.cloud.datastream.v1.Datastream.DeletePrivateConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "DeletePrivateConnection",
-                    "fullName": "google.cloud.datastream.v1.Datastream.DeletePrivateConnection",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_CreateRoute_async",
-            "title": "Datastream createRoute Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to create a route for a private connectivity configuration in a project and location.",
-            "canonical": true,
-            "file": "datastream.create_route.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateRoute",
-                "fullName": "google.cloud.datastream.v1.Datastream.CreateRoute",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "route_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "route",
-                        "type": ".google.cloud.datastream.v1.Route"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "CreateRoute",
-                    "fullName": "google.cloud.datastream.v1.Datastream.CreateRoute",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_GetRoute_async",
-            "title": "Datastream getRoute Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to get details about a route.",
-            "canonical": true,
-            "file": "datastream.get_route.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetRoute",
-                "fullName": "google.cloud.datastream.v1.Datastream.GetRoute",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.Route",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "GetRoute",
-                    "fullName": "google.cloud.datastream.v1.Datastream.GetRoute",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_ListRoutes_async",
-            "title": "Datastream listRoutes Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to list routes created for a private connectivity configuration in a project and location.",
-            "canonical": true,
-            "file": "datastream.list_routes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListRoutes",
-                "fullName": "google.cloud.datastream.v1.Datastream.ListRoutes",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datastream.v1.ListRoutesResponse",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "ListRoutes",
-                    "fullName": "google.cloud.datastream.v1.Datastream.ListRoutes",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datastream_v1_generated_Datastream_DeleteRoute_async",
-            "title": "Datastream deleteRoute Sample",
-            "origin": "API_DEFINITION",
-            "description": " Use this method to delete a route.",
-            "canonical": true,
-            "file": "datastream.delete_route.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteRoute",
-                "fullName": "google.cloud.datastream.v1.Datastream.DeleteRoute",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DatastreamClient",
-                    "fullName": "google.cloud.datastream.v1.DatastreamClient"
-                },
-                "method": {
-                    "shortName": "DeleteRoute",
-                    "fullName": "google.cloud.datastream.v1.Datastream.DeleteRoute",
-                    "service": {
-                        "shortName": "Datastream",
-                        "fullName": "google.cloud.datastream.v1.Datastream"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-datastream",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.datastream.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "datastream_v1_generated_Datastream_ListConnectionProfiles_async",
+      "title": "Datastream listConnectionProfiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to list connection profiles created in a project and location.",
+      "canonical": true,
+      "file": "datastream.list_connection_profiles.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConnectionProfiles",
+        "fullName": "google.cloud.datastream.v1.Datastream.ListConnectionProfiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.ListConnectionProfilesResponse",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "ListConnectionProfiles",
+          "fullName": "google.cloud.datastream.v1.Datastream.ListConnectionProfiles",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_GetConnectionProfile_async",
+      "title": "Datastream getConnectionProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to get details about a connection profile.",
+      "canonical": true,
+      "file": "datastream.get_connection_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnectionProfile",
+        "fullName": "google.cloud.datastream.v1.Datastream.GetConnectionProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.ConnectionProfile",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "GetConnectionProfile",
+          "fullName": "google.cloud.datastream.v1.Datastream.GetConnectionProfile",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_CreateConnectionProfile_async",
+      "title": "Datastream createConnectionProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to create a connection profile in a project and location.",
+      "canonical": true,
+      "file": "datastream.create_connection_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 87,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConnectionProfile",
+        "fullName": "google.cloud.datastream.v1.Datastream.CreateConnectionProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connection_profile_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connection_profile",
+            "type": ".google.cloud.datastream.v1.ConnectionProfile"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "CreateConnectionProfile",
+          "fullName": "google.cloud.datastream.v1.Datastream.CreateConnectionProfile",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_UpdateConnectionProfile_async",
+      "title": "Datastream updateConnectionProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to update the parameters of a connection profile.",
+      "canonical": true,
+      "file": "datastream.update_connection_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConnectionProfile",
+        "fullName": "google.cloud.datastream.v1.Datastream.UpdateConnectionProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "connection_profile",
+            "type": ".google.cloud.datastream.v1.ConnectionProfile"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "UpdateConnectionProfile",
+          "fullName": "google.cloud.datastream.v1.Datastream.UpdateConnectionProfile",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_DeleteConnectionProfile_async",
+      "title": "Datastream deleteConnectionProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to delete a connection profile.",
+      "canonical": true,
+      "file": "datastream.delete_connection_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConnectionProfile",
+        "fullName": "google.cloud.datastream.v1.Datastream.DeleteConnectionProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "DeleteConnectionProfile",
+          "fullName": "google.cloud.datastream.v1.Datastream.DeleteConnectionProfile",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_DiscoverConnectionProfile_async",
+      "title": "Datastream discoverConnectionProfile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to discover a connection profile. The discover API call exposes the data objects and metadata belonging to the profile. Typically, a request returns children data objects of a parent data object that's optionally supplied in the request.",
+      "canonical": true,
+      "file": "datastream.discover_connection_profile.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 95,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DiscoverConnectionProfile",
+        "fullName": "google.cloud.datastream.v1.Datastream.DiscoverConnectionProfile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connection_profile",
+            "type": ".google.cloud.datastream.v1.ConnectionProfile"
+          },
+          {
+            "name": "connection_profile_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "full_hierarchy",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "hierarchy_depth",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "oracle_rdbms",
+            "type": ".google.cloud.datastream.v1.OracleRdbms"
+          },
+          {
+            "name": "mysql_rdbms",
+            "type": ".google.cloud.datastream.v1.MysqlRdbms"
+          },
+          {
+            "name": "postgresql_rdbms",
+            "type": ".google.cloud.datastream.v1.PostgresqlRdbms"
+          },
+          {
+            "name": "sql_server_rdbms",
+            "type": ".google.cloud.datastream.v1.SqlServerRdbms"
+          },
+          {
+            "name": "salesforce_org",
+            "type": ".google.cloud.datastream.v1.SalesforceOrg"
+          },
+          {
+            "name": "mongodb_cluster",
+            "type": ".google.cloud.datastream.v1.MongodbCluster"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.DiscoverConnectionProfileResponse",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "DiscoverConnectionProfile",
+          "fullName": "google.cloud.datastream.v1.Datastream.DiscoverConnectionProfile",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_ListStreams_async",
+      "title": "Datastream listStreams Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to list streams in a project and location.",
+      "canonical": true,
+      "file": "datastream.list_streams.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListStreams",
+        "fullName": "google.cloud.datastream.v1.Datastream.ListStreams",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.ListStreamsResponse",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "ListStreams",
+          "fullName": "google.cloud.datastream.v1.Datastream.ListStreams",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_GetStream_async",
+      "title": "Datastream getStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to get details about a stream.",
+      "canonical": true,
+      "file": "datastream.get_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetStream",
+        "fullName": "google.cloud.datastream.v1.Datastream.GetStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.Stream",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "GetStream",
+          "fullName": "google.cloud.datastream.v1.Datastream.GetStream",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_CreateStream_async",
+      "title": "Datastream createStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to create a stream.",
+      "canonical": true,
+      "file": "datastream.create_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 87,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateStream",
+        "fullName": "google.cloud.datastream.v1.Datastream.CreateStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "stream_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "stream",
+            "type": ".google.cloud.datastream.v1.Stream"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "CreateStream",
+          "fullName": "google.cloud.datastream.v1.Datastream.CreateStream",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_UpdateStream_async",
+      "title": "Datastream updateStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to update the configuration of a stream.",
+      "canonical": true,
+      "file": "datastream.update_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateStream",
+        "fullName": "google.cloud.datastream.v1.Datastream.UpdateStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "stream",
+            "type": ".google.cloud.datastream.v1.Stream"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "UpdateStream",
+          "fullName": "google.cloud.datastream.v1.Datastream.UpdateStream",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_DeleteStream_async",
+      "title": "Datastream deleteStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to delete a stream.",
+      "canonical": true,
+      "file": "datastream.delete_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteStream",
+        "fullName": "google.cloud.datastream.v1.Datastream.DeleteStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "DeleteStream",
+          "fullName": "google.cloud.datastream.v1.Datastream.DeleteStream",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_RunStream_async",
+      "title": "Datastream runStream Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to start, resume or recover a stream with a non default CDC strategy.",
+      "canonical": true,
+      "file": "datastream.run_stream.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunStream",
+        "fullName": "google.cloud.datastream.v1.Datastream.RunStream",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cdc_strategy",
+            "type": ".google.cloud.datastream.v1.CdcStrategy"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "RunStream",
+          "fullName": "google.cloud.datastream.v1.Datastream.RunStream",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_GetStreamObject_async",
+      "title": "Datastream getStreamObject Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to get details about a stream object.",
+      "canonical": true,
+      "file": "datastream.get_stream_object.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetStreamObject",
+        "fullName": "google.cloud.datastream.v1.Datastream.GetStreamObject",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.StreamObject",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "GetStreamObject",
+          "fullName": "google.cloud.datastream.v1.Datastream.GetStreamObject",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_LookupStreamObject_async",
+      "title": "Datastream lookupStreamObject Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to look up a stream object by its source object identifier.",
+      "canonical": true,
+      "file": "datastream.lookup_stream_object.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupStreamObject",
+        "fullName": "google.cloud.datastream.v1.Datastream.LookupStreamObject",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source_object_identifier",
+            "type": ".google.cloud.datastream.v1.SourceObjectIdentifier"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.StreamObject",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "LookupStreamObject",
+          "fullName": "google.cloud.datastream.v1.Datastream.LookupStreamObject",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_ListStreamObjects_async",
+      "title": "Datastream listStreamObjects Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to list the objects of a specific stream.",
+      "canonical": true,
+      "file": "datastream.list_stream_objects.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListStreamObjects",
+        "fullName": "google.cloud.datastream.v1.Datastream.ListStreamObjects",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.ListStreamObjectsResponse",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "ListStreamObjects",
+          "fullName": "google.cloud.datastream.v1.Datastream.ListStreamObjects",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_StartBackfillJob_async",
+      "title": "Datastream startBackfillJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to start a backfill job for the specified stream object.",
+      "canonical": true,
+      "file": "datastream.start_backfill_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartBackfillJob",
+        "fullName": "google.cloud.datastream.v1.Datastream.StartBackfillJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "object",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.StartBackfillJobResponse",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "StartBackfillJob",
+          "fullName": "google.cloud.datastream.v1.Datastream.StartBackfillJob",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_StopBackfillJob_async",
+      "title": "Datastream stopBackfillJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to stop a backfill job for the specified stream object.",
+      "canonical": true,
+      "file": "datastream.stop_backfill_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StopBackfillJob",
+        "fullName": "google.cloud.datastream.v1.Datastream.StopBackfillJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "object",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.StopBackfillJobResponse",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "StopBackfillJob",
+          "fullName": "google.cloud.datastream.v1.Datastream.StopBackfillJob",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_FetchStaticIps_async",
+      "title": "Datastream fetchStaticIps Sample",
+      "origin": "API_DEFINITION",
+      "description": " The FetchStaticIps API call exposes the static IP addresses used by Datastream.",
+      "canonical": true,
+      "file": "datastream.fetch_static_ips.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchStaticIps",
+        "fullName": "google.cloud.datastream.v1.Datastream.FetchStaticIps",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.FetchStaticIpsResponse",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "FetchStaticIps",
+          "fullName": "google.cloud.datastream.v1.Datastream.FetchStaticIps",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_CreatePrivateConnection_async",
+      "title": "Datastream createPrivateConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to create a private connectivity configuration.",
+      "canonical": true,
+      "file": "datastream.create_private_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 88,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePrivateConnection",
+        "fullName": "google.cloud.datastream.v1.Datastream.CreatePrivateConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "private_connection_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "private_connection",
+            "type": ".google.cloud.datastream.v1.PrivateConnection"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "CreatePrivateConnection",
+          "fullName": "google.cloud.datastream.v1.Datastream.CreatePrivateConnection",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_GetPrivateConnection_async",
+      "title": "Datastream getPrivateConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to get details about a private connectivity configuration.",
+      "canonical": true,
+      "file": "datastream.get_private_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPrivateConnection",
+        "fullName": "google.cloud.datastream.v1.Datastream.GetPrivateConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.PrivateConnection",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "GetPrivateConnection",
+          "fullName": "google.cloud.datastream.v1.Datastream.GetPrivateConnection",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_ListPrivateConnections_async",
+      "title": "Datastream listPrivateConnections Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to list private connectivity configurations in a project and location.",
+      "canonical": true,
+      "file": "datastream.list_private_connections.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 79,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPrivateConnections",
+        "fullName": "google.cloud.datastream.v1.Datastream.ListPrivateConnections",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.ListPrivateConnectionsResponse",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "ListPrivateConnections",
+          "fullName": "google.cloud.datastream.v1.Datastream.ListPrivateConnections",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_DeletePrivateConnection_async",
+      "title": "Datastream deletePrivateConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to delete a private connectivity configuration.",
+      "canonical": true,
+      "file": "datastream.delete_private_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePrivateConnection",
+        "fullName": "google.cloud.datastream.v1.Datastream.DeletePrivateConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "DeletePrivateConnection",
+          "fullName": "google.cloud.datastream.v1.Datastream.DeletePrivateConnection",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_CreateRoute_async",
+      "title": "Datastream createRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to create a route for a private connectivity configuration in a project and location.",
+      "canonical": true,
+      "file": "datastream.create_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRoute",
+        "fullName": "google.cloud.datastream.v1.Datastream.CreateRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "route_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "route",
+            "type": ".google.cloud.datastream.v1.Route"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "CreateRoute",
+          "fullName": "google.cloud.datastream.v1.Datastream.CreateRoute",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_GetRoute_async",
+      "title": "Datastream getRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to get details about a route.",
+      "canonical": true,
+      "file": "datastream.get_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRoute",
+        "fullName": "google.cloud.datastream.v1.Datastream.GetRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.Route",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "GetRoute",
+          "fullName": "google.cloud.datastream.v1.Datastream.GetRoute",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_ListRoutes_async",
+      "title": "Datastream listRoutes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to list routes created for a private connectivity configuration in a project and location.",
+      "canonical": true,
+      "file": "datastream.list_routes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRoutes",
+        "fullName": "google.cloud.datastream.v1.Datastream.ListRoutes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datastream.v1.ListRoutesResponse",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "ListRoutes",
+          "fullName": "google.cloud.datastream.v1.Datastream.ListRoutes",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datastream_v1_generated_Datastream_DeleteRoute_async",
+      "title": "Datastream deleteRoute Sample",
+      "origin": "API_DEFINITION",
+      "description": " Use this method to delete a route.",
+      "canonical": true,
+      "file": "datastream.delete_route.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteRoute",
+        "fullName": "google.cloud.datastream.v1.Datastream.DeleteRoute",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DatastreamClient",
+          "fullName": "google.cloud.datastream.v1.DatastreamClient"
+        },
+        "method": {
+          "shortName": "DeleteRoute",
+          "fullName": "google.cloud.datastream.v1.Datastream.DeleteRoute",
+          "service": {
+            "shortName": "Datastream",
+            "fullName": "google.cloud.datastream.v1.Datastream"
+          }
+        }
+      }
+    }
+  ]
 }

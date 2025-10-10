@@ -1,243 +1,243 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-shell",
-        "version": "4.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.shell.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "cloudshell_v1_generated_CloudShellService_GetEnvironment_async",
-            "title": "CloudShellService getEnvironment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an environment. Returns NOT_FOUND if the environment does not exist.",
-            "canonical": true,
-            "file": "cloud_shell_service.get_environment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetEnvironment",
-                "fullName": "google.cloud.shell.v1.CloudShellService.GetEnvironment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.shell.v1.Environment",
-                "client": {
-                    "shortName": "CloudShellServiceClient",
-                    "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
-                },
-                "method": {
-                    "shortName": "GetEnvironment",
-                    "fullName": "google.cloud.shell.v1.CloudShellService.GetEnvironment",
-                    "service": {
-                        "shortName": "CloudShellService",
-                        "fullName": "google.cloud.shell.v1.CloudShellService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudshell_v1_generated_CloudShellService_StartEnvironment_async",
-            "title": "CloudShellService startEnvironment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Starts an existing environment, allowing clients to connect to it. The returned operation will contain an instance of StartEnvironmentMetadata in its metadata field. Users can wait for the environment to start by polling this operation via GetOperation. Once the environment has finished starting and is ready to accept connections, the operation will contain a StartEnvironmentResponse in its response field.",
-            "canonical": true,
-            "file": "cloud_shell_service.start_environment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StartEnvironment",
-                "fullName": "google.cloud.shell.v1.CloudShellService.StartEnvironment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "access_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "public_keys",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudShellServiceClient",
-                    "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
-                },
-                "method": {
-                    "shortName": "StartEnvironment",
-                    "fullName": "google.cloud.shell.v1.CloudShellService.StartEnvironment",
-                    "service": {
-                        "shortName": "CloudShellService",
-                        "fullName": "google.cloud.shell.v1.CloudShellService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudshell_v1_generated_CloudShellService_AuthorizeEnvironment_async",
-            "title": "CloudShellService authorizeEnvironment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sends OAuth credentials to a running environment on behalf of a user. When this completes, the environment will be authorized to run various Google Cloud command line tools without requiring the user to manually authenticate.",
-            "canonical": true,
-            "file": "cloud_shell_service.authorize_environment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AuthorizeEnvironment",
-                "fullName": "google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "access_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "id_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "expire_time",
-                        "type": ".google.protobuf.Timestamp"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudShellServiceClient",
-                    "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
-                },
-                "method": {
-                    "shortName": "AuthorizeEnvironment",
-                    "fullName": "google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment",
-                    "service": {
-                        "shortName": "CloudShellService",
-                        "fullName": "google.cloud.shell.v1.CloudShellService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudshell_v1_generated_CloudShellService_AddPublicKey_async",
-            "title": "CloudShellService addPublicKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Adds a public SSH key to an environment, allowing clients with the corresponding private key to connect to that environment via SSH. If a key with the same content already exists, this will error with ALREADY_EXISTS.",
-            "canonical": true,
-            "file": "cloud_shell_service.add_public_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AddPublicKey",
-                "fullName": "google.cloud.shell.v1.CloudShellService.AddPublicKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "environment",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "key",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudShellServiceClient",
-                    "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
-                },
-                "method": {
-                    "shortName": "AddPublicKey",
-                    "fullName": "google.cloud.shell.v1.CloudShellService.AddPublicKey",
-                    "service": {
-                        "shortName": "CloudShellService",
-                        "fullName": "google.cloud.shell.v1.CloudShellService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudshell_v1_generated_CloudShellService_RemovePublicKey_async",
-            "title": "CloudShellService removePublicKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Removes a public SSH key from an environment. Clients will no longer be able to connect to the environment using the corresponding private key. If a key with the same content is not present, this will error with NOT_FOUND.",
-            "canonical": true,
-            "file": "cloud_shell_service.remove_public_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RemovePublicKey",
-                "fullName": "google.cloud.shell.v1.CloudShellService.RemovePublicKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "environment",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "key",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudShellServiceClient",
-                    "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
-                },
-                "method": {
-                    "shortName": "RemovePublicKey",
-                    "fullName": "google.cloud.shell.v1.CloudShellService.RemovePublicKey",
-                    "service": {
-                        "shortName": "CloudShellService",
-                        "fullName": "google.cloud.shell.v1.CloudShellService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-shell",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.shell.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudshell_v1_generated_CloudShellService_GetEnvironment_async",
+      "title": "CloudShellService getEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an environment. Returns NOT_FOUND if the environment does not exist.",
+      "canonical": true,
+      "file": "cloud_shell_service.get_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEnvironment",
+        "fullName": "google.cloud.shell.v1.CloudShellService.GetEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.shell.v1.Environment",
+        "client": {
+          "shortName": "CloudShellServiceClient",
+          "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
+        },
+        "method": {
+          "shortName": "GetEnvironment",
+          "fullName": "google.cloud.shell.v1.CloudShellService.GetEnvironment",
+          "service": {
+            "shortName": "CloudShellService",
+            "fullName": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudshell_v1_generated_CloudShellService_StartEnvironment_async",
+      "title": "CloudShellService startEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts an existing environment, allowing clients to connect to it. The returned operation will contain an instance of StartEnvironmentMetadata in its metadata field. Users can wait for the environment to start by polling this operation via GetOperation. Once the environment has finished starting and is ready to accept connections, the operation will contain a StartEnvironmentResponse in its response field.",
+      "canonical": true,
+      "file": "cloud_shell_service.start_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartEnvironment",
+        "fullName": "google.cloud.shell.v1.CloudShellService.StartEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "access_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "public_keys",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudShellServiceClient",
+          "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
+        },
+        "method": {
+          "shortName": "StartEnvironment",
+          "fullName": "google.cloud.shell.v1.CloudShellService.StartEnvironment",
+          "service": {
+            "shortName": "CloudShellService",
+            "fullName": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudshell_v1_generated_CloudShellService_AuthorizeEnvironment_async",
+      "title": "CloudShellService authorizeEnvironment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sends OAuth credentials to a running environment on behalf of a user. When this completes, the environment will be authorized to run various Google Cloud command line tools without requiring the user to manually authenticate.",
+      "canonical": true,
+      "file": "cloud_shell_service.authorize_environment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AuthorizeEnvironment",
+        "fullName": "google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "access_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "id_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "expire_time",
+            "type": ".google.protobuf.Timestamp"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudShellServiceClient",
+          "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
+        },
+        "method": {
+          "shortName": "AuthorizeEnvironment",
+          "fullName": "google.cloud.shell.v1.CloudShellService.AuthorizeEnvironment",
+          "service": {
+            "shortName": "CloudShellService",
+            "fullName": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudshell_v1_generated_CloudShellService_AddPublicKey_async",
+      "title": "CloudShellService addPublicKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds a public SSH key to an environment, allowing clients with the corresponding private key to connect to that environment via SSH. If a key with the same content already exists, this will error with ALREADY_EXISTS.",
+      "canonical": true,
+      "file": "cloud_shell_service.add_public_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddPublicKey",
+        "fullName": "google.cloud.shell.v1.CloudShellService.AddPublicKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "environment",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "key",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudShellServiceClient",
+          "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
+        },
+        "method": {
+          "shortName": "AddPublicKey",
+          "fullName": "google.cloud.shell.v1.CloudShellService.AddPublicKey",
+          "service": {
+            "shortName": "CloudShellService",
+            "fullName": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudshell_v1_generated_CloudShellService_RemovePublicKey_async",
+      "title": "CloudShellService removePublicKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes a public SSH key from an environment. Clients will no longer be able to connect to the environment using the corresponding private key. If a key with the same content is not present, this will error with NOT_FOUND.",
+      "canonical": true,
+      "file": "cloud_shell_service.remove_public_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemovePublicKey",
+        "fullName": "google.cloud.shell.v1.CloudShellService.RemovePublicKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "environment",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "key",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudShellServiceClient",
+          "fullName": "google.cloud.shell.v1.CloudShellServiceClient"
+        },
+        "method": {
+          "shortName": "RemovePublicKey",
+          "fullName": "google.cloud.shell.v1.CloudShellService.RemovePublicKey",
+          "service": {
+            "shortName": "CloudShellService",
+            "fullName": "google.cloud.shell.v1.CloudShellService"
+          }
+        }
+      }
+    }
+  ]
 }

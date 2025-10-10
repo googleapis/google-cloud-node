@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/apihub-v0.4.0...apihub-v0.5.0) (2025-09-16)
+
+
+### Features
+
+* [apihub] Introduce new services for data collection (ApiHubCollect) and curation (ApiHubCurate) ([#6715](https://github.com/googleapis/google-cloud-node/issues/6715)) ([6bc75f6](https://github.com/googleapis/google-cloud-node/commit/6bc75f673e44831fb2f73ba3ae29e8da23a8b50a))
+
 ## [0.4.0](https://github.com/googleapis/google-cloud-node/compare/apihub-v0.3.0...apihub-v0.4.0) (2025-07-09)
 
 
