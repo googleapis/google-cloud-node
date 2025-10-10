@@ -12,3 +12,5 @@ libraries:
         service_config: cloudasset_v1p1beta1.yaml
       - path: google/cloud/asset/v1p2beta1
         service_config: cloudasset_v1p2beta1.yaml
+    source_roots:
+      - packages/google-cloud-asset
