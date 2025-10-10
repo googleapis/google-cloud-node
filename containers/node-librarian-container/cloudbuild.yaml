@@ -1,0 +1,16 @@
+steps:
+    # Build the docker image.
+    - name: 'gcr.io/cloud-builders/docker'
+      dir: 'containers/node-librarian-container'
+      args: [ 'build',
+        # '-t', 'gcr.io/coleleah-sofialeon/node-librarian-generator:$SHORT_SHA',
+        # '-t', 'us-docker.pkg.dev/coleleah-sofialeon/node-librarian-generator:$SHORT_SHA',
+        # '-t', 'gcr.io/coleleah-sofialeon/node-librarian-generator:latest',
+        '-t', 'us-docker.pkg.dev/coleleah-sofialeon/node-librarian-generator/node-librarian-generator:latest',
+        '.' ]
+    # Push the docker image.
+images:
+  # - gcr.io/coleleah-sofialeon/node-librarian-generator:$SHORT_SHA
+  # - us-docker.pkg.dev/coleleah-sofialeon/node-librarian-generator:$SHORT_SHA
+  # - gcr.io/coleleah-sofialeon/node-librarian-generator:latest
+  - us-docker.pkg.dev/coleleah-sofialeon/node-librarian-generator/node-librarian-generator:latest

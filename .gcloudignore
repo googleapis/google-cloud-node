@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build artifacts
+coverage/
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
