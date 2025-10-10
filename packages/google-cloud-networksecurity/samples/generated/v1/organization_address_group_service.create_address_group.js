@@ -60,7 +60,7 @@ function main(parent, addressGroupId, addressGroup) {
   // const requestId = 'abc123'
 
   // Imports the Networksecurity library
-  const {OrganizationAddressGroupServiceClient} = require('@google-cloud/networksecurity').v1;
+  const {OrganizationAddressGroupServiceClient} = require('@google-cloud/network-security').v1;
 
   // Instantiates a client
   const networksecurityClient = new OrganizationAddressGroupServiceClient();

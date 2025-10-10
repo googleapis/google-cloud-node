@@ -1,2487 +1,2487 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-dataform",
-        "version": "2.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.dataform.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ListRepositories_async",
-            "title": "Dataform listRepositories Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Repositories in a given project and location. **Note:** *This method can return repositories not shown in the [Dataform UI](https://console.cloud.google.com/bigquery/dataform)*.",
-            "canonical": true,
-            "file": "dataform.list_repositories.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListRepositories",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ListRepositories",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ListRepositoriesResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ListRepositories",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ListRepositories",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_GetRepository_async",
-            "title": "Dataform getRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a single Repository.",
-            "canonical": true,
-            "file": "dataform.get_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetRepository",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.GetRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.Repository",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "GetRepository",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.GetRepository",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_CreateRepository_async",
-            "title": "Dataform createRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new Repository in a given project and location.",
-            "canonical": true,
-            "file": "dataform.create_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateRepository",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "repository",
-                        "type": ".google.cloud.dataform.v1beta1.Repository"
-                    },
-                    {
-                        "name": "repository_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.Repository",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "CreateRepository",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateRepository",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_UpdateRepository_async",
-            "title": "Dataform updateRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a single Repository. **Note:** *This method does not fully implement [AIP/134](https://google.aip.dev/134). The wildcard entry (\\*) is treated as a bad request, and when the `field_mask` is omitted, the request is treated as a full update on all modifiable fields.*",
-            "canonical": true,
-            "file": "dataform.update_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateRepository",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "repository",
-                        "type": ".google.cloud.dataform.v1beta1.Repository"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.Repository",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "UpdateRepository",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateRepository",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_DeleteRepository_async",
-            "title": "Dataform deleteRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single Repository.",
-            "canonical": true,
-            "file": "dataform.delete_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteRepository",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "DeleteRepository",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteRepository",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_async",
-            "title": "Dataform commitRepositoryChanges Sample",
-            "origin": "API_DEFINITION",
-            "description": " Applies a Git commit to a Repository. The Repository must not have a value for `git_remote_settings.url`.",
-            "canonical": true,
-            "file": "dataform.commit_repository_changes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CommitRepositoryChanges",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.CommitRepositoryChanges",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "commit_metadata",
-                        "type": ".google.cloud.dataform.v1beta1.CommitMetadata"
-                    },
-                    {
-                        "name": "required_head_commit_sha",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "file_operations",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.CommitRepositoryChangesResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "CommitRepositoryChanges",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.CommitRepositoryChanges",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ReadRepositoryFile_async",
-            "title": "Dataform readRepositoryFile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the contents of a file (inside a Repository). The Repository must not have a value for `git_remote_settings.url`.",
-            "canonical": true,
-            "file": "dataform.read_repository_file.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ReadRepositoryFile",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ReadRepositoryFile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "commit_sha",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ReadRepositoryFileResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ReadRepositoryFile",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ReadRepositoryFile",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_QueryRepositoryDirectoryContents_async",
-            "title": "Dataform queryRepositoryDirectoryContents Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the contents of a given Repository directory. The Repository must not have a value for `git_remote_settings.url`.",
-            "canonical": true,
-            "file": "dataform.query_repository_directory_contents.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "QueryRepositoryDirectoryContents",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryRepositoryDirectoryContents",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "commit_sha",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "QueryRepositoryDirectoryContents",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryRepositoryDirectoryContents",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_FetchRepositoryHistory_async",
-            "title": "Dataform fetchRepositoryHistory Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a Repository's history of commits.  The Repository must not have a value for `git_remote_settings.url`.",
-            "canonical": true,
-            "file": "dataform.fetch_repository_history.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchRepositoryHistory",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchRepositoryHistory",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "FetchRepositoryHistory",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchRepositoryHistory",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ComputeRepositoryAccessTokenStatus_async",
-            "title": "Dataform computeRepositoryAccessTokenStatus Sample",
-            "origin": "API_DEFINITION",
-            "description": " Computes a Repository's Git access token status.",
-            "canonical": true,
-            "file": "dataform.compute_repository_access_token_status.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ComputeRepositoryAccessTokenStatus",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ComputeRepositoryAccessTokenStatus",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ComputeRepositoryAccessTokenStatus",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ComputeRepositoryAccessTokenStatus",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_FetchRemoteBranches_async",
-            "title": "Dataform fetchRemoteBranches Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a Repository's remote branches.",
-            "canonical": true,
-            "file": "dataform.fetch_remote_branches.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchRemoteBranches",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchRemoteBranches",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.FetchRemoteBranchesResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "FetchRemoteBranches",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchRemoteBranches",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ListWorkspaces_async",
-            "title": "Dataform listWorkspaces Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Workspaces in a given Repository.",
-            "canonical": true,
-            "file": "dataform.list_workspaces.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListWorkspaces",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkspaces",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ListWorkspacesResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ListWorkspaces",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkspaces",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_GetWorkspace_async",
-            "title": "Dataform getWorkspace Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a single Workspace.",
-            "canonical": true,
-            "file": "dataform.get_workspace.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetWorkspace",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkspace",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.Workspace",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "GetWorkspace",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkspace",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_CreateWorkspace_async",
-            "title": "Dataform createWorkspace Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new Workspace in a given Repository.",
-            "canonical": true,
-            "file": "dataform.create_workspace.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateWorkspace",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkspace",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "workspace",
-                        "type": ".google.cloud.dataform.v1beta1.Workspace"
-                    },
-                    {
-                        "name": "workspace_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.Workspace",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "CreateWorkspace",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkspace",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_DeleteWorkspace_async",
-            "title": "Dataform deleteWorkspace Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single Workspace.",
-            "canonical": true,
-            "file": "dataform.delete_workspace.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteWorkspace",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkspace",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "DeleteWorkspace",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkspace",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_InstallNpmPackages_async",
-            "title": "Dataform installNpmPackages Sample",
-            "origin": "API_DEFINITION",
-            "description": " Installs dependency NPM packages (inside a Workspace).",
-            "canonical": true,
-            "file": "dataform.install_npm_packages.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "InstallNpmPackages",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.InstallNpmPackages",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.InstallNpmPackagesResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "InstallNpmPackages",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.InstallNpmPackages",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_PullGitCommits_async",
-            "title": "Dataform pullGitCommits Sample",
-            "origin": "API_DEFINITION",
-            "description": " Pulls Git commits from the Repository's remote into a Workspace.",
-            "canonical": true,
-            "file": "dataform.pull_git_commits.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "PullGitCommits",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.PullGitCommits",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "remote_branch",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "author",
-                        "type": ".google.cloud.dataform.v1beta1.CommitAuthor"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.PullGitCommitsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "PullGitCommits",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.PullGitCommits",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_PushGitCommits_async",
-            "title": "Dataform pushGitCommits Sample",
-            "origin": "API_DEFINITION",
-            "description": " Pushes Git commits from a Workspace to the Repository's remote.",
-            "canonical": true,
-            "file": "dataform.push_git_commits.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "PushGitCommits",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.PushGitCommits",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "remote_branch",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.PushGitCommitsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "PushGitCommits",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.PushGitCommits",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_FetchFileGitStatuses_async",
-            "title": "Dataform fetchFileGitStatuses Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches Git statuses for the files in a Workspace.",
-            "canonical": true,
-            "file": "dataform.fetch_file_git_statuses.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchFileGitStatuses",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchFileGitStatuses",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.FetchFileGitStatusesResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "FetchFileGitStatuses",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchFileGitStatuses",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_FetchGitAheadBehind_async",
-            "title": "Dataform fetchGitAheadBehind Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches Git ahead/behind against a remote branch.",
-            "canonical": true,
-            "file": "dataform.fetch_git_ahead_behind.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchGitAheadBehind",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchGitAheadBehind",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "remote_branch",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.FetchGitAheadBehindResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "FetchGitAheadBehind",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchGitAheadBehind",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_CommitWorkspaceChanges_async",
-            "title": "Dataform commitWorkspaceChanges Sample",
-            "origin": "API_DEFINITION",
-            "description": " Applies a Git commit for uncommitted files in a Workspace.",
-            "canonical": true,
-            "file": "dataform.commit_workspace_changes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CommitWorkspaceChanges",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.CommitWorkspaceChanges",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "author",
-                        "type": ".google.cloud.dataform.v1beta1.CommitAuthor"
-                    },
-                    {
-                        "name": "commit_message",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "paths",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.CommitWorkspaceChangesResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "CommitWorkspaceChanges",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.CommitWorkspaceChanges",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ResetWorkspaceChanges_async",
-            "title": "Dataform resetWorkspaceChanges Sample",
-            "origin": "API_DEFINITION",
-            "description": " Performs a Git reset for uncommitted files in a Workspace.",
-            "canonical": true,
-            "file": "dataform.reset_workspace_changes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResetWorkspaceChanges",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ResetWorkspaceChanges",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "paths",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "clean",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ResetWorkspaceChangesResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ResetWorkspaceChanges",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ResetWorkspaceChanges",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_FetchFileDiff_async",
-            "title": "Dataform fetchFileDiff Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches Git diff for an uncommitted file in a Workspace.",
-            "canonical": true,
-            "file": "dataform.fetch_file_diff.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchFileDiff",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchFileDiff",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.FetchFileDiffResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "FetchFileDiff",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchFileDiff",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_QueryDirectoryContents_async",
-            "title": "Dataform queryDirectoryContents Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the contents of a given Workspace directory.",
-            "canonical": true,
-            "file": "dataform.query_directory_contents.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "QueryDirectoryContents",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryDirectoryContents",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "QueryDirectoryContents",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryDirectoryContents",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_SearchFiles_async",
-            "title": "Dataform searchFiles Sample",
-            "origin": "API_DEFINITION",
-            "description": " Finds the contents of a given Workspace directory by filter.",
-            "canonical": true,
-            "file": "dataform.search_files.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SearchFiles",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.SearchFiles",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.SearchFilesResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "SearchFiles",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.SearchFiles",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_MakeDirectory_async",
-            "title": "Dataform makeDirectory Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a directory inside a Workspace.",
-            "canonical": true,
-            "file": "dataform.make_directory.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "MakeDirectory",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.MakeDirectory",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.MakeDirectoryResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "MakeDirectory",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.MakeDirectory",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_RemoveDirectory_async",
-            "title": "Dataform removeDirectory Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a directory (inside a Workspace) and all of its contents.",
-            "canonical": true,
-            "file": "dataform.remove_directory.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RemoveDirectory",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.RemoveDirectory",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.RemoveDirectoryResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "RemoveDirectory",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.RemoveDirectory",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_MoveDirectory_async",
-            "title": "Dataform moveDirectory Sample",
-            "origin": "API_DEFINITION",
-            "description": " Moves a directory (inside a Workspace), and all of its contents, to a new location.",
-            "canonical": true,
-            "file": "dataform.move_directory.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "MoveDirectory",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.MoveDirectory",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "new_path",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.MoveDirectoryResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "MoveDirectory",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.MoveDirectory",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ReadFile_async",
-            "title": "Dataform readFile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the contents of a file (inside a Workspace).",
-            "canonical": true,
-            "file": "dataform.read_file.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ReadFile",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ReadFile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "revision",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ReadFileResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ReadFile",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ReadFile",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_RemoveFile_async",
-            "title": "Dataform removeFile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a file (inside a Workspace).",
-            "canonical": true,
-            "file": "dataform.remove_file.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RemoveFile",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.RemoveFile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.RemoveFileResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "RemoveFile",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.RemoveFile",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_MoveFile_async",
-            "title": "Dataform moveFile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Moves a file (inside a Workspace) to a new location.",
-            "canonical": true,
-            "file": "dataform.move_file.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "MoveFile",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.MoveFile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "new_path",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.MoveFileResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "MoveFile",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.MoveFile",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_WriteFile_async",
-            "title": "Dataform writeFile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Writes to a file (inside a Workspace).",
-            "canonical": true,
-            "file": "dataform.write_file.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "WriteFile",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.WriteFile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "workspace",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "path",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "contents",
-                        "type": "TYPE_BYTES"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.WriteFileResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "WriteFile",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.WriteFile",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ListReleaseConfigs_async",
-            "title": "Dataform listReleaseConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists ReleaseConfigs in a given Repository.",
-            "canonical": true,
-            "file": "dataform.list_release_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListReleaseConfigs",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ListReleaseConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ListReleaseConfigsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ListReleaseConfigs",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ListReleaseConfigs",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_GetReleaseConfig_async",
-            "title": "Dataform getReleaseConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a single ReleaseConfig.",
-            "canonical": true,
-            "file": "dataform.get_release_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetReleaseConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.GetReleaseConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ReleaseConfig",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "GetReleaseConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.GetReleaseConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_CreateReleaseConfig_async",
-            "title": "Dataform createReleaseConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new ReleaseConfig in a given Repository.",
-            "canonical": true,
-            "file": "dataform.create_release_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateReleaseConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateReleaseConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "release_config",
-                        "type": ".google.cloud.dataform.v1beta1.ReleaseConfig"
-                    },
-                    {
-                        "name": "release_config_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ReleaseConfig",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "CreateReleaseConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateReleaseConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_UpdateReleaseConfig_async",
-            "title": "Dataform updateReleaseConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a single ReleaseConfig. **Note:** *This method does not fully implement [AIP/134](https://google.aip.dev/134). The wildcard entry (\\*) is treated as a bad request, and when the `field_mask` is omitted, the request is treated as a full update on all modifiable fields.*",
-            "canonical": true,
-            "file": "dataform.update_release_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateReleaseConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateReleaseConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "release_config",
-                        "type": ".google.cloud.dataform.v1beta1.ReleaseConfig"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ReleaseConfig",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "UpdateReleaseConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateReleaseConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_DeleteReleaseConfig_async",
-            "title": "Dataform deleteReleaseConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single ReleaseConfig.",
-            "canonical": true,
-            "file": "dataform.delete_release_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteReleaseConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteReleaseConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "DeleteReleaseConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteReleaseConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ListCompilationResults_async",
-            "title": "Dataform listCompilationResults Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists CompilationResults in a given Repository.",
-            "canonical": true,
-            "file": "dataform.list_compilation_results.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListCompilationResults",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ListCompilationResults",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ListCompilationResultsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ListCompilationResults",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ListCompilationResults",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_GetCompilationResult_async",
-            "title": "Dataform getCompilationResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a single CompilationResult.",
-            "canonical": true,
-            "file": "dataform.get_compilation_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCompilationResult",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.GetCompilationResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.CompilationResult",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "GetCompilationResult",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.GetCompilationResult",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_CreateCompilationResult_async",
-            "title": "Dataform createCompilationResult Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new CompilationResult in a given project and location.",
-            "canonical": true,
-            "file": "dataform.create_compilation_result.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCompilationResult",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateCompilationResult",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "compilation_result",
-                        "type": ".google.cloud.dataform.v1beta1.CompilationResult"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.CompilationResult",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "CreateCompilationResult",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateCompilationResult",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_QueryCompilationResultActions_async",
-            "title": "Dataform queryCompilationResultActions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns CompilationResultActions in a given CompilationResult.",
-            "canonical": true,
-            "file": "dataform.query_compilation_result_actions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "QueryCompilationResultActions",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryCompilationResultActions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.QueryCompilationResultActionsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "QueryCompilationResultActions",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryCompilationResultActions",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ListWorkflowConfigs_async",
-            "title": "Dataform listWorkflowConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists WorkflowConfigs in a given Repository.",
-            "canonical": true,
-            "file": "dataform.list_workflow_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListWorkflowConfigs",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkflowConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ListWorkflowConfigs",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkflowConfigs",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_GetWorkflowConfig_async",
-            "title": "Dataform getWorkflowConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a single WorkflowConfig.",
-            "canonical": true,
-            "file": "dataform.get_workflow_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetWorkflowConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkflowConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.WorkflowConfig",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "GetWorkflowConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkflowConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_CreateWorkflowConfig_async",
-            "title": "Dataform createWorkflowConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new WorkflowConfig in a given Repository.",
-            "canonical": true,
-            "file": "dataform.create_workflow_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateWorkflowConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkflowConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "workflow_config",
-                        "type": ".google.cloud.dataform.v1beta1.WorkflowConfig"
-                    },
-                    {
-                        "name": "workflow_config_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.WorkflowConfig",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "CreateWorkflowConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkflowConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_UpdateWorkflowConfig_async",
-            "title": "Dataform updateWorkflowConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a single WorkflowConfig. **Note:** *This method does not fully implement [AIP/134](https://google.aip.dev/134). The wildcard entry (\\*) is treated as a bad request, and when the `field_mask` is omitted, the request is treated as a full update on all modifiable fields.*",
-            "canonical": true,
-            "file": "dataform.update_workflow_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateWorkflowConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateWorkflowConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "workflow_config",
-                        "type": ".google.cloud.dataform.v1beta1.WorkflowConfig"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.WorkflowConfig",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "UpdateWorkflowConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateWorkflowConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_DeleteWorkflowConfig_async",
-            "title": "Dataform deleteWorkflowConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single WorkflowConfig.",
-            "canonical": true,
-            "file": "dataform.delete_workflow_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteWorkflowConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "DeleteWorkflowConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_ListWorkflowInvocations_async",
-            "title": "Dataform listWorkflowInvocations Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists WorkflowInvocations in a given Repository.",
-            "canonical": true,
-            "file": "dataform.list_workflow_invocations.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListWorkflowInvocations",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkflowInvocations",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.ListWorkflowInvocationsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "ListWorkflowInvocations",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkflowInvocations",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_GetWorkflowInvocation_async",
-            "title": "Dataform getWorkflowInvocation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches a single WorkflowInvocation.",
-            "canonical": true,
-            "file": "dataform.get_workflow_invocation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetWorkflowInvocation",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkflowInvocation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.WorkflowInvocation",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "GetWorkflowInvocation",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkflowInvocation",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_CreateWorkflowInvocation_async",
-            "title": "Dataform createWorkflowInvocation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new WorkflowInvocation in a given Repository.",
-            "canonical": true,
-            "file": "dataform.create_workflow_invocation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateWorkflowInvocation",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkflowInvocation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "workflow_invocation",
-                        "type": ".google.cloud.dataform.v1beta1.WorkflowInvocation"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.WorkflowInvocation",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "CreateWorkflowInvocation",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkflowInvocation",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_DeleteWorkflowInvocation_async",
-            "title": "Dataform deleteWorkflowInvocation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single WorkflowInvocation.",
-            "canonical": true,
-            "file": "dataform.delete_workflow_invocation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteWorkflowInvocation",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowInvocation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "DeleteWorkflowInvocation",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowInvocation",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_CancelWorkflowInvocation_async",
-            "title": "Dataform cancelWorkflowInvocation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Requests cancellation of a running WorkflowInvocation.",
-            "canonical": true,
-            "file": "dataform.cancel_workflow_invocation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CancelWorkflowInvocation",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.CancelWorkflowInvocation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.CancelWorkflowInvocationResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "CancelWorkflowInvocation",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.CancelWorkflowInvocation",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_QueryWorkflowInvocationActions_async",
-            "title": "Dataform queryWorkflowInvocationActions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns WorkflowInvocationActions in a given WorkflowInvocation.",
-            "canonical": true,
-            "file": "dataform.query_workflow_invocation_actions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "QueryWorkflowInvocationActions",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryWorkflowInvocationActions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.QueryWorkflowInvocationActionsResponse",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "QueryWorkflowInvocationActions",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryWorkflowInvocationActions",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_GetConfig_async",
-            "title": "Dataform getConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get default config for a given project and location.",
-            "canonical": true,
-            "file": "dataform.get_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.GetConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.Config",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "GetConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.GetConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "dataform_v1beta1_generated_Dataform_UpdateConfig_async",
-            "title": "Dataform updateConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update default config for a given project and location. **Note:** *This method does not fully implement [AIP/134](https://google.aip.dev/134). The wildcard entry (\\*) is treated as a bad request, and when the `field_mask` is omitted, the request is treated as a full update on all modifiable fields.*",
-            "canonical": true,
-            "file": "dataform.update_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConfig",
-                "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "config",
-                        "type": ".google.cloud.dataform.v1beta1.Config"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.dataform.v1beta1.Config",
-                "client": {
-                    "shortName": "DataformClient",
-                    "fullName": "google.cloud.dataform.v1beta1.DataformClient"
-                },
-                "method": {
-                    "shortName": "UpdateConfig",
-                    "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateConfig",
-                    "service": {
-                        "shortName": "Dataform",
-                        "fullName": "google.cloud.dataform.v1beta1.Dataform"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-dataform",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.dataform.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ListRepositories_async",
+      "title": "Dataform listRepositories Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Repositories in a given project and location. **Note:** *This method can return repositories not shown in the [Dataform UI](https://console.cloud.google.com/bigquery/dataform)*.",
+      "canonical": true,
+      "file": "dataform.list_repositories.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRepositories",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ListRepositories",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ListRepositoriesResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ListRepositories",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ListRepositories",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_GetRepository_async",
+      "title": "Dataform getRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a single Repository.",
+      "canonical": true,
+      "file": "dataform.get_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRepository",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.GetRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.Repository",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetRepository",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.GetRepository",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_CreateRepository_async",
+      "title": "Dataform createRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Repository in a given project and location.",
+      "canonical": true,
+      "file": "dataform.create_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRepository",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "repository",
+            "type": ".google.cloud.dataform.v1beta1.Repository"
+          },
+          {
+            "name": "repository_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.Repository",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "CreateRepository",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateRepository",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_UpdateRepository_async",
+      "title": "Dataform updateRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single Repository. **Note:** *This method does not fully implement [AIP/134](https://google.aip.dev/134). The wildcard entry (\\*) is treated as a bad request, and when the `field_mask` is omitted, the request is treated as a full update on all modifiable fields.*",
+      "canonical": true,
+      "file": "dataform.update_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateRepository",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "repository",
+            "type": ".google.cloud.dataform.v1beta1.Repository"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.Repository",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "UpdateRepository",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateRepository",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_DeleteRepository_async",
+      "title": "Dataform deleteRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Repository.",
+      "canonical": true,
+      "file": "dataform.delete_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteRepository",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "DeleteRepository",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteRepository",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_CommitRepositoryChanges_async",
+      "title": "Dataform commitRepositoryChanges Sample",
+      "origin": "API_DEFINITION",
+      "description": " Applies a Git commit to a Repository. The Repository must not have a value for `git_remote_settings.url`.",
+      "canonical": true,
+      "file": "dataform.commit_repository_changes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CommitRepositoryChanges",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.CommitRepositoryChanges",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "commit_metadata",
+            "type": ".google.cloud.dataform.v1beta1.CommitMetadata"
+          },
+          {
+            "name": "required_head_commit_sha",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "file_operations",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.CommitRepositoryChangesResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "CommitRepositoryChanges",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.CommitRepositoryChanges",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ReadRepositoryFile_async",
+      "title": "Dataform readRepositoryFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the contents of a file (inside a Repository). The Repository must not have a value for `git_remote_settings.url`.",
+      "canonical": true,
+      "file": "dataform.read_repository_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReadRepositoryFile",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ReadRepositoryFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "commit_sha",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ReadRepositoryFileResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ReadRepositoryFile",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ReadRepositoryFile",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_QueryRepositoryDirectoryContents_async",
+      "title": "Dataform queryRepositoryDirectoryContents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the contents of a given Repository directory. The Repository must not have a value for `git_remote_settings.url`.",
+      "canonical": true,
+      "file": "dataform.query_repository_directory_contents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryRepositoryDirectoryContents",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryRepositoryDirectoryContents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "commit_sha",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.QueryRepositoryDirectoryContentsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "QueryRepositoryDirectoryContents",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryRepositoryDirectoryContents",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_FetchRepositoryHistory_async",
+      "title": "Dataform fetchRepositoryHistory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a Repository's history of commits.  The Repository must not have a value for `git_remote_settings.url`.",
+      "canonical": true,
+      "file": "dataform.fetch_repository_history.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchRepositoryHistory",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchRepositoryHistory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.FetchRepositoryHistoryResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "FetchRepositoryHistory",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchRepositoryHistory",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ComputeRepositoryAccessTokenStatus_async",
+      "title": "Dataform computeRepositoryAccessTokenStatus Sample",
+      "origin": "API_DEFINITION",
+      "description": " Computes a Repository's Git access token status.",
+      "canonical": true,
+      "file": "dataform.compute_repository_access_token_status.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ComputeRepositoryAccessTokenStatus",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ComputeRepositoryAccessTokenStatus",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ComputeRepositoryAccessTokenStatusResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ComputeRepositoryAccessTokenStatus",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ComputeRepositoryAccessTokenStatus",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_FetchRemoteBranches_async",
+      "title": "Dataform fetchRemoteBranches Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a Repository's remote branches.",
+      "canonical": true,
+      "file": "dataform.fetch_remote_branches.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchRemoteBranches",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchRemoteBranches",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.FetchRemoteBranchesResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "FetchRemoteBranches",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchRemoteBranches",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ListWorkspaces_async",
+      "title": "Dataform listWorkspaces Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Workspaces in a given Repository.",
+      "canonical": true,
+      "file": "dataform.list_workspaces.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListWorkspaces",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkspaces",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ListWorkspacesResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ListWorkspaces",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkspaces",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_GetWorkspace_async",
+      "title": "Dataform getWorkspace Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a single Workspace.",
+      "canonical": true,
+      "file": "dataform.get_workspace.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetWorkspace",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkspace",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.Workspace",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetWorkspace",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkspace",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_CreateWorkspace_async",
+      "title": "Dataform createWorkspace Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Workspace in a given Repository.",
+      "canonical": true,
+      "file": "dataform.create_workspace.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateWorkspace",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkspace",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "workspace",
+            "type": ".google.cloud.dataform.v1beta1.Workspace"
+          },
+          {
+            "name": "workspace_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.Workspace",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "CreateWorkspace",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkspace",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_DeleteWorkspace_async",
+      "title": "Dataform deleteWorkspace Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Workspace.",
+      "canonical": true,
+      "file": "dataform.delete_workspace.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteWorkspace",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkspace",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "DeleteWorkspace",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkspace",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_InstallNpmPackages_async",
+      "title": "Dataform installNpmPackages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Installs dependency NPM packages (inside a Workspace).",
+      "canonical": true,
+      "file": "dataform.install_npm_packages.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "InstallNpmPackages",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.InstallNpmPackages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.InstallNpmPackagesResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "InstallNpmPackages",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.InstallNpmPackages",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_PullGitCommits_async",
+      "title": "Dataform pullGitCommits Sample",
+      "origin": "API_DEFINITION",
+      "description": " Pulls Git commits from the Repository's remote into a Workspace.",
+      "canonical": true,
+      "file": "dataform.pull_git_commits.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PullGitCommits",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.PullGitCommits",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "remote_branch",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "author",
+            "type": ".google.cloud.dataform.v1beta1.CommitAuthor"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.PullGitCommitsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "PullGitCommits",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.PullGitCommits",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_PushGitCommits_async",
+      "title": "Dataform pushGitCommits Sample",
+      "origin": "API_DEFINITION",
+      "description": " Pushes Git commits from a Workspace to the Repository's remote.",
+      "canonical": true,
+      "file": "dataform.push_git_commits.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PushGitCommits",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.PushGitCommits",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "remote_branch",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.PushGitCommitsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "PushGitCommits",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.PushGitCommits",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_FetchFileGitStatuses_async",
+      "title": "Dataform fetchFileGitStatuses Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches Git statuses for the files in a Workspace.",
+      "canonical": true,
+      "file": "dataform.fetch_file_git_statuses.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchFileGitStatuses",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchFileGitStatuses",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.FetchFileGitStatusesResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "FetchFileGitStatuses",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchFileGitStatuses",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_FetchGitAheadBehind_async",
+      "title": "Dataform fetchGitAheadBehind Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches Git ahead/behind against a remote branch.",
+      "canonical": true,
+      "file": "dataform.fetch_git_ahead_behind.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchGitAheadBehind",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchGitAheadBehind",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "remote_branch",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.FetchGitAheadBehindResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "FetchGitAheadBehind",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchGitAheadBehind",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_CommitWorkspaceChanges_async",
+      "title": "Dataform commitWorkspaceChanges Sample",
+      "origin": "API_DEFINITION",
+      "description": " Applies a Git commit for uncommitted files in a Workspace.",
+      "canonical": true,
+      "file": "dataform.commit_workspace_changes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CommitWorkspaceChanges",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.CommitWorkspaceChanges",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "author",
+            "type": ".google.cloud.dataform.v1beta1.CommitAuthor"
+          },
+          {
+            "name": "commit_message",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "paths",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.CommitWorkspaceChangesResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "CommitWorkspaceChanges",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.CommitWorkspaceChanges",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ResetWorkspaceChanges_async",
+      "title": "Dataform resetWorkspaceChanges Sample",
+      "origin": "API_DEFINITION",
+      "description": " Performs a Git reset for uncommitted files in a Workspace.",
+      "canonical": true,
+      "file": "dataform.reset_workspace_changes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResetWorkspaceChanges",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ResetWorkspaceChanges",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "paths",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "clean",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ResetWorkspaceChangesResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ResetWorkspaceChanges",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ResetWorkspaceChanges",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_FetchFileDiff_async",
+      "title": "Dataform fetchFileDiff Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches Git diff for an uncommitted file in a Workspace.",
+      "canonical": true,
+      "file": "dataform.fetch_file_diff.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchFileDiff",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchFileDiff",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.FetchFileDiffResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "FetchFileDiff",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.FetchFileDiff",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_QueryDirectoryContents_async",
+      "title": "Dataform queryDirectoryContents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the contents of a given Workspace directory.",
+      "canonical": true,
+      "file": "dataform.query_directory_contents.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryDirectoryContents",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryDirectoryContents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.QueryDirectoryContentsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "QueryDirectoryContents",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryDirectoryContents",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_SearchFiles_async",
+      "title": "Dataform searchFiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Finds the contents of a given Workspace directory by filter.",
+      "canonical": true,
+      "file": "dataform.search_files.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchFiles",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.SearchFiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.SearchFilesResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "SearchFiles",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.SearchFiles",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_MakeDirectory_async",
+      "title": "Dataform makeDirectory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a directory inside a Workspace.",
+      "canonical": true,
+      "file": "dataform.make_directory.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MakeDirectory",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.MakeDirectory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.MakeDirectoryResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "MakeDirectory",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.MakeDirectory",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_RemoveDirectory_async",
+      "title": "Dataform removeDirectory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a directory (inside a Workspace) and all of its contents.",
+      "canonical": true,
+      "file": "dataform.remove_directory.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveDirectory",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.RemoveDirectory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.RemoveDirectoryResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "RemoveDirectory",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.RemoveDirectory",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_MoveDirectory_async",
+      "title": "Dataform moveDirectory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Moves a directory (inside a Workspace), and all of its contents, to a new location.",
+      "canonical": true,
+      "file": "dataform.move_directory.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MoveDirectory",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.MoveDirectory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "new_path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.MoveDirectoryResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "MoveDirectory",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.MoveDirectory",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ReadFile_async",
+      "title": "Dataform readFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the contents of a file (inside a Workspace).",
+      "canonical": true,
+      "file": "dataform.read_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReadFile",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ReadFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "revision",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ReadFileResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ReadFile",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ReadFile",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_RemoveFile_async",
+      "title": "Dataform removeFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a file (inside a Workspace).",
+      "canonical": true,
+      "file": "dataform.remove_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveFile",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.RemoveFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.RemoveFileResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "RemoveFile",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.RemoveFile",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_MoveFile_async",
+      "title": "Dataform moveFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Moves a file (inside a Workspace) to a new location.",
+      "canonical": true,
+      "file": "dataform.move_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "MoveFile",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.MoveFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "new_path",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.MoveFileResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "MoveFile",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.MoveFile",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_WriteFile_async",
+      "title": "Dataform writeFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Writes to a file (inside a Workspace).",
+      "canonical": true,
+      "file": "dataform.write_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "WriteFile",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.WriteFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "workspace",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "path",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "contents",
+            "type": "TYPE_BYTES"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.WriteFileResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "WriteFile",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.WriteFile",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ListReleaseConfigs_async",
+      "title": "Dataform listReleaseConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists ReleaseConfigs in a given Repository.",
+      "canonical": true,
+      "file": "dataform.list_release_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReleaseConfigs",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ListReleaseConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ListReleaseConfigsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ListReleaseConfigs",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ListReleaseConfigs",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_GetReleaseConfig_async",
+      "title": "Dataform getReleaseConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a single ReleaseConfig.",
+      "canonical": true,
+      "file": "dataform.get_release_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetReleaseConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.GetReleaseConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ReleaseConfig",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetReleaseConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.GetReleaseConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_CreateReleaseConfig_async",
+      "title": "Dataform createReleaseConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new ReleaseConfig in a given Repository.",
+      "canonical": true,
+      "file": "dataform.create_release_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateReleaseConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateReleaseConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "release_config",
+            "type": ".google.cloud.dataform.v1beta1.ReleaseConfig"
+          },
+          {
+            "name": "release_config_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ReleaseConfig",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "CreateReleaseConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateReleaseConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_UpdateReleaseConfig_async",
+      "title": "Dataform updateReleaseConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single ReleaseConfig. **Note:** *This method does not fully implement [AIP/134](https://google.aip.dev/134). The wildcard entry (\\*) is treated as a bad request, and when the `field_mask` is omitted, the request is treated as a full update on all modifiable fields.*",
+      "canonical": true,
+      "file": "dataform.update_release_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateReleaseConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateReleaseConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "release_config",
+            "type": ".google.cloud.dataform.v1beta1.ReleaseConfig"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ReleaseConfig",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "UpdateReleaseConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateReleaseConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_DeleteReleaseConfig_async",
+      "title": "Dataform deleteReleaseConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single ReleaseConfig.",
+      "canonical": true,
+      "file": "dataform.delete_release_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteReleaseConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteReleaseConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "DeleteReleaseConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteReleaseConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ListCompilationResults_async",
+      "title": "Dataform listCompilationResults Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists CompilationResults in a given Repository.",
+      "canonical": true,
+      "file": "dataform.list_compilation_results.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListCompilationResults",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ListCompilationResults",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ListCompilationResultsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ListCompilationResults",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ListCompilationResults",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_GetCompilationResult_async",
+      "title": "Dataform getCompilationResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a single CompilationResult.",
+      "canonical": true,
+      "file": "dataform.get_compilation_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCompilationResult",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.GetCompilationResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.CompilationResult",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetCompilationResult",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.GetCompilationResult",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_CreateCompilationResult_async",
+      "title": "Dataform createCompilationResult Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new CompilationResult in a given project and location.",
+      "canonical": true,
+      "file": "dataform.create_compilation_result.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCompilationResult",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateCompilationResult",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "compilation_result",
+            "type": ".google.cloud.dataform.v1beta1.CompilationResult"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.CompilationResult",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "CreateCompilationResult",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateCompilationResult",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_QueryCompilationResultActions_async",
+      "title": "Dataform queryCompilationResultActions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns CompilationResultActions in a given CompilationResult.",
+      "canonical": true,
+      "file": "dataform.query_compilation_result_actions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryCompilationResultActions",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryCompilationResultActions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.QueryCompilationResultActionsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "QueryCompilationResultActions",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryCompilationResultActions",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ListWorkflowConfigs_async",
+      "title": "Dataform listWorkflowConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists WorkflowConfigs in a given Repository.",
+      "canonical": true,
+      "file": "dataform.list_workflow_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListWorkflowConfigs",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkflowConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ListWorkflowConfigsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ListWorkflowConfigs",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkflowConfigs",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_GetWorkflowConfig_async",
+      "title": "Dataform getWorkflowConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a single WorkflowConfig.",
+      "canonical": true,
+      "file": "dataform.get_workflow_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetWorkflowConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkflowConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.WorkflowConfig",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetWorkflowConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkflowConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_CreateWorkflowConfig_async",
+      "title": "Dataform createWorkflowConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new WorkflowConfig in a given Repository.",
+      "canonical": true,
+      "file": "dataform.create_workflow_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateWorkflowConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkflowConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "workflow_config",
+            "type": ".google.cloud.dataform.v1beta1.WorkflowConfig"
+          },
+          {
+            "name": "workflow_config_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.WorkflowConfig",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "CreateWorkflowConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkflowConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_UpdateWorkflowConfig_async",
+      "title": "Dataform updateWorkflowConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single WorkflowConfig. **Note:** *This method does not fully implement [AIP/134](https://google.aip.dev/134). The wildcard entry (\\*) is treated as a bad request, and when the `field_mask` is omitted, the request is treated as a full update on all modifiable fields.*",
+      "canonical": true,
+      "file": "dataform.update_workflow_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateWorkflowConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateWorkflowConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "workflow_config",
+            "type": ".google.cloud.dataform.v1beta1.WorkflowConfig"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.WorkflowConfig",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "UpdateWorkflowConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateWorkflowConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_DeleteWorkflowConfig_async",
+      "title": "Dataform deleteWorkflowConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single WorkflowConfig.",
+      "canonical": true,
+      "file": "dataform.delete_workflow_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteWorkflowConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "DeleteWorkflowConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_ListWorkflowInvocations_async",
+      "title": "Dataform listWorkflowInvocations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists WorkflowInvocations in a given Repository.",
+      "canonical": true,
+      "file": "dataform.list_workflow_invocations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListWorkflowInvocations",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkflowInvocations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.ListWorkflowInvocationsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "ListWorkflowInvocations",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.ListWorkflowInvocations",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_GetWorkflowInvocation_async",
+      "title": "Dataform getWorkflowInvocation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches a single WorkflowInvocation.",
+      "canonical": true,
+      "file": "dataform.get_workflow_invocation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetWorkflowInvocation",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkflowInvocation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.WorkflowInvocation",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetWorkflowInvocation",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.GetWorkflowInvocation",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_CreateWorkflowInvocation_async",
+      "title": "Dataform createWorkflowInvocation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new WorkflowInvocation in a given Repository.",
+      "canonical": true,
+      "file": "dataform.create_workflow_invocation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateWorkflowInvocation",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkflowInvocation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "workflow_invocation",
+            "type": ".google.cloud.dataform.v1beta1.WorkflowInvocation"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.WorkflowInvocation",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "CreateWorkflowInvocation",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.CreateWorkflowInvocation",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_DeleteWorkflowInvocation_async",
+      "title": "Dataform deleteWorkflowInvocation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single WorkflowInvocation.",
+      "canonical": true,
+      "file": "dataform.delete_workflow_invocation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteWorkflowInvocation",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowInvocation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "DeleteWorkflowInvocation",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.DeleteWorkflowInvocation",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_CancelWorkflowInvocation_async",
+      "title": "Dataform cancelWorkflowInvocation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Requests cancellation of a running WorkflowInvocation.",
+      "canonical": true,
+      "file": "dataform.cancel_workflow_invocation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelWorkflowInvocation",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.CancelWorkflowInvocation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.CancelWorkflowInvocationResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "CancelWorkflowInvocation",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.CancelWorkflowInvocation",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_QueryWorkflowInvocationActions_async",
+      "title": "Dataform queryWorkflowInvocationActions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns WorkflowInvocationActions in a given WorkflowInvocation.",
+      "canonical": true,
+      "file": "dataform.query_workflow_invocation_actions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "QueryWorkflowInvocationActions",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryWorkflowInvocationActions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.QueryWorkflowInvocationActionsResponse",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "QueryWorkflowInvocationActions",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.QueryWorkflowInvocationActions",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_GetConfig_async",
+      "title": "Dataform getConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get default config for a given project and location.",
+      "canonical": true,
+      "file": "dataform.get_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.GetConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.Config",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "GetConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.GetConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dataform_v1beta1_generated_Dataform_UpdateConfig_async",
+      "title": "Dataform updateConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update default config for a given project and location. **Note:** *This method does not fully implement [AIP/134](https://google.aip.dev/134). The wildcard entry (\\*) is treated as a bad request, and when the `field_mask` is omitted, the request is treated as a full update on all modifiable fields.*",
+      "canonical": true,
+      "file": "dataform.update_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConfig",
+        "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "config",
+            "type": ".google.cloud.dataform.v1beta1.Config"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.dataform.v1beta1.Config",
+        "client": {
+          "shortName": "DataformClient",
+          "fullName": "google.cloud.dataform.v1beta1.DataformClient"
+        },
+        "method": {
+          "shortName": "UpdateConfig",
+          "fullName": "google.cloud.dataform.v1beta1.Dataform.UpdateConfig",
+          "service": {
+            "shortName": "Dataform",
+            "fullName": "google.cloud.dataform.v1beta1.Dataform"
+          }
+        }
+      }
+    }
+  ]
 }

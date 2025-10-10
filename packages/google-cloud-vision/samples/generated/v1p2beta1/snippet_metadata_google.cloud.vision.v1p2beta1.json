@@ -1,95 +1,95 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-vision",
-        "version": "5.3.3",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.vision.v1p2beta1",
-                "version": "v1p2beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "vision_v1p2beta1_generated_ImageAnnotator_BatchAnnotateImages_async",
-            "title": "vision batchAnnotateImages Sample",
-            "origin": "API_DEFINITION",
-            "description": " Run image detection and annotation for a batch of images.",
-            "canonical": true,
-            "file": "image_annotator.batch_annotate_images.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchAnnotateImages",
-                "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator.BatchAnnotateImages",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.vision.v1p2beta1.BatchAnnotateImagesResponse",
-                "client": {
-                    "shortName": "ImageAnnotatorClient",
-                    "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotatorClient"
-                },
-                "method": {
-                    "shortName": "BatchAnnotateImages",
-                    "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator.BatchAnnotateImages",
-                    "service": {
-                        "shortName": "ImageAnnotator",
-                        "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vision_v1p2beta1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async",
-            "title": "vision asyncBatchAnnotateFiles Sample",
-            "origin": "API_DEFINITION",
-            "description": " Run async image detection and annotation for a list of generic files (e.g. PDF) which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the `google.longrunning.Operations` interface. `Operation.metadata` contains `OperationMetadata` (metadata). `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).",
-            "canonical": true,
-            "file": "image_annotator.async_batch_annotate_files.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AsyncBatchAnnotateFiles",
-                "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator.AsyncBatchAnnotateFiles",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ImageAnnotatorClient",
-                    "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotatorClient"
-                },
-                "method": {
-                    "shortName": "AsyncBatchAnnotateFiles",
-                    "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator.AsyncBatchAnnotateFiles",
-                    "service": {
-                        "shortName": "ImageAnnotator",
-                        "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-vision",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.vision.v1p2beta1",
+        "version": "v1p2beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "vision_v1p2beta1_generated_ImageAnnotator_BatchAnnotateImages_async",
+      "title": "vision batchAnnotateImages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Run image detection and annotation for a batch of images.",
+      "canonical": true,
+      "file": "image_annotator.batch_annotate_images.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchAnnotateImages",
+        "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator.BatchAnnotateImages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.vision.v1p2beta1.BatchAnnotateImagesResponse",
+        "client": {
+          "shortName": "ImageAnnotatorClient",
+          "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotatorClient"
+        },
+        "method": {
+          "shortName": "BatchAnnotateImages",
+          "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator.BatchAnnotateImages",
+          "service": {
+            "shortName": "ImageAnnotator",
+            "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vision_v1p2beta1_generated_ImageAnnotator_AsyncBatchAnnotateFiles_async",
+      "title": "vision asyncBatchAnnotateFiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " Run async image detection and annotation for a list of generic files (e.g. PDF) which may contain multiple pages and multiple images per page. Progress and results can be retrieved through the `google.longrunning.Operations` interface. `Operation.metadata` contains `OperationMetadata` (metadata). `Operation.response` contains `AsyncBatchAnnotateFilesResponse` (results).",
+      "canonical": true,
+      "file": "image_annotator.async_batch_annotate_files.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AsyncBatchAnnotateFiles",
+        "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator.AsyncBatchAnnotateFiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ImageAnnotatorClient",
+          "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotatorClient"
+        },
+        "method": {
+          "shortName": "AsyncBatchAnnotateFiles",
+          "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator.AsyncBatchAnnotateFiles",
+          "service": {
+            "shortName": "ImageAnnotator",
+            "fullName": "google.cloud.vision.v1p2beta1.ImageAnnotator"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -1,1287 +1,1287 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-apphub",
-        "version": "0.6.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.apphub.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "apphub_v1_generated_AppHub_LookupServiceProjectAttachment_async",
-            "title": "AppHub lookupServiceProjectAttachment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists a service project attachment for a given service project. You can call this API from any project to find if it is attached to a host project.",
-            "canonical": true,
-            "file": "app_hub.lookup_service_project_attachment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LookupServiceProjectAttachment",
-                "fullName": "google.cloud.apphub.v1.AppHub.LookupServiceProjectAttachment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.LookupServiceProjectAttachmentResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "LookupServiceProjectAttachment",
-                    "fullName": "google.cloud.apphub.v1.AppHub.LookupServiceProjectAttachment",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_ListServiceProjectAttachments_async",
-            "title": "AppHub listServiceProjectAttachments Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists service projects attached to the host project.",
-            "canonical": true,
-            "file": "app_hub.list_service_project_attachments.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListServiceProjectAttachments",
-                "fullName": "google.cloud.apphub.v1.AppHub.ListServiceProjectAttachments",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.ListServiceProjectAttachmentsResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "ListServiceProjectAttachments",
-                    "fullName": "google.cloud.apphub.v1.AppHub.ListServiceProjectAttachments",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_CreateServiceProjectAttachment_async",
-            "title": "AppHub createServiceProjectAttachment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Attaches a service project to the host project.",
-            "canonical": true,
-            "file": "app_hub.create_service_project_attachment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 82,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateServiceProjectAttachment",
-                "fullName": "google.cloud.apphub.v1.AppHub.CreateServiceProjectAttachment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service_project_attachment_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service_project_attachment",
-                        "type": ".google.cloud.apphub.v1.ServiceProjectAttachment"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "CreateServiceProjectAttachment",
-                    "fullName": "google.cloud.apphub.v1.AppHub.CreateServiceProjectAttachment",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_GetServiceProjectAttachment_async",
-            "title": "AppHub getServiceProjectAttachment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a service project attachment.",
-            "canonical": true,
-            "file": "app_hub.get_service_project_attachment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetServiceProjectAttachment",
-                "fullName": "google.cloud.apphub.v1.AppHub.GetServiceProjectAttachment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.ServiceProjectAttachment",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "GetServiceProjectAttachment",
-                    "fullName": "google.cloud.apphub.v1.AppHub.GetServiceProjectAttachment",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_DeleteServiceProjectAttachment_async",
-            "title": "AppHub deleteServiceProjectAttachment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a service project attachment.",
-            "canonical": true,
-            "file": "app_hub.delete_service_project_attachment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteServiceProjectAttachment",
-                "fullName": "google.cloud.apphub.v1.AppHub.DeleteServiceProjectAttachment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "DeleteServiceProjectAttachment",
-                    "fullName": "google.cloud.apphub.v1.AppHub.DeleteServiceProjectAttachment",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_DetachServiceProjectAttachment_async",
-            "title": "AppHub detachServiceProjectAttachment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Detaches a service project from a host project. You can call this API from any service project without needing access to the host project that it is attached to.",
-            "canonical": true,
-            "file": "app_hub.detach_service_project_attachment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DetachServiceProjectAttachment",
-                "fullName": "google.cloud.apphub.v1.AppHub.DetachServiceProjectAttachment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.DetachServiceProjectAttachmentResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "DetachServiceProjectAttachment",
-                    "fullName": "google.cloud.apphub.v1.AppHub.DetachServiceProjectAttachment",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_ListDiscoveredServices_async",
-            "title": "AppHub listDiscoveredServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Discovered Services that can be added to an Application in a host project and location.",
-            "canonical": true,
-            "file": "app_hub.list_discovered_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDiscoveredServices",
-                "fullName": "google.cloud.apphub.v1.AppHub.ListDiscoveredServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.ListDiscoveredServicesResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "ListDiscoveredServices",
-                    "fullName": "google.cloud.apphub.v1.AppHub.ListDiscoveredServices",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_GetDiscoveredService_async",
-            "title": "AppHub getDiscoveredService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a Discovered Service in a host project and location.",
-            "canonical": true,
-            "file": "app_hub.get_discovered_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDiscoveredService",
-                "fullName": "google.cloud.apphub.v1.AppHub.GetDiscoveredService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.DiscoveredService",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "GetDiscoveredService",
-                    "fullName": "google.cloud.apphub.v1.AppHub.GetDiscoveredService",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_LookupDiscoveredService_async",
-            "title": "AppHub lookupDiscoveredService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists a Discovered Service in a host project and location, with a given resource URI.",
-            "canonical": true,
-            "file": "app_hub.lookup_discovered_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LookupDiscoveredService",
-                "fullName": "google.cloud.apphub.v1.AppHub.LookupDiscoveredService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "uri",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.LookupDiscoveredServiceResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "LookupDiscoveredService",
-                    "fullName": "google.cloud.apphub.v1.AppHub.LookupDiscoveredService",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_ListServices_async",
-            "title": "AppHub listServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Services in an Application.",
-            "canonical": true,
-            "file": "app_hub.list_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListServices",
-                "fullName": "google.cloud.apphub.v1.AppHub.ListServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.ListServicesResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "ListServices",
-                    "fullName": "google.cloud.apphub.v1.AppHub.ListServices",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_CreateService_async",
-            "title": "AppHub createService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Service in an Application.",
-            "canonical": true,
-            "file": "app_hub.create_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 83,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateService",
-                "fullName": "google.cloud.apphub.v1.AppHub.CreateService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service",
-                        "type": ".google.cloud.apphub.v1.Service"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "CreateService",
-                    "fullName": "google.cloud.apphub.v1.AppHub.CreateService",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_GetService_async",
-            "title": "AppHub getService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a Service in an Application.",
-            "canonical": true,
-            "file": "app_hub.get_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetService",
-                "fullName": "google.cloud.apphub.v1.AppHub.GetService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.Service",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "GetService",
-                    "fullName": "google.cloud.apphub.v1.AppHub.GetService",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_UpdateService_async",
-            "title": "AppHub updateService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a Service in an Application.",
-            "canonical": true,
-            "file": "app_hub.update_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateService",
-                "fullName": "google.cloud.apphub.v1.AppHub.UpdateService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "service",
-                        "type": ".google.cloud.apphub.v1.Service"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "UpdateService",
-                    "fullName": "google.cloud.apphub.v1.AppHub.UpdateService",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_DeleteService_async",
-            "title": "AppHub deleteService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a Service from an Application.",
-            "canonical": true,
-            "file": "app_hub.delete_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteService",
-                "fullName": "google.cloud.apphub.v1.AppHub.DeleteService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "DeleteService",
-                    "fullName": "google.cloud.apphub.v1.AppHub.DeleteService",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_ListDiscoveredWorkloads_async",
-            "title": "AppHub listDiscoveredWorkloads Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Discovered Workloads that can be added to an Application in a host project and location.",
-            "canonical": true,
-            "file": "app_hub.list_discovered_workloads.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDiscoveredWorkloads",
-                "fullName": "google.cloud.apphub.v1.AppHub.ListDiscoveredWorkloads",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.ListDiscoveredWorkloadsResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "ListDiscoveredWorkloads",
-                    "fullName": "google.cloud.apphub.v1.AppHub.ListDiscoveredWorkloads",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_GetDiscoveredWorkload_async",
-            "title": "AppHub getDiscoveredWorkload Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a Discovered Workload in a host project and location.",
-            "canonical": true,
-            "file": "app_hub.get_discovered_workload.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDiscoveredWorkload",
-                "fullName": "google.cloud.apphub.v1.AppHub.GetDiscoveredWorkload",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.DiscoveredWorkload",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "GetDiscoveredWorkload",
-                    "fullName": "google.cloud.apphub.v1.AppHub.GetDiscoveredWorkload",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_LookupDiscoveredWorkload_async",
-            "title": "AppHub lookupDiscoveredWorkload Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists a Discovered Workload in a host project and location, with a given resource URI.",
-            "canonical": true,
-            "file": "app_hub.lookup_discovered_workload.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LookupDiscoveredWorkload",
-                "fullName": "google.cloud.apphub.v1.AppHub.LookupDiscoveredWorkload",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "uri",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.LookupDiscoveredWorkloadResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "LookupDiscoveredWorkload",
-                    "fullName": "google.cloud.apphub.v1.AppHub.LookupDiscoveredWorkload",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_ListWorkloads_async",
-            "title": "AppHub listWorkloads Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Workloads in an Application.",
-            "canonical": true,
-            "file": "app_hub.list_workloads.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListWorkloads",
-                "fullName": "google.cloud.apphub.v1.AppHub.ListWorkloads",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.ListWorkloadsResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "ListWorkloads",
-                    "fullName": "google.cloud.apphub.v1.AppHub.ListWorkloads",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_CreateWorkload_async",
-            "title": "AppHub createWorkload Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Workload in an Application.",
-            "canonical": true,
-            "file": "app_hub.create_workload.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 83,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateWorkload",
-                "fullName": "google.cloud.apphub.v1.AppHub.CreateWorkload",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "workload_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "workload",
-                        "type": ".google.cloud.apphub.v1.Workload"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "CreateWorkload",
-                    "fullName": "google.cloud.apphub.v1.AppHub.CreateWorkload",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_GetWorkload_async",
-            "title": "AppHub getWorkload Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a Workload in an Application.",
-            "canonical": true,
-            "file": "app_hub.get_workload.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetWorkload",
-                "fullName": "google.cloud.apphub.v1.AppHub.GetWorkload",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.Workload",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "GetWorkload",
-                    "fullName": "google.cloud.apphub.v1.AppHub.GetWorkload",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_UpdateWorkload_async",
-            "title": "AppHub updateWorkload Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a Workload in an Application.",
-            "canonical": true,
-            "file": "app_hub.update_workload.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateWorkload",
-                "fullName": "google.cloud.apphub.v1.AppHub.UpdateWorkload",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "workload",
-                        "type": ".google.cloud.apphub.v1.Workload"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "UpdateWorkload",
-                    "fullName": "google.cloud.apphub.v1.AppHub.UpdateWorkload",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_DeleteWorkload_async",
-            "title": "AppHub deleteWorkload Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a Workload from an Application.",
-            "canonical": true,
-            "file": "app_hub.delete_workload.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteWorkload",
-                "fullName": "google.cloud.apphub.v1.AppHub.DeleteWorkload",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "DeleteWorkload",
-                    "fullName": "google.cloud.apphub.v1.AppHub.DeleteWorkload",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_ListApplications_async",
-            "title": "AppHub listApplications Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Applications in a host project and location.",
-            "canonical": true,
-            "file": "app_hub.list_applications.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListApplications",
-                "fullName": "google.cloud.apphub.v1.AppHub.ListApplications",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.ListApplicationsResponse",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "ListApplications",
-                    "fullName": "google.cloud.apphub.v1.AppHub.ListApplications",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_CreateApplication_async",
-            "title": "AppHub createApplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an Application in a host project and location.",
-            "canonical": true,
-            "file": "app_hub.create_application.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 82,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateApplication",
-                "fullName": "google.cloud.apphub.v1.AppHub.CreateApplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "application_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "application",
-                        "type": ".google.cloud.apphub.v1.Application"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "CreateApplication",
-                    "fullName": "google.cloud.apphub.v1.AppHub.CreateApplication",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_GetApplication_async",
-            "title": "AppHub getApplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an Application in a host project and location.",
-            "canonical": true,
-            "file": "app_hub.get_application.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetApplication",
-                "fullName": "google.cloud.apphub.v1.AppHub.GetApplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.apphub.v1.Application",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "GetApplication",
-                    "fullName": "google.cloud.apphub.v1.AppHub.GetApplication",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_UpdateApplication_async",
-            "title": "AppHub updateApplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an Application in a host project and location.",
-            "canonical": true,
-            "file": "app_hub.update_application.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateApplication",
-                "fullName": "google.cloud.apphub.v1.AppHub.UpdateApplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "application",
-                        "type": ".google.cloud.apphub.v1.Application"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "UpdateApplication",
-                    "fullName": "google.cloud.apphub.v1.AppHub.UpdateApplication",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "apphub_v1_generated_AppHub_DeleteApplication_async",
-            "title": "AppHub deleteApplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an Application in a host project and location.",
-            "canonical": true,
-            "file": "app_hub.delete_application.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteApplication",
-                "fullName": "google.cloud.apphub.v1.AppHub.DeleteApplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AppHubClient",
-                    "fullName": "google.cloud.apphub.v1.AppHubClient"
-                },
-                "method": {
-                    "shortName": "DeleteApplication",
-                    "fullName": "google.cloud.apphub.v1.AppHub.DeleteApplication",
-                    "service": {
-                        "shortName": "AppHub",
-                        "fullName": "google.cloud.apphub.v1.AppHub"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-apphub",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.apphub.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "apphub_v1_generated_AppHub_LookupServiceProjectAttachment_async",
+      "title": "AppHub lookupServiceProjectAttachment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists a service project attachment for a given service project. You can call this API from any project to find if it is attached to a host project.",
+      "canonical": true,
+      "file": "app_hub.lookup_service_project_attachment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupServiceProjectAttachment",
+        "fullName": "google.cloud.apphub.v1.AppHub.LookupServiceProjectAttachment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.LookupServiceProjectAttachmentResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "LookupServiceProjectAttachment",
+          "fullName": "google.cloud.apphub.v1.AppHub.LookupServiceProjectAttachment",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_ListServiceProjectAttachments_async",
+      "title": "AppHub listServiceProjectAttachments Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists service projects attached to the host project.",
+      "canonical": true,
+      "file": "app_hub.list_service_project_attachments.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServiceProjectAttachments",
+        "fullName": "google.cloud.apphub.v1.AppHub.ListServiceProjectAttachments",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.ListServiceProjectAttachmentsResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "ListServiceProjectAttachments",
+          "fullName": "google.cloud.apphub.v1.AppHub.ListServiceProjectAttachments",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_CreateServiceProjectAttachment_async",
+      "title": "AppHub createServiceProjectAttachment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Attaches a service project to the host project.",
+      "canonical": true,
+      "file": "app_hub.create_service_project_attachment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateServiceProjectAttachment",
+        "fullName": "google.cloud.apphub.v1.AppHub.CreateServiceProjectAttachment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_project_attachment_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_project_attachment",
+            "type": ".google.cloud.apphub.v1.ServiceProjectAttachment"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "CreateServiceProjectAttachment",
+          "fullName": "google.cloud.apphub.v1.AppHub.CreateServiceProjectAttachment",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_GetServiceProjectAttachment_async",
+      "title": "AppHub getServiceProjectAttachment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a service project attachment.",
+      "canonical": true,
+      "file": "app_hub.get_service_project_attachment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetServiceProjectAttachment",
+        "fullName": "google.cloud.apphub.v1.AppHub.GetServiceProjectAttachment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.ServiceProjectAttachment",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "GetServiceProjectAttachment",
+          "fullName": "google.cloud.apphub.v1.AppHub.GetServiceProjectAttachment",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_DeleteServiceProjectAttachment_async",
+      "title": "AppHub deleteServiceProjectAttachment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a service project attachment.",
+      "canonical": true,
+      "file": "app_hub.delete_service_project_attachment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteServiceProjectAttachment",
+        "fullName": "google.cloud.apphub.v1.AppHub.DeleteServiceProjectAttachment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "DeleteServiceProjectAttachment",
+          "fullName": "google.cloud.apphub.v1.AppHub.DeleteServiceProjectAttachment",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_DetachServiceProjectAttachment_async",
+      "title": "AppHub detachServiceProjectAttachment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Detaches a service project from a host project. You can call this API from any service project without needing access to the host project that it is attached to.",
+      "canonical": true,
+      "file": "app_hub.detach_service_project_attachment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DetachServiceProjectAttachment",
+        "fullName": "google.cloud.apphub.v1.AppHub.DetachServiceProjectAttachment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.DetachServiceProjectAttachmentResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "DetachServiceProjectAttachment",
+          "fullName": "google.cloud.apphub.v1.AppHub.DetachServiceProjectAttachment",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_ListDiscoveredServices_async",
+      "title": "AppHub listDiscoveredServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Discovered Services that can be added to an Application in a host project and location.",
+      "canonical": true,
+      "file": "app_hub.list_discovered_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDiscoveredServices",
+        "fullName": "google.cloud.apphub.v1.AppHub.ListDiscoveredServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.ListDiscoveredServicesResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "ListDiscoveredServices",
+          "fullName": "google.cloud.apphub.v1.AppHub.ListDiscoveredServices",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_GetDiscoveredService_async",
+      "title": "AppHub getDiscoveredService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a Discovered Service in a host project and location.",
+      "canonical": true,
+      "file": "app_hub.get_discovered_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDiscoveredService",
+        "fullName": "google.cloud.apphub.v1.AppHub.GetDiscoveredService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.DiscoveredService",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "GetDiscoveredService",
+          "fullName": "google.cloud.apphub.v1.AppHub.GetDiscoveredService",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_LookupDiscoveredService_async",
+      "title": "AppHub lookupDiscoveredService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists a Discovered Service in a host project and location, with a given resource URI.",
+      "canonical": true,
+      "file": "app_hub.lookup_discovered_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupDiscoveredService",
+        "fullName": "google.cloud.apphub.v1.AppHub.LookupDiscoveredService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "uri",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.LookupDiscoveredServiceResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "LookupDiscoveredService",
+          "fullName": "google.cloud.apphub.v1.AppHub.LookupDiscoveredService",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_ListServices_async",
+      "title": "AppHub listServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Services in an Application.",
+      "canonical": true,
+      "file": "app_hub.list_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServices",
+        "fullName": "google.cloud.apphub.v1.AppHub.ListServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.ListServicesResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "ListServices",
+          "fullName": "google.cloud.apphub.v1.AppHub.ListServices",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_CreateService_async",
+      "title": "AppHub createService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Service in an Application.",
+      "canonical": true,
+      "file": "app_hub.create_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateService",
+        "fullName": "google.cloud.apphub.v1.AppHub.CreateService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service",
+            "type": ".google.cloud.apphub.v1.Service"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "CreateService",
+          "fullName": "google.cloud.apphub.v1.AppHub.CreateService",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_GetService_async",
+      "title": "AppHub getService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a Service in an Application.",
+      "canonical": true,
+      "file": "app_hub.get_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetService",
+        "fullName": "google.cloud.apphub.v1.AppHub.GetService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.Service",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "GetService",
+          "fullName": "google.cloud.apphub.v1.AppHub.GetService",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_UpdateService_async",
+      "title": "AppHub updateService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a Service in an Application.",
+      "canonical": true,
+      "file": "app_hub.update_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateService",
+        "fullName": "google.cloud.apphub.v1.AppHub.UpdateService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "service",
+            "type": ".google.cloud.apphub.v1.Service"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "UpdateService",
+          "fullName": "google.cloud.apphub.v1.AppHub.UpdateService",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_DeleteService_async",
+      "title": "AppHub deleteService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Service from an Application.",
+      "canonical": true,
+      "file": "app_hub.delete_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteService",
+        "fullName": "google.cloud.apphub.v1.AppHub.DeleteService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "DeleteService",
+          "fullName": "google.cloud.apphub.v1.AppHub.DeleteService",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_ListDiscoveredWorkloads_async",
+      "title": "AppHub listDiscoveredWorkloads Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Discovered Workloads that can be added to an Application in a host project and location.",
+      "canonical": true,
+      "file": "app_hub.list_discovered_workloads.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDiscoveredWorkloads",
+        "fullName": "google.cloud.apphub.v1.AppHub.ListDiscoveredWorkloads",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.ListDiscoveredWorkloadsResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "ListDiscoveredWorkloads",
+          "fullName": "google.cloud.apphub.v1.AppHub.ListDiscoveredWorkloads",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_GetDiscoveredWorkload_async",
+      "title": "AppHub getDiscoveredWorkload Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a Discovered Workload in a host project and location.",
+      "canonical": true,
+      "file": "app_hub.get_discovered_workload.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDiscoveredWorkload",
+        "fullName": "google.cloud.apphub.v1.AppHub.GetDiscoveredWorkload",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.DiscoveredWorkload",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "GetDiscoveredWorkload",
+          "fullName": "google.cloud.apphub.v1.AppHub.GetDiscoveredWorkload",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_LookupDiscoveredWorkload_async",
+      "title": "AppHub lookupDiscoveredWorkload Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists a Discovered Workload in a host project and location, with a given resource URI.",
+      "canonical": true,
+      "file": "app_hub.lookup_discovered_workload.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupDiscoveredWorkload",
+        "fullName": "google.cloud.apphub.v1.AppHub.LookupDiscoveredWorkload",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "uri",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.LookupDiscoveredWorkloadResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "LookupDiscoveredWorkload",
+          "fullName": "google.cloud.apphub.v1.AppHub.LookupDiscoveredWorkload",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_ListWorkloads_async",
+      "title": "AppHub listWorkloads Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Workloads in an Application.",
+      "canonical": true,
+      "file": "app_hub.list_workloads.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListWorkloads",
+        "fullName": "google.cloud.apphub.v1.AppHub.ListWorkloads",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.ListWorkloadsResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "ListWorkloads",
+          "fullName": "google.cloud.apphub.v1.AppHub.ListWorkloads",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_CreateWorkload_async",
+      "title": "AppHub createWorkload Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Workload in an Application.",
+      "canonical": true,
+      "file": "app_hub.create_workload.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateWorkload",
+        "fullName": "google.cloud.apphub.v1.AppHub.CreateWorkload",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "workload_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "workload",
+            "type": ".google.cloud.apphub.v1.Workload"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "CreateWorkload",
+          "fullName": "google.cloud.apphub.v1.AppHub.CreateWorkload",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_GetWorkload_async",
+      "title": "AppHub getWorkload Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a Workload in an Application.",
+      "canonical": true,
+      "file": "app_hub.get_workload.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetWorkload",
+        "fullName": "google.cloud.apphub.v1.AppHub.GetWorkload",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.Workload",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "GetWorkload",
+          "fullName": "google.cloud.apphub.v1.AppHub.GetWorkload",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_UpdateWorkload_async",
+      "title": "AppHub updateWorkload Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a Workload in an Application.",
+      "canonical": true,
+      "file": "app_hub.update_workload.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateWorkload",
+        "fullName": "google.cloud.apphub.v1.AppHub.UpdateWorkload",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "workload",
+            "type": ".google.cloud.apphub.v1.Workload"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "UpdateWorkload",
+          "fullName": "google.cloud.apphub.v1.AppHub.UpdateWorkload",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_DeleteWorkload_async",
+      "title": "AppHub deleteWorkload Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Workload from an Application.",
+      "canonical": true,
+      "file": "app_hub.delete_workload.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteWorkload",
+        "fullName": "google.cloud.apphub.v1.AppHub.DeleteWorkload",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "DeleteWorkload",
+          "fullName": "google.cloud.apphub.v1.AppHub.DeleteWorkload",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_ListApplications_async",
+      "title": "AppHub listApplications Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Applications in a host project and location.",
+      "canonical": true,
+      "file": "app_hub.list_applications.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListApplications",
+        "fullName": "google.cloud.apphub.v1.AppHub.ListApplications",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.ListApplicationsResponse",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "ListApplications",
+          "fullName": "google.cloud.apphub.v1.AppHub.ListApplications",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_CreateApplication_async",
+      "title": "AppHub createApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an Application in a host project and location.",
+      "canonical": true,
+      "file": "app_hub.create_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApplication",
+        "fullName": "google.cloud.apphub.v1.AppHub.CreateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application",
+            "type": ".google.cloud.apphub.v1.Application"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "CreateApplication",
+          "fullName": "google.cloud.apphub.v1.AppHub.CreateApplication",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_GetApplication_async",
+      "title": "AppHub getApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an Application in a host project and location.",
+      "canonical": true,
+      "file": "app_hub.get_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApplication",
+        "fullName": "google.cloud.apphub.v1.AppHub.GetApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.apphub.v1.Application",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "GetApplication",
+          "fullName": "google.cloud.apphub.v1.AppHub.GetApplication",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_UpdateApplication_async",
+      "title": "AppHub updateApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an Application in a host project and location.",
+      "canonical": true,
+      "file": "app_hub.update_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApplication",
+        "fullName": "google.cloud.apphub.v1.AppHub.UpdateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "application",
+            "type": ".google.cloud.apphub.v1.Application"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "UpdateApplication",
+          "fullName": "google.cloud.apphub.v1.AppHub.UpdateApplication",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "apphub_v1_generated_AppHub_DeleteApplication_async",
+      "title": "AppHub deleteApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an Application in a host project and location.",
+      "canonical": true,
+      "file": "app_hub.delete_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteApplication",
+        "fullName": "google.cloud.apphub.v1.AppHub.DeleteApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AppHubClient",
+          "fullName": "google.cloud.apphub.v1.AppHubClient"
+        },
+        "method": {
+          "shortName": "DeleteApplication",
+          "fullName": "google.cloud.apphub.v1.AppHub.DeleteApplication",
+          "service": {
+            "shortName": "AppHub",
+            "fullName": "google.cloud.apphub.v1.AppHub"
+          }
+        }
+      }
+    }
+  ]
 }

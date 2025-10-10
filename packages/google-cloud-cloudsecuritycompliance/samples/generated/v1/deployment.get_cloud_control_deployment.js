@@ -29,7 +29,7 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. CloudControlDeployment name in either of the following formats:
+   *  Required. CloudControlDeployment name in the following format:
    *  organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}
    */
   // const name = 'abc123'

@@ -1,1315 +1,1315 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-analyticshub",
-        "version": "2.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.bigquery.analyticshub.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListDataExchanges_async",
-            "title": "AnalyticsHubService listDataExchanges Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all data exchanges in a given project and location.",
-            "canonical": true,
-            "file": "analytics_hub_service.list_data_exchanges.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDataExchanges",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.ListDataExchangesResponse",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "ListDataExchanges",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListOrgDataExchanges_async",
-            "title": "AnalyticsHubService listOrgDataExchanges Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all data exchanges from projects in a given organization and location.",
-            "canonical": true,
-            "file": "analytics_hub_service.list_org_data_exchanges.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListOrgDataExchanges",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "organization",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesResponse",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "ListOrgDataExchanges",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetDataExchange_async",
-            "title": "AnalyticsHubService getDataExchange Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a data exchange.",
-            "canonical": true,
-            "file": "analytics_hub_service.get_data_exchange.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDataExchange",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.DataExchange",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "GetDataExchange",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_CreateDataExchange_async",
-            "title": "AnalyticsHubService createDataExchange Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new data exchange.",
-            "canonical": true,
-            "file": "analytics_hub_service.create_data_exchange.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateDataExchange",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "data_exchange_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "data_exchange",
-                        "type": ".google.cloud.bigquery.analyticshub.v1.DataExchange"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.DataExchange",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateDataExchange",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_UpdateDataExchange_async",
-            "title": "AnalyticsHubService updateDataExchange Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an existing data exchange.",
-            "canonical": true,
-            "file": "analytics_hub_service.update_data_exchange.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateDataExchange",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "data_exchange",
-                        "type": ".google.cloud.bigquery.analyticshub.v1.DataExchange"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.DataExchange",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateDataExchange",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_async",
-            "title": "AnalyticsHubService deleteDataExchange Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an existing data exchange.",
-            "canonical": true,
-            "file": "analytics_hub_service.delete_data_exchange.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteDataExchange",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteDataExchange",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListListings_async",
-            "title": "AnalyticsHubService listListings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all listings in a given project and location.",
-            "canonical": true,
-            "file": "analytics_hub_service.list_listings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListListings",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.ListListingsResponse",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "ListListings",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetListing_async",
-            "title": "AnalyticsHubService getListing Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a listing.",
-            "canonical": true,
-            "file": "analytics_hub_service.get_listing.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetListing",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.Listing",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "GetListing",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_CreateListing_async",
-            "title": "AnalyticsHubService createListing Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new listing.",
-            "canonical": true,
-            "file": "analytics_hub_service.create_listing.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateListing",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "listing_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "listing",
-                        "type": ".google.cloud.bigquery.analyticshub.v1.Listing"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.Listing",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateListing",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_UpdateListing_async",
-            "title": "AnalyticsHubService updateListing Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an existing listing.",
-            "canonical": true,
-            "file": "analytics_hub_service.update_listing.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateListing",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "listing",
-                        "type": ".google.cloud.bigquery.analyticshub.v1.Listing"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.Listing",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateListing",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteListing_async",
-            "title": "AnalyticsHubService deleteListing Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a listing.",
-            "canonical": true,
-            "file": "analytics_hub_service.delete_listing.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteListing",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "delete_commercial",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteListing",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SubscribeListing_async",
-            "title": "AnalyticsHubService subscribeListing Sample",
-            "origin": "API_DEFINITION",
-            "description": " Subscribes to a listing. Currently, with Analytics Hub, you can create listings that reference only BigQuery datasets. Upon subscription to a listing for a BigQuery dataset, Analytics Hub creates a linked dataset in the subscriber's project.",
-            "canonical": true,
-            "file": "analytics_hub_service.subscribe_listing.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SubscribeListing",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "destination_dataset",
-                        "type": ".google.cloud.bigquery.analyticshub.v1.DestinationDataset"
-                    },
-                    {
-                        "name": "destination_pubsub_subscription",
-                        "type": ".google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.SubscribeListingResponse",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "SubscribeListing",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async",
-            "title": "AnalyticsHubService subscribeDataExchange Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Subscription to a Data Clean Room. This is a long-running operation as it will create one or more linked datasets. Throws a Bad Request error if the Data Exchange does not contain any listings.",
-            "canonical": true,
-            "file": "analytics_hub_service.subscribe_data_exchange.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SubscribeDataExchange",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "destination",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "destination_dataset",
-                        "type": ".google.cloud.bigquery.analyticshub.v1.DestinationDataset"
-                    },
-                    {
-                        "name": "subscription",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "subscriber_contact",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "SubscribeDataExchange",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_RefreshSubscription_async",
-            "title": "AnalyticsHubService refreshSubscription Sample",
-            "origin": "API_DEFINITION",
-            "description": " Refreshes a Subscription to a Data Exchange. A Data Exchange can become stale when a publisher adds or removes data. This is a long-running operation as it may create many linked datasets.",
-            "canonical": true,
-            "file": "analytics_hub_service.refresh_subscription.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RefreshSubscription",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "RefreshSubscription",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetSubscription_async",
-            "title": "AnalyticsHubService getSubscription Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a Subscription.",
-            "canonical": true,
-            "file": "analytics_hub_service.get_subscription.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSubscription",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.Subscription",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "GetSubscription",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListSubscriptions_async",
-            "title": "AnalyticsHubService listSubscriptions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all subscriptions in a given project and location.",
-            "canonical": true,
-            "file": "analytics_hub_service.list_subscriptions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSubscriptions",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "ListSubscriptions",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListSharedResourceSubscriptions_async",
-            "title": "AnalyticsHubService listSharedResourceSubscriptions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all subscriptions on a given Data Exchange or Listing.",
-            "canonical": true,
-            "file": "analytics_hub_service.list_shared_resource_subscriptions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSharedResourceSubscriptions",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "include_deleted_subscriptions",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "ListSharedResourceSubscriptions",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_RevokeSubscription_async",
-            "title": "AnalyticsHubService revokeSubscription Sample",
-            "origin": "API_DEFINITION",
-            "description": " Revokes a given subscription.",
-            "canonical": true,
-            "file": "analytics_hub_service.revoke_subscription.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RevokeSubscription",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "revoke_commercial",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "RevokeSubscription",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteSubscription_async",
-            "title": "AnalyticsHubService deleteSubscription Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a subscription.",
-            "canonical": true,
-            "file": "analytics_hub_service.delete_subscription.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSubscription",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteSubscription",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetIamPolicy_async",
-            "title": "AnalyticsHubService getIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the IAM policy.",
-            "canonical": true,
-            "file": "analytics_hub_service.get_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIamPolicy",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "options",
-                        "type": ".google.iam.v1.GetPolicyOptions"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "GetIamPolicy",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SetIamPolicy_async",
-            "title": "AnalyticsHubService setIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the IAM policy.",
-            "canonical": true,
-            "file": "analytics_hub_service.set_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetIamPolicy",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "policy",
-                        "type": ".google.iam.v1.Policy"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "SetIamPolicy",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_TestIamPermissions_async",
-            "title": "AnalyticsHubService testIamPermissions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the permissions that a caller has.",
-            "canonical": true,
-            "file": "analytics_hub_service.test_iam_permissions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "TestIamPermissions",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.TestIamPermissions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "permissions",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.iam.v1.TestIamPermissionsResponse",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "TestIamPermissions",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.TestIamPermissions",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_CreateQueryTemplate_async",
-            "title": "AnalyticsHubService createQueryTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new QueryTemplate",
-            "canonical": true,
-            "file": "analytics_hub_service.create_query_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateQueryTemplate",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateQueryTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "query_template_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "query_template",
-                        "type": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateQueryTemplate",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateQueryTemplate",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetQueryTemplate_async",
-            "title": "AnalyticsHubService getQueryTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a QueryTemplate",
-            "canonical": true,
-            "file": "analytics_hub_service.get_query_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetQueryTemplate",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetQueryTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "GetQueryTemplate",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetQueryTemplate",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListQueryTemplates_async",
-            "title": "AnalyticsHubService listQueryTemplates Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all QueryTemplates in a given project and location.",
-            "canonical": true,
-            "file": "analytics_hub_service.list_query_templates.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListQueryTemplates",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListQueryTemplates",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "ListQueryTemplates",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListQueryTemplates",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_UpdateQueryTemplate_async",
-            "title": "AnalyticsHubService updateQueryTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an existing QueryTemplate",
-            "canonical": true,
-            "file": "analytics_hub_service.update_query_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateQueryTemplate",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateQueryTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "query_template",
-                        "type": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateQueryTemplate",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateQueryTemplate",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteQueryTemplate_async",
-            "title": "AnalyticsHubService deleteQueryTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a query template.",
-            "canonical": true,
-            "file": "analytics_hub_service.delete_query_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteQueryTemplate",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteQueryTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteQueryTemplate",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteQueryTemplate",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SubmitQueryTemplate_async",
-            "title": "AnalyticsHubService submitQueryTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Submits a query template for approval.",
-            "canonical": true,
-            "file": "analytics_hub_service.submit_query_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SubmitQueryTemplate",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubmitQueryTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "SubmitQueryTemplate",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubmitQueryTemplate",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ApproveQueryTemplate_async",
-            "title": "AnalyticsHubService approveQueryTemplate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Approves a query template.",
-            "canonical": true,
-            "file": "analytics_hub_service.approve_query_template.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ApproveQueryTemplate",
-                "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ApproveQueryTemplate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
-                "client": {
-                    "shortName": "AnalyticsHubServiceClient",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
-                },
-                "method": {
-                    "shortName": "ApproveQueryTemplate",
-                    "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ApproveQueryTemplate",
-                    "service": {
-                        "shortName": "AnalyticsHubService",
-                        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-analyticshub",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.bigquery.analyticshub.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListDataExchanges_async",
+      "title": "AnalyticsHubService listDataExchanges Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all data exchanges in a given project and location.",
+      "canonical": true,
+      "file": "analytics_hub_service.list_data_exchanges.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDataExchanges",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.ListDataExchangesResponse",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "ListDataExchanges",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListDataExchanges",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListOrgDataExchanges_async",
+      "title": "AnalyticsHubService listOrgDataExchanges Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all data exchanges from projects in a given organization and location.",
+      "canonical": true,
+      "file": "analytics_hub_service.list_org_data_exchanges.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListOrgDataExchanges",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges",
+        "async": true,
+        "parameters": [
+          {
+            "name": "organization",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.ListOrgDataExchangesResponse",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "ListOrgDataExchanges",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListOrgDataExchanges",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetDataExchange_async",
+      "title": "AnalyticsHubService getDataExchange Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a data exchange.",
+      "canonical": true,
+      "file": "analytics_hub_service.get_data_exchange.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataExchange",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.DataExchange",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataExchange",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetDataExchange",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_CreateDataExchange_async",
+      "title": "AnalyticsHubService createDataExchange Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new data exchange.",
+      "canonical": true,
+      "file": "analytics_hub_service.create_data_exchange.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDataExchange",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_exchange_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_exchange",
+            "type": ".google.cloud.bigquery.analyticshub.v1.DataExchange"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.DataExchange",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDataExchange",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateDataExchange",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_UpdateDataExchange_async",
+      "title": "AnalyticsHubService updateDataExchange Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing data exchange.",
+      "canonical": true,
+      "file": "analytics_hub_service.update_data_exchange.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDataExchange",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "data_exchange",
+            "type": ".google.cloud.bigquery.analyticshub.v1.DataExchange"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.DataExchange",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDataExchange",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateDataExchange",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteDataExchange_async",
+      "title": "AnalyticsHubService deleteDataExchange Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an existing data exchange.",
+      "canonical": true,
+      "file": "analytics_hub_service.delete_data_exchange.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataExchange",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDataExchange",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteDataExchange",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListListings_async",
+      "title": "AnalyticsHubService listListings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all listings in a given project and location.",
+      "canonical": true,
+      "file": "analytics_hub_service.list_listings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListListings",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.ListListingsResponse",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "ListListings",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListListings",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetListing_async",
+      "title": "AnalyticsHubService getListing Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a listing.",
+      "canonical": true,
+      "file": "analytics_hub_service.get_listing.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetListing",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.Listing",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "GetListing",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetListing",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_CreateListing_async",
+      "title": "AnalyticsHubService createListing Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new listing.",
+      "canonical": true,
+      "file": "analytics_hub_service.create_listing.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateListing",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "listing_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "listing",
+            "type": ".google.cloud.bigquery.analyticshub.v1.Listing"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.Listing",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "CreateListing",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateListing",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_UpdateListing_async",
+      "title": "AnalyticsHubService updateListing Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing listing.",
+      "canonical": true,
+      "file": "analytics_hub_service.update_listing.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateListing",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "listing",
+            "type": ".google.cloud.bigquery.analyticshub.v1.Listing"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.Listing",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateListing",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateListing",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteListing_async",
+      "title": "AnalyticsHubService deleteListing Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a listing.",
+      "canonical": true,
+      "file": "analytics_hub_service.delete_listing.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteListing",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "delete_commercial",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteListing",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteListing",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SubscribeListing_async",
+      "title": "AnalyticsHubService subscribeListing Sample",
+      "origin": "API_DEFINITION",
+      "description": " Subscribes to a listing. Currently, with Analytics Hub, you can create listings that reference only BigQuery datasets. Upon subscription to a listing for a BigQuery dataset, Analytics Hub creates a linked dataset in the subscriber's project.",
+      "canonical": true,
+      "file": "analytics_hub_service.subscribe_listing.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SubscribeListing",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing",
+        "async": true,
+        "parameters": [
+          {
+            "name": "destination_dataset",
+            "type": ".google.cloud.bigquery.analyticshub.v1.DestinationDataset"
+          },
+          {
+            "name": "destination_pubsub_subscription",
+            "type": ".google.cloud.bigquery.analyticshub.v1.DestinationPubSubSubscription"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.SubscribeListingResponse",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "SubscribeListing",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeListing",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SubscribeDataExchange_async",
+      "title": "AnalyticsHubService subscribeDataExchange Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Subscription to a Data Clean Room. This is a long-running operation as it will create one or more linked datasets. Throws a Bad Request error if the Data Exchange does not contain any listings.",
+      "canonical": true,
+      "file": "analytics_hub_service.subscribe_data_exchange.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SubscribeDataExchange",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "destination",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "destination_dataset",
+            "type": ".google.cloud.bigquery.analyticshub.v1.DestinationDataset"
+          },
+          {
+            "name": "subscription",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "subscriber_contact",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "SubscribeDataExchange",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubscribeDataExchange",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_RefreshSubscription_async",
+      "title": "AnalyticsHubService refreshSubscription Sample",
+      "origin": "API_DEFINITION",
+      "description": " Refreshes a Subscription to a Data Exchange. A Data Exchange can become stale when a publisher adds or removes data. This is a long-running operation as it may create many linked datasets.",
+      "canonical": true,
+      "file": "analytics_hub_service.refresh_subscription.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RefreshSubscription",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "RefreshSubscription",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RefreshSubscription",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetSubscription_async",
+      "title": "AnalyticsHubService getSubscription Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a Subscription.",
+      "canonical": true,
+      "file": "analytics_hub_service.get_subscription.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSubscription",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.Subscription",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "GetSubscription",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetSubscription",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListSubscriptions_async",
+      "title": "AnalyticsHubService listSubscriptions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all subscriptions in a given project and location.",
+      "canonical": true,
+      "file": "analytics_hub_service.list_subscriptions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSubscriptions",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.ListSubscriptionsResponse",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "ListSubscriptions",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSubscriptions",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListSharedResourceSubscriptions_async",
+      "title": "AnalyticsHubService listSharedResourceSubscriptions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all subscriptions on a given Data Exchange or Listing.",
+      "canonical": true,
+      "file": "analytics_hub_service.list_shared_resource_subscriptions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSharedResourceSubscriptions",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "include_deleted_subscriptions",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.ListSharedResourceSubscriptionsResponse",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "ListSharedResourceSubscriptions",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListSharedResourceSubscriptions",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_RevokeSubscription_async",
+      "title": "AnalyticsHubService revokeSubscription Sample",
+      "origin": "API_DEFINITION",
+      "description": " Revokes a given subscription.",
+      "canonical": true,
+      "file": "analytics_hub_service.revoke_subscription.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RevokeSubscription",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "revoke_commercial",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.RevokeSubscriptionResponse",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "RevokeSubscription",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.RevokeSubscription",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteSubscription_async",
+      "title": "AnalyticsHubService deleteSubscription Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a subscription.",
+      "canonical": true,
+      "file": "analytics_hub_service.delete_subscription.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSubscription",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteSubscription",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteSubscription",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetIamPolicy_async",
+      "title": "AnalyticsHubService getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the IAM policy.",
+      "canonical": true,
+      "file": "analytics_hub_service.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetIamPolicy",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SetIamPolicy_async",
+      "title": "AnalyticsHubService setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the IAM policy.",
+      "canonical": true,
+      "file": "analytics_hub_service.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SetIamPolicy",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_TestIamPermissions_async",
+      "title": "AnalyticsHubService testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the permissions that a caller has.",
+      "canonical": true,
+      "file": "analytics_hub_service.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.TestIamPermissions",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_CreateQueryTemplate_async",
+      "title": "AnalyticsHubService createQueryTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new QueryTemplate",
+      "canonical": true,
+      "file": "analytics_hub_service.create_query_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateQueryTemplate",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateQueryTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query_template_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "query_template",
+            "type": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "CreateQueryTemplate",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.CreateQueryTemplate",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_GetQueryTemplate_async",
+      "title": "AnalyticsHubService getQueryTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a QueryTemplate",
+      "canonical": true,
+      "file": "analytics_hub_service.get_query_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetQueryTemplate",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetQueryTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "GetQueryTemplate",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.GetQueryTemplate",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ListQueryTemplates_async",
+      "title": "AnalyticsHubService listQueryTemplates Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all QueryTemplates in a given project and location.",
+      "canonical": true,
+      "file": "analytics_hub_service.list_query_templates.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListQueryTemplates",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListQueryTemplates",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.ListQueryTemplatesResponse",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "ListQueryTemplates",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ListQueryTemplates",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_UpdateQueryTemplate_async",
+      "title": "AnalyticsHubService updateQueryTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an existing QueryTemplate",
+      "canonical": true,
+      "file": "analytics_hub_service.update_query_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateQueryTemplate",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateQueryTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "query_template",
+            "type": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateQueryTemplate",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.UpdateQueryTemplate",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_DeleteQueryTemplate_async",
+      "title": "AnalyticsHubService deleteQueryTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a query template.",
+      "canonical": true,
+      "file": "analytics_hub_service.delete_query_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteQueryTemplate",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteQueryTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteQueryTemplate",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.DeleteQueryTemplate",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_SubmitQueryTemplate_async",
+      "title": "AnalyticsHubService submitQueryTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Submits a query template for approval.",
+      "canonical": true,
+      "file": "analytics_hub_service.submit_query_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SubmitQueryTemplate",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubmitQueryTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "SubmitQueryTemplate",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.SubmitQueryTemplate",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "analyticshub_v1_generated_AnalyticsHubService_ApproveQueryTemplate_async",
+      "title": "AnalyticsHubService approveQueryTemplate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Approves a query template.",
+      "canonical": true,
+      "file": "analytics_hub_service.approve_query_template.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ApproveQueryTemplate",
+        "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ApproveQueryTemplate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.analyticshub.v1.QueryTemplate",
+        "client": {
+          "shortName": "AnalyticsHubServiceClient",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubServiceClient"
+        },
+        "method": {
+          "shortName": "ApproveQueryTemplate",
+          "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService.ApproveQueryTemplate",
+          "service": {
+            "shortName": "AnalyticsHubService",
+            "fullName": "google.cloud.bigquery.analyticshub.v1.AnalyticsHubService"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -95,6 +95,21 @@
                 "updateOrganizationIntelligenceConfig"
               ]
             },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
             "RenameFolder": {
               "methods": [
                 "renameFolder"
@@ -219,6 +234,21 @@
             "UpdateOrganizationIntelligenceConfig": {
               "methods": [
                 "updateOrganizationIntelligenceConfig"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
               ]
             },
             "RenameFolder": {

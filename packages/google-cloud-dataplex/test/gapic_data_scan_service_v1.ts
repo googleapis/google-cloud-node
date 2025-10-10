@@ -2702,6 +2702,60 @@ describe('v1.DataScanServiceClient', () => {
             });
         });
 
+        describe('entryLink', async () => {
+            const fakePath = "/rendered/path/entryLink";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entry_group: "entryGroupValue",
+                entry_link: "entryLinkValue",
+            };
+            const client = new datascanserviceModule.v1.DataScanServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.entryLinkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entryLinkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entryLinkPath', () => {
+                const result = client.entryLinkPath("projectValue", "locationValue", "entryGroupValue", "entryLinkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entryLinkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntryLinkName', () => {
+                const result = client.matchProjectFromEntryLinkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entryLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEntryLinkName', () => {
+                const result = client.matchLocationFromEntryLinkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.entryLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryGroupFromEntryLinkName', () => {
+                const result = client.matchEntryGroupFromEntryLinkName(fakePath);
+                assert.strictEqual(result, "entryGroupValue");
+                assert((client.pathTemplates.entryLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryLinkFromEntryLinkName', () => {
+                const result = client.matchEntryLinkFromEntryLinkName(fakePath);
+                assert.strictEqual(result, "entryLinkValue");
+                assert((client.pathTemplates.entryLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('entryType', async () => {
             const fakePath = "/rendered/path/entryType";
             const expectedParameters = {
@@ -2798,6 +2852,160 @@ describe('v1.DataScanServiceClient', () => {
                 const result = client.matchEnvironmentFromEnvironmentName(fakePath);
                 assert.strictEqual(result, "environmentValue");
                 assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('glossary', async () => {
+            const fakePath = "/rendered/path/glossary";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                glossary: "glossaryValue",
+            };
+            const client = new datascanserviceModule.v1.DataScanServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.glossaryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.glossaryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('glossaryPath', () => {
+                const result = client.glossaryPath("projectValue", "locationValue", "glossaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.glossaryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGlossaryName', () => {
+                const result = client.matchProjectFromGlossaryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.glossaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGlossaryName', () => {
+                const result = client.matchLocationFromGlossaryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.glossaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryFromGlossaryName', () => {
+                const result = client.matchGlossaryFromGlossaryName(fakePath);
+                assert.strictEqual(result, "glossaryValue");
+                assert((client.pathTemplates.glossaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('glossaryCategory', async () => {
+            const fakePath = "/rendered/path/glossaryCategory";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                glossary: "glossaryValue",
+                glossary_category: "glossaryCategoryValue",
+            };
+            const client = new datascanserviceModule.v1.DataScanServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.glossaryCategoryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.glossaryCategoryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('glossaryCategoryPath', () => {
+                const result = client.glossaryCategoryPath("projectValue", "locationValue", "glossaryValue", "glossaryCategoryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGlossaryCategoryName', () => {
+                const result = client.matchProjectFromGlossaryCategoryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGlossaryCategoryName', () => {
+                const result = client.matchLocationFromGlossaryCategoryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryFromGlossaryCategoryName', () => {
+                const result = client.matchGlossaryFromGlossaryCategoryName(fakePath);
+                assert.strictEqual(result, "glossaryValue");
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryCategoryFromGlossaryCategoryName', () => {
+                const result = client.matchGlossaryCategoryFromGlossaryCategoryName(fakePath);
+                assert.strictEqual(result, "glossaryCategoryValue");
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('glossaryTerm', async () => {
+            const fakePath = "/rendered/path/glossaryTerm";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                glossary: "glossaryValue",
+                glossary_term: "glossaryTermValue",
+            };
+            const client = new datascanserviceModule.v1.DataScanServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.glossaryTermPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.glossaryTermPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('glossaryTermPath', () => {
+                const result = client.glossaryTermPath("projectValue", "locationValue", "glossaryValue", "glossaryTermValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.glossaryTermPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGlossaryTermName', () => {
+                const result = client.matchProjectFromGlossaryTermName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.glossaryTermPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGlossaryTermName', () => {
+                const result = client.matchLocationFromGlossaryTermName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.glossaryTermPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryFromGlossaryTermName', () => {
+                const result = client.matchGlossaryFromGlossaryTermName(fakePath);
+                assert.strictEqual(result, "glossaryValue");
+                assert((client.pathTemplates.glossaryTermPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryTermFromGlossaryTermName', () => {
+                const result = client.matchGlossaryTermFromGlossaryTermName(fakePath);
+                assert.strictEqual(result, "glossaryTermValue");
+                assert((client.pathTemplates.glossaryTermPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

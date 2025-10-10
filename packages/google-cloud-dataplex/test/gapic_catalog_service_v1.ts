@@ -1359,6 +1359,330 @@ describe('v1.CatalogServiceClient', () => {
         });
     });
 
+    describe('createEntryLink', () => {
+        it('invokes createEntryLink without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateEntryLinkRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.EntryLink()
+            );
+            client.innerApiCalls.createEntryLink = stubSimpleCall(expectedResponse);
+            const [response] = await client.createEntryLink(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEntryLink without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateEntryLinkRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.EntryLink()
+            );
+            client.innerApiCalls.createEntryLink = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.createEntryLink(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IEntryLink|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.createEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEntryLink with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateEntryLinkRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.createEntryLink = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.createEntryLink(request), expectedError);
+            const actualRequest = (client.innerApiCalls.createEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.createEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes createEntryLink with closed client', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.CreateEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.CreateEntryLinkRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.createEntryLink(request), expectedError);
+        });
+    });
+
+    describe('deleteEntryLink', () => {
+        it('invokes deleteEntryLink without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteEntryLinkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.EntryLink()
+            );
+            client.innerApiCalls.deleteEntryLink = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteEntryLink(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEntryLink without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteEntryLinkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.EntryLink()
+            );
+            client.innerApiCalls.deleteEntryLink = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteEntryLink(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IEntryLink|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEntryLink with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteEntryLinkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteEntryLink = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteEntryLink(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteEntryLink with closed client', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.DeleteEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.DeleteEntryLinkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteEntryLink(request), expectedError);
+        });
+    });
+
+    describe('getEntryLink', () => {
+        it('invokes getEntryLink without error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetEntryLinkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.EntryLink()
+            );
+            client.innerApiCalls.getEntryLink = stubSimpleCall(expectedResponse);
+            const [response] = await client.getEntryLink(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEntryLink without error using callback', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetEntryLinkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.EntryLink()
+            );
+            client.innerApiCalls.getEntryLink = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.getEntryLink(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.dataplex.v1.IEntryLink|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.getEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEntryLink with error', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetEntryLinkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.getEntryLink = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.getEntryLink(request), expectedError);
+            const actualRequest = (client.innerApiCalls.getEntryLink as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.getEntryLink as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes getEntryLink with closed client', async () => {
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dataplex.v1.GetEntryLinkRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.dataplex.v1.GetEntryLinkRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.getEntryLink(request), expectedError);
+        });
+    });
+
     describe('createEntryType', () => {
         it('invokes createEntryType without error', async () => {
             const client = new catalogserviceModule.v1.CatalogServiceClient({
@@ -5420,6 +5744,60 @@ describe('v1.CatalogServiceClient', () => {
             });
         });
 
+        describe('entryLink', async () => {
+            const fakePath = "/rendered/path/entryLink";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                entry_group: "entryGroupValue",
+                entry_link: "entryLinkValue",
+            };
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.entryLinkPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.entryLinkPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('entryLinkPath', () => {
+                const result = client.entryLinkPath("projectValue", "locationValue", "entryGroupValue", "entryLinkValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.entryLinkPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromEntryLinkName', () => {
+                const result = client.matchProjectFromEntryLinkName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.entryLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromEntryLinkName', () => {
+                const result = client.matchLocationFromEntryLinkName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.entryLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryGroupFromEntryLinkName', () => {
+                const result = client.matchEntryGroupFromEntryLinkName(fakePath);
+                assert.strictEqual(result, "entryGroupValue");
+                assert((client.pathTemplates.entryLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEntryLinkFromEntryLinkName', () => {
+                const result = client.matchEntryLinkFromEntryLinkName(fakePath);
+                assert.strictEqual(result, "entryLinkValue");
+                assert((client.pathTemplates.entryLinkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('entryType', async () => {
             const fakePath = "/rendered/path/entryType";
             const expectedParameters = {
@@ -5516,6 +5894,160 @@ describe('v1.CatalogServiceClient', () => {
                 const result = client.matchEnvironmentFromEnvironmentName(fakePath);
                 assert.strictEqual(result, "environmentValue");
                 assert((client.pathTemplates.environmentPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('glossary', async () => {
+            const fakePath = "/rendered/path/glossary";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                glossary: "glossaryValue",
+            };
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.glossaryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.glossaryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('glossaryPath', () => {
+                const result = client.glossaryPath("projectValue", "locationValue", "glossaryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.glossaryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGlossaryName', () => {
+                const result = client.matchProjectFromGlossaryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.glossaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGlossaryName', () => {
+                const result = client.matchLocationFromGlossaryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.glossaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryFromGlossaryName', () => {
+                const result = client.matchGlossaryFromGlossaryName(fakePath);
+                assert.strictEqual(result, "glossaryValue");
+                assert((client.pathTemplates.glossaryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('glossaryCategory', async () => {
+            const fakePath = "/rendered/path/glossaryCategory";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                glossary: "glossaryValue",
+                glossary_category: "glossaryCategoryValue",
+            };
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.glossaryCategoryPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.glossaryCategoryPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('glossaryCategoryPath', () => {
+                const result = client.glossaryCategoryPath("projectValue", "locationValue", "glossaryValue", "glossaryCategoryValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGlossaryCategoryName', () => {
+                const result = client.matchProjectFromGlossaryCategoryName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGlossaryCategoryName', () => {
+                const result = client.matchLocationFromGlossaryCategoryName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryFromGlossaryCategoryName', () => {
+                const result = client.matchGlossaryFromGlossaryCategoryName(fakePath);
+                assert.strictEqual(result, "glossaryValue");
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryCategoryFromGlossaryCategoryName', () => {
+                const result = client.matchGlossaryCategoryFromGlossaryCategoryName(fakePath);
+                assert.strictEqual(result, "glossaryCategoryValue");
+                assert((client.pathTemplates.glossaryCategoryPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('glossaryTerm', async () => {
+            const fakePath = "/rendered/path/glossaryTerm";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                glossary: "glossaryValue",
+                glossary_term: "glossaryTermValue",
+            };
+            const client = new catalogserviceModule.v1.CatalogServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.glossaryTermPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.glossaryTermPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('glossaryTermPath', () => {
+                const result = client.glossaryTermPath("projectValue", "locationValue", "glossaryValue", "glossaryTermValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.glossaryTermPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGlossaryTermName', () => {
+                const result = client.matchProjectFromGlossaryTermName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.glossaryTermPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGlossaryTermName', () => {
+                const result = client.matchLocationFromGlossaryTermName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.glossaryTermPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryFromGlossaryTermName', () => {
+                const result = client.matchGlossaryFromGlossaryTermName(fakePath);
+                assert.strictEqual(result, "glossaryValue");
+                assert((client.pathTemplates.glossaryTermPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGlossaryTermFromGlossaryTermName', () => {
+                const result = client.matchGlossaryTermFromGlossaryTermName(fakePath);
+                assert.strictEqual(result, "glossaryTermValue");
+                assert((client.pathTemplates.glossaryTermPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });

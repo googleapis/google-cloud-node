@@ -1,55 +1,55 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-iam",
-        "version": "0.8.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.policytroubleshooter.iam.v3",
-                "version": "v3"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "policytroubleshooter_v3_generated_PolicyTroubleshooter_TroubleshootIamPolicy_async",
-            "title": "Policies troubleshootIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Checks whether a principal has a specific permission for a specific resource, and explains why the principal does or doesn't have that permission.",
-            "canonical": true,
-            "file": "policy_troubleshooter.troubleshoot_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "TroubleshootIamPolicy",
-                "fullName": "google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter.TroubleshootIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "access_tuple",
-                        "type": ".google.cloud.policytroubleshooter.iam.v3.AccessTuple"
-                    }
-                ],
-                "resultType": ".google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse",
-                "client": {
-                    "shortName": "PolicyTroubleshooterClient",
-                    "fullName": "google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooterClient"
-                },
-                "method": {
-                    "shortName": "TroubleshootIamPolicy",
-                    "fullName": "google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter.TroubleshootIamPolicy",
-                    "service": {
-                        "shortName": "PolicyTroubleshooter",
-                        "fullName": "google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-iam",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.policytroubleshooter.iam.v3",
+        "version": "v3"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "policytroubleshooter_v3_generated_PolicyTroubleshooter_TroubleshootIamPolicy_async",
+      "title": "Policies troubleshootIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Checks whether a principal has a specific permission for a specific resource, and explains why the principal does or doesn't have that permission.",
+      "canonical": true,
+      "file": "policy_troubleshooter.troubleshoot_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TroubleshootIamPolicy",
+        "fullName": "google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter.TroubleshootIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "access_tuple",
+            "type": ".google.cloud.policytroubleshooter.iam.v3.AccessTuple"
+          }
+        ],
+        "resultType": ".google.cloud.policytroubleshooter.iam.v3.TroubleshootIamPolicyResponse",
+        "client": {
+          "shortName": "PolicyTroubleshooterClient",
+          "fullName": "google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooterClient"
+        },
+        "method": {
+          "shortName": "TroubleshootIamPolicy",
+          "fullName": "google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter.TroubleshootIamPolicy",
+          "service": {
+            "shortName": "PolicyTroubleshooter",
+            "fullName": "google.cloud.policytroubleshooter.iam.v3.PolicyTroubleshooter"
+          }
+        }
+      }
+    }
+  ]
 }

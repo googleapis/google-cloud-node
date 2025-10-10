@@ -54,6 +54,11 @@ function main(instance, database, sqlStatement) {
    *  permitted, including DDL, DML, DQL statements.
    */
   // const sqlStatement = 'abc123'
+  /**
+   *  Optional. If set, validates the sql statement by performing
+   *  syntax and semantic validation and doesn't execute the query.
+   */
+  // const validateOnly = true
 
   // Imports the Alloydb library
   const {AlloyDBAdminClient} = require('@google-cloud/alloydb').v1;

@@ -44,6 +44,10 @@ function main(securityPolicy, securityPolicyRuleResource) {
    *  The body resource for this request
    */
   // const securityPolicyRuleResource = {}
+  /**
+   *  Indicates fields to be cleared as part of this request.
+   */
+  // const updateMask = 'abc123'
 
   // Imports the Compute library
   const {OrganizationSecurityPoliciesClient} = require('@google-cloud/compute').v1beta;

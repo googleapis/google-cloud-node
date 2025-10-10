@@ -1,955 +1,955 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-edgecontainer",
-        "version": "0.8.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.edgecontainer.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_ListClusters_async",
-            "title": "EdgeContainer listClusters Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Clusters in a given project and location.",
-            "canonical": true,
-            "file": "edge_container.list_clusters.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListClusters",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListClusters",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.ListClustersResponse",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "ListClusters",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListClusters",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetCluster_async",
-            "title": "EdgeContainer getCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single Cluster.",
-            "canonical": true,
-            "file": "edge_container.get_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCluster",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.Cluster",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "GetCluster",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetCluster",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_CreateCluster_async",
-            "title": "EdgeContainer createCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new Cluster in a given project and location.",
-            "canonical": true,
-            "file": "edge_container.create_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCluster",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster",
-                        "type": ".google.cloud.edgecontainer.v1.Cluster"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "CreateCluster",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateCluster",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_UpdateCluster_async",
-            "title": "EdgeContainer updateCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single Cluster.",
-            "canonical": true,
-            "file": "edge_container.update_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCluster",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpdateCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "cluster",
-                        "type": ".google.cloud.edgecontainer.v1.Cluster"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "UpdateCluster",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpdateCluster",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_UpgradeCluster_async",
-            "title": "EdgeContainer upgradeCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Upgrades a single cluster.",
-            "canonical": true,
-            "file": "edge_container.upgrade_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpgradeCluster",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpgradeCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "target_version",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "schedule",
-                        "type": ".google.cloud.edgecontainer.v1.UpgradeClusterRequest.Schedule"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "UpgradeCluster",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpgradeCluster",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_DeleteCluster_async",
-            "title": "EdgeContainer deleteCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single Cluster.",
-            "canonical": true,
-            "file": "edge_container.delete_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteCluster",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "DeleteCluster",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteCluster",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_GenerateAccessToken_async",
-            "title": "EdgeContainer generateAccessToken Sample",
-            "origin": "API_DEFINITION",
-            "description": " Generates an access token for a Cluster.",
-            "canonical": true,
-            "file": "edge_container.generate_access_token.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GenerateAccessToken",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateAccessToken",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "cluster",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.GenerateAccessTokenResponse",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "GenerateAccessToken",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateAccessToken",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_GenerateOfflineCredential_async",
-            "title": "EdgeContainer generateOfflineCredential Sample",
-            "origin": "API_DEFINITION",
-            "description": " Generates an offline credential for a Cluster.",
-            "canonical": true,
-            "file": "edge_container.generate_offline_credential.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GenerateOfflineCredential",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateOfflineCredential",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "cluster",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "GenerateOfflineCredential",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateOfflineCredential",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_ListNodePools_async",
-            "title": "EdgeContainer listNodePools Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists NodePools in a given project and location.",
-            "canonical": true,
-            "file": "edge_container.list_node_pools.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListNodePools",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListNodePools",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.ListNodePoolsResponse",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "ListNodePools",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListNodePools",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetNodePool_async",
-            "title": "EdgeContainer getNodePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single NodePool.",
-            "canonical": true,
-            "file": "edge_container.get_node_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetNodePool",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetNodePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.NodePool",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "GetNodePool",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetNodePool",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_CreateNodePool_async",
-            "title": "EdgeContainer createNodePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new NodePool in a given project and location.",
-            "canonical": true,
-            "file": "edge_container.create_node_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateNodePool",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateNodePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool",
-                        "type": ".google.cloud.edgecontainer.v1.NodePool"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "CreateNodePool",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateNodePool",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_UpdateNodePool_async",
-            "title": "EdgeContainer updateNodePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single NodePool.",
-            "canonical": true,
-            "file": "edge_container.update_node_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateNodePool",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpdateNodePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "node_pool",
-                        "type": ".google.cloud.edgecontainer.v1.NodePool"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "UpdateNodePool",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpdateNodePool",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_DeleteNodePool_async",
-            "title": "EdgeContainer deleteNodePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single NodePool.",
-            "canonical": true,
-            "file": "edge_container.delete_node_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteNodePool",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteNodePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "DeleteNodePool",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteNodePool",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_ListMachines_async",
-            "title": "EdgeContainer listMachines Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Machines in a given project and location.",
-            "canonical": true,
-            "file": "edge_container.list_machines.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListMachines",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListMachines",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.ListMachinesResponse",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "ListMachines",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListMachines",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetMachine_async",
-            "title": "EdgeContainer getMachine Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single Machine.",
-            "canonical": true,
-            "file": "edge_container.get_machine.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetMachine",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetMachine",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.Machine",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "GetMachine",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetMachine",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async",
-            "title": "EdgeContainer listVpnConnections Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists VPN connections in a given project and location.",
-            "canonical": true,
-            "file": "edge_container.list_vpn_connections.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListVpnConnections",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListVpnConnections",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.ListVpnConnectionsResponse",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "ListVpnConnections",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListVpnConnections",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetVpnConnection_async",
-            "title": "EdgeContainer getVpnConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single VPN connection.",
-            "canonical": true,
-            "file": "edge_container.get_vpn_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetVpnConnection",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetVpnConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.VpnConnection",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "GetVpnConnection",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetVpnConnection",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_CreateVpnConnection_async",
-            "title": "EdgeContainer createVpnConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new VPN connection in a given project and location.",
-            "canonical": true,
-            "file": "edge_container.create_vpn_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateVpnConnection",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateVpnConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "vpn_connection_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "vpn_connection",
-                        "type": ".google.cloud.edgecontainer.v1.VpnConnection"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "CreateVpnConnection",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateVpnConnection",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_DeleteVpnConnection_async",
-            "title": "EdgeContainer deleteVpnConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single VPN connection.",
-            "canonical": true,
-            "file": "edge_container.delete_vpn_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteVpnConnection",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteVpnConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "DeleteVpnConnection",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteVpnConnection",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetServerConfig_async",
-            "title": "EdgeContainer getServerConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the server config.",
-            "canonical": true,
-            "file": "edge_container.get_server_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetServerConfig",
-                "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetServerConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.edgecontainer.v1.ServerConfig",
-                "client": {
-                    "shortName": "EdgeContainerClient",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
-                },
-                "method": {
-                    "shortName": "GetServerConfig",
-                    "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetServerConfig",
-                    "service": {
-                        "shortName": "EdgeContainer",
-                        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-edgecontainer",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.edgecontainer.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_ListClusters_async",
+      "title": "EdgeContainer listClusters Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Clusters in a given project and location.",
+      "canonical": true,
+      "file": "edge_container.list_clusters.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListClusters",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListClusters",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.ListClustersResponse",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "ListClusters",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListClusters",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetCluster_async",
+      "title": "EdgeContainer getCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Cluster.",
+      "canonical": true,
+      "file": "edge_container.get_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCluster",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.Cluster",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "GetCluster",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetCluster",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_CreateCluster_async",
+      "title": "EdgeContainer createCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Cluster in a given project and location.",
+      "canonical": true,
+      "file": "edge_container.create_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCluster",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster",
+            "type": ".google.cloud.edgecontainer.v1.Cluster"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "CreateCluster",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateCluster",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_UpdateCluster_async",
+      "title": "EdgeContainer updateCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Cluster.",
+      "canonical": true,
+      "file": "edge_container.update_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCluster",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpdateCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "cluster",
+            "type": ".google.cloud.edgecontainer.v1.Cluster"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "UpdateCluster",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpdateCluster",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_UpgradeCluster_async",
+      "title": "EdgeContainer upgradeCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Upgrades a single cluster.",
+      "canonical": true,
+      "file": "edge_container.upgrade_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpgradeCluster",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpgradeCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "target_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "schedule",
+            "type": ".google.cloud.edgecontainer.v1.UpgradeClusterRequest.Schedule"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "UpgradeCluster",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpgradeCluster",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_DeleteCluster_async",
+      "title": "EdgeContainer deleteCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Cluster.",
+      "canonical": true,
+      "file": "edge_container.delete_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCluster",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "DeleteCluster",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteCluster",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_GenerateAccessToken_async",
+      "title": "EdgeContainer generateAccessToken Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates an access token for a Cluster.",
+      "canonical": true,
+      "file": "edge_container.generate_access_token.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateAccessToken",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateAccessToken",
+        "async": true,
+        "parameters": [
+          {
+            "name": "cluster",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.GenerateAccessTokenResponse",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "GenerateAccessToken",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateAccessToken",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_GenerateOfflineCredential_async",
+      "title": "EdgeContainer generateOfflineCredential Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates an offline credential for a Cluster.",
+      "canonical": true,
+      "file": "edge_container.generate_offline_credential.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateOfflineCredential",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateOfflineCredential",
+        "async": true,
+        "parameters": [
+          {
+            "name": "cluster",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "GenerateOfflineCredential",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GenerateOfflineCredential",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_ListNodePools_async",
+      "title": "EdgeContainer listNodePools Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists NodePools in a given project and location.",
+      "canonical": true,
+      "file": "edge_container.list_node_pools.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListNodePools",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListNodePools",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.ListNodePoolsResponse",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "ListNodePools",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListNodePools",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetNodePool_async",
+      "title": "EdgeContainer getNodePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single NodePool.",
+      "canonical": true,
+      "file": "edge_container.get_node_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetNodePool",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetNodePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.NodePool",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "GetNodePool",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetNodePool",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_CreateNodePool_async",
+      "title": "EdgeContainer createNodePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new NodePool in a given project and location.",
+      "canonical": true,
+      "file": "edge_container.create_node_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateNodePool",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateNodePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool",
+            "type": ".google.cloud.edgecontainer.v1.NodePool"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "CreateNodePool",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateNodePool",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_UpdateNodePool_async",
+      "title": "EdgeContainer updateNodePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single NodePool.",
+      "canonical": true,
+      "file": "edge_container.update_node_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateNodePool",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpdateNodePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "node_pool",
+            "type": ".google.cloud.edgecontainer.v1.NodePool"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "UpdateNodePool",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.UpdateNodePool",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_DeleteNodePool_async",
+      "title": "EdgeContainer deleteNodePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single NodePool.",
+      "canonical": true,
+      "file": "edge_container.delete_node_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteNodePool",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteNodePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "DeleteNodePool",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteNodePool",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_ListMachines_async",
+      "title": "EdgeContainer listMachines Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Machines in a given project and location.",
+      "canonical": true,
+      "file": "edge_container.list_machines.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListMachines",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListMachines",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.ListMachinesResponse",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "ListMachines",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListMachines",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetMachine_async",
+      "title": "EdgeContainer getMachine Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Machine.",
+      "canonical": true,
+      "file": "edge_container.get_machine.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetMachine",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetMachine",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.Machine",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "GetMachine",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetMachine",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_ListVpnConnections_async",
+      "title": "EdgeContainer listVpnConnections Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists VPN connections in a given project and location.",
+      "canonical": true,
+      "file": "edge_container.list_vpn_connections.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListVpnConnections",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListVpnConnections",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.ListVpnConnectionsResponse",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "ListVpnConnections",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.ListVpnConnections",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetVpnConnection_async",
+      "title": "EdgeContainer getVpnConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single VPN connection.",
+      "canonical": true,
+      "file": "edge_container.get_vpn_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetVpnConnection",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetVpnConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.VpnConnection",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "GetVpnConnection",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetVpnConnection",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_CreateVpnConnection_async",
+      "title": "EdgeContainer createVpnConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new VPN connection in a given project and location.",
+      "canonical": true,
+      "file": "edge_container.create_vpn_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateVpnConnection",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateVpnConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "vpn_connection_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "vpn_connection",
+            "type": ".google.cloud.edgecontainer.v1.VpnConnection"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "CreateVpnConnection",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.CreateVpnConnection",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_DeleteVpnConnection_async",
+      "title": "EdgeContainer deleteVpnConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single VPN connection.",
+      "canonical": true,
+      "file": "edge_container.delete_vpn_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteVpnConnection",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteVpnConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "DeleteVpnConnection",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.DeleteVpnConnection",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "edgecontainer_v1_generated_EdgeContainer_GetServerConfig_async",
+      "title": "EdgeContainer getServerConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the server config.",
+      "canonical": true,
+      "file": "edge_container.get_server_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetServerConfig",
+        "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetServerConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.edgecontainer.v1.ServerConfig",
+        "client": {
+          "shortName": "EdgeContainerClient",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainerClient"
+        },
+        "method": {
+          "shortName": "GetServerConfig",
+          "fullName": "google.cloud.edgecontainer.v1.EdgeContainer.GetServerConfig",
+          "service": {
+            "shortName": "EdgeContainer",
+            "fullName": "google.cloud.edgecontainer.v1.EdgeContainer"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -47,7 +47,7 @@ function main(parent) {
   // const pageToken = 'abc123'
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} = require('@google-cloud/networksecurity').v1;
+  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();

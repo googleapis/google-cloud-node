@@ -1,6 +1,6 @@
 {
   "name": "gapic-node-processing",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "Does various processing functions for Nodejs gapic libraries",
   "bin": "./build/src/cli.js",
   "scripts": {
@@ -15,8 +15,13 @@
     "test:snap": "SNAPSHOT_UPDATE=1 npm test",
     "test": "cross-env c8 mocha --exit build/test",
     "prelint": "npm install",
-    "precompile": "gts clean"
+    "precompile": "gts clean",
+    "docs": "echo 'no docs to publish'"
   },
+  "files": [
+    "build/src",
+    "templates"
+  ],
   "author": "Google LLC",
   "license": "Apache-2.0",
   "devDependencies": {

@@ -1,1231 +1,1231 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-schemaregistry",
-        "version": "0.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.managedkafka.schemaregistry.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaRegistry_async",
-            "title": "ManagedSchemaRegistry getSchemaRegistry Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the schema registry instance.",
-            "canonical": true,
-            "file": "managed_schema_registry.get_schema_registry.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSchemaRegistry",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaRegistry",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "GetSchemaRegistry",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaRegistry",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaRegistries_async",
-            "title": "ManagedSchemaRegistry listSchemaRegistries Sample",
-            "origin": "API_DEFINITION",
-            "description": " List schema registries.",
-            "canonical": true,
-            "file": "managed_schema_registry.list_schema_registries.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSchemaRegistries",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaRegistries",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.ListSchemaRegistriesResponse",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "ListSchemaRegistries",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaRegistries",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_CreateSchemaRegistry_async",
-            "title": "ManagedSchemaRegistry createSchemaRegistry Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a schema registry instance.",
-            "canonical": true,
-            "file": "managed_schema_registry.create_schema_registry.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateSchemaRegistry",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateSchemaRegistry",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "schema_registry_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "schema_registry",
-                        "type": ".google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "CreateSchemaRegistry",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateSchemaRegistry",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaRegistry_async",
-            "title": "ManagedSchemaRegistry deleteSchemaRegistry Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a schema registry instance.",
-            "canonical": true,
-            "file": "managed_schema_registry.delete_schema_registry.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSchemaRegistry",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaRegistry",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteSchemaRegistry",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaRegistry",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetContext_async",
-            "title": "ManagedSchemaRegistry getContext Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the context.",
-            "canonical": true,
-            "file": "managed_schema_registry.get_context.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetContext",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetContext",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.Context",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "GetContext",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetContext",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListContexts_async",
-            "title": "ManagedSchemaRegistry listContexts Sample",
-            "origin": "API_DEFINITION",
-            "description": " List contexts for a schema registry.",
-            "canonical": true,
-            "file": "managed_schema_registry.list_contexts.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListContexts",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListContexts",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "ListContexts",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListContexts",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchema_async",
-            "title": "ManagedSchemaRegistry getSchema Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the schema for the given schema id.",
-            "canonical": true,
-            "file": "managed_schema_registry.get_schema.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSchema",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchema",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "subject",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.Schema",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "GetSchema",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchema",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchema_async",
-            "title": "ManagedSchemaRegistry getRawSchema Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the schema string for the given schema id. The response will be the schema string.",
-            "canonical": true,
-            "file": "managed_schema_registry.get_raw_schema.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetRawSchema",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchema",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "subject",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "GetRawSchema",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchema",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaVersions_async",
-            "title": "ManagedSchemaRegistry listSchemaVersions Sample",
-            "origin": "API_DEFINITION",
-            "description": " List the schema versions for the given schema id. The response will be an array of subject-version pairs as: [{\"subject\":\"subject1\", \"version\":1}, {\"subject\":\"subject2\", \"version\":2}].",
-            "canonical": true,
-            "file": "managed_schema_registry.list_schema_versions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSchemaVersions",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaVersions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "subject",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "ListSchemaVersions",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaVersions",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaTypes_async",
-            "title": "ManagedSchemaRegistry listSchemaTypes Sample",
-            "origin": "API_DEFINITION",
-            "description": " List the supported schema types. The response will be an array of schema types.",
-            "canonical": true,
-            "file": "managed_schema_registry.list_schema_types.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSchemaTypes",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaTypes",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "ListSchemaTypes",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaTypes",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjects_async",
-            "title": "ManagedSchemaRegistry listSubjects Sample",
-            "origin": "API_DEFINITION",
-            "description": " List subjects in the schema registry. The response will be an array of subject names.",
-            "canonical": true,
-            "file": "managed_schema_registry.list_subjects.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 70,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSubjects",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjects",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "subject_prefix",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "ListSubjects",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjects",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjectsBySchemaId_async",
-            "title": "ManagedSchemaRegistry listSubjectsBySchemaId Sample",
-            "origin": "API_DEFINITION",
-            "description": " List subjects which reference a particular schema id. The response will be an array of subject names.",
-            "canonical": true,
-            "file": "managed_schema_registry.list_subjects_by_schema_id.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSubjectsBySchemaId",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjectsBySchemaId",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "subject",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "ListSubjectsBySchemaId",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjectsBySchemaId",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSubject_async",
-            "title": "ManagedSchemaRegistry deleteSubject Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a subject. The response will be an array of versions of the deleted subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.delete_subject.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSubject",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSubject",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "permanent",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteSubject",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSubject",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_LookupVersion_async",
-            "title": "ManagedSchemaRegistry lookupVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lookup a schema under the specified subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.lookup_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LookupVersion",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.LookupVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "schema_type",
-                        "type": ".google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType"
-                    },
-                    {
-                        "name": "schema",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "references",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "normalize",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaVersion",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "LookupVersion",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.LookupVersion",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetVersion_async",
-            "title": "ManagedSchemaRegistry getVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a versioned schema (schema with subject/version) of a subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.get_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetVersion",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaVersion",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "GetVersion",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetVersion",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchemaVersion_async",
-            "title": "ManagedSchemaRegistry getRawSchemaVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get the schema string only for a version of a subject. The response will be the schema string.",
-            "canonical": true,
-            "file": "managed_schema_registry.get_raw_schema_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetRawSchemaVersion",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchemaVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "GetRawSchemaVersion",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchemaVersion",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListVersions_async",
-            "title": "ManagedSchemaRegistry listVersions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get all versions of a subject. The response will be an array of versions of the subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.list_versions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListVersions",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListVersions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "deleted",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "ListVersions",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListVersions",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_CreateVersion_async",
-            "title": "ManagedSchemaRegistry createVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Register a new version under a given subject with the given schema.",
-            "canonical": true,
-            "file": "managed_schema_registry.create_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 88,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateVersion",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "version",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "id",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "schema_type",
-                        "type": ".google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType"
-                    },
-                    {
-                        "name": "schema",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "references",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "normalize",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.CreateVersionResponse",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "CreateVersion",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateVersion",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteVersion_async",
-            "title": "ManagedSchemaRegistry deleteVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete a version of a subject. The response will be the deleted version id.",
-            "canonical": true,
-            "file": "managed_schema_registry.delete_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteVersion",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "permanent",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteVersion",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteVersion",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListReferencedSchemas_async",
-            "title": "ManagedSchemaRegistry listReferencedSchemas Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get a list of IDs of schemas that reference the schema with the given subject and version.",
-            "canonical": true,
-            "file": "managed_schema_registry.list_referenced_schemas.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListReferencedSchemas",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListReferencedSchemas",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.HttpBody",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "ListReferencedSchemas",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListReferencedSchemas",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_CheckCompatibility_async",
-            "title": "ManagedSchemaRegistry checkCompatibility Sample",
-            "origin": "API_DEFINITION",
-            "description": " Check compatibility of a schema with all versions or a specific version of a subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.check_compatibility.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CheckCompatibility",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CheckCompatibility",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "schema_type",
-                        "type": ".google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType"
-                    },
-                    {
-                        "name": "schema",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "references",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "verbose",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.CheckCompatibilityResponse",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "CheckCompatibility",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CheckCompatibility",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaConfig_async",
-            "title": "ManagedSchemaRegistry getSchemaConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get schema config at global level or for a subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.get_schema_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSchemaConfig",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "default_to_global",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaConfig",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "GetSchemaConfig",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaConfig",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaConfig_async",
-            "title": "ManagedSchemaRegistry updateSchemaConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update config at global level or for a subject. Creates a SchemaSubject-level SchemaConfig if it does not exist.",
-            "canonical": true,
-            "file": "managed_schema_registry.update_schema_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSchemaConfig",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "compatibility",
-                        "type": ".google.cloud.managedkafka.schemaregistry.v1.SchemaConfig.CompatibilityType"
-                    },
-                    {
-                        "name": "normalize",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaConfig",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "UpdateSchemaConfig",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaConfig",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaConfig_async",
-            "title": "ManagedSchemaRegistry deleteSchemaConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete schema config for a subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.delete_schema_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSchemaConfig",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaConfig",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteSchemaConfig",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaConfig",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaMode_async",
-            "title": "ManagedSchemaRegistry getSchemaMode Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get mode at global level or for a subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.get_schema_mode.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSchemaMode",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaMode",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaMode",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "GetSchemaMode",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaMode",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaMode_async",
-            "title": "ManagedSchemaRegistry updateSchemaMode Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update mode at global level or for a subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.update_schema_mode.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSchemaMode",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaMode",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "mode",
-                        "type": ".google.cloud.managedkafka.schemaregistry.v1.SchemaMode.ModeType"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaMode",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "UpdateSchemaMode",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaMode",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaMode_async",
-            "title": "ManagedSchemaRegistry deleteSchemaMode Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete schema mode for a subject.",
-            "canonical": true,
-            "file": "managed_schema_registry.delete_schema_mode.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSchemaMode",
-                "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaMode",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaMode",
-                "client": {
-                    "shortName": "ManagedSchemaRegistryClient",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
-                },
-                "method": {
-                    "shortName": "DeleteSchemaMode",
-                    "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaMode",
-                    "service": {
-                        "shortName": "ManagedSchemaRegistry",
-                        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-schemaregistry",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.managedkafka.schemaregistry.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaRegistry_async",
+      "title": "ManagedSchemaRegistry getSchemaRegistry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the schema registry instance.",
+      "canonical": true,
+      "file": "managed_schema_registry.get_schema_registry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSchemaRegistry",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaRegistry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "GetSchemaRegistry",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaRegistry",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaRegistries_async",
+      "title": "ManagedSchemaRegistry listSchemaRegistries Sample",
+      "origin": "API_DEFINITION",
+      "description": " List schema registries.",
+      "canonical": true,
+      "file": "managed_schema_registry.list_schema_registries.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSchemaRegistries",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaRegistries",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.ListSchemaRegistriesResponse",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "ListSchemaRegistries",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaRegistries",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_CreateSchemaRegistry_async",
+      "title": "ManagedSchemaRegistry createSchemaRegistry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a schema registry instance.",
+      "canonical": true,
+      "file": "managed_schema_registry.create_schema_registry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSchemaRegistry",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateSchemaRegistry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "schema_registry_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "schema_registry",
+            "type": ".google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaRegistry",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "CreateSchemaRegistry",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateSchemaRegistry",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaRegistry_async",
+      "title": "ManagedSchemaRegistry deleteSchemaRegistry Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a schema registry instance.",
+      "canonical": true,
+      "file": "managed_schema_registry.delete_schema_registry.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSchemaRegistry",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaRegistry",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteSchemaRegistry",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaRegistry",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetContext_async",
+      "title": "ManagedSchemaRegistry getContext Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the context.",
+      "canonical": true,
+      "file": "managed_schema_registry.get_context.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetContext",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetContext",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.Context",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "GetContext",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetContext",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListContexts_async",
+      "title": "ManagedSchemaRegistry listContexts Sample",
+      "origin": "API_DEFINITION",
+      "description": " List contexts for a schema registry.",
+      "canonical": true,
+      "file": "managed_schema_registry.list_contexts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListContexts",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListContexts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "ListContexts",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListContexts",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchema_async",
+      "title": "ManagedSchemaRegistry getSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the schema for the given schema id.",
+      "canonical": true,
+      "file": "managed_schema_registry.get_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSchema",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "subject",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.Schema",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "GetSchema",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchema",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchema_async",
+      "title": "ManagedSchemaRegistry getRawSchema Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the schema string for the given schema id. The response will be the schema string.",
+      "canonical": true,
+      "file": "managed_schema_registry.get_raw_schema.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRawSchema",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchema",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "subject",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "GetRawSchema",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchema",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaVersions_async",
+      "title": "ManagedSchemaRegistry listSchemaVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " List the schema versions for the given schema id. The response will be an array of subject-version pairs as: [{\"subject\":\"subject1\", \"version\":1}, {\"subject\":\"subject2\", \"version\":2}].",
+      "canonical": true,
+      "file": "managed_schema_registry.list_schema_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSchemaVersions",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "subject",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "ListSchemaVersions",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaVersions",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSchemaTypes_async",
+      "title": "ManagedSchemaRegistry listSchemaTypes Sample",
+      "origin": "API_DEFINITION",
+      "description": " List the supported schema types. The response will be an array of schema types.",
+      "canonical": true,
+      "file": "managed_schema_registry.list_schema_types.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSchemaTypes",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaTypes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "ListSchemaTypes",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSchemaTypes",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjects_async",
+      "title": "ManagedSchemaRegistry listSubjects Sample",
+      "origin": "API_DEFINITION",
+      "description": " List subjects in the schema registry. The response will be an array of subject names.",
+      "canonical": true,
+      "file": "managed_schema_registry.list_subjects.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSubjects",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjects",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "subject_prefix",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "ListSubjects",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjects",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListSubjectsBySchemaId_async",
+      "title": "ManagedSchemaRegistry listSubjectsBySchemaId Sample",
+      "origin": "API_DEFINITION",
+      "description": " List subjects which reference a particular schema id. The response will be an array of subject names.",
+      "canonical": true,
+      "file": "managed_schema_registry.list_subjects_by_schema_id.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSubjectsBySchemaId",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjectsBySchemaId",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "subject",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "ListSubjectsBySchemaId",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListSubjectsBySchemaId",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSubject_async",
+      "title": "ManagedSchemaRegistry deleteSubject Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a subject. The response will be an array of versions of the deleted subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.delete_subject.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSubject",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSubject",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permanent",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteSubject",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSubject",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_LookupVersion_async",
+      "title": "ManagedSchemaRegistry lookupVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lookup a schema under the specified subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.lookup_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LookupVersion",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.LookupVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "schema_type",
+            "type": ".google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType"
+          },
+          {
+            "name": "schema",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "references",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "normalize",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaVersion",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "LookupVersion",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.LookupVersion",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetVersion_async",
+      "title": "ManagedSchemaRegistry getVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a versioned schema (schema with subject/version) of a subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.get_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetVersion",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaVersion",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "GetVersion",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetVersion",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetRawSchemaVersion_async",
+      "title": "ManagedSchemaRegistry getRawSchemaVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get the schema string only for a version of a subject. The response will be the schema string.",
+      "canonical": true,
+      "file": "managed_schema_registry.get_raw_schema_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRawSchemaVersion",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchemaVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "GetRawSchemaVersion",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetRawSchemaVersion",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListVersions_async",
+      "title": "ManagedSchemaRegistry listVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get all versions of a subject. The response will be an array of versions of the subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.list_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListVersions",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "deleted",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "ListVersions",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListVersions",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_CreateVersion_async",
+      "title": "ManagedSchemaRegistry createVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Register a new version under a given subject with the given schema.",
+      "canonical": true,
+      "file": "managed_schema_registry.create_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 88,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateVersion",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "id",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "schema_type",
+            "type": ".google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType"
+          },
+          {
+            "name": "schema",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "references",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "normalize",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.CreateVersionResponse",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "CreateVersion",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CreateVersion",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteVersion_async",
+      "title": "ManagedSchemaRegistry deleteVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete a version of a subject. The response will be the deleted version id.",
+      "canonical": true,
+      "file": "managed_schema_registry.delete_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteVersion",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permanent",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteVersion",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteVersion",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_ListReferencedSchemas_async",
+      "title": "ManagedSchemaRegistry listReferencedSchemas Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get a list of IDs of schemas that reference the schema with the given subject and version.",
+      "canonical": true,
+      "file": "managed_schema_registry.list_referenced_schemas.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReferencedSchemas",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListReferencedSchemas",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.HttpBody",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "ListReferencedSchemas",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.ListReferencedSchemas",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_CheckCompatibility_async",
+      "title": "ManagedSchemaRegistry checkCompatibility Sample",
+      "origin": "API_DEFINITION",
+      "description": " Check compatibility of a schema with all versions or a specific version of a subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.check_compatibility.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CheckCompatibility",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CheckCompatibility",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "schema_type",
+            "type": ".google.cloud.managedkafka.schemaregistry.v1.Schema.SchemaType"
+          },
+          {
+            "name": "schema",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "references",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "verbose",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.CheckCompatibilityResponse",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "CheckCompatibility",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.CheckCompatibility",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaConfig_async",
+      "title": "ManagedSchemaRegistry getSchemaConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get schema config at global level or for a subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.get_schema_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSchemaConfig",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "default_to_global",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaConfig",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "GetSchemaConfig",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaConfig",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaConfig_async",
+      "title": "ManagedSchemaRegistry updateSchemaConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update config at global level or for a subject. Creates a SchemaSubject-level SchemaConfig if it does not exist.",
+      "canonical": true,
+      "file": "managed_schema_registry.update_schema_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSchemaConfig",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "compatibility",
+            "type": ".google.cloud.managedkafka.schemaregistry.v1.SchemaConfig.CompatibilityType"
+          },
+          {
+            "name": "normalize",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaConfig",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "UpdateSchemaConfig",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaConfig",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaConfig_async",
+      "title": "ManagedSchemaRegistry deleteSchemaConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete schema config for a subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.delete_schema_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSchemaConfig",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaConfig",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteSchemaConfig",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaConfig",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_GetSchemaMode_async",
+      "title": "ManagedSchemaRegistry getSchemaMode Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get mode at global level or for a subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.get_schema_mode.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSchemaMode",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaMode",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaMode",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "GetSchemaMode",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.GetSchemaMode",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_UpdateSchemaMode_async",
+      "title": "ManagedSchemaRegistry updateSchemaMode Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update mode at global level or for a subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.update_schema_mode.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSchemaMode",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaMode",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "mode",
+            "type": ".google.cloud.managedkafka.schemaregistry.v1.SchemaMode.ModeType"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaMode",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "UpdateSchemaMode",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.UpdateSchemaMode",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "managedkafka_v1_generated_ManagedSchemaRegistry_DeleteSchemaMode_async",
+      "title": "ManagedSchemaRegistry deleteSchemaMode Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete schema mode for a subject.",
+      "canonical": true,
+      "file": "managed_schema_registry.delete_schema_mode.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSchemaMode",
+        "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaMode",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.managedkafka.schemaregistry.v1.SchemaMode",
+        "client": {
+          "shortName": "ManagedSchemaRegistryClient",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistryClient"
+        },
+        "method": {
+          "shortName": "DeleteSchemaMode",
+          "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry.DeleteSchemaMode",
+          "service": {
+            "shortName": "ManagedSchemaRegistry",
+            "fullName": "google.cloud.managedkafka.schemaregistry.v1.ManagedSchemaRegistry"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -13,12 +13,14 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Api_hub.create_api](#api_hub.create_api)
+  * [Api_hub.create_api_operation](#api_hub.create_api_operation)
   * [Api_hub.create_attribute](#api_hub.create_attribute)
   * [Api_hub.create_deployment](#api_hub.create_deployment)
   * [Api_hub.create_external_api](#api_hub.create_external_api)
   * [Api_hub.create_spec](#api_hub.create_spec)
   * [Api_hub.create_version](#api_hub.create_version)
   * [Api_hub.delete_api](#api_hub.delete_api)
+  * [Api_hub.delete_api_operation](#api_hub.delete_api_operation)
   * [Api_hub.delete_attribute](#api_hub.delete_attribute)
   * [Api_hub.delete_deployment](#api_hub.delete_deployment)
   * [Api_hub.delete_external_api](#api_hub.delete_external_api)
@@ -42,19 +44,41 @@
   * [Api_hub.list_versions](#api_hub.list_versions)
   * [Api_hub.search_resources](#api_hub.search_resources)
   * [Api_hub.update_api](#api_hub.update_api)
+  * [Api_hub.update_api_operation](#api_hub.update_api_operation)
   * [Api_hub.update_attribute](#api_hub.update_attribute)
   * [Api_hub.update_deployment](#api_hub.update_deployment)
   * [Api_hub.update_external_api](#api_hub.update_external_api)
   * [Api_hub.update_spec](#api_hub.update_spec)
   * [Api_hub.update_version](#api_hub.update_version)
+  * [Api_hub_collect.collect_api_data](#api_hub_collect.collect_api_data)
+  * [Api_hub_curate.create_curation](#api_hub_curate.create_curation)
+  * [Api_hub_curate.delete_curation](#api_hub_curate.delete_curation)
+  * [Api_hub_curate.get_curation](#api_hub_curate.get_curation)
+  * [Api_hub_curate.list_curations](#api_hub_curate.list_curations)
+  * [Api_hub_curate.update_curation](#api_hub_curate.update_curation)
   * [Api_hub_dependencies.create_dependency](#api_hub_dependencies.create_dependency)
   * [Api_hub_dependencies.delete_dependency](#api_hub_dependencies.delete_dependency)
   * [Api_hub_dependencies.get_dependency](#api_hub_dependencies.get_dependency)
   * [Api_hub_dependencies.list_dependencies](#api_hub_dependencies.list_dependencies)
   * [Api_hub_dependencies.update_dependency](#api_hub_dependencies.update_dependency)
+  * [Api_hub_discovery.get_discovered_api_observation](#api_hub_discovery.get_discovered_api_observation)
+  * [Api_hub_discovery.get_discovered_api_operation](#api_hub_discovery.get_discovered_api_operation)
+  * [Api_hub_discovery.list_discovered_api_observations](#api_hub_discovery.list_discovered_api_observations)
+  * [Api_hub_discovery.list_discovered_api_operations](#api_hub_discovery.list_discovered_api_operations)
+  * [Api_hub_plugin.create_plugin](#api_hub_plugin.create_plugin)
+  * [Api_hub_plugin.create_plugin_instance](#api_hub_plugin.create_plugin_instance)
+  * [Api_hub_plugin.delete_plugin](#api_hub_plugin.delete_plugin)
+  * [Api_hub_plugin.delete_plugin_instance](#api_hub_plugin.delete_plugin_instance)
   * [Api_hub_plugin.disable_plugin](#api_hub_plugin.disable_plugin)
+  * [Api_hub_plugin.disable_plugin_instance_action](#api_hub_plugin.disable_plugin_instance_action)
   * [Api_hub_plugin.enable_plugin](#api_hub_plugin.enable_plugin)
+  * [Api_hub_plugin.enable_plugin_instance_action](#api_hub_plugin.enable_plugin_instance_action)
+  * [Api_hub_plugin.execute_plugin_instance_action](#api_hub_plugin.execute_plugin_instance_action)
   * [Api_hub_plugin.get_plugin](#api_hub_plugin.get_plugin)
+  * [Api_hub_plugin.get_plugin_instance](#api_hub_plugin.get_plugin_instance)
+  * [Api_hub_plugin.list_plugin_instances](#api_hub_plugin.list_plugin_instances)
+  * [Api_hub_plugin.list_plugins](#api_hub_plugin.list_plugins)
+  * [Api_hub_plugin.update_plugin_instance](#api_hub_plugin.update_plugin_instance)
   * [Host_project_registration_service.create_host_project_registration](#host_project_registration_service.create_host_project_registration)
   * [Host_project_registration_service.get_host_project_registration](#host_project_registration_service.get_host_project_registration)
   * [Host_project_registration_service.list_host_project_registrations](#host_project_registration_service.list_host_project_registrations)
@@ -63,6 +87,7 @@
   * [Linting_service.lint_spec](#linting_service.lint_spec)
   * [Linting_service.update_style_guide](#linting_service.update_style_guide)
   * [Provisioning.create_api_hub_instance](#provisioning.create_api_hub_instance)
+  * [Provisioning.delete_api_hub_instance](#provisioning.delete_api_hub_instance)
   * [Provisioning.get_api_hub_instance](#provisioning.get_api_hub_instance)
   * [Provisioning.lookup_api_hub_instance](#provisioning.lookup_api_hub_instance)
   * [Runtime_project_attachment_service.create_runtime_project_attachment](#runtime_project_attachment_service.create_runtime_project_attachment)
@@ -97,6 +122,23 @@ __Usage:__
 
 
 `node packages/google-cloud-apihub/samples/generated/v1/api_hub.create_api.js`
+
+
+-----
+
+
+
+
+### Api_hub.create_api_operation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.create_api_operation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.create_api_operation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub.create_api_operation.js`
 
 
 -----
@@ -199,6 +241,23 @@ __Usage:__
 
 
 `node packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_api.js`
+
+
+-----
+
+
+
+
+### Api_hub.delete_api_operation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_api_operation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_api_operation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub.delete_api_operation.js`
 
 
 -----
@@ -597,6 +656,23 @@ __Usage:__
 
 
 
+### Api_hub.update_api_operation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_api_operation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub.update_api_operation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub.update_api_operation.js`
+
+
+-----
+
+
+
+
 ### Api_hub.update_attribute
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub.update_attribute.js).
@@ -675,6 +751,108 @@ __Usage:__
 
 
 `node packages/google-cloud-apihub/samples/generated/v1/api_hub.update_version.js`
+
+
+-----
+
+
+
+
+### Api_hub_collect.collect_api_data
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_collect.collect_api_data.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_collect.collect_api_data.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_collect.collect_api_data.js`
+
+
+-----
+
+
+
+
+### Api_hub_curate.create_curation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.create_curation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.create_curation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.create_curation.js`
+
+
+-----
+
+
+
+
+### Api_hub_curate.delete_curation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.delete_curation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.delete_curation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.delete_curation.js`
+
+
+-----
+
+
+
+
+### Api_hub_curate.get_curation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.get_curation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.get_curation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.get_curation.js`
+
+
+-----
+
+
+
+
+### Api_hub_curate.list_curations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.list_curations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.list_curations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.list_curations.js`
+
+
+-----
+
+
+
+
+### Api_hub_curate.update_curation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.update_curation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.update_curation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_curate.update_curation.js`
 
 
 -----
@@ -767,6 +945,142 @@ __Usage:__
 
 
 
+### Api_hub_discovery.get_discovered_api_observation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.get_discovered_api_observation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.get_discovered_api_observation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.get_discovered_api_observation.js`
+
+
+-----
+
+
+
+
+### Api_hub_discovery.get_discovered_api_operation
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.get_discovered_api_operation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.get_discovered_api_operation.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.get_discovered_api_operation.js`
+
+
+-----
+
+
+
+
+### Api_hub_discovery.list_discovered_api_observations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.list_discovered_api_observations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.list_discovered_api_observations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.list_discovered_api_observations.js`
+
+
+-----
+
+
+
+
+### Api_hub_discovery.list_discovered_api_operations
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.list_discovered_api_operations.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.list_discovered_api_operations.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_discovery.list_discovered_api_operations.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.create_plugin
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.create_plugin.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.create_plugin.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.create_plugin.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.create_plugin_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.create_plugin_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.create_plugin_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.create_plugin_instance.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.delete_plugin
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.delete_plugin.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.delete_plugin.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.delete_plugin.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.delete_plugin_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.delete_plugin_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.delete_plugin_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.delete_plugin_instance.js`
+
+
+-----
+
+
+
+
 ### Api_hub_plugin.disable_plugin
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.disable_plugin.js).
@@ -777,6 +1091,23 @@ __Usage:__
 
 
 `node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.disable_plugin.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.disable_plugin_instance_action
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.disable_plugin_instance_action.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.disable_plugin_instance_action.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.disable_plugin_instance_action.js`
 
 
 -----
@@ -801,6 +1132,40 @@ __Usage:__
 
 
 
+### Api_hub_plugin.enable_plugin_instance_action
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.enable_plugin_instance_action.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.enable_plugin_instance_action.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.enable_plugin_instance_action.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.execute_plugin_instance_action
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.execute_plugin_instance_action.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.execute_plugin_instance_action.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.execute_plugin_instance_action.js`
+
+
+-----
+
+
+
+
 ### Api_hub_plugin.get_plugin
 
 View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.get_plugin.js).
@@ -811,6 +1176,74 @@ __Usage:__
 
 
 `node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.get_plugin.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.get_plugin_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.get_plugin_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.get_plugin_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.get_plugin_instance.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.list_plugin_instances
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.list_plugin_instances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.list_plugin_instances.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.list_plugin_instances.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.list_plugins
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.list_plugins.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.list_plugins.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.list_plugins.js`
+
+
+-----
+
+
+
+
+### Api_hub_plugin.update_plugin_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.update_plugin_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.update_plugin_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/api_hub_plugin.update_plugin_instance.js`
 
 
 -----
@@ -947,6 +1380,23 @@ __Usage:__
 
 
 `node packages/google-cloud-apihub/samples/generated/v1/provisioning.create_api_hub_instance.js`
+
+
+-----
+
+
+
+
+### Provisioning.delete_api_hub_instance
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-apihub/samples/generated/v1/provisioning.delete_api_hub_instance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-apihub/samples/generated/v1/provisioning.delete_api_hub_instance.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-apihub/samples/generated/v1/provisioning.delete_api_hub_instance.js`
 
 
 -----

@@ -268,6 +268,14 @@ export class LivestreamServiceClient {
       '.google.cloud.video.livestream.v1.ChannelOperationResponse') as gax.protobuf.Type;
     const stopChannelMetadata = protoFilesRoot.lookup(
       '.google.cloud.video.livestream.v1.OperationMetadata') as gax.protobuf.Type;
+    const startDistributionResponse = protoFilesRoot.lookup(
+      '.google.cloud.video.livestream.v1.ChannelOperationResponse') as gax.protobuf.Type;
+    const startDistributionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.video.livestream.v1.OperationMetadata') as gax.protobuf.Type;
+    const stopDistributionResponse = protoFilesRoot.lookup(
+      '.google.cloud.video.livestream.v1.ChannelOperationResponse') as gax.protobuf.Type;
+    const stopDistributionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.video.livestream.v1.OperationMetadata') as gax.protobuf.Type;
     const createInputResponse = protoFilesRoot.lookup(
       '.google.cloud.video.livestream.v1.Input') as gax.protobuf.Type;
     const createInputMetadata = protoFilesRoot.lookup(
@@ -334,6 +342,14 @@ export class LivestreamServiceClient {
         this.operationsClient,
         stopChannelResponse.decode.bind(stopChannelResponse),
         stopChannelMetadata.decode.bind(stopChannelMetadata)),
+      startDistribution: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        startDistributionResponse.decode.bind(startDistributionResponse),
+        startDistributionMetadata.decode.bind(startDistributionMetadata)),
+      stopDistribution: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        stopDistributionResponse.decode.bind(stopDistributionResponse),
+        stopDistributionMetadata.decode.bind(stopDistributionMetadata)),
       createInput: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createInputResponse.decode.bind(createInputResponse),
@@ -423,7 +439,7 @@ export class LivestreamServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const livestreamServiceStubMethods =
-        ['createChannel', 'listChannels', 'getChannel', 'deleteChannel', 'updateChannel', 'startChannel', 'stopChannel', 'createInput', 'listInputs', 'getInput', 'deleteInput', 'updateInput', 'createEvent', 'listEvents', 'getEvent', 'deleteEvent', 'listClips', 'getClip', 'createClip', 'deleteClip', 'createDvrSession', 'listDvrSessions', 'getDvrSession', 'deleteDvrSession', 'updateDvrSession', 'createAsset', 'deleteAsset', 'getAsset', 'listAssets', 'getPool', 'updatePool'];
+        ['createChannel', 'listChannels', 'getChannel', 'deleteChannel', 'updateChannel', 'startChannel', 'stopChannel', 'startDistribution', 'stopDistribution', 'createInput', 'listInputs', 'getInput', 'deleteInput', 'updateInput', 'previewInput', 'createEvent', 'listEvents', 'getEvent', 'deleteEvent', 'listClips', 'getClip', 'createClip', 'deleteClip', 'createDvrSession', 'listDvrSessions', 'getDvrSession', 'deleteDvrSession', 'updateDvrSession', 'createAsset', 'deleteAsset', 'getAsset', 'listAssets', 'getPool', 'updatePool'];
     for (const methodName of livestreamServiceStubMethods) {
       const callPromise = this.livestreamServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -718,6 +734,101 @@ export class LivestreamServiceClient {
       });
   }
 /**
+ * Preview the streaming content of the specified input.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the input resource, in the form of:
+ *   `projects/{project}/locations/{location}/inputs/{inputId}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.video.livestream.v1.PreviewInputResponse|PreviewInputResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/livestream_service.preview_input.js</caption>
+ * region_tag:livestream_v1_generated_LivestreamService_PreviewInput_async
+ */
+  previewInput(
+      request?: protos.google.cloud.video.livestream.v1.IPreviewInputRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.video.livestream.v1.IPreviewInputResponse,
+        protos.google.cloud.video.livestream.v1.IPreviewInputRequest|undefined, {}|undefined
+      ]>;
+  previewInput(
+      request: protos.google.cloud.video.livestream.v1.IPreviewInputRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.video.livestream.v1.IPreviewInputResponse,
+          protos.google.cloud.video.livestream.v1.IPreviewInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  previewInput(
+      request: protos.google.cloud.video.livestream.v1.IPreviewInputRequest,
+      callback: Callback<
+          protos.google.cloud.video.livestream.v1.IPreviewInputResponse,
+          protos.google.cloud.video.livestream.v1.IPreviewInputRequest|null|undefined,
+          {}|null|undefined>): void;
+  previewInput(
+      request?: protos.google.cloud.video.livestream.v1.IPreviewInputRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.video.livestream.v1.IPreviewInputResponse,
+          protos.google.cloud.video.livestream.v1.IPreviewInputRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.video.livestream.v1.IPreviewInputResponse,
+          protos.google.cloud.video.livestream.v1.IPreviewInputRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.video.livestream.v1.IPreviewInputResponse,
+        protos.google.cloud.video.livestream.v1.IPreviewInputRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('previewInput request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.video.livestream.v1.IPreviewInputResponse,
+        protos.google.cloud.video.livestream.v1.IPreviewInputRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('previewInput response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.previewInput(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.video.livestream.v1.IPreviewInputResponse,
+        protos.google.cloud.video.livestream.v1.IPreviewInputRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('previewInput response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Creates an event with the provided unique ID in the specified channel.
  *
  * @param {Object} request
@@ -729,8 +840,11 @@ export class LivestreamServiceClient {
  *   Required. The event resource to be created.
  * @param {string} request.eventId
  *   Required. The ID of the event resource to be created.
- *   This value must be 1-63 characters, begin and end with `[a-z0-9]`,
- *   could contain dashes (-) in between.
+ *
+ *   This value must be 1-63 characters, begin and end with a lower-case letter
+ *   or a number, and consist of only lower-case letters, numbers, and hyphens.
+ *   In other words, it must match the following regex:
+ *   `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {string} request.requestId
  *   A request ID to identify requests. Specify a unique request ID
  *   so that if you must retry your request, the server will know to ignore
@@ -1430,8 +1544,11 @@ export class LivestreamServiceClient {
  *   Required. The channel resource to be created.
  * @param {string} request.channelId
  *   Required. The ID of the channel resource to be created.
- *   This value must be 1-63 characters, begin and end with `[a-z0-9]`,
- *   could contain dashes (-) in between.
+ *
+ *   This value must be 1-63 characters, begin and end with a lower-case letter
+ *   or a number, and consist of only lower-case letters, numbers, and hyphens.
+ *   In other words, it must match the following regex:
+ *   `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {string} request.requestId
  *   A request ID to identify requests. Specify a unique request ID
  *   so that if you must retry your request, the server will know to ignore
@@ -2062,6 +2179,259 @@ export class LivestreamServiceClient {
     return decodeOperation as LROperation<protos.google.cloud.video.livestream.v1.ChannelOperationResponse, protos.google.cloud.video.livestream.v1.OperationMetadata>;
   }
 /**
+ * Starts distribution which delivers outputs to the destination indicated by
+ * the Distribution configuration.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the channel resource, in the form of:
+ *   `projects/{project}/locations/{location}/channels/{channelId}`.
+ * @param {string[]} [request.distributionKeys]
+ *   Optional. A list of keys to identify the distribution configuration in the
+ *   channel resource. If left empty, all the distributions in the channel
+ *   specification will be started.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported `(00000000-0000-0000-0000-000000000000)`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/livestream_service.start_distribution.js</caption>
+ * region_tag:livestream_v1_generated_LivestreamService_StartDistribution_async
+ */
+  startDistribution(
+      request?: protos.google.cloud.video.livestream.v1.IStartDistributionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  startDistribution(
+      request: protos.google.cloud.video.livestream.v1.IStartDistributionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  startDistribution(
+      request: protos.google.cloud.video.livestream.v1.IStartDistributionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  startDistribution(
+      request?: protos.google.cloud.video.livestream.v1.IStartDistributionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('startDistribution response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('startDistribution request %j', request);
+    return this.innerApiCalls.startDistribution(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('startDistribution response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `startDistribution()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/livestream_service.start_distribution.js</caption>
+ * region_tag:livestream_v1_generated_LivestreamService_StartDistribution_async
+ */
+  async checkStartDistributionProgress(name: string): Promise<LROperation<protos.google.cloud.video.livestream.v1.ChannelOperationResponse, protos.google.cloud.video.livestream.v1.OperationMetadata>>{
+    this._log.info('startDistribution long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.startDistribution, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.video.livestream.v1.ChannelOperationResponse, protos.google.cloud.video.livestream.v1.OperationMetadata>;
+  }
+/**
+ * Stops the specified distribution.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the channel resource, in the form of:
+ *   `projects/{project}/locations/{location}/channels/{channelId}`.
+ * @param {string[]} [request.distributionKeys]
+ *   Optional. A list of key to identify the distribution configuration in the
+ *   channel resource. If left empty, all the distributions in the channel
+ *   specification will be stopped.
+ * @param {string} [request.requestId]
+ *   Optional. A request ID to identify requests. Specify a unique request ID
+ *   so that if you must retry your request, the server will know to ignore
+ *   the request if it has already been completed. The server will guarantee
+ *   that for at least 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request ID,
+ *   the server can check if original operation with the same request ID was
+ *   received, and if so, will ignore the second request. This prevents clients
+ *   from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported `(00000000-0000-0000-0000-000000000000)`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/livestream_service.stop_distribution.js</caption>
+ * region_tag:livestream_v1_generated_LivestreamService_StopDistribution_async
+ */
+  stopDistribution(
+      request?: protos.google.cloud.video.livestream.v1.IStopDistributionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  stopDistribution(
+      request: protos.google.cloud.video.livestream.v1.IStopDistributionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  stopDistribution(
+      request: protos.google.cloud.video.livestream.v1.IStopDistributionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  stopDistribution(
+      request?: protos.google.cloud.video.livestream.v1.IStopDistributionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('stopDistribution response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('stopDistribution request %j', request);
+    return this.innerApiCalls.stopDistribution(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.video.livestream.v1.IChannelOperationResponse, protos.google.cloud.video.livestream.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('stopDistribution response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `stopDistribution()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/livestream_service.stop_distribution.js</caption>
+ * region_tag:livestream_v1_generated_LivestreamService_StopDistribution_async
+ */
+  async checkStopDistributionProgress(name: string): Promise<LROperation<protos.google.cloud.video.livestream.v1.ChannelOperationResponse, protos.google.cloud.video.livestream.v1.OperationMetadata>>{
+    this._log.info('stopDistribution long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.stopDistribution, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.video.livestream.v1.ChannelOperationResponse, protos.google.cloud.video.livestream.v1.OperationMetadata>;
+  }
+/**
  * Creates an input with the provided unique ID in the specified region.
  *
  * @param {Object} request
@@ -2073,8 +2443,11 @@ export class LivestreamServiceClient {
  *   Required. The input resource to be created.
  * @param {string} request.inputId
  *   Required. The ID of the input resource to be created.
- *   This value must be 1-63 characters, begin and end with `[a-z0-9]`,
- *   could contain dashes (-) in between.
+ *
+ *   This value must be 1-63 characters, begin and end with a lower-case letter
+ *   or a number, and consist of only lower-case letters, numbers, and hyphens.
+ *   In other words, it must match the following regex:
+ *   `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {string} request.requestId
  *   A request ID to identify requests. Specify a unique request ID
  *   so that if you must retry your request, the server will know to ignore
@@ -2455,10 +2828,12 @@ export class LivestreamServiceClient {
  *   Required. The parent resource name, in the following form:
  *   `projects/{project}/locations/{location}/channels/{channel}`.
  * @param {string} request.clipId
- *   Required. Id of the requesting object in the following form:
+ *   Required. The ID of the clip resource to be created.
  *
- *   1. 1 character minimum, 63 characters maximum
- *   2. Only contains letters, digits, underscores, and hyphens
+ *   This value must be 1-63 characters, begin and end with a lower-case letter
+ *   or a number, and consist of only lower-case letters, numbers, and hyphens.
+ *   In other words, it must match the following regex:
+ *   `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {google.cloud.video.livestream.v1.Clip} request.clip
  *   Required. The resource being created
  * @param {string} [request.requestId]
@@ -2707,10 +3082,12 @@ export class LivestreamServiceClient {
  *   Required. The parent resource name, in the following form:
  *   `projects/{project}/locations/{location}/channels/{channelId}`.
  * @param {string} request.dvrSessionId
- *   Required. Id of the requesting object in the following form:
+ *   Required. The ID of the DVR session resource to be created.
  *
- *   1. 1 character minimum, 63 characters maximum
- *   2. Only contains letters, digits, underscores, and hyphens
+ *   This value must be 1-63 characters, begin and end with a lower-case letter
+ *   or a number, and consist of only lower-case letters, numbers, and hyphens.
+ *   In other words, it must match the following regex:
+ *   `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {google.cloud.video.livestream.v1.DvrSession} request.dvrSession
  *   Required. The resource being created
  * @param {string} [request.requestId]
@@ -3092,8 +3469,11 @@ export class LivestreamServiceClient {
  *   Required. The asset resource to be created.
  * @param {string} request.assetId
  *   Required. The ID of the asset resource to be created.
- *   This value must be 1-63 characters, begin and end with `[a-z0-9]`,
- *   could contain dashes (-) in between.
+ *
+ *   This value must be 1-63 characters, begin and end with a lower-case letter
+ *   or a number, and consist of only lower-case letters, numbers, and hyphens.
+ *   In other words, it must match the following regex:
+ *   `^[a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?$`.
  * @param {string} request.requestId
  *   A request ID to identify requests. Specify a unique request ID
  *   so that if you must retry your request, the server will know to ignore

@@ -31,6 +31,7 @@
   * [Key_management_service.create_crypto_key_version](#key_management_service.create_crypto_key_version)
   * [Key_management_service.create_import_job](#key_management_service.create_import_job)
   * [Key_management_service.create_key_ring](#key_management_service.create_key_ring)
+  * [Key_management_service.decapsulate](#key_management_service.decapsulate)
   * [Key_management_service.decrypt](#key_management_service.decrypt)
   * [Key_management_service.destroy_crypto_key_version](#key_management_service.destroy_crypto_key_version)
   * [Key_management_service.encrypt](#key_management_service.encrypt)
@@ -386,6 +387,23 @@ __Usage:__
 
 
 `node packages/google-cloud-kms/samples/generated/v1/key_management_service.create_key_ring.js`
+
+
+-----
+
+
+
+
+### Key_management_service.decapsulate
+
+View the [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-kms/samples/generated/v1/key_management_service.decapsulate.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/google-cloud-node&page=editor&open_in_editor=packages/google-cloud-kms/samples/generated/v1/key_management_service.decapsulate.js,samples/README.md)
+
+__Usage:__
+
+
+`node packages/google-cloud-kms/samples/generated/v1/key_management_service.decapsulate.js`
 
 
 -----

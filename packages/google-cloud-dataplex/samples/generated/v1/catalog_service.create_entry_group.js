@@ -31,7 +31,7 @@ function main(parent, entryGroupId, entryGroup) {
   /**
    *  Required. The resource name of the entryGroup, of the form:
    *  projects/{project_number}/locations/{location_id}
-   *  where `location_id` refers to a GCP region.
+   *  where `location_id` refers to a Google Cloud region.
    */
   // const parent = 'abc123'
   /**

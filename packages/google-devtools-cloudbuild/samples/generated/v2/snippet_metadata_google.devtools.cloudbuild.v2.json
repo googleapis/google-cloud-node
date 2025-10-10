@@ -1,655 +1,655 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-cloudbuild",
-        "version": "5.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.devtools.cloudbuild.v2",
-                "version": "v2"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_CreateConnection_async",
-            "title": "RepositoryManager createConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Connection.",
-            "canonical": true,
-            "file": "repository_manager.create_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConnection",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.CreateConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connection",
-                        "type": ".google.devtools.cloudbuild.v2.Connection"
-                    },
-                    {
-                        "name": "connection_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateConnection",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.CreateConnection",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_GetConnection_async",
-            "title": "RepositoryManager getConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single connection.",
-            "canonical": true,
-            "file": "repository_manager.get_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnection",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.GetConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v2.Connection",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "GetConnection",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.GetConnection",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_ListConnections_async",
-            "title": "RepositoryManager listConnections Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Connections in a given project and location.",
-            "canonical": true,
-            "file": "repository_manager.list_connections.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnections",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.ListConnections",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v2.ListConnectionsResponse",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "ListConnections",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.ListConnections",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_UpdateConnection_async",
-            "title": "RepositoryManager updateConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a single connection.",
-            "canonical": true,
-            "file": "repository_manager.update_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConnection",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.UpdateConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "connection",
-                        "type": ".google.devtools.cloudbuild.v2.Connection"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateConnection",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.UpdateConnection",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_DeleteConnection_async",
-            "title": "RepositoryManager deleteConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single connection.",
-            "canonical": true,
-            "file": "repository_manager.delete_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConnection",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.DeleteConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteConnection",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.DeleteConnection",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_CreateRepository_async",
-            "title": "RepositoryManager createRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Repository.",
-            "canonical": true,
-            "file": "repository_manager.create_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateRepository",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.CreateRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "repository",
-                        "type": ".google.devtools.cloudbuild.v2.Repository"
-                    },
-                    {
-                        "name": "repository_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateRepository",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.CreateRepository",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_BatchCreateRepositories_async",
-            "title": "RepositoryManager batchCreateRepositories Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates multiple repositories inside a connection.",
-            "canonical": true,
-            "file": "repository_manager.batch_create_repositories.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchCreateRepositories",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.BatchCreateRepositories",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "BatchCreateRepositories",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.BatchCreateRepositories",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_GetRepository_async",
-            "title": "RepositoryManager getRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single repository.",
-            "canonical": true,
-            "file": "repository_manager.get_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetRepository",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.GetRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v2.Repository",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "GetRepository",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.GetRepository",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_ListRepositories_async",
-            "title": "RepositoryManager listRepositories Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Repositories in a given connection.",
-            "canonical": true,
-            "file": "repository_manager.list_repositories.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListRepositories",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.ListRepositories",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v2.ListRepositoriesResponse",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "ListRepositories",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.ListRepositories",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_DeleteRepository_async",
-            "title": "RepositoryManager deleteRepository Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single repository.",
-            "canonical": true,
-            "file": "repository_manager.delete_repository.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteRepository",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.DeleteRepository",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteRepository",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.DeleteRepository",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchReadWriteToken_async",
-            "title": "RepositoryManager fetchReadWriteToken Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches read/write token of a given repository.",
-            "canonical": true,
-            "file": "repository_manager.fetch_read_write_token.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchReadWriteToken",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchReadWriteToken",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "repository",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "FetchReadWriteToken",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchReadWriteToken",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchReadToken_async",
-            "title": "RepositoryManager fetchReadToken Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches read token of a given repository.",
-            "canonical": true,
-            "file": "repository_manager.fetch_read_token.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchReadToken",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchReadToken",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "repository",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v2.FetchReadTokenResponse",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "FetchReadToken",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchReadToken",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchLinkableRepositories_async",
-            "title": "RepositoryManager fetchLinkableRepositories Sample",
-            "origin": "API_DEFINITION",
-            "description": " FetchLinkableRepositories get repositories from SCM that are accessible and could be added to the connection.",
-            "canonical": true,
-            "file": "repository_manager.fetch_linkable_repositories.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchLinkableRepositories",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchLinkableRepositories",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "connection",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v2.FetchLinkableRepositoriesResponse",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "FetchLinkableRepositories",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchLinkableRepositories",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchGitRefs_async",
-            "title": "RepositoryManager fetchGitRefs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetch the list of branches or tags for a given repository.",
-            "canonical": true,
-            "file": "repository_manager.fetch_git_refs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchGitRefs",
-                "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchGitRefs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "repository",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ref_type",
-                        "type": ".google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v2.FetchGitRefsResponse",
-                "client": {
-                    "shortName": "RepositoryManagerClient",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
-                },
-                "method": {
-                    "shortName": "FetchGitRefs",
-                    "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchGitRefs",
-                    "service": {
-                        "shortName": "RepositoryManager",
-                        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-cloudbuild",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.devtools.cloudbuild.v2",
+        "version": "v2"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_CreateConnection_async",
+      "title": "RepositoryManager createConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Connection.",
+      "canonical": true,
+      "file": "repository_manager.create_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConnection",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.CreateConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connection",
+            "type": ".google.devtools.cloudbuild.v2.Connection"
+          },
+          {
+            "name": "connection_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "CreateConnection",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.CreateConnection",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_GetConnection_async",
+      "title": "RepositoryManager getConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single connection.",
+      "canonical": true,
+      "file": "repository_manager.get_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnection",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.GetConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v2.Connection",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "GetConnection",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.GetConnection",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_ListConnections_async",
+      "title": "RepositoryManager listConnections Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Connections in a given project and location.",
+      "canonical": true,
+      "file": "repository_manager.list_connections.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConnections",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.ListConnections",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v2.ListConnectionsResponse",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "ListConnections",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.ListConnections",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_UpdateConnection_async",
+      "title": "RepositoryManager updateConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a single connection.",
+      "canonical": true,
+      "file": "repository_manager.update_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConnection",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.UpdateConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "connection",
+            "type": ".google.devtools.cloudbuild.v2.Connection"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateConnection",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.UpdateConnection",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_DeleteConnection_async",
+      "title": "RepositoryManager deleteConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single connection.",
+      "canonical": true,
+      "file": "repository_manager.delete_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConnection",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.DeleteConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteConnection",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.DeleteConnection",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_CreateRepository_async",
+      "title": "RepositoryManager createRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Repository.",
+      "canonical": true,
+      "file": "repository_manager.create_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateRepository",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.CreateRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "repository",
+            "type": ".google.devtools.cloudbuild.v2.Repository"
+          },
+          {
+            "name": "repository_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "CreateRepository",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.CreateRepository",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_BatchCreateRepositories_async",
+      "title": "RepositoryManager batchCreateRepositories Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates multiple repositories inside a connection.",
+      "canonical": true,
+      "file": "repository_manager.batch_create_repositories.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchCreateRepositories",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.BatchCreateRepositories",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "BatchCreateRepositories",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.BatchCreateRepositories",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_GetRepository_async",
+      "title": "RepositoryManager getRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single repository.",
+      "canonical": true,
+      "file": "repository_manager.get_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetRepository",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.GetRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v2.Repository",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "GetRepository",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.GetRepository",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_ListRepositories_async",
+      "title": "RepositoryManager listRepositories Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Repositories in a given connection.",
+      "canonical": true,
+      "file": "repository_manager.list_repositories.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListRepositories",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.ListRepositories",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v2.ListRepositoriesResponse",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "ListRepositories",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.ListRepositories",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_DeleteRepository_async",
+      "title": "RepositoryManager deleteRepository Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single repository.",
+      "canonical": true,
+      "file": "repository_manager.delete_repository.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteRepository",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.DeleteRepository",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteRepository",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.DeleteRepository",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchReadWriteToken_async",
+      "title": "RepositoryManager fetchReadWriteToken Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches read/write token of a given repository.",
+      "canonical": true,
+      "file": "repository_manager.fetch_read_write_token.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchReadWriteToken",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchReadWriteToken",
+        "async": true,
+        "parameters": [
+          {
+            "name": "repository",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v2.FetchReadWriteTokenResponse",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "FetchReadWriteToken",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchReadWriteToken",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchReadToken_async",
+      "title": "RepositoryManager fetchReadToken Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches read token of a given repository.",
+      "canonical": true,
+      "file": "repository_manager.fetch_read_token.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchReadToken",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchReadToken",
+        "async": true,
+        "parameters": [
+          {
+            "name": "repository",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v2.FetchReadTokenResponse",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "FetchReadToken",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchReadToken",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchLinkableRepositories_async",
+      "title": "RepositoryManager fetchLinkableRepositories Sample",
+      "origin": "API_DEFINITION",
+      "description": " FetchLinkableRepositories get repositories from SCM that are accessible and could be added to the connection.",
+      "canonical": true,
+      "file": "repository_manager.fetch_linkable_repositories.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchLinkableRepositories",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchLinkableRepositories",
+        "async": true,
+        "parameters": [
+          {
+            "name": "connection",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v2.FetchLinkableRepositoriesResponse",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "FetchLinkableRepositories",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchLinkableRepositories",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v2_generated_RepositoryManager_FetchGitRefs_async",
+      "title": "RepositoryManager fetchGitRefs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetch the list of branches or tags for a given repository.",
+      "canonical": true,
+      "file": "repository_manager.fetch_git_refs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchGitRefs",
+        "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchGitRefs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "repository",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ref_type",
+            "type": ".google.devtools.cloudbuild.v2.FetchGitRefsRequest.RefType"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v2.FetchGitRefsResponse",
+        "client": {
+          "shortName": "RepositoryManagerClient",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManagerClient"
+        },
+        "method": {
+          "shortName": "FetchGitRefs",
+          "fullName": "google.devtools.cloudbuild.v2.RepositoryManager.FetchGitRefs",
+          "service": {
+            "shortName": "RepositoryManager",
+            "fullName": "google.devtools.cloudbuild.v2.RepositoryManager"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -39,7 +39,7 @@ function main(parent, lfpStore) {
   // const lfpStore = {}
 
   // Imports the Lfp library
-  const {LfpStoreServiceClient} = require('@google-cloud/lfp').v1;
+  const {LfpStoreServiceClient} = require('@google-shopping/lfp').v1;
 
   // Instantiates a client
   const lfpClient = new LfpStoreServiceClient();

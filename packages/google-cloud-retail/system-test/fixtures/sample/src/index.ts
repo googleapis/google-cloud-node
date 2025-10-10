@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, ProjectServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient} from '@google-cloud/retail';
+import {AnalyticsServiceClient, CatalogServiceClient, CompletionServiceClient, ControlServiceClient, ConversationalSearchServiceClient, GenerativeQuestionServiceClient, ModelServiceClient, PredictionServiceClient, ProductServiceClient, SearchServiceClient, ServingConfigServiceClient, UserEventServiceClient} from '@google-cloud/retail';
 
 // check that the client class type name can be used
 function doStuffWithAnalyticsServiceClient(client: AnalyticsServiceClient) {
@@ -31,6 +31,9 @@ function doStuffWithCompletionServiceClient(client: CompletionServiceClient) {
 function doStuffWithControlServiceClient(client: ControlServiceClient) {
   client.close();
 }
+function doStuffWithConversationalSearchServiceClient(client: ConversationalSearchServiceClient) {
+  client.close();
+}
 function doStuffWithGenerativeQuestionServiceClient(client: GenerativeQuestionServiceClient) {
   client.close();
 }
@@ -41,9 +44,6 @@ function doStuffWithPredictionServiceClient(client: PredictionServiceClient) {
   client.close();
 }
 function doStuffWithProductServiceClient(client: ProductServiceClient) {
-  client.close();
-}
-function doStuffWithProjectServiceClient(client: ProjectServiceClient) {
   client.close();
 }
 function doStuffWithSearchServiceClient(client: SearchServiceClient) {
@@ -70,6 +70,9 @@ function main() {
   const controlServiceClient = new ControlServiceClient();
   doStuffWithControlServiceClient(controlServiceClient);
   // check that the client instance can be created
+  const conversationalSearchServiceClient = new ConversationalSearchServiceClient();
+  doStuffWithConversationalSearchServiceClient(conversationalSearchServiceClient);
+  // check that the client instance can be created
   const generativeQuestionServiceClient = new GenerativeQuestionServiceClient();
   doStuffWithGenerativeQuestionServiceClient(generativeQuestionServiceClient);
   // check that the client instance can be created
@@ -81,9 +84,6 @@ function main() {
   // check that the client instance can be created
   const productServiceClient = new ProductServiceClient();
   doStuffWithProductServiceClient(productServiceClient);
-  // check that the client instance can be created
-  const projectServiceClient = new ProjectServiceClient();
-  doStuffWithProjectServiceClient(projectServiceClient);
   // check that the client instance can be created
   const searchServiceClient = new SearchServiceClient();
   doStuffWithSearchServiceClient(searchServiceClient);

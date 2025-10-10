@@ -1,115 +1,115 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-recaptchaenterprise",
-        "version": "6.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.recaptchaenterprise.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_CreateAssessment_async",
-            "title": "RecaptchaEnterpriseServiceV1Beta1 createAssessment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an Assessment of the likelihood an event is legitimate.",
-            "canonical": true,
-            "file": "recaptcha_enterprise_service_v1_beta1.create_assessment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAssessment",
-                "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.CreateAssessment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "assessment",
-                        "type": ".google.cloud.recaptchaenterprise.v1beta1.Assessment"
-                    }
-                ],
-                "resultType": ".google.cloud.recaptchaenterprise.v1beta1.Assessment",
-                "client": {
-                    "shortName": "RecaptchaEnterpriseServiceV1Beta1Client",
-                    "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "CreateAssessment",
-                    "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.CreateAssessment",
-                    "service": {
-                        "shortName": "RecaptchaEnterpriseServiceV1Beta1",
-                        "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_AnnotateAssessment_async",
-            "title": "RecaptchaEnterpriseServiceV1Beta1 annotateAssessment Sample",
-            "origin": "API_DEFINITION",
-            "description": " Annotates a previously created Assessment to provide additional information on whether the event turned out to be authentic or fradulent.",
-            "canonical": true,
-            "file": "recaptcha_enterprise_service_v1_beta1.annotate_assessment.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AnnotateAssessment",
-                "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.AnnotateAssessment",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "annotation",
-                        "type": ".google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation"
-                    },
-                    {
-                        "name": "reasons",
-                        "type": "TYPE_ENUM[]"
-                    },
-                    {
-                        "name": "hashed_account_id",
-                        "type": "TYPE_BYTES"
-                    },
-                    {
-                        "name": "transaction_event",
-                        "type": ".google.cloud.recaptchaenterprise.v1beta1.TransactionEvent"
-                    }
-                ],
-                "resultType": ".google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse",
-                "client": {
-                    "shortName": "RecaptchaEnterpriseServiceV1Beta1Client",
-                    "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client"
-                },
-                "method": {
-                    "shortName": "AnnotateAssessment",
-                    "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.AnnotateAssessment",
-                    "service": {
-                        "shortName": "RecaptchaEnterpriseServiceV1Beta1",
-                        "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-recaptchaenterprise",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.recaptchaenterprise.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_CreateAssessment_async",
+      "title": "RecaptchaEnterpriseServiceV1Beta1 createAssessment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an Assessment of the likelihood an event is legitimate.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service_v1_beta1.create_assessment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAssessment",
+        "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.CreateAssessment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "assessment",
+            "type": ".google.cloud.recaptchaenterprise.v1beta1.Assessment"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1beta1.Assessment",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceV1Beta1Client",
+          "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "CreateAssessment",
+          "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.CreateAssessment",
+          "service": {
+            "shortName": "RecaptchaEnterpriseServiceV1Beta1",
+            "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "recaptchaenterprise_v1beta1_generated_RecaptchaEnterpriseServiceV1Beta1_AnnotateAssessment_async",
+      "title": "RecaptchaEnterpriseServiceV1Beta1 annotateAssessment Sample",
+      "origin": "API_DEFINITION",
+      "description": " Annotates a previously created Assessment to provide additional information on whether the event turned out to be authentic or fradulent.",
+      "canonical": true,
+      "file": "recaptcha_enterprise_service_v1_beta1.annotate_assessment.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AnnotateAssessment",
+        "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.AnnotateAssessment",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "annotation",
+            "type": ".google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentRequest.Annotation"
+          },
+          {
+            "name": "reasons",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "hashed_account_id",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "transaction_event",
+            "type": ".google.cloud.recaptchaenterprise.v1beta1.TransactionEvent"
+          }
+        ],
+        "resultType": ".google.cloud.recaptchaenterprise.v1beta1.AnnotateAssessmentResponse",
+        "client": {
+          "shortName": "RecaptchaEnterpriseServiceV1Beta1Client",
+          "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1Client"
+        },
+        "method": {
+          "shortName": "AnnotateAssessment",
+          "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1.AnnotateAssessment",
+          "service": {
+            "shortName": "RecaptchaEnterpriseServiceV1Beta1",
+            "fullName": "google.cloud.recaptchaenterprise.v1beta1.RecaptchaEnterpriseServiceV1Beta1"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -19,8 +19,6 @@ import * as sinon from 'sinon';
 import * as generateReadMe from '../src/generate-readme';
 import path from 'path';
 
-const TEST_FIXTURES_PATH = path.join(__dirname, 'fixtures', 'combined-library');
-
 describe('tests running generate-readme command', () => {
   let initialGenerateReadMeStub: sinon.SinonStub;
   let readAndWriteToReadmeStub: sinon.SinonStub;
@@ -109,14 +107,14 @@ describe('tests running generate-readme command', () => {
     // Assert that the console log message is displayed for the missing replacement strings
     assert.ok(
       consoleStub.calledWith(
-        `Initial readme generation was selected, but no string to replace the samples table was given. `+
-        `Will use '[//]: # "samples"'`
+        'Initial readme generation was selected, but no string to replace the samples table was given. ' +
+          'Will use \'[//]: # "samples"\'',
       ),
     );
     assert.ok(
       consoleStub.calledWith(
-        `Initial readme generation was selected, but no string to replace the release level was given. ` +
-        `Will use '[//]: # "releaseLevel"'`,
+        'Initial readme generation was selected, but no string to replace the release level was given. ' +
+          'Will use \'[//]: # "releaseLevel"\'',
       ),
     );
 

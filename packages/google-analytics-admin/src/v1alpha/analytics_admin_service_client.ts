@@ -4196,7 +4196,7 @@ export class AnalyticsAdminServiceClient {
     options.otherArgs.headers[
       'x-goog-request-params'
     ] = this._gaxModule.routingHeader.fromParams({
-      'display_video_360_advertiser_link.name': request.displayVideo_360AdvertiserLink!.name ?? '',
+      'display_video_360_advertiser_link.name': request.displayVideo_360AdvertiserLink!.name?.toString() ?? '',
     });
     this.initialize().catch(err => {throw err});
     this._log.info('updateDisplayVideo360AdvertiserLink request %j', request);

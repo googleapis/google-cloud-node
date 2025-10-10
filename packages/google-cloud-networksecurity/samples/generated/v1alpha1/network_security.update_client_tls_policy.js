@@ -43,7 +43,7 @@ function main(clientTlsPolicy) {
   // const clientTlsPolicy = {}
 
   // Imports the Networksecurity library
-  const {NetworkSecurityClient} = require('@google-cloud/networksecurity').v1alpha1;
+  const {NetworkSecurityClient} = require('@google-cloud/network-security').v1alpha1;
 
   // Instantiates a client
   const networksecurityClient = new NetworkSecurityClient();

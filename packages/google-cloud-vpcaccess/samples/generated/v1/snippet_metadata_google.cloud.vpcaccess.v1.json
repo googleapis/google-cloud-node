@@ -1,191 +1,191 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-vpcaccess",
-        "version": "4.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.vpcaccess.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "vpcaccess_v1_generated_VpcAccessService_CreateConnector_async",
-            "title": "VpcAccessService createConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Serverless VPC Access connector, returns an operation.",
-            "canonical": true,
-            "file": "vpc_access_service.create_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConnector",
-                "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.CreateConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connector_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connector",
-                        "type": ".google.cloud.vpcaccess.v1.Connector"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "VpcAccessServiceClient",
-                    "fullName": "google.cloud.vpcaccess.v1.VpcAccessServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateConnector",
-                    "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.CreateConnector",
-                    "service": {
-                        "shortName": "VpcAccessService",
-                        "fullName": "google.cloud.vpcaccess.v1.VpcAccessService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vpcaccess_v1_generated_VpcAccessService_GetConnector_async",
-            "title": "VpcAccessService getConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a Serverless VPC Access connector. Returns NOT_FOUND if the resource does not exist.",
-            "canonical": true,
-            "file": "vpc_access_service.get_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnector",
-                "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.GetConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vpcaccess.v1.Connector",
-                "client": {
-                    "shortName": "VpcAccessServiceClient",
-                    "fullName": "google.cloud.vpcaccess.v1.VpcAccessServiceClient"
-                },
-                "method": {
-                    "shortName": "GetConnector",
-                    "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.GetConnector",
-                    "service": {
-                        "shortName": "VpcAccessService",
-                        "fullName": "google.cloud.vpcaccess.v1.VpcAccessService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vpcaccess_v1_generated_VpcAccessService_ListConnectors_async",
-            "title": "VpcAccessService listConnectors Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Serverless VPC Access connectors.",
-            "canonical": true,
-            "file": "vpc_access_service.list_connectors.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnectors",
-                "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.ListConnectors",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.vpcaccess.v1.ListConnectorsResponse",
-                "client": {
-                    "shortName": "VpcAccessServiceClient",
-                    "fullName": "google.cloud.vpcaccess.v1.VpcAccessServiceClient"
-                },
-                "method": {
-                    "shortName": "ListConnectors",
-                    "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.ListConnectors",
-                    "service": {
-                        "shortName": "VpcAccessService",
-                        "fullName": "google.cloud.vpcaccess.v1.VpcAccessService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "vpcaccess_v1_generated_VpcAccessService_DeleteConnector_async",
-            "title": "VpcAccessService deleteConnector Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a Serverless VPC Access connector. Returns NOT_FOUND if the resource does not exist.",
-            "canonical": true,
-            "file": "vpc_access_service.delete_connector.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConnector",
-                "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.DeleteConnector",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "VpcAccessServiceClient",
-                    "fullName": "google.cloud.vpcaccess.v1.VpcAccessServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteConnector",
-                    "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.DeleteConnector",
-                    "service": {
-                        "shortName": "VpcAccessService",
-                        "fullName": "google.cloud.vpcaccess.v1.VpcAccessService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-vpcaccess",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.vpcaccess.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "vpcaccess_v1_generated_VpcAccessService_CreateConnector_async",
+      "title": "VpcAccessService createConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Serverless VPC Access connector, returns an operation.",
+      "canonical": true,
+      "file": "vpc_access_service.create_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConnector",
+        "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.CreateConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connector_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connector",
+            "type": ".google.cloud.vpcaccess.v1.Connector"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VpcAccessServiceClient",
+          "fullName": "google.cloud.vpcaccess.v1.VpcAccessServiceClient"
+        },
+        "method": {
+          "shortName": "CreateConnector",
+          "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.CreateConnector",
+          "service": {
+            "shortName": "VpcAccessService",
+            "fullName": "google.cloud.vpcaccess.v1.VpcAccessService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vpcaccess_v1_generated_VpcAccessService_GetConnector_async",
+      "title": "VpcAccessService getConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a Serverless VPC Access connector. Returns NOT_FOUND if the resource does not exist.",
+      "canonical": true,
+      "file": "vpc_access_service.get_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnector",
+        "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.GetConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vpcaccess.v1.Connector",
+        "client": {
+          "shortName": "VpcAccessServiceClient",
+          "fullName": "google.cloud.vpcaccess.v1.VpcAccessServiceClient"
+        },
+        "method": {
+          "shortName": "GetConnector",
+          "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.GetConnector",
+          "service": {
+            "shortName": "VpcAccessService",
+            "fullName": "google.cloud.vpcaccess.v1.VpcAccessService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vpcaccess_v1_generated_VpcAccessService_ListConnectors_async",
+      "title": "VpcAccessService listConnectors Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Serverless VPC Access connectors.",
+      "canonical": true,
+      "file": "vpc_access_service.list_connectors.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConnectors",
+        "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.ListConnectors",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.vpcaccess.v1.ListConnectorsResponse",
+        "client": {
+          "shortName": "VpcAccessServiceClient",
+          "fullName": "google.cloud.vpcaccess.v1.VpcAccessServiceClient"
+        },
+        "method": {
+          "shortName": "ListConnectors",
+          "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.ListConnectors",
+          "service": {
+            "shortName": "VpcAccessService",
+            "fullName": "google.cloud.vpcaccess.v1.VpcAccessService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "vpcaccess_v1_generated_VpcAccessService_DeleteConnector_async",
+      "title": "VpcAccessService deleteConnector Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Serverless VPC Access connector. Returns NOT_FOUND if the resource does not exist.",
+      "canonical": true,
+      "file": "vpc_access_service.delete_connector.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConnector",
+        "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.DeleteConnector",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VpcAccessServiceClient",
+          "fullName": "google.cloud.vpcaccess.v1.VpcAccessServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteConnector",
+          "fullName": "google.cloud.vpcaccess.v1.VpcAccessService.DeleteConnector",
+          "service": {
+            "shortName": "VpcAccessService",
+            "fullName": "google.cloud.vpcaccess.v1.VpcAccessService"
+          }
+        }
+      }
+    }
+  ]
 }

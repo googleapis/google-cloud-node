@@ -50,7 +50,7 @@ function main(parent, productInput, dataSource) {
   // const dataSource = 'abc123'
 
   // Imports the Products library
-  const {ProductInputsServiceClient} = require('@google-cloud/products').v1;
+  const {ProductInputsServiceClient} = require('@google-shopping/products').v1;
 
   // Instantiates a client
   const productsClient = new ProductInputsServiceClient();

@@ -730,6 +730,50 @@ export namespace google {
                         DEFAULT = 2
                     }
 
+                    /** CarrierTransitTimeOption enum. */
+                    enum CarrierTransitTimeOption {
+                        CARRIER_TRANSIT_TIME_OPTION_UNSPECIFIED = 0,
+                        DHL_PAKET = 1,
+                        DHL_PACKCHEN = 2,
+                        DHL_EXPRESSEASY = 3,
+                        DPD_EXPRESS = 4,
+                        DPD_CLASSIC_PARCEL = 5,
+                        HERMES_HAUSTUR = 6,
+                        HERMES_PAKETSHOP = 7,
+                        GLS_BUSINESS = 8,
+                        GLS_EXPRESS = 9,
+                        GLS_PRIVATE = 10,
+                        COLISSIMO_DOMICILE = 11,
+                        DHL_EXPRESS_12AM = 12,
+                        DHL_EXPRESS_9AM = 13,
+                        GEODIS_EXPRESS = 14,
+                        GEODIS_PACK_30 = 15,
+                        GEODIS_SAME_DAY = 16,
+                        GEODIS_TOP_24 = 17,
+                        TNT_ESSENTIEL_24H = 18,
+                        TNT_ESSENTIEL_FLEXIBILITE = 19,
+                        FEDEX_GROUND = 20,
+                        FEDEX_HOME_DELIVERY = 21,
+                        FEDEX_EXPRESS_SAVER = 22,
+                        FEDEX_FIRST_OVERNIGHT = 23,
+                        FEDEX_PRIORITY_OVERNIGHT = 24,
+                        FEDEX_STANDARD_OVERNIGHT = 25,
+                        FEDEX_2DAY = 26,
+                        UPS_2ND_DAY_AIR = 27,
+                        UPS_2ND_DAY_AM = 28,
+                        UPS_3_DAY_SELECT = 29,
+                        UPS_GROUND = 30,
+                        UPS_NEXT_DAY_AIR = 31,
+                        UPS_NEXT_DAY_AIR_EARLY_AM = 32,
+                        UPS_NEXT_DAY_AIR_SAVER = 33,
+                        USPS_PRIORITY_MAIL_EXPRESS = 34,
+                        USPS_MEDIA_MAIL = 35,
+                        USPS_GROUND_ADVANTAGE_RETAIL = 36,
+                        USPS_PRIORITY_MAIL = 37,
+                        USPS_GROUND_ADVANTAGE_COMMERCIAL = 38,
+                        USPS_FIRST_CLASS_MAIL = 39
+                    }
+
                     /** Properties of a ProductAttributes. */
                     interface IProductAttributes {
 
@@ -852,6 +896,9 @@ export namespace google {
 
                         /** ProductAttributes shipping */
                         shipping?: (google.shopping.merchant.products.v1.IShipping[]|null);
+
+                        /** ProductAttributes carrierShipping */
+                        carrierShipping?: (google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping[]|null);
 
                         /** ProductAttributes freeShippingThreshold */
                         freeShippingThreshold?: (google.shopping.merchant.products.v1.IFreeShippingThreshold[]|null);
@@ -1139,6 +1186,9 @@ export namespace google {
                         /** ProductAttributes shipping. */
                         public shipping: google.shopping.merchant.products.v1.IShipping[];
 
+                        /** ProductAttributes carrierShipping. */
+                        public carrierShipping: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping[];
+
                         /** ProductAttributes freeShippingThreshold. */
                         public freeShippingThreshold: google.shopping.merchant.products.v1.IFreeShippingThreshold[];
 
@@ -1371,6 +1421,244 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ProductAttributes {
+
+                        /** Properties of a CarrierShipping. */
+                        interface ICarrierShipping {
+
+                            /** CarrierShipping country */
+                            country?: (string|null);
+
+                            /** CarrierShipping region */
+                            region?: (string|null);
+
+                            /** CarrierShipping postalCode */
+                            postalCode?: (string|null);
+
+                            /** CarrierShipping originPostalCode */
+                            originPostalCode?: (string|null);
+
+                            /** CarrierShipping flatPrice */
+                            flatPrice?: (google.shopping.type.IPrice|null);
+
+                            /** CarrierShipping carrierPrice */
+                            carrierPrice?: (google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|null);
+
+                            /** CarrierShipping carrierPriceFlatAdjustment */
+                            carrierPriceFlatAdjustment?: (google.shopping.type.IPrice|null);
+
+                            /** CarrierShipping carrierPricePercentageAdjustment */
+                            carrierPricePercentageAdjustment?: (number|null);
+
+                            /** CarrierShipping minHandlingTime */
+                            minHandlingTime?: (number|Long|string|null);
+
+                            /** CarrierShipping maxHandlingTime */
+                            maxHandlingTime?: (number|Long|string|null);
+
+                            /** CarrierShipping fixedMinTransitTime */
+                            fixedMinTransitTime?: (number|Long|string|null);
+
+                            /** CarrierShipping fixedMaxTransitTime */
+                            fixedMaxTransitTime?: (number|Long|string|null);
+
+                            /** CarrierShipping carrierTransitTime */
+                            carrierTransitTime?: (google.shopping.merchant.products.v1.CarrierTransitTimeOption|keyof typeof google.shopping.merchant.products.v1.CarrierTransitTimeOption|null);
+                        }
+
+                        /** Represents a CarrierShipping. */
+                        class CarrierShipping implements ICarrierShipping {
+
+                            /**
+                             * Constructs a new CarrierShipping.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping);
+
+                            /** CarrierShipping country. */
+                            public country?: (string|null);
+
+                            /** CarrierShipping region. */
+                            public region?: (string|null);
+
+                            /** CarrierShipping postalCode. */
+                            public postalCode?: (string|null);
+
+                            /** CarrierShipping originPostalCode. */
+                            public originPostalCode?: (string|null);
+
+                            /** CarrierShipping flatPrice. */
+                            public flatPrice?: (google.shopping.type.IPrice|null);
+
+                            /** CarrierShipping carrierPrice. */
+                            public carrierPrice?: (google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|keyof typeof google.shopping.merchant.products.v1.ProductAttributes.CarrierPriceOption|null);
+
+                            /** CarrierShipping carrierPriceFlatAdjustment. */
+                            public carrierPriceFlatAdjustment?: (google.shopping.type.IPrice|null);
+
+                            /** CarrierShipping carrierPricePercentageAdjustment. */
+                            public carrierPricePercentageAdjustment?: (number|null);
+
+                            /** CarrierShipping minHandlingTime. */
+                            public minHandlingTime?: (number|Long|string|null);
+
+                            /** CarrierShipping maxHandlingTime. */
+                            public maxHandlingTime?: (number|Long|string|null);
+
+                            /** CarrierShipping fixedMinTransitTime. */
+                            public fixedMinTransitTime?: (number|Long|string|null);
+
+                            /** CarrierShipping fixedMaxTransitTime. */
+                            public fixedMaxTransitTime?: (number|Long|string|null);
+
+                            /** CarrierShipping carrierTransitTime. */
+                            public carrierTransitTime?: (google.shopping.merchant.products.v1.CarrierTransitTimeOption|keyof typeof google.shopping.merchant.products.v1.CarrierTransitTimeOption|null);
+
+                            /**
+                             * Creates a new CarrierShipping instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns CarrierShipping instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping): google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping;
+
+                            /**
+                             * Encodes the specified CarrierShipping message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.verify|verify} messages.
+                             * @param message CarrierShipping message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified CarrierShipping message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping.verify|verify} messages.
+                             * @param message CarrierShipping message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.ICarrierShipping, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a CarrierShipping message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns CarrierShipping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping;
+
+                            /**
+                             * Decodes a CarrierShipping message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns CarrierShipping
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping;
+
+                            /**
+                             * Verifies a CarrierShipping message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a CarrierShipping message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns CarrierShipping
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping;
+
+                            /**
+                             * Creates a plain object from a CarrierShipping message. Also converts values to other types if specified.
+                             * @param message CarrierShipping
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.CarrierShipping, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this CarrierShipping to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for CarrierShipping
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** CarrierPriceOption enum. */
+                        enum CarrierPriceOption {
+                            CARRIER_PRICE_OPTION_UNSPECIFIED = 0,
+                            AUSTRALIA_POST_REGULAR = 1,
+                            AUSTRALIA_POST_EXPRESS = 2,
+                            AUSTRALIA_POST_REGULAR_S = 3,
+                            AUSTRALIA_POST_REGULAR_M = 4,
+                            AUSTRALIA_POST_REGULAR_L = 5,
+                            AUSTRALIA_POST_REGULAR_XL = 6,
+                            AUSTRALIA_POST_EXPRESS_S = 7,
+                            AUSTRALIA_POST_EXPRESS_M = 8,
+                            AUSTRALIA_POST_EXPRESS_L = 9,
+                            AUSTRALIA_POST_EXPRESS_XL = 10,
+                            TNT_ROAD_EXPRESS = 11,
+                            TNT_OVERNIGHT_EXPRESS = 12,
+                            TOLL_ROAD_DELIVERY = 13,
+                            TOLL_OVERNIGHT_PRIORITY = 14,
+                            DHL_PAKET = 15,
+                            DHL_PACKCHEN = 16,
+                            DPD_EXPRESS_12 = 17,
+                            DPD_EXPRESS = 18,
+                            DPD_CLASSIC_PARCEL = 19,
+                            HERMES_PACKCHEN = 20,
+                            HERMES_PAKETKLASSE_S = 21,
+                            HERMES_PAKETKLASSE_M = 22,
+                            HERMES_PAKETKLASSE_L = 23,
+                            UPS_EXPRESS = 24,
+                            UPS_EXPRESS_SAVER = 25,
+                            UPS_EXPRESS_STANDARD = 26,
+                            DHL_EXPRESS = 27,
+                            DHL_EXPRESS_12 = 28,
+                            DPD_NEXT_DAY = 29,
+                            DPD_STANDARD_NEXT_DAY = 30,
+                            DPD_STANDARD_TWO_DAY = 31,
+                            RMG_1ST_CLASS_SMALL = 32,
+                            RMG_1ST_CLASS_MEDIUM = 33,
+                            RMG_2ND_CLASS_SMALL = 34,
+                            RMG_2ND_CLASS_MEDIUM = 35,
+                            TNT_EXPRESS = 36,
+                            TNT_EXPRESS_10 = 37,
+                            TNT_EXPRESS_12 = 38,
+                            YODEL_B2C_48HR = 39,
+                            YODEL_B2C_72HR = 40,
+                            YODEL_B2C_PACKET = 41,
+                            FEDEX_GROUND = 42,
+                            FEDEX_HOME_DELIVERY = 43,
+                            FEDEX_EXPRESS_SAVER = 44,
+                            FEDEX_FIRST_OVERNIGHT = 45,
+                            FEDEX_PRIORITY_OVERNIGHT = 46,
+                            FEDEX_STANDARD_OVERNIGHT = 47,
+                            FEDEX_2DAY = 48,
+                            UPS_STANDARD = 49,
+                            UPS_2ND_DAY_AIR = 50,
+                            UPS_2ND_DAY_AM = 51,
+                            UPS_3_DAY_SELECT = 52,
+                            UPS_GROUND = 53,
+                            UPS_NEXT_DAY_AIR = 54,
+                            UPS_NEXT_DAY_AIR_EARLY_AM = 55,
+                            UPS_NEXT_DAY_AIR_SAVER = 56,
+                            USPS_PRIORITY_MAIL_EXPRESS = 57,
+                            USPS_MEDIA_MAIL = 58,
+                            USPS_GROUND_ADVANTAGE_RETAIL = 59,
+                            USPS_PRIORITY_MAIL = 60,
+                            USPS_GROUND_ADVANTAGE_COMMERCIAL = 61
+                        }
                     }
 
                     /** Properties of a ShippingWeight. */
@@ -9890,9 +10178,6 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
-
-            /** CommonLanguageSettings selectiveGapicGeneration */
-            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -9909,9 +10194,6 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
-
-            /** CommonLanguageSettings selectiveGapicGeneration. */
-            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -10613,9 +10895,6 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
-
-            /** PythonSettings experimentalFeatures */
-            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -10629,9 +10908,6 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
-
-            /** PythonSettings experimentalFeatures. */
-            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -10709,118 +10985,6 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace PythonSettings {
-
-            /** Properties of an ExperimentalFeatures. */
-            interface IExperimentalFeatures {
-
-                /** ExperimentalFeatures restAsyncIoEnabled */
-                restAsyncIoEnabled?: (boolean|null);
-
-                /** ExperimentalFeatures protobufPythonicTypesEnabled */
-                protobufPythonicTypesEnabled?: (boolean|null);
-
-                /** ExperimentalFeatures unversionedPackageDisabled */
-                unversionedPackageDisabled?: (boolean|null);
-            }
-
-            /** Represents an ExperimentalFeatures. */
-            class ExperimentalFeatures implements IExperimentalFeatures {
-
-                /**
-                 * Constructs a new ExperimentalFeatures.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
-
-                /** ExperimentalFeatures restAsyncIoEnabled. */
-                public restAsyncIoEnabled: boolean;
-
-                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
-                public protobufPythonicTypesEnabled: boolean;
-
-                /** ExperimentalFeatures unversionedPackageDisabled. */
-                public unversionedPackageDisabled: boolean;
-
-                /**
-                 * Creates a new ExperimentalFeatures instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns ExperimentalFeatures instance
-                 */
-                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                 * @param message ExperimentalFeatures message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
-                 * @param message ExperimentalFeatures message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns ExperimentalFeatures
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns ExperimentalFeatures
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Verifies an ExperimentalFeatures message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns ExperimentalFeatures
-                 */
-                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
-
-                /**
-                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
-                 * @param message ExperimentalFeatures
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this ExperimentalFeatures to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for ExperimentalFeatures
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
         }
 
         /** Properties of a NodeSettings. */
@@ -11149,9 +11313,6 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
-
-            /** GoSettings renamedServices */
-            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -11165,9 +11326,6 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
-
-            /** GoSettings renamedServices. */
-            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -11491,109 +11649,6 @@ export namespace google {
             CLIENT_LIBRARY_DESTINATION_UNSPECIFIED = 0,
             GITHUB = 10,
             PACKAGE_MANAGER = 20
-        }
-
-        /** Properties of a SelectiveGapicGeneration. */
-        interface ISelectiveGapicGeneration {
-
-            /** SelectiveGapicGeneration methods */
-            methods?: (string[]|null);
-
-            /** SelectiveGapicGeneration generateOmittedAsInternal */
-            generateOmittedAsInternal?: (boolean|null);
-        }
-
-        /** Represents a SelectiveGapicGeneration. */
-        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
-
-            /**
-             * Constructs a new SelectiveGapicGeneration.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.ISelectiveGapicGeneration);
-
-            /** SelectiveGapicGeneration methods. */
-            public methods: string[];
-
-            /** SelectiveGapicGeneration generateOmittedAsInternal. */
-            public generateOmittedAsInternal: boolean;
-
-            /**
-             * Creates a new SelectiveGapicGeneration instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns SelectiveGapicGeneration instance
-             */
-            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-             * @param message SelectiveGapicGeneration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
-             * @param message SelectiveGapicGeneration message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns SelectiveGapicGeneration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns SelectiveGapicGeneration
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Verifies a SelectiveGapicGeneration message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns SelectiveGapicGeneration
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
-
-            /**
-             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
-             * @param message SelectiveGapicGeneration
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this SelectiveGapicGeneration to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for SelectiveGapicGeneration
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** LaunchStage enum. */
@@ -11977,7 +12032,6 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
-            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -12007,9 +12061,6 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
-
-            /** FileDescriptorProto optionDependency */
-            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -12059,9 +12110,6 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
-
-            /** FileDescriptorProto optionDependency. */
-            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -12197,9 +12245,6 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
-
-            /** DescriptorProto visibility */
-            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -12240,9 +12285,6 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
-
-            /** DescriptorProto visibility. */
-            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -13091,9 +13133,6 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
-
-            /** EnumDescriptorProto visibility */
-            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -13119,9 +13158,6 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
-
-            /** EnumDescriptorProto visibility. */
-            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -14057,9 +14093,6 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
-            /** FieldOptions featureSupport */
-            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
-
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -14114,9 +14147,6 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
-
-            /** FieldOptions featureSupport. */
-            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -14333,121 +14363,6 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            /** Properties of a FeatureSupport. */
-            interface IFeatureSupport {
-
-                /** FeatureSupport editionIntroduced */
-                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-
-                /** FeatureSupport editionDeprecated */
-                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-
-                /** FeatureSupport deprecationWarning */
-                deprecationWarning?: (string|null);
-
-                /** FeatureSupport editionRemoved */
-                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
-            }
-
-            /** Represents a FeatureSupport. */
-            class FeatureSupport implements IFeatureSupport {
-
-                /**
-                 * Constructs a new FeatureSupport.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
-
-                /** FeatureSupport editionIntroduced. */
-                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /** FeatureSupport editionDeprecated. */
-                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /** FeatureSupport deprecationWarning. */
-                public deprecationWarning: string;
-
-                /** FeatureSupport editionRemoved. */
-                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
-
-                /**
-                 * Creates a new FeatureSupport instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns FeatureSupport instance
-                 */
-                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                 * @param message FeatureSupport message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
-                 * @param message FeatureSupport message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a FeatureSupport message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns FeatureSupport
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns FeatureSupport
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Verifies a FeatureSupport message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns FeatureSupport
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
-
-                /**
-                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
-                 * @param message FeatureSupport
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this FeatureSupport to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -14691,9 +14606,6 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
-            /** EnumValueOptions featureSupport */
-            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
-
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -14715,9 +14627,6 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
-
-            /** EnumValueOptions featureSupport. */
-            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -15308,12 +15217,6 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
-
-            /** FeatureSet enforceNamingStyle */
-            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
-
-            /** FeatureSet defaultSymbolVisibility */
-            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -15342,12 +15245,6 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
-
-            /** FeatureSet enforceNamingStyle. */
-            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
-
-            /** FeatureSet defaultSymbolVisibility. */
-            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -15471,116 +15368,6 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
-
-            /** EnforceNamingStyle enum. */
-            enum EnforceNamingStyle {
-                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
-                STYLE2024 = 1,
-                STYLE_LEGACY = 2
-            }
-
-            /** Properties of a VisibilityFeature. */
-            interface IVisibilityFeature {
-            }
-
-            /** Represents a VisibilityFeature. */
-            class VisibilityFeature implements IVisibilityFeature {
-
-                /**
-                 * Constructs a new VisibilityFeature.
-                 * @param [properties] Properties to set
-                 */
-                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
-
-                /**
-                 * Creates a new VisibilityFeature instance using the specified properties.
-                 * @param [properties] Properties to set
-                 * @returns VisibilityFeature instance
-                 */
-                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                 * @param message VisibilityFeature message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
-                 * @param message VisibilityFeature message or plain object to encode
-                 * @param [writer] Writer to encode to
-                 * @returns Writer
-                 */
-                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                /**
-                 * Decodes a VisibilityFeature message from the specified reader or buffer.
-                 * @param reader Reader or buffer to decode from
-                 * @param [length] Message length if known beforehand
-                 * @returns VisibilityFeature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
-                 * @param reader Reader or buffer to decode from
-                 * @returns VisibilityFeature
-                 * @throws {Error} If the payload is not a reader or valid buffer
-                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                 */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Verifies a VisibilityFeature message.
-                 * @param message Plain object to verify
-                 * @returns `null` if valid, otherwise the reason why it is not
-                 */
-                public static verify(message: { [k: string]: any }): (string|null);
-
-                /**
-                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
-                 * @param object Plain object
-                 * @returns VisibilityFeature
-                 */
-                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
-
-                /**
-                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
-                 * @param message VisibilityFeature
-                 * @param [options] Conversion options
-                 * @returns Plain object
-                 */
-                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                /**
-                 * Converts this VisibilityFeature to JSON.
-                 * @returns JSON object
-                 */
-                public toJSON(): { [k: string]: any };
-
-                /**
-                 * Gets the default type url for VisibilityFeature
-                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                 * @returns The default type url
-                 */
-                public static getTypeUrl(typeUrlPrefix?: string): string;
-            }
-
-            namespace VisibilityFeature {
-
-                /** DefaultSymbolVisibility enum. */
-                enum DefaultSymbolVisibility {
-                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
-                    EXPORT_ALL = 1,
-                    EXPORT_TOP_LEVEL = 2,
-                    LOCAL_ALL = 3,
-                    STRICT = 4
-                }
-            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -15700,11 +15487,8 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault overridableFeatures */
-                overridableFeatures?: (google.protobuf.IFeatureSet|null);
-
-                /** FeatureSetEditionDefault fixedFeatures */
-                fixedFeatures?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault features */
+                features?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -15719,11 +15503,8 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault overridableFeatures. */
-                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
-
-                /** FeatureSetEditionDefault fixedFeatures. */
-                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault features. */
+                public features?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -16254,13 +16035,6 @@ export namespace google {
                     ALIAS = 2
                 }
             }
-        }
-
-        /** SymbolVisibility enum. */
-        enum SymbolVisibility {
-            VISIBILITY_UNSET = 0,
-            VISIBILITY_LOCAL = 1,
-            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

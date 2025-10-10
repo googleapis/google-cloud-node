@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.5.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.4.0...discoveryengine-v2.5.0) (2025-09-16)
+
+
+### Features
+
+* [discoveryengine] Added `ranking_expression_backed` and `rank_signals` fields related to the Custom Ranking feature ([#6708](https://github.com/googleapis/google-cloud-node/issues/6708)) ([a9078c3](https://github.com/googleapis/google-cloud-node/commit/a9078c30ec0cd7409befbe4177e0d5e381dc50a0))
+
 ## [2.4.0](https://github.com/googleapis/google-cloud-node/compare/discoveryengine-v2.3.0...discoveryengine-v2.4.0) (2025-07-28)
 
 

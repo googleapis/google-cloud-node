@@ -2751,6 +2751,114 @@ describe('v1.KeyManagementServiceClient', () => {
         });
     });
 
+    describe('decapsulate', () => {
+        it('invokes decapsulate without error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DecapsulateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateResponse()
+            );
+            client.innerApiCalls.decapsulate = stubSimpleCall(expectedResponse);
+            const [response] = await client.decapsulate(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes decapsulate without error using callback', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DecapsulateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateResponse()
+            );
+            client.innerApiCalls.decapsulate = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.decapsulate(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.kms.v1.IDecapsulateResponse|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes decapsulate with error', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DecapsulateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.decapsulate = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.decapsulate(request), expectedError);
+            const actualRequest = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.decapsulate as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes decapsulate with closed client', async () => {
+            const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.kms.v1.DecapsulateRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.kms.v1.DecapsulateRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.decapsulate(request), expectedError);
+        });
+    });
+
     describe('generateRandomBytes', () => {
         it('invokes generateRandomBytes without error', async () => {
             const client = new keymanagementserviceModule.v1.KeyManagementServiceClient({

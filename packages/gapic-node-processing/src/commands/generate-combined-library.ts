@@ -15,6 +15,7 @@
 import yargs = require('yargs');
 import {combineLibraries} from '../combine-libraries';
 import {generateIndexTs} from '../generate-index';
+import {LibraryConfig} from '../library';
 
 export interface CliArgs {
   'source-path': string;
@@ -66,11 +67,19 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
     // Since we're 'transforming' a library, we're going to assume that the user wants to overwrite the library
     // unless otherwise specified
     const destinationPath = argv['destination-path'] || argv['source-path'];
+    const library = new LibraryConfig({
+      sourcePath: argv['source-path'],
+      destinationPath,
+      defaultVersion: argv['default-version'],
+      isEsm: argv['is-esm'],
+    });
+    await library.initialize();
+    console.log(library);
     console.log(
       `Combining libraries in ${argv['source-path']} ${argv['destination-path'] ? `to ${argv['destination-path']}` : ''}`,
     );
     try {
-      await combineLibraries(argv['source-path'], destinationPath);
+      await combineLibraries(library);
     } catch (err) {
       if (!(err as any).message.includes('Unexpected library format')) {
         throw err;
@@ -80,9 +89,11 @@ export const generateCombinedLibraries: yargs.CommandModule<{}, CliArgs> = {
     }
     console.log(`Generating index.ts in ${destinationPath}`);
     await generateIndexTs(
-      destinationPath,
-      argv['default-version'],
-      argv['is-esm'],
+      library.destinationPath,
+      library.versions,
+      library.defaultVersionAndClients,
+      library.isEsm,
+      library.srcPath,
     );
   },
 };

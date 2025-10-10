@@ -2413,6 +2413,28 @@
                         }
                       }
                     },
+                    "LocationSupport": {
+                      "fields": {
+                        "regionalizationScope": {
+                          "type": "RegionalizationScope",
+                          "id": 1
+                        },
+                        "locations": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "RegionalizationScope": {
+                          "values": {
+                            "REGIONALIZATION_SCOPE_UNSPECIFIED": 0,
+                            "REGIONAL": 1,
+                            "ANY_LOCATION": 2
+                          }
+                        }
+                      }
+                    },
                     "InfoTypeDescription": {
                       "fields": {
                         "name": {
@@ -2431,6 +2453,10 @@
                         "description": {
                           "type": "string",
                           "id": 4
+                        },
+                        "locationSupport": {
+                          "type": "LocationSupport",
+                          "id": 6
                         },
                         "example": {
                           "type": "string",
@@ -2489,6 +2515,7 @@
                             "ARGENTINA": 2,
                             "ARMENIA": 51,
                             "AUSTRALIA": 3,
+                            "AUSTRIA": 53,
                             "AZERBAIJAN": 48,
                             "BELARUS": 50,
                             "BELGIUM": 4,
@@ -7540,6 +7567,11 @@
                           "rule": "repeated",
                           "type": "RelatedResource",
                           "id": 41
+                        },
+                        "domains": {
+                          "rule": "repeated",
+                          "type": "Domain",
+                          "id": 47
                         }
                       },
                       "nested": {
@@ -7862,6 +7894,11 @@
                           "rule": "repeated",
                           "type": "RelatedResource",
                           "id": 26
+                        },
+                        "domains": {
+                          "rule": "repeated",
+                          "type": "Domain",
+                          "id": 27
                         }
                       },
                       "nested": {
@@ -8483,6 +8520,10 @@
                         "imageFallbackLocation": {
                           "type": "ImageFallbackLocation",
                           "id": 1
+                        },
+                        "documentFallbackLocation": {
+                          "type": "DocumentFallbackLocation",
+                          "id": 2
                         }
                       },
                       "nested": {
@@ -8503,6 +8544,18 @@
                               "id": 200
                             }
                           }
+                        },
+                        "DocumentFallbackLocation": {
+                          "fields": {
+                            "multiRegionProcessing": {
+                              "type": "MultiRegionProcessing",
+                              "id": 100
+                            },
+                            "globalProcessing": {
+                              "type": "GlobalProcessing",
+                              "id": 200
+                            }
+                          }
                         }
                       }
                     },
@@ -8512,6 +8565,39 @@
                           "rule": "repeated",
                           "type": "Finding",
                           "id": 1
+                        }
+                      }
+                    },
+                    "Domain": {
+                      "fields": {
+                        "category": {
+                          "type": "Category",
+                          "id": 1
+                        },
+                        "signals": {
+                          "rule": "repeated",
+                          "type": "Signal",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Category": {
+                          "values": {
+                            "CATEGORY_UNSPECIFIED": 0,
+                            "AI": 1,
+                            "CODE": 2
+                          }
+                        },
+                        "Signal": {
+                          "values": {
+                            "SIGNAL_UNSPECIFIED": 0,
+                            "MODEL": 1,
+                            "TEXT_EMBEDDING": 2,
+                            "VERTEX_PLUGIN": 3,
+                            "VECTOR_PLUGIN": 4,
+                            "SOURCE_CODE": 5,
+                            "SERVICE": 6
+                          }
                         }
                       }
                     },

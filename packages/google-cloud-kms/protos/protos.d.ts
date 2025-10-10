@@ -3220,7 +3220,8 @@ export namespace google {
                         ASYMMETRIC_SIGN = 5,
                         ASYMMETRIC_DECRYPT = 6,
                         RAW_ENCRYPT_DECRYPT = 7,
-                        MAC = 9
+                        MAC = 9,
+                        KEY_ENCAPSULATION = 10
                     }
                 }
 
@@ -3782,6 +3783,9 @@ export namespace google {
                         HMAC_SHA512 = 35,
                         HMAC_SHA224 = 36,
                         EXTERNAL_SYMMETRIC_ENCRYPTION = 18,
+                        ML_KEM_768 = 47,
+                        ML_KEM_1024 = 48,
+                        KEM_XWING = 63,
                         PQ_SIGN_ML_DSA_65 = 56,
                         PQ_SIGN_SLH_DSA_SHA2_128S = 57
                     }
@@ -4050,7 +4054,9 @@ export namespace google {
                     enum PublicKeyFormat {
                         PUBLIC_KEY_FORMAT_UNSPECIFIED = 0,
                         PEM = 1,
-                        NIST_PQC = 3
+                        DER = 2,
+                        NIST_PQC = 3,
+                        XWING_RAW_BYTES = 4
                     }
                 }
 
@@ -4948,6 +4954,20 @@ export namespace google {
                     public macVerify(request: google.cloud.kms.v1.IMacVerifyRequest): Promise<google.cloud.kms.v1.MacVerifyResponse>;
 
                     /**
+                     * Calls Decapsulate.
+                     * @param request DecapsulateRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DecapsulateResponse
+                     */
+                    public decapsulate(request: google.cloud.kms.v1.IDecapsulateRequest, callback: google.cloud.kms.v1.KeyManagementService.DecapsulateCallback): void;
+
+                    /**
+                     * Calls Decapsulate.
+                     * @param request DecapsulateRequest message or plain object
+                     * @returns Promise
+                     */
+                    public decapsulate(request: google.cloud.kms.v1.IDecapsulateRequest): Promise<google.cloud.kms.v1.DecapsulateResponse>;
+
+                    /**
                      * Calls GenerateRandomBytes.
                      * @param request GenerateRandomBytesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and GenerateRandomBytesResponse
@@ -5152,6 +5172,13 @@ export namespace google {
                      * @param [response] MacVerifyResponse
                      */
                     type MacVerifyCallback = (error: (Error|null), response?: google.cloud.kms.v1.MacVerifyResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|decapsulate}.
+                     * @param error Error, if any
+                     * @param [response] DecapsulateResponse
+                     */
+                    type DecapsulateCallback = (error: (Error|null), response?: google.cloud.kms.v1.DecapsulateResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.kms.v1.KeyManagementService|generateRandomBytes}.
@@ -8627,6 +8654,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a DecapsulateRequest. */
+                interface IDecapsulateRequest {
+
+                    /** DecapsulateRequest name */
+                    name?: (string|null);
+
+                    /** DecapsulateRequest ciphertext */
+                    ciphertext?: (Uint8Array|Buffer|string|null);
+
+                    /** DecapsulateRequest ciphertextCrc32c */
+                    ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
+                }
+
+                /** Represents a DecapsulateRequest. */
+                class DecapsulateRequest implements IDecapsulateRequest {
+
+                    /**
+                     * Constructs a new DecapsulateRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDecapsulateRequest);
+
+                    /** DecapsulateRequest name. */
+                    public name: string;
+
+                    /** DecapsulateRequest ciphertext. */
+                    public ciphertext: (Uint8Array|Buffer|string);
+
+                    /** DecapsulateRequest ciphertextCrc32c. */
+                    public ciphertextCrc32c?: (google.protobuf.IInt64Value|null);
+
+                    /**
+                     * Creates a new DecapsulateRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DecapsulateRequest instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDecapsulateRequest): google.cloud.kms.v1.DecapsulateRequest;
+
+                    /**
+                     * Encodes the specified DecapsulateRequest message. Does not implicitly {@link google.cloud.kms.v1.DecapsulateRequest.verify|verify} messages.
+                     * @param message DecapsulateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDecapsulateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DecapsulateRequest message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecapsulateRequest.verify|verify} messages.
+                     * @param message DecapsulateRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDecapsulateRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DecapsulateRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DecapsulateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DecapsulateRequest;
+
+                    /**
+                     * Decodes a DecapsulateRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DecapsulateRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DecapsulateRequest;
+
+                    /**
+                     * Verifies a DecapsulateRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DecapsulateRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DecapsulateRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DecapsulateRequest;
+
+                    /**
+                     * Creates a plain object from a DecapsulateRequest message. Also converts values to other types if specified.
+                     * @param message DecapsulateRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DecapsulateRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DecapsulateRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DecapsulateRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GenerateRandomBytesRequest. */
                 interface IGenerateRandomBytesRequest {
 
@@ -9740,6 +9876,127 @@ export namespace google {
 
                     /**
                      * Gets the default type url for MacVerifyResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DecapsulateResponse. */
+                interface IDecapsulateResponse {
+
+                    /** DecapsulateResponse name */
+                    name?: (string|null);
+
+                    /** DecapsulateResponse sharedSecret */
+                    sharedSecret?: (Uint8Array|Buffer|string|null);
+
+                    /** DecapsulateResponse sharedSecretCrc32c */
+                    sharedSecretCrc32c?: (number|Long|string|null);
+
+                    /** DecapsulateResponse verifiedCiphertextCrc32c */
+                    verifiedCiphertextCrc32c?: (boolean|null);
+
+                    /** DecapsulateResponse protectionLevel */
+                    protectionLevel?: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel|null);
+                }
+
+                /** Represents a DecapsulateResponse. */
+                class DecapsulateResponse implements IDecapsulateResponse {
+
+                    /**
+                     * Constructs a new DecapsulateResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.kms.v1.IDecapsulateResponse);
+
+                    /** DecapsulateResponse name. */
+                    public name: string;
+
+                    /** DecapsulateResponse sharedSecret. */
+                    public sharedSecret: (Uint8Array|Buffer|string);
+
+                    /** DecapsulateResponse sharedSecretCrc32c. */
+                    public sharedSecretCrc32c?: (number|Long|string|null);
+
+                    /** DecapsulateResponse verifiedCiphertextCrc32c. */
+                    public verifiedCiphertextCrc32c: boolean;
+
+                    /** DecapsulateResponse protectionLevel. */
+                    public protectionLevel: (google.cloud.kms.v1.ProtectionLevel|keyof typeof google.cloud.kms.v1.ProtectionLevel);
+
+                    /**
+                     * Creates a new DecapsulateResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DecapsulateResponse instance
+                     */
+                    public static create(properties?: google.cloud.kms.v1.IDecapsulateResponse): google.cloud.kms.v1.DecapsulateResponse;
+
+                    /**
+                     * Encodes the specified DecapsulateResponse message. Does not implicitly {@link google.cloud.kms.v1.DecapsulateResponse.verify|verify} messages.
+                     * @param message DecapsulateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.kms.v1.IDecapsulateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DecapsulateResponse message, length delimited. Does not implicitly {@link google.cloud.kms.v1.DecapsulateResponse.verify|verify} messages.
+                     * @param message DecapsulateResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.kms.v1.IDecapsulateResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DecapsulateResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DecapsulateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.kms.v1.DecapsulateResponse;
+
+                    /**
+                     * Decodes a DecapsulateResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DecapsulateResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.kms.v1.DecapsulateResponse;
+
+                    /**
+                     * Verifies a DecapsulateResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DecapsulateResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DecapsulateResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.kms.v1.DecapsulateResponse;
+
+                    /**
+                     * Creates a plain object from a DecapsulateResponse message. Also converts values to other types if specified.
+                     * @param message DecapsulateResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.kms.v1.DecapsulateResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DecapsulateResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DecapsulateResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

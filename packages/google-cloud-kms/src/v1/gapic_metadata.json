@@ -305,6 +305,11 @@
                 "macVerify"
               ]
             },
+            "Decapsulate": {
+              "methods": [
+                "decapsulate"
+              ]
+            },
             "GenerateRandomBytes": {
               "methods": [
                 "generateRandomBytes"
@@ -456,6 +461,11 @@
             "MacVerify": {
               "methods": [
                 "macVerify"
+              ]
+            },
+            "Decapsulate": {
+              "methods": [
+                "decapsulate"
               ]
             },
             "GenerateRandomBytes": {
