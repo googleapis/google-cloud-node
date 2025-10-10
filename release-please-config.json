@@ -215,7 +215,8 @@
     "packages/google-cloud-cloudsecuritycompliance": {},
     "packages/google-cloud-capacityplanner": {},
     "packages/google-cloud-locationfinder": {},
-    "packages/google-cloud-cloudsecuritycompliance/cloudsecuritycompliance-v1-nodejs": {}
+    "packages/google-cloud-cloudsecuritycompliance/cloudsecuritycompliance-v1-nodejs": {},
+    "packages/google-cloud-gkerecommender": {}
   },
   "plugins": [
     {
