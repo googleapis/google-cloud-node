@@ -1,0 +1,99 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.gkerecommender.v1",
+  "libraryPackage": "@google-cloud/gkerecommender",
+  "services": {
+    "GkeInferenceQuickstart": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GkeInferenceQuickstartClient",
+          "rpcs": {
+            "GenerateOptimizedManifest": {
+              "methods": [
+                "generateOptimizedManifest"
+              ]
+            },
+            "FetchBenchmarkingData": {
+              "methods": [
+                "fetchBenchmarkingData"
+              ]
+            },
+            "FetchModels": {
+              "methods": [
+                "fetchModels",
+                "fetchModelsStream",
+                "fetchModelsAsync"
+              ]
+            },
+            "FetchModelServers": {
+              "methods": [
+                "fetchModelServers",
+                "fetchModelServersStream",
+                "fetchModelServersAsync"
+              ]
+            },
+            "FetchModelServerVersions": {
+              "methods": [
+                "fetchModelServerVersions",
+                "fetchModelServerVersionsStream",
+                "fetchModelServerVersionsAsync"
+              ]
+            },
+            "FetchProfiles": {
+              "methods": [
+                "fetchProfiles",
+                "fetchProfilesStream",
+                "fetchProfilesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GkeInferenceQuickstartClient",
+          "rpcs": {
+            "GenerateOptimizedManifest": {
+              "methods": [
+                "generateOptimizedManifest"
+              ]
+            },
+            "FetchBenchmarkingData": {
+              "methods": [
+                "fetchBenchmarkingData"
+              ]
+            },
+            "FetchModels": {
+              "methods": [
+                "fetchModels",
+                "fetchModelsStream",
+                "fetchModelsAsync"
+              ]
+            },
+            "FetchModelServers": {
+              "methods": [
+                "fetchModelServers",
+                "fetchModelServersStream",
+                "fetchModelServersAsync"
+              ]
+            },
+            "FetchModelServerVersions": {
+              "methods": [
+                "fetchModelServerVersions",
+                "fetchModelServerVersionsStream",
+                "fetchModelServerVersionsAsync"
+              ]
+            },
+            "FetchProfiles": {
+              "methods": [
+                "fetchProfiles",
+                "fetchProfilesStream",
+                "fetchProfilesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
