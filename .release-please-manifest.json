@@ -212,5 +212,6 @@
   "packages/google-cloud-saasplatform-saasservicemgmt": "0.1.0",
   "packages/google-cloud-cloudsecuritycompliance": "0.1.0",
   "packages/google-cloud-capacityplanner": "0.1.0",
-  "packages/google-cloud-locationfinder": "0.1.0"
+  "packages/google-cloud-locationfinder": "0.1.0",
+  ".": "0.0.0"
 }

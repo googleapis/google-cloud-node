@@ -215,7 +215,14 @@
     "packages/google-cloud-cloudsecuritycompliance": {},
     "packages/google-cloud-capacityplanner": {},
     "packages/google-cloud-locationfinder": {},
-    "packages/google-cloud-cloudsecuritycompliance/cloudsecuritycompliance-v1-nodejs": {}
+    "packages/google-cloud-cloudsecuritycompliance/cloudsecuritycompliance-v1-nodejs": {},
+    ".": {
+      "changelog-path": "CHANGELOG.md",
+      "bump-minor-pre-major": false,
+      "bump-patch-for-minor-pre-major": false,
+      "draft": false,
+      "prerelease": false
+    }
   },
   "plugins": [
     {
@@ -223,5 +230,6 @@
     }
   ],
   "bump-minor-pre-major": true,
-  "release-type": "node"
+  "release-type": "node",
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
