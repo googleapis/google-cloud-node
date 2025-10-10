@@ -33,7 +33,8 @@ import * as gapicConfig from './deployment_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  Service describing handlers for resources
+ *  Deployment service allows users to manage deployments of Frameworks and
+ *  Cloud Controls on a target resource.
  * @class
  * @memberof v1
  */
@@ -400,7 +401,7 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. FrameworkDeployment name in either of the following formats:
+ *   Required. FrameworkDeployment name in the following format:
  *   organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -495,7 +496,7 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. CloudControlDeployment name in either of the following formats:
+ *   Required. CloudControlDeployment name in the following format:
  *   organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -586,20 +587,20 @@ export class DeploymentClient {
   }
 
 /**
- * Creates a new FrameworkDeployment in a given project and location.
+ * Creates a new FrameworkDeployment in a given parent resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. Value for parent. Supported formats:
+ *   Required. The parent resource of the FrameworkDeployment in the format:
  *   organizations/{organization}/locations/{location}
  *   Only global location is supported.
  * @param {string} [request.frameworkDeploymentId]
  *   Optional. User provided identifier. It should be unique in scope of a
- *   parent Please note that this is optional and if not provided, a random UUID
- *   will be generated.
+ *   parent. This is optional and if not provided, a random UUID will be
+ *   generated.
  * @param {google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment} request.frameworkDeployment
- *   Required. The resource being created.
+ *   Required. The FrameworkDeployment to be created.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -706,8 +707,8 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. Name of the framework deployment to be deleted
- *   FrameworkDeployment name in either of the following formats:
+ *   Required. name of the FrameworkDeployment to be deleted in the following
+ *   format:
  *   organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}
  * @param {string} [request.etag]
  *   Optional. An opaque identifier for the current version of the resource.
@@ -819,12 +820,14 @@ export class DeploymentClient {
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.cloudsecuritycompliance.v1.OperationMetadata>;
   }
  /**
- * Lists FrameworkDeployments in a given parent and location.
+ * Lists FrameworkDeployments in a given parent resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. Parent value for ListFrameworkDeploymentsRequest.
+ *   Required. parent resource of the FrameworkDeployment in the format:
+ *   organizations/{organization}/locations/{location}
+ *   Only global location is supported.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. Server may return fewer items than
  *   requested. If unspecified, server will pick an appropriate default.
@@ -928,7 +931,9 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. Parent value for ListFrameworkDeploymentsRequest.
+ *   Required. parent resource of the FrameworkDeployment in the format:
+ *   organizations/{organization}/locations/{location}
+ *   Only global location is supported.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. Server may return fewer items than
  *   requested. If unspecified, server will pick an appropriate default.
@@ -981,7 +986,9 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. Parent value for ListFrameworkDeploymentsRequest.
+ *   Required. parent resource of the FrameworkDeployment in the format:
+ *   organizations/{organization}/locations/{location}
+ *   Only global location is supported.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. Server may return fewer items than
  *   requested. If unspecified, server will pick an appropriate default.
@@ -1028,12 +1035,14 @@ export class DeploymentClient {
     ) as AsyncIterable<protos.google.cloud.cloudsecuritycompliance.v1.IFrameworkDeployment>;
   }
  /**
- * Lists CloudControlDeployments under a given parent.
+ * Lists CloudControlDeployments in a given parent resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. Parent value for ListCloudControlDeploymentsRequest.
+ *   Required. parent resource of the CloudControlDeployment in the format:
+ *   organizations/{organization}/locations/{location}
+ *   Only global location is supported.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. Server may return fewer items than
  *   requested. If unspecified, server will pick an appropriate default.
@@ -1137,7 +1146,9 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. Parent value for ListCloudControlDeploymentsRequest.
+ *   Required. parent resource of the CloudControlDeployment in the format:
+ *   organizations/{organization}/locations/{location}
+ *   Only global location is supported.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. Server may return fewer items than
  *   requested. If unspecified, server will pick an appropriate default.
@@ -1190,7 +1201,9 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. Parent value for ListCloudControlDeploymentsRequest.
+ *   Required. parent resource of the CloudControlDeployment in the format:
+ *   organizations/{organization}/locations/{location}
+ *   Only global location is supported.
  * @param {number} [request.pageSize]
  *   Optional. Requested page size. Server may return fewer items than
  *   requested. If unspecified, server will pick an appropriate default.

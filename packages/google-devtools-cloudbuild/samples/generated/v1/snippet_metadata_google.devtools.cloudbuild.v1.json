@@ -1,903 +1,903 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-cloudbuild",
-        "version": "5.3.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.devtools.cloudbuild.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_CreateBuild_async",
-            "title": "CloudBuild createBuild Sample",
-            "origin": "API_DEFINITION",
-            "description": " Starts a build with the specified configuration. This method returns a long-running `Operation`, which includes the build ID. Pass the build ID to `GetBuild` to determine the build status (such as `SUCCESS` or `FAILURE`).",
-            "canonical": true,
-            "file": "cloud_build.create_build.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBuild",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuild",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "build",
-                        "type": ".google.devtools.cloudbuild.v1.Build"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "CreateBuild",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuild",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_GetBuild_async",
-            "title": "CloudBuild getBuild Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns information about a previously requested build. The `Build` that is returned includes its status (such as `SUCCESS`, `FAILURE`, or `WORKING`), and timing information.",
-            "canonical": true,
-            "file": "cloud_build.get_build.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBuild",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetBuild",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.Build",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "GetBuild",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetBuild",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_ListBuilds_async",
-            "title": "CloudBuild listBuilds Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists previously requested builds. Previously requested builds may still be in-progress, or may have finished successfully or unsuccessfully.",
-            "canonical": true,
-            "file": "cloud_build.list_builds.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBuilds",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListBuilds",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.ListBuildsResponse",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "ListBuilds",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListBuilds",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_CancelBuild_async",
-            "title": "CloudBuild cancelBuild Sample",
-            "origin": "API_DEFINITION",
-            "description": " Cancels a build in progress.",
-            "canonical": true,
-            "file": "cloud_build.cancel_build.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CancelBuild",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CancelBuild",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.Build",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "CancelBuild",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CancelBuild",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_RetryBuild_async",
-            "title": "CloudBuild retryBuild Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new build based on the specified build. This method creates a new build using the original build request, which may or may not result in an identical build. For triggered builds: * Triggered builds resolve to a precise revision; therefore a retry of a triggered build will result in a build that uses the same revision. For non-triggered builds that specify `RepoSource`: * If the original build built from the tip of a branch, the retried build will build from the tip of that branch, which may not be the same revision as the original build. * If the original build specified a commit sha or revision ID, the retried build will use the identical source. For builds that specify `StorageSource`: * If the original build pulled source from Cloud Storage without specifying the generation of the object, the new build will use the current object, which may be different from the original build source. * If the original build pulled source from Cloud Storage and specified the generation of the object, the new build will attempt to use the same object, which may or may not be available depending on the bucket's lifecycle management settings.",
-            "canonical": true,
-            "file": "cloud_build.retry_build.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RetryBuild",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.RetryBuild",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "RetryBuild",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.RetryBuild",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_ApproveBuild_async",
-            "title": "CloudBuild approveBuild Sample",
-            "origin": "API_DEFINITION",
-            "description": " Approves or rejects a pending build. If approved, the returned LRO will be analogous to the LRO returned from a CreateBuild call. If rejected, the returned LRO will be immediately done.",
-            "canonical": true,
-            "file": "cloud_build.approve_build.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ApproveBuild",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ApproveBuild",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "approval_result",
-                        "type": ".google.devtools.cloudbuild.v1.ApprovalResult"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "ApproveBuild",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ApproveBuild",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_CreateBuildTrigger_async",
-            "title": "CloudBuild createBuildTrigger Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new `BuildTrigger`. This API is experimental.",
-            "canonical": true,
-            "file": "cloud_build.create_build_trigger.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBuildTrigger",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuildTrigger",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "trigger",
-                        "type": ".google.devtools.cloudbuild.v1.BuildTrigger"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.BuildTrigger",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "CreateBuildTrigger",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuildTrigger",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_GetBuildTrigger_async",
-            "title": "CloudBuild getBuildTrigger Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns information about a `BuildTrigger`. This API is experimental.",
-            "canonical": true,
-            "file": "cloud_build.get_build_trigger.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBuildTrigger",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetBuildTrigger",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "trigger_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.BuildTrigger",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "GetBuildTrigger",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetBuildTrigger",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_ListBuildTriggers_async",
-            "title": "CloudBuild listBuildTriggers Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists existing `BuildTrigger`s. This API is experimental.",
-            "canonical": true,
-            "file": "cloud_build.list_build_triggers.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBuildTriggers",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListBuildTriggers",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.ListBuildTriggersResponse",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "ListBuildTriggers",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListBuildTriggers",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_DeleteBuildTrigger_async",
-            "title": "CloudBuild deleteBuildTrigger Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a `BuildTrigger` by its project ID and trigger ID. This API is experimental.",
-            "canonical": true,
-            "file": "cloud_build.delete_build_trigger.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteBuildTrigger",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.DeleteBuildTrigger",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "trigger_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "DeleteBuildTrigger",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.DeleteBuildTrigger",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_UpdateBuildTrigger_async",
-            "title": "CloudBuild updateBuildTrigger Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a `BuildTrigger` by its project ID and trigger ID. This API is experimental.",
-            "canonical": true,
-            "file": "cloud_build.update_build_trigger.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateBuildTrigger",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.UpdateBuildTrigger",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "trigger_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "trigger",
-                        "type": ".google.devtools.cloudbuild.v1.BuildTrigger"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.BuildTrigger",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "UpdateBuildTrigger",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.UpdateBuildTrigger",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_RunBuildTrigger_async",
-            "title": "CloudBuild runBuildTrigger Sample",
-            "origin": "API_DEFINITION",
-            "description": " Runs a `BuildTrigger` at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path (ex. v1/projects/{projectId}/locations/{region}/triggers/{triggerId}:run). The POST request that does not include the location endpoint in the path can only be used when running global triggers.",
-            "canonical": true,
-            "file": "cloud_build.run_build_trigger.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RunBuildTrigger",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.RunBuildTrigger",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "trigger_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "source",
-                        "type": ".google.devtools.cloudbuild.v1.RepoSource"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "RunBuildTrigger",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.RunBuildTrigger",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_ReceiveTriggerWebhook_async",
-            "title": "CloudBuild receiveTriggerWebhook Sample",
-            "origin": "API_DEFINITION",
-            "description": " ReceiveTriggerWebhook [Experimental] is called when the API receives a webhook request targeted at a specific trigger.",
-            "canonical": true,
-            "file": "cloud_build.receive_trigger_webhook.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ReceiveTriggerWebhook",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ReceiveTriggerWebhook",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "body",
-                        "type": ".google.api.HttpBody"
-                    },
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "trigger",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "secret",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "ReceiveTriggerWebhook",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ReceiveTriggerWebhook",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_CreateWorkerPool_async",
-            "title": "CloudBuild createWorkerPool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a `WorkerPool`.",
-            "canonical": true,
-            "file": "cloud_build.create_worker_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateWorkerPool",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateWorkerPool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "worker_pool",
-                        "type": ".google.devtools.cloudbuild.v1.WorkerPool"
-                    },
-                    {
-                        "name": "worker_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "CreateWorkerPool",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateWorkerPool",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_GetWorkerPool_async",
-            "title": "CloudBuild getWorkerPool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns details of a `WorkerPool`.",
-            "canonical": true,
-            "file": "cloud_build.get_worker_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetWorkerPool",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetWorkerPool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.WorkerPool",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "GetWorkerPool",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetWorkerPool",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_DeleteWorkerPool_async",
-            "title": "CloudBuild deleteWorkerPool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a `WorkerPool`.",
-            "canonical": true,
-            "file": "cloud_build.delete_worker_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteWorkerPool",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.DeleteWorkerPool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "DeleteWorkerPool",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.DeleteWorkerPool",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_UpdateWorkerPool_async",
-            "title": "CloudBuild updateWorkerPool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a `WorkerPool`.",
-            "canonical": true,
-            "file": "cloud_build.update_worker_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateWorkerPool",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.UpdateWorkerPool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "worker_pool",
-                        "type": ".google.devtools.cloudbuild.v1.WorkerPool"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "UpdateWorkerPool",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.UpdateWorkerPool",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "cloudbuild_v1_generated_CloudBuild_ListWorkerPools_async",
-            "title": "CloudBuild listWorkerPools Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists `WorkerPool`s.",
-            "canonical": true,
-            "file": "cloud_build.list_worker_pools.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListWorkerPools",
-                "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListWorkerPools",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.devtools.cloudbuild.v1.ListWorkerPoolsResponse",
-                "client": {
-                    "shortName": "CloudBuildClient",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
-                },
-                "method": {
-                    "shortName": "ListWorkerPools",
-                    "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListWorkerPools",
-                    "service": {
-                        "shortName": "CloudBuild",
-                        "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-cloudbuild",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.devtools.cloudbuild.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_CreateBuild_async",
+      "title": "CloudBuild createBuild Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts a build with the specified configuration. This method returns a long-running `Operation`, which includes the build ID. Pass the build ID to `GetBuild` to determine the build status (such as `SUCCESS` or `FAILURE`).",
+      "canonical": true,
+      "file": "cloud_build.create_build.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBuild",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuild",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "build",
+            "type": ".google.devtools.cloudbuild.v1.Build"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "CreateBuild",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuild",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_GetBuild_async",
+      "title": "CloudBuild getBuild Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns information about a previously requested build. The `Build` that is returned includes its status (such as `SUCCESS`, `FAILURE`, or `WORKING`), and timing information.",
+      "canonical": true,
+      "file": "cloud_build.get_build.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBuild",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetBuild",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.Build",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "GetBuild",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetBuild",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_ListBuilds_async",
+      "title": "CloudBuild listBuilds Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists previously requested builds. Previously requested builds may still be in-progress, or may have finished successfully or unsuccessfully.",
+      "canonical": true,
+      "file": "cloud_build.list_builds.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBuilds",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListBuilds",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.ListBuildsResponse",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "ListBuilds",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListBuilds",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_CancelBuild_async",
+      "title": "CloudBuild cancelBuild Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancels a build in progress.",
+      "canonical": true,
+      "file": "cloud_build.cancel_build.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelBuild",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CancelBuild",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.Build",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "CancelBuild",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CancelBuild",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_RetryBuild_async",
+      "title": "CloudBuild retryBuild Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new build based on the specified build. This method creates a new build using the original build request, which may or may not result in an identical build. For triggered builds: * Triggered builds resolve to a precise revision; therefore a retry of a triggered build will result in a build that uses the same revision. For non-triggered builds that specify `RepoSource`: * If the original build built from the tip of a branch, the retried build will build from the tip of that branch, which may not be the same revision as the original build. * If the original build specified a commit sha or revision ID, the retried build will use the identical source. For builds that specify `StorageSource`: * If the original build pulled source from Cloud Storage without specifying the generation of the object, the new build will use the current object, which may be different from the original build source. * If the original build pulled source from Cloud Storage and specified the generation of the object, the new build will attempt to use the same object, which may or may not be available depending on the bucket's lifecycle management settings.",
+      "canonical": true,
+      "file": "cloud_build.retry_build.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RetryBuild",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.RetryBuild",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "RetryBuild",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.RetryBuild",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_ApproveBuild_async",
+      "title": "CloudBuild approveBuild Sample",
+      "origin": "API_DEFINITION",
+      "description": " Approves or rejects a pending build. If approved, the returned LRO will be analogous to the LRO returned from a CreateBuild call. If rejected, the returned LRO will be immediately done.",
+      "canonical": true,
+      "file": "cloud_build.approve_build.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ApproveBuild",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ApproveBuild",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "approval_result",
+            "type": ".google.devtools.cloudbuild.v1.ApprovalResult"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "ApproveBuild",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ApproveBuild",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_CreateBuildTrigger_async",
+      "title": "CloudBuild createBuildTrigger Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new `BuildTrigger`. This API is experimental.",
+      "canonical": true,
+      "file": "cloud_build.create_build_trigger.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBuildTrigger",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuildTrigger",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trigger",
+            "type": ".google.devtools.cloudbuild.v1.BuildTrigger"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.BuildTrigger",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "CreateBuildTrigger",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateBuildTrigger",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_GetBuildTrigger_async",
+      "title": "CloudBuild getBuildTrigger Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns information about a `BuildTrigger`. This API is experimental.",
+      "canonical": true,
+      "file": "cloud_build.get_build_trigger.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBuildTrigger",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetBuildTrigger",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trigger_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.BuildTrigger",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "GetBuildTrigger",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetBuildTrigger",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_ListBuildTriggers_async",
+      "title": "CloudBuild listBuildTriggers Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists existing `BuildTrigger`s. This API is experimental.",
+      "canonical": true,
+      "file": "cloud_build.list_build_triggers.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBuildTriggers",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListBuildTriggers",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.ListBuildTriggersResponse",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "ListBuildTriggers",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListBuildTriggers",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_DeleteBuildTrigger_async",
+      "title": "CloudBuild deleteBuildTrigger Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a `BuildTrigger` by its project ID and trigger ID. This API is experimental.",
+      "canonical": true,
+      "file": "cloud_build.delete_build_trigger.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBuildTrigger",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.DeleteBuildTrigger",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trigger_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "DeleteBuildTrigger",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.DeleteBuildTrigger",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_UpdateBuildTrigger_async",
+      "title": "CloudBuild updateBuildTrigger Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a `BuildTrigger` by its project ID and trigger ID. This API is experimental.",
+      "canonical": true,
+      "file": "cloud_build.update_build_trigger.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBuildTrigger",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.UpdateBuildTrigger",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trigger_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trigger",
+            "type": ".google.devtools.cloudbuild.v1.BuildTrigger"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.BuildTrigger",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "UpdateBuildTrigger",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.UpdateBuildTrigger",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_RunBuildTrigger_async",
+      "title": "CloudBuild runBuildTrigger Sample",
+      "origin": "API_DEFINITION",
+      "description": " Runs a `BuildTrigger` at a particular source revision. To run a regional or global trigger, use the POST request that includes the location endpoint in the path (ex. v1/projects/{projectId}/locations/{region}/triggers/{triggerId}:run). The POST request that does not include the location endpoint in the path can only be used when running global triggers.",
+      "canonical": true,
+      "file": "cloud_build.run_build_trigger.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunBuildTrigger",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.RunBuildTrigger",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trigger_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source",
+            "type": ".google.devtools.cloudbuild.v1.RepoSource"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "RunBuildTrigger",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.RunBuildTrigger",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_ReceiveTriggerWebhook_async",
+      "title": "CloudBuild receiveTriggerWebhook Sample",
+      "origin": "API_DEFINITION",
+      "description": " ReceiveTriggerWebhook [Experimental] is called when the API receives a webhook request targeted at a specific trigger.",
+      "canonical": true,
+      "file": "cloud_build.receive_trigger_webhook.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReceiveTriggerWebhook",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ReceiveTriggerWebhook",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "body",
+            "type": ".google.api.HttpBody"
+          },
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "trigger",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "secret",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.ReceiveTriggerWebhookResponse",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "ReceiveTriggerWebhook",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ReceiveTriggerWebhook",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_CreateWorkerPool_async",
+      "title": "CloudBuild createWorkerPool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a `WorkerPool`.",
+      "canonical": true,
+      "file": "cloud_build.create_worker_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateWorkerPool",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateWorkerPool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "worker_pool",
+            "type": ".google.devtools.cloudbuild.v1.WorkerPool"
+          },
+          {
+            "name": "worker_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "CreateWorkerPool",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.CreateWorkerPool",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_GetWorkerPool_async",
+      "title": "CloudBuild getWorkerPool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns details of a `WorkerPool`.",
+      "canonical": true,
+      "file": "cloud_build.get_worker_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetWorkerPool",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetWorkerPool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.WorkerPool",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "GetWorkerPool",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.GetWorkerPool",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_DeleteWorkerPool_async",
+      "title": "CloudBuild deleteWorkerPool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a `WorkerPool`.",
+      "canonical": true,
+      "file": "cloud_build.delete_worker_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteWorkerPool",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.DeleteWorkerPool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "DeleteWorkerPool",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.DeleteWorkerPool",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_UpdateWorkerPool_async",
+      "title": "CloudBuild updateWorkerPool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a `WorkerPool`.",
+      "canonical": true,
+      "file": "cloud_build.update_worker_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateWorkerPool",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.UpdateWorkerPool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "worker_pool",
+            "type": ".google.devtools.cloudbuild.v1.WorkerPool"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "UpdateWorkerPool",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.UpdateWorkerPool",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "cloudbuild_v1_generated_CloudBuild_ListWorkerPools_async",
+      "title": "CloudBuild listWorkerPools Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists `WorkerPool`s.",
+      "canonical": true,
+      "file": "cloud_build.list_worker_pools.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListWorkerPools",
+        "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListWorkerPools",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.devtools.cloudbuild.v1.ListWorkerPoolsResponse",
+        "client": {
+          "shortName": "CloudBuildClient",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuildClient"
+        },
+        "method": {
+          "shortName": "ListWorkerPools",
+          "fullName": "google.devtools.cloudbuild.v1.CloudBuild.ListWorkerPools",
+          "service": {
+            "shortName": "CloudBuild",
+            "fullName": "google.devtools.cloudbuild.v1.CloudBuild"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'AcceleratorTypes',
-    filename: './accelerator-types.js',
+    library: 'Addresses',
+    filename: './addresses.js',
   },
   node: {
     child_process: 'empty',

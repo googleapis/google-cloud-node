@@ -1,211 +1,211 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-routing",
-        "version": "2.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.maps.routing.v2",
-                "version": "v2"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "routes_v2_generated_Routes_ComputeRoutes_async",
-            "title": "Routes computeRoutes Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the primary route along with optional alternate routes, given a set of terminal and intermediate waypoints. **NOTE:** This method requires that you specify a response field mask in the input. You can provide the response field mask by using URL parameter `$fields` or `fields`, or by using an HTTP/gRPC header `X-Goog-FieldMask` (see the [available URL parameters and headers](https://cloud.google.com/apis/docs/system-parameters)). The value is a comma separated list of field paths. See detailed documentation about [how to construct the field paths](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/field_mask.proto). For example, in this method: * Field mask of all available fields (for manual inspection):   `X-Goog-FieldMask: *` * Field mask of Route-level duration, distance, and polyline (an example production setup):   `X-Goog-FieldMask:   routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline` Google discourage the use of the wildcard (`*`) response field mask, or specifying the field mask at the top level (`routes`), because: * Selecting only the fields that you need helps our server save computation cycles, allowing us to return the result to you with a lower latency. * Selecting only the fields that you need in your production job ensures stable latency performance. We might add more response fields in the future, and those new fields might require extra computation time. If you select all fields, or if you select all fields at the top level, then you might experience performance degradation because any new field we add will be automatically included in the response. * Selecting only the fields that you need results in a smaller response size, and thus higher network throughput.",
-            "canonical": true,
-            "file": "routes.compute_routes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 191,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ComputeRoutes",
-                "fullName": "google.maps.routing.v2.Routes.ComputeRoutes",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "origin",
-                        "type": ".google.maps.routing.v2.Waypoint"
-                    },
-                    {
-                        "name": "destination",
-                        "type": ".google.maps.routing.v2.Waypoint"
-                    },
-                    {
-                        "name": "intermediates",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "travel_mode",
-                        "type": ".google.maps.routing.v2.RouteTravelMode"
-                    },
-                    {
-                        "name": "routing_preference",
-                        "type": ".google.maps.routing.v2.RoutingPreference"
-                    },
-                    {
-                        "name": "polyline_quality",
-                        "type": ".google.maps.routing.v2.PolylineQuality"
-                    },
-                    {
-                        "name": "polyline_encoding",
-                        "type": ".google.maps.routing.v2.PolylineEncoding"
-                    },
-                    {
-                        "name": "departure_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "arrival_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "compute_alternative_routes",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "route_modifiers",
-                        "type": ".google.maps.routing.v2.RouteModifiers"
-                    },
-                    {
-                        "name": "language_code",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "region_code",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "units",
-                        "type": ".google.maps.routing.v2.Units"
-                    },
-                    {
-                        "name": "optimize_waypoint_order",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "requested_reference_routes",
-                        "type": "TYPE_ENUM[]"
-                    },
-                    {
-                        "name": "extra_computations",
-                        "type": "TYPE_ENUM[]"
-                    },
-                    {
-                        "name": "traffic_model",
-                        "type": ".google.maps.routing.v2.TrafficModel"
-                    },
-                    {
-                        "name": "transit_preferences",
-                        "type": ".google.maps.routing.v2.TransitPreferences"
-                    }
-                ],
-                "resultType": ".google.maps.routing.v2.ComputeRoutesResponse",
-                "client": {
-                    "shortName": "RoutesClient",
-                    "fullName": "google.maps.routing.v2.RoutesClient"
-                },
-                "method": {
-                    "shortName": "ComputeRoutes",
-                    "fullName": "google.maps.routing.v2.Routes.ComputeRoutes",
-                    "service": {
-                        "shortName": "Routes",
-                        "fullName": "google.maps.routing.v2.Routes"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "routes_v2_generated_Routes_ComputeRouteMatrix_async",
-            "title": "Routes computeRouteMatrix Sample",
-            "origin": "API_DEFINITION",
-            "description": " Takes in a list of origins and destinations and returns a stream containing route information for each combination of origin and destination. **NOTE:** This method requires that you specify a response field mask in the input. You can provide the response field mask by using the URL parameter `$fields` or `fields`, or by using the HTTP/gRPC header `X-Goog-FieldMask` (see the [available URL parameters and headers](https://cloud.google.com/apis/docs/system-parameters)). The value is a comma separated list of field paths. See this detailed documentation about [how to construct the field paths](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/field_mask.proto). For example, in this method: * Field mask of all available fields (for manual inspection):   `X-Goog-FieldMask: *` * Field mask of route durations, distances, element status, condition, and   element indices (an example production setup):   `X-Goog-FieldMask:   originIndex,destinationIndex,status,condition,distanceMeters,duration` It is critical that you include `status` in your field mask as otherwise all messages will appear to be OK. Google discourages the use of the wildcard (`*`) response field mask, because: * Selecting only the fields that you need helps our server save computation cycles, allowing us to return the result to you with a lower latency. * Selecting only the fields that you need in your production job ensures stable latency performance. We might add more response fields in the future, and those new fields might require extra computation time. If you select all fields, or if you select all fields at the top level, then you might experience performance degradation because any new field we add will be automatically included in the response. * Selecting only the fields that you need results in a smaller response size, and thus higher network throughput.",
-            "canonical": true,
-            "file": "routes.compute_route_matrix.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 145,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ComputeRouteMatrix",
-                "fullName": "google.maps.routing.v2.Routes.ComputeRouteMatrix",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "origins",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "destinations",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "travel_mode",
-                        "type": ".google.maps.routing.v2.RouteTravelMode"
-                    },
-                    {
-                        "name": "routing_preference",
-                        "type": ".google.maps.routing.v2.RoutingPreference"
-                    },
-                    {
-                        "name": "departure_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "arrival_time",
-                        "type": ".google.protobuf.Timestamp"
-                    },
-                    {
-                        "name": "language_code",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "region_code",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "units",
-                        "type": ".google.maps.routing.v2.Units"
-                    },
-                    {
-                        "name": "extra_computations",
-                        "type": "TYPE_ENUM[]"
-                    },
-                    {
-                        "name": "traffic_model",
-                        "type": ".google.maps.routing.v2.TrafficModel"
-                    },
-                    {
-                        "name": "transit_preferences",
-                        "type": ".google.maps.routing.v2.TransitPreferences"
-                    }
-                ],
-                "resultType": ".google.maps.routing.v2.RouteMatrixElement",
-                "client": {
-                    "shortName": "RoutesClient",
-                    "fullName": "google.maps.routing.v2.RoutesClient"
-                },
-                "method": {
-                    "shortName": "ComputeRouteMatrix",
-                    "fullName": "google.maps.routing.v2.Routes.ComputeRouteMatrix",
-                    "service": {
-                        "shortName": "Routes",
-                        "fullName": "google.maps.routing.v2.Routes"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-routing",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.maps.routing.v2",
+        "version": "v2"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "routes_v2_generated_Routes_ComputeRoutes_async",
+      "title": "Routes computeRoutes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the primary route along with optional alternate routes, given a set of terminal and intermediate waypoints. **NOTE:** This method requires that you specify a response field mask in the input. You can provide the response field mask by using URL parameter `$fields` or `fields`, or by using an HTTP/gRPC header `X-Goog-FieldMask` (see the [available URL parameters and headers](https://cloud.google.com/apis/docs/system-parameters)). The value is a comma separated list of field paths. See detailed documentation about [how to construct the field paths](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/field_mask.proto). For example, in this method: * Field mask of all available fields (for manual inspection):   `X-Goog-FieldMask: *` * Field mask of Route-level duration, distance, and polyline (an example production setup):   `X-Goog-FieldMask:   routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline` Google discourage the use of the wildcard (`*`) response field mask, or specifying the field mask at the top level (`routes`), because: * Selecting only the fields that you need helps our server save computation cycles, allowing us to return the result to you with a lower latency. * Selecting only the fields that you need in your production job ensures stable latency performance. We might add more response fields in the future, and those new fields might require extra computation time. If you select all fields, or if you select all fields at the top level, then you might experience performance degradation because any new field we add will be automatically included in the response. * Selecting only the fields that you need results in a smaller response size, and thus higher network throughput.",
+      "canonical": true,
+      "file": "routes.compute_routes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 191,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ComputeRoutes",
+        "fullName": "google.maps.routing.v2.Routes.ComputeRoutes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "origin",
+            "type": ".google.maps.routing.v2.Waypoint"
+          },
+          {
+            "name": "destination",
+            "type": ".google.maps.routing.v2.Waypoint"
+          },
+          {
+            "name": "intermediates",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "travel_mode",
+            "type": ".google.maps.routing.v2.RouteTravelMode"
+          },
+          {
+            "name": "routing_preference",
+            "type": ".google.maps.routing.v2.RoutingPreference"
+          },
+          {
+            "name": "polyline_quality",
+            "type": ".google.maps.routing.v2.PolylineQuality"
+          },
+          {
+            "name": "polyline_encoding",
+            "type": ".google.maps.routing.v2.PolylineEncoding"
+          },
+          {
+            "name": "departure_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "arrival_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "compute_alternative_routes",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "route_modifiers",
+            "type": ".google.maps.routing.v2.RouteModifiers"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "units",
+            "type": ".google.maps.routing.v2.Units"
+          },
+          {
+            "name": "optimize_waypoint_order",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "requested_reference_routes",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "extra_computations",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "traffic_model",
+            "type": ".google.maps.routing.v2.TrafficModel"
+          },
+          {
+            "name": "transit_preferences",
+            "type": ".google.maps.routing.v2.TransitPreferences"
+          }
+        ],
+        "resultType": ".google.maps.routing.v2.ComputeRoutesResponse",
+        "client": {
+          "shortName": "RoutesClient",
+          "fullName": "google.maps.routing.v2.RoutesClient"
+        },
+        "method": {
+          "shortName": "ComputeRoutes",
+          "fullName": "google.maps.routing.v2.Routes.ComputeRoutes",
+          "service": {
+            "shortName": "Routes",
+            "fullName": "google.maps.routing.v2.Routes"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "routes_v2_generated_Routes_ComputeRouteMatrix_async",
+      "title": "Routes computeRouteMatrix Sample",
+      "origin": "API_DEFINITION",
+      "description": " Takes in a list of origins and destinations and returns a stream containing route information for each combination of origin and destination. **NOTE:** This method requires that you specify a response field mask in the input. You can provide the response field mask by using the URL parameter `$fields` or `fields`, or by using the HTTP/gRPC header `X-Goog-FieldMask` (see the [available URL parameters and headers](https://cloud.google.com/apis/docs/system-parameters)). The value is a comma separated list of field paths. See this detailed documentation about [how to construct the field paths](https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/field_mask.proto). For example, in this method: * Field mask of all available fields (for manual inspection):   `X-Goog-FieldMask: *` * Field mask of route durations, distances, element status, condition, and   element indices (an example production setup):   `X-Goog-FieldMask:   originIndex,destinationIndex,status,condition,distanceMeters,duration` It is critical that you include `status` in your field mask as otherwise all messages will appear to be OK. Google discourages the use of the wildcard (`*`) response field mask, because: * Selecting only the fields that you need helps our server save computation cycles, allowing us to return the result to you with a lower latency. * Selecting only the fields that you need in your production job ensures stable latency performance. We might add more response fields in the future, and those new fields might require extra computation time. If you select all fields, or if you select all fields at the top level, then you might experience performance degradation because any new field we add will be automatically included in the response. * Selecting only the fields that you need results in a smaller response size, and thus higher network throughput.",
+      "canonical": true,
+      "file": "routes.compute_route_matrix.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 145,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ComputeRouteMatrix",
+        "fullName": "google.maps.routing.v2.Routes.ComputeRouteMatrix",
+        "async": true,
+        "parameters": [
+          {
+            "name": "origins",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "destinations",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "travel_mode",
+            "type": ".google.maps.routing.v2.RouteTravelMode"
+          },
+          {
+            "name": "routing_preference",
+            "type": ".google.maps.routing.v2.RoutingPreference"
+          },
+          {
+            "name": "departure_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "arrival_time",
+            "type": ".google.protobuf.Timestamp"
+          },
+          {
+            "name": "language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "region_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "units",
+            "type": ".google.maps.routing.v2.Units"
+          },
+          {
+            "name": "extra_computations",
+            "type": "TYPE_ENUM[]"
+          },
+          {
+            "name": "traffic_model",
+            "type": ".google.maps.routing.v2.TrafficModel"
+          },
+          {
+            "name": "transit_preferences",
+            "type": ".google.maps.routing.v2.TransitPreferences"
+          }
+        ],
+        "resultType": ".google.maps.routing.v2.RouteMatrixElement",
+        "client": {
+          "shortName": "RoutesClient",
+          "fullName": "google.maps.routing.v2.RoutesClient"
+        },
+        "method": {
+          "shortName": "ComputeRouteMatrix",
+          "fullName": "google.maps.routing.v2.Routes.ComputeRouteMatrix",
+          "service": {
+            "shortName": "Routes",
+            "fullName": "google.maps.routing.v2.Routes"
+          }
+        }
+      }
+    }
+  ]
 }

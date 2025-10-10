@@ -1419,6 +1419,8 @@ export class OrganizationSecurityPoliciesClient {
  *   Name of the security policy to update.
  * @param {google.cloud.compute.v1beta.SecurityPolicy} request.securityPolicyResource
  *   The body resource for this request
+ * @param {string} request.updateMask
+ *   Indicates fields to be cleared as part of this request.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1523,6 +1525,8 @@ export class OrganizationSecurityPoliciesClient {
  *   Name of the security policy to update.
  * @param {google.cloud.compute.v1beta.SecurityPolicyRule} request.securityPolicyRuleResource
  *   The body resource for this request
+ * @param {string} request.updateMask
+ *   Indicates fields to be cleared as part of this request.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

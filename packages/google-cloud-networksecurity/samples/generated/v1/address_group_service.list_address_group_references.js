@@ -48,7 +48,7 @@ function main(addressGroup) {
   // const pageToken = 'abc123'
 
   // Imports the Networksecurity library
-  const {AddressGroupServiceClient} = require('@google-cloud/networksecurity').v1;
+  const {AddressGroupServiceClient} = require('@google-cloud/network-security').v1;
 
   // Instantiates a client
   const networksecurityClient = new AddressGroupServiceClient();

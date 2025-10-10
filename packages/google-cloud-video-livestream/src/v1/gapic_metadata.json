@@ -20,6 +20,11 @@
                 "getInput"
               ]
             },
+            "PreviewInput": {
+              "methods": [
+                "previewInput"
+              ]
+            },
             "CreateEvent": {
               "methods": [
                 "createEvent"
@@ -78,6 +83,16 @@
             "StopChannel": {
               "methods": [
                 "stopChannel"
+              ]
+            },
+            "StartDistribution": {
+              "methods": [
+                "startDistribution"
+              ]
+            },
+            "StopDistribution": {
+              "methods": [
+                "stopDistribution"
               ]
             },
             "CreateInput": {
@@ -192,6 +207,11 @@
                 "getInput"
               ]
             },
+            "PreviewInput": {
+              "methods": [
+                "previewInput"
+              ]
+            },
             "CreateEvent": {
               "methods": [
                 "createEvent"
@@ -250,6 +270,16 @@
             "StopChannel": {
               "methods": [
                 "stopChannel"
+              ]
+            },
+            "StartDistribution": {
+              "methods": [
+                "startDistribution"
+              ]
+            },
+            "StopDistribution": {
+              "methods": [
+                "stopDistribution"
               ]
             },
             "CreateInput": {

@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2025 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/policy-troubleshooter-iam',
+    systemName: '@google-cloud/iam',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

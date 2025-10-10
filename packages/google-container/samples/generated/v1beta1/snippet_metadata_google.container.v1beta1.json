@@ -1,2087 +1,2087 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-container",
-        "version": "6.4.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.container.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_ListClusters_async",
-            "title": "ClusterManager listClusters Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all clusters owned by a project in either the specified zone or all zones.",
-            "canonical": true,
-            "file": "cluster_manager.list_clusters.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListClusters",
-                "fullName": "google.container.v1beta1.ClusterManager.ListClusters",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.ListClustersResponse",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "ListClusters",
-                    "fullName": "google.container.v1beta1.ClusterManager.ListClusters",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_GetCluster_async",
-            "title": "ClusterManager getCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details for a specific cluster.",
-            "canonical": true,
-            "file": "cluster_manager.get_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetCluster",
-                "fullName": "google.container.v1beta1.ClusterManager.GetCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Cluster",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "GetCluster",
-                    "fullName": "google.container.v1beta1.ClusterManager.GetCluster",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_CreateCluster_async",
-            "title": "ClusterManager createCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project's [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks). One firewall is added for the cluster. After cluster creation, the Kubelet creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project's global metadata indicating which CIDR range the cluster is using.",
-            "canonical": true,
-            "file": "cluster_manager.create_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateCluster",
-                "fullName": "google.container.v1beta1.ClusterManager.CreateCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster",
-                        "type": ".google.container.v1beta1.Cluster"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateCluster",
-                    "fullName": "google.container.v1beta1.ClusterManager.CreateCluster",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_UpdateCluster_async",
-            "title": "ClusterManager updateCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the settings for a specific cluster.",
-            "canonical": true,
-            "file": "cluster_manager.update_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateCluster",
-                "fullName": "google.container.v1beta1.ClusterManager.UpdateCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "update",
-                        "type": ".google.container.v1beta1.ClusterUpdate"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateCluster",
-                    "fullName": "google.container.v1beta1.ClusterManager.UpdateCluster",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_UpdateNodePool_async",
-            "title": "ClusterManager updateNodePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the version and/or image type of a specific node pool.",
-            "canonical": true,
-            "file": "cluster_manager.update_node_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 217,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateNodePool",
-                "fullName": "google.container.v1beta1.ClusterManager.UpdateNodePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_version",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "image_type",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "locations",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "workload_metadata_config",
-                        "type": ".google.container.v1beta1.WorkloadMetadataConfig"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "upgrade_settings",
-                        "type": ".google.container.v1beta1.NodePool.UpgradeSettings"
-                    },
-                    {
-                        "name": "tags",
-                        "type": ".google.container.v1beta1.NetworkTags"
-                    },
-                    {
-                        "name": "taints",
-                        "type": ".google.container.v1beta1.NodeTaints"
-                    },
-                    {
-                        "name": "labels",
-                        "type": ".google.container.v1beta1.NodeLabels"
-                    },
-                    {
-                        "name": "linux_node_config",
-                        "type": ".google.container.v1beta1.LinuxNodeConfig"
-                    },
-                    {
-                        "name": "kubelet_config",
-                        "type": ".google.container.v1beta1.NodeKubeletConfig"
-                    },
-                    {
-                        "name": "node_network_config",
-                        "type": ".google.container.v1beta1.NodeNetworkConfig"
-                    },
-                    {
-                        "name": "gcfs_config",
-                        "type": ".google.container.v1beta1.GcfsConfig"
-                    },
-                    {
-                        "name": "confidential_nodes",
-                        "type": ".google.container.v1beta1.ConfidentialNodes"
-                    },
-                    {
-                        "name": "gvnic",
-                        "type": ".google.container.v1beta1.VirtualNIC"
-                    },
-                    {
-                        "name": "etag",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "fast_socket",
-                        "type": ".google.container.v1beta1.FastSocket"
-                    },
-                    {
-                        "name": "logging_config",
-                        "type": ".google.container.v1beta1.NodePoolLoggingConfig"
-                    },
-                    {
-                        "name": "resource_labels",
-                        "type": ".google.container.v1beta1.ResourceLabels"
-                    },
-                    {
-                        "name": "windows_node_config",
-                        "type": ".google.container.v1beta1.WindowsNodeConfig"
-                    },
-                    {
-                        "name": "accelerators",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "machine_type",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "disk_type",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "disk_size_gb",
-                        "type": "TYPE_INT64"
-                    },
-                    {
-                        "name": "resource_manager_tags",
-                        "type": ".google.container.v1beta1.ResourceManagerTags"
-                    },
-                    {
-                        "name": "containerd_config",
-                        "type": ".google.container.v1beta1.ContainerdConfig"
-                    },
-                    {
-                        "name": "queued_provisioning",
-                        "type": ".google.container.v1beta1.NodePool.QueuedProvisioning"
-                    },
-                    {
-                        "name": "storage_pools",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "max_run_duration",
-                        "type": ".google.protobuf.Duration"
-                    },
-                    {
-                        "name": "flex_start",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "boot_disk",
-                        "type": ".google.container.v1beta1.BootDisk"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateNodePool",
-                    "fullName": "google.container.v1beta1.ClusterManager.UpdateNodePool",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetNodePoolAutoscaling_async",
-            "title": "ClusterManager setNodePoolAutoscaling Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the autoscaling settings of a specific node pool.",
-            "canonical": true,
-            "file": "cluster_manager.set_node_pool_autoscaling.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetNodePoolAutoscaling",
-                "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolAutoscaling",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "autoscaling",
-                        "type": ".google.container.v1beta1.NodePoolAutoscaling"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetNodePoolAutoscaling",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolAutoscaling",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetLoggingService_async",
-            "title": "ClusterManager setLoggingService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the logging service for a specific cluster.",
-            "canonical": true,
-            "file": "cluster_manager.set_logging_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetLoggingService",
-                "fullName": "google.container.v1beta1.ClusterManager.SetLoggingService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "logging_service",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetLoggingService",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetLoggingService",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetMonitoringService_async",
-            "title": "ClusterManager setMonitoringService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the monitoring service for a specific cluster.",
-            "canonical": true,
-            "file": "cluster_manager.set_monitoring_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetMonitoringService",
-                "fullName": "google.container.v1beta1.ClusterManager.SetMonitoringService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "monitoring_service",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetMonitoringService",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetMonitoringService",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetAddonsConfig_async",
-            "title": "ClusterManager setAddonsConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the addons for a specific cluster.",
-            "canonical": true,
-            "file": "cluster_manager.set_addons_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetAddonsConfig",
-                "fullName": "google.container.v1beta1.ClusterManager.SetAddonsConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "addons_config",
-                        "type": ".google.container.v1beta1.AddonsConfig"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetAddonsConfig",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetAddonsConfig",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetLocations_async",
-            "title": "ClusterManager setLocations Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the locations for a specific cluster. Deprecated. Use [projects.locations.clusters.update](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters/update) instead.",
-            "canonical": true,
-            "file": "cluster_manager.set_locations.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetLocations",
-                "fullName": "google.container.v1beta1.ClusterManager.SetLocations",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "locations",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetLocations",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetLocations",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_UpdateMaster_async",
-            "title": "ClusterManager updateMaster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the master for a specific cluster.",
-            "canonical": true,
-            "file": "cluster_manager.update_master.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateMaster",
-                "fullName": "google.container.v1beta1.ClusterManager.UpdateMaster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "master_version",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "UpdateMaster",
-                    "fullName": "google.container.v1beta1.ClusterManager.UpdateMaster",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetMasterAuth_async",
-            "title": "ClusterManager setMasterAuth Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets master auth materials. Currently supports changing the admin password or a specific cluster, either via password generation or explicitly setting the password.",
-            "canonical": true,
-            "file": "cluster_manager.set_master_auth.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetMasterAuth",
-                "fullName": "google.container.v1beta1.ClusterManager.SetMasterAuth",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "action",
-                        "type": ".google.container.v1beta1.SetMasterAuthRequest.Action"
-                    },
-                    {
-                        "name": "update",
-                        "type": ".google.container.v1beta1.MasterAuth"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetMasterAuth",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetMasterAuth",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_DeleteCluster_async",
-            "title": "ClusterManager deleteCluster Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster, such as load balancer resources, are not deleted if they weren't present when the cluster was initially created.",
-            "canonical": true,
-            "file": "cluster_manager.delete_cluster.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteCluster",
-                "fullName": "google.container.v1beta1.ClusterManager.DeleteCluster",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteCluster",
-                    "fullName": "google.container.v1beta1.ClusterManager.DeleteCluster",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_ListOperations_async",
-            "title": "ClusterManager listOperations Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all operations in a project in the specified zone or all zones.",
-            "canonical": true,
-            "file": "cluster_manager.list_operations.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListOperations",
-                "fullName": "google.container.v1beta1.ClusterManager.ListOperations",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.ListOperationsResponse",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "ListOperations",
-                    "fullName": "google.container.v1beta1.ClusterManager.ListOperations",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_GetOperation_async",
-            "title": "ClusterManager getOperation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the specified operation.",
-            "canonical": true,
-            "file": "cluster_manager.get_operation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetOperation",
-                "fullName": "google.container.v1beta1.ClusterManager.GetOperation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "operation_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "GetOperation",
-                    "fullName": "google.container.v1beta1.ClusterManager.GetOperation",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_CancelOperation_async",
-            "title": "ClusterManager cancelOperation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Cancels the specified operation.",
-            "canonical": true,
-            "file": "cluster_manager.cancel_operation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CancelOperation",
-                "fullName": "google.container.v1beta1.ClusterManager.CancelOperation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "operation_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "CancelOperation",
-                    "fullName": "google.container.v1beta1.ClusterManager.CancelOperation",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_GetServerConfig_async",
-            "title": "ClusterManager getServerConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns configuration info about the Google Kubernetes Engine service.",
-            "canonical": true,
-            "file": "cluster_manager.get_server_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetServerConfig",
-                "fullName": "google.container.v1beta1.ClusterManager.GetServerConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.ServerConfig",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "GetServerConfig",
-                    "fullName": "google.container.v1beta1.ClusterManager.GetServerConfig",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_GetJSONWebKeys_async",
-            "title": "ClusterManager getJSONWebKeys Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the public component of the cluster signing keys in JSON Web Key format.",
-            "canonical": true,
-            "file": "cluster_manager.get_j_s_o_n_web_keys.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetJSONWebKeys",
-                "fullName": "google.container.v1beta1.ClusterManager.GetJSONWebKeys",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.GetJSONWebKeysResponse",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "GetJSONWebKeys",
-                    "fullName": "google.container.v1beta1.ClusterManager.GetJSONWebKeys",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_ListNodePools_async",
-            "title": "ClusterManager listNodePools Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the node pools for a cluster.",
-            "canonical": true,
-            "file": "cluster_manager.list_node_pools.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListNodePools",
-                "fullName": "google.container.v1beta1.ClusterManager.ListNodePools",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.ListNodePoolsResponse",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "ListNodePools",
-                    "fullName": "google.container.v1beta1.ClusterManager.ListNodePools",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_GetNodePool_async",
-            "title": "ClusterManager getNodePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves the requested node pool.",
-            "canonical": true,
-            "file": "cluster_manager.get_node_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetNodePool",
-                "fullName": "google.container.v1beta1.ClusterManager.GetNodePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.NodePool",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "GetNodePool",
-                    "fullName": "google.container.v1beta1.ClusterManager.GetNodePool",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_CreateNodePool_async",
-            "title": "ClusterManager createNodePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a node pool for a cluster.",
-            "canonical": true,
-            "file": "cluster_manager.create_node_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateNodePool",
-                "fullName": "google.container.v1beta1.ClusterManager.CreateNodePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool",
-                        "type": ".google.container.v1beta1.NodePool"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateNodePool",
-                    "fullName": "google.container.v1beta1.ClusterManager.CreateNodePool",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_DeleteNodePool_async",
-            "title": "ClusterManager deleteNodePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a node pool from a cluster.",
-            "canonical": true,
-            "file": "cluster_manager.delete_node_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteNodePool",
-                "fullName": "google.container.v1beta1.ClusterManager.DeleteNodePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteNodePool",
-                    "fullName": "google.container.v1beta1.ClusterManager.DeleteNodePool",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_CompleteNodePoolUpgrade_async",
-            "title": "ClusterManager completeNodePoolUpgrade Sample",
-            "origin": "API_DEFINITION",
-            "description": " CompleteNodePoolUpgrade will signal an on-going node pool upgrade to complete.",
-            "canonical": true,
-            "file": "cluster_manager.complete_node_pool_upgrade.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CompleteNodePoolUpgrade",
-                "fullName": "google.container.v1beta1.ClusterManager.CompleteNodePoolUpgrade",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "CompleteNodePoolUpgrade",
-                    "fullName": "google.container.v1beta1.ClusterManager.CompleteNodePoolUpgrade",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_RollbackNodePoolUpgrade_async",
-            "title": "ClusterManager rollbackNodePoolUpgrade Sample",
-            "origin": "API_DEFINITION",
-            "description": " Rolls back a previously Aborted or Failed NodePool upgrade. This makes no changes if the last upgrade successfully completed.",
-            "canonical": true,
-            "file": "cluster_manager.rollback_node_pool_upgrade.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RollbackNodePoolUpgrade",
-                "fullName": "google.container.v1beta1.ClusterManager.RollbackNodePoolUpgrade",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "respect_pdb",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "RollbackNodePoolUpgrade",
-                    "fullName": "google.container.v1beta1.ClusterManager.RollbackNodePoolUpgrade",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetNodePoolManagement_async",
-            "title": "ClusterManager setNodePoolManagement Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the NodeManagement options for a node pool.",
-            "canonical": true,
-            "file": "cluster_manager.set_node_pool_management.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetNodePoolManagement",
-                "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolManagement",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "management",
-                        "type": ".google.container.v1beta1.NodeManagement"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetNodePoolManagement",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolManagement",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetLabels_async",
-            "title": "ClusterManager setLabels Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets labels on a cluster.",
-            "canonical": true,
-            "file": "cluster_manager.set_labels.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetLabels",
-                "fullName": "google.container.v1beta1.ClusterManager.SetLabels",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "resource_labels",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "label_fingerprint",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetLabels",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetLabels",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetLegacyAbac_async",
-            "title": "ClusterManager setLegacyAbac Sample",
-            "origin": "API_DEFINITION",
-            "description": " Enables or disables the ABAC authorization mechanism on a cluster.",
-            "canonical": true,
-            "file": "cluster_manager.set_legacy_abac.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetLegacyAbac",
-                "fullName": "google.container.v1beta1.ClusterManager.SetLegacyAbac",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "enabled",
-                        "type": "TYPE_BOOL"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetLegacyAbac",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetLegacyAbac",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_StartIPRotation_async",
-            "title": "ClusterManager startIPRotation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Starts master IP rotation.",
-            "canonical": true,
-            "file": "cluster_manager.start_i_p_rotation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StartIPRotation",
-                "fullName": "google.container.v1beta1.ClusterManager.StartIPRotation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "rotate_credentials",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "StartIPRotation",
-                    "fullName": "google.container.v1beta1.ClusterManager.StartIPRotation",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_CompleteIPRotation_async",
-            "title": "ClusterManager completeIPRotation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Completes master IP rotation.",
-            "canonical": true,
-            "file": "cluster_manager.complete_i_p_rotation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CompleteIPRotation",
-                "fullName": "google.container.v1beta1.ClusterManager.CompleteIPRotation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "CompleteIPRotation",
-                    "fullName": "google.container.v1beta1.ClusterManager.CompleteIPRotation",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetNodePoolSize_async",
-            "title": "ClusterManager setNodePoolSize Sample",
-            "origin": "API_DEFINITION",
-            "description": " SetNodePoolSizeRequest sets the size of a node pool. The new size will be used for all replicas, including future replicas created by modifying [NodePool.locations][google.container.v1beta1.NodePool.locations].",
-            "canonical": true,
-            "file": "cluster_manager.set_node_pool_size.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetNodePoolSize",
-                "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolSize",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "node_count",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetNodePoolSize",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolSize",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetNetworkPolicy_async",
-            "title": "ClusterManager setNetworkPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Enables or disables Network Policy for a cluster.",
-            "canonical": true,
-            "file": "cluster_manager.set_network_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetNetworkPolicy",
-                "fullName": "google.container.v1beta1.ClusterManager.SetNetworkPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "network_policy",
-                        "type": ".google.container.v1beta1.NetworkPolicy"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetNetworkPolicy",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetNetworkPolicy",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_SetMaintenancePolicy_async",
-            "title": "ClusterManager setMaintenancePolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the maintenance policy for a cluster.",
-            "canonical": true,
-            "file": "cluster_manager.set_maintenance_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetMaintenancePolicy",
-                "fullName": "google.container.v1beta1.ClusterManager.SetMaintenancePolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "zone",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "cluster_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "maintenance_policy",
-                        "type": ".google.container.v1beta1.MaintenancePolicy"
-                    },
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.Operation",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "SetMaintenancePolicy",
-                    "fullName": "google.container.v1beta1.ClusterManager.SetMaintenancePolicy",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_ListUsableSubnetworks_async",
-            "title": "ClusterManager listUsableSubnetworks Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists subnetworks that can be used for creating clusters in a project.",
-            "canonical": true,
-            "file": "cluster_manager.list_usable_subnetworks.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListUsableSubnetworks",
-                "fullName": "google.container.v1beta1.ClusterManager.ListUsableSubnetworks",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.ListUsableSubnetworksResponse",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "ListUsableSubnetworks",
-                    "fullName": "google.container.v1beta1.ClusterManager.ListUsableSubnetworks",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_CheckAutopilotCompatibility_async",
-            "title": "ClusterManager checkAutopilotCompatibility Sample",
-            "origin": "API_DEFINITION",
-            "description": " Checks the cluster compatibility with Autopilot mode, and returns a list of compatibility issues.",
-            "canonical": true,
-            "file": "cluster_manager.check_autopilot_compatibility.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CheckAutopilotCompatibility",
-                "fullName": "google.container.v1beta1.ClusterManager.CheckAutopilotCompatibility",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.CheckAutopilotCompatibilityResponse",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "CheckAutopilotCompatibility",
-                    "fullName": "google.container.v1beta1.ClusterManager.CheckAutopilotCompatibility",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_ListLocations_async",
-            "title": "ClusterManager listLocations Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetches locations that offer Google Kubernetes Engine.",
-            "canonical": true,
-            "file": "cluster_manager.list_locations.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListLocations",
-                "fullName": "google.container.v1beta1.ClusterManager.ListLocations",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.ListLocationsResponse",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "ListLocations",
-                    "fullName": "google.container.v1beta1.ClusterManager.ListLocations",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_FetchClusterUpgradeInfo_async",
-            "title": "ClusterManager fetchClusterUpgradeInfo Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetch upgrade information of a specific cluster.",
-            "canonical": true,
-            "file": "cluster_manager.fetch_cluster_upgrade_info.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchClusterUpgradeInfo",
-                "fullName": "google.container.v1beta1.ClusterManager.FetchClusterUpgradeInfo",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "version",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.ClusterUpgradeInfo",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "FetchClusterUpgradeInfo",
-                    "fullName": "google.container.v1beta1.ClusterManager.FetchClusterUpgradeInfo",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "container_v1beta1_generated_ClusterManager_FetchNodePoolUpgradeInfo_async",
-            "title": "ClusterManager fetchNodePoolUpgradeInfo Sample",
-            "origin": "API_DEFINITION",
-            "description": " Fetch upgrade information of a specific nodepool.",
-            "canonical": true,
-            "file": "cluster_manager.fetch_node_pool_upgrade_info.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "FetchNodePoolUpgradeInfo",
-                "fullName": "google.container.v1beta1.ClusterManager.FetchNodePoolUpgradeInfo",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "version",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.container.v1beta1.NodePoolUpgradeInfo",
-                "client": {
-                    "shortName": "ClusterManagerClient",
-                    "fullName": "google.container.v1beta1.ClusterManagerClient"
-                },
-                "method": {
-                    "shortName": "FetchNodePoolUpgradeInfo",
-                    "fullName": "google.container.v1beta1.ClusterManager.FetchNodePoolUpgradeInfo",
-                    "service": {
-                        "shortName": "ClusterManager",
-                        "fullName": "google.container.v1beta1.ClusterManager"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-container",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.container.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_ListClusters_async",
+      "title": "ClusterManager listClusters Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all clusters owned by a project in either the specified zone or all zones.",
+      "canonical": true,
+      "file": "cluster_manager.list_clusters.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListClusters",
+        "fullName": "google.container.v1beta1.ClusterManager.ListClusters",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.ListClustersResponse",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "ListClusters",
+          "fullName": "google.container.v1beta1.ClusterManager.ListClusters",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_GetCluster_async",
+      "title": "ClusterManager getCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details for a specific cluster.",
+      "canonical": true,
+      "file": "cluster_manager.get_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetCluster",
+        "fullName": "google.container.v1beta1.ClusterManager.GetCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Cluster",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "GetCluster",
+          "fullName": "google.container.v1beta1.ClusterManager.GetCluster",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_CreateCluster_async",
+      "title": "ClusterManager createCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a cluster, consisting of the specified number and type of Google Compute Engine instances. By default, the cluster is created in the project's [default network](https://cloud.google.com/compute/docs/networks-and-firewalls#networks). One firewall is added for the cluster. After cluster creation, the Kubelet creates routes for each node to allow the containers on that node to communicate with all other instances in the cluster. Finally, an entry is added to the project's global metadata indicating which CIDR range the cluster is using.",
+      "canonical": true,
+      "file": "cluster_manager.create_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateCluster",
+        "fullName": "google.container.v1beta1.ClusterManager.CreateCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster",
+            "type": ".google.container.v1beta1.Cluster"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "CreateCluster",
+          "fullName": "google.container.v1beta1.ClusterManager.CreateCluster",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_UpdateCluster_async",
+      "title": "ClusterManager updateCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the settings for a specific cluster.",
+      "canonical": true,
+      "file": "cluster_manager.update_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateCluster",
+        "fullName": "google.container.v1beta1.ClusterManager.UpdateCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "update",
+            "type": ".google.container.v1beta1.ClusterUpdate"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateCluster",
+          "fullName": "google.container.v1beta1.ClusterManager.UpdateCluster",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_UpdateNodePool_async",
+      "title": "ClusterManager updateNodePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the version and/or image type of a specific node pool.",
+      "canonical": true,
+      "file": "cluster_manager.update_node_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 217,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateNodePool",
+        "fullName": "google.container.v1beta1.ClusterManager.UpdateNodePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "image_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "locations",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "workload_metadata_config",
+            "type": ".google.container.v1beta1.WorkloadMetadataConfig"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "upgrade_settings",
+            "type": ".google.container.v1beta1.NodePool.UpgradeSettings"
+          },
+          {
+            "name": "tags",
+            "type": ".google.container.v1beta1.NetworkTags"
+          },
+          {
+            "name": "taints",
+            "type": ".google.container.v1beta1.NodeTaints"
+          },
+          {
+            "name": "labels",
+            "type": ".google.container.v1beta1.NodeLabels"
+          },
+          {
+            "name": "linux_node_config",
+            "type": ".google.container.v1beta1.LinuxNodeConfig"
+          },
+          {
+            "name": "kubelet_config",
+            "type": ".google.container.v1beta1.NodeKubeletConfig"
+          },
+          {
+            "name": "node_network_config",
+            "type": ".google.container.v1beta1.NodeNetworkConfig"
+          },
+          {
+            "name": "gcfs_config",
+            "type": ".google.container.v1beta1.GcfsConfig"
+          },
+          {
+            "name": "confidential_nodes",
+            "type": ".google.container.v1beta1.ConfidentialNodes"
+          },
+          {
+            "name": "gvnic",
+            "type": ".google.container.v1beta1.VirtualNIC"
+          },
+          {
+            "name": "etag",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "fast_socket",
+            "type": ".google.container.v1beta1.FastSocket"
+          },
+          {
+            "name": "logging_config",
+            "type": ".google.container.v1beta1.NodePoolLoggingConfig"
+          },
+          {
+            "name": "resource_labels",
+            "type": ".google.container.v1beta1.ResourceLabels"
+          },
+          {
+            "name": "windows_node_config",
+            "type": ".google.container.v1beta1.WindowsNodeConfig"
+          },
+          {
+            "name": "accelerators",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "machine_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "disk_type",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "disk_size_gb",
+            "type": "TYPE_INT64"
+          },
+          {
+            "name": "resource_manager_tags",
+            "type": ".google.container.v1beta1.ResourceManagerTags"
+          },
+          {
+            "name": "containerd_config",
+            "type": ".google.container.v1beta1.ContainerdConfig"
+          },
+          {
+            "name": "queued_provisioning",
+            "type": ".google.container.v1beta1.NodePool.QueuedProvisioning"
+          },
+          {
+            "name": "storage_pools",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "max_run_duration",
+            "type": ".google.protobuf.Duration"
+          },
+          {
+            "name": "flex_start",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "boot_disk",
+            "type": ".google.container.v1beta1.BootDisk"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateNodePool",
+          "fullName": "google.container.v1beta1.ClusterManager.UpdateNodePool",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetNodePoolAutoscaling_async",
+      "title": "ClusterManager setNodePoolAutoscaling Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the autoscaling settings of a specific node pool.",
+      "canonical": true,
+      "file": "cluster_manager.set_node_pool_autoscaling.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetNodePoolAutoscaling",
+        "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolAutoscaling",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "autoscaling",
+            "type": ".google.container.v1beta1.NodePoolAutoscaling"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetNodePoolAutoscaling",
+          "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolAutoscaling",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetLoggingService_async",
+      "title": "ClusterManager setLoggingService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the logging service for a specific cluster.",
+      "canonical": true,
+      "file": "cluster_manager.set_logging_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetLoggingService",
+        "fullName": "google.container.v1beta1.ClusterManager.SetLoggingService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "logging_service",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetLoggingService",
+          "fullName": "google.container.v1beta1.ClusterManager.SetLoggingService",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetMonitoringService_async",
+      "title": "ClusterManager setMonitoringService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the monitoring service for a specific cluster.",
+      "canonical": true,
+      "file": "cluster_manager.set_monitoring_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetMonitoringService",
+        "fullName": "google.container.v1beta1.ClusterManager.SetMonitoringService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "monitoring_service",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetMonitoringService",
+          "fullName": "google.container.v1beta1.ClusterManager.SetMonitoringService",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetAddonsConfig_async",
+      "title": "ClusterManager setAddonsConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the addons for a specific cluster.",
+      "canonical": true,
+      "file": "cluster_manager.set_addons_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetAddonsConfig",
+        "fullName": "google.container.v1beta1.ClusterManager.SetAddonsConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "addons_config",
+            "type": ".google.container.v1beta1.AddonsConfig"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetAddonsConfig",
+          "fullName": "google.container.v1beta1.ClusterManager.SetAddonsConfig",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetLocations_async",
+      "title": "ClusterManager setLocations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the locations for a specific cluster. Deprecated. Use [projects.locations.clusters.update](https://cloud.google.com/kubernetes-engine/docs/reference/rest/v1beta1/projects.locations.clusters/update) instead.",
+      "canonical": true,
+      "file": "cluster_manager.set_locations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetLocations",
+        "fullName": "google.container.v1beta1.ClusterManager.SetLocations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "locations",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetLocations",
+          "fullName": "google.container.v1beta1.ClusterManager.SetLocations",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_UpdateMaster_async",
+      "title": "ClusterManager updateMaster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the master for a specific cluster.",
+      "canonical": true,
+      "file": "cluster_manager.update_master.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateMaster",
+        "fullName": "google.container.v1beta1.ClusterManager.UpdateMaster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "master_version",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "UpdateMaster",
+          "fullName": "google.container.v1beta1.ClusterManager.UpdateMaster",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetMasterAuth_async",
+      "title": "ClusterManager setMasterAuth Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets master auth materials. Currently supports changing the admin password or a specific cluster, either via password generation or explicitly setting the password.",
+      "canonical": true,
+      "file": "cluster_manager.set_master_auth.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetMasterAuth",
+        "fullName": "google.container.v1beta1.ClusterManager.SetMasterAuth",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "action",
+            "type": ".google.container.v1beta1.SetMasterAuthRequest.Action"
+          },
+          {
+            "name": "update",
+            "type": ".google.container.v1beta1.MasterAuth"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetMasterAuth",
+          "fullName": "google.container.v1beta1.ClusterManager.SetMasterAuth",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_DeleteCluster_async",
+      "title": "ClusterManager deleteCluster Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the cluster, including the Kubernetes endpoint and all worker nodes. Firewalls and routes that were configured during cluster creation are also deleted. Other Google Compute Engine resources that might be in use by the cluster, such as load balancer resources, are not deleted if they weren't present when the cluster was initially created.",
+      "canonical": true,
+      "file": "cluster_manager.delete_cluster.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteCluster",
+        "fullName": "google.container.v1beta1.ClusterManager.DeleteCluster",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteCluster",
+          "fullName": "google.container.v1beta1.ClusterManager.DeleteCluster",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_ListOperations_async",
+      "title": "ClusterManager listOperations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all operations in a project in the specified zone or all zones.",
+      "canonical": true,
+      "file": "cluster_manager.list_operations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListOperations",
+        "fullName": "google.container.v1beta1.ClusterManager.ListOperations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.ListOperationsResponse",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "ListOperations",
+          "fullName": "google.container.v1beta1.ClusterManager.ListOperations",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_GetOperation_async",
+      "title": "ClusterManager getOperation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified operation.",
+      "canonical": true,
+      "file": "cluster_manager.get_operation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetOperation",
+        "fullName": "google.container.v1beta1.ClusterManager.GetOperation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "operation_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "GetOperation",
+          "fullName": "google.container.v1beta1.ClusterManager.GetOperation",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_CancelOperation_async",
+      "title": "ClusterManager cancelOperation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Cancels the specified operation.",
+      "canonical": true,
+      "file": "cluster_manager.cancel_operation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CancelOperation",
+        "fullName": "google.container.v1beta1.ClusterManager.CancelOperation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "operation_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "CancelOperation",
+          "fullName": "google.container.v1beta1.ClusterManager.CancelOperation",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_GetServerConfig_async",
+      "title": "ClusterManager getServerConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns configuration info about the Google Kubernetes Engine service.",
+      "canonical": true,
+      "file": "cluster_manager.get_server_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetServerConfig",
+        "fullName": "google.container.v1beta1.ClusterManager.GetServerConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.ServerConfig",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "GetServerConfig",
+          "fullName": "google.container.v1beta1.ClusterManager.GetServerConfig",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_GetJSONWebKeys_async",
+      "title": "ClusterManager getJSONWebKeys Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the public component of the cluster signing keys in JSON Web Key format.",
+      "canonical": true,
+      "file": "cluster_manager.get_j_s_o_n_web_keys.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetJSONWebKeys",
+        "fullName": "google.container.v1beta1.ClusterManager.GetJSONWebKeys",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.GetJSONWebKeysResponse",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "GetJSONWebKeys",
+          "fullName": "google.container.v1beta1.ClusterManager.GetJSONWebKeys",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_ListNodePools_async",
+      "title": "ClusterManager listNodePools Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the node pools for a cluster.",
+      "canonical": true,
+      "file": "cluster_manager.list_node_pools.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListNodePools",
+        "fullName": "google.container.v1beta1.ClusterManager.ListNodePools",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.ListNodePoolsResponse",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "ListNodePools",
+          "fullName": "google.container.v1beta1.ClusterManager.ListNodePools",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_GetNodePool_async",
+      "title": "ClusterManager getNodePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the requested node pool.",
+      "canonical": true,
+      "file": "cluster_manager.get_node_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetNodePool",
+        "fullName": "google.container.v1beta1.ClusterManager.GetNodePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.NodePool",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "GetNodePool",
+          "fullName": "google.container.v1beta1.ClusterManager.GetNodePool",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_CreateNodePool_async",
+      "title": "ClusterManager createNodePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a node pool for a cluster.",
+      "canonical": true,
+      "file": "cluster_manager.create_node_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateNodePool",
+        "fullName": "google.container.v1beta1.ClusterManager.CreateNodePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool",
+            "type": ".google.container.v1beta1.NodePool"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "CreateNodePool",
+          "fullName": "google.container.v1beta1.ClusterManager.CreateNodePool",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_DeleteNodePool_async",
+      "title": "ClusterManager deleteNodePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a node pool from a cluster.",
+      "canonical": true,
+      "file": "cluster_manager.delete_node_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteNodePool",
+        "fullName": "google.container.v1beta1.ClusterManager.DeleteNodePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteNodePool",
+          "fullName": "google.container.v1beta1.ClusterManager.DeleteNodePool",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_CompleteNodePoolUpgrade_async",
+      "title": "ClusterManager completeNodePoolUpgrade Sample",
+      "origin": "API_DEFINITION",
+      "description": " CompleteNodePoolUpgrade will signal an on-going node pool upgrade to complete.",
+      "canonical": true,
+      "file": "cluster_manager.complete_node_pool_upgrade.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CompleteNodePoolUpgrade",
+        "fullName": "google.container.v1beta1.ClusterManager.CompleteNodePoolUpgrade",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "CompleteNodePoolUpgrade",
+          "fullName": "google.container.v1beta1.ClusterManager.CompleteNodePoolUpgrade",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_RollbackNodePoolUpgrade_async",
+      "title": "ClusterManager rollbackNodePoolUpgrade Sample",
+      "origin": "API_DEFINITION",
+      "description": " Rolls back a previously Aborted or Failed NodePool upgrade. This makes no changes if the last upgrade successfully completed.",
+      "canonical": true,
+      "file": "cluster_manager.rollback_node_pool_upgrade.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RollbackNodePoolUpgrade",
+        "fullName": "google.container.v1beta1.ClusterManager.RollbackNodePoolUpgrade",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "respect_pdb",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "RollbackNodePoolUpgrade",
+          "fullName": "google.container.v1beta1.ClusterManager.RollbackNodePoolUpgrade",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetNodePoolManagement_async",
+      "title": "ClusterManager setNodePoolManagement Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the NodeManagement options for a node pool.",
+      "canonical": true,
+      "file": "cluster_manager.set_node_pool_management.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetNodePoolManagement",
+        "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolManagement",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "management",
+            "type": ".google.container.v1beta1.NodeManagement"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetNodePoolManagement",
+          "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolManagement",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetLabels_async",
+      "title": "ClusterManager setLabels Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets labels on a cluster.",
+      "canonical": true,
+      "file": "cluster_manager.set_labels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetLabels",
+        "fullName": "google.container.v1beta1.ClusterManager.SetLabels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "resource_labels",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "label_fingerprint",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetLabels",
+          "fullName": "google.container.v1beta1.ClusterManager.SetLabels",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetLegacyAbac_async",
+      "title": "ClusterManager setLegacyAbac Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enables or disables the ABAC authorization mechanism on a cluster.",
+      "canonical": true,
+      "file": "cluster_manager.set_legacy_abac.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetLegacyAbac",
+        "fullName": "google.container.v1beta1.ClusterManager.SetLegacyAbac",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "enabled",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetLegacyAbac",
+          "fullName": "google.container.v1beta1.ClusterManager.SetLegacyAbac",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_StartIPRotation_async",
+      "title": "ClusterManager startIPRotation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts master IP rotation.",
+      "canonical": true,
+      "file": "cluster_manager.start_i_p_rotation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartIPRotation",
+        "fullName": "google.container.v1beta1.ClusterManager.StartIPRotation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rotate_credentials",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "StartIPRotation",
+          "fullName": "google.container.v1beta1.ClusterManager.StartIPRotation",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_CompleteIPRotation_async",
+      "title": "ClusterManager completeIPRotation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Completes master IP rotation.",
+      "canonical": true,
+      "file": "cluster_manager.complete_i_p_rotation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CompleteIPRotation",
+        "fullName": "google.container.v1beta1.ClusterManager.CompleteIPRotation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "CompleteIPRotation",
+          "fullName": "google.container.v1beta1.ClusterManager.CompleteIPRotation",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetNodePoolSize_async",
+      "title": "ClusterManager setNodePoolSize Sample",
+      "origin": "API_DEFINITION",
+      "description": " SetNodePoolSizeRequest sets the size of a node pool. The new size will be used for all replicas, including future replicas created by modifying [NodePool.locations][google.container.v1beta1.NodePool.locations].",
+      "canonical": true,
+      "file": "cluster_manager.set_node_pool_size.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetNodePoolSize",
+        "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolSize",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "node_count",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetNodePoolSize",
+          "fullName": "google.container.v1beta1.ClusterManager.SetNodePoolSize",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetNetworkPolicy_async",
+      "title": "ClusterManager setNetworkPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enables or disables Network Policy for a cluster.",
+      "canonical": true,
+      "file": "cluster_manager.set_network_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetNetworkPolicy",
+        "fullName": "google.container.v1beta1.ClusterManager.SetNetworkPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "network_policy",
+            "type": ".google.container.v1beta1.NetworkPolicy"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetNetworkPolicy",
+          "fullName": "google.container.v1beta1.ClusterManager.SetNetworkPolicy",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_SetMaintenancePolicy_async",
+      "title": "ClusterManager setMaintenancePolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the maintenance policy for a cluster.",
+      "canonical": true,
+      "file": "cluster_manager.set_maintenance_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetMaintenancePolicy",
+        "fullName": "google.container.v1beta1.ClusterManager.SetMaintenancePolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "zone",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "cluster_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "maintenance_policy",
+            "type": ".google.container.v1beta1.MaintenancePolicy"
+          },
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.Operation",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "SetMaintenancePolicy",
+          "fullName": "google.container.v1beta1.ClusterManager.SetMaintenancePolicy",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_ListUsableSubnetworks_async",
+      "title": "ClusterManager listUsableSubnetworks Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists subnetworks that can be used for creating clusters in a project.",
+      "canonical": true,
+      "file": "cluster_manager.list_usable_subnetworks.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListUsableSubnetworks",
+        "fullName": "google.container.v1beta1.ClusterManager.ListUsableSubnetworks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.ListUsableSubnetworksResponse",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "ListUsableSubnetworks",
+          "fullName": "google.container.v1beta1.ClusterManager.ListUsableSubnetworks",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_CheckAutopilotCompatibility_async",
+      "title": "ClusterManager checkAutopilotCompatibility Sample",
+      "origin": "API_DEFINITION",
+      "description": " Checks the cluster compatibility with Autopilot mode, and returns a list of compatibility issues.",
+      "canonical": true,
+      "file": "cluster_manager.check_autopilot_compatibility.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CheckAutopilotCompatibility",
+        "fullName": "google.container.v1beta1.ClusterManager.CheckAutopilotCompatibility",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.CheckAutopilotCompatibilityResponse",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "CheckAutopilotCompatibility",
+          "fullName": "google.container.v1beta1.ClusterManager.CheckAutopilotCompatibility",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_ListLocations_async",
+      "title": "ClusterManager listLocations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetches locations that offer Google Kubernetes Engine.",
+      "canonical": true,
+      "file": "cluster_manager.list_locations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListLocations",
+        "fullName": "google.container.v1beta1.ClusterManager.ListLocations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.ListLocationsResponse",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "ListLocations",
+          "fullName": "google.container.v1beta1.ClusterManager.ListLocations",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_FetchClusterUpgradeInfo_async",
+      "title": "ClusterManager fetchClusterUpgradeInfo Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetch upgrade information of a specific cluster.",
+      "canonical": true,
+      "file": "cluster_manager.fetch_cluster_upgrade_info.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchClusterUpgradeInfo",
+        "fullName": "google.container.v1beta1.ClusterManager.FetchClusterUpgradeInfo",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.ClusterUpgradeInfo",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "FetchClusterUpgradeInfo",
+          "fullName": "google.container.v1beta1.ClusterManager.FetchClusterUpgradeInfo",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "container_v1beta1_generated_ClusterManager_FetchNodePoolUpgradeInfo_async",
+      "title": "ClusterManager fetchNodePoolUpgradeInfo Sample",
+      "origin": "API_DEFINITION",
+      "description": " Fetch upgrade information of a specific nodepool.",
+      "canonical": true,
+      "file": "cluster_manager.fetch_node_pool_upgrade_info.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "FetchNodePoolUpgradeInfo",
+        "fullName": "google.container.v1beta1.ClusterManager.FetchNodePoolUpgradeInfo",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.container.v1beta1.NodePoolUpgradeInfo",
+        "client": {
+          "shortName": "ClusterManagerClient",
+          "fullName": "google.container.v1beta1.ClusterManagerClient"
+        },
+        "method": {
+          "shortName": "FetchNodePoolUpgradeInfo",
+          "fullName": "google.container.v1beta1.ClusterManager.FetchNodePoolUpgradeInfo",
+          "service": {
+            "shortName": "ClusterManager",
+            "fullName": "google.container.v1beta1.ClusterManager"
+          }
+        }
+      }
+    }
+  ]
 }

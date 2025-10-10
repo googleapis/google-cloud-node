@@ -1,1491 +1,1627 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-livestream",
-        "version": "2.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.video.livestream.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_CreateChannel_async",
-            "title": "LivestreamService createChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a channel with the provided unique ID in the specified region.",
-            "canonical": true,
-            "file": "livestream_service.create_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateChannel",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "channel",
-                        "type": ".google.cloud.video.livestream.v1.Channel"
-                    },
-                    {
-                        "name": "channel_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateChannel",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateChannel",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_ListChannels_async",
-            "title": "LivestreamService listChannels Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of all channels in the specified region.",
-            "canonical": true,
-            "file": "livestream_service.list_channels.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListChannels",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListChannels",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.ListChannelsResponse",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "ListChannels",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListChannels",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_GetChannel_async",
-            "title": "LivestreamService getChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the specified channel.",
-            "canonical": true,
-            "file": "livestream_service.get_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetChannel",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.Channel",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "GetChannel",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetChannel",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_DeleteChannel_async",
-            "title": "LivestreamService deleteChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified channel.",
-            "canonical": true,
-            "file": "livestream_service.delete_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteChannel",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteChannel",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteChannel",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_UpdateChannel_async",
-            "title": "LivestreamService updateChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified channel.",
-            "canonical": true,
-            "file": "livestream_service.update_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 88,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateChannel",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "channel",
-                        "type": ".google.cloud.video.livestream.v1.Channel"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateChannel",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateChannel",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_StartChannel_async",
-            "title": "LivestreamService startChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Starts the specified channel. Part of the video pipeline will be created only when the StartChannel request is received by the server.",
-            "canonical": true,
-            "file": "livestream_service.start_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StartChannel",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.StartChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "StartChannel",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.StartChannel",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_StopChannel_async",
-            "title": "LivestreamService stopChannel Sample",
-            "origin": "API_DEFINITION",
-            "description": " Stops the specified channel. Part of the video pipeline will be released when the StopChannel request is received by the server.",
-            "canonical": true,
-            "file": "livestream_service.stop_channel.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StopChannel",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.StopChannel",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "StopChannel",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.StopChannel",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_CreateInput_async",
-            "title": "LivestreamService createInput Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an input with the provided unique ID in the specified region.",
-            "canonical": true,
-            "file": "livestream_service.create_input.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateInput",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateInput",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "input",
-                        "type": ".google.cloud.video.livestream.v1.Input"
-                    },
-                    {
-                        "name": "input_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateInput",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateInput",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_ListInputs_async",
-            "title": "LivestreamService listInputs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of all inputs in the specified region.",
-            "canonical": true,
-            "file": "livestream_service.list_inputs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListInputs",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListInputs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.ListInputsResponse",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "ListInputs",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListInputs",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_GetInput_async",
-            "title": "LivestreamService getInput Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the specified input.",
-            "canonical": true,
-            "file": "livestream_service.get_input.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetInput",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetInput",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.Input",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "GetInput",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetInput",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_DeleteInput_async",
-            "title": "LivestreamService deleteInput Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified input.",
-            "canonical": true,
-            "file": "livestream_service.delete_input.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteInput",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteInput",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteInput",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteInput",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_UpdateInput_async",
-            "title": "LivestreamService updateInput Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified input.",
-            "canonical": true,
-            "file": "livestream_service.update_input.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateInput",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateInput",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "input",
-                        "type": ".google.cloud.video.livestream.v1.Input"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateInput",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateInput",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_CreateEvent_async",
-            "title": "LivestreamService createEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an event with the provided unique ID in the specified channel.",
-            "canonical": true,
-            "file": "livestream_service.create_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateEvent",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "event",
-                        "type": ".google.cloud.video.livestream.v1.Event"
-                    },
-                    {
-                        "name": "event_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.Event",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateEvent",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateEvent",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_ListEvents_async",
-            "title": "LivestreamService listEvents Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of all events in the specified channel.",
-            "canonical": true,
-            "file": "livestream_service.list_events.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListEvents",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListEvents",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.ListEventsResponse",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "ListEvents",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListEvents",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_GetEvent_async",
-            "title": "LivestreamService getEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the specified event.",
-            "canonical": true,
-            "file": "livestream_service.get_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetEvent",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.Event",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "GetEvent",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetEvent",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_DeleteEvent_async",
-            "title": "LivestreamService deleteEvent Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified event.",
-            "canonical": true,
-            "file": "livestream_service.delete_event.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteEvent",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteEvent",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteEvent",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteEvent",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_ListClips_async",
-            "title": "LivestreamService listClips Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of all clips in the specified channel.",
-            "canonical": true,
-            "file": "livestream_service.list_clips.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListClips",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListClips",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.ListClipsResponse",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "ListClips",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListClips",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_GetClip_async",
-            "title": "LivestreamService getClip Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the specified clip.",
-            "canonical": true,
-            "file": "livestream_service.get_clip.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetClip",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetClip",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.Clip",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "GetClip",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetClip",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_CreateClip_async",
-            "title": "LivestreamService createClip Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a clip with the provided clip ID in the specified channel.",
-            "canonical": true,
-            "file": "livestream_service.create_clip.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateClip",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateClip",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "clip_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "clip",
-                        "type": ".google.cloud.video.livestream.v1.Clip"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateClip",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateClip",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_DeleteClip_async",
-            "title": "LivestreamService deleteClip Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified clip job resource. This method only deletes the clip job and does not delete the VOD clip stored in Cloud Storage.",
-            "canonical": true,
-            "file": "livestream_service.delete_clip.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteClip",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteClip",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteClip",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteClip",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_CreateDvrSession_async",
-            "title": "LivestreamService createDvrSession Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a DVR session with the provided unique ID in the specified channel.",
-            "canonical": true,
-            "file": "livestream_service.create_dvr_session.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateDvrSession",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateDvrSession",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "dvr_session_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "dvr_session",
-                        "type": ".google.cloud.video.livestream.v1.DvrSession"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateDvrSession",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateDvrSession",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_ListDvrSessions_async",
-            "title": "LivestreamService listDvrSessions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of all DVR sessions in the specified channel.",
-            "canonical": true,
-            "file": "livestream_service.list_dvr_sessions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDvrSessions",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListDvrSessions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.ListDvrSessionsResponse",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "ListDvrSessions",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListDvrSessions",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_GetDvrSession_async",
-            "title": "LivestreamService getDvrSession Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the specified DVR session.",
-            "canonical": true,
-            "file": "livestream_service.get_dvr_session.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDvrSession",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetDvrSession",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.DvrSession",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "GetDvrSession",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetDvrSession",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_DeleteDvrSession_async",
-            "title": "LivestreamService deleteDvrSession Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified DVR session.",
-            "canonical": true,
-            "file": "livestream_service.delete_dvr_session.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteDvrSession",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteDvrSession",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteDvrSession",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteDvrSession",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_UpdateDvrSession_async",
-            "title": "LivestreamService updateDvrSession Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified DVR session.",
-            "canonical": true,
-            "file": "livestream_service.update_dvr_session.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateDvrSession",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateDvrSession",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "dvr_session",
-                        "type": ".google.cloud.video.livestream.v1.DvrSession"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateDvrSession",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateDvrSession",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_CreateAsset_async",
-            "title": "LivestreamService createAsset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a Asset with the provided unique ID in the specified region.",
-            "canonical": true,
-            "file": "livestream_service.create_asset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 81,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAsset",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateAsset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "asset",
-                        "type": ".google.cloud.video.livestream.v1.Asset"
-                    },
-                    {
-                        "name": "asset_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateAsset",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateAsset",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_DeleteAsset_async",
-            "title": "LivestreamService deleteAsset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified asset if it is not used.",
-            "canonical": true,
-            "file": "livestream_service.delete_asset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAsset",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteAsset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteAsset",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteAsset",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_GetAsset_async",
-            "title": "LivestreamService getAsset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the specified asset.",
-            "canonical": true,
-            "file": "livestream_service.get_asset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAsset",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetAsset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.Asset",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "GetAsset",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetAsset",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_ListAssets_async",
-            "title": "LivestreamService listAssets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of all assets in the specified region.",
-            "canonical": true,
-            "file": "livestream_service.list_assets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAssets",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListAssets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.ListAssetsResponse",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "ListAssets",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListAssets",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_GetPool_async",
-            "title": "LivestreamService getPool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the specified pool.",
-            "canonical": true,
-            "file": "livestream_service.get_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPool",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetPool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.video.livestream.v1.Pool",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "GetPool",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetPool",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "livestream_v1_generated_LivestreamService_UpdatePool_async",
-            "title": "LivestreamService updatePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified pool.",
-            "canonical": true,
-            "file": "livestream_service.update_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdatePool",
-                "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdatePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "pool",
-                        "type": ".google.cloud.video.livestream.v1.Pool"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "LivestreamServiceClient",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdatePool",
-                    "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdatePool",
-                    "service": {
-                        "shortName": "LivestreamService",
-                        "fullName": "google.cloud.video.livestream.v1.LivestreamService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-livestream",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.video.livestream.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_CreateChannel_async",
+      "title": "LivestreamService createChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a channel with the provided unique ID in the specified region.",
+      "canonical": true,
+      "file": "livestream_service.create_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateChannel",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "channel",
+            "type": ".google.cloud.video.livestream.v1.Channel"
+          },
+          {
+            "name": "channel_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "CreateChannel",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateChannel",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_ListChannels_async",
+      "title": "LivestreamService listChannels Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of all channels in the specified region.",
+      "canonical": true,
+      "file": "livestream_service.list_channels.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListChannels",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListChannels",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.ListChannelsResponse",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "ListChannels",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListChannels",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_GetChannel_async",
+      "title": "LivestreamService getChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified channel.",
+      "canonical": true,
+      "file": "livestream_service.get_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetChannel",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.Channel",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "GetChannel",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetChannel",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_DeleteChannel_async",
+      "title": "LivestreamService deleteChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified channel.",
+      "canonical": true,
+      "file": "livestream_service.delete_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteChannel",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteChannel",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteChannel",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_UpdateChannel_async",
+      "title": "LivestreamService updateChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified channel.",
+      "canonical": true,
+      "file": "livestream_service.update_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 88,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateChannel",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "channel",
+            "type": ".google.cloud.video.livestream.v1.Channel"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateChannel",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateChannel",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_StartChannel_async",
+      "title": "LivestreamService startChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts the specified channel. Part of the video pipeline will be created only when the StartChannel request is received by the server.",
+      "canonical": true,
+      "file": "livestream_service.start_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartChannel",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.StartChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "StartChannel",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.StartChannel",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_StopChannel_async",
+      "title": "LivestreamService stopChannel Sample",
+      "origin": "API_DEFINITION",
+      "description": " Stops the specified channel. Part of the video pipeline will be released when the StopChannel request is received by the server.",
+      "canonical": true,
+      "file": "livestream_service.stop_channel.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StopChannel",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.StopChannel",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "StopChannel",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.StopChannel",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_StartDistribution_async",
+      "title": "LivestreamService startDistribution Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts distribution which delivers outputs to the destination indicated by the Distribution configuration.",
+      "canonical": true,
+      "file": "livestream_service.start_distribution.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartDistribution",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.StartDistribution",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "distribution_keys",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "StartDistribution",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.StartDistribution",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_StopDistribution_async",
+      "title": "LivestreamService stopDistribution Sample",
+      "origin": "API_DEFINITION",
+      "description": " Stops the specified distribution.",
+      "canonical": true,
+      "file": "livestream_service.stop_distribution.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StopDistribution",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.StopDistribution",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "distribution_keys",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "StopDistribution",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.StopDistribution",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_CreateInput_async",
+      "title": "LivestreamService createInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an input with the provided unique ID in the specified region.",
+      "canonical": true,
+      "file": "livestream_service.create_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInput",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input",
+            "type": ".google.cloud.video.livestream.v1.Input"
+          },
+          {
+            "name": "input_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "CreateInput",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateInput",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_ListInputs_async",
+      "title": "LivestreamService listInputs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of all inputs in the specified region.",
+      "canonical": true,
+      "file": "livestream_service.list_inputs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInputs",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListInputs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.ListInputsResponse",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "ListInputs",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListInputs",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_GetInput_async",
+      "title": "LivestreamService getInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified input.",
+      "canonical": true,
+      "file": "livestream_service.get_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInput",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.Input",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "GetInput",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetInput",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_DeleteInput_async",
+      "title": "LivestreamService deleteInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified input.",
+      "canonical": true,
+      "file": "livestream_service.delete_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInput",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteInput",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteInput",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_UpdateInput_async",
+      "title": "LivestreamService updateInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified input.",
+      "canonical": true,
+      "file": "livestream_service.update_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 81,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateInput",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "input",
+            "type": ".google.cloud.video.livestream.v1.Input"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateInput",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateInput",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_PreviewInput_async",
+      "title": "LivestreamService previewInput Sample",
+      "origin": "API_DEFINITION",
+      "description": " Preview the streaming content of the specified input.",
+      "canonical": true,
+      "file": "livestream_service.preview_input.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PreviewInput",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.PreviewInput",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.PreviewInputResponse",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "PreviewInput",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.PreviewInput",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_CreateEvent_async",
+      "title": "LivestreamService createEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an event with the provided unique ID in the specified channel.",
+      "canonical": true,
+      "file": "livestream_service.create_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEvent",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "event",
+            "type": ".google.cloud.video.livestream.v1.Event"
+          },
+          {
+            "name": "event_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.Event",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "CreateEvent",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateEvent",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_ListEvents_async",
+      "title": "LivestreamService listEvents Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of all events in the specified channel.",
+      "canonical": true,
+      "file": "livestream_service.list_events.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEvents",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListEvents",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.ListEventsResponse",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "ListEvents",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListEvents",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_GetEvent_async",
+      "title": "LivestreamService getEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified event.",
+      "canonical": true,
+      "file": "livestream_service.get_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEvent",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.Event",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "GetEvent",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetEvent",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_DeleteEvent_async",
+      "title": "LivestreamService deleteEvent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified event.",
+      "canonical": true,
+      "file": "livestream_service.delete_event.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEvent",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteEvent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteEvent",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteEvent",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_ListClips_async",
+      "title": "LivestreamService listClips Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of all clips in the specified channel.",
+      "canonical": true,
+      "file": "livestream_service.list_clips.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListClips",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListClips",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.ListClipsResponse",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "ListClips",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListClips",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_GetClip_async",
+      "title": "LivestreamService getClip Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified clip.",
+      "canonical": true,
+      "file": "livestream_service.get_clip.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetClip",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetClip",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.Clip",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "GetClip",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetClip",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_CreateClip_async",
+      "title": "LivestreamService createClip Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a clip with the provided clip ID in the specified channel.",
+      "canonical": true,
+      "file": "livestream_service.create_clip.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateClip",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateClip",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "clip_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "clip",
+            "type": ".google.cloud.video.livestream.v1.Clip"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "CreateClip",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateClip",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_DeleteClip_async",
+      "title": "LivestreamService deleteClip Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified clip job resource. This method only deletes the clip job and does not delete the VOD clip stored in Cloud Storage.",
+      "canonical": true,
+      "file": "livestream_service.delete_clip.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteClip",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteClip",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteClip",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteClip",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_CreateDvrSession_async",
+      "title": "LivestreamService createDvrSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a DVR session with the provided unique ID in the specified channel.",
+      "canonical": true,
+      "file": "livestream_service.create_dvr_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDvrSession",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateDvrSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dvr_session_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dvr_session",
+            "type": ".google.cloud.video.livestream.v1.DvrSession"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDvrSession",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateDvrSession",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_ListDvrSessions_async",
+      "title": "LivestreamService listDvrSessions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of all DVR sessions in the specified channel.",
+      "canonical": true,
+      "file": "livestream_service.list_dvr_sessions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDvrSessions",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListDvrSessions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.ListDvrSessionsResponse",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "ListDvrSessions",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListDvrSessions",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_GetDvrSession_async",
+      "title": "LivestreamService getDvrSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified DVR session.",
+      "canonical": true,
+      "file": "livestream_service.get_dvr_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDvrSession",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetDvrSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.DvrSession",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "GetDvrSession",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetDvrSession",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_DeleteDvrSession_async",
+      "title": "LivestreamService deleteDvrSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified DVR session.",
+      "canonical": true,
+      "file": "livestream_service.delete_dvr_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDvrSession",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteDvrSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDvrSession",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteDvrSession",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_UpdateDvrSession_async",
+      "title": "LivestreamService updateDvrSession Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified DVR session.",
+      "canonical": true,
+      "file": "livestream_service.update_dvr_session.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDvrSession",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateDvrSession",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "dvr_session",
+            "type": ".google.cloud.video.livestream.v1.DvrSession"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateDvrSession",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdateDvrSession",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_CreateAsset_async",
+      "title": "LivestreamService createAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a Asset with the provided unique ID in the specified region.",
+      "canonical": true,
+      "file": "livestream_service.create_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAsset",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "asset",
+            "type": ".google.cloud.video.livestream.v1.Asset"
+          },
+          {
+            "name": "asset_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "CreateAsset",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.CreateAsset",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_DeleteAsset_async",
+      "title": "LivestreamService deleteAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified asset if it is not used.",
+      "canonical": true,
+      "file": "livestream_service.delete_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAsset",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAsset",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.DeleteAsset",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_GetAsset_async",
+      "title": "LivestreamService getAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified asset.",
+      "canonical": true,
+      "file": "livestream_service.get_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAsset",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.Asset",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "GetAsset",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetAsset",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_ListAssets_async",
+      "title": "LivestreamService listAssets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of all assets in the specified region.",
+      "canonical": true,
+      "file": "livestream_service.list_assets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAssets",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListAssets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.ListAssetsResponse",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "ListAssets",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.ListAssets",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_GetPool_async",
+      "title": "LivestreamService getPool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified pool.",
+      "canonical": true,
+      "file": "livestream_service.get_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPool",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetPool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.video.livestream.v1.Pool",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "GetPool",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.GetPool",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "livestream_v1_generated_LivestreamService_UpdatePool_async",
+      "title": "LivestreamService updatePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified pool.",
+      "canonical": true,
+      "file": "livestream_service.update_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePool",
+        "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdatePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "pool",
+            "type": ".google.cloud.video.livestream.v1.Pool"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "LivestreamServiceClient",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamServiceClient"
+        },
+        "method": {
+          "shortName": "UpdatePool",
+          "fullName": "google.cloud.video.livestream.v1.LivestreamService.UpdatePool",
+          "service": {
+            "shortName": "LivestreamService",
+            "fullName": "google.cloud.video.livestream.v1.LivestreamService"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -1,2727 +1,2727 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-netapp",
-        "version": "0.14.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.netapp.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListStoragePools_async",
-            "title": "NetApp listStoragePools Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns descriptions of all storage pools owned by the caller.",
-            "canonical": true,
-            "file": "net_app.list_storage_pools.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListStoragePools",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListStoragePools",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListStoragePoolsResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListStoragePools",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListStoragePools",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateStoragePool_async",
-            "title": "NetApp createStoragePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new storage pool.",
-            "canonical": true,
-            "file": "net_app.create_storage_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateStoragePool",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateStoragePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "storage_pool_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "storage_pool",
-                        "type": ".google.cloud.netapp.v1.StoragePool"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateStoragePool",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateStoragePool",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetStoragePool_async",
-            "title": "NetApp getStoragePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the description of the specified storage pool by poolId.",
-            "canonical": true,
-            "file": "net_app.get_storage_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetStoragePool",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetStoragePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.StoragePool",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetStoragePool",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetStoragePool",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateStoragePool_async",
-            "title": "NetApp updateStoragePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the storage pool properties with the full spec",
-            "canonical": true,
-            "file": "net_app.update_storage_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateStoragePool",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateStoragePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "storage_pool",
-                        "type": ".google.cloud.netapp.v1.StoragePool"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateStoragePool",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateStoragePool",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteStoragePool_async",
-            "title": "NetApp deleteStoragePool Sample",
-            "origin": "API_DEFINITION",
-            "description": " Warning! This operation will permanently delete the storage pool.",
-            "canonical": true,
-            "file": "net_app.delete_storage_pool.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteStoragePool",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteStoragePool",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteStoragePool",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteStoragePool",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ValidateDirectoryService_async",
-            "title": "NetApp validateDirectoryService Sample",
-            "origin": "API_DEFINITION",
-            "description": " ValidateDirectoryService does a connectivity check for a directory service policy attached to the storage pool.",
-            "canonical": true,
-            "file": "net_app.validate_directory_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ValidateDirectoryService",
-                "fullName": "google.cloud.netapp.v1.NetApp.ValidateDirectoryService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "directory_service_type",
-                        "type": ".google.cloud.netapp.v1.DirectoryServiceType"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ValidateDirectoryService",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ValidateDirectoryService",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_SwitchActiveReplicaZone_async",
-            "title": "NetApp switchActiveReplicaZone Sample",
-            "origin": "API_DEFINITION",
-            "description": " This operation will switch the active/replica zone for a regional storagePool.",
-            "canonical": true,
-            "file": "net_app.switch_active_replica_zone.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SwitchActiveReplicaZone",
-                "fullName": "google.cloud.netapp.v1.NetApp.SwitchActiveReplicaZone",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "SwitchActiveReplicaZone",
-                    "fullName": "google.cloud.netapp.v1.NetApp.SwitchActiveReplicaZone",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListVolumes_async",
-            "title": "NetApp listVolumes Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Volumes in a given project.",
-            "canonical": true,
-            "file": "net_app.list_volumes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListVolumes",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListVolumes",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListVolumesResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListVolumes",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListVolumes",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetVolume_async",
-            "title": "NetApp getVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single Volume.",
-            "canonical": true,
-            "file": "net_app.get_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetVolume",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.Volume",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetVolume",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetVolume",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateVolume_async",
-            "title": "NetApp createVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new Volume in a given project and location.",
-            "canonical": true,
-            "file": "net_app.create_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateVolume",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "volume_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "volume",
-                        "type": ".google.cloud.netapp.v1.Volume"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateVolume",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateVolume",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateVolume_async",
-            "title": "NetApp updateVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a single Volume.",
-            "canonical": true,
-            "file": "net_app.update_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateVolume",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "volume",
-                        "type": ".google.cloud.netapp.v1.Volume"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateVolume",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateVolume",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteVolume_async",
-            "title": "NetApp deleteVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a single Volume.",
-            "canonical": true,
-            "file": "net_app.delete_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteVolume",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteVolume",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteVolume",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_RevertVolume_async",
-            "title": "NetApp revertVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " Revert an existing volume to a specified snapshot. Warning! This operation will permanently revert all changes made after the snapshot was created.",
-            "canonical": true,
-            "file": "net_app.revert_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RevertVolume",
-                "fullName": "google.cloud.netapp.v1.NetApp.RevertVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "snapshot_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "RevertVolume",
-                    "fullName": "google.cloud.netapp.v1.NetApp.RevertVolume",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListSnapshots_async",
-            "title": "NetApp listSnapshots Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns descriptions of all snapshots for a volume.",
-            "canonical": true,
-            "file": "net_app.list_snapshots.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSnapshots",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListSnapshots",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListSnapshotsResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListSnapshots",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListSnapshots",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetSnapshot_async",
-            "title": "NetApp getSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Describe a snapshot for a volume.",
-            "canonical": true,
-            "file": "net_app.get_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSnapshot",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.Snapshot",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetSnapshot",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetSnapshot",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateSnapshot_async",
-            "title": "NetApp createSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new snapshot for a volume.",
-            "canonical": true,
-            "file": "net_app.create_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateSnapshot",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "snapshot",
-                        "type": ".google.cloud.netapp.v1.Snapshot"
-                    },
-                    {
-                        "name": "snapshot_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateSnapshot",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateSnapshot",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteSnapshot_async",
-            "title": "NetApp deleteSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a snapshot.",
-            "canonical": true,
-            "file": "net_app.delete_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSnapshot",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteSnapshot",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteSnapshot",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateSnapshot_async",
-            "title": "NetApp updateSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the settings of a specific snapshot.",
-            "canonical": true,
-            "file": "net_app.update_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSnapshot",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "snapshot",
-                        "type": ".google.cloud.netapp.v1.Snapshot"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateSnapshot",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateSnapshot",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListActiveDirectories_async",
-            "title": "NetApp listActiveDirectories Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists active directories.",
-            "canonical": true,
-            "file": "net_app.list_active_directories.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListActiveDirectories",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListActiveDirectories",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListActiveDirectoriesResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListActiveDirectories",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListActiveDirectories",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetActiveDirectory_async",
-            "title": "NetApp getActiveDirectory Sample",
-            "origin": "API_DEFINITION",
-            "description": " Describes a specified active directory.",
-            "canonical": true,
-            "file": "net_app.get_active_directory.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetActiveDirectory",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetActiveDirectory",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ActiveDirectory",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetActiveDirectory",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetActiveDirectory",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateActiveDirectory_async",
-            "title": "NetApp createActiveDirectory Sample",
-            "origin": "API_DEFINITION",
-            "description": " CreateActiveDirectory Creates the active directory specified in the request.",
-            "canonical": true,
-            "file": "net_app.create_active_directory.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateActiveDirectory",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateActiveDirectory",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "active_directory",
-                        "type": ".google.cloud.netapp.v1.ActiveDirectory"
-                    },
-                    {
-                        "name": "active_directory_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateActiveDirectory",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateActiveDirectory",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateActiveDirectory_async",
-            "title": "NetApp updateActiveDirectory Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update the parameters of an active directories.",
-            "canonical": true,
-            "file": "net_app.update_active_directory.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateActiveDirectory",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateActiveDirectory",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "active_directory",
-                        "type": ".google.cloud.netapp.v1.ActiveDirectory"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateActiveDirectory",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateActiveDirectory",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteActiveDirectory_async",
-            "title": "NetApp deleteActiveDirectory Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete the active directory specified in the request.",
-            "canonical": true,
-            "file": "net_app.delete_active_directory.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteActiveDirectory",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteActiveDirectory",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteActiveDirectory",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteActiveDirectory",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListKmsConfigs_async",
-            "title": "NetApp listKmsConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns descriptions of all KMS configs owned by the caller.",
-            "canonical": true,
-            "file": "net_app.list_kms_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListKmsConfigs",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListKmsConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListKmsConfigsResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListKmsConfigs",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListKmsConfigs",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateKmsConfig_async",
-            "title": "NetApp createKmsConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new KMS config.",
-            "canonical": true,
-            "file": "net_app.create_kms_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateKmsConfig",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateKmsConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "kms_config_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "kms_config",
-                        "type": ".google.cloud.netapp.v1.KmsConfig"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateKmsConfig",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateKmsConfig",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetKmsConfig_async",
-            "title": "NetApp getKmsConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the description of the specified KMS config by kms_config_id.",
-            "canonical": true,
-            "file": "net_app.get_kms_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetKmsConfig",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetKmsConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.KmsConfig",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetKmsConfig",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetKmsConfig",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateKmsConfig_async",
-            "title": "NetApp updateKmsConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the Kms config properties with the full spec",
-            "canonical": true,
-            "file": "net_app.update_kms_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateKmsConfig",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateKmsConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "kms_config",
-                        "type": ".google.cloud.netapp.v1.KmsConfig"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateKmsConfig",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateKmsConfig",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_EncryptVolumes_async",
-            "title": "NetApp encryptVolumes Sample",
-            "origin": "API_DEFINITION",
-            "description": " Encrypt the existing volumes without CMEK encryption with the desired the KMS config for the whole region.",
-            "canonical": true,
-            "file": "net_app.encrypt_volumes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "EncryptVolumes",
-                "fullName": "google.cloud.netapp.v1.NetApp.EncryptVolumes",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "EncryptVolumes",
-                    "fullName": "google.cloud.netapp.v1.NetApp.EncryptVolumes",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_VerifyKmsConfig_async",
-            "title": "NetApp verifyKmsConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Verifies KMS config reachability.",
-            "canonical": true,
-            "file": "net_app.verify_kms_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "VerifyKmsConfig",
-                "fullName": "google.cloud.netapp.v1.NetApp.VerifyKmsConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.VerifyKmsConfigResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "VerifyKmsConfig",
-                    "fullName": "google.cloud.netapp.v1.NetApp.VerifyKmsConfig",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteKmsConfig_async",
-            "title": "NetApp deleteKmsConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Warning! This operation will permanently delete the Kms config.",
-            "canonical": true,
-            "file": "net_app.delete_kms_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteKmsConfig",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteKmsConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteKmsConfig",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteKmsConfig",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListReplications_async",
-            "title": "NetApp listReplications Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns descriptions of all replications for a volume.",
-            "canonical": true,
-            "file": "net_app.list_replications.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListReplications",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListReplications",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListReplicationsResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListReplications",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListReplications",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetReplication_async",
-            "title": "NetApp getReplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Describe a replication for a volume.",
-            "canonical": true,
-            "file": "net_app.get_replication.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetReplication",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetReplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.Replication",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetReplication",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetReplication",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateReplication_async",
-            "title": "NetApp createReplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create a new replication for a volume.",
-            "canonical": true,
-            "file": "net_app.create_replication.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateReplication",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateReplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "replication",
-                        "type": ".google.cloud.netapp.v1.Replication"
-                    },
-                    {
-                        "name": "replication_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateReplication",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateReplication",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteReplication_async",
-            "title": "NetApp deleteReplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a replication.",
-            "canonical": true,
-            "file": "net_app.delete_replication.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteReplication",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteReplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteReplication",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteReplication",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateReplication_async",
-            "title": "NetApp updateReplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the settings of a specific replication.",
-            "canonical": true,
-            "file": "net_app.update_replication.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateReplication",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateReplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "replication",
-                        "type": ".google.cloud.netapp.v1.Replication"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateReplication",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateReplication",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_StopReplication_async",
-            "title": "NetApp stopReplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Stop Cross Region Replication.",
-            "canonical": true,
-            "file": "net_app.stop_replication.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StopReplication",
-                "fullName": "google.cloud.netapp.v1.NetApp.StopReplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "StopReplication",
-                    "fullName": "google.cloud.netapp.v1.NetApp.StopReplication",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ResumeReplication_async",
-            "title": "NetApp resumeReplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Resume Cross Region Replication.",
-            "canonical": true,
-            "file": "net_app.resume_replication.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResumeReplication",
-                "fullName": "google.cloud.netapp.v1.NetApp.ResumeReplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ResumeReplication",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ResumeReplication",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ReverseReplicationDirection_async",
-            "title": "NetApp reverseReplicationDirection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Reverses direction of replication. Source becomes destination and destination becomes source.",
-            "canonical": true,
-            "file": "net_app.reverse_replication_direction.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ReverseReplicationDirection",
-                "fullName": "google.cloud.netapp.v1.NetApp.ReverseReplicationDirection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ReverseReplicationDirection",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ReverseReplicationDirection",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_EstablishPeering_async",
-            "title": "NetApp establishPeering Sample",
-            "origin": "API_DEFINITION",
-            "description": " Establish replication peering.",
-            "canonical": true,
-            "file": "net_app.establish_peering.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "EstablishPeering",
-                "fullName": "google.cloud.netapp.v1.NetApp.EstablishPeering",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "peer_cluster_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "peer_svm_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "peer_ip_addresses",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "peer_volume_name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "EstablishPeering",
-                    "fullName": "google.cloud.netapp.v1.NetApp.EstablishPeering",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_SyncReplication_async",
-            "title": "NetApp syncReplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Syncs the replication. This will invoke one time volume data transfer from source to destination.",
-            "canonical": true,
-            "file": "net_app.sync_replication.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SyncReplication",
-                "fullName": "google.cloud.netapp.v1.NetApp.SyncReplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "SyncReplication",
-                    "fullName": "google.cloud.netapp.v1.NetApp.SyncReplication",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateBackupVault_async",
-            "title": "NetApp createBackupVault Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates new backup vault",
-            "canonical": true,
-            "file": "net_app.create_backup_vault.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBackupVault",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateBackupVault",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "backup_vault_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "backup_vault",
-                        "type": ".google.cloud.netapp.v1.BackupVault"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateBackupVault",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateBackupVault",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetBackupVault_async",
-            "title": "NetApp getBackupVault Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the description of the specified backup vault",
-            "canonical": true,
-            "file": "net_app.get_backup_vault.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBackupVault",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetBackupVault",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.BackupVault",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetBackupVault",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetBackupVault",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListBackupVaults_async",
-            "title": "NetApp listBackupVaults Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns list of all available backup vaults.",
-            "canonical": true,
-            "file": "net_app.list_backup_vaults.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBackupVaults",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListBackupVaults",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListBackupVaultsResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListBackupVaults",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListBackupVaults",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateBackupVault_async",
-            "title": "NetApp updateBackupVault Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the settings of a specific backup vault.",
-            "canonical": true,
-            "file": "net_app.update_backup_vault.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateBackupVault",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackupVault",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "backup_vault",
-                        "type": ".google.cloud.netapp.v1.BackupVault"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateBackupVault",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackupVault",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteBackupVault_async",
-            "title": "NetApp deleteBackupVault Sample",
-            "origin": "API_DEFINITION",
-            "description": " Warning! This operation will permanently delete the backup vault.",
-            "canonical": true,
-            "file": "net_app.delete_backup_vault.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteBackupVault",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackupVault",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteBackupVault",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackupVault",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateBackup_async",
-            "title": "NetApp createBackup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a backup from the volume specified in the request The backup can be created from the given snapshot if specified in the request. If no snapshot specified, there'll be a new snapshot taken to initiate the backup creation.",
-            "canonical": true,
-            "file": "net_app.create_backup.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBackup",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateBackup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "backup_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "backup",
-                        "type": ".google.cloud.netapp.v1.Backup"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateBackup",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateBackup",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetBackup_async",
-            "title": "NetApp getBackup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the description of the specified backup",
-            "canonical": true,
-            "file": "net_app.get_backup.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBackup",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetBackup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.Backup",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetBackup",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetBackup",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListBackups_async",
-            "title": "NetApp listBackups Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns descriptions of all backups for a backupVault.",
-            "canonical": true,
-            "file": "net_app.list_backups.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 85,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBackups",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListBackups",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListBackupsResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListBackups",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListBackups",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteBackup_async",
-            "title": "NetApp deleteBackup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Warning! This operation will permanently delete the backup.",
-            "canonical": true,
-            "file": "net_app.delete_backup.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteBackup",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteBackup",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackup",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateBackup_async",
-            "title": "NetApp updateBackup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update backup with full spec.",
-            "canonical": true,
-            "file": "net_app.update_backup.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateBackup",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "backup",
-                        "type": ".google.cloud.netapp.v1.Backup"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateBackup",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackup",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateBackupPolicy_async",
-            "title": "NetApp createBackupPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates new backup policy",
-            "canonical": true,
-            "file": "net_app.create_backup_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateBackupPolicy",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateBackupPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "backup_policy",
-                        "type": ".google.cloud.netapp.v1.BackupPolicy"
-                    },
-                    {
-                        "name": "backup_policy_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateBackupPolicy",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateBackupPolicy",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetBackupPolicy_async",
-            "title": "NetApp getBackupPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the description of the specified backup policy by backup_policy_id.",
-            "canonical": true,
-            "file": "net_app.get_backup_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetBackupPolicy",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetBackupPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.BackupPolicy",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetBackupPolicy",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetBackupPolicy",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListBackupPolicies_async",
-            "title": "NetApp listBackupPolicies Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns list of all available backup policies.",
-            "canonical": true,
-            "file": "net_app.list_backup_policies.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListBackupPolicies",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListBackupPolicies",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListBackupPoliciesResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListBackupPolicies",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListBackupPolicies",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateBackupPolicy_async",
-            "title": "NetApp updateBackupPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates settings of a specific backup policy.",
-            "canonical": true,
-            "file": "net_app.update_backup_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateBackupPolicy",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackupPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "backup_policy",
-                        "type": ".google.cloud.netapp.v1.BackupPolicy"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateBackupPolicy",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackupPolicy",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteBackupPolicy_async",
-            "title": "NetApp deleteBackupPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Warning! This operation will permanently delete the backup policy.",
-            "canonical": true,
-            "file": "net_app.delete_backup_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteBackupPolicy",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackupPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteBackupPolicy",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackupPolicy",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_ListQuotaRules_async",
-            "title": "NetApp listQuotaRules Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns list of all quota rules in a location.",
-            "canonical": true,
-            "file": "net_app.list_quota_rules.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListQuotaRules",
-                "fullName": "google.cloud.netapp.v1.NetApp.ListQuotaRules",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.ListQuotaRulesResponse",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "ListQuotaRules",
-                    "fullName": "google.cloud.netapp.v1.NetApp.ListQuotaRules",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_GetQuotaRule_async",
-            "title": "NetApp getQuotaRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns details of the specified quota rule.",
-            "canonical": true,
-            "file": "net_app.get_quota_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetQuotaRule",
-                "fullName": "google.cloud.netapp.v1.NetApp.GetQuotaRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.netapp.v1.QuotaRule",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "GetQuotaRule",
-                    "fullName": "google.cloud.netapp.v1.NetApp.GetQuotaRule",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_CreateQuotaRule_async",
-            "title": "NetApp createQuotaRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new quota rule.",
-            "canonical": true,
-            "file": "net_app.create_quota_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateQuotaRule",
-                "fullName": "google.cloud.netapp.v1.NetApp.CreateQuotaRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "quota_rule",
-                        "type": ".google.cloud.netapp.v1.QuotaRule"
-                    },
-                    {
-                        "name": "quota_rule_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "CreateQuotaRule",
-                    "fullName": "google.cloud.netapp.v1.NetApp.CreateQuotaRule",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_UpdateQuotaRule_async",
-            "title": "NetApp updateQuotaRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates a quota rule.",
-            "canonical": true,
-            "file": "net_app.update_quota_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateQuotaRule",
-                "fullName": "google.cloud.netapp.v1.NetApp.UpdateQuotaRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "quota_rule",
-                        "type": ".google.cloud.netapp.v1.QuotaRule"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "UpdateQuotaRule",
-                    "fullName": "google.cloud.netapp.v1.NetApp.UpdateQuotaRule",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "netapp_v1_generated_NetApp_DeleteQuotaRule_async",
-            "title": "NetApp deleteQuotaRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a quota rule.",
-            "canonical": true,
-            "file": "net_app.delete_quota_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteQuotaRule",
-                "fullName": "google.cloud.netapp.v1.NetApp.DeleteQuotaRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "NetAppClient",
-                    "fullName": "google.cloud.netapp.v1.NetAppClient"
-                },
-                "method": {
-                    "shortName": "DeleteQuotaRule",
-                    "fullName": "google.cloud.netapp.v1.NetApp.DeleteQuotaRule",
-                    "service": {
-                        "shortName": "NetApp",
-                        "fullName": "google.cloud.netapp.v1.NetApp"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-netapp",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.netapp.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListStoragePools_async",
+      "title": "NetApp listStoragePools Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns descriptions of all storage pools owned by the caller.",
+      "canonical": true,
+      "file": "net_app.list_storage_pools.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListStoragePools",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListStoragePools",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListStoragePoolsResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListStoragePools",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListStoragePools",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateStoragePool_async",
+      "title": "NetApp createStoragePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new storage pool.",
+      "canonical": true,
+      "file": "net_app.create_storage_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateStoragePool",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateStoragePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "storage_pool_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "storage_pool",
+            "type": ".google.cloud.netapp.v1.StoragePool"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateStoragePool",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateStoragePool",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetStoragePool_async",
+      "title": "NetApp getStoragePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the description of the specified storage pool by poolId.",
+      "canonical": true,
+      "file": "net_app.get_storage_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetStoragePool",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetStoragePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.StoragePool",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetStoragePool",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetStoragePool",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateStoragePool_async",
+      "title": "NetApp updateStoragePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the storage pool properties with the full spec",
+      "canonical": true,
+      "file": "net_app.update_storage_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateStoragePool",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateStoragePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "storage_pool",
+            "type": ".google.cloud.netapp.v1.StoragePool"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateStoragePool",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateStoragePool",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteStoragePool_async",
+      "title": "NetApp deleteStoragePool Sample",
+      "origin": "API_DEFINITION",
+      "description": " Warning! This operation will permanently delete the storage pool.",
+      "canonical": true,
+      "file": "net_app.delete_storage_pool.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteStoragePool",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteStoragePool",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteStoragePool",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteStoragePool",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ValidateDirectoryService_async",
+      "title": "NetApp validateDirectoryService Sample",
+      "origin": "API_DEFINITION",
+      "description": " ValidateDirectoryService does a connectivity check for a directory service policy attached to the storage pool.",
+      "canonical": true,
+      "file": "net_app.validate_directory_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ValidateDirectoryService",
+        "fullName": "google.cloud.netapp.v1.NetApp.ValidateDirectoryService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "directory_service_type",
+            "type": ".google.cloud.netapp.v1.DirectoryServiceType"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ValidateDirectoryService",
+          "fullName": "google.cloud.netapp.v1.NetApp.ValidateDirectoryService",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_SwitchActiveReplicaZone_async",
+      "title": "NetApp switchActiveReplicaZone Sample",
+      "origin": "API_DEFINITION",
+      "description": " This operation will switch the active/replica zone for a regional storagePool.",
+      "canonical": true,
+      "file": "net_app.switch_active_replica_zone.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SwitchActiveReplicaZone",
+        "fullName": "google.cloud.netapp.v1.NetApp.SwitchActiveReplicaZone",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "SwitchActiveReplicaZone",
+          "fullName": "google.cloud.netapp.v1.NetApp.SwitchActiveReplicaZone",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListVolumes_async",
+      "title": "NetApp listVolumes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Volumes in a given project.",
+      "canonical": true,
+      "file": "net_app.list_volumes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListVolumes",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListVolumes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListVolumesResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListVolumes",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListVolumes",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetVolume_async",
+      "title": "NetApp getVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Volume.",
+      "canonical": true,
+      "file": "net_app.get_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetVolume",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.Volume",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetVolume",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetVolume",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateVolume_async",
+      "title": "NetApp createVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new Volume in a given project and location.",
+      "canonical": true,
+      "file": "net_app.create_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateVolume",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "volume_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "volume",
+            "type": ".google.cloud.netapp.v1.Volume"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateVolume",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateVolume",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateVolume_async",
+      "title": "NetApp updateVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a single Volume.",
+      "canonical": true,
+      "file": "net_app.update_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateVolume",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "volume",
+            "type": ".google.cloud.netapp.v1.Volume"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateVolume",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateVolume",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteVolume_async",
+      "title": "NetApp deleteVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a single Volume.",
+      "canonical": true,
+      "file": "net_app.delete_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteVolume",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteVolume",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteVolume",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_RevertVolume_async",
+      "title": "NetApp revertVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " Revert an existing volume to a specified snapshot. Warning! This operation will permanently revert all changes made after the snapshot was created.",
+      "canonical": true,
+      "file": "net_app.revert_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RevertVolume",
+        "fullName": "google.cloud.netapp.v1.NetApp.RevertVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "RevertVolume",
+          "fullName": "google.cloud.netapp.v1.NetApp.RevertVolume",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListSnapshots_async",
+      "title": "NetApp listSnapshots Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns descriptions of all snapshots for a volume.",
+      "canonical": true,
+      "file": "net_app.list_snapshots.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSnapshots",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListSnapshots",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListSnapshotsResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListSnapshots",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListSnapshots",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetSnapshot_async",
+      "title": "NetApp getSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Describe a snapshot for a volume.",
+      "canonical": true,
+      "file": "net_app.get_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSnapshot",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.Snapshot",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetSnapshot",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetSnapshot",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateSnapshot_async",
+      "title": "NetApp createSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new snapshot for a volume.",
+      "canonical": true,
+      "file": "net_app.create_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSnapshot",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "snapshot",
+            "type": ".google.cloud.netapp.v1.Snapshot"
+          },
+          {
+            "name": "snapshot_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateSnapshot",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateSnapshot",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteSnapshot_async",
+      "title": "NetApp deleteSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a snapshot.",
+      "canonical": true,
+      "file": "net_app.delete_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSnapshot",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteSnapshot",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteSnapshot",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateSnapshot_async",
+      "title": "NetApp updateSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the settings of a specific snapshot.",
+      "canonical": true,
+      "file": "net_app.update_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSnapshot",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "snapshot",
+            "type": ".google.cloud.netapp.v1.Snapshot"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateSnapshot",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateSnapshot",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListActiveDirectories_async",
+      "title": "NetApp listActiveDirectories Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists active directories.",
+      "canonical": true,
+      "file": "net_app.list_active_directories.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListActiveDirectories",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListActiveDirectories",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListActiveDirectoriesResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListActiveDirectories",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListActiveDirectories",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetActiveDirectory_async",
+      "title": "NetApp getActiveDirectory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Describes a specified active directory.",
+      "canonical": true,
+      "file": "net_app.get_active_directory.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetActiveDirectory",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetActiveDirectory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ActiveDirectory",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetActiveDirectory",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetActiveDirectory",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateActiveDirectory_async",
+      "title": "NetApp createActiveDirectory Sample",
+      "origin": "API_DEFINITION",
+      "description": " CreateActiveDirectory Creates the active directory specified in the request.",
+      "canonical": true,
+      "file": "net_app.create_active_directory.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateActiveDirectory",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateActiveDirectory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "active_directory",
+            "type": ".google.cloud.netapp.v1.ActiveDirectory"
+          },
+          {
+            "name": "active_directory_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateActiveDirectory",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateActiveDirectory",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateActiveDirectory_async",
+      "title": "NetApp updateActiveDirectory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update the parameters of an active directories.",
+      "canonical": true,
+      "file": "net_app.update_active_directory.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateActiveDirectory",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateActiveDirectory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "active_directory",
+            "type": ".google.cloud.netapp.v1.ActiveDirectory"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateActiveDirectory",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateActiveDirectory",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteActiveDirectory_async",
+      "title": "NetApp deleteActiveDirectory Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete the active directory specified in the request.",
+      "canonical": true,
+      "file": "net_app.delete_active_directory.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteActiveDirectory",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteActiveDirectory",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteActiveDirectory",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteActiveDirectory",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListKmsConfigs_async",
+      "title": "NetApp listKmsConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns descriptions of all KMS configs owned by the caller.",
+      "canonical": true,
+      "file": "net_app.list_kms_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListKmsConfigs",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListKmsConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListKmsConfigsResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListKmsConfigs",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListKmsConfigs",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateKmsConfig_async",
+      "title": "NetApp createKmsConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new KMS config.",
+      "canonical": true,
+      "file": "net_app.create_kms_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateKmsConfig",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateKmsConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "kms_config_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "kms_config",
+            "type": ".google.cloud.netapp.v1.KmsConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateKmsConfig",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateKmsConfig",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetKmsConfig_async",
+      "title": "NetApp getKmsConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the description of the specified KMS config by kms_config_id.",
+      "canonical": true,
+      "file": "net_app.get_kms_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetKmsConfig",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetKmsConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.KmsConfig",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetKmsConfig",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetKmsConfig",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateKmsConfig_async",
+      "title": "NetApp updateKmsConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the Kms config properties with the full spec",
+      "canonical": true,
+      "file": "net_app.update_kms_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateKmsConfig",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateKmsConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "kms_config",
+            "type": ".google.cloud.netapp.v1.KmsConfig"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateKmsConfig",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateKmsConfig",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_EncryptVolumes_async",
+      "title": "NetApp encryptVolumes Sample",
+      "origin": "API_DEFINITION",
+      "description": " Encrypt the existing volumes without CMEK encryption with the desired the KMS config for the whole region.",
+      "canonical": true,
+      "file": "net_app.encrypt_volumes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EncryptVolumes",
+        "fullName": "google.cloud.netapp.v1.NetApp.EncryptVolumes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "EncryptVolumes",
+          "fullName": "google.cloud.netapp.v1.NetApp.EncryptVolumes",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_VerifyKmsConfig_async",
+      "title": "NetApp verifyKmsConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Verifies KMS config reachability.",
+      "canonical": true,
+      "file": "net_app.verify_kms_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "VerifyKmsConfig",
+        "fullName": "google.cloud.netapp.v1.NetApp.VerifyKmsConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.VerifyKmsConfigResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "VerifyKmsConfig",
+          "fullName": "google.cloud.netapp.v1.NetApp.VerifyKmsConfig",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteKmsConfig_async",
+      "title": "NetApp deleteKmsConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Warning! This operation will permanently delete the Kms config.",
+      "canonical": true,
+      "file": "net_app.delete_kms_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteKmsConfig",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteKmsConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteKmsConfig",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteKmsConfig",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListReplications_async",
+      "title": "NetApp listReplications Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns descriptions of all replications for a volume.",
+      "canonical": true,
+      "file": "net_app.list_replications.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReplications",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListReplications",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListReplicationsResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListReplications",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListReplications",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetReplication_async",
+      "title": "NetApp getReplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Describe a replication for a volume.",
+      "canonical": true,
+      "file": "net_app.get_replication.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetReplication",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetReplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.Replication",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetReplication",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetReplication",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateReplication_async",
+      "title": "NetApp createReplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create a new replication for a volume.",
+      "canonical": true,
+      "file": "net_app.create_replication.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateReplication",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateReplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "replication",
+            "type": ".google.cloud.netapp.v1.Replication"
+          },
+          {
+            "name": "replication_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateReplication",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateReplication",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteReplication_async",
+      "title": "NetApp deleteReplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a replication.",
+      "canonical": true,
+      "file": "net_app.delete_replication.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteReplication",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteReplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteReplication",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteReplication",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateReplication_async",
+      "title": "NetApp updateReplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the settings of a specific replication.",
+      "canonical": true,
+      "file": "net_app.update_replication.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateReplication",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateReplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "replication",
+            "type": ".google.cloud.netapp.v1.Replication"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateReplication",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateReplication",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_StopReplication_async",
+      "title": "NetApp stopReplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Stop Cross Region Replication.",
+      "canonical": true,
+      "file": "net_app.stop_replication.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StopReplication",
+        "fullName": "google.cloud.netapp.v1.NetApp.StopReplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "StopReplication",
+          "fullName": "google.cloud.netapp.v1.NetApp.StopReplication",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ResumeReplication_async",
+      "title": "NetApp resumeReplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resume Cross Region Replication.",
+      "canonical": true,
+      "file": "net_app.resume_replication.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResumeReplication",
+        "fullName": "google.cloud.netapp.v1.NetApp.ResumeReplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ResumeReplication",
+          "fullName": "google.cloud.netapp.v1.NetApp.ResumeReplication",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ReverseReplicationDirection_async",
+      "title": "NetApp reverseReplicationDirection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Reverses direction of replication. Source becomes destination and destination becomes source.",
+      "canonical": true,
+      "file": "net_app.reverse_replication_direction.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReverseReplicationDirection",
+        "fullName": "google.cloud.netapp.v1.NetApp.ReverseReplicationDirection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ReverseReplicationDirection",
+          "fullName": "google.cloud.netapp.v1.NetApp.ReverseReplicationDirection",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_EstablishPeering_async",
+      "title": "NetApp establishPeering Sample",
+      "origin": "API_DEFINITION",
+      "description": " Establish replication peering.",
+      "canonical": true,
+      "file": "net_app.establish_peering.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EstablishPeering",
+        "fullName": "google.cloud.netapp.v1.NetApp.EstablishPeering",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "peer_cluster_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "peer_svm_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "peer_ip_addresses",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "peer_volume_name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "EstablishPeering",
+          "fullName": "google.cloud.netapp.v1.NetApp.EstablishPeering",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_SyncReplication_async",
+      "title": "NetApp syncReplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Syncs the replication. This will invoke one time volume data transfer from source to destination.",
+      "canonical": true,
+      "file": "net_app.sync_replication.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SyncReplication",
+        "fullName": "google.cloud.netapp.v1.NetApp.SyncReplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "SyncReplication",
+          "fullName": "google.cloud.netapp.v1.NetApp.SyncReplication",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateBackupVault_async",
+      "title": "NetApp createBackupVault Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates new backup vault",
+      "canonical": true,
+      "file": "net_app.create_backup_vault.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBackupVault",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateBackupVault",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup_vault_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup_vault",
+            "type": ".google.cloud.netapp.v1.BackupVault"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateBackupVault",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateBackupVault",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetBackupVault_async",
+      "title": "NetApp getBackupVault Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the description of the specified backup vault",
+      "canonical": true,
+      "file": "net_app.get_backup_vault.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBackupVault",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetBackupVault",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.BackupVault",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetBackupVault",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetBackupVault",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListBackupVaults_async",
+      "title": "NetApp listBackupVaults Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns list of all available backup vaults.",
+      "canonical": true,
+      "file": "net_app.list_backup_vaults.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBackupVaults",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListBackupVaults",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListBackupVaultsResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListBackupVaults",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListBackupVaults",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateBackupVault_async",
+      "title": "NetApp updateBackupVault Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the settings of a specific backup vault.",
+      "canonical": true,
+      "file": "net_app.update_backup_vault.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBackupVault",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackupVault",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "backup_vault",
+            "type": ".google.cloud.netapp.v1.BackupVault"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateBackupVault",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackupVault",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteBackupVault_async",
+      "title": "NetApp deleteBackupVault Sample",
+      "origin": "API_DEFINITION",
+      "description": " Warning! This operation will permanently delete the backup vault.",
+      "canonical": true,
+      "file": "net_app.delete_backup_vault.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBackupVault",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackupVault",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteBackupVault",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackupVault",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateBackup_async",
+      "title": "NetApp createBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a backup from the volume specified in the request The backup can be created from the given snapshot if specified in the request. If no snapshot specified, there'll be a new snapshot taken to initiate the backup creation.",
+      "canonical": true,
+      "file": "net_app.create_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBackup",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup",
+            "type": ".google.cloud.netapp.v1.Backup"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateBackup",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateBackup",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetBackup_async",
+      "title": "NetApp getBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the description of the specified backup",
+      "canonical": true,
+      "file": "net_app.get_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBackup",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.Backup",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetBackup",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetBackup",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListBackups_async",
+      "title": "NetApp listBackups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns descriptions of all backups for a backupVault.",
+      "canonical": true,
+      "file": "net_app.list_backups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 85,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBackups",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListBackups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListBackupsResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListBackups",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListBackups",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteBackup_async",
+      "title": "NetApp deleteBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Warning! This operation will permanently delete the backup.",
+      "canonical": true,
+      "file": "net_app.delete_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBackup",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteBackup",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackup",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateBackup_async",
+      "title": "NetApp updateBackup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update backup with full spec.",
+      "canonical": true,
+      "file": "net_app.update_backup.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBackup",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "backup",
+            "type": ".google.cloud.netapp.v1.Backup"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateBackup",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackup",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateBackupPolicy_async",
+      "title": "NetApp createBackupPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates new backup policy",
+      "canonical": true,
+      "file": "net_app.create_backup_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateBackupPolicy",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateBackupPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "backup_policy",
+            "type": ".google.cloud.netapp.v1.BackupPolicy"
+          },
+          {
+            "name": "backup_policy_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateBackupPolicy",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateBackupPolicy",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetBackupPolicy_async",
+      "title": "NetApp getBackupPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the description of the specified backup policy by backup_policy_id.",
+      "canonical": true,
+      "file": "net_app.get_backup_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetBackupPolicy",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetBackupPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.BackupPolicy",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetBackupPolicy",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetBackupPolicy",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListBackupPolicies_async",
+      "title": "NetApp listBackupPolicies Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns list of all available backup policies.",
+      "canonical": true,
+      "file": "net_app.list_backup_policies.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListBackupPolicies",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListBackupPolicies",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListBackupPoliciesResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListBackupPolicies",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListBackupPolicies",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateBackupPolicy_async",
+      "title": "NetApp updateBackupPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates settings of a specific backup policy.",
+      "canonical": true,
+      "file": "net_app.update_backup_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateBackupPolicy",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackupPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "backup_policy",
+            "type": ".google.cloud.netapp.v1.BackupPolicy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateBackupPolicy",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateBackupPolicy",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteBackupPolicy_async",
+      "title": "NetApp deleteBackupPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Warning! This operation will permanently delete the backup policy.",
+      "canonical": true,
+      "file": "net_app.delete_backup_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteBackupPolicy",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackupPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteBackupPolicy",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteBackupPolicy",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_ListQuotaRules_async",
+      "title": "NetApp listQuotaRules Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns list of all quota rules in a location.",
+      "canonical": true,
+      "file": "net_app.list_quota_rules.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListQuotaRules",
+        "fullName": "google.cloud.netapp.v1.NetApp.ListQuotaRules",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.ListQuotaRulesResponse",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "ListQuotaRules",
+          "fullName": "google.cloud.netapp.v1.NetApp.ListQuotaRules",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_GetQuotaRule_async",
+      "title": "NetApp getQuotaRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns details of the specified quota rule.",
+      "canonical": true,
+      "file": "net_app.get_quota_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetQuotaRule",
+        "fullName": "google.cloud.netapp.v1.NetApp.GetQuotaRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.netapp.v1.QuotaRule",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "GetQuotaRule",
+          "fullName": "google.cloud.netapp.v1.NetApp.GetQuotaRule",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_CreateQuotaRule_async",
+      "title": "NetApp createQuotaRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new quota rule.",
+      "canonical": true,
+      "file": "net_app.create_quota_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateQuotaRule",
+        "fullName": "google.cloud.netapp.v1.NetApp.CreateQuotaRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "quota_rule",
+            "type": ".google.cloud.netapp.v1.QuotaRule"
+          },
+          {
+            "name": "quota_rule_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "CreateQuotaRule",
+          "fullName": "google.cloud.netapp.v1.NetApp.CreateQuotaRule",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_UpdateQuotaRule_async",
+      "title": "NetApp updateQuotaRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates a quota rule.",
+      "canonical": true,
+      "file": "net_app.update_quota_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateQuotaRule",
+        "fullName": "google.cloud.netapp.v1.NetApp.UpdateQuotaRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "quota_rule",
+            "type": ".google.cloud.netapp.v1.QuotaRule"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "UpdateQuotaRule",
+          "fullName": "google.cloud.netapp.v1.NetApp.UpdateQuotaRule",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "netapp_v1_generated_NetApp_DeleteQuotaRule_async",
+      "title": "NetApp deleteQuotaRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a quota rule.",
+      "canonical": true,
+      "file": "net_app.delete_quota_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteQuotaRule",
+        "fullName": "google.cloud.netapp.v1.NetApp.DeleteQuotaRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "NetAppClient",
+          "fullName": "google.cloud.netapp.v1.NetAppClient"
+        },
+        "method": {
+          "shortName": "DeleteQuotaRule",
+          "fullName": "google.cloud.netapp.v1.NetApp.DeleteQuotaRule",
+          "service": {
+            "shortName": "NetApp",
+            "fullName": "google.cloud.netapp.v1.NetApp"
+          }
+        }
+      }
+    }
+  ]
 }

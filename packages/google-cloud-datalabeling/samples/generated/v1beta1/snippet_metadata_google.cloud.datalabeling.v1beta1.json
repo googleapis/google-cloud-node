@@ -1,1591 +1,1591 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-datalabeling",
-        "version": "5.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.datalabeling.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_CreateDataset_async",
-            "title": "datalabeling createDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates dataset. If success return a Dataset resource.",
-            "canonical": true,
-            "file": "data_labeling_service.create_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateDataset",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "dataset",
-                        "type": ".google.cloud.datalabeling.v1beta1.Dataset"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.Dataset",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateDataset",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateDataset",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetDataset_async",
-            "title": "datalabeling getDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets dataset by resource name.",
-            "canonical": true,
-            "file": "data_labeling_service.get_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDataset",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.Dataset",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "GetDataset",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetDataset",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListDatasets_async",
-            "title": "datalabeling listDatasets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists datasets under a project. Pagination is supported.",
-            "canonical": true,
-            "file": "data_labeling_service.list_datasets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDatasets",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListDatasets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.ListDatasetsResponse",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ListDatasets",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListDatasets",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteDataset_async",
-            "title": "datalabeling deleteDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a dataset by resource name.",
-            "canonical": true,
-            "file": "data_labeling_service.delete_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteDataset",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteDataset",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteDataset",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ImportData_async",
-            "title": "datalabeling importData Sample",
-            "origin": "API_DEFINITION",
-            "description": " Imports data into dataset based on source locations defined in request. It can be called multiple times for the same dataset. Each dataset can only have one long running operation running on it. For example, no labeling task (also long running operation) can be started while importing is still ongoing. Vice versa.",
-            "canonical": true,
-            "file": "data_labeling_service.import_data.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ImportData",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ImportData",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "input_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.InputConfig"
-                    },
-                    {
-                        "name": "user_email_address",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ImportData",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ImportData",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ExportData_async",
-            "title": "datalabeling exportData Sample",
-            "origin": "API_DEFINITION",
-            "description": " Exports data and annotations from dataset.",
-            "canonical": true,
-            "file": "data_labeling_service.export_data.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ExportData",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ExportData",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "annotated_dataset",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "output_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.OutputConfig"
-                    },
-                    {
-                        "name": "user_email_address",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ExportData",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ExportData",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetDataItem_async",
-            "title": "datalabeling getDataItem Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a data item in a dataset by resource name. This API can be called after data are imported into dataset.",
-            "canonical": true,
-            "file": "data_labeling_service.get_data_item.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDataItem",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetDataItem",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.DataItem",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "GetDataItem",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetDataItem",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListDataItems_async",
-            "title": "datalabeling listDataItems Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists data items in a dataset. This API can be called after data are imported into dataset. Pagination is supported.",
-            "canonical": true,
-            "file": "data_labeling_service.list_data_items.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDataItems",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListDataItems",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.ListDataItemsResponse",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ListDataItems",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListDataItems",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetAnnotatedDataset_async",
-            "title": "datalabeling getAnnotatedDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an annotated dataset by resource name.",
-            "canonical": true,
-            "file": "data_labeling_service.get_annotated_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAnnotatedDataset",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetAnnotatedDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.AnnotatedDataset",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "GetAnnotatedDataset",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetAnnotatedDataset",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListAnnotatedDatasets_async",
-            "title": "datalabeling listAnnotatedDatasets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists annotated datasets for a dataset. Pagination is supported.",
-            "canonical": true,
-            "file": "data_labeling_service.list_annotated_datasets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAnnotatedDatasets",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListAnnotatedDatasets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ListAnnotatedDatasets",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListAnnotatedDatasets",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotatedDataset_async",
-            "title": "datalabeling deleteAnnotatedDataset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an annotated dataset by resource name.",
-            "canonical": true,
-            "file": "data_labeling_service.delete_annotated_dataset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAnnotatedDataset",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteAnnotatedDataset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteAnnotatedDataset",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteAnnotatedDataset",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_LabelImage_async",
-            "title": "datalabeling labelImage Sample",
-            "origin": "API_DEFINITION",
-            "description": " Starts a labeling task for image. The type of image labeling task is configured by feature in the request.",
-            "canonical": true,
-            "file": "data_labeling_service.label_image.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 89,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LabelImage",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelImage",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "image_classification_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.ImageClassificationConfig"
-                    },
-                    {
-                        "name": "bounding_poly_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.BoundingPolyConfig"
-                    },
-                    {
-                        "name": "polyline_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.PolylineConfig"
-                    },
-                    {
-                        "name": "segmentation_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.SegmentationConfig"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "basic_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.HumanAnnotationConfig"
-                    },
-                    {
-                        "name": "feature",
-                        "type": ".google.cloud.datalabeling.v1beta1.LabelImageRequest.Feature"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "LabelImage",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelImage",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_LabelVideo_async",
-            "title": "datalabeling labelVideo Sample",
-            "origin": "API_DEFINITION",
-            "description": " Starts a labeling task for video. The type of video labeling task is configured by feature in the request.",
-            "canonical": true,
-            "file": "data_labeling_service.label_video.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 89,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LabelVideo",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelVideo",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "video_classification_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.VideoClassificationConfig"
-                    },
-                    {
-                        "name": "object_detection_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.ObjectDetectionConfig"
-                    },
-                    {
-                        "name": "object_tracking_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.ObjectTrackingConfig"
-                    },
-                    {
-                        "name": "event_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.EventConfig"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "basic_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.HumanAnnotationConfig"
-                    },
-                    {
-                        "name": "feature",
-                        "type": ".google.cloud.datalabeling.v1beta1.LabelVideoRequest.Feature"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "LabelVideo",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelVideo",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_LabelText_async",
-            "title": "datalabeling labelText Sample",
-            "origin": "API_DEFINITION",
-            "description": " Starts a labeling task for text. The type of text labeling task is configured by feature in the request.",
-            "canonical": true,
-            "file": "data_labeling_service.label_text.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "LabelText",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelText",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "text_classification_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.TextClassificationConfig"
-                    },
-                    {
-                        "name": "text_entity_extraction_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.TextEntityExtractionConfig"
-                    },
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "basic_config",
-                        "type": ".google.cloud.datalabeling.v1beta1.HumanAnnotationConfig"
-                    },
-                    {
-                        "name": "feature",
-                        "type": ".google.cloud.datalabeling.v1beta1.LabelTextRequest.Feature"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "LabelText",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelText",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetExample_async",
-            "title": "datalabeling getExample Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an example by resource name, including both data and annotation.",
-            "canonical": true,
-            "file": "data_labeling_service.get_example.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetExample",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetExample",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.Example",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "GetExample",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetExample",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListExamples_async",
-            "title": "datalabeling listExamples Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists examples in an annotated dataset. Pagination is supported.",
-            "canonical": true,
-            "file": "data_labeling_service.list_examples.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 75,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListExamples",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListExamples",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.ListExamplesResponse",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ListExamples",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListExamples",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_CreateAnnotationSpecSet_async",
-            "title": "datalabeling createAnnotationSpecSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an annotation spec set by providing a set of labels.",
-            "canonical": true,
-            "file": "data_labeling_service.create_annotation_spec_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAnnotationSpecSet",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateAnnotationSpecSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "annotation_spec_set",
-                        "type": ".google.cloud.datalabeling.v1beta1.AnnotationSpecSet"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.AnnotationSpecSet",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateAnnotationSpecSet",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateAnnotationSpecSet",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetAnnotationSpecSet_async",
-            "title": "datalabeling getAnnotationSpecSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an annotation spec set by resource name.",
-            "canonical": true,
-            "file": "data_labeling_service.get_annotation_spec_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAnnotationSpecSet",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetAnnotationSpecSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.AnnotationSpecSet",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "GetAnnotationSpecSet",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetAnnotationSpecSet",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListAnnotationSpecSets_async",
-            "title": "datalabeling listAnnotationSpecSets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists annotation spec sets for a project. Pagination is supported.",
-            "canonical": true,
-            "file": "data_labeling_service.list_annotation_spec_sets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAnnotationSpecSets",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListAnnotationSpecSets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ListAnnotationSpecSets",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListAnnotationSpecSets",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotationSpecSet_async",
-            "title": "datalabeling deleteAnnotationSpecSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an annotation spec set by resource name.",
-            "canonical": true,
-            "file": "data_labeling_service.delete_annotation_spec_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAnnotationSpecSet",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteAnnotationSpecSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteAnnotationSpecSet",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteAnnotationSpecSet",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_CreateInstruction_async",
-            "title": "datalabeling createInstruction Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an instruction for how data should be labeled.",
-            "canonical": true,
-            "file": "data_labeling_service.create_instruction.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateInstruction",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateInstruction",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "instruction",
-                        "type": ".google.cloud.datalabeling.v1beta1.Instruction"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateInstruction",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateInstruction",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetInstruction_async",
-            "title": "datalabeling getInstruction Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an instruction by resource name.",
-            "canonical": true,
-            "file": "data_labeling_service.get_instruction.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetInstruction",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetInstruction",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.Instruction",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "GetInstruction",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetInstruction",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListInstructions_async",
-            "title": "datalabeling listInstructions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists instructions for a project. Pagination is supported.",
-            "canonical": true,
-            "file": "data_labeling_service.list_instructions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 73,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListInstructions",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListInstructions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.ListInstructionsResponse",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ListInstructions",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListInstructions",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteInstruction_async",
-            "title": "datalabeling deleteInstruction Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an instruction object by resource name.",
-            "canonical": true,
-            "file": "data_labeling_service.delete_instruction.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteInstruction",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteInstruction",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteInstruction",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteInstruction",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetEvaluation_async",
-            "title": "datalabeling getEvaluation Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an evaluation by resource name (to search, use [projects.evaluations.search][google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations]).",
-            "canonical": true,
-            "file": "data_labeling_service.get_evaluation.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetEvaluation",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetEvaluation",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.Evaluation",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "GetEvaluation",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetEvaluation",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_SearchEvaluations_async",
-            "title": "datalabeling searchEvaluations Sample",
-            "origin": "API_DEFINITION",
-            "description": " Searches [evaluations][google.cloud.datalabeling.v1beta1.Evaluation] within a project.",
-            "canonical": true,
-            "file": "data_labeling_service.search_evaluations.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 101,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SearchEvaluations",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "SearchEvaluations",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_SearchExampleComparisons_async",
-            "title": "datalabeling searchExampleComparisons Sample",
-            "origin": "API_DEFINITION",
-            "description": " Searches example comparisons from an evaluation. The return format is a list of example comparisons that show ground truth and prediction(s) for a single input. Search by providing an evaluation ID.",
-            "canonical": true,
-            "file": "data_labeling_service.search_example_comparisons.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SearchExampleComparisons",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.SearchExampleComparisons",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "SearchExampleComparisons",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.SearchExampleComparisons",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_CreateEvaluationJob_async",
-            "title": "datalabeling createEvaluationJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an evaluation job.",
-            "canonical": true,
-            "file": "data_labeling_service.create_evaluation_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateEvaluationJob",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateEvaluationJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "job",
-                        "type": ".google.cloud.datalabeling.v1beta1.EvaluationJob"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.EvaluationJob",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateEvaluationJob",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateEvaluationJob",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_UpdateEvaluationJob_async",
-            "title": "datalabeling updateEvaluationJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an evaluation job. You can only update certain fields of the job's [EvaluationJobConfig][google.cloud.datalabeling.v1beta1.EvaluationJobConfig]: `humanAnnotationConfig.instruction`, `exampleCount`, and `exampleSamplePercentage`. If you want to change any other aspect of the evaluation job, you must delete the job and create a new one.",
-            "canonical": true,
-            "file": "data_labeling_service.update_evaluation_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateEvaluationJob",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.UpdateEvaluationJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "evaluation_job",
-                        "type": ".google.cloud.datalabeling.v1beta1.EvaluationJob"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.EvaluationJob",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateEvaluationJob",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.UpdateEvaluationJob",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetEvaluationJob_async",
-            "title": "datalabeling getEvaluationJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an evaluation job by resource name.",
-            "canonical": true,
-            "file": "data_labeling_service.get_evaluation_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetEvaluationJob",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetEvaluationJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.EvaluationJob",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "GetEvaluationJob",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetEvaluationJob",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_PauseEvaluationJob_async",
-            "title": "datalabeling pauseEvaluationJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Pauses an evaluation job. Pausing an evaluation job that is already in a `PAUSED` state is a no-op.",
-            "canonical": true,
-            "file": "data_labeling_service.pause_evaluation_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "PauseEvaluationJob",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.PauseEvaluationJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "PauseEvaluationJob",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.PauseEvaluationJob",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ResumeEvaluationJob_async",
-            "title": "datalabeling resumeEvaluationJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Resumes a paused evaluation job. A deleted evaluation job can't be resumed. Resuming a running or scheduled evaluation job is a no-op.",
-            "canonical": true,
-            "file": "data_labeling_service.resume_evaluation_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResumeEvaluationJob",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ResumeEvaluationJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ResumeEvaluationJob",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ResumeEvaluationJob",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteEvaluationJob_async",
-            "title": "datalabeling deleteEvaluationJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Stops and deletes an evaluation job.",
-            "canonical": true,
-            "file": "data_labeling_service.delete_evaluation_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteEvaluationJob",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteEvaluationJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteEvaluationJob",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteEvaluationJob",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListEvaluationJobs_async",
-            "title": "datalabeling listEvaluationJobs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all evaluation jobs within a project with possible filters. Pagination is supported.",
-            "canonical": true,
-            "file": "data_labeling_service.list_evaluation_jobs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 80,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListEvaluationJobs",
-                "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListEvaluationJobs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse",
-                "client": {
-                    "shortName": "DataLabelingServiceClient",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
-                },
-                "method": {
-                    "shortName": "ListEvaluationJobs",
-                    "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListEvaluationJobs",
-                    "service": {
-                        "shortName": "DataLabelingService",
-                        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-datalabeling",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.datalabeling.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_CreateDataset_async",
+      "title": "datalabeling createDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates dataset. If success return a Dataset resource.",
+      "canonical": true,
+      "file": "data_labeling_service.create_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDataset",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "dataset",
+            "type": ".google.cloud.datalabeling.v1beta1.Dataset"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.Dataset",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "CreateDataset",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateDataset",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetDataset_async",
+      "title": "datalabeling getDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets dataset by resource name.",
+      "canonical": true,
+      "file": "data_labeling_service.get_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataset",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.Dataset",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataset",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetDataset",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListDatasets_async",
+      "title": "datalabeling listDatasets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists datasets under a project. Pagination is supported.",
+      "canonical": true,
+      "file": "data_labeling_service.list_datasets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDatasets",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListDatasets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.ListDatasetsResponse",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ListDatasets",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListDatasets",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteDataset_async",
+      "title": "datalabeling deleteDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a dataset by resource name.",
+      "canonical": true,
+      "file": "data_labeling_service.delete_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDataset",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteDataset",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteDataset",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ImportData_async",
+      "title": "datalabeling importData Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports data into dataset based on source locations defined in request. It can be called multiple times for the same dataset. Each dataset can only have one long running operation running on it. For example, no labeling task (also long running operation) can be started while importing is still ongoing. Vice versa.",
+      "canonical": true,
+      "file": "data_labeling_service.import_data.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportData",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ImportData",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input_config",
+            "type": ".google.cloud.datalabeling.v1beta1.InputConfig"
+          },
+          {
+            "name": "user_email_address",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ImportData",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ImportData",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ExportData_async",
+      "title": "datalabeling exportData Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports data and annotations from dataset.",
+      "canonical": true,
+      "file": "data_labeling_service.export_data.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportData",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ExportData",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "annotated_dataset",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "output_config",
+            "type": ".google.cloud.datalabeling.v1beta1.OutputConfig"
+          },
+          {
+            "name": "user_email_address",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ExportData",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ExportData",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetDataItem_async",
+      "title": "datalabeling getDataItem Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a data item in a dataset by resource name. This API can be called after data are imported into dataset.",
+      "canonical": true,
+      "file": "data_labeling_service.get_data_item.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDataItem",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetDataItem",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.DataItem",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "GetDataItem",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetDataItem",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListDataItems_async",
+      "title": "datalabeling listDataItems Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists data items in a dataset. This API can be called after data are imported into dataset. Pagination is supported.",
+      "canonical": true,
+      "file": "data_labeling_service.list_data_items.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDataItems",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListDataItems",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.ListDataItemsResponse",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ListDataItems",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListDataItems",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetAnnotatedDataset_async",
+      "title": "datalabeling getAnnotatedDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an annotated dataset by resource name.",
+      "canonical": true,
+      "file": "data_labeling_service.get_annotated_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAnnotatedDataset",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetAnnotatedDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.AnnotatedDataset",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "GetAnnotatedDataset",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetAnnotatedDataset",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListAnnotatedDatasets_async",
+      "title": "datalabeling listAnnotatedDatasets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists annotated datasets for a dataset. Pagination is supported.",
+      "canonical": true,
+      "file": "data_labeling_service.list_annotated_datasets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAnnotatedDatasets",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListAnnotatedDatasets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.ListAnnotatedDatasetsResponse",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ListAnnotatedDatasets",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListAnnotatedDatasets",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotatedDataset_async",
+      "title": "datalabeling deleteAnnotatedDataset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an annotated dataset by resource name.",
+      "canonical": true,
+      "file": "data_labeling_service.delete_annotated_dataset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAnnotatedDataset",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteAnnotatedDataset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAnnotatedDataset",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteAnnotatedDataset",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_LabelImage_async",
+      "title": "datalabeling labelImage Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts a labeling task for image. The type of image labeling task is configured by feature in the request.",
+      "canonical": true,
+      "file": "data_labeling_service.label_image.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LabelImage",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelImage",
+        "async": true,
+        "parameters": [
+          {
+            "name": "image_classification_config",
+            "type": ".google.cloud.datalabeling.v1beta1.ImageClassificationConfig"
+          },
+          {
+            "name": "bounding_poly_config",
+            "type": ".google.cloud.datalabeling.v1beta1.BoundingPolyConfig"
+          },
+          {
+            "name": "polyline_config",
+            "type": ".google.cloud.datalabeling.v1beta1.PolylineConfig"
+          },
+          {
+            "name": "segmentation_config",
+            "type": ".google.cloud.datalabeling.v1beta1.SegmentationConfig"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "basic_config",
+            "type": ".google.cloud.datalabeling.v1beta1.HumanAnnotationConfig"
+          },
+          {
+            "name": "feature",
+            "type": ".google.cloud.datalabeling.v1beta1.LabelImageRequest.Feature"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "LabelImage",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelImage",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_LabelVideo_async",
+      "title": "datalabeling labelVideo Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts a labeling task for video. The type of video labeling task is configured by feature in the request.",
+      "canonical": true,
+      "file": "data_labeling_service.label_video.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 89,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LabelVideo",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelVideo",
+        "async": true,
+        "parameters": [
+          {
+            "name": "video_classification_config",
+            "type": ".google.cloud.datalabeling.v1beta1.VideoClassificationConfig"
+          },
+          {
+            "name": "object_detection_config",
+            "type": ".google.cloud.datalabeling.v1beta1.ObjectDetectionConfig"
+          },
+          {
+            "name": "object_tracking_config",
+            "type": ".google.cloud.datalabeling.v1beta1.ObjectTrackingConfig"
+          },
+          {
+            "name": "event_config",
+            "type": ".google.cloud.datalabeling.v1beta1.EventConfig"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "basic_config",
+            "type": ".google.cloud.datalabeling.v1beta1.HumanAnnotationConfig"
+          },
+          {
+            "name": "feature",
+            "type": ".google.cloud.datalabeling.v1beta1.LabelVideoRequest.Feature"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "LabelVideo",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelVideo",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_LabelText_async",
+      "title": "datalabeling labelText Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts a labeling task for text. The type of text labeling task is configured by feature in the request.",
+      "canonical": true,
+      "file": "data_labeling_service.label_text.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "LabelText",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelText",
+        "async": true,
+        "parameters": [
+          {
+            "name": "text_classification_config",
+            "type": ".google.cloud.datalabeling.v1beta1.TextClassificationConfig"
+          },
+          {
+            "name": "text_entity_extraction_config",
+            "type": ".google.cloud.datalabeling.v1beta1.TextEntityExtractionConfig"
+          },
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "basic_config",
+            "type": ".google.cloud.datalabeling.v1beta1.HumanAnnotationConfig"
+          },
+          {
+            "name": "feature",
+            "type": ".google.cloud.datalabeling.v1beta1.LabelTextRequest.Feature"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "LabelText",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.LabelText",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetExample_async",
+      "title": "datalabeling getExample Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an example by resource name, including both data and annotation.",
+      "canonical": true,
+      "file": "data_labeling_service.get_example.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetExample",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetExample",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.Example",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "GetExample",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetExample",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListExamples_async",
+      "title": "datalabeling listExamples Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists examples in an annotated dataset. Pagination is supported.",
+      "canonical": true,
+      "file": "data_labeling_service.list_examples.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListExamples",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListExamples",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.ListExamplesResponse",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ListExamples",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListExamples",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_CreateAnnotationSpecSet_async",
+      "title": "datalabeling createAnnotationSpecSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an annotation spec set by providing a set of labels.",
+      "canonical": true,
+      "file": "data_labeling_service.create_annotation_spec_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAnnotationSpecSet",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateAnnotationSpecSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "annotation_spec_set",
+            "type": ".google.cloud.datalabeling.v1beta1.AnnotationSpecSet"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.AnnotationSpecSet",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "CreateAnnotationSpecSet",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateAnnotationSpecSet",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetAnnotationSpecSet_async",
+      "title": "datalabeling getAnnotationSpecSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an annotation spec set by resource name.",
+      "canonical": true,
+      "file": "data_labeling_service.get_annotation_spec_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAnnotationSpecSet",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetAnnotationSpecSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.AnnotationSpecSet",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "GetAnnotationSpecSet",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetAnnotationSpecSet",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListAnnotationSpecSets_async",
+      "title": "datalabeling listAnnotationSpecSets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists annotation spec sets for a project. Pagination is supported.",
+      "canonical": true,
+      "file": "data_labeling_service.list_annotation_spec_sets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAnnotationSpecSets",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListAnnotationSpecSets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.ListAnnotationSpecSetsResponse",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ListAnnotationSpecSets",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListAnnotationSpecSets",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteAnnotationSpecSet_async",
+      "title": "datalabeling deleteAnnotationSpecSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an annotation spec set by resource name.",
+      "canonical": true,
+      "file": "data_labeling_service.delete_annotation_spec_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAnnotationSpecSet",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteAnnotationSpecSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteAnnotationSpecSet",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteAnnotationSpecSet",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_CreateInstruction_async",
+      "title": "datalabeling createInstruction Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an instruction for how data should be labeled.",
+      "canonical": true,
+      "file": "data_labeling_service.create_instruction.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateInstruction",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateInstruction",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "instruction",
+            "type": ".google.cloud.datalabeling.v1beta1.Instruction"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "CreateInstruction",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateInstruction",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetInstruction_async",
+      "title": "datalabeling getInstruction Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an instruction by resource name.",
+      "canonical": true,
+      "file": "data_labeling_service.get_instruction.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInstruction",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetInstruction",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.Instruction",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "GetInstruction",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetInstruction",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListInstructions_async",
+      "title": "datalabeling listInstructions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists instructions for a project. Pagination is supported.",
+      "canonical": true,
+      "file": "data_labeling_service.list_instructions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInstructions",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListInstructions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.ListInstructionsResponse",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ListInstructions",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListInstructions",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteInstruction_async",
+      "title": "datalabeling deleteInstruction Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an instruction object by resource name.",
+      "canonical": true,
+      "file": "data_labeling_service.delete_instruction.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInstruction",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteInstruction",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteInstruction",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteInstruction",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetEvaluation_async",
+      "title": "datalabeling getEvaluation Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an evaluation by resource name (to search, use [projects.evaluations.search][google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations]).",
+      "canonical": true,
+      "file": "data_labeling_service.get_evaluation.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEvaluation",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetEvaluation",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.Evaluation",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "GetEvaluation",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetEvaluation",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_SearchEvaluations_async",
+      "title": "datalabeling searchEvaluations Sample",
+      "origin": "API_DEFINITION",
+      "description": " Searches [evaluations][google.cloud.datalabeling.v1beta1.Evaluation] within a project.",
+      "canonical": true,
+      "file": "data_labeling_service.search_evaluations.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 101,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchEvaluations",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.SearchEvaluationsResponse",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "SearchEvaluations",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.SearchEvaluations",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_SearchExampleComparisons_async",
+      "title": "datalabeling searchExampleComparisons Sample",
+      "origin": "API_DEFINITION",
+      "description": " Searches example comparisons from an evaluation. The return format is a list of example comparisons that show ground truth and prediction(s) for a single input. Search by providing an evaluation ID.",
+      "canonical": true,
+      "file": "data_labeling_service.search_example_comparisons.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SearchExampleComparisons",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.SearchExampleComparisons",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.SearchExampleComparisonsResponse",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "SearchExampleComparisons",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.SearchExampleComparisons",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_CreateEvaluationJob_async",
+      "title": "datalabeling createEvaluationJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an evaluation job.",
+      "canonical": true,
+      "file": "data_labeling_service.create_evaluation_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateEvaluationJob",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateEvaluationJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "job",
+            "type": ".google.cloud.datalabeling.v1beta1.EvaluationJob"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.EvaluationJob",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "CreateEvaluationJob",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.CreateEvaluationJob",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_UpdateEvaluationJob_async",
+      "title": "datalabeling updateEvaluationJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an evaluation job. You can only update certain fields of the job's [EvaluationJobConfig][google.cloud.datalabeling.v1beta1.EvaluationJobConfig]: `humanAnnotationConfig.instruction`, `exampleCount`, and `exampleSamplePercentage`. If you want to change any other aspect of the evaluation job, you must delete the job and create a new one.",
+      "canonical": true,
+      "file": "data_labeling_service.update_evaluation_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateEvaluationJob",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.UpdateEvaluationJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "evaluation_job",
+            "type": ".google.cloud.datalabeling.v1beta1.EvaluationJob"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.EvaluationJob",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateEvaluationJob",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.UpdateEvaluationJob",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_GetEvaluationJob_async",
+      "title": "datalabeling getEvaluationJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an evaluation job by resource name.",
+      "canonical": true,
+      "file": "data_labeling_service.get_evaluation_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetEvaluationJob",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetEvaluationJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.EvaluationJob",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "GetEvaluationJob",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.GetEvaluationJob",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_PauseEvaluationJob_async",
+      "title": "datalabeling pauseEvaluationJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Pauses an evaluation job. Pausing an evaluation job that is already in a `PAUSED` state is a no-op.",
+      "canonical": true,
+      "file": "data_labeling_service.pause_evaluation_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "PauseEvaluationJob",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.PauseEvaluationJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "PauseEvaluationJob",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.PauseEvaluationJob",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ResumeEvaluationJob_async",
+      "title": "datalabeling resumeEvaluationJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Resumes a paused evaluation job. A deleted evaluation job can't be resumed. Resuming a running or scheduled evaluation job is a no-op.",
+      "canonical": true,
+      "file": "data_labeling_service.resume_evaluation_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResumeEvaluationJob",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ResumeEvaluationJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ResumeEvaluationJob",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ResumeEvaluationJob",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_DeleteEvaluationJob_async",
+      "title": "datalabeling deleteEvaluationJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Stops and deletes an evaluation job.",
+      "canonical": true,
+      "file": "data_labeling_service.delete_evaluation_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteEvaluationJob",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteEvaluationJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteEvaluationJob",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.DeleteEvaluationJob",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "datalabeling_v1beta1_generated_DataLabelingService_ListEvaluationJobs_async",
+      "title": "datalabeling listEvaluationJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all evaluation jobs within a project with possible filters. Pagination is supported.",
+      "canonical": true,
+      "file": "data_labeling_service.list_evaluation_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 80,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListEvaluationJobs",
+        "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListEvaluationJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.datalabeling.v1beta1.ListEvaluationJobsResponse",
+        "client": {
+          "shortName": "DataLabelingServiceClient",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingServiceClient"
+        },
+        "method": {
+          "shortName": "ListEvaluationJobs",
+          "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService.ListEvaluationJobs",
+          "service": {
+            "shortName": "DataLabelingService",
+            "fullName": "google.cloud.datalabeling.v1beta1.DataLabelingService"
+          }
+        }
+      }
+    }
+  ]
 }

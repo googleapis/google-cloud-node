@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.4](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.3...gapic-node-processing-v0.1.4) (2025-10-01)
+
+
+### Bug Fixes
+
+* Add 'esm' to src path for esm-specific structure ([#6768](https://github.com/googleapis/google-cloud-node/issues/6768)) ([88c89f4](https://github.com/googleapis/google-cloud-node/commit/88c89f456af4d6347e46d2919cbb757733bd7e19))
+
+## [0.1.3](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.2...gapic-node-processing-v0.1.3) (2025-09-30)
+
+
+### Bug Fixes
+
+* Reexport templates ([#6766](https://github.com/googleapis/google-cloud-node/issues/6766)) ([4742ae8](https://github.com/googleapis/google-cloud-node/commit/4742ae83ff00974e2677935fd7fe6ae13b9f7715))
+
 ## [0.1.2](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.1...gapic-node-processing-v0.1.2) (2025-09-09)
 
 

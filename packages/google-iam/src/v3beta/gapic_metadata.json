@@ -1,0 +1,173 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.iam.v3beta",
+  "libraryPackage": "@google-cloud/iam",
+  "services": {
+    "PolicyBindings": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PolicyBindingsClient",
+          "rpcs": {
+            "GetPolicyBinding": {
+              "methods": [
+                "getPolicyBinding"
+              ]
+            },
+            "CreatePolicyBinding": {
+              "methods": [
+                "createPolicyBinding"
+              ]
+            },
+            "UpdatePolicyBinding": {
+              "methods": [
+                "updatePolicyBinding"
+              ]
+            },
+            "DeletePolicyBinding": {
+              "methods": [
+                "deletePolicyBinding"
+              ]
+            },
+            "ListPolicyBindings": {
+              "methods": [
+                "listPolicyBindings",
+                "listPolicyBindingsStream",
+                "listPolicyBindingsAsync"
+              ]
+            },
+            "SearchTargetPolicyBindings": {
+              "methods": [
+                "searchTargetPolicyBindings",
+                "searchTargetPolicyBindingsStream",
+                "searchTargetPolicyBindingsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PolicyBindingsClient",
+          "rpcs": {
+            "GetPolicyBinding": {
+              "methods": [
+                "getPolicyBinding"
+              ]
+            },
+            "CreatePolicyBinding": {
+              "methods": [
+                "createPolicyBinding"
+              ]
+            },
+            "UpdatePolicyBinding": {
+              "methods": [
+                "updatePolicyBinding"
+              ]
+            },
+            "DeletePolicyBinding": {
+              "methods": [
+                "deletePolicyBinding"
+              ]
+            },
+            "ListPolicyBindings": {
+              "methods": [
+                "listPolicyBindings",
+                "listPolicyBindingsStream",
+                "listPolicyBindingsAsync"
+              ]
+            },
+            "SearchTargetPolicyBindings": {
+              "methods": [
+                "searchTargetPolicyBindings",
+                "searchTargetPolicyBindingsStream",
+                "searchTargetPolicyBindingsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PrincipalAccessBoundaryPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PrincipalAccessBoundaryPoliciesClient",
+          "rpcs": {
+            "GetPrincipalAccessBoundaryPolicy": {
+              "methods": [
+                "getPrincipalAccessBoundaryPolicy"
+              ]
+            },
+            "CreatePrincipalAccessBoundaryPolicy": {
+              "methods": [
+                "createPrincipalAccessBoundaryPolicy"
+              ]
+            },
+            "UpdatePrincipalAccessBoundaryPolicy": {
+              "methods": [
+                "updatePrincipalAccessBoundaryPolicy"
+              ]
+            },
+            "DeletePrincipalAccessBoundaryPolicy": {
+              "methods": [
+                "deletePrincipalAccessBoundaryPolicy"
+              ]
+            },
+            "ListPrincipalAccessBoundaryPolicies": {
+              "methods": [
+                "listPrincipalAccessBoundaryPolicies",
+                "listPrincipalAccessBoundaryPoliciesStream",
+                "listPrincipalAccessBoundaryPoliciesAsync"
+              ]
+            },
+            "SearchPrincipalAccessBoundaryPolicyBindings": {
+              "methods": [
+                "searchPrincipalAccessBoundaryPolicyBindings",
+                "searchPrincipalAccessBoundaryPolicyBindingsStream",
+                "searchPrincipalAccessBoundaryPolicyBindingsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PrincipalAccessBoundaryPoliciesClient",
+          "rpcs": {
+            "GetPrincipalAccessBoundaryPolicy": {
+              "methods": [
+                "getPrincipalAccessBoundaryPolicy"
+              ]
+            },
+            "CreatePrincipalAccessBoundaryPolicy": {
+              "methods": [
+                "createPrincipalAccessBoundaryPolicy"
+              ]
+            },
+            "UpdatePrincipalAccessBoundaryPolicy": {
+              "methods": [
+                "updatePrincipalAccessBoundaryPolicy"
+              ]
+            },
+            "DeletePrincipalAccessBoundaryPolicy": {
+              "methods": [
+                "deletePrincipalAccessBoundaryPolicy"
+              ]
+            },
+            "ListPrincipalAccessBoundaryPolicies": {
+              "methods": [
+                "listPrincipalAccessBoundaryPolicies",
+                "listPrincipalAccessBoundaryPoliciesStream",
+                "listPrincipalAccessBoundaryPoliciesAsync"
+              ]
+            },
+            "SearchPrincipalAccessBoundaryPolicyBindings": {
+              "methods": [
+                "searchPrincipalAccessBoundaryPolicyBindings",
+                "searchPrincipalAccessBoundaryPolicyBindingsStream",
+                "searchPrincipalAccessBoundaryPolicyBindingsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

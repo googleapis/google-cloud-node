@@ -1,1531 +1,1531 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-appengine",
-        "version": "4.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.appengine.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "appengine_v1_generated_Applications_GetApplication_async",
-            "title": "Applications getApplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets information about an application.",
-            "canonical": true,
-            "file": "applications.get_application.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 52,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetApplication",
-                "fullName": "google.appengine.v1.Applications.GetApplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.Application",
-                "client": {
-                    "shortName": "ApplicationsClient",
-                    "fullName": "google.appengine.v1.ApplicationsClient"
-                },
-                "method": {
-                    "shortName": "GetApplication",
-                    "fullName": "google.appengine.v1.Applications.GetApplication",
-                    "service": {
-                        "shortName": "Applications",
-                        "fullName": "google.appengine.v1.Applications"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Applications_CreateApplication_async",
-            "title": "Applications createApplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an App Engine application for a Google Cloud Platform project. Required fields: * `id` - The ID of the target Cloud Platform project. * *location* - The [region](https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located. For more information about App Engine applications, see [Managing Projects, Applications, and Billing](https://cloud.google.com/appengine/docs/standard/python/console/).",
-            "canonical": true,
-            "file": "applications.create_application.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateApplication",
-                "fullName": "google.appengine.v1.Applications.CreateApplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "application",
-                        "type": ".google.appengine.v1.Application"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ApplicationsClient",
-                    "fullName": "google.appengine.v1.ApplicationsClient"
-                },
-                "method": {
-                    "shortName": "CreateApplication",
-                    "fullName": "google.appengine.v1.Applications.CreateApplication",
-                    "service": {
-                        "shortName": "Applications",
-                        "fullName": "google.appengine.v1.Applications"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Applications_UpdateApplication_async",
-            "title": "Applications updateApplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified Application resource. You can update the following fields: * `auth_domain` - Google authentication domain for controlling user access to the application. * `default_cookie_expiration` - Cookie expiration policy for the application. * `iap` - Identity-Aware Proxy properties for the application.",
-            "canonical": true,
-            "file": "applications.update_application.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateApplication",
-                "fullName": "google.appengine.v1.Applications.UpdateApplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "application",
-                        "type": ".google.appengine.v1.Application"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ApplicationsClient",
-                    "fullName": "google.appengine.v1.ApplicationsClient"
-                },
-                "method": {
-                    "shortName": "UpdateApplication",
-                    "fullName": "google.appengine.v1.Applications.UpdateApplication",
-                    "service": {
-                        "shortName": "Applications",
-                        "fullName": "google.appengine.v1.Applications"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Applications_RepairApplication_async",
-            "title": "Applications repairApplication Sample",
-            "origin": "API_DEFINITION",
-            "description": " Recreates the required App Engine features for the specified App Engine application, for example a Cloud Storage bucket or App Engine service account. Use this method if you receive an error message about a missing feature, for example, *Error retrieving the App Engine service account*. If you have deleted your App Engine service account, this will not be able to recreate it. Instead, you should attempt to use the IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B\"name\"%3A\"projects%2F-%2FserviceAccounts%2Funique_id\"%2C\"resource\"%3A%7B%7D%7D . If the deletion was recent, the numeric ID can be found in the Cloud Console Activity Log.",
-            "canonical": true,
-            "file": "applications.repair_application.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RepairApplication",
-                "fullName": "google.appengine.v1.Applications.RepairApplication",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ApplicationsClient",
-                    "fullName": "google.appengine.v1.ApplicationsClient"
-                },
-                "method": {
-                    "shortName": "RepairApplication",
-                    "fullName": "google.appengine.v1.Applications.RepairApplication",
-                    "service": {
-                        "shortName": "Applications",
-                        "fullName": "google.appengine.v1.Applications"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_AuthorizedCertificates_ListAuthorizedCertificates_async",
-            "title": "Applications listAuthorizedCertificates Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all SSL certificates the user is authorized to administer.",
-            "canonical": true,
-            "file": "authorized_certificates.list_authorized_certificates.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAuthorizedCertificates",
-                "fullName": "google.appengine.v1.AuthorizedCertificates.ListAuthorizedCertificates",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.appengine.v1.AuthorizedCertificateView"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.ListAuthorizedCertificatesResponse",
-                "client": {
-                    "shortName": "AuthorizedCertificatesClient",
-                    "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
-                },
-                "method": {
-                    "shortName": "ListAuthorizedCertificates",
-                    "fullName": "google.appengine.v1.AuthorizedCertificates.ListAuthorizedCertificates",
-                    "service": {
-                        "shortName": "AuthorizedCertificates",
-                        "fullName": "google.appengine.v1.AuthorizedCertificates"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_AuthorizedCertificates_GetAuthorizedCertificate_async",
-            "title": "Applications getAuthorizedCertificate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the specified SSL certificate.",
-            "canonical": true,
-            "file": "authorized_certificates.get_authorized_certificate.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAuthorizedCertificate",
-                "fullName": "google.appengine.v1.AuthorizedCertificates.GetAuthorizedCertificate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.appengine.v1.AuthorizedCertificateView"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.AuthorizedCertificate",
-                "client": {
-                    "shortName": "AuthorizedCertificatesClient",
-                    "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
-                },
-                "method": {
-                    "shortName": "GetAuthorizedCertificate",
-                    "fullName": "google.appengine.v1.AuthorizedCertificates.GetAuthorizedCertificate",
-                    "service": {
-                        "shortName": "AuthorizedCertificates",
-                        "fullName": "google.appengine.v1.AuthorizedCertificates"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_AuthorizedCertificates_CreateAuthorizedCertificate_async",
-            "title": "Applications createAuthorizedCertificate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Uploads the specified SSL certificate.",
-            "canonical": true,
-            "file": "authorized_certificates.create_authorized_certificate.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateAuthorizedCertificate",
-                "fullName": "google.appengine.v1.AuthorizedCertificates.CreateAuthorizedCertificate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "certificate",
-                        "type": ".google.appengine.v1.AuthorizedCertificate"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.AuthorizedCertificate",
-                "client": {
-                    "shortName": "AuthorizedCertificatesClient",
-                    "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
-                },
-                "method": {
-                    "shortName": "CreateAuthorizedCertificate",
-                    "fullName": "google.appengine.v1.AuthorizedCertificates.CreateAuthorizedCertificate",
-                    "service": {
-                        "shortName": "AuthorizedCertificates",
-                        "fullName": "google.appengine.v1.AuthorizedCertificates"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_AuthorizedCertificates_UpdateAuthorizedCertificate_async",
-            "title": "Applications updateAuthorizedCertificate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified SSL certificate. To renew a certificate and maintain its existing domain mappings, update `certificate_data` with a new certificate. The new certificate must be applicable to the same domains as the original certificate. The certificate `display_name` may also be updated.",
-            "canonical": true,
-            "file": "authorized_certificates.update_authorized_certificate.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateAuthorizedCertificate",
-                "fullName": "google.appengine.v1.AuthorizedCertificates.UpdateAuthorizedCertificate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "certificate",
-                        "type": ".google.appengine.v1.AuthorizedCertificate"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.AuthorizedCertificate",
-                "client": {
-                    "shortName": "AuthorizedCertificatesClient",
-                    "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
-                },
-                "method": {
-                    "shortName": "UpdateAuthorizedCertificate",
-                    "fullName": "google.appengine.v1.AuthorizedCertificates.UpdateAuthorizedCertificate",
-                    "service": {
-                        "shortName": "AuthorizedCertificates",
-                        "fullName": "google.appengine.v1.AuthorizedCertificates"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_AuthorizedCertificates_DeleteAuthorizedCertificate_async",
-            "title": "Applications deleteAuthorizedCertificate Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified SSL certificate.",
-            "canonical": true,
-            "file": "authorized_certificates.delete_authorized_certificate.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAuthorizedCertificate",
-                "fullName": "google.appengine.v1.AuthorizedCertificates.DeleteAuthorizedCertificate",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "AuthorizedCertificatesClient",
-                    "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
-                },
-                "method": {
-                    "shortName": "DeleteAuthorizedCertificate",
-                    "fullName": "google.appengine.v1.AuthorizedCertificates.DeleteAuthorizedCertificate",
-                    "service": {
-                        "shortName": "AuthorizedCertificates",
-                        "fullName": "google.appengine.v1.AuthorizedCertificates"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_AuthorizedDomains_ListAuthorizedDomains_async",
-            "title": "Applications listAuthorizedDomains Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all domains the user is authorized to administer.",
-            "canonical": true,
-            "file": "authorized_domains.list_authorized_domains.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAuthorizedDomains",
-                "fullName": "google.appengine.v1.AuthorizedDomains.ListAuthorizedDomains",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.ListAuthorizedDomainsResponse",
-                "client": {
-                    "shortName": "AuthorizedDomainsClient",
-                    "fullName": "google.appengine.v1.AuthorizedDomainsClient"
-                },
-                "method": {
-                    "shortName": "ListAuthorizedDomains",
-                    "fullName": "google.appengine.v1.AuthorizedDomains.ListAuthorizedDomains",
-                    "service": {
-                        "shortName": "AuthorizedDomains",
-                        "fullName": "google.appengine.v1.AuthorizedDomains"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_DomainMappings_ListDomainMappings_async",
-            "title": "Applications listDomainMappings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the domain mappings on an application.",
-            "canonical": true,
-            "file": "domain_mappings.list_domain_mappings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListDomainMappings",
-                "fullName": "google.appengine.v1.DomainMappings.ListDomainMappings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.ListDomainMappingsResponse",
-                "client": {
-                    "shortName": "DomainMappingsClient",
-                    "fullName": "google.appengine.v1.DomainMappingsClient"
-                },
-                "method": {
-                    "shortName": "ListDomainMappings",
-                    "fullName": "google.appengine.v1.DomainMappings.ListDomainMappings",
-                    "service": {
-                        "shortName": "DomainMappings",
-                        "fullName": "google.appengine.v1.DomainMappings"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_DomainMappings_GetDomainMapping_async",
-            "title": "Applications getDomainMapping Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the specified domain mapping.",
-            "canonical": true,
-            "file": "domain_mappings.get_domain_mapping.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetDomainMapping",
-                "fullName": "google.appengine.v1.DomainMappings.GetDomainMapping",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.DomainMapping",
-                "client": {
-                    "shortName": "DomainMappingsClient",
-                    "fullName": "google.appengine.v1.DomainMappingsClient"
-                },
-                "method": {
-                    "shortName": "GetDomainMapping",
-                    "fullName": "google.appengine.v1.DomainMappings.GetDomainMapping",
-                    "service": {
-                        "shortName": "DomainMappings",
-                        "fullName": "google.appengine.v1.DomainMappings"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_DomainMappings_CreateDomainMapping_async",
-            "title": "Applications createDomainMapping Sample",
-            "origin": "API_DEFINITION",
-            "description": " Maps a domain to an application. A user must be authorized to administer a domain in order to map it to an application. For a list of available authorized domains, see [`AuthorizedDomains.ListAuthorizedDomains`]().",
-            "canonical": true,
-            "file": "domain_mappings.create_domain_mapping.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateDomainMapping",
-                "fullName": "google.appengine.v1.DomainMappings.CreateDomainMapping",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "domain_mapping",
-                        "type": ".google.appengine.v1.DomainMapping"
-                    },
-                    {
-                        "name": "override_strategy",
-                        "type": ".google.appengine.v1.DomainOverrideStrategy"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DomainMappingsClient",
-                    "fullName": "google.appengine.v1.DomainMappingsClient"
-                },
-                "method": {
-                    "shortName": "CreateDomainMapping",
-                    "fullName": "google.appengine.v1.DomainMappings.CreateDomainMapping",
-                    "service": {
-                        "shortName": "DomainMappings",
-                        "fullName": "google.appengine.v1.DomainMappings"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_DomainMappings_UpdateDomainMapping_async",
-            "title": "Applications updateDomainMapping Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified domain mapping. To map an SSL certificate to a domain mapping, update `certificate_id` to point to an `AuthorizedCertificate` resource. A user must be authorized to administer the associated domain in order to update a `DomainMapping` resource.",
-            "canonical": true,
-            "file": "domain_mappings.update_domain_mapping.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateDomainMapping",
-                "fullName": "google.appengine.v1.DomainMappings.UpdateDomainMapping",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "domain_mapping",
-                        "type": ".google.appengine.v1.DomainMapping"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DomainMappingsClient",
-                    "fullName": "google.appengine.v1.DomainMappingsClient"
-                },
-                "method": {
-                    "shortName": "UpdateDomainMapping",
-                    "fullName": "google.appengine.v1.DomainMappings.UpdateDomainMapping",
-                    "service": {
-                        "shortName": "DomainMappings",
-                        "fullName": "google.appengine.v1.DomainMappings"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_DomainMappings_DeleteDomainMapping_async",
-            "title": "Applications deleteDomainMapping Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified domain mapping. A user must be authorized to administer the associated domain in order to delete a `DomainMapping` resource.",
-            "canonical": true,
-            "file": "domain_mappings.delete_domain_mapping.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteDomainMapping",
-                "fullName": "google.appengine.v1.DomainMappings.DeleteDomainMapping",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "DomainMappingsClient",
-                    "fullName": "google.appengine.v1.DomainMappingsClient"
-                },
-                "method": {
-                    "shortName": "DeleteDomainMapping",
-                    "fullName": "google.appengine.v1.DomainMappings.DeleteDomainMapping",
-                    "service": {
-                        "shortName": "DomainMappings",
-                        "fullName": "google.appengine.v1.DomainMappings"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Firewall_ListIngressRules_async",
-            "title": "Applications listIngressRules Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the firewall rules of an application.",
-            "canonical": true,
-            "file": "firewall.list_ingress_rules.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListIngressRules",
-                "fullName": "google.appengine.v1.Firewall.ListIngressRules",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "matching_address",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.ListIngressRulesResponse",
-                "client": {
-                    "shortName": "FirewallClient",
-                    "fullName": "google.appengine.v1.FirewallClient"
-                },
-                "method": {
-                    "shortName": "ListIngressRules",
-                    "fullName": "google.appengine.v1.Firewall.ListIngressRules",
-                    "service": {
-                        "shortName": "Firewall",
-                        "fullName": "google.appengine.v1.Firewall"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Firewall_BatchUpdateIngressRules_async",
-            "title": "Applications batchUpdateIngressRules Sample",
-            "origin": "API_DEFINITION",
-            "description": " Replaces the entire firewall ruleset in one bulk operation. This overrides and replaces the rules of an existing firewall with the new rules. If the final rule does not match traffic with the '*' wildcard IP range, then an \"allow all\" rule is explicitly added to the end of the list.",
-            "canonical": true,
-            "file": "firewall.batch_update_ingress_rules.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchUpdateIngressRules",
-                "fullName": "google.appengine.v1.Firewall.BatchUpdateIngressRules",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ingress_rules",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.BatchUpdateIngressRulesResponse",
-                "client": {
-                    "shortName": "FirewallClient",
-                    "fullName": "google.appengine.v1.FirewallClient"
-                },
-                "method": {
-                    "shortName": "BatchUpdateIngressRules",
-                    "fullName": "google.appengine.v1.Firewall.BatchUpdateIngressRules",
-                    "service": {
-                        "shortName": "Firewall",
-                        "fullName": "google.appengine.v1.Firewall"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Firewall_CreateIngressRule_async",
-            "title": "Applications createIngressRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a firewall rule for the application.",
-            "canonical": true,
-            "file": "firewall.create_ingress_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateIngressRule",
-                "fullName": "google.appengine.v1.Firewall.CreateIngressRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "rule",
-                        "type": ".google.appengine.v1.FirewallRule"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.FirewallRule",
-                "client": {
-                    "shortName": "FirewallClient",
-                    "fullName": "google.appengine.v1.FirewallClient"
-                },
-                "method": {
-                    "shortName": "CreateIngressRule",
-                    "fullName": "google.appengine.v1.Firewall.CreateIngressRule",
-                    "service": {
-                        "shortName": "Firewall",
-                        "fullName": "google.appengine.v1.Firewall"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Firewall_GetIngressRule_async",
-            "title": "Applications getIngressRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the specified firewall rule.",
-            "canonical": true,
-            "file": "firewall.get_ingress_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIngressRule",
-                "fullName": "google.appengine.v1.Firewall.GetIngressRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.FirewallRule",
-                "client": {
-                    "shortName": "FirewallClient",
-                    "fullName": "google.appengine.v1.FirewallClient"
-                },
-                "method": {
-                    "shortName": "GetIngressRule",
-                    "fullName": "google.appengine.v1.Firewall.GetIngressRule",
-                    "service": {
-                        "shortName": "Firewall",
-                        "fullName": "google.appengine.v1.Firewall"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Firewall_UpdateIngressRule_async",
-            "title": "Applications updateIngressRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified firewall rule.",
-            "canonical": true,
-            "file": "firewall.update_ingress_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateIngressRule",
-                "fullName": "google.appengine.v1.Firewall.UpdateIngressRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "rule",
-                        "type": ".google.appengine.v1.FirewallRule"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.FirewallRule",
-                "client": {
-                    "shortName": "FirewallClient",
-                    "fullName": "google.appengine.v1.FirewallClient"
-                },
-                "method": {
-                    "shortName": "UpdateIngressRule",
-                    "fullName": "google.appengine.v1.Firewall.UpdateIngressRule",
-                    "service": {
-                        "shortName": "Firewall",
-                        "fullName": "google.appengine.v1.Firewall"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Firewall_DeleteIngressRule_async",
-            "title": "Applications deleteIngressRule Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified firewall rule.",
-            "canonical": true,
-            "file": "firewall.delete_ingress_rule.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteIngressRule",
-                "fullName": "google.appengine.v1.Firewall.DeleteIngressRule",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "FirewallClient",
-                    "fullName": "google.appengine.v1.FirewallClient"
-                },
-                "method": {
-                    "shortName": "DeleteIngressRule",
-                    "fullName": "google.appengine.v1.Firewall.DeleteIngressRule",
-                    "service": {
-                        "shortName": "Firewall",
-                        "fullName": "google.appengine.v1.Firewall"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Instances_ListInstances_async",
-            "title": "Applications listInstances Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the instances of a version. Tip: To aggregate details about instances over time, see the [Stackdriver Monitoring API](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).",
-            "canonical": true,
-            "file": "instances.list_instances.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListInstances",
-                "fullName": "google.appengine.v1.Instances.ListInstances",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.ListInstancesResponse",
-                "client": {
-                    "shortName": "InstancesClient",
-                    "fullName": "google.appengine.v1.InstancesClient"
-                },
-                "method": {
-                    "shortName": "ListInstances",
-                    "fullName": "google.appengine.v1.Instances.ListInstances",
-                    "service": {
-                        "shortName": "Instances",
-                        "fullName": "google.appengine.v1.Instances"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Instances_GetInstance_async",
-            "title": "Applications getInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets instance information.",
-            "canonical": true,
-            "file": "instances.get_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetInstance",
-                "fullName": "google.appengine.v1.Instances.GetInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.Instance",
-                "client": {
-                    "shortName": "InstancesClient",
-                    "fullName": "google.appengine.v1.InstancesClient"
-                },
-                "method": {
-                    "shortName": "GetInstance",
-                    "fullName": "google.appengine.v1.Instances.GetInstance",
-                    "service": {
-                        "shortName": "Instances",
-                        "fullName": "google.appengine.v1.Instances"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Instances_DeleteInstance_async",
-            "title": "Applications deleteInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Stops a running instance. The instance might be automatically recreated based on the scaling settings of the version. For more information, see \"How Instances are Managed\" ([standard environment](https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) | [flexible environment](https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)). To ensure that instances are not re-created and avoid getting billed, you can stop all instances within the target version by changing the serving status of the version to `STOPPED` with the [`apps.services.versions.patch`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch) method.",
-            "canonical": true,
-            "file": "instances.delete_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteInstance",
-                "fullName": "google.appengine.v1.Instances.DeleteInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "InstancesClient",
-                    "fullName": "google.appengine.v1.InstancesClient"
-                },
-                "method": {
-                    "shortName": "DeleteInstance",
-                    "fullName": "google.appengine.v1.Instances.DeleteInstance",
-                    "service": {
-                        "shortName": "Instances",
-                        "fullName": "google.appengine.v1.Instances"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Instances_DebugInstance_async",
-            "title": "Applications debugInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in \"debug mode\", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started. Only applicable for instances in App Engine flexible environment.",
-            "canonical": true,
-            "file": "instances.debug_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DebugInstance",
-                "fullName": "google.appengine.v1.Instances.DebugInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ssh_key",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "InstancesClient",
-                    "fullName": "google.appengine.v1.InstancesClient"
-                },
-                "method": {
-                    "shortName": "DebugInstance",
-                    "fullName": "google.appengine.v1.Instances.DebugInstance",
-                    "service": {
-                        "shortName": "Instances",
-                        "fullName": "google.appengine.v1.Instances"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Services_ListServices_async",
-            "title": "Applications listServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all the services in the application.",
-            "canonical": true,
-            "file": "services.list_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListServices",
-                "fullName": "google.appengine.v1.Services.ListServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.ListServicesResponse",
-                "client": {
-                    "shortName": "ServicesClient",
-                    "fullName": "google.appengine.v1.ServicesClient"
-                },
-                "method": {
-                    "shortName": "ListServices",
-                    "fullName": "google.appengine.v1.Services.ListServices",
-                    "service": {
-                        "shortName": "Services",
-                        "fullName": "google.appengine.v1.Services"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Services_GetService_async",
-            "title": "Applications getService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the current configuration of the specified service.",
-            "canonical": true,
-            "file": "services.get_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 52,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetService",
-                "fullName": "google.appengine.v1.Services.GetService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.Service",
-                "client": {
-                    "shortName": "ServicesClient",
-                    "fullName": "google.appengine.v1.ServicesClient"
-                },
-                "method": {
-                    "shortName": "GetService",
-                    "fullName": "google.appengine.v1.Services.GetService",
-                    "service": {
-                        "shortName": "Services",
-                        "fullName": "google.appengine.v1.Services"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Services_UpdateService_async",
-            "title": "Applications updateService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the configuration of the specified service.",
-            "canonical": true,
-            "file": "services.update_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateService",
-                "fullName": "google.appengine.v1.Services.UpdateService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service",
-                        "type": ".google.appengine.v1.Service"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "migrate_traffic",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServicesClient",
-                    "fullName": "google.appengine.v1.ServicesClient"
-                },
-                "method": {
-                    "shortName": "UpdateService",
-                    "fullName": "google.appengine.v1.Services.UpdateService",
-                    "service": {
-                        "shortName": "Services",
-                        "fullName": "google.appengine.v1.Services"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Services_DeleteService_async",
-            "title": "Applications deleteService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes the specified service and all enclosed versions.",
-            "canonical": true,
-            "file": "services.delete_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteService",
-                "fullName": "google.appengine.v1.Services.DeleteService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServicesClient",
-                    "fullName": "google.appengine.v1.ServicesClient"
-                },
-                "method": {
-                    "shortName": "DeleteService",
-                    "fullName": "google.appengine.v1.Services.DeleteService",
-                    "service": {
-                        "shortName": "Services",
-                        "fullName": "google.appengine.v1.Services"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Versions_ListVersions_async",
-            "title": "Applications listVersions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the versions of a service.",
-            "canonical": true,
-            "file": "versions.list_versions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListVersions",
-                "fullName": "google.appengine.v1.Versions.ListVersions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.appengine.v1.VersionView"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.ListVersionsResponse",
-                "client": {
-                    "shortName": "VersionsClient",
-                    "fullName": "google.appengine.v1.VersionsClient"
-                },
-                "method": {
-                    "shortName": "ListVersions",
-                    "fullName": "google.appengine.v1.Versions.ListVersions",
-                    "service": {
-                        "shortName": "Versions",
-                        "fullName": "google.appengine.v1.Versions"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Versions_GetVersion_async",
-            "title": "Applications getVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the specified Version resource. By default, only a `BASIC_VIEW` will be returned. Specify the `FULL_VIEW` parameter to get the full resource.",
-            "canonical": true,
-            "file": "versions.get_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetVersion",
-                "fullName": "google.appengine.v1.Versions.GetVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.appengine.v1.VersionView"
-                    }
-                ],
-                "resultType": ".google.appengine.v1.Version",
-                "client": {
-                    "shortName": "VersionsClient",
-                    "fullName": "google.appengine.v1.VersionsClient"
-                },
-                "method": {
-                    "shortName": "GetVersion",
-                    "fullName": "google.appengine.v1.Versions.GetVersion",
-                    "service": {
-                        "shortName": "Versions",
-                        "fullName": "google.appengine.v1.Versions"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Versions_CreateVersion_async",
-            "title": "Applications createVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deploys code and resource files to a new version.",
-            "canonical": true,
-            "file": "versions.create_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateVersion",
-                "fullName": "google.appengine.v1.Versions.CreateVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "version",
-                        "type": ".google.appengine.v1.Version"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "VersionsClient",
-                    "fullName": "google.appengine.v1.VersionsClient"
-                },
-                "method": {
-                    "shortName": "CreateVersion",
-                    "fullName": "google.appengine.v1.Versions.CreateVersion",
-                    "service": {
-                        "shortName": "Versions",
-                        "fullName": "google.appengine.v1.Versions"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Versions_UpdateVersion_async",
-            "title": "Applications updateVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified Version resource. You can specify the following fields depending on the App Engine environment and type of scaling that the version resource uses: **Standard environment** * [`instance_class`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.instance_class) *automatic scaling* in the standard environment: * [`automatic_scaling.min_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automatic_scaling.max_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automaticScaling.standard_scheduler_settings.max_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings) * [`automaticScaling.standard_scheduler_settings.min_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings) * [`automaticScaling.standard_scheduler_settings.target_cpu_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings) * [`automaticScaling.standard_scheduler_settings.target_throughput_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings) *basic scaling* or *manual scaling* in the standard environment: * [`serving_status`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.serving_status) * [`manual_scaling.instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#manualscaling) **Flexible environment** * [`serving_status`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.serving_status) *automatic scaling* in the flexible environment: * [`automatic_scaling.min_total_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automatic_scaling.max_total_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automatic_scaling.cool_down_period_sec`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automatic_scaling.cpu_utilization.target_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) *manual scaling* in the flexible environment: * [`manual_scaling.instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#manualscaling)",
-            "canonical": true,
-            "file": "versions.update_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateVersion",
-                "fullName": "google.appengine.v1.Versions.UpdateVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "version",
-                        "type": ".google.appengine.v1.Version"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "VersionsClient",
-                    "fullName": "google.appengine.v1.VersionsClient"
-                },
-                "method": {
-                    "shortName": "UpdateVersion",
-                    "fullName": "google.appengine.v1.Versions.UpdateVersion",
-                    "service": {
-                        "shortName": "Versions",
-                        "fullName": "google.appengine.v1.Versions"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "appengine_v1_generated_Versions_DeleteVersion_async",
-            "title": "Applications deleteVersion Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an existing Version resource.",
-            "canonical": true,
-            "file": "versions.delete_version.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteVersion",
-                "fullName": "google.appengine.v1.Versions.DeleteVersion",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "VersionsClient",
-                    "fullName": "google.appengine.v1.VersionsClient"
-                },
-                "method": {
-                    "shortName": "DeleteVersion",
-                    "fullName": "google.appengine.v1.Versions.DeleteVersion",
-                    "service": {
-                        "shortName": "Versions",
-                        "fullName": "google.appengine.v1.Versions"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-appengine",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.appengine.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "appengine_v1_generated_Applications_GetApplication_async",
+      "title": "Applications getApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets information about an application.",
+      "canonical": true,
+      "file": "applications.get_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetApplication",
+        "fullName": "google.appengine.v1.Applications.GetApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.Application",
+        "client": {
+          "shortName": "ApplicationsClient",
+          "fullName": "google.appengine.v1.ApplicationsClient"
+        },
+        "method": {
+          "shortName": "GetApplication",
+          "fullName": "google.appengine.v1.Applications.GetApplication",
+          "service": {
+            "shortName": "Applications",
+            "fullName": "google.appengine.v1.Applications"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Applications_CreateApplication_async",
+      "title": "Applications createApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an App Engine application for a Google Cloud Platform project. Required fields: * `id` - The ID of the target Cloud Platform project. * *location* - The [region](https://cloud.google.com/appengine/docs/locations) where you want the App Engine application located. For more information about App Engine applications, see [Managing Projects, Applications, and Billing](https://cloud.google.com/appengine/docs/standard/python/console/).",
+      "canonical": true,
+      "file": "applications.create_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateApplication",
+        "fullName": "google.appengine.v1.Applications.CreateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "application",
+            "type": ".google.appengine.v1.Application"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ApplicationsClient",
+          "fullName": "google.appengine.v1.ApplicationsClient"
+        },
+        "method": {
+          "shortName": "CreateApplication",
+          "fullName": "google.appengine.v1.Applications.CreateApplication",
+          "service": {
+            "shortName": "Applications",
+            "fullName": "google.appengine.v1.Applications"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Applications_UpdateApplication_async",
+      "title": "Applications updateApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified Application resource. You can update the following fields: * `auth_domain` - Google authentication domain for controlling user access to the application. * `default_cookie_expiration` - Cookie expiration policy for the application. * `iap` - Identity-Aware Proxy properties for the application.",
+      "canonical": true,
+      "file": "applications.update_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateApplication",
+        "fullName": "google.appengine.v1.Applications.UpdateApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "application",
+            "type": ".google.appengine.v1.Application"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ApplicationsClient",
+          "fullName": "google.appengine.v1.ApplicationsClient"
+        },
+        "method": {
+          "shortName": "UpdateApplication",
+          "fullName": "google.appengine.v1.Applications.UpdateApplication",
+          "service": {
+            "shortName": "Applications",
+            "fullName": "google.appengine.v1.Applications"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Applications_RepairApplication_async",
+      "title": "Applications repairApplication Sample",
+      "origin": "API_DEFINITION",
+      "description": " Recreates the required App Engine features for the specified App Engine application, for example a Cloud Storage bucket or App Engine service account. Use this method if you receive an error message about a missing feature, for example, *Error retrieving the App Engine service account*. If you have deleted your App Engine service account, this will not be able to recreate it. Instead, you should attempt to use the IAM undelete API if possible at https://cloud.google.com/iam/reference/rest/v1/projects.serviceAccounts/undelete?apix_params=%7B\"name\"%3A\"projects%2F-%2FserviceAccounts%2Funique_id\"%2C\"resource\"%3A%7B%7D%7D . If the deletion was recent, the numeric ID can be found in the Cloud Console Activity Log.",
+      "canonical": true,
+      "file": "applications.repair_application.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RepairApplication",
+        "fullName": "google.appengine.v1.Applications.RepairApplication",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ApplicationsClient",
+          "fullName": "google.appengine.v1.ApplicationsClient"
+        },
+        "method": {
+          "shortName": "RepairApplication",
+          "fullName": "google.appengine.v1.Applications.RepairApplication",
+          "service": {
+            "shortName": "Applications",
+            "fullName": "google.appengine.v1.Applications"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_AuthorizedCertificates_ListAuthorizedCertificates_async",
+      "title": "Applications listAuthorizedCertificates Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all SSL certificates the user is authorized to administer.",
+      "canonical": true,
+      "file": "authorized_certificates.list_authorized_certificates.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAuthorizedCertificates",
+        "fullName": "google.appengine.v1.AuthorizedCertificates.ListAuthorizedCertificates",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.appengine.v1.AuthorizedCertificateView"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.ListAuthorizedCertificatesResponse",
+        "client": {
+          "shortName": "AuthorizedCertificatesClient",
+          "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
+        },
+        "method": {
+          "shortName": "ListAuthorizedCertificates",
+          "fullName": "google.appengine.v1.AuthorizedCertificates.ListAuthorizedCertificates",
+          "service": {
+            "shortName": "AuthorizedCertificates",
+            "fullName": "google.appengine.v1.AuthorizedCertificates"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_AuthorizedCertificates_GetAuthorizedCertificate_async",
+      "title": "Applications getAuthorizedCertificate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified SSL certificate.",
+      "canonical": true,
+      "file": "authorized_certificates.get_authorized_certificate.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAuthorizedCertificate",
+        "fullName": "google.appengine.v1.AuthorizedCertificates.GetAuthorizedCertificate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.appengine.v1.AuthorizedCertificateView"
+          }
+        ],
+        "resultType": ".google.appengine.v1.AuthorizedCertificate",
+        "client": {
+          "shortName": "AuthorizedCertificatesClient",
+          "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
+        },
+        "method": {
+          "shortName": "GetAuthorizedCertificate",
+          "fullName": "google.appengine.v1.AuthorizedCertificates.GetAuthorizedCertificate",
+          "service": {
+            "shortName": "AuthorizedCertificates",
+            "fullName": "google.appengine.v1.AuthorizedCertificates"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_AuthorizedCertificates_CreateAuthorizedCertificate_async",
+      "title": "Applications createAuthorizedCertificate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Uploads the specified SSL certificate.",
+      "canonical": true,
+      "file": "authorized_certificates.create_authorized_certificate.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateAuthorizedCertificate",
+        "fullName": "google.appengine.v1.AuthorizedCertificates.CreateAuthorizedCertificate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "certificate",
+            "type": ".google.appengine.v1.AuthorizedCertificate"
+          }
+        ],
+        "resultType": ".google.appengine.v1.AuthorizedCertificate",
+        "client": {
+          "shortName": "AuthorizedCertificatesClient",
+          "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
+        },
+        "method": {
+          "shortName": "CreateAuthorizedCertificate",
+          "fullName": "google.appengine.v1.AuthorizedCertificates.CreateAuthorizedCertificate",
+          "service": {
+            "shortName": "AuthorizedCertificates",
+            "fullName": "google.appengine.v1.AuthorizedCertificates"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_AuthorizedCertificates_UpdateAuthorizedCertificate_async",
+      "title": "Applications updateAuthorizedCertificate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified SSL certificate. To renew a certificate and maintain its existing domain mappings, update `certificate_data` with a new certificate. The new certificate must be applicable to the same domains as the original certificate. The certificate `display_name` may also be updated.",
+      "canonical": true,
+      "file": "authorized_certificates.update_authorized_certificate.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAuthorizedCertificate",
+        "fullName": "google.appengine.v1.AuthorizedCertificates.UpdateAuthorizedCertificate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "certificate",
+            "type": ".google.appengine.v1.AuthorizedCertificate"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.appengine.v1.AuthorizedCertificate",
+        "client": {
+          "shortName": "AuthorizedCertificatesClient",
+          "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
+        },
+        "method": {
+          "shortName": "UpdateAuthorizedCertificate",
+          "fullName": "google.appengine.v1.AuthorizedCertificates.UpdateAuthorizedCertificate",
+          "service": {
+            "shortName": "AuthorizedCertificates",
+            "fullName": "google.appengine.v1.AuthorizedCertificates"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_AuthorizedCertificates_DeleteAuthorizedCertificate_async",
+      "title": "Applications deleteAuthorizedCertificate Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified SSL certificate.",
+      "canonical": true,
+      "file": "authorized_certificates.delete_authorized_certificate.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAuthorizedCertificate",
+        "fullName": "google.appengine.v1.AuthorizedCertificates.DeleteAuthorizedCertificate",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "AuthorizedCertificatesClient",
+          "fullName": "google.appengine.v1.AuthorizedCertificatesClient"
+        },
+        "method": {
+          "shortName": "DeleteAuthorizedCertificate",
+          "fullName": "google.appengine.v1.AuthorizedCertificates.DeleteAuthorizedCertificate",
+          "service": {
+            "shortName": "AuthorizedCertificates",
+            "fullName": "google.appengine.v1.AuthorizedCertificates"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_AuthorizedDomains_ListAuthorizedDomains_async",
+      "title": "Applications listAuthorizedDomains Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all domains the user is authorized to administer.",
+      "canonical": true,
+      "file": "authorized_domains.list_authorized_domains.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAuthorizedDomains",
+        "fullName": "google.appengine.v1.AuthorizedDomains.ListAuthorizedDomains",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.ListAuthorizedDomainsResponse",
+        "client": {
+          "shortName": "AuthorizedDomainsClient",
+          "fullName": "google.appengine.v1.AuthorizedDomainsClient"
+        },
+        "method": {
+          "shortName": "ListAuthorizedDomains",
+          "fullName": "google.appengine.v1.AuthorizedDomains.ListAuthorizedDomains",
+          "service": {
+            "shortName": "AuthorizedDomains",
+            "fullName": "google.appengine.v1.AuthorizedDomains"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_DomainMappings_ListDomainMappings_async",
+      "title": "Applications listDomainMappings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the domain mappings on an application.",
+      "canonical": true,
+      "file": "domain_mappings.list_domain_mappings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListDomainMappings",
+        "fullName": "google.appengine.v1.DomainMappings.ListDomainMappings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.ListDomainMappingsResponse",
+        "client": {
+          "shortName": "DomainMappingsClient",
+          "fullName": "google.appengine.v1.DomainMappingsClient"
+        },
+        "method": {
+          "shortName": "ListDomainMappings",
+          "fullName": "google.appengine.v1.DomainMappings.ListDomainMappings",
+          "service": {
+            "shortName": "DomainMappings",
+            "fullName": "google.appengine.v1.DomainMappings"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_DomainMappings_GetDomainMapping_async",
+      "title": "Applications getDomainMapping Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified domain mapping.",
+      "canonical": true,
+      "file": "domain_mappings.get_domain_mapping.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetDomainMapping",
+        "fullName": "google.appengine.v1.DomainMappings.GetDomainMapping",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.DomainMapping",
+        "client": {
+          "shortName": "DomainMappingsClient",
+          "fullName": "google.appengine.v1.DomainMappingsClient"
+        },
+        "method": {
+          "shortName": "GetDomainMapping",
+          "fullName": "google.appengine.v1.DomainMappings.GetDomainMapping",
+          "service": {
+            "shortName": "DomainMappings",
+            "fullName": "google.appengine.v1.DomainMappings"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_DomainMappings_CreateDomainMapping_async",
+      "title": "Applications createDomainMapping Sample",
+      "origin": "API_DEFINITION",
+      "description": " Maps a domain to an application. A user must be authorized to administer a domain in order to map it to an application. For a list of available authorized domains, see [`AuthorizedDomains.ListAuthorizedDomains`]().",
+      "canonical": true,
+      "file": "domain_mappings.create_domain_mapping.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateDomainMapping",
+        "fullName": "google.appengine.v1.DomainMappings.CreateDomainMapping",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "domain_mapping",
+            "type": ".google.appengine.v1.DomainMapping"
+          },
+          {
+            "name": "override_strategy",
+            "type": ".google.appengine.v1.DomainOverrideStrategy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DomainMappingsClient",
+          "fullName": "google.appengine.v1.DomainMappingsClient"
+        },
+        "method": {
+          "shortName": "CreateDomainMapping",
+          "fullName": "google.appengine.v1.DomainMappings.CreateDomainMapping",
+          "service": {
+            "shortName": "DomainMappings",
+            "fullName": "google.appengine.v1.DomainMappings"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_DomainMappings_UpdateDomainMapping_async",
+      "title": "Applications updateDomainMapping Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified domain mapping. To map an SSL certificate to a domain mapping, update `certificate_id` to point to an `AuthorizedCertificate` resource. A user must be authorized to administer the associated domain in order to update a `DomainMapping` resource.",
+      "canonical": true,
+      "file": "domain_mappings.update_domain_mapping.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateDomainMapping",
+        "fullName": "google.appengine.v1.DomainMappings.UpdateDomainMapping",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "domain_mapping",
+            "type": ".google.appengine.v1.DomainMapping"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DomainMappingsClient",
+          "fullName": "google.appengine.v1.DomainMappingsClient"
+        },
+        "method": {
+          "shortName": "UpdateDomainMapping",
+          "fullName": "google.appengine.v1.DomainMappings.UpdateDomainMapping",
+          "service": {
+            "shortName": "DomainMappings",
+            "fullName": "google.appengine.v1.DomainMappings"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_DomainMappings_DeleteDomainMapping_async",
+      "title": "Applications deleteDomainMapping Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified domain mapping. A user must be authorized to administer the associated domain in order to delete a `DomainMapping` resource.",
+      "canonical": true,
+      "file": "domain_mappings.delete_domain_mapping.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteDomainMapping",
+        "fullName": "google.appengine.v1.DomainMappings.DeleteDomainMapping",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "DomainMappingsClient",
+          "fullName": "google.appengine.v1.DomainMappingsClient"
+        },
+        "method": {
+          "shortName": "DeleteDomainMapping",
+          "fullName": "google.appengine.v1.DomainMappings.DeleteDomainMapping",
+          "service": {
+            "shortName": "DomainMappings",
+            "fullName": "google.appengine.v1.DomainMappings"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Firewall_ListIngressRules_async",
+      "title": "Applications listIngressRules Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the firewall rules of an application.",
+      "canonical": true,
+      "file": "firewall.list_ingress_rules.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListIngressRules",
+        "fullName": "google.appengine.v1.Firewall.ListIngressRules",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "matching_address",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.ListIngressRulesResponse",
+        "client": {
+          "shortName": "FirewallClient",
+          "fullName": "google.appengine.v1.FirewallClient"
+        },
+        "method": {
+          "shortName": "ListIngressRules",
+          "fullName": "google.appengine.v1.Firewall.ListIngressRules",
+          "service": {
+            "shortName": "Firewall",
+            "fullName": "google.appengine.v1.Firewall"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Firewall_BatchUpdateIngressRules_async",
+      "title": "Applications batchUpdateIngressRules Sample",
+      "origin": "API_DEFINITION",
+      "description": " Replaces the entire firewall ruleset in one bulk operation. This overrides and replaces the rules of an existing firewall with the new rules. If the final rule does not match traffic with the '*' wildcard IP range, then an \"allow all\" rule is explicitly added to the end of the list.",
+      "canonical": true,
+      "file": "firewall.batch_update_ingress_rules.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchUpdateIngressRules",
+        "fullName": "google.appengine.v1.Firewall.BatchUpdateIngressRules",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ingress_rules",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.appengine.v1.BatchUpdateIngressRulesResponse",
+        "client": {
+          "shortName": "FirewallClient",
+          "fullName": "google.appengine.v1.FirewallClient"
+        },
+        "method": {
+          "shortName": "BatchUpdateIngressRules",
+          "fullName": "google.appengine.v1.Firewall.BatchUpdateIngressRules",
+          "service": {
+            "shortName": "Firewall",
+            "fullName": "google.appengine.v1.Firewall"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Firewall_CreateIngressRule_async",
+      "title": "Applications createIngressRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a firewall rule for the application.",
+      "canonical": true,
+      "file": "firewall.create_ingress_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateIngressRule",
+        "fullName": "google.appengine.v1.Firewall.CreateIngressRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rule",
+            "type": ".google.appengine.v1.FirewallRule"
+          }
+        ],
+        "resultType": ".google.appengine.v1.FirewallRule",
+        "client": {
+          "shortName": "FirewallClient",
+          "fullName": "google.appengine.v1.FirewallClient"
+        },
+        "method": {
+          "shortName": "CreateIngressRule",
+          "fullName": "google.appengine.v1.Firewall.CreateIngressRule",
+          "service": {
+            "shortName": "Firewall",
+            "fullName": "google.appengine.v1.Firewall"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Firewall_GetIngressRule_async",
+      "title": "Applications getIngressRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified firewall rule.",
+      "canonical": true,
+      "file": "firewall.get_ingress_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIngressRule",
+        "fullName": "google.appengine.v1.Firewall.GetIngressRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.FirewallRule",
+        "client": {
+          "shortName": "FirewallClient",
+          "fullName": "google.appengine.v1.FirewallClient"
+        },
+        "method": {
+          "shortName": "GetIngressRule",
+          "fullName": "google.appengine.v1.Firewall.GetIngressRule",
+          "service": {
+            "shortName": "Firewall",
+            "fullName": "google.appengine.v1.Firewall"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Firewall_UpdateIngressRule_async",
+      "title": "Applications updateIngressRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified firewall rule.",
+      "canonical": true,
+      "file": "firewall.update_ingress_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateIngressRule",
+        "fullName": "google.appengine.v1.Firewall.UpdateIngressRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rule",
+            "type": ".google.appengine.v1.FirewallRule"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.appengine.v1.FirewallRule",
+        "client": {
+          "shortName": "FirewallClient",
+          "fullName": "google.appengine.v1.FirewallClient"
+        },
+        "method": {
+          "shortName": "UpdateIngressRule",
+          "fullName": "google.appengine.v1.Firewall.UpdateIngressRule",
+          "service": {
+            "shortName": "Firewall",
+            "fullName": "google.appengine.v1.Firewall"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Firewall_DeleteIngressRule_async",
+      "title": "Applications deleteIngressRule Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified firewall rule.",
+      "canonical": true,
+      "file": "firewall.delete_ingress_rule.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteIngressRule",
+        "fullName": "google.appengine.v1.Firewall.DeleteIngressRule",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "FirewallClient",
+          "fullName": "google.appengine.v1.FirewallClient"
+        },
+        "method": {
+          "shortName": "DeleteIngressRule",
+          "fullName": "google.appengine.v1.Firewall.DeleteIngressRule",
+          "service": {
+            "shortName": "Firewall",
+            "fullName": "google.appengine.v1.Firewall"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Instances_ListInstances_async",
+      "title": "Applications listInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the instances of a version. Tip: To aggregate details about instances over time, see the [Stackdriver Monitoring API](https://cloud.google.com/monitoring/api/ref_v3/rest/v3/projects.timeSeries/list).",
+      "canonical": true,
+      "file": "instances.list_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInstances",
+        "fullName": "google.appengine.v1.Instances.ListInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.ListInstancesResponse",
+        "client": {
+          "shortName": "InstancesClient",
+          "fullName": "google.appengine.v1.InstancesClient"
+        },
+        "method": {
+          "shortName": "ListInstances",
+          "fullName": "google.appengine.v1.Instances.ListInstances",
+          "service": {
+            "shortName": "Instances",
+            "fullName": "google.appengine.v1.Instances"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Instances_GetInstance_async",
+      "title": "Applications getInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets instance information.",
+      "canonical": true,
+      "file": "instances.get_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInstance",
+        "fullName": "google.appengine.v1.Instances.GetInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.Instance",
+        "client": {
+          "shortName": "InstancesClient",
+          "fullName": "google.appengine.v1.InstancesClient"
+        },
+        "method": {
+          "shortName": "GetInstance",
+          "fullName": "google.appengine.v1.Instances.GetInstance",
+          "service": {
+            "shortName": "Instances",
+            "fullName": "google.appengine.v1.Instances"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Instances_DeleteInstance_async",
+      "title": "Applications deleteInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Stops a running instance. The instance might be automatically recreated based on the scaling settings of the version. For more information, see \"How Instances are Managed\" ([standard environment](https://cloud.google.com/appengine/docs/standard/python/how-instances-are-managed) | [flexible environment](https://cloud.google.com/appengine/docs/flexible/python/how-instances-are-managed)). To ensure that instances are not re-created and avoid getting billed, you can stop all instances within the target version by changing the serving status of the version to `STOPPED` with the [`apps.services.versions.patch`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions/patch) method.",
+      "canonical": true,
+      "file": "instances.delete_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteInstance",
+        "fullName": "google.appengine.v1.Instances.DeleteInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InstancesClient",
+          "fullName": "google.appengine.v1.InstancesClient"
+        },
+        "method": {
+          "shortName": "DeleteInstance",
+          "fullName": "google.appengine.v1.Instances.DeleteInstance",
+          "service": {
+            "shortName": "Instances",
+            "fullName": "google.appengine.v1.Instances"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Instances_DebugInstance_async",
+      "title": "Applications debugInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enables debugging on a VM instance. This allows you to use the SSH command to connect to the virtual machine where the instance lives. While in \"debug mode\", the instance continues to serve live traffic. You should delete the instance when you are done debugging and then allow the system to take over and determine if another instance should be started. Only applicable for instances in App Engine flexible environment.",
+      "canonical": true,
+      "file": "instances.debug_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DebugInstance",
+        "fullName": "google.appengine.v1.Instances.DebugInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ssh_key",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "InstancesClient",
+          "fullName": "google.appengine.v1.InstancesClient"
+        },
+        "method": {
+          "shortName": "DebugInstance",
+          "fullName": "google.appengine.v1.Instances.DebugInstance",
+          "service": {
+            "shortName": "Instances",
+            "fullName": "google.appengine.v1.Instances"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Services_ListServices_async",
+      "title": "Applications listServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the services in the application.",
+      "canonical": true,
+      "file": "services.list_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServices",
+        "fullName": "google.appengine.v1.Services.ListServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.ListServicesResponse",
+        "client": {
+          "shortName": "ServicesClient",
+          "fullName": "google.appengine.v1.ServicesClient"
+        },
+        "method": {
+          "shortName": "ListServices",
+          "fullName": "google.appengine.v1.Services.ListServices",
+          "service": {
+            "shortName": "Services",
+            "fullName": "google.appengine.v1.Services"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Services_GetService_async",
+      "title": "Applications getService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the current configuration of the specified service.",
+      "canonical": true,
+      "file": "services.get_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 52,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetService",
+        "fullName": "google.appengine.v1.Services.GetService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.Service",
+        "client": {
+          "shortName": "ServicesClient",
+          "fullName": "google.appengine.v1.ServicesClient"
+        },
+        "method": {
+          "shortName": "GetService",
+          "fullName": "google.appengine.v1.Services.GetService",
+          "service": {
+            "shortName": "Services",
+            "fullName": "google.appengine.v1.Services"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Services_UpdateService_async",
+      "title": "Applications updateService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the configuration of the specified service.",
+      "canonical": true,
+      "file": "services.update_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateService",
+        "fullName": "google.appengine.v1.Services.UpdateService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service",
+            "type": ".google.appengine.v1.Service"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "migrate_traffic",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServicesClient",
+          "fullName": "google.appengine.v1.ServicesClient"
+        },
+        "method": {
+          "shortName": "UpdateService",
+          "fullName": "google.appengine.v1.Services.UpdateService",
+          "service": {
+            "shortName": "Services",
+            "fullName": "google.appengine.v1.Services"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Services_DeleteService_async",
+      "title": "Applications deleteService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes the specified service and all enclosed versions.",
+      "canonical": true,
+      "file": "services.delete_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteService",
+        "fullName": "google.appengine.v1.Services.DeleteService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServicesClient",
+          "fullName": "google.appengine.v1.ServicesClient"
+        },
+        "method": {
+          "shortName": "DeleteService",
+          "fullName": "google.appengine.v1.Services.DeleteService",
+          "service": {
+            "shortName": "Services",
+            "fullName": "google.appengine.v1.Services"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Versions_ListVersions_async",
+      "title": "Applications listVersions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the versions of a service.",
+      "canonical": true,
+      "file": "versions.list_versions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListVersions",
+        "fullName": "google.appengine.v1.Versions.ListVersions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.appengine.v1.VersionView"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.appengine.v1.ListVersionsResponse",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.appengine.v1.VersionsClient"
+        },
+        "method": {
+          "shortName": "ListVersions",
+          "fullName": "google.appengine.v1.Versions.ListVersions",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.appengine.v1.Versions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Versions_GetVersion_async",
+      "title": "Applications getVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the specified Version resource. By default, only a `BASIC_VIEW` will be returned. Specify the `FULL_VIEW` parameter to get the full resource.",
+      "canonical": true,
+      "file": "versions.get_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetVersion",
+        "fullName": "google.appengine.v1.Versions.GetVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.appengine.v1.VersionView"
+          }
+        ],
+        "resultType": ".google.appengine.v1.Version",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.appengine.v1.VersionsClient"
+        },
+        "method": {
+          "shortName": "GetVersion",
+          "fullName": "google.appengine.v1.Versions.GetVersion",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.appengine.v1.Versions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Versions_CreateVersion_async",
+      "title": "Applications createVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deploys code and resource files to a new version.",
+      "canonical": true,
+      "file": "versions.create_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateVersion",
+        "fullName": "google.appengine.v1.Versions.CreateVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version",
+            "type": ".google.appengine.v1.Version"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.appengine.v1.VersionsClient"
+        },
+        "method": {
+          "shortName": "CreateVersion",
+          "fullName": "google.appengine.v1.Versions.CreateVersion",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.appengine.v1.Versions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Versions_UpdateVersion_async",
+      "title": "Applications updateVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified Version resource. You can specify the following fields depending on the App Engine environment and type of scaling that the version resource uses: **Standard environment** * [`instance_class`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.instance_class) *automatic scaling* in the standard environment: * [`automatic_scaling.min_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automatic_scaling.max_idle_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automaticScaling.standard_scheduler_settings.max_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings) * [`automaticScaling.standard_scheduler_settings.min_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings) * [`automaticScaling.standard_scheduler_settings.target_cpu_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings) * [`automaticScaling.standard_scheduler_settings.target_throughput_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#StandardSchedulerSettings) *basic scaling* or *manual scaling* in the standard environment: * [`serving_status`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.serving_status) * [`manual_scaling.instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#manualscaling) **Flexible environment** * [`serving_status`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.serving_status) *automatic scaling* in the flexible environment: * [`automatic_scaling.min_total_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automatic_scaling.max_total_instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automatic_scaling.cool_down_period_sec`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) * [`automatic_scaling.cpu_utilization.target_utilization`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#Version.FIELDS.automatic_scaling) *manual scaling* in the flexible environment: * [`manual_scaling.instances`](https://cloud.google.com/appengine/docs/admin-api/reference/rest/v1/apps.services.versions#manualscaling)",
+      "canonical": true,
+      "file": "versions.update_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateVersion",
+        "fullName": "google.appengine.v1.Versions.UpdateVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "version",
+            "type": ".google.appengine.v1.Version"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.appengine.v1.VersionsClient"
+        },
+        "method": {
+          "shortName": "UpdateVersion",
+          "fullName": "google.appengine.v1.Versions.UpdateVersion",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.appengine.v1.Versions"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "appengine_v1_generated_Versions_DeleteVersion_async",
+      "title": "Applications deleteVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an existing Version resource.",
+      "canonical": true,
+      "file": "versions.delete_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteVersion",
+        "fullName": "google.appengine.v1.Versions.DeleteVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "VersionsClient",
+          "fullName": "google.appengine.v1.VersionsClient"
+        },
+        "method": {
+          "shortName": "DeleteVersion",
+          "fullName": "google.appengine.v1.Versions.DeleteVersion",
+          "service": {
+            "shortName": "Versions",
+            "fullName": "google.appengine.v1.Versions"
+          }
+        }
+      }
+    }
+  ]
 }

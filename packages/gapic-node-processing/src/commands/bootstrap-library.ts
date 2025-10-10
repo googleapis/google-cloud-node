@@ -23,7 +23,7 @@ import yaml from 'js-yaml';
 
 const BOOTSTRAP_TEMPLATES_PATH = path.resolve(
   __dirname,
-  '../../../templates/bootstrap-templates'
+  '../../../templates/bootstrap-templates',
 );
 
 export interface CliArgs {
@@ -87,17 +87,17 @@ export const bootstrapLibrary: yargs.CommandModule<{}, CliArgs> = {
     const distributionName = await getDistributionName(
       octokit,
       argv['api-id'],
-      cp.execSync
+      cp.execSync,
     );
 
     const serviceConfig = yaml.load(
-      fs.readFileSync(argv['service-config-path'], 'utf8')
+      fs.readFileSync(argv['service-config-path'], 'utf8'),
     ) as ServiceConfig;
 
     const bootstrapVars = await compileVars(
       argv,
       serviceConfig,
-      distributionName
+      distributionName,
     );
 
     await compileTemplates(

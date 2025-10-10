@@ -383,6 +383,50 @@
                             "DEFAULT": 2
                           }
                         },
+                        "CarrierTransitTimeOption": {
+                          "values": {
+                            "CARRIER_TRANSIT_TIME_OPTION_UNSPECIFIED": 0,
+                            "DHL_PAKET": 1,
+                            "DHL_PACKCHEN": 2,
+                            "DHL_EXPRESSEASY": 3,
+                            "DPD_EXPRESS": 4,
+                            "DPD_CLASSIC_PARCEL": 5,
+                            "HERMES_HAUSTUR": 6,
+                            "HERMES_PAKETSHOP": 7,
+                            "GLS_BUSINESS": 8,
+                            "GLS_EXPRESS": 9,
+                            "GLS_PRIVATE": 10,
+                            "COLISSIMO_DOMICILE": 11,
+                            "DHL_EXPRESS_12AM": 12,
+                            "DHL_EXPRESS_9AM": 13,
+                            "GEODIS_EXPRESS": 14,
+                            "GEODIS_PACK_30": 15,
+                            "GEODIS_SAME_DAY": 16,
+                            "GEODIS_TOP_24": 17,
+                            "TNT_ESSENTIEL_24H": 18,
+                            "TNT_ESSENTIEL_FLEXIBILITE": 19,
+                            "FEDEX_GROUND": 20,
+                            "FEDEX_HOME_DELIVERY": 21,
+                            "FEDEX_EXPRESS_SAVER": 22,
+                            "FEDEX_FIRST_OVERNIGHT": 23,
+                            "FEDEX_PRIORITY_OVERNIGHT": 24,
+                            "FEDEX_STANDARD_OVERNIGHT": 25,
+                            "FEDEX_2DAY": 26,
+                            "UPS_2ND_DAY_AIR": 27,
+                            "UPS_2ND_DAY_AM": 28,
+                            "UPS_3_DAY_SELECT": 29,
+                            "UPS_GROUND": 30,
+                            "UPS_NEXT_DAY_AIR": 31,
+                            "UPS_NEXT_DAY_AIR_EARLY_AM": 32,
+                            "UPS_NEXT_DAY_AIR_SAVER": 33,
+                            "USPS_PRIORITY_MAIL_EXPRESS": 34,
+                            "USPS_MEDIA_MAIL": 35,
+                            "USPS_GROUND_ADVANTAGE_RETAIL": 36,
+                            "USPS_PRIORITY_MAIL": 37,
+                            "USPS_GROUND_ADVANTAGE_COMMERCIAL": 38,
+                            "USPS_FIRST_CLASS_MAIL": 39
+                          }
+                        },
                         "ProductAttributes": {
                           "oneofs": {
                             "_identifierExists": {
@@ -870,6 +914,11 @@
                               "type": "Shipping",
                               "id": 39
                             },
+                            "carrierShipping": {
+                              "rule": "repeated",
+                              "type": "CarrierShipping",
+                              "id": 142
+                            },
                             "freeShippingThreshold": {
                               "rule": "repeated",
                               "type": "FreeShippingThreshold",
@@ -1181,6 +1230,236 @@
                               "rule": "repeated",
                               "type": "ProductSustainabilityIncentive",
                               "id": 138
+                            }
+                          },
+                          "nested": {
+                            "CarrierShipping": {
+                              "oneofs": {
+                                "_country": {
+                                  "oneof": [
+                                    "country"
+                                  ]
+                                },
+                                "_region": {
+                                  "oneof": [
+                                    "region"
+                                  ]
+                                },
+                                "_postalCode": {
+                                  "oneof": [
+                                    "postalCode"
+                                  ]
+                                },
+                                "_originPostalCode": {
+                                  "oneof": [
+                                    "originPostalCode"
+                                  ]
+                                },
+                                "_flatPrice": {
+                                  "oneof": [
+                                    "flatPrice"
+                                  ]
+                                },
+                                "_carrierPrice": {
+                                  "oneof": [
+                                    "carrierPrice"
+                                  ]
+                                },
+                                "_carrierPriceFlatAdjustment": {
+                                  "oneof": [
+                                    "carrierPriceFlatAdjustment"
+                                  ]
+                                },
+                                "_carrierPricePercentageAdjustment": {
+                                  "oneof": [
+                                    "carrierPricePercentageAdjustment"
+                                  ]
+                                },
+                                "_minHandlingTime": {
+                                  "oneof": [
+                                    "minHandlingTime"
+                                  ]
+                                },
+                                "_maxHandlingTime": {
+                                  "oneof": [
+                                    "maxHandlingTime"
+                                  ]
+                                },
+                                "_fixedMinTransitTime": {
+                                  "oneof": [
+                                    "fixedMinTransitTime"
+                                  ]
+                                },
+                                "_fixedMaxTransitTime": {
+                                  "oneof": [
+                                    "fixedMaxTransitTime"
+                                  ]
+                                },
+                                "_carrierTransitTime": {
+                                  "oneof": [
+                                    "carrierTransitTime"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "country": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "region": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "postalCode": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "originPostalCode": {
+                                  "type": "string",
+                                  "id": 4,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "flatPrice": {
+                                  "type": "google.shopping.type.Price",
+                                  "id": 5,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "carrierPrice": {
+                                  "type": "CarrierPriceOption",
+                                  "id": 6,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "carrierPriceFlatAdjustment": {
+                                  "type": "google.shopping.type.Price",
+                                  "id": 7,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "carrierPricePercentageAdjustment": {
+                                  "type": "double",
+                                  "id": 8,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "minHandlingTime": {
+                                  "type": "int64",
+                                  "id": 9,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "maxHandlingTime": {
+                                  "type": "int64",
+                                  "id": 10,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "fixedMinTransitTime": {
+                                  "type": "int64",
+                                  "id": 11,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "fixedMaxTransitTime": {
+                                  "type": "int64",
+                                  "id": 12,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "carrierTransitTime": {
+                                  "type": "CarrierTransitTimeOption",
+                                  "id": 13,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
+                            "CarrierPriceOption": {
+                              "values": {
+                                "CARRIER_PRICE_OPTION_UNSPECIFIED": 0,
+                                "AUSTRALIA_POST_REGULAR": 1,
+                                "AUSTRALIA_POST_EXPRESS": 2,
+                                "AUSTRALIA_POST_REGULAR_S": 3,
+                                "AUSTRALIA_POST_REGULAR_M": 4,
+                                "AUSTRALIA_POST_REGULAR_L": 5,
+                                "AUSTRALIA_POST_REGULAR_XL": 6,
+                                "AUSTRALIA_POST_EXPRESS_S": 7,
+                                "AUSTRALIA_POST_EXPRESS_M": 8,
+                                "AUSTRALIA_POST_EXPRESS_L": 9,
+                                "AUSTRALIA_POST_EXPRESS_XL": 10,
+                                "TNT_ROAD_EXPRESS": 11,
+                                "TNT_OVERNIGHT_EXPRESS": 12,
+                                "TOLL_ROAD_DELIVERY": 13,
+                                "TOLL_OVERNIGHT_PRIORITY": 14,
+                                "DHL_PAKET": 15,
+                                "DHL_PACKCHEN": 16,
+                                "DPD_EXPRESS_12": 17,
+                                "DPD_EXPRESS": 18,
+                                "DPD_CLASSIC_PARCEL": 19,
+                                "HERMES_PACKCHEN": 20,
+                                "HERMES_PAKETKLASSE_S": 21,
+                                "HERMES_PAKETKLASSE_M": 22,
+                                "HERMES_PAKETKLASSE_L": 23,
+                                "UPS_EXPRESS": 24,
+                                "UPS_EXPRESS_SAVER": 25,
+                                "UPS_EXPRESS_STANDARD": 26,
+                                "DHL_EXPRESS": 27,
+                                "DHL_EXPRESS_12": 28,
+                                "DPD_NEXT_DAY": 29,
+                                "DPD_STANDARD_NEXT_DAY": 30,
+                                "DPD_STANDARD_TWO_DAY": 31,
+                                "RMG_1ST_CLASS_SMALL": 32,
+                                "RMG_1ST_CLASS_MEDIUM": 33,
+                                "RMG_2ND_CLASS_SMALL": 34,
+                                "RMG_2ND_CLASS_MEDIUM": 35,
+                                "TNT_EXPRESS": 36,
+                                "TNT_EXPRESS_10": 37,
+                                "TNT_EXPRESS_12": 38,
+                                "YODEL_B2C_48HR": 39,
+                                "YODEL_B2C_72HR": 40,
+                                "YODEL_B2C_PACKET": 41,
+                                "FEDEX_GROUND": 42,
+                                "FEDEX_HOME_DELIVERY": 43,
+                                "FEDEX_EXPRESS_SAVER": 44,
+                                "FEDEX_FIRST_OVERNIGHT": 45,
+                                "FEDEX_PRIORITY_OVERNIGHT": 46,
+                                "FEDEX_STANDARD_OVERNIGHT": 47,
+                                "FEDEX_2DAY": 48,
+                                "UPS_STANDARD": 49,
+                                "UPS_2ND_DAY_AIR": 50,
+                                "UPS_2ND_DAY_AM": 51,
+                                "UPS_3_DAY_SELECT": 52,
+                                "UPS_GROUND": 53,
+                                "UPS_NEXT_DAY_AIR": 54,
+                                "UPS_NEXT_DAY_AIR_EARLY_AM": 55,
+                                "UPS_NEXT_DAY_AIR_SAVER": 56,
+                                "USPS_PRIORITY_MAIL_EXPRESS": 57,
+                                "USPS_MEDIA_MAIL": 58,
+                                "USPS_GROUND_ADVANTAGE_RETAIL": 59,
+                                "USPS_PRIORITY_MAIL": 60,
+                                "USPS_GROUND_ADVANTAGE_COMMERCIAL": 61
+                              }
                             }
                           }
                         },
@@ -4265,7 +4544,8 @@
             "java_multiple_files": true,
             "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
-            "objc_class_prefix": "GAPI"
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
           },
           "nested": {
             "http": {
@@ -4389,10 +4669,6 @@
                   "rule": "repeated",
                   "type": "ClientLibraryDestination",
                   "id": 2
-                },
-                "selectiveGapicGeneration": {
-                  "type": "SelectiveGapicGeneration",
-                  "id": 3
                 }
               }
             },
@@ -4533,28 +4809,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "experimentalFeatures": {
-                  "type": "ExperimentalFeatures",
-                  "id": 2
-                }
-              },
-              "nested": {
-                "ExperimentalFeatures": {
-                  "fields": {
-                    "restAsyncIoEnabled": {
-                      "type": "bool",
-                      "id": 1
-                    },
-                    "protobufPythonicTypesEnabled": {
-                      "type": "bool",
-                      "id": 2
-                    },
-                    "unversionedPackageDisabled": {
-                      "type": "bool",
-                      "id": 3
-                    }
-                  }
                 }
               }
             },
@@ -4612,11 +4866,6 @@
                 "common": {
                   "type": "CommonLanguageSettings",
                   "id": 1
-                },
-                "renamedServices": {
-                  "keyType": "string",
-                  "type": "string",
-                  "id": 2
                 }
               }
             },
@@ -4676,19 +4925,6 @@
                 "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
                 "GITHUB": 10,
                 "PACKAGE_MANAGER": 20
-              }
-            },
-            "SelectiveGapicGeneration": {
-              "fields": {
-                "methods": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 1
-                },
-                "generateOmittedAsInternal": {
-                  "type": "bool",
-                  "id": 2
-                }
               }
             },
             "LaunchStage": {
@@ -4823,19 +5059,12 @@
                   "type": "FileDescriptorProto",
                   "id": 1
                 }
-              },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ]
+              }
             },
             "Edition": {
               "edition": "proto2",
               "values": {
                 "EDITION_UNKNOWN": 0,
-                "EDITION_LEGACY": 900,
                 "EDITION_PROTO2": 998,
                 "EDITION_PROTO3": 999,
                 "EDITION_2023": 1000,
@@ -4873,11 +5102,6 @@
                   "rule": "repeated",
                   "type": "int32",
                   "id": 11
-                },
-                "optionDependency": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 15
                 },
                 "messageType": {
                   "rule": "repeated",
@@ -4967,10 +5191,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 10
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 11
                 }
               },
               "nested": {
@@ -5196,10 +5416,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 5
-                },
-                "visibility": {
-                  "type": "SymbolVisibility",
-                  "id": 6
                 }
               },
               "nested": {
@@ -5414,7 +5630,6 @@
                   42,
                   42
                 ],
-                "php_generic_services",
                 [
                   38,
                   38
@@ -5550,8 +5765,7 @@
                   "type": "bool",
                   "id": 10,
                   "options": {
-                    "default": false,
-                    "deprecated": true
+                    "default": false
                   }
                 },
                 "debugRedact": {
@@ -5578,10 +5792,6 @@
                 "features": {
                   "type": "FeatureSet",
                   "id": 21
-                },
-                "featureSupport": {
-                  "type": "FeatureSupport",
-                  "id": 22
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -5650,26 +5860,6 @@
                     "value": {
                       "type": "string",
                       "id": 2
-                    }
-                  }
-                },
-                "FeatureSupport": {
-                  "fields": {
-                    "editionIntroduced": {
-                      "type": "Edition",
-                      "id": 1
-                    },
-                    "editionDeprecated": {
-                      "type": "Edition",
-                      "id": 2
-                    },
-                    "deprecationWarning": {
-                      "type": "string",
-                      "id": 3
-                    },
-                    "editionRemoved": {
-                      "type": "Edition",
-                      "id": 4
                     }
                   }
                 }
@@ -5759,10 +5949,6 @@
                   "options": {
                     "default": false
                   }
-                },
-                "featureSupport": {
-                  "type": "FieldOptions.FeatureSupport",
-                  "id": 4
                 },
                 "uninterpretedOption": {
                   "rule": "repeated",
@@ -5906,7 +6092,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_2023",
                     "edition_defaults.value": "EXPLICIT"
                   }
@@ -5917,7 +6102,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "OPEN"
                   }
@@ -5928,7 +6112,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "PACKED"
                   }
@@ -5939,7 +6122,6 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "VERIFY"
                   }
@@ -5950,8 +6132,7 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
-                    "edition_defaults.edition": "EDITION_LEGACY",
+                    "edition_defaults.edition": "EDITION_PROTO2",
                     "edition_defaults.value": "LENGTH_PREFIXED"
                   }
                 },
@@ -5961,38 +6142,27 @@
                   "options": {
                     "retention": "RETENTION_RUNTIME",
                     "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2023",
                     "edition_defaults.edition": "EDITION_PROTO3",
                     "edition_defaults.value": "ALLOW"
-                  }
-                },
-                "enforceNamingStyle": {
-                  "type": "EnforceNamingStyle",
-                  "id": 7,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_METHOD",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "STYLE2024"
-                  }
-                },
-                "defaultSymbolVisibility": {
-                  "type": "VisibilityFeature.DefaultSymbolVisibility",
-                  "id": 8,
-                  "options": {
-                    "retention": "RETENTION_SOURCE",
-                    "targets": "TARGET_TYPE_FILE",
-                    "feature_support.edition_introduced": "EDITION_2024",
-                    "edition_defaults.edition": "EDITION_2024",
-                    "edition_defaults.value": "EXPORT_TOP_LEVEL"
                   }
                 }
               },
               "extensions": [
                 [
                   1000,
-                  9994
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
                 ],
                 [
                   9995,
@@ -6037,13 +6207,7 @@
                     "UTF8_VALIDATION_UNKNOWN": 0,
                     "VERIFY": 2,
                     "NONE": 3
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ]
-                  ]
+                  }
                 },
                 "MessageEncoding": {
                   "values": {
@@ -6057,33 +6221,6 @@
                     "JSON_FORMAT_UNKNOWN": 0,
                     "ALLOW": 1,
                     "LEGACY_BEST_EFFORT": 2
-                  }
-                },
-                "EnforceNamingStyle": {
-                  "values": {
-                    "ENFORCE_NAMING_STYLE_UNKNOWN": 0,
-                    "STYLE2024": 1,
-                    "STYLE_LEGACY": 2
-                  }
-                },
-                "VisibilityFeature": {
-                  "fields": {},
-                  "reserved": [
-                    [
-                      1,
-                      536870911
-                    ]
-                  ],
-                  "nested": {
-                    "DefaultSymbolVisibility": {
-                      "values": {
-                        "DEFAULT_SYMBOL_VISIBILITY_UNKNOWN": 0,
-                        "EXPORT_ALL": 1,
-                        "EXPORT_TOP_LEVEL": 2,
-                        "LOCAL_ALL": 3,
-                        "STRICT": 4
-                      }
-                    }
                   }
                 }
               }
@@ -6112,26 +6249,11 @@
                       "type": "Edition",
                       "id": 3
                     },
-                    "overridableFeatures": {
+                    "features": {
                       "type": "FeatureSet",
-                      "id": 4
-                    },
-                    "fixedFeatures": {
-                      "type": "FeatureSet",
-                      "id": 5
+                      "id": 2
                     }
-                  },
-                  "reserved": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    "features"
-                  ]
+                  }
                 }
               }
             },
@@ -6144,12 +6266,6 @@
                   "id": 1
                 }
               },
-              "extensions": [
-                [
-                  536000000,
-                  536000000
-                ]
-              ],
               "nested": {
                 "Location": {
                   "fields": {
@@ -6233,14 +6349,6 @@
                     }
                   }
                 }
-              }
-            },
-            "SymbolVisibility": {
-              "edition": "proto2",
-              "values": {
-                "VISIBILITY_UNSET": 0,
-                "VISIBILITY_LOCAL": 1,
-                "VISIBILITY_EXPORT": 2
               }
             },
             "Duration": {

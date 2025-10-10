@@ -209,6 +209,9 @@ export class ReservationServiceClient {
       reservationPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/reservations/{reservation}'
       ),
+      reservationGroupPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/reservationGroups/{reservation_group}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -224,7 +227,9 @@ export class ReservationServiceClient {
       searchAssignments:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'assignments'),
       searchAllAssignments:
-          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'assignments')
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'assignments'),
+      listReservationGroups:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'reservationGroups')
     };
 
     // Put together the default options sent with requests.
@@ -270,7 +275,7 @@ export class ReservationServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const reservationServiceStubMethods =
-        ['createReservation', 'listReservations', 'getReservation', 'deleteReservation', 'updateReservation', 'failoverReservation', 'createCapacityCommitment', 'listCapacityCommitments', 'getCapacityCommitment', 'deleteCapacityCommitment', 'updateCapacityCommitment', 'splitCapacityCommitment', 'mergeCapacityCommitments', 'createAssignment', 'listAssignments', 'deleteAssignment', 'searchAssignments', 'searchAllAssignments', 'moveAssignment', 'updateAssignment', 'getBiReservation', 'updateBiReservation'];
+        ['createReservation', 'listReservations', 'getReservation', 'deleteReservation', 'updateReservation', 'failoverReservation', 'createCapacityCommitment', 'listCapacityCommitments', 'getCapacityCommitment', 'deleteCapacityCommitment', 'updateCapacityCommitment', 'splitCapacityCommitment', 'mergeCapacityCommitments', 'createAssignment', 'listAssignments', 'deleteAssignment', 'searchAssignments', 'searchAllAssignments', 'moveAssignment', 'updateAssignment', 'getBiReservation', 'updateBiReservation', 'getIamPolicy', 'setIamPolicy', 'testIamPermissions', 'createReservationGroup', 'getReservationGroup', 'deleteReservationGroup', 'listReservationGroups'];
     for (const methodName of reservationServiceStubMethods) {
       const callPromise = this.reservationServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1394,6 +1399,11 @@ export class ReservationServiceClient {
  *   specified in the parent.
  *   ID is the last portion of capacity commitment name e.g., 'abc' for
  *   projects/myproject/locations/US/capacityCommitments/abc
+ * @param {string} [request.capacityCommitmentId]
+ *   Optional. The optional resulting capacity commitment ID. Capacity
+ *   commitment name will be generated automatically if this field is empty.
+ *   This field must only contain lower case alphanumeric characters or dashes.
+ *   The first and last character cannot be a dash. Max length is 64 characters.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -2122,6 +2132,632 @@ export class ReservationServiceClient {
         {}|undefined
       ]) => {
         this._log.info('updateBiReservation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets the access control policy for a resource.
+ * May return:
+ *
+ * * A`NOT_FOUND` error if the resource doesn't exist or you don't have the
+ *   permission to view it.
+ * * An empty policy if the resource exists but doesn't have a set policy.
+ *
+ * Supported resources are:
+ * - Reservations
+ * - ReservationAssignments
+ *
+ * To call this method, you must have the following Google IAM permissions:
+ *
+ * - `bigqueryreservation.reservations.getIamPolicy` to get policies on
+ * reservations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.GetPolicyOptions} request.options
+ *   OPTIONAL: A `GetPolicyOptions` object for specifying options to
+ *   `GetIamPolicy`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.get_iam_policy.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_GetIamPolicy_async
+ */
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.iam.v1.IGetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request?: protos.google.iam.v1.IGetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getIamPolicy request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.IGetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Sets an access control policy for a resource. Replaces any existing
+ * policy.
+ *
+ * Supported resources are:
+ * - Reservations
+ *
+ * To call this method, you must have the following Google IAM permissions:
+ *
+ * - `bigqueryreservation.reservations.setIamPolicy` to set policies on
+ * reservations.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy is being specified.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {google.iam.v1.Policy} request.policy
+ *   REQUIRED: The complete policy to be applied to the `resource`. The size of
+ *   the policy is limited to a few 10s of KB. An empty policy is a
+ *   valid policy but certain Cloud Platform services (such as Projects)
+ *   might reject them.
+ * @param {google.protobuf.FieldMask} request.updateMask
+ *   OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+ *   the fields in the mask will be modified. If no mask is provided, the
+ *   following default mask is used:
+ *
+ *   `paths: "bindings, etag"`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.Policy|Policy}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.set_iam_policy.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_SetIamPolicy_async
+ */
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.iam.v1.ISetIamPolicyRequest,
+      callback: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request?: protos.google.iam.v1.ISetIamPolicyRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.IPolicy,
+          protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('setIamPolicy request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('setIamPolicy response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.setIamPolicy(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.IPolicy,
+        protos.google.iam.v1.ISetIamPolicyRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('setIamPolicy response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets your permissions on a resource. Returns an empty set of permissions if
+ * the resource doesn't exist.
+ *
+ * Supported resources are:
+ * - Reservations
+ *
+ * No Google IAM permissions are required to call this method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.resource
+ *   REQUIRED: The resource for which the policy detail is being requested.
+ *   See the operation documentation for the appropriate value for this field.
+ * @param {string[]} request.permissions
+ *   The set of permissions to check for the `resource`. Permissions with
+ *   wildcards (such as '*' or 'storage.*') are not allowed. For more
+ *   information see
+ *   [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.iam.v1.TestIamPermissionsResponse|TestIamPermissionsResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.test_iam_permissions.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_TestIamPermissions_async
+ */
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.iam.v1.ITestIamPermissionsRequest,
+      callback: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request?: protos.google.iam.v1.ITestIamPermissionsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.iam.v1.ITestIamPermissionsResponse,
+          protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'resource': request.resource ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('testIamPermissions request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('testIamPermissions response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.testIamPermissions(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.iam.v1.ITestIamPermissionsResponse,
+        protos.google.iam.v1.ITestIamPermissionsRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('testIamPermissions response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Creates a new reservation group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project, location. E.g.,
+ *   `projects/myproject/locations/US`
+ * @param {string} request.reservationGroupId
+ *   Required. The reservation group ID. It must only contain lower case
+ *   alphanumeric characters or dashes. It must start with a letter and must not
+ *   end with a dash. Its maximum length is 64 characters.
+ * @param {google.cloud.bigquery.reservation.v1.ReservationGroup} request.reservationGroup
+ *   Required. New Reservation Group to create.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.ReservationGroup|ReservationGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.create_reservation_group.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_CreateReservationGroup_async
+ */
+  createReservationGroup(
+      request?: protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+        protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest|undefined, {}|undefined
+      ]>;
+  createReservationGroup(
+      request: protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReservationGroup(
+      request: protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  createReservationGroup(
+      request?: protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+        protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('createReservationGroup request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+        protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('createReservationGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.createReservationGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+        protos.google.cloud.bigquery.reservation.v1.ICreateReservationGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('createReservationGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Returns information about the reservation group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the reservation group to retrieve. E.g.,
+ *      `projects/myproject/locations/US/reservationGroups/team1-prod`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.bigquery.reservation.v1.ReservationGroup|ReservationGroup}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.get_reservation_group.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_GetReservationGroup_async
+ */
+  getReservationGroup(
+      request?: protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+        protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest|undefined, {}|undefined
+      ]>;
+  getReservationGroup(
+      request: protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReservationGroup(
+      request: protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest,
+      callback: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  getReservationGroup(
+      request?: protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+          protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+        protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getReservationGroup request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+        protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getReservationGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getReservationGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup,
+        protos.google.cloud.bigquery.reservation.v1.IGetReservationGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getReservationGroup response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Deletes a reservation.
+ * Returns `google.rpc.Code.FAILED_PRECONDITION` when reservation has
+ * assignments.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Resource name of the reservation group to retrieve. E.g.,
+ *      `projects/myproject/locations/US/reservationGroups/team1-prod`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.delete_reservation_group.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_DeleteReservationGroup_async
+ */
+  deleteReservationGroup(
+      request?: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest|undefined, {}|undefined
+      ]>;
+  deleteReservationGroup(
+      request: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteReservationGroup(
+      request: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteReservationGroup(
+      request?: protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteReservationGroup request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteReservationGroup response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteReservationGroup(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.bigquery.reservation.v1.IDeleteReservationGroupRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteReservationGroup response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -3238,6 +3874,200 @@ export class ReservationServiceClient {
       callSettings
     ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IAssignment>;
   }
+ /**
+ * Lists all the reservation groups for the project in the specified location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name containing project and location, e.g.:
+ *     `projects/myproject/locations/US`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.bigquery.reservation.v1.ReservationGroup|ReservationGroup}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listReservationGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listReservationGroups(
+      request?: protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup[],
+        protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse
+      ]>;
+  listReservationGroups(
+      request: protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup>): void;
+  listReservationGroups(
+      request: protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup>): void;
+  listReservationGroups(
+      request?: protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup>,
+      callback?: PaginationCallback<
+          protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+          protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse|null|undefined,
+          protos.google.cloud.bigquery.reservation.v1.IReservationGroup>):
+      Promise<[
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup[],
+        protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+      protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse|null|undefined,
+      protos.google.cloud.bigquery.reservation.v1.IReservationGroup>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listReservationGroups values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listReservationGroups request %j', request);
+    return this.innerApiCalls
+      .listReservationGroups(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.bigquery.reservation.v1.IReservationGroup[],
+        protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest|null,
+        protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsResponse
+      ]) => {
+        this._log.info('listReservationGroups values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listReservationGroups`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name containing project and location, e.g.:
+ *     `projects/myproject/locations/US`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.bigquery.reservation.v1.ReservationGroup|ReservationGroup} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listReservationGroupsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listReservationGroupsStream(
+      request?: protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listReservationGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listReservationGroups stream %j', request);
+    return this.descriptors.page.listReservationGroups.createStream(
+      this.innerApiCalls.listReservationGroups as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listReservationGroups`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource name containing project and location, e.g.:
+ *     `projects/myproject/locations/US`
+ * @param {number} request.pageSize
+ *   The maximum number of items to return per page.
+ * @param {string} request.pageToken
+ *   The next_page_token value returned from a previous List request, if any.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.bigquery.reservation.v1.ReservationGroup|ReservationGroup}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/reservation_service.list_reservation_groups.js</caption>
+ * region_tag:bigqueryreservation_v1_generated_ReservationService_ListReservationGroups_async
+ */
+  listReservationGroupsAsync(
+      request?: protos.google.cloud.bigquery.reservation.v1.IListReservationGroupsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IReservationGroup>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listReservationGroups'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listReservationGroups iterate %j', request);
+    return this.descriptors.page.listReservationGroups.asyncIterate(
+      this.innerApiCalls['listReservationGroups'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.bigquery.reservation.v1.IReservationGroup>;
+  }
   // --------------------
   // -- Path templates --
   // --------------------
@@ -3495,6 +4325,55 @@ export class ReservationServiceClient {
    */
   matchReservationFromReservationName(reservationName: string) {
     return this.pathTemplates.reservationPathTemplate.match(reservationName).reservation;
+  }
+
+  /**
+   * Return a fully-qualified reservationGroup resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} reservation_group
+   * @returns {string} Resource name string.
+   */
+  reservationGroupPath(project:string,location:string,reservationGroup:string) {
+    return this.pathTemplates.reservationGroupPathTemplate.render({
+      project: project,
+      location: location,
+      reservation_group: reservationGroup,
+    });
+  }
+
+  /**
+   * Parse the project from ReservationGroup resource.
+   *
+   * @param {string} reservationGroupName
+   *   A fully-qualified path representing ReservationGroup resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromReservationGroupName(reservationGroupName: string) {
+    return this.pathTemplates.reservationGroupPathTemplate.match(reservationGroupName).project;
+  }
+
+  /**
+   * Parse the location from ReservationGroup resource.
+   *
+   * @param {string} reservationGroupName
+   *   A fully-qualified path representing ReservationGroup resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromReservationGroupName(reservationGroupName: string) {
+    return this.pathTemplates.reservationGroupPathTemplate.match(reservationGroupName).location;
+  }
+
+  /**
+   * Parse the reservation_group from ReservationGroup resource.
+   *
+   * @param {string} reservationGroupName
+   *   A fully-qualified path representing ReservationGroup resource.
+   * @returns {string} A string representing the reservation_group.
+   */
+  matchReservationGroupFromReservationGroupName(reservationGroupName: string) {
+    return this.pathTemplates.reservationGroupPathTemplate.match(reservationGroupName).reservation_group;
   }
 
   /**

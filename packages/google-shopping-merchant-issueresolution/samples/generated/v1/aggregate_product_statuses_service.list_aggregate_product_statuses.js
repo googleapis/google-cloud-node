@@ -57,7 +57,7 @@ function main(parent) {
   // const filter = 'abc123'
 
   // Imports the Issueresolution library
-  const {AggregateProductStatusesServiceClient} = require('@google-cloud/issueresolution').v1;
+  const {AggregateProductStatusesServiceClient} = require('@google-shopping/issueresolution').v1;
 
   // Instantiates a client
   const issueresolutionClient = new AggregateProductStatusesServiceClient();

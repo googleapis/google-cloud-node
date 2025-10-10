@@ -1,6 +1,6 @@
 {
   "name": "gapic-node-processing",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "Does various processing functions for Nodejs gapic libraries",
   "bin": "./build/src/cli.js",
   "scripts": {
@@ -19,7 +19,8 @@
     "docs": "echo 'no docs to publish'"
   },
   "files": [
-    "build/src"
+    "build/src",
+    "templates"
   ],
   "author": "Google LLC",
   "license": "Apache-2.0",

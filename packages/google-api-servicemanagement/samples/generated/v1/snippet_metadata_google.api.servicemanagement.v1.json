@@ -1,599 +1,599 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-servicemanagement",
-        "version": "3.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.api.servicemanagement.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_ListServices_async",
-            "title": "ServiceManager listServices Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists managed services. Returns all public services. For authenticated users, also returns all services the calling user has \"servicemanagement.services.get\" permission for.",
-            "canonical": true,
-            "file": "service_manager.list_services.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 71,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListServices",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServices",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "producer_project_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "consumer_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.servicemanagement.v1.ListServicesResponse",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListServices",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServices",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_GetService_async",
-            "title": "ServiceManager getService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a managed service. Authentication is required unless the service is public.",
-            "canonical": true,
-            "file": "service_manager.get_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetService",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.GetService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.servicemanagement.v1.ManagedService",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetService",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.GetService",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_CreateService_async",
-            "title": "ServiceManager createService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new managed service. A managed service is immutable, and is subject to mandatory 30-day data retention. You cannot move a service or recreate it within 30 days after deletion. One producer project can own no more than 500 services. For security and reliability purposes, a production service should be hosted in a dedicated producer project. Operation<response: ManagedService>",
-            "canonical": true,
-            "file": "service_manager.create_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateService",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service",
-                        "type": ".google.api.servicemanagement.v1.ManagedService"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateService",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateService",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_DeleteService_async",
-            "title": "ServiceManager deleteService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a managed service. This method will change the service to the `Soft-Delete` state for 30 days. Within this period, service producers may call [UndeleteService][google.api.servicemanagement.v1.ServiceManager.UndeleteService] to restore the service. After 30 days, the service will be permanently deleted. Operation<response: google.protobuf.Empty>",
-            "canonical": true,
-            "file": "service_manager.delete_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteService",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.DeleteService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "DeleteService",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.DeleteService",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_UndeleteService_async",
-            "title": "ServiceManager undeleteService Sample",
-            "origin": "API_DEFINITION",
-            "description": " Revives a previously deleted managed service. The method restores the service using the configuration at the time the service was deleted. The target service must exist and must have been deleted within the last 30 days. Operation<response: UndeleteServiceResponse>",
-            "canonical": true,
-            "file": "service_manager.undelete_service.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 56,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UndeleteService",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.UndeleteService",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "UndeleteService",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.UndeleteService",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_ListServiceConfigs_async",
-            "title": "ServiceManager listServiceConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the history of the service configuration for a managed service, from the newest to the oldest.",
-            "canonical": true,
-            "file": "service_manager.list_service_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListServiceConfigs",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServiceConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    }
-                ],
-                "resultType": ".google.api.servicemanagement.v1.ListServiceConfigsResponse",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListServiceConfigs",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServiceConfigs",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_GetServiceConfig_async",
-            "title": "ServiceManager getServiceConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a service configuration (version) for a managed service.",
-            "canonical": true,
-            "file": "service_manager.get_service_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetServiceConfig",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.GetServiceConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "config_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.api.servicemanagement.v1.GetServiceConfigRequest.ConfigView"
-                    }
-                ],
-                "resultType": ".google.api.Service",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetServiceConfig",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.GetServiceConfig",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_CreateServiceConfig_async",
-            "title": "ServiceManager createServiceConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new service configuration (version) for a managed service. This method only stores the service configuration. To roll out the service configuration to backend systems please call [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout]. Only the 100 most recent service configurations and ones referenced by existing rollouts are kept for each service. The rest will be deleted eventually.",
-            "canonical": true,
-            "file": "service_manager.create_service_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateServiceConfig",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateServiceConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "service_config",
-                        "type": ".google.api.Service"
-                    }
-                ],
-                "resultType": ".google.api.Service",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateServiceConfig",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateServiceConfig",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_SubmitConfigSource_async",
-            "title": "ServiceManager submitConfigSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new service configuration (version) for a managed service based on user-supplied configuration source files (for example: OpenAPI Specification). This method stores the source configurations as well as the generated service configuration. To rollout the service configuration to other services, please call [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout]. Only the 100 most recent configuration sources and ones referenced by existing service configurtions are kept for each service. The rest will be deleted eventually. Operation<response: SubmitConfigSourceResponse>",
-            "canonical": true,
-            "file": "service_manager.submit_config_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SubmitConfigSource",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.SubmitConfigSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "config_source",
-                        "type": ".google.api.servicemanagement.v1.ConfigSource"
-                    },
-                    {
-                        "name": "validate_only",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "SubmitConfigSource",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.SubmitConfigSource",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_ListServiceRollouts_async",
-            "title": "ServiceManager listServiceRollouts Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the history of the service configuration rollouts for a managed service, from the newest to the oldest.",
-            "canonical": true,
-            "file": "service_manager.list_service_rollouts.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListServiceRollouts",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServiceRollouts",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.servicemanagement.v1.ListServiceRolloutsResponse",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "ListServiceRollouts",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServiceRollouts",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_GetServiceRollout_async",
-            "title": "ServiceManager getServiceRollout Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets a service configuration [rollout][google.api.servicemanagement.v1.Rollout].",
-            "canonical": true,
-            "file": "service_manager.get_service_rollout.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetServiceRollout",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.GetServiceRollout",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "rollout_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.api.servicemanagement.v1.Rollout",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "GetServiceRollout",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.GetServiceRollout",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_CreateServiceRollout_async",
-            "title": "ServiceManager createServiceRollout Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new service configuration rollout. Based on rollout, the Google Service Management will roll out the service configurations to different backend services. For example, the logging configuration will be pushed to Google Cloud Logging. Please note that any previous pending and running Rollouts and associated Operations will be automatically cancelled so that the latest Rollout will not be blocked by previous Rollouts. Only the 100 most recent (in any state) and the last 10 successful (if not already part of the set of 100 most recent) rollouts are kept for each service. The rest will be deleted eventually. Operation<response: Rollout>",
-            "canonical": true,
-            "file": "service_manager.create_service_rollout.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 61,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateServiceRollout",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "service_name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "rollout",
-                        "type": ".google.api.servicemanagement.v1.Rollout"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "CreateServiceRollout",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "servicemanagement_v1_generated_ServiceManager_GenerateConfigReport_async",
-            "title": "ServiceManager generateConfigReport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Generates and returns a report (errors, warnings and changes from existing configurations) associated with GenerateConfigReportRequest.new_value If GenerateConfigReportRequest.old_value is specified, GenerateConfigReportRequest will contain a single ChangeReport based on the comparison between GenerateConfigReportRequest.new_value and GenerateConfigReportRequest.old_value. If GenerateConfigReportRequest.old_value is not specified, this method will compare GenerateConfigReportRequest.new_value with the last pushed service configuration.",
-            "canonical": true,
-            "file": "service_manager.generate_config_report.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 65,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GenerateConfigReport",
-                "fullName": "google.api.servicemanagement.v1.ServiceManager.GenerateConfigReport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "new_config",
-                        "type": ".google.protobuf.Any"
-                    },
-                    {
-                        "name": "old_config",
-                        "type": ".google.protobuf.Any"
-                    }
-                ],
-                "resultType": ".google.api.servicemanagement.v1.GenerateConfigReportResponse",
-                "client": {
-                    "shortName": "ServiceManagerClient",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
-                },
-                "method": {
-                    "shortName": "GenerateConfigReport",
-                    "fullName": "google.api.servicemanagement.v1.ServiceManager.GenerateConfigReport",
-                    "service": {
-                        "shortName": "ServiceManager",
-                        "fullName": "google.api.servicemanagement.v1.ServiceManager"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-servicemanagement",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.api.servicemanagement.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_ListServices_async",
+      "title": "ServiceManager listServices Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists managed services. Returns all public services. For authenticated users, also returns all services the calling user has \"servicemanagement.services.get\" permission for.",
+      "canonical": true,
+      "file": "service_manager.list_services.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 71,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServices",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServices",
+        "async": true,
+        "parameters": [
+          {
+            "name": "producer_project_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "consumer_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.servicemanagement.v1.ListServicesResponse",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "ListServices",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServices",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_GetService_async",
+      "title": "ServiceManager getService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a managed service. Authentication is required unless the service is public.",
+      "canonical": true,
+      "file": "service_manager.get_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetService",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.GetService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.servicemanagement.v1.ManagedService",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "GetService",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.GetService",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_CreateService_async",
+      "title": "ServiceManager createService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new managed service. A managed service is immutable, and is subject to mandatory 30-day data retention. You cannot move a service or recreate it within 30 days after deletion. One producer project can own no more than 500 services. For security and reliability purposes, a production service should be hosted in a dedicated producer project. Operation<response: ManagedService>",
+      "canonical": true,
+      "file": "service_manager.create_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateService",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service",
+            "type": ".google.api.servicemanagement.v1.ManagedService"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateService",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateService",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_DeleteService_async",
+      "title": "ServiceManager deleteService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a managed service. This method will change the service to the `Soft-Delete` state for 30 days. Within this period, service producers may call [UndeleteService][google.api.servicemanagement.v1.ServiceManager.UndeleteService] to restore the service. After 30 days, the service will be permanently deleted. Operation<response: google.protobuf.Empty>",
+      "canonical": true,
+      "file": "service_manager.delete_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteService",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.DeleteService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "DeleteService",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.DeleteService",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_UndeleteService_async",
+      "title": "ServiceManager undeleteService Sample",
+      "origin": "API_DEFINITION",
+      "description": " Revives a previously deleted managed service. The method restores the service using the configuration at the time the service was deleted. The target service must exist and must have been deleted within the last 30 days. Operation<response: UndeleteServiceResponse>",
+      "canonical": true,
+      "file": "service_manager.undelete_service.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 56,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UndeleteService",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.UndeleteService",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "UndeleteService",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.UndeleteService",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_ListServiceConfigs_async",
+      "title": "ServiceManager listServiceConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the history of the service configuration for a managed service, from the newest to the oldest.",
+      "canonical": true,
+      "file": "service_manager.list_service_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServiceConfigs",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServiceConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          }
+        ],
+        "resultType": ".google.api.servicemanagement.v1.ListServiceConfigsResponse",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "ListServiceConfigs",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServiceConfigs",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_GetServiceConfig_async",
+      "title": "ServiceManager getServiceConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a service configuration (version) for a managed service.",
+      "canonical": true,
+      "file": "service_manager.get_service_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetServiceConfig",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.GetServiceConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "config_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.api.servicemanagement.v1.GetServiceConfigRequest.ConfigView"
+          }
+        ],
+        "resultType": ".google.api.Service",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "GetServiceConfig",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.GetServiceConfig",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_CreateServiceConfig_async",
+      "title": "ServiceManager createServiceConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new service configuration (version) for a managed service. This method only stores the service configuration. To roll out the service configuration to backend systems please call [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout]. Only the 100 most recent service configurations and ones referenced by existing rollouts are kept for each service. The rest will be deleted eventually.",
+      "canonical": true,
+      "file": "service_manager.create_service_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateServiceConfig",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateServiceConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "service_config",
+            "type": ".google.api.Service"
+          }
+        ],
+        "resultType": ".google.api.Service",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateServiceConfig",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateServiceConfig",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_SubmitConfigSource_async",
+      "title": "ServiceManager submitConfigSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new service configuration (version) for a managed service based on user-supplied configuration source files (for example: OpenAPI Specification). This method stores the source configurations as well as the generated service configuration. To rollout the service configuration to other services, please call [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout]. Only the 100 most recent configuration sources and ones referenced by existing service configurtions are kept for each service. The rest will be deleted eventually. Operation<response: SubmitConfigSourceResponse>",
+      "canonical": true,
+      "file": "service_manager.submit_config_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SubmitConfigSource",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.SubmitConfigSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "config_source",
+            "type": ".google.api.servicemanagement.v1.ConfigSource"
+          },
+          {
+            "name": "validate_only",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "SubmitConfigSource",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.SubmitConfigSource",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_ListServiceRollouts_async",
+      "title": "ServiceManager listServiceRollouts Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the history of the service configuration rollouts for a managed service, from the newest to the oldest.",
+      "canonical": true,
+      "file": "service_manager.list_service_rollouts.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListServiceRollouts",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServiceRollouts",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.servicemanagement.v1.ListServiceRolloutsResponse",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "ListServiceRollouts",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.ListServiceRollouts",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_GetServiceRollout_async",
+      "title": "ServiceManager getServiceRollout Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets a service configuration [rollout][google.api.servicemanagement.v1.Rollout].",
+      "canonical": true,
+      "file": "service_manager.get_service_rollout.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetServiceRollout",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.GetServiceRollout",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.api.servicemanagement.v1.Rollout",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "GetServiceRollout",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.GetServiceRollout",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_CreateServiceRollout_async",
+      "title": "ServiceManager createServiceRollout Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new service configuration rollout. Based on rollout, the Google Service Management will roll out the service configurations to different backend services. For example, the logging configuration will be pushed to Google Cloud Logging. Please note that any previous pending and running Rollouts and associated Operations will be automatically cancelled so that the latest Rollout will not be blocked by previous Rollouts. Only the 100 most recent (in any state) and the last 10 successful (if not already part of the set of 100 most recent) rollouts are kept for each service. The rest will be deleted eventually. Operation<response: Rollout>",
+      "canonical": true,
+      "file": "service_manager.create_service_rollout.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 61,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateServiceRollout",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout",
+        "async": true,
+        "parameters": [
+          {
+            "name": "service_name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "rollout",
+            "type": ".google.api.servicemanagement.v1.Rollout"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "CreateServiceRollout",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "servicemanagement_v1_generated_ServiceManager_GenerateConfigReport_async",
+      "title": "ServiceManager generateConfigReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Generates and returns a report (errors, warnings and changes from existing configurations) associated with GenerateConfigReportRequest.new_value If GenerateConfigReportRequest.old_value is specified, GenerateConfigReportRequest will contain a single ChangeReport based on the comparison between GenerateConfigReportRequest.new_value and GenerateConfigReportRequest.old_value. If GenerateConfigReportRequest.old_value is not specified, this method will compare GenerateConfigReportRequest.new_value with the last pushed service configuration.",
+      "canonical": true,
+      "file": "service_manager.generate_config_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 65,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateConfigReport",
+        "fullName": "google.api.servicemanagement.v1.ServiceManager.GenerateConfigReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "new_config",
+            "type": ".google.protobuf.Any"
+          },
+          {
+            "name": "old_config",
+            "type": ".google.protobuf.Any"
+          }
+        ],
+        "resultType": ".google.api.servicemanagement.v1.GenerateConfigReportResponse",
+        "client": {
+          "shortName": "ServiceManagerClient",
+          "fullName": "google.api.servicemanagement.v1.ServiceManagerClient"
+        },
+        "method": {
+          "shortName": "GenerateConfigReport",
+          "fullName": "google.api.servicemanagement.v1.ServiceManager.GenerateConfigReport",
+          "service": {
+            "shortName": "ServiceManager",
+            "fullName": "google.api.servicemanagement.v1.ServiceManager"
+          }
+        }
+      }
+    }
+  ]
 }

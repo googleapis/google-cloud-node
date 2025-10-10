@@ -1,2331 +1,2331 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-migrationcenter",
-        "version": "2.2.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.migrationcenter.v1",
-                "version": "v1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListAssets_async",
-            "title": "MigrationCenter listAssets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all the assets in a given project and location.",
-            "canonical": true,
-            "file": "migration_center.list_assets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListAssets",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListAssets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.migrationcenter.v1.AssetView"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ListAssetsResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ListAssets",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListAssets",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetAsset_async",
-            "title": "MigrationCenter getAsset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of an asset.",
-            "canonical": true,
-            "file": "migration_center.get_asset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetAsset",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetAsset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.migrationcenter.v1.AssetView"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.Asset",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetAsset",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetAsset",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateAsset_async",
-            "title": "MigrationCenter updateAsset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of an asset.",
-            "canonical": true,
-            "file": "migration_center.update_asset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateAsset",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateAsset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "asset",
-                        "type": ".google.cloud.migrationcenter.v1.Asset"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.Asset",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateAsset",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateAsset",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_BatchUpdateAssets_async",
-            "title": "MigrationCenter batchUpdateAssets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a list of assets.",
-            "canonical": true,
-            "file": "migration_center.batch_update_assets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchUpdateAssets",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.BatchUpdateAssets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "requests",
-                        "type": "TYPE_MESSAGE[]"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "BatchUpdateAssets",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.BatchUpdateAssets",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteAsset_async",
-            "title": "MigrationCenter deleteAsset Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an asset.",
-            "canonical": true,
-            "file": "migration_center.delete_asset.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 67,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteAsset",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteAsset",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteAsset",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteAsset",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_BatchDeleteAssets_async",
-            "title": "MigrationCenter batchDeleteAssets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes list of Assets.",
-            "canonical": true,
-            "file": "migration_center.batch_delete_assets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "BatchDeleteAssets",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.BatchDeleteAssets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "names",
-                        "type": "TYPE_STRING[]"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "BatchDeleteAssets",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.BatchDeleteAssets",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ReportAssetFrames_async",
-            "title": "MigrationCenter reportAssetFrames Sample",
-            "origin": "API_DEFINITION",
-            "description": " Reports a set of frames.",
-            "canonical": true,
-            "file": "migration_center.report_asset_frames.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ReportAssetFrames",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ReportAssetFrames",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "frames",
-                        "type": ".google.cloud.migrationcenter.v1.Frames"
-                    },
-                    {
-                        "name": "source",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ReportAssetFramesResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ReportAssetFrames",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ReportAssetFrames",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_AggregateAssetsValues_async",
-            "title": "MigrationCenter aggregateAssetsValues Sample",
-            "origin": "API_DEFINITION",
-            "description": " Aggregates the requested fields based on provided function.",
-            "canonical": true,
-            "file": "migration_center.aggregate_assets_values.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AggregateAssetsValues",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.AggregateAssetsValues",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "aggregations",
-                        "type": "TYPE_MESSAGE[]"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "AggregateAssetsValues",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.AggregateAssetsValues",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateImportJob_async",
-            "title": "MigrationCenter createImportJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an import job.",
-            "canonical": true,
-            "file": "migration_center.create_import_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateImportJob",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "import_job_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "import_job",
-                        "type": ".google.cloud.migrationcenter.v1.ImportJob"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateImportJob",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportJob",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListImportJobs_async",
-            "title": "MigrationCenter listImportJobs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all import jobs.",
-            "canonical": true,
-            "file": "migration_center.list_import_jobs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListImportJobs",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportJobs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.migrationcenter.v1.ImportJobView"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ListImportJobsResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ListImportJobs",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportJobs",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetImportJob_async",
-            "title": "MigrationCenter getImportJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of an import job.",
-            "canonical": true,
-            "file": "migration_center.get_import_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetImportJob",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.migrationcenter.v1.ImportJobView"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ImportJob",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetImportJob",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportJob",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_async",
-            "title": "MigrationCenter deleteImportJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes an import job.",
-            "canonical": true,
-            "file": "migration_center.delete_import_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteImportJob",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteImportJob",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportJob",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_async",
-            "title": "MigrationCenter updateImportJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates an import job.",
-            "canonical": true,
-            "file": "migration_center.update_import_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateImportJob",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateImportJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "import_job",
-                        "type": ".google.cloud.migrationcenter.v1.ImportJob"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateImportJob",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateImportJob",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_async",
-            "title": "MigrationCenter validateImportJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Validates an import job.",
-            "canonical": true,
-            "file": "migration_center.validate_import_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ValidateImportJob",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ValidateImportJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ValidateImportJob",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ValidateImportJob",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_RunImportJob_async",
-            "title": "MigrationCenter runImportJob Sample",
-            "origin": "API_DEFINITION",
-            "description": " Runs an import job.",
-            "canonical": true,
-            "file": "migration_center.run_import_job.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RunImportJob",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.RunImportJob",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "RunImportJob",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.RunImportJob",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetImportDataFile_async",
-            "title": "MigrationCenter getImportDataFile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets an import data file.",
-            "canonical": true,
-            "file": "migration_center.get_import_data_file.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetImportDataFile",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportDataFile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ImportDataFile",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetImportDataFile",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportDataFile",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListImportDataFiles_async",
-            "title": "MigrationCenter listImportDataFiles Sample",
-            "origin": "API_DEFINITION",
-            "description": " List import data files.",
-            "canonical": true,
-            "file": "migration_center.list_import_data_files.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListImportDataFiles",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportDataFiles",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ListImportDataFilesResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ListImportDataFiles",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportDataFiles",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_async",
-            "title": "MigrationCenter createImportDataFile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates an import data file.",
-            "canonical": true,
-            "file": "migration_center.create_import_data_file.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateImportDataFile",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportDataFile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "import_data_file_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "import_data_file",
-                        "type": ".google.cloud.migrationcenter.v1.ImportDataFile"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateImportDataFile",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportDataFile",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_async",
-            "title": "MigrationCenter deleteImportDataFile Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete an import data file.",
-            "canonical": true,
-            "file": "migration_center.delete_import_data_file.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteImportDataFile",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportDataFile",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteImportDataFile",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportDataFile",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListGroups_async",
-            "title": "MigrationCenter listGroups Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all groups in a given project and location.",
-            "canonical": true,
-            "file": "migration_center.list_groups.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListGroups",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListGroups",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ListGroupsResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ListGroups",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListGroups",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetGroup_async",
-            "title": "MigrationCenter getGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a group.",
-            "canonical": true,
-            "file": "migration_center.get_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetGroup",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.Group",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetGroup",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetGroup",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateGroup_async",
-            "title": "MigrationCenter createGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new group in a given project and location.",
-            "canonical": true,
-            "file": "migration_center.create_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 82,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateGroup",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "group_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "group",
-                        "type": ".google.cloud.migrationcenter.v1.Group"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateGroup",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateGroup",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateGroup_async",
-            "title": "MigrationCenter updateGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a group.",
-            "canonical": true,
-            "file": "migration_center.update_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 77,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateGroup",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "group",
-                        "type": ".google.cloud.migrationcenter.v1.Group"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateGroup",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateGroup",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteGroup_async",
-            "title": "MigrationCenter deleteGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a group.",
-            "canonical": true,
-            "file": "migration_center.delete_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteGroup",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteGroup",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteGroup",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_async",
-            "title": "MigrationCenter addAssetsToGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Adds assets to a group.",
-            "canonical": true,
-            "file": "migration_center.add_assets_to_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 83,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "AddAssetsToGroup",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.AddAssetsToGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "group",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "assets",
-                        "type": ".google.cloud.migrationcenter.v1.AssetList"
-                    },
-                    {
-                        "name": "allow_existing",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "AddAssetsToGroup",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.AddAssetsToGroup",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_async",
-            "title": "MigrationCenter removeAssetsFromGroup Sample",
-            "origin": "API_DEFINITION",
-            "description": " Removes assets from a group.",
-            "canonical": true,
-            "file": "migration_center.remove_assets_from_group.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 82,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RemoveAssetsFromGroup",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.RemoveAssetsFromGroup",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "group",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "assets",
-                        "type": ".google.cloud.migrationcenter.v1.AssetList"
-                    },
-                    {
-                        "name": "allow_missing",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "RemoveAssetsFromGroup",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.RemoveAssetsFromGroup",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListErrorFrames_async",
-            "title": "MigrationCenter listErrorFrames Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all error frames in a given source and location.",
-            "canonical": true,
-            "file": "migration_center.list_error_frames.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListErrorFrames",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListErrorFrames",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.migrationcenter.v1.ErrorFrameView"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ListErrorFramesResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ListErrorFrames",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListErrorFrames",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetErrorFrame_async",
-            "title": "MigrationCenter getErrorFrame Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of an error frame.",
-            "canonical": true,
-            "file": "migration_center.get_error_frame.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 60,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetErrorFrame",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetErrorFrame",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.migrationcenter.v1.ErrorFrameView"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ErrorFrame",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetErrorFrame",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetErrorFrame",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListSources_async",
-            "title": "MigrationCenter listSources Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all the sources in a given project and location.",
-            "canonical": true,
-            "file": "migration_center.list_sources.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSources",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListSources",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ListSourcesResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ListSources",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListSources",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetSource_async",
-            "title": "MigrationCenter getSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a source.",
-            "canonical": true,
-            "file": "migration_center.get_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSource",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.Source",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetSource",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetSource",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateSource_async",
-            "title": "MigrationCenter createSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new source in a given project and location.",
-            "canonical": true,
-            "file": "migration_center.create_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 82,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateSource",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "source_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "source",
-                        "type": ".google.cloud.migrationcenter.v1.Source"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateSource",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateSource",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateSource_async",
-            "title": "MigrationCenter updateSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a source.",
-            "canonical": true,
-            "file": "migration_center.update_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSource",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "source",
-                        "type": ".google.cloud.migrationcenter.v1.Source"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateSource",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSource",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteSource_async",
-            "title": "MigrationCenter deleteSource Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a source.",
-            "canonical": true,
-            "file": "migration_center.delete_source.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSource",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteSource",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteSource",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteSource",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListPreferenceSets_async",
-            "title": "MigrationCenter listPreferenceSets Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists all the preference sets in a given project and location.",
-            "canonical": true,
-            "file": "migration_center.list_preference_sets.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListPreferenceSets",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListPreferenceSets",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ListPreferenceSetsResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ListPreferenceSets",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListPreferenceSets",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetPreferenceSet_async",
-            "title": "MigrationCenter getPreferenceSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of a preference set.",
-            "canonical": true,
-            "file": "migration_center.get_preference_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetPreferenceSet",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetPreferenceSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.PreferenceSet",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetPreferenceSet",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetPreferenceSet",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_async",
-            "title": "MigrationCenter createPreferenceSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new preference set in a given project and location.",
-            "canonical": true,
-            "file": "migration_center.create_preference_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 83,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreatePreferenceSet",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreatePreferenceSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "preference_set_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "preference_set",
-                        "type": ".google.cloud.migrationcenter.v1.PreferenceSet"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "CreatePreferenceSet",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreatePreferenceSet",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_async",
-            "title": "MigrationCenter updatePreferenceSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the parameters of a preference set.",
-            "canonical": true,
-            "file": "migration_center.update_preference_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdatePreferenceSet",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdatePreferenceSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "preference_set",
-                        "type": ".google.cloud.migrationcenter.v1.PreferenceSet"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdatePreferenceSet",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdatePreferenceSet",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_async",
-            "title": "MigrationCenter deletePreferenceSet Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a preference set.",
-            "canonical": true,
-            "file": "migration_center.delete_preference_set.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeletePreferenceSet",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeletePreferenceSet",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "DeletePreferenceSet",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeletePreferenceSet",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetSettings_async",
-            "title": "MigrationCenter getSettings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the details of regional settings.",
-            "canonical": true,
-            "file": "migration_center.get_settings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetSettings",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetSettings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.Settings",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetSettings",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetSettings",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateSettings_async",
-            "title": "MigrationCenter updateSettings Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the regional-level project settings.",
-            "canonical": true,
-            "file": "migration_center.update_settings.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 78,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateSettings",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSettings",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "settings",
-                        "type": ".google.cloud.migrationcenter.v1.Settings"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "UpdateSettings",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSettings",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_async",
-            "title": "MigrationCenter createReportConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a report configuration.",
-            "canonical": true,
-            "file": "migration_center.create_report_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 82,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateReportConfig",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReportConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "report_config_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "report_config",
-                        "type": ".google.cloud.migrationcenter.v1.ReportConfig"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateReportConfig",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReportConfig",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetReportConfig_async",
-            "title": "MigrationCenter getReportConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single ReportConfig.",
-            "canonical": true,
-            "file": "migration_center.get_report_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetReportConfig",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetReportConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ReportConfig",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetReportConfig",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetReportConfig",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListReportConfigs_async",
-            "title": "MigrationCenter listReportConfigs Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists ReportConfigs in a given project and location.",
-            "canonical": true,
-            "file": "migration_center.list_report_configs.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 72,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListReportConfigs",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListReportConfigs",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ListReportConfigsResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ListReportConfigs",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListReportConfigs",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_async",
-            "title": "MigrationCenter deleteReportConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a ReportConfig.",
-            "canonical": true,
-            "file": "migration_center.delete_report_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 74,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteReportConfig",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReportConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "force",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteReportConfig",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReportConfig",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateReport_async",
-            "title": "MigrationCenter createReport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a report.",
-            "canonical": true,
-            "file": "migration_center.create_report.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 82,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateReport",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "report_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "report",
-                        "type": ".google.cloud.migrationcenter.v1.Report"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "CreateReport",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReport",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetReport_async",
-            "title": "MigrationCenter getReport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets details of a single Report.",
-            "canonical": true,
-            "file": "migration_center.get_report.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 57,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetReport",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetReport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.migrationcenter.v1.ReportView"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.Report",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "GetReport",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetReport",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListReports_async",
-            "title": "MigrationCenter listReports Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists Reports in a given ReportConfig.",
-            "canonical": true,
-            "file": "migration_center.list_reports.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 76,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListReports",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListReports",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "order_by",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "view",
-                        "type": ".google.cloud.migrationcenter.v1.ReportView"
-                    }
-                ],
-                "resultType": ".google.cloud.migrationcenter.v1.ListReportsResponse",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "ListReports",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListReports",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteReport_async",
-            "title": "MigrationCenter deleteReport Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a Report.",
-            "canonical": true,
-            "file": "migration_center.delete_report.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteReport",
-                "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReport",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "request_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "MigrationCenterClient",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
-                },
-                "method": {
-                    "shortName": "DeleteReport",
-                    "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReport",
-                    "service": {
-                        "shortName": "MigrationCenter",
-                        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-migrationcenter",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.migrationcenter.v1",
+        "version": "v1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListAssets_async",
+      "title": "MigrationCenter listAssets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the assets in a given project and location.",
+      "canonical": true,
+      "file": "migration_center.list_assets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListAssets",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListAssets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.migrationcenter.v1.AssetView"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ListAssetsResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ListAssets",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListAssets",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetAsset_async",
+      "title": "MigrationCenter getAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of an asset.",
+      "canonical": true,
+      "file": "migration_center.get_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetAsset",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.migrationcenter.v1.AssetView"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.Asset",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetAsset",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetAsset",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateAsset_async",
+      "title": "MigrationCenter updateAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of an asset.",
+      "canonical": true,
+      "file": "migration_center.update_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateAsset",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "asset",
+            "type": ".google.cloud.migrationcenter.v1.Asset"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.Asset",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateAsset",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateAsset",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_BatchUpdateAssets_async",
+      "title": "MigrationCenter batchUpdateAssets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a list of assets.",
+      "canonical": true,
+      "file": "migration_center.batch_update_assets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchUpdateAssets",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.BatchUpdateAssets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "requests",
+            "type": "TYPE_MESSAGE[]"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.BatchUpdateAssetsResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "BatchUpdateAssets",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.BatchUpdateAssets",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteAsset_async",
+      "title": "MigrationCenter deleteAsset Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an asset.",
+      "canonical": true,
+      "file": "migration_center.delete_asset.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 67,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteAsset",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteAsset",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteAsset",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteAsset",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_BatchDeleteAssets_async",
+      "title": "MigrationCenter batchDeleteAssets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes list of Assets.",
+      "canonical": true,
+      "file": "migration_center.batch_delete_assets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "BatchDeleteAssets",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.BatchDeleteAssets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "names",
+            "type": "TYPE_STRING[]"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "BatchDeleteAssets",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.BatchDeleteAssets",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ReportAssetFrames_async",
+      "title": "MigrationCenter reportAssetFrames Sample",
+      "origin": "API_DEFINITION",
+      "description": " Reports a set of frames.",
+      "canonical": true,
+      "file": "migration_center.report_asset_frames.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ReportAssetFrames",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ReportAssetFrames",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "frames",
+            "type": ".google.cloud.migrationcenter.v1.Frames"
+          },
+          {
+            "name": "source",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ReportAssetFramesResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ReportAssetFrames",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ReportAssetFrames",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_AggregateAssetsValues_async",
+      "title": "MigrationCenter aggregateAssetsValues Sample",
+      "origin": "API_DEFINITION",
+      "description": " Aggregates the requested fields based on provided function.",
+      "canonical": true,
+      "file": "migration_center.aggregate_assets_values.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AggregateAssetsValues",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.AggregateAssetsValues",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "aggregations",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.AggregateAssetsValuesResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "AggregateAssetsValues",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.AggregateAssetsValues",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateImportJob_async",
+      "title": "MigrationCenter createImportJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an import job.",
+      "canonical": true,
+      "file": "migration_center.create_import_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateImportJob",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "import_job_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "import_job",
+            "type": ".google.cloud.migrationcenter.v1.ImportJob"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "CreateImportJob",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportJob",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListImportJobs_async",
+      "title": "MigrationCenter listImportJobs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all import jobs.",
+      "canonical": true,
+      "file": "migration_center.list_import_jobs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListImportJobs",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportJobs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.migrationcenter.v1.ImportJobView"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ListImportJobsResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ListImportJobs",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportJobs",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetImportJob_async",
+      "title": "MigrationCenter getImportJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of an import job.",
+      "canonical": true,
+      "file": "migration_center.get_import_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetImportJob",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.migrationcenter.v1.ImportJobView"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ImportJob",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetImportJob",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportJob",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteImportJob_async",
+      "title": "MigrationCenter deleteImportJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes an import job.",
+      "canonical": true,
+      "file": "migration_center.delete_import_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteImportJob",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteImportJob",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportJob",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateImportJob_async",
+      "title": "MigrationCenter updateImportJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates an import job.",
+      "canonical": true,
+      "file": "migration_center.update_import_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateImportJob",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateImportJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "import_job",
+            "type": ".google.cloud.migrationcenter.v1.ImportJob"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateImportJob",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateImportJob",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ValidateImportJob_async",
+      "title": "MigrationCenter validateImportJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Validates an import job.",
+      "canonical": true,
+      "file": "migration_center.validate_import_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ValidateImportJob",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ValidateImportJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ValidateImportJob",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ValidateImportJob",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_RunImportJob_async",
+      "title": "MigrationCenter runImportJob Sample",
+      "origin": "API_DEFINITION",
+      "description": " Runs an import job.",
+      "canonical": true,
+      "file": "migration_center.run_import_job.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RunImportJob",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.RunImportJob",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "RunImportJob",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.RunImportJob",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetImportDataFile_async",
+      "title": "MigrationCenter getImportDataFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets an import data file.",
+      "canonical": true,
+      "file": "migration_center.get_import_data_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetImportDataFile",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportDataFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ImportDataFile",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetImportDataFile",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetImportDataFile",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListImportDataFiles_async",
+      "title": "MigrationCenter listImportDataFiles Sample",
+      "origin": "API_DEFINITION",
+      "description": " List import data files.",
+      "canonical": true,
+      "file": "migration_center.list_import_data_files.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListImportDataFiles",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportDataFiles",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ListImportDataFilesResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ListImportDataFiles",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListImportDataFiles",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateImportDataFile_async",
+      "title": "MigrationCenter createImportDataFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates an import data file.",
+      "canonical": true,
+      "file": "migration_center.create_import_data_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateImportDataFile",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportDataFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "import_data_file_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "import_data_file",
+            "type": ".google.cloud.migrationcenter.v1.ImportDataFile"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "CreateImportDataFile",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateImportDataFile",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteImportDataFile_async",
+      "title": "MigrationCenter deleteImportDataFile Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete an import data file.",
+      "canonical": true,
+      "file": "migration_center.delete_import_data_file.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteImportDataFile",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportDataFile",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteImportDataFile",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteImportDataFile",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListGroups_async",
+      "title": "MigrationCenter listGroups Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all groups in a given project and location.",
+      "canonical": true,
+      "file": "migration_center.list_groups.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListGroups",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListGroups",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ListGroupsResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ListGroups",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListGroups",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetGroup_async",
+      "title": "MigrationCenter getGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a group.",
+      "canonical": true,
+      "file": "migration_center.get_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetGroup",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.Group",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetGroup",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetGroup",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateGroup_async",
+      "title": "MigrationCenter createGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new group in a given project and location.",
+      "canonical": true,
+      "file": "migration_center.create_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateGroup",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "group_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "group",
+            "type": ".google.cloud.migrationcenter.v1.Group"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "CreateGroup",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateGroup",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateGroup_async",
+      "title": "MigrationCenter updateGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a group.",
+      "canonical": true,
+      "file": "migration_center.update_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 77,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateGroup",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "group",
+            "type": ".google.cloud.migrationcenter.v1.Group"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateGroup",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateGroup",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteGroup_async",
+      "title": "MigrationCenter deleteGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a group.",
+      "canonical": true,
+      "file": "migration_center.delete_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteGroup",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteGroup",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteGroup",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_AddAssetsToGroup_async",
+      "title": "MigrationCenter addAssetsToGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Adds assets to a group.",
+      "canonical": true,
+      "file": "migration_center.add_assets_to_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "AddAssetsToGroup",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.AddAssetsToGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "group",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "assets",
+            "type": ".google.cloud.migrationcenter.v1.AssetList"
+          },
+          {
+            "name": "allow_existing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "AddAssetsToGroup",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.AddAssetsToGroup",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_RemoveAssetsFromGroup_async",
+      "title": "MigrationCenter removeAssetsFromGroup Sample",
+      "origin": "API_DEFINITION",
+      "description": " Removes assets from a group.",
+      "canonical": true,
+      "file": "migration_center.remove_assets_from_group.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RemoveAssetsFromGroup",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.RemoveAssetsFromGroup",
+        "async": true,
+        "parameters": [
+          {
+            "name": "group",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "assets",
+            "type": ".google.cloud.migrationcenter.v1.AssetList"
+          },
+          {
+            "name": "allow_missing",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "RemoveAssetsFromGroup",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.RemoveAssetsFromGroup",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListErrorFrames_async",
+      "title": "MigrationCenter listErrorFrames Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all error frames in a given source and location.",
+      "canonical": true,
+      "file": "migration_center.list_error_frames.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListErrorFrames",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListErrorFrames",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.migrationcenter.v1.ErrorFrameView"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ListErrorFramesResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ListErrorFrames",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListErrorFrames",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetErrorFrame_async",
+      "title": "MigrationCenter getErrorFrame Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of an error frame.",
+      "canonical": true,
+      "file": "migration_center.get_error_frame.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 60,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetErrorFrame",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetErrorFrame",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.migrationcenter.v1.ErrorFrameView"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ErrorFrame",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetErrorFrame",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetErrorFrame",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListSources_async",
+      "title": "MigrationCenter listSources Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the sources in a given project and location.",
+      "canonical": true,
+      "file": "migration_center.list_sources.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSources",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListSources",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ListSourcesResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ListSources",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListSources",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetSource_async",
+      "title": "MigrationCenter getSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a source.",
+      "canonical": true,
+      "file": "migration_center.get_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSource",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.Source",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetSource",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetSource",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateSource_async",
+      "title": "MigrationCenter createSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new source in a given project and location.",
+      "canonical": true,
+      "file": "migration_center.create_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSource",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "source",
+            "type": ".google.cloud.migrationcenter.v1.Source"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "CreateSource",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateSource",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateSource_async",
+      "title": "MigrationCenter updateSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a source.",
+      "canonical": true,
+      "file": "migration_center.update_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSource",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "source",
+            "type": ".google.cloud.migrationcenter.v1.Source"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateSource",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSource",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteSource_async",
+      "title": "MigrationCenter deleteSource Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a source.",
+      "canonical": true,
+      "file": "migration_center.delete_source.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSource",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteSource",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteSource",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteSource",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListPreferenceSets_async",
+      "title": "MigrationCenter listPreferenceSets Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists all the preference sets in a given project and location.",
+      "canonical": true,
+      "file": "migration_center.list_preference_sets.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListPreferenceSets",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListPreferenceSets",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ListPreferenceSetsResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ListPreferenceSets",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListPreferenceSets",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetPreferenceSet_async",
+      "title": "MigrationCenter getPreferenceSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of a preference set.",
+      "canonical": true,
+      "file": "migration_center.get_preference_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetPreferenceSet",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetPreferenceSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.PreferenceSet",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetPreferenceSet",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetPreferenceSet",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreatePreferenceSet_async",
+      "title": "MigrationCenter createPreferenceSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new preference set in a given project and location.",
+      "canonical": true,
+      "file": "migration_center.create_preference_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 83,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreatePreferenceSet",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreatePreferenceSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "preference_set_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "preference_set",
+            "type": ".google.cloud.migrationcenter.v1.PreferenceSet"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "CreatePreferenceSet",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreatePreferenceSet",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdatePreferenceSet_async",
+      "title": "MigrationCenter updatePreferenceSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the parameters of a preference set.",
+      "canonical": true,
+      "file": "migration_center.update_preference_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdatePreferenceSet",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdatePreferenceSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "preference_set",
+            "type": ".google.cloud.migrationcenter.v1.PreferenceSet"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "UpdatePreferenceSet",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdatePreferenceSet",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeletePreferenceSet_async",
+      "title": "MigrationCenter deletePreferenceSet Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a preference set.",
+      "canonical": true,
+      "file": "migration_center.delete_preference_set.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeletePreferenceSet",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeletePreferenceSet",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "DeletePreferenceSet",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeletePreferenceSet",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetSettings_async",
+      "title": "MigrationCenter getSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the details of regional settings.",
+      "canonical": true,
+      "file": "migration_center.get_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetSettings",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.Settings",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetSettings",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetSettings",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_UpdateSettings_async",
+      "title": "MigrationCenter updateSettings Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the regional-level project settings.",
+      "canonical": true,
+      "file": "migration_center.update_settings.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 78,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateSettings",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSettings",
+        "async": true,
+        "parameters": [
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "settings",
+            "type": ".google.cloud.migrationcenter.v1.Settings"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "UpdateSettings",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.UpdateSettings",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateReportConfig_async",
+      "title": "MigrationCenter createReportConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a report configuration.",
+      "canonical": true,
+      "file": "migration_center.create_report_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateReportConfig",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReportConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "report_config_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "report_config",
+            "type": ".google.cloud.migrationcenter.v1.ReportConfig"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "CreateReportConfig",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReportConfig",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetReportConfig_async",
+      "title": "MigrationCenter getReportConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single ReportConfig.",
+      "canonical": true,
+      "file": "migration_center.get_report_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetReportConfig",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetReportConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ReportConfig",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetReportConfig",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetReportConfig",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListReportConfigs_async",
+      "title": "MigrationCenter listReportConfigs Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists ReportConfigs in a given project and location.",
+      "canonical": true,
+      "file": "migration_center.list_report_configs.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 72,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReportConfigs",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListReportConfigs",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ListReportConfigsResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ListReportConfigs",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListReportConfigs",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteReportConfig_async",
+      "title": "MigrationCenter deleteReportConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a ReportConfig.",
+      "canonical": true,
+      "file": "migration_center.delete_report_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 74,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteReportConfig",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReportConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "force",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteReportConfig",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReportConfig",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_CreateReport_async",
+      "title": "MigrationCenter createReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a report.",
+      "canonical": true,
+      "file": "migration_center.create_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 82,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateReport",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "report_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "report",
+            "type": ".google.cloud.migrationcenter.v1.Report"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "CreateReport",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.CreateReport",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_GetReport_async",
+      "title": "MigrationCenter getReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets details of a single Report.",
+      "canonical": true,
+      "file": "migration_center.get_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 57,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetReport",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.migrationcenter.v1.ReportView"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.Report",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "GetReport",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.GetReport",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_ListReports_async",
+      "title": "MigrationCenter listReports Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists Reports in a given ReportConfig.",
+      "canonical": true,
+      "file": "migration_center.list_reports.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListReports",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListReports",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "order_by",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "view",
+            "type": ".google.cloud.migrationcenter.v1.ReportView"
+          }
+        ],
+        "resultType": ".google.cloud.migrationcenter.v1.ListReportsResponse",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "ListReports",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.ListReports",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "migrationcenter_v1_generated_MigrationCenter_DeleteReport_async",
+      "title": "MigrationCenter deleteReport Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a Report.",
+      "canonical": true,
+      "file": "migration_center.delete_report.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteReport",
+        "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReport",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "request_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "MigrationCenterClient",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenterClient"
+        },
+        "method": {
+          "shortName": "DeleteReport",
+          "fullName": "google.cloud.migrationcenter.v1.MigrationCenter.DeleteReport",
+          "service": {
+            "shortName": "MigrationCenter",
+            "fullName": "google.cloud.migrationcenter.v1.MigrationCenter"
+          }
+        }
+      }
+    }
+  ]
 }

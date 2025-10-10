@@ -12,10 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {ensureDirectoryExists, traverseDirectory, FilePaths} from './combine-libraries';
+import {ensureDirectoryExists, traverseDirectory} from './combine-libraries';
 import * as nj from 'nunjucks';
 import {POST_PROCESSING_TEMPLATES_PATH} from './generate-index';
-import { CliArgsReadme } from './commands/generate-readme';
 
 const fs = require('fs/promises'); // For async file system operations
 const path = require('path');
@@ -33,9 +32,9 @@ work-in-progress and under active development. Any release is subject to
 backwards-incompatible changes at any time.`;
 
 interface SampleMetadata {
-  filePath: string,
-  content: string,
-  title: string
+  filePath: string;
+  content: string;
+  title: string;
 }
 
 const DEFAULT_RELEASE_LEVEL = 'preview';
@@ -55,7 +54,7 @@ export async function getSamplesMetadata(
 ): Promise<SampleMetadata[]> {
   // Let's separate out the absolute path so that we
   // can later remove it from the filePath (so that it
-  // is relative to the working directory). 
+  // is relative to the working directory).
   // For example for CURRENT LIBRARY: google-cloud-node/packages/gapic-node-processing/test/fixtures/combined-library/google-cloud-speech
   // we would produce stringToRemove: /Users/sofialeon/gcp/google-cloud-node/packages/gapic-node-processing/test/fixtures/combined-library
   // which we then use to remove from the absolute filePath (so
@@ -68,13 +67,15 @@ export async function getSamplesMetadata(
 
   const samples = await traverseDirectory(
     path.join(currentLibrary, SAMPLES_PATH),
-    [], 
+    [],
   );
   samples.map(sample => {
-    sample.filePath = sample.filePath.replace(stringToRemove, '').replace('-nodejs', '');
+    sample.filePath = sample.filePath
+      .replace(stringToRemove, '')
+      .replace('-nodejs', '');
     Object.assign(sample, {title: getSampleName(sample)});
   });
-  console.log(samples)
+  console.log(samples);
   // Since we later assign the title property, we can coerce it into
   // this type
   return samples as unknown as SampleMetadata[];
@@ -90,9 +91,7 @@ export async function getSamplesMetadata(
  * @param {FilePaths} sample - The sample object containing the file path.
  * @returns {string} The formatted name of the sample.
  */
-export function getSampleName(sample: {
-  filePath: string;
-}): string {
+export function getSampleName(sample: {filePath: string}): string {
   // Get just the sample name from the path
   let sampleName = sample.filePath;
   try {

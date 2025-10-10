@@ -1,1947 +1,1947 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-baremetalsolution",
-        "version": "2.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.baremetalsolution.v2",
-                "version": "v2"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListInstances_async",
-            "title": "BareMetalSolution listInstances Sample",
-            "origin": "API_DEFINITION",
-            "description": " List servers in a given project and location.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_instances.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListInstances",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListInstances",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListInstancesResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListInstances",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListInstances",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetInstance_async",
-            "title": "BareMetalSolution getInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get details about a single server.",
-            "canonical": true,
-            "file": "bare_metal_solution.get_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetInstance",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.Instance",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "GetInstance",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetInstance",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateInstance_async",
-            "title": "BareMetalSolution updateInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update details of a single server.",
-            "canonical": true,
-            "file": "bare_metal_solution.update_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateInstance",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "instance",
-                        "type": ".google.cloud.baremetalsolution.v2.Instance"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "UpdateInstance",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateInstance",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RenameInstance_async",
-            "title": "BareMetalSolution renameInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " RenameInstance sets a new name for an instance. Use with caution, previous names become immediately invalidated.",
-            "canonical": true,
-            "file": "bare_metal_solution.rename_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RenameInstance",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "new_instance_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.Instance",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "RenameInstance",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameInstance",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ResetInstance_async",
-            "title": "BareMetalSolution resetInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Perform an ungraceful, hard reset on a server. Equivalent to shutting the power off and then turning it back on.",
-            "canonical": true,
-            "file": "bare_metal_solution.reset_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResetInstance",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ResetInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ResetInstance",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ResetInstance",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_StartInstance_async",
-            "title": "BareMetalSolution startInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Starts a server that was shutdown.",
-            "canonical": true,
-            "file": "bare_metal_solution.start_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StartInstance",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.StartInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "StartInstance",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.StartInstance",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_StopInstance_async",
-            "title": "BareMetalSolution stopInstance Sample",
-            "origin": "API_DEFINITION",
-            "description": " Stop a running server.",
-            "canonical": true,
-            "file": "bare_metal_solution.stop_instance.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "StopInstance",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.StopInstance",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "StopInstance",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.StopInstance",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_EnableInteractiveSerialConsole_async",
-            "title": "BareMetalSolution enableInteractiveSerialConsole Sample",
-            "origin": "API_DEFINITION",
-            "description": " Enable the interactive serial console feature on an instance.",
-            "canonical": true,
-            "file": "bare_metal_solution.enable_interactive_serial_console.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "EnableInteractiveSerialConsole",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EnableInteractiveSerialConsole",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "EnableInteractiveSerialConsole",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EnableInteractiveSerialConsole",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DisableInteractiveSerialConsole_async",
-            "title": "BareMetalSolution disableInteractiveSerialConsole Sample",
-            "origin": "API_DEFINITION",
-            "description": " Disable the interactive serial console feature on an instance.",
-            "canonical": true,
-            "file": "bare_metal_solution.disable_interactive_serial_console.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DisableInteractiveSerialConsole",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DisableInteractiveSerialConsole",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "DisableInteractiveSerialConsole",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DisableInteractiveSerialConsole",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DetachLun_async",
-            "title": "BareMetalSolution detachLun Sample",
-            "origin": "API_DEFINITION",
-            "description": " Detach LUN from Instance.",
-            "canonical": true,
-            "file": "bare_metal_solution.detach_lun.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DetachLun",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DetachLun",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "instance",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "lun",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "skip_reboot",
-                        "type": "TYPE_BOOL"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "DetachLun",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DetachLun",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListSSHKeys_async",
-            "title": "BareMetalSolution listSSHKeys Sample",
-            "origin": "API_DEFINITION",
-            "description": " Lists the public SSH keys registered for the specified project. These SSH keys are used only for the interactive serial console feature.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_s_s_h_keys.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListSSHKeys",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListSSHKeys",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListSSHKeysResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListSSHKeys",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListSSHKeys",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_CreateSSHKey_async",
-            "title": "BareMetalSolution createSSHKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Register a public SSH key in the specified project for use with the interactive serial console feature.",
-            "canonical": true,
-            "file": "bare_metal_solution.create_s_s_h_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateSSHKey",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateSSHKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "ssh_key",
-                        "type": ".google.cloud.baremetalsolution.v2.SSHKey"
-                    },
-                    {
-                        "name": "ssh_key_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.SSHKey",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "CreateSSHKey",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateSSHKey",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DeleteSSHKey_async",
-            "title": "BareMetalSolution deleteSSHKey Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a public SSH key registered in the specified project.",
-            "canonical": true,
-            "file": "bare_metal_solution.delete_s_s_h_key.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteSSHKey",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteSSHKey",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "DeleteSSHKey",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteSSHKey",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListVolumes_async",
-            "title": "BareMetalSolution listVolumes Sample",
-            "origin": "API_DEFINITION",
-            "description": " List storage volumes in a given project and location.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_volumes.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListVolumes",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumes",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListVolumesResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListVolumes",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumes",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetVolume_async",
-            "title": "BareMetalSolution getVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get details of a single storage volume.",
-            "canonical": true,
-            "file": "bare_metal_solution.get_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetVolume",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.Volume",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "GetVolume",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolume",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateVolume_async",
-            "title": "BareMetalSolution updateVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update details of a single storage volume.",
-            "canonical": true,
-            "file": "bare_metal_solution.update_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateVolume",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "volume",
-                        "type": ".google.cloud.baremetalsolution.v2.Volume"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "UpdateVolume",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateVolume",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RenameVolume_async",
-            "title": "BareMetalSolution renameVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " RenameVolume sets a new name for a volume. Use with caution, previous names become immediately invalidated.",
-            "canonical": true,
-            "file": "bare_metal_solution.rename_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RenameVolume",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "new_volume_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.Volume",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "RenameVolume",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameVolume",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_EvictVolume_async",
-            "title": "BareMetalSolution evictVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " Skips volume's cooloff and deletes it now. Volume must be in cooloff state.",
-            "canonical": true,
-            "file": "bare_metal_solution.evict_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "EvictVolume",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "EvictVolume",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictVolume",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ResizeVolume_async",
-            "title": "BareMetalSolution resizeVolume Sample",
-            "origin": "API_DEFINITION",
-            "description": " Emergency Volume resize.",
-            "canonical": true,
-            "file": "bare_metal_solution.resize_volume.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ResizeVolume",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ResizeVolume",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "volume",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "size_gib",
-                        "type": "TYPE_INT64"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ResizeVolume",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ResizeVolume",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListNetworks_async",
-            "title": "BareMetalSolution listNetworks Sample",
-            "origin": "API_DEFINITION",
-            "description": " List network in a given project and location.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_networks.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListNetworks",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNetworks",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListNetworksResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListNetworks",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNetworks",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListNetworkUsage_async",
-            "title": "BareMetalSolution listNetworkUsage Sample",
-            "origin": "API_DEFINITION",
-            "description": " List all Networks (and used IPs for each Network) in the vendor account associated with the specified project.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_network_usage.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListNetworkUsage",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNetworkUsage",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "location",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListNetworkUsageResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListNetworkUsage",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNetworkUsage",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetNetwork_async",
-            "title": "BareMetalSolution getNetwork Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get details of a single network.",
-            "canonical": true,
-            "file": "bare_metal_solution.get_network.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetNetwork",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetNetwork",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.Network",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "GetNetwork",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetNetwork",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateNetwork_async",
-            "title": "BareMetalSolution updateNetwork Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update details of a single network.",
-            "canonical": true,
-            "file": "bare_metal_solution.update_network.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateNetwork",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateNetwork",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "network",
-                        "type": ".google.cloud.baremetalsolution.v2.Network"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "UpdateNetwork",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateNetwork",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_CreateVolumeSnapshot_async",
-            "title": "BareMetalSolution createVolumeSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Takes a snapshot of a boot volume. Returns INVALID_ARGUMENT if called for a non-boot volume.",
-            "canonical": true,
-            "file": "bare_metal_solution.create_volume_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 58,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateVolumeSnapshot",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateVolumeSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "volume_snapshot",
-                        "type": ".google.cloud.baremetalsolution.v2.VolumeSnapshot"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.VolumeSnapshot",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "CreateVolumeSnapshot",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateVolumeSnapshot",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RestoreVolumeSnapshot_async",
-            "title": "BareMetalSolution restoreVolumeSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Uses the specified snapshot to restore its parent volume. Returns INVALID_ARGUMENT if called for a non-boot volume.",
-            "canonical": true,
-            "file": "bare_metal_solution.restore_volume_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 55,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RestoreVolumeSnapshot",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RestoreVolumeSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "volume_snapshot",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "RestoreVolumeSnapshot",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RestoreVolumeSnapshot",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DeleteVolumeSnapshot_async",
-            "title": "BareMetalSolution deleteVolumeSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes a volume snapshot. Returns INVALID_ARGUMENT if called for a non-boot volume.",
-            "canonical": true,
-            "file": "bare_metal_solution.delete_volume_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteVolumeSnapshot",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteVolumeSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "DeleteVolumeSnapshot",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteVolumeSnapshot",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetVolumeSnapshot_async",
-            "title": "BareMetalSolution getVolumeSnapshot Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns the specified snapshot resource. Returns INVALID_ARGUMENT if called for a non-boot volume.",
-            "canonical": true,
-            "file": "bare_metal_solution.get_volume_snapshot.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetVolumeSnapshot",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolumeSnapshot",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.VolumeSnapshot",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "GetVolumeSnapshot",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolumeSnapshot",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListVolumeSnapshots_async",
-            "title": "BareMetalSolution listVolumeSnapshots Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves the list of snapshots for the specified volume. Returns a response with an empty list of snapshots if called for a non-boot volume.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_volume_snapshots.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListVolumeSnapshots",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumeSnapshots",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListVolumeSnapshots",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumeSnapshots",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetLun_async",
-            "title": "BareMetalSolution getLun Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get details of a single storage logical unit number(LUN).",
-            "canonical": true,
-            "file": "bare_metal_solution.get_lun.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetLun",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetLun",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.Lun",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "GetLun",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetLun",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListLuns_async",
-            "title": "BareMetalSolution listLuns Sample",
-            "origin": "API_DEFINITION",
-            "description": " List storage volume luns for given storage volume.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_luns.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListLuns",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListLuns",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListLunsResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListLuns",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListLuns",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_EvictLun_async",
-            "title": "BareMetalSolution evictLun Sample",
-            "origin": "API_DEFINITION",
-            "description": " Skips lun's cooloff and deletes it now. Lun must be in cooloff state.",
-            "canonical": true,
-            "file": "bare_metal_solution.evict_lun.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "EvictLun",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictLun",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "EvictLun",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictLun",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetNfsShare_async",
-            "title": "BareMetalSolution getNfsShare Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get details of a single NFS share.",
-            "canonical": true,
-            "file": "bare_metal_solution.get_nfs_share.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetNfsShare",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetNfsShare",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.NfsShare",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "GetNfsShare",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetNfsShare",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListNfsShares_async",
-            "title": "BareMetalSolution listNfsShares Sample",
-            "origin": "API_DEFINITION",
-            "description": " List NFS shares.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_nfs_shares.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 68,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListNfsShares",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNfsShares",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "filter",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListNfsSharesResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListNfsShares",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNfsShares",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async",
-            "title": "BareMetalSolution updateNfsShare Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update details of a single NFS share.",
-            "canonical": true,
-            "file": "bare_metal_solution.update_nfs_share.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateNfsShare",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateNfsShare",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "nfs_share",
-                        "type": ".google.cloud.baremetalsolution.v2.NfsShare"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "UpdateNfsShare",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateNfsShare",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_CreateNfsShare_async",
-            "title": "BareMetalSolution createNfsShare Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create an NFS share.",
-            "canonical": true,
-            "file": "bare_metal_solution.create_nfs_share.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateNfsShare",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateNfsShare",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "nfs_share",
-                        "type": ".google.cloud.baremetalsolution.v2.NfsShare"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "CreateNfsShare",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateNfsShare",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RenameNfsShare_async",
-            "title": "BareMetalSolution renameNfsShare Sample",
-            "origin": "API_DEFINITION",
-            "description": " RenameNfsShare sets a new name for an nfsshare. Use with caution, previous names become immediately invalidated.",
-            "canonical": true,
-            "file": "bare_metal_solution.rename_nfs_share.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RenameNfsShare",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNfsShare",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "new_nfsshare_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.NfsShare",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "RenameNfsShare",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNfsShare",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DeleteNfsShare_async",
-            "title": "BareMetalSolution deleteNfsShare Sample",
-            "origin": "API_DEFINITION",
-            "description": " Delete an NFS share. The underlying volume is automatically deleted.",
-            "canonical": true,
-            "file": "bare_metal_solution.delete_nfs_share.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteNfsShare",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteNfsShare",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.longrunning.Operation",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "DeleteNfsShare",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteNfsShare",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListProvisioningQuotas_async",
-            "title": "BareMetalSolution listProvisioningQuotas Sample",
-            "origin": "API_DEFINITION",
-            "description": " List the budget details to provision resources on a given project.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_provisioning_quotas.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListProvisioningQuotas",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListProvisioningQuotas",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListProvisioningQuotas",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListProvisioningQuotas",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_SubmitProvisioningConfig_async",
-            "title": "BareMetalSolution submitProvisioningConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Submit a provisiong configuration for a given project.",
-            "canonical": true,
-            "file": "bare_metal_solution.submit_provisioning_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SubmitProvisioningConfig",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.SubmitProvisioningConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "provisioning_config",
-                        "type": ".google.cloud.baremetalsolution.v2.ProvisioningConfig"
-                    },
-                    {
-                        "name": "email",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "SubmitProvisioningConfig",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.SubmitProvisioningConfig",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetProvisioningConfig_async",
-            "title": "BareMetalSolution getProvisioningConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Get ProvisioningConfig by name.",
-            "canonical": true,
-            "file": "bare_metal_solution.get_provisioning_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 53,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetProvisioningConfig",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetProvisioningConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ProvisioningConfig",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "GetProvisioningConfig",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetProvisioningConfig",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_CreateProvisioningConfig_async",
-            "title": "BareMetalSolution createProvisioningConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Create new ProvisioningConfig.",
-            "canonical": true,
-            "file": "bare_metal_solution.create_provisioning_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateProvisioningConfig",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateProvisioningConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "provisioning_config",
-                        "type": ".google.cloud.baremetalsolution.v2.ProvisioningConfig"
-                    },
-                    {
-                        "name": "email",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ProvisioningConfig",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "CreateProvisioningConfig",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateProvisioningConfig",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateProvisioningConfig_async",
-            "title": "BareMetalSolution updateProvisioningConfig Sample",
-            "origin": "API_DEFINITION",
-            "description": " Update existing ProvisioningConfig.",
-            "canonical": true,
-            "file": "bare_metal_solution.update_provisioning_config.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateProvisioningConfig",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateProvisioningConfig",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "provisioning_config",
-                        "type": ".google.cloud.baremetalsolution.v2.ProvisioningConfig"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    },
-                    {
-                        "name": "email",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ProvisioningConfig",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "UpdateProvisioningConfig",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateProvisioningConfig",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RenameNetwork_async",
-            "title": "BareMetalSolution renameNetwork Sample",
-            "origin": "API_DEFINITION",
-            "description": " RenameNetwork sets a new name for a network. Use with caution, previous names become immediately invalidated.",
-            "canonical": true,
-            "file": "bare_metal_solution.rename_network.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "RenameNetwork",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNetwork",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "new_network_id",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.Network",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "RenameNetwork",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNetwork",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListOSImages_async",
-            "title": "BareMetalSolution listOSImages Sample",
-            "origin": "API_DEFINITION",
-            "description": " Retrieves the list of OS images which are currently approved.",
-            "canonical": true,
-            "file": "bare_metal_solution.list_o_s_images.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 66,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListOSImages",
-                "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListOSImages",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "page_size",
-                        "type": "TYPE_INT32"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.baremetalsolution.v2.ListOSImagesResponse",
-                "client": {
-                    "shortName": "BareMetalSolutionClient",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
-                },
-                "method": {
-                    "shortName": "ListOSImages",
-                    "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListOSImages",
-                    "service": {
-                        "shortName": "BareMetalSolution",
-                        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-baremetalsolution",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.baremetalsolution.v2",
+        "version": "v2"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListInstances_async",
+      "title": "BareMetalSolution listInstances Sample",
+      "origin": "API_DEFINITION",
+      "description": " List servers in a given project and location.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_instances.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListInstances",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListInstances",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListInstancesResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListInstances",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListInstances",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetInstance_async",
+      "title": "BareMetalSolution getInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get details about a single server.",
+      "canonical": true,
+      "file": "bare_metal_solution.get_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetInstance",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.Instance",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "GetInstance",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetInstance",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateInstance_async",
+      "title": "BareMetalSolution updateInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update details of a single server.",
+      "canonical": true,
+      "file": "bare_metal_solution.update_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateInstance",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance",
+            "type": ".google.cloud.baremetalsolution.v2.Instance"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "UpdateInstance",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateInstance",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RenameInstance_async",
+      "title": "BareMetalSolution renameInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " RenameInstance sets a new name for an instance. Use with caution, previous names become immediately invalidated.",
+      "canonical": true,
+      "file": "bare_metal_solution.rename_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RenameInstance",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "new_instance_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.Instance",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "RenameInstance",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameInstance",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ResetInstance_async",
+      "title": "BareMetalSolution resetInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Perform an ungraceful, hard reset on a server. Equivalent to shutting the power off and then turning it back on.",
+      "canonical": true,
+      "file": "bare_metal_solution.reset_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResetInstance",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ResetInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ResetInstance",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ResetInstance",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_StartInstance_async",
+      "title": "BareMetalSolution startInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Starts a server that was shutdown.",
+      "canonical": true,
+      "file": "bare_metal_solution.start_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StartInstance",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.StartInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "StartInstance",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.StartInstance",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_StopInstance_async",
+      "title": "BareMetalSolution stopInstance Sample",
+      "origin": "API_DEFINITION",
+      "description": " Stop a running server.",
+      "canonical": true,
+      "file": "bare_metal_solution.stop_instance.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "StopInstance",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.StopInstance",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "StopInstance",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.StopInstance",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_EnableInteractiveSerialConsole_async",
+      "title": "BareMetalSolution enableInteractiveSerialConsole Sample",
+      "origin": "API_DEFINITION",
+      "description": " Enable the interactive serial console feature on an instance.",
+      "canonical": true,
+      "file": "bare_metal_solution.enable_interactive_serial_console.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EnableInteractiveSerialConsole",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EnableInteractiveSerialConsole",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "EnableInteractiveSerialConsole",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EnableInteractiveSerialConsole",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DisableInteractiveSerialConsole_async",
+      "title": "BareMetalSolution disableInteractiveSerialConsole Sample",
+      "origin": "API_DEFINITION",
+      "description": " Disable the interactive serial console feature on an instance.",
+      "canonical": true,
+      "file": "bare_metal_solution.disable_interactive_serial_console.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DisableInteractiveSerialConsole",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DisableInteractiveSerialConsole",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "DisableInteractiveSerialConsole",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DisableInteractiveSerialConsole",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DetachLun_async",
+      "title": "BareMetalSolution detachLun Sample",
+      "origin": "API_DEFINITION",
+      "description": " Detach LUN from Instance.",
+      "canonical": true,
+      "file": "bare_metal_solution.detach_lun.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DetachLun",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DetachLun",
+        "async": true,
+        "parameters": [
+          {
+            "name": "instance",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "lun",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "skip_reboot",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "DetachLun",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DetachLun",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListSSHKeys_async",
+      "title": "BareMetalSolution listSSHKeys Sample",
+      "origin": "API_DEFINITION",
+      "description": " Lists the public SSH keys registered for the specified project. These SSH keys are used only for the interactive serial console feature.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_s_s_h_keys.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListSSHKeys",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListSSHKeys",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListSSHKeysResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListSSHKeys",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListSSHKeys",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_CreateSSHKey_async",
+      "title": "BareMetalSolution createSSHKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Register a public SSH key in the specified project for use with the interactive serial console feature.",
+      "canonical": true,
+      "file": "bare_metal_solution.create_s_s_h_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateSSHKey",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateSSHKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "ssh_key",
+            "type": ".google.cloud.baremetalsolution.v2.SSHKey"
+          },
+          {
+            "name": "ssh_key_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.SSHKey",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "CreateSSHKey",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateSSHKey",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DeleteSSHKey_async",
+      "title": "BareMetalSolution deleteSSHKey Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a public SSH key registered in the specified project.",
+      "canonical": true,
+      "file": "bare_metal_solution.delete_s_s_h_key.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteSSHKey",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteSSHKey",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "DeleteSSHKey",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteSSHKey",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListVolumes_async",
+      "title": "BareMetalSolution listVolumes Sample",
+      "origin": "API_DEFINITION",
+      "description": " List storage volumes in a given project and location.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_volumes.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListVolumes",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumes",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListVolumesResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListVolumes",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumes",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetVolume_async",
+      "title": "BareMetalSolution getVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get details of a single storage volume.",
+      "canonical": true,
+      "file": "bare_metal_solution.get_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetVolume",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.Volume",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "GetVolume",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolume",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateVolume_async",
+      "title": "BareMetalSolution updateVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update details of a single storage volume.",
+      "canonical": true,
+      "file": "bare_metal_solution.update_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateVolume",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "volume",
+            "type": ".google.cloud.baremetalsolution.v2.Volume"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "UpdateVolume",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateVolume",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RenameVolume_async",
+      "title": "BareMetalSolution renameVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " RenameVolume sets a new name for a volume. Use with caution, previous names become immediately invalidated.",
+      "canonical": true,
+      "file": "bare_metal_solution.rename_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RenameVolume",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "new_volume_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.Volume",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "RenameVolume",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameVolume",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_EvictVolume_async",
+      "title": "BareMetalSolution evictVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " Skips volume's cooloff and deletes it now. Volume must be in cooloff state.",
+      "canonical": true,
+      "file": "bare_metal_solution.evict_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EvictVolume",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "EvictVolume",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictVolume",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ResizeVolume_async",
+      "title": "BareMetalSolution resizeVolume Sample",
+      "origin": "API_DEFINITION",
+      "description": " Emergency Volume resize.",
+      "canonical": true,
+      "file": "bare_metal_solution.resize_volume.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ResizeVolume",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ResizeVolume",
+        "async": true,
+        "parameters": [
+          {
+            "name": "volume",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "size_gib",
+            "type": "TYPE_INT64"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ResizeVolume",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ResizeVolume",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListNetworks_async",
+      "title": "BareMetalSolution listNetworks Sample",
+      "origin": "API_DEFINITION",
+      "description": " List network in a given project and location.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_networks.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListNetworks",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNetworks",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListNetworksResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListNetworks",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNetworks",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListNetworkUsage_async",
+      "title": "BareMetalSolution listNetworkUsage Sample",
+      "origin": "API_DEFINITION",
+      "description": " List all Networks (and used IPs for each Network) in the vendor account associated with the specified project.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_network_usage.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListNetworkUsage",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNetworkUsage",
+        "async": true,
+        "parameters": [
+          {
+            "name": "location",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListNetworkUsageResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListNetworkUsage",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNetworkUsage",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetNetwork_async",
+      "title": "BareMetalSolution getNetwork Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get details of a single network.",
+      "canonical": true,
+      "file": "bare_metal_solution.get_network.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetNetwork",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetNetwork",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.Network",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "GetNetwork",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetNetwork",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateNetwork_async",
+      "title": "BareMetalSolution updateNetwork Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update details of a single network.",
+      "canonical": true,
+      "file": "bare_metal_solution.update_network.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateNetwork",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateNetwork",
+        "async": true,
+        "parameters": [
+          {
+            "name": "network",
+            "type": ".google.cloud.baremetalsolution.v2.Network"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "UpdateNetwork",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateNetwork",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_CreateVolumeSnapshot_async",
+      "title": "BareMetalSolution createVolumeSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Takes a snapshot of a boot volume. Returns INVALID_ARGUMENT if called for a non-boot volume.",
+      "canonical": true,
+      "file": "bare_metal_solution.create_volume_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 58,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateVolumeSnapshot",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateVolumeSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "volume_snapshot",
+            "type": ".google.cloud.baremetalsolution.v2.VolumeSnapshot"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.VolumeSnapshot",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "CreateVolumeSnapshot",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateVolumeSnapshot",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RestoreVolumeSnapshot_async",
+      "title": "BareMetalSolution restoreVolumeSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Uses the specified snapshot to restore its parent volume. Returns INVALID_ARGUMENT if called for a non-boot volume.",
+      "canonical": true,
+      "file": "bare_metal_solution.restore_volume_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestoreVolumeSnapshot",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RestoreVolumeSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "volume_snapshot",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "RestoreVolumeSnapshot",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RestoreVolumeSnapshot",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DeleteVolumeSnapshot_async",
+      "title": "BareMetalSolution deleteVolumeSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes a volume snapshot. Returns INVALID_ARGUMENT if called for a non-boot volume.",
+      "canonical": true,
+      "file": "bare_metal_solution.delete_volume_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteVolumeSnapshot",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteVolumeSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "DeleteVolumeSnapshot",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteVolumeSnapshot",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetVolumeSnapshot_async",
+      "title": "BareMetalSolution getVolumeSnapshot Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns the specified snapshot resource. Returns INVALID_ARGUMENT if called for a non-boot volume.",
+      "canonical": true,
+      "file": "bare_metal_solution.get_volume_snapshot.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetVolumeSnapshot",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolumeSnapshot",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.VolumeSnapshot",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "GetVolumeSnapshot",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetVolumeSnapshot",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListVolumeSnapshots_async",
+      "title": "BareMetalSolution listVolumeSnapshots Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the list of snapshots for the specified volume. Returns a response with an empty list of snapshots if called for a non-boot volume.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_volume_snapshots.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListVolumeSnapshots",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumeSnapshots",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListVolumeSnapshotsResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListVolumeSnapshots",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListVolumeSnapshots",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetLun_async",
+      "title": "BareMetalSolution getLun Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get details of a single storage logical unit number(LUN).",
+      "canonical": true,
+      "file": "bare_metal_solution.get_lun.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetLun",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetLun",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.Lun",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "GetLun",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetLun",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListLuns_async",
+      "title": "BareMetalSolution listLuns Sample",
+      "origin": "API_DEFINITION",
+      "description": " List storage volume luns for given storage volume.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_luns.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListLuns",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListLuns",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListLunsResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListLuns",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListLuns",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_EvictLun_async",
+      "title": "BareMetalSolution evictLun Sample",
+      "origin": "API_DEFINITION",
+      "description": " Skips lun's cooloff and deletes it now. Lun must be in cooloff state.",
+      "canonical": true,
+      "file": "bare_metal_solution.evict_lun.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EvictLun",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictLun",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "EvictLun",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.EvictLun",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetNfsShare_async",
+      "title": "BareMetalSolution getNfsShare Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get details of a single NFS share.",
+      "canonical": true,
+      "file": "bare_metal_solution.get_nfs_share.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetNfsShare",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetNfsShare",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.NfsShare",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "GetNfsShare",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetNfsShare",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListNfsShares_async",
+      "title": "BareMetalSolution listNfsShares Sample",
+      "origin": "API_DEFINITION",
+      "description": " List NFS shares.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_nfs_shares.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 68,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListNfsShares",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNfsShares",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "filter",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListNfsSharesResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListNfsShares",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListNfsShares",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateNfsShare_async",
+      "title": "BareMetalSolution updateNfsShare Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update details of a single NFS share.",
+      "canonical": true,
+      "file": "bare_metal_solution.update_nfs_share.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateNfsShare",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateNfsShare",
+        "async": true,
+        "parameters": [
+          {
+            "name": "nfs_share",
+            "type": ".google.cloud.baremetalsolution.v2.NfsShare"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "UpdateNfsShare",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateNfsShare",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_CreateNfsShare_async",
+      "title": "BareMetalSolution createNfsShare Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create an NFS share.",
+      "canonical": true,
+      "file": "bare_metal_solution.create_nfs_share.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateNfsShare",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateNfsShare",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "nfs_share",
+            "type": ".google.cloud.baremetalsolution.v2.NfsShare"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "CreateNfsShare",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateNfsShare",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RenameNfsShare_async",
+      "title": "BareMetalSolution renameNfsShare Sample",
+      "origin": "API_DEFINITION",
+      "description": " RenameNfsShare sets a new name for an nfsshare. Use with caution, previous names become immediately invalidated.",
+      "canonical": true,
+      "file": "bare_metal_solution.rename_nfs_share.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RenameNfsShare",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNfsShare",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "new_nfsshare_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.NfsShare",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "RenameNfsShare",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNfsShare",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_DeleteNfsShare_async",
+      "title": "BareMetalSolution deleteNfsShare Sample",
+      "origin": "API_DEFINITION",
+      "description": " Delete an NFS share. The underlying volume is automatically deleted.",
+      "canonical": true,
+      "file": "bare_metal_solution.delete_nfs_share.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteNfsShare",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteNfsShare",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "DeleteNfsShare",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.DeleteNfsShare",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListProvisioningQuotas_async",
+      "title": "BareMetalSolution listProvisioningQuotas Sample",
+      "origin": "API_DEFINITION",
+      "description": " List the budget details to provision resources on a given project.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_provisioning_quotas.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListProvisioningQuotas",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListProvisioningQuotas",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListProvisioningQuotasResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListProvisioningQuotas",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListProvisioningQuotas",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_SubmitProvisioningConfig_async",
+      "title": "BareMetalSolution submitProvisioningConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Submit a provisiong configuration for a given project.",
+      "canonical": true,
+      "file": "bare_metal_solution.submit_provisioning_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SubmitProvisioningConfig",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.SubmitProvisioningConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "provisioning_config",
+            "type": ".google.cloud.baremetalsolution.v2.ProvisioningConfig"
+          },
+          {
+            "name": "email",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.SubmitProvisioningConfigResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "SubmitProvisioningConfig",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.SubmitProvisioningConfig",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_GetProvisioningConfig_async",
+      "title": "BareMetalSolution getProvisioningConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Get ProvisioningConfig by name.",
+      "canonical": true,
+      "file": "bare_metal_solution.get_provisioning_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetProvisioningConfig",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetProvisioningConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ProvisioningConfig",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "GetProvisioningConfig",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.GetProvisioningConfig",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_CreateProvisioningConfig_async",
+      "title": "BareMetalSolution createProvisioningConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Create new ProvisioningConfig.",
+      "canonical": true,
+      "file": "bare_metal_solution.create_provisioning_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateProvisioningConfig",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateProvisioningConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "provisioning_config",
+            "type": ".google.cloud.baremetalsolution.v2.ProvisioningConfig"
+          },
+          {
+            "name": "email",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ProvisioningConfig",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "CreateProvisioningConfig",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.CreateProvisioningConfig",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_UpdateProvisioningConfig_async",
+      "title": "BareMetalSolution updateProvisioningConfig Sample",
+      "origin": "API_DEFINITION",
+      "description": " Update existing ProvisioningConfig.",
+      "canonical": true,
+      "file": "bare_metal_solution.update_provisioning_config.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateProvisioningConfig",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateProvisioningConfig",
+        "async": true,
+        "parameters": [
+          {
+            "name": "provisioning_config",
+            "type": ".google.cloud.baremetalsolution.v2.ProvisioningConfig"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          },
+          {
+            "name": "email",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ProvisioningConfig",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "UpdateProvisioningConfig",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.UpdateProvisioningConfig",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_RenameNetwork_async",
+      "title": "BareMetalSolution renameNetwork Sample",
+      "origin": "API_DEFINITION",
+      "description": " RenameNetwork sets a new name for a network. Use with caution, previous names become immediately invalidated.",
+      "canonical": true,
+      "file": "bare_metal_solution.rename_network.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RenameNetwork",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNetwork",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "new_network_id",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.Network",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "RenameNetwork",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.RenameNetwork",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "baremetalsolution_v2_generated_BareMetalSolution_ListOSImages_async",
+      "title": "BareMetalSolution listOSImages Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the list of OS images which are currently approved.",
+      "canonical": true,
+      "file": "bare_metal_solution.list_o_s_images.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 66,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListOSImages",
+        "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListOSImages",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "page_size",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.baremetalsolution.v2.ListOSImagesResponse",
+        "client": {
+          "shortName": "BareMetalSolutionClient",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolutionClient"
+        },
+        "method": {
+          "shortName": "ListOSImages",
+          "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution.ListOSImages",
+          "service": {
+            "shortName": "BareMetalSolution",
+            "fullName": "google.cloud.baremetalsolution.v2.BareMetalSolution"
+          }
+        }
+      }
+    }
+  ]
 }

@@ -15196,6 +15196,9 @@ export namespace google {
 
                     /** ResourceOptions k8sVersion */
                     k8sVersion?: (string|null);
+
+                    /** ResourceOptions k8sGitVersion */
+                    k8sGitVersion?: (string|null);
                 }
 
                 /** Represents a ResourceOptions. */
@@ -15215,6 +15218,9 @@ export namespace google {
 
                     /** ResourceOptions k8sVersion. */
                     public k8sVersion: string;
+
+                    /** ResourceOptions k8sGitVersion. */
+                    public k8sGitVersion: string;
 
                     /**
                      * Creates a new ResourceOptions instance using the specified properties.
@@ -28537,6 +28543,9 @@ export namespace google {
 
                     /** ResourceOptions k8sVersion */
                     k8sVersion?: (string|null);
+
+                    /** ResourceOptions k8sGitVersion */
+                    k8sGitVersion?: (string|null);
                 }
 
                 /** Represents a ResourceOptions. */
@@ -28556,6 +28565,9 @@ export namespace google {
 
                     /** ResourceOptions k8sVersion. */
                     public k8sVersion: string;
+
+                    /** ResourceOptions k8sGitVersion. */
+                    public k8sGitVersion: string;
 
                     /**
                      * Creates a new ResourceOptions instance using the specified properties.

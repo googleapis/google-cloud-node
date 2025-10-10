@@ -7,7 +7,7 @@
   "release_level": "stable",
   "language": "nodejs",
   "repo": "googleapis/google-cloud-node",
-  "distribution_name": "@google-cloud/inventories",
+  "distribution_name": "@google-shopping/inventories",
   "api_id": "merchantapi.googleapis.com",
   "default_version": "v1",
   "requires_billing": true,

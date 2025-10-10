@@ -31,8 +31,6 @@ function main(parent) {
   /**
    *  The source processor version to import from. The source processor version
    *  and destination processor need to be in the same environment and region.
-   *  Note that ProcessorVersions with `model_type` `MODEL_TYPE_LLM` are not
-   *  supported.
    */
   // const processorVersionSource = 'abc123'
   /**

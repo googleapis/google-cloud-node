@@ -1,419 +1,419 @@
 {
-    "clientLibrary": {
-        "name": "nodejs-connection",
-        "version": "4.1.0",
-        "language": "TYPESCRIPT",
-        "apis": [
-            {
-                "id": "google.cloud.bigquery.connection.v1beta1",
-                "version": "v1beta1"
-            }
-        ]
-    },
-    "snippets": [
-        {
-            "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_CreateConnection_async",
-            "title": "ConnectionService createConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Creates a new connection.",
-            "canonical": true,
-            "file": "connection_service.create_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "CreateConnection",
-                "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.CreateConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connection_id",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connection",
-                        "type": ".google.cloud.bigquery.connection.v1beta1.Connection"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.connection.v1beta1.Connection",
-                "client": {
-                    "shortName": "ConnectionServiceClient",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
-                },
-                "method": {
-                    "shortName": "CreateConnection",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.CreateConnection",
-                    "service": {
-                        "shortName": "ConnectionService",
-                        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_GetConnection_async",
-            "title": "ConnectionService getConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns specified connection.",
-            "canonical": true,
-            "file": "connection_service.get_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetConnection",
-                "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.GetConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.connection.v1beta1.Connection",
-                "client": {
-                    "shortName": "ConnectionServiceClient",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
-                },
-                "method": {
-                    "shortName": "GetConnection",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.GetConnection",
-                    "service": {
-                        "shortName": "ConnectionService",
-                        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_ListConnections_async",
-            "title": "ConnectionService listConnections Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns a list of connections in the given project.",
-            "canonical": true,
-            "file": "connection_service.list_connections.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 63,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "ListConnections",
-                "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.ListConnections",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "parent",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "max_results",
-                        "type": ".google.protobuf.UInt32Value"
-                    },
-                    {
-                        "name": "page_token",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse",
-                "client": {
-                    "shortName": "ConnectionServiceClient",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
-                },
-                "method": {
-                    "shortName": "ListConnections",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.ListConnections",
-                    "service": {
-                        "shortName": "ConnectionService",
-                        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_UpdateConnection_async",
-            "title": "ConnectionService updateConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Updates the specified connection. For security reasons, also resets credential if connection properties are in the update field mask.",
-            "canonical": true,
-            "file": "connection_service.update_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 64,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConnection",
-                "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "connection",
-                        "type": ".google.cloud.bigquery.connection.v1beta1.Connection"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.cloud.bigquery.connection.v1beta1.Connection",
-                "client": {
-                    "shortName": "ConnectionServiceClient",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateConnection",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnection",
-                    "service": {
-                        "shortName": "ConnectionService",
-                        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_UpdateConnectionCredential_async",
-            "title": "ConnectionService updateConnectionCredential Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the credential for the specified connection.",
-            "canonical": true,
-            "file": "connection_service.update_connection_credential.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "UpdateConnectionCredential",
-                "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnectionCredential",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "credential",
-                        "type": ".google.cloud.bigquery.connection.v1beta1.ConnectionCredential"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ConnectionServiceClient",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
-                },
-                "method": {
-                    "shortName": "UpdateConnectionCredential",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnectionCredential",
-                    "service": {
-                        "shortName": "ConnectionService",
-                        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_DeleteConnection_async",
-            "title": "ConnectionService deleteConnection Sample",
-            "origin": "API_DEFINITION",
-            "description": " Deletes connection and associated credential.",
-            "canonical": true,
-            "file": "connection_service.delete_connection.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 54,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "DeleteConnection",
-                "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.DeleteConnection",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "name",
-                        "type": "TYPE_STRING"
-                    }
-                ],
-                "resultType": ".google.protobuf.Empty",
-                "client": {
-                    "shortName": "ConnectionServiceClient",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
-                },
-                "method": {
-                    "shortName": "DeleteConnection",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.DeleteConnection",
-                    "service": {
-                        "shortName": "ConnectionService",
-                        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_GetIamPolicy_async",
-            "title": "ConnectionService getIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.",
-            "canonical": true,
-            "file": "connection_service.get_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 59,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "GetIamPolicy",
-                "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.GetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "options",
-                        "type": ".google.iam.v1.GetPolicyOptions"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "ConnectionServiceClient",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
-                },
-                "method": {
-                    "shortName": "GetIamPolicy",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.GetIamPolicy",
-                    "service": {
-                        "shortName": "ConnectionService",
-                        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_SetIamPolicy_async",
-            "title": "ConnectionService setIamPolicy Sample",
-            "origin": "API_DEFINITION",
-            "description": " Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.",
-            "canonical": true,
-            "file": "connection_service.set_iam_policy.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 69,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "SetIamPolicy",
-                "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.SetIamPolicy",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "policy",
-                        "type": ".google.iam.v1.Policy"
-                    },
-                    {
-                        "name": "update_mask",
-                        "type": ".google.protobuf.FieldMask"
-                    }
-                ],
-                "resultType": ".google.iam.v1.Policy",
-                "client": {
-                    "shortName": "ConnectionServiceClient",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
-                },
-                "method": {
-                    "shortName": "SetIamPolicy",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.SetIamPolicy",
-                    "service": {
-                        "shortName": "ConnectionService",
-                        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
-                    }
-                }
-            }
-        },
-        {
-            "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_TestIamPermissions_async",
-            "title": "ConnectionService testIamPermissions Sample",
-            "origin": "API_DEFINITION",
-            "description": " Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
-            "canonical": true,
-            "file": "connection_service.test_iam_permissions.js",
-            "language": "JAVASCRIPT",
-            "segments": [
-                {
-                    "start": 25,
-                    "end": 62,
-                    "type": "FULL"
-                }
-            ],
-            "clientMethod": {
-                "shortName": "TestIamPermissions",
-                "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.TestIamPermissions",
-                "async": true,
-                "parameters": [
-                    {
-                        "name": "resource",
-                        "type": "TYPE_STRING"
-                    },
-                    {
-                        "name": "permissions",
-                        "type": "TYPE_STRING[]"
-                    }
-                ],
-                "resultType": ".google.iam.v1.TestIamPermissionsResponse",
-                "client": {
-                    "shortName": "ConnectionServiceClient",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
-                },
-                "method": {
-                    "shortName": "TestIamPermissions",
-                    "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.TestIamPermissions",
-                    "service": {
-                        "shortName": "ConnectionService",
-                        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
-                    }
-                }
-            }
-        }
+  "clientLibrary": {
+    "name": "nodejs-connection",
+    "version": "0.1.0",
+    "language": "TYPESCRIPT",
+    "apis": [
+      {
+        "id": "google.cloud.bigquery.connection.v1beta1",
+        "version": "v1beta1"
+      }
     ]
+  },
+  "snippets": [
+    {
+      "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_CreateConnection_async",
+      "title": "ConnectionService createConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Creates a new connection.",
+      "canonical": true,
+      "file": "connection_service.create_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "CreateConnection",
+        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.CreateConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connection_id",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connection",
+            "type": ".google.cloud.bigquery.connection.v1beta1.Connection"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.connection.v1beta1.Connection",
+        "client": {
+          "shortName": "ConnectionServiceClient",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
+        },
+        "method": {
+          "shortName": "CreateConnection",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.CreateConnection",
+          "service": {
+            "shortName": "ConnectionService",
+            "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_GetConnection_async",
+      "title": "ConnectionService getConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns specified connection.",
+      "canonical": true,
+      "file": "connection_service.get_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetConnection",
+        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.GetConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.connection.v1beta1.Connection",
+        "client": {
+          "shortName": "ConnectionServiceClient",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
+        },
+        "method": {
+          "shortName": "GetConnection",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.GetConnection",
+          "service": {
+            "shortName": "ConnectionService",
+            "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_ListConnections_async",
+      "title": "ConnectionService listConnections Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns a list of connections in the given project.",
+      "canonical": true,
+      "file": "connection_service.list_connections.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 63,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ListConnections",
+        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.ListConnections",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "max_results",
+            "type": ".google.protobuf.UInt32Value"
+          },
+          {
+            "name": "page_token",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.connection.v1beta1.ListConnectionsResponse",
+        "client": {
+          "shortName": "ConnectionServiceClient",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
+        },
+        "method": {
+          "shortName": "ListConnections",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.ListConnections",
+          "service": {
+            "shortName": "ConnectionService",
+            "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_UpdateConnection_async",
+      "title": "ConnectionService updateConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Updates the specified connection. For security reasons, also resets credential if connection properties are in the update field mask.",
+      "canonical": true,
+      "file": "connection_service.update_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 64,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConnection",
+        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "connection",
+            "type": ".google.cloud.bigquery.connection.v1beta1.Connection"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.cloud.bigquery.connection.v1beta1.Connection",
+        "client": {
+          "shortName": "ConnectionServiceClient",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateConnection",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnection",
+          "service": {
+            "shortName": "ConnectionService",
+            "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_UpdateConnectionCredential_async",
+      "title": "ConnectionService updateConnectionCredential Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the credential for the specified connection.",
+      "canonical": true,
+      "file": "connection_service.update_connection_credential.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "UpdateConnectionCredential",
+        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnectionCredential",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "credential",
+            "type": ".google.cloud.bigquery.connection.v1beta1.ConnectionCredential"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ConnectionServiceClient",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
+        },
+        "method": {
+          "shortName": "UpdateConnectionCredential",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.UpdateConnectionCredential",
+          "service": {
+            "shortName": "ConnectionService",
+            "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_DeleteConnection_async",
+      "title": "ConnectionService deleteConnection Sample",
+      "origin": "API_DEFINITION",
+      "description": " Deletes connection and associated credential.",
+      "canonical": true,
+      "file": "connection_service.delete_connection.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 54,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "DeleteConnection",
+        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.DeleteConnection",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.protobuf.Empty",
+        "client": {
+          "shortName": "ConnectionServiceClient",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
+        },
+        "method": {
+          "shortName": "DeleteConnection",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.DeleteConnection",
+          "service": {
+            "shortName": "ConnectionService",
+            "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_GetIamPolicy_async",
+      "title": "ConnectionService getIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Gets the access control policy for a resource. Returns an empty policy if the resource exists and does not have a policy set.",
+      "canonical": true,
+      "file": "connection_service.get_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 59,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GetIamPolicy",
+        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.GetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "options",
+            "type": ".google.iam.v1.GetPolicyOptions"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "ConnectionServiceClient",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
+        },
+        "method": {
+          "shortName": "GetIamPolicy",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.GetIamPolicy",
+          "service": {
+            "shortName": "ConnectionService",
+            "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_SetIamPolicy_async",
+      "title": "ConnectionService setIamPolicy Sample",
+      "origin": "API_DEFINITION",
+      "description": " Sets the access control policy on the specified resource. Replaces any existing policy. Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.",
+      "canonical": true,
+      "file": "connection_service.set_iam_policy.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 69,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "SetIamPolicy",
+        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.SetIamPolicy",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "policy",
+            "type": ".google.iam.v1.Policy"
+          },
+          {
+            "name": "update_mask",
+            "type": ".google.protobuf.FieldMask"
+          }
+        ],
+        "resultType": ".google.iam.v1.Policy",
+        "client": {
+          "shortName": "ConnectionServiceClient",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
+        },
+        "method": {
+          "shortName": "SetIamPolicy",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.SetIamPolicy",
+          "service": {
+            "shortName": "ConnectionService",
+            "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "bigqueryconnection_v1beta1_generated_ConnectionService_TestIamPermissions_async",
+      "title": "ConnectionService testIamPermissions Sample",
+      "origin": "API_DEFINITION",
+      "description": " Returns permissions that a caller has on the specified resource. If the resource does not exist, this will return an empty set of permissions, not a `NOT_FOUND` error. Note: This operation is designed to be used for building permission-aware UIs and command-line tools, not for authorization checking. This operation may \"fail open\" without warning.",
+      "canonical": true,
+      "file": "connection_service.test_iam_permissions.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 62,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "TestIamPermissions",
+        "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.TestIamPermissions",
+        "async": true,
+        "parameters": [
+          {
+            "name": "resource",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "permissions",
+            "type": "TYPE_STRING[]"
+          }
+        ],
+        "resultType": ".google.iam.v1.TestIamPermissionsResponse",
+        "client": {
+          "shortName": "ConnectionServiceClient",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionServiceClient"
+        },
+        "method": {
+          "shortName": "TestIamPermissions",
+          "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService.TestIamPermissions",
+          "service": {
+            "shortName": "ConnectionService",
+            "fullName": "google.cloud.bigquery.connection.v1beta1.ConnectionService"
+          }
+        }
+      }
+    }
+  ]
 }
