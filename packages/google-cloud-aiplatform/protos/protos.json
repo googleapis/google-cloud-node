@@ -13240,6 +13240,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "enableDirectBigtableAccess": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "bigtableMetadata": {
+                              "type": "BigtableMetadata",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -13265,6 +13279,22 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                }
+                              }
+                            },
+                            "BigtableMetadata": {
+                              "fields": {
+                                "tenantProjectId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "instanceId": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "tableId": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             }
@@ -14052,6 +14082,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "bigtableMetadata": {
+                          "type": "BigtableMetadata",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -14272,6 +14309,17 @@
                             "SERVICE_AGENT_TYPE_PROJECT": 1,
                             "SERVICE_AGENT_TYPE_FEATURE_VIEW": 2
                           }
+                        },
+                        "BigtableMetadata": {
+                          "fields": {
+                            "readAppProfile": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -14411,6 +14459,22 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:directWrite",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "GenerateFetchAccessToken": {
+                          "requestType": "GenerateFetchAccessTokenRequest",
+                          "responseType": "GenerateFetchAccessTokenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:generateFetchAccessToken",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:generateFetchAccessToken",
                                 "body": "*"
                               }
                             }
@@ -14858,6 +14922,29 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "GenerateFetchAccessTokenRequest": {
+                      "fields": {
+                        "featureView": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/FeatureView"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateFetchAccessTokenResponse": {
+                      "fields": {
+                        "accessToken": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
                         }
                       }
                     },
@@ -55772,6 +55859,20 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "enableDirectBigtableAccess": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "bigtableMetadata": {
+                              "type": "BigtableMetadata",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
                             }
                           },
                           "nested": {
@@ -55797,6 +55898,22 @@
                                   "options": {
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
+                                }
+                              }
+                            },
+                            "BigtableMetadata": {
+                              "fields": {
+                                "tenantProjectId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "instanceId": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "tableId": {
+                                  "type": "string",
+                                  "id": 3
                                 }
                               }
                             }
@@ -56606,6 +56723,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "bigtableMetadata": {
+                          "type": "BigtableMetadata",
+                          "id": 21,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -56922,6 +57046,17 @@
                             "SERVICE_AGENT_TYPE_PROJECT": 1,
                             "SERVICE_AGENT_TYPE_FEATURE_VIEW": 2
                           }
+                        },
+                        "BigtableMetadata": {
+                          "fields": {
+                            "readAppProfile": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -57083,6 +57218,22 @@
                             {
                               "(google.api.http)": {
                                 "post": "/v1beta1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:directWrite",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "GenerateFetchAccessToken": {
+                          "requestType": "GenerateFetchAccessTokenRequest",
+                          "responseType": "GenerateFetchAccessTokenResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1beta1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:generateFetchAccessToken",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1beta1/{feature_view=projects/*/locations/*/featureOnlineStores/*/featureViews/*}:generateFetchAccessToken",
                                 "body": "*"
                               }
                             }
@@ -57621,6 +57772,29 @@
                               "id": 2
                             }
                           }
+                        }
+                      }
+                    },
+                    "GenerateFetchAccessTokenRequest": {
+                      "fields": {
+                        "featureView": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/FeatureView"
+                          }
+                        }
+                      }
+                    },
+                    "GenerateFetchAccessTokenResponse": {
+                      "fields": {
+                        "accessToken": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "expireTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 2
                         }
                       }
                     },
