@@ -1,6 +1,6 @@
 {
   "name": "gcp-metadata",
-  "version": "7.0.1",
+  "version": "8.1.0",
   "description": "Get the metadata from a Google Cloud Platform environment",
   "repository": {
     "type": "git",
@@ -18,9 +18,9 @@
     "fix": "gts fix",
     "pretest": "npm run compile",
     "prepare": "npm run compile",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
     "presystem-test": "npm run compile",
-    "system-test": "npm run compile && c8 mocha build/system-test",
+    "system-test": "mocha build/system-test --timeout 600000",
     "test": "c8 mocha --timeout=5000 build/test",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
