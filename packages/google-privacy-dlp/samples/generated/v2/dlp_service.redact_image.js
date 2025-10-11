@@ -60,6 +60,25 @@ function main() {
    *  The content must be PNG, JPEG, SVG or BMP.
    */
   // const byteItem = {}
+  /**
+   *  The full resource name of the inspection template to use. Settings in the
+   *  main `inspect_config` field override the corresponding settings in this
+   *  inspection template.
+   *  The merge behavior is as follows:
+   *    - Singular field: The main field's value replaces the value of the
+   *    corresponding field in the template.
+   *    - Repeated fields: The field values are appended to the list defined in
+   *    the template.
+   *    - Sub-messages and groups: The fields are recursively merged.
+   */
+  // const inspectTemplate = 'abc123'
+  /**
+   *  The full resource name of the de-identification template to use. Settings
+   *  in the main `image_redaction_configs` field override the corresponding
+   *  settings in this de-identification template. The request fails if the
+   *  type of the template's deidentify_config is not image_transformations.
+   */
+  // const deidentifyTemplate = 'abc123'
 
   // Imports the Dlp library
   const {DlpServiceClient} = require('@google-cloud/dlp').v2;
