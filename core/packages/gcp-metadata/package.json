@@ -2,7 +2,11 @@
   "name": "gcp-metadata",
   "version": "7.0.1",
   "description": "Get the metadata from a Google Cloud Platform environment",
-  "repository": "googleapis/gcp-metadata",
+  "repository": {
+    "type": "git",
+    "directory": "packages/gcp-metadata",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+  },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
   "type": "commonjs",
@@ -14,9 +18,9 @@
     "fix": "gts fix",
     "pretest": "npm run compile",
     "prepare": "npm run compile",
-    "samples-test": "npm link && cd samples/ && npm link ../ && npm test && cd ../",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "presystem-test": "npm run compile",
-    "system-test": "mocha build/system-test --timeout 600000",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "test": "c8 mocha --timeout=5000 build/test",
     "docs": "jsdoc -c .jsdoc.js",
     "lint": "gts check",
@@ -68,5 +72,6 @@
   },
   "engines": {
     "node": ">=18"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gcp-metadata"
 }
