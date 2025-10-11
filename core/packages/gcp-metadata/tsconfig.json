@@ -1,11 +1,34 @@
 {
-  "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "build",
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "composite": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": ["ES2023", "dom"],
     "module": "nodenext",
-    "outDir": "build",
-    "rootDir": "."
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "pretty": true,
+    "sourceMap": true,
+    "stripInternal": true,
+    "strict": true,
+    "target": "ES2022"
   },
-  "include": ["src/*.ts", "test/*.ts", "system-test/*.ts", "test/**/*.ts"],
-  "exclude": ["test/fixtures"]
+  "include": [
+    "src/*.ts",
+    "src/**/*.ts",
+    "test/*.ts",
+    "test/**/*.ts",
+    ".eslintrc.json",
+    "system-test/*.ts"
+  ],
+  "exclude": [
+    "test/fixtures",
+    "test/fixtures/**/*.*", "template/**/*.*", "node_modules"
+  ]
 }
