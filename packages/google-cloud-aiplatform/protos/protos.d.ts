@@ -88071,7 +88071,8 @@ export namespace google {
                             OTHER = 2,
                             BLOCKLIST = 3,
                             PROHIBITED_CONTENT = 4,
-                            MODEL_ARMOR = 5
+                            MODEL_ARMOR = 5,
+                            JAILBREAK = 6
                         }
                     }
 
