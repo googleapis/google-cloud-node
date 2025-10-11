@@ -155327,7 +155327,8 @@ export namespace google {
                     HARM_CATEGORY_DANGEROUS_CONTENT = 2,
                     HARM_CATEGORY_HARASSMENT = 3,
                     HARM_CATEGORY_SEXUALLY_EXPLICIT = 4,
-                    HARM_CATEGORY_CIVIC_INTEGRITY = 5
+                    HARM_CATEGORY_CIVIC_INTEGRITY = 5,
+                    HARM_CATEGORY_JAILBREAK = 6
                 }
 
                 /** Modality enum. */
