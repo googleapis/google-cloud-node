@@ -2,6 +2,6 @@
   "dev-packages/jsdoc-fresh": "5.0.2",
   "dev-packages/jsdoc-region-tag": "4.0.1",
   "dev-packages/pack-n-play": "4.2.1",
-  "packages/gcp-metadata": "8.1.0",
+  "packages/gcp-metadata": "7.0.1",
   "packages/proto3-json-serializer-nodejs": "3.0.2"
 }
