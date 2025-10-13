@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.0.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v4.4.0...workflows-v5.0.0) (2025-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove deprecated workflows client ([#6790](https://github.com/googleapis/google-cloud-node/issues/6790))
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+* Remove deprecated workflows client ([#6790](https://github.com/googleapis/google-cloud-node/issues/6790)) ([326ff26](https://github.com/googleapis/google-cloud-node/commit/326ff264c52f9c8e7860e93404aacb66a11dc5fd))
+
 ## [4.4.0](https://github.com/googleapis/google-cloud-node/compare/workflows-v4.3.0...workflows-v4.4.0) (2025-07-09)
 
 

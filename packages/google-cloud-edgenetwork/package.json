@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/edgenetwork",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Distributed Cloud Edge Network API client for Node.js",
   "repository": {
     "type": "git",

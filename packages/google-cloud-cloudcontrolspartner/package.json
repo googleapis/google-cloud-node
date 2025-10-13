@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/cloudcontrolspartner",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Cloud Controls Partner API client for Node.js",
   "repository": {
     "type": "git",
