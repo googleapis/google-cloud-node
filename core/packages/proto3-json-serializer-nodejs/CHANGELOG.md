@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.3](https://github.com/googleapis/google-cloud-node-core/compare/proto3-json-serializer-v3.0.3...proto3-json-serializer-v3.0.3) (2025-10-13)
+
+
+### Miscellaneous Chores
+
+* Release 3.0.3 ([e0154b4](https://github.com/googleapis/google-cloud-node-core/commit/e0154b44d85ec3c32bce6656d99d517b4994022f))
+
 ## [3.0.3](https://github.com/googleapis/google-cloud-node-core/compare/proto3-json-serializer-v3.0.2...proto3-json-serializer-v3.0.3) (2025-10-13)
 
 
