@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.8.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.7.0...products-v0.8.0) (2025-10-13)
+
+
+### Features
+
+* [merchantapi] Include CarrierShipping field inside the Products attribute ([#6787](https://github.com/googleapis/google-cloud-node/issues/6787)) ([7432c86](https://github.com/googleapis/google-cloud-node/commit/7432c86aba2fb48f27f78e6ed89d00a4174bbce1))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/products-v0.6.0...products-v0.7.0) (2025-08-21)
 
 
