@@ -14,3 +14,4 @@ libraries:
         service_config: cloudasset_v1p2beta1.yaml
     source_roots:
       - packages/google-cloud-asset
+    tag_format: '{id}-v{version}'
