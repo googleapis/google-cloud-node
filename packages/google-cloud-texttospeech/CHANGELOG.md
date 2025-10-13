@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/text-to-speech?activeTab=versions
 
+## [6.3.1](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v6.3.0...text-to-speech-v6.3.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/text-to-speech-v6.2.0...text-to-speech-v6.3.0) (2025-08-27)
 
 

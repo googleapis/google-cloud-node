@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/policy-troubleshooter-iam",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Iam client for Node.js",
   "repository": {
     "type": "git",

@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/nodejs-vision?activeTab=versions
 
+## [5.3.4](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.3...vision-v5.3.4) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [5.3.3](https://github.com/googleapis/google-cloud-node/compare/vision-v5.3.2...vision-v5.3.3) (2025-08-04)
 
 
