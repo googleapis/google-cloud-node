@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/os-login?activeTab=versions
 
+## [6.2.1](https://github.com/googleapis/google-cloud-node/compare/os-login-v6.2.0...os-login-v6.2.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [6.2.0](https://github.com/googleapis/google-cloud-node/compare/os-login-v6.1.0...os-login-v6.2.0) (2025-07-09)
 
 
