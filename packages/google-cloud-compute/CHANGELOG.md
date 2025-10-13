@@ -4,6 +4,21 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.3.0...compute-v6.4.0) (2025-10-13)
+
+
+### Features
+
+* [compute] Update Compute Engine v1 API to revision 20250916 ([#1107](https://github.com/googleapis/google-cloud-node/issues/1107)) ([#6800](https://github.com/googleapis/google-cloud-node/issues/6800)) ([d37c02c](https://github.com/googleapis/google-cloud-node/commit/d37c02c033319677d7a77da80bb6b09d42ad1730))
+* [compute] Update Compute Engine v1beta API to revision 20250916 ([#1106](https://github.com/googleapis/google-cloud-node/issues/1106)) ([#6798](https://github.com/googleapis/google-cloud-node/issues/6798)) ([bf313ec](https://github.com/googleapis/google-cloud-node/commit/bf313ec644dab4e0c6a1037891cfbdf6f13e98ee))
+* Update Compute Engine v1 API to revision 20250909 ([f9cc6b0](https://github.com/googleapis/google-cloud-node/commit/f9cc6b0420308912faa9930fa82529e691c3f2c3))
+* Update Compute Engine v1beta API to revision 20250909 ([f9cc6b0](https://github.com/googleapis/google-cloud-node/commit/f9cc6b0420308912faa9930fa82529e691c3f2c3))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [6.3.0](https://github.com/googleapis/google-cloud-node/compare/compute-v6.2.0...compute-v6.3.0) (2025-09-04)
 
 

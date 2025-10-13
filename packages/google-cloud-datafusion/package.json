@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/data-fusion",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "datafusion client for Node.js",
   "repository": {
     "type": "git",

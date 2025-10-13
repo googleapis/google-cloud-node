@@ -1,5 +1,19 @@
 # Changelog
 
+## [4.3.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.2.0...bigquery-reservation-v4.3.0) (2025-10-13)
+
+
+### Features
+
+* [bigquery-reservation] Add new `BACKGROUND_CHANGE_DATA_CAPTURE`, `BACKGROUND_COLUMN_METADATA_INDEX`, and `BACKGROUND_SEARCH_INDEX_REFRESH` reservation assignment types ([#6785](https://github.com/googleapis/google-cloud-node/issues/6785)) ([73797fd](https://github.com/googleapis/google-cloud-node/commit/73797fd29aab42ef5751e72a7b31a3e3a7336881))
+* Add new reservation IAM policy get/set/test methods ([73797fd](https://github.com/googleapis/google-cloud-node/commit/73797fd29aab42ef5751e72a7b31a3e3a7336881))
+* Add support for creation and modification of new reservation groups ([73797fd](https://github.com/googleapis/google-cloud-node/commit/73797fd29aab42ef5751e72a7b31a3e3a7336881))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [4.2.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-reservation-v4.1.0...bigquery-reservation-v4.2.0) (2025-08-21)
 
 

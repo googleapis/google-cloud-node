@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.4.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.3.0...dialogflow-cx-v5.4.0) (2025-10-13)
+
+
+### Features
+
+* [cx] Add parameters to adjust LLM input and output token limit and temperature in v3beta1 API ([#6806](https://github.com/googleapis/google-cloud-node/issues/6806)) ([8d9d660](https://github.com/googleapis/google-cloud-node/commit/8d9d6601f047fc0b7f2a2139a77792d416ff1054))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-cx-v5.2.0...dialogflow-cx-v5.3.0) (2025-07-17)
 
 
