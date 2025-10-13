@@ -5,6 +5,3805 @@
       "changes": [
         {
           "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/locationfinder",
+      "id": "1445bcb7-f5d7-4608-8343-c02e4677c519",
+      "createTime": "2025-10-13T16:25:08.956Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/capacityplanner",
+      "id": "65101c7f-3471-4aef-876d-999b1c424b60",
+      "createTime": "2025-10-13T16:25:08.931Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudsecuritycompliance",
+      "id": "79c10b6e-382c-46c7-920e-4285e542a6c2",
+      "createTime": "2025-10-13T16:25:08.903Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/saasservicemgmt",
+      "id": "ea8192f3-9ac9-47b1-a4f8-d098352f8d1a",
+      "createTime": "2025-10-13T16:25:08.878Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/configdelivery",
+      "id": "570ab608-2c88-4cd8-b4db-1758d90048f2",
+      "createTime": "2025-10-13T16:25:08.849Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/licensemanager",
+      "id": "e2e82377-a1e6-4126-bf09-56bad86c8c1c",
+      "createTime": "2025-10-13T16:25:08.824Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka-schemaregistry",
+      "id": "52813206-93a2-4c20-bbd6-9fbb833622cb",
+      "createTime": "2025-10-13T16:25:08.797Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/maintenance-api",
+      "id": "21b52ebf-321e-49eb-b57c-388b5f891f0c",
+      "createTime": "2025-10-13T16:25:08.771Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/subscriptions",
+      "id": "af25e2eb-c2c0-488b-8bd2-83a66b71fdc3",
+      "createTime": "2025-10-13T16:25:08.740Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storagebatchoperations",
+      "id": "d2fc5da9-79d5-47ce-b4d1-5fc1a96408c3",
+      "createTime": "2025-10-13T16:25:08.712Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lustre",
+      "id": "54e67afa-9b77-4f4b-8da2-dee43735bf38",
+      "createTime": "2025-10-13T16:25:08.678Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/devicestreaming",
+      "id": "38efedd4-70d8-4840-a63a-d6b0696a2727",
+      "createTime": "2025-10-13T16:25:08.653Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/chronicle",
+      "id": "0debae42-0b73-44a4-a21f-b920b9f42285",
+      "createTime": "2025-10-13T16:25:08.614Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/ordertracking",
+      "id": "450f1e29-1b17-422b-ac68-097cf44b5238",
+      "createTime": "2025-10-13T16:25:08.525Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/issueresolution",
+      "id": "a4693091-0f9b-4362-914d-f157d681e898",
+      "createTime": "2025-10-13T16:25:08.497Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/financialservices",
+      "id": "c1b65a8a-8d81-4747-acf0-61a7526ef3ca",
+      "createTime": "2025-10-13T16:25:08.465Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/areainsights",
+      "id": "94f47be0-823a-431f-b525-b96985fdc085",
+      "createTime": "2025-10-13T16:25:08.439Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/modelarmor",
+      "id": "af57092f-fb85-4c51-b0ec-64114e1d78c7",
+      "createTime": "2025-10-13T16:25:08.410Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parametermanager",
+      "id": "51c0167d-3238-4194-af79-fb0c06a9de78",
+      "createTime": "2025-10-13T16:25:08.384Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memorystore",
+      "id": "42bc25b2-30d2-43eb-8615-ea8bc4fd9afc",
+      "createTime": "2025-10-13T16:25:08.356Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reviews",
+      "id": "b4f5e280-0c0f-40d5-bb6a-e356f14737c0",
+      "createTime": "2025-10-13T16:25:08.329Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "9d136364-81da-438c-ab38-281e8d201f93",
+      "createTime": "2025-10-13T16:25:08.298Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "bbb229ea-f38f-45d6-a3d7-944d8295ed4b",
+      "createTime": "2025-10-13T16:25:08.272Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/marketing-platform-admin",
+      "id": "7f444e5e-05bc-49c9-a838-20bef3c5ea12",
+      "createTime": "2025-10-13T16:25:08.242Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apihub",
+      "id": "84dc0cfd-db4b-4e78-82bf-307262ca83cc",
+      "createTime": "2025-10-13T16:25:08.213Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gdchardwaremanagement",
+      "id": "ec6e1ee3-485f-40a1-bd33-ab35037a70b4",
+      "createTime": "2025-10-13T16:25:08.184Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/accounts",
+      "id": "02d523b5-03ad-4eed-925f-0ab4d450f1b6",
+      "createTime": "2025-10-13T16:25:08.157Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7432c86aba2fb48f27f78e6ed89d00a4174bbce1",
+          "message": "[merchantapi] Include CarrierShipping field inside the Products attribute",
+          "issues": [
+            "6787"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/products",
+      "id": "bc391219-1e04-4549-884e-51be17e73cb2",
+      "createTime": "2025-10-13T16:25:08.127Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/privilegedaccessmanager",
+      "id": "2004dbad-b016-4825-b896-9f995e53fed2",
+      "createTime": "2025-10-13T16:25:08.099Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/promotions",
+      "id": "13527041-6d09-4c35-b7d2-d47fd431e1f9",
+      "createTime": "2025-10-13T16:25:08.067Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "19b789dd-ee63-45cb-a1c9-2b514fb6162f",
+      "createTime": "2025-10-13T16:25:08.040Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine",
+      "id": "029fb6be-3311-427e-9edd-c3d109207074",
+      "createTime": "2025-10-13T16:25:08.009Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/streetview-publish",
+      "id": "cf5bf8d7-092e-4d15-a8b9-6ccff0010c14",
+      "createTime": "2025-10-13T16:25:07.983Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/developerconnect",
+      "id": "47c0d3bf-4572-4e59-88cb-40e27c341744",
+      "createTime": "2025-10-13T16:25:07.951Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managedkafka",
+      "id": "4d6afd77-2140-4ade-b6b6-f4449bc770ff",
+      "createTime": "2025-10-13T16:25:07.924Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "a8342a1e-add5-4b55-802c-9a117063db7c",
+      "createTime": "2025-10-13T16:25:07.895Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/solar",
+      "id": "ba2fa708-988b-4b24-b48d-4c776bfd4bc7",
+      "createTime": "2025-10-13T16:25:07.866Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/conversions",
+      "id": "62c57979-698a-4fc6-a0c2-d52876fa75d0",
+      "createTime": "2025-10-13T16:25:07.828Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securitycentermanagement",
+      "id": "4d4f7313-7e2c-4bb0-8149-bd1da3bbd9c6",
+      "createTime": "2025-10-13T16:25:07.774Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/lfp",
+      "id": "a4a2a5be-88b6-4803-8cc1-1a28e80ff475",
+      "createTime": "2025-10-13T16:25:07.729Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/notifications",
+      "id": "f776643a-7f60-4279-acf2-5d731833152d",
+      "createTime": "2025-10-13T16:25:07.677Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/securesourcemanager",
+      "id": "41ff5842-9a31-40ea-8d9f-6638750c67d6",
+      "createTime": "2025-10-13T16:25:07.650Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/backupdr",
+      "id": "379b2cd8-72d4-414b-9765-a556e4cf0e37",
+      "createTime": "2025-10-13T16:25:07.619Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/fleetengine-delivery",
+      "id": "1aab0df6-6aea-4d54-bfef-c19fb25f2d1d",
+      "createTime": "2025-10-13T16:25:07.584Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/quota",
+      "id": "c761327e-7c2c-42be-ba5c-8ac1a0dbce0b",
+      "createTime": "2025-10-13T16:25:07.547Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-control",
+      "id": "07e63437-77d6-4a8c-8593-66219c7570f5",
+      "createTime": "2025-10-13T16:25:07.520Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apphub",
+      "id": "5d450ae6-79e3-4577-b9aa-1dc6cee2926b",
+      "createTime": "2025-10-13T16:25:07.489Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.19.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "c60921ba-536b-4273-8762-28dc33f4d114",
+      "createTime": "2025-10-13T16:25:07.463Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/parallelstore",
+      "id": "4e097692-c865-4caa-a43e-ed53ca18ac5e",
+      "createTime": "2025-10-13T16:25:07.436Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/meet",
+      "id": "8f312dcc-bfd2-49e1-87c0-91bf926250e4",
+      "createTime": "2025-10-13T16:25:07.411Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.6.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudcontrolspartner",
+      "id": "45148d0e-8599-4e04-a53f-6e47a5005f4c",
+      "createTime": "2025-10-13T16:25:07.385Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/telcoautomation",
+      "id": "bfca72a5-0502-4d0e-85bd-d3a59187acdc",
+      "createTime": "2025-10-13T16:25:07.360Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/servicehealth",
+      "id": "e4b96710-666e-4cc3-bc25-66236b288f6a",
+      "createTime": "2025-10-13T16:25:07.331Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis-cluster",
+      "id": "80f63358-9cba-493f-92cb-790087e84a5c",
+      "createTime": "2025-10-13T16:25:07.307Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudquotas",
+      "id": "6ad69943-e39e-461f-8cfe-177a183ba88a",
+      "createTime": "2025-10-13T16:25:07.281Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/css",
+      "id": "84629289-96f4-452f-90f2-ecb8631f85f5",
+      "createTime": "2025-10-13T16:25:07.251Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/inventories",
+      "id": "7abdcf69-246a-45c3-90aa-9ee6af5af892",
+      "createTime": "2025-10-13T16:25:07.218Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.13.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/reports",
+      "id": "b90082e5-2736-4c0b-8afc-5d0da78bd0f7",
+      "createTime": "2025-10-13T16:25:07.192Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.10.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "e3f05cf7-a100-42ba-b94f-874cdc10b712",
+      "createTime": "2025-10-13T16:25:07.164Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/typeless-sample-bot",
+      "id": "20175d74-0d4a-4df2-92c4-645dd13dc9e4",
+      "createTime": "2025-10-13T16:25:07.137Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/grafeas",
+      "id": "0c69f401-0101-48bb-bf6f-4f7a17144e57",
+      "createTime": "2025-10-13T16:25:07.107Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storage-transfer",
+      "id": "8072768e-4746-496b-a78d-691d0ca2c838",
+      "createTime": "2025-10-13T16:25:07.081Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "5d228b9d9852c4e3e9d309335f36abd7e1085801",
+          "message": "[dlp] inspect and deid templates in RedactImage",
+          "issues": [
+            "6810"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dlp",
+      "id": "91c5e3a7-3ade-4dd8-a249-6eb9c39c2484",
+      "createTime": "2025-10-13T16:25:07.052Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring-dashboards",
+      "id": "93e57a2d-55d4-4fed-b374-bf91954f6041",
+      "createTime": "2025-10-13T16:25:07.026Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routing",
+      "id": "6a98e11d-0e0b-4e8e-ab76-c4b21f7104db",
+      "createTime": "2025-10-13T16:25:06.990Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "10279de9-d48d-44e0-af06-b017e574f5a5",
+      "createTime": "2025-10-13T16:25:06.964Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5540190bfce6a97615191ecd36835376b919f487",
+          "message": "Remove unmaintained modules",
+          "issues": [
+            "6789"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/maps-platform-datasets",
+      "id": "536707f7-56de-4fd3-ab13-4eaa62b82937",
+      "createTime": "2025-10-13T16:25:06.920Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/addressvalidation",
+      "id": "38129727-b210-42c8-b41c-8018c4102074",
+      "createTime": "2025-10-13T16:25:06.824Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-context-manager",
+      "id": "1a7858d8-e9c7-4cf1-88b4-04546119f7c3",
+      "createTime": "2025-10-13T16:25:06.796Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam-credentials",
+      "id": "1cc3b0f1-bca2-47e1-a6f6-f35dbb3e79d1",
+      "createTime": "2025-10-13T16:25:06.766Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iam",
+      "id": "5b4b4969-f34e-4d10-9190-026b03705279",
+      "createTime": "2025-10-13T16:25:06.742Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/containeranalysis",
+      "id": "cda03a9b-9f82-4c93-b1e1-61037955a221",
+      "createTime": "2025-10-13T16:25:06.714Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.9.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudprofiler",
+      "id": "6498cdcf-3da0-4db3-94a8-6d7ca726c0a6",
+      "createTime": "2025-10-13T16:25:06.689Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudbuild",
+      "id": "c1c3bba3-f1a8-4b84-8ffd-8a8afebe1e22",
+      "createTime": "2025-10-13T16:25:06.661Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/artifact-registry",
+      "id": "8a4ed1bb-0645-4fd9-abf5-5e4a934d9266",
+      "createTime": "2025-10-13T16:25:06.631Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataflow",
+      "id": "f11bb04c-4b62-4c54-bc69-00ad7b1311c2",
+      "createTime": "2025-10-13T16:25:06.597Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "2c4eb28a-6172-42b5-b623-36eeba02c501",
+      "createTime": "2025-10-13T16:25:06.573Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workstations",
+      "id": "0810f35e-911d-4d27-b0da-39784e6a7d5f",
+      "createTime": "2025-10-13T16:25:06.546Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "326ff264c52f9c8e7860e93404aacb66a11dc5fd",
+          "message": "Remove deprecated workflows client",
+          "issues": [
+            "6790"
+          ],
+          "breakingChangeNote": "remove deprecated workflows client ([#6790](https://github.com/googleapis/google-cloud-node/issues/6790))"
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.0.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/workflows",
+      "id": "a26d3e0a-6e8f-40d3-96ed-5936c252f1dc",
+      "createTime": "2025-10-13T16:25:06.518Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-security-scanner",
+      "id": "dd9efe4a-a0ad-4f80-8450-4bfe041d13a3",
+      "createTime": "2025-10-13T16:25:06.490Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/web-risk",
+      "id": "8c6c2575-9ede-43aa-a7af-92876baabb26",
+      "createTime": "2025-10-13T16:25:06.464Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vpc-access",
+      "id": "0973e627-23f9-4c8f-9160-63c7cf4a1cfb",
+      "createTime": "2025-10-13T16:25:06.437Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmwareengine",
+      "id": "6cd26750-e4c3-4e9f-8e2c-961a1b1e1105",
+      "createTime": "2025-10-13T16:25:06.412Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vmmigration",
+      "id": "51299f71-b6f6-4d51-b366-ffd008423159",
+      "createTime": "2025-10-13T16:25:06.384Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.3.4",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/vision",
+      "id": "c48fca20-c6f2-455b-9b6d-2722aa35fc4f",
+      "createTime": "2025-10-13T16:25:06.358Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-intelligence",
+      "id": "673a27e1-b358-4531-92e3-0ca94b3b8e33",
+      "createTime": "2025-10-13T16:25:06.323Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-transcoder",
+      "id": "57295ae0-7d5b-4902-894d-56b2a18d878c",
+      "createTime": "2025-10-13T16:25:06.294Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/video-stitcher",
+      "id": "450808b8-3514-4feb-a3f9-15b458d4e597",
+      "createTime": "2025-10-13T16:25:06.268Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/livestream",
+      "id": "5a46ccb2-07c9-4ad2-b285-e01bc9578fbc",
+      "createTime": "2025-10-13T16:25:06.244Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "9.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/translate",
+      "id": "eb19da56-a12d-43f1-8442-3d690dc69013",
+      "createTime": "2025-10-13T16:25:06.215Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tpu",
+      "id": "4490e674-5f33-4d21-9b70-05feaf631f12",
+      "createTime": "2025-10-13T16:25:06.191Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "29591347-a052-4ebb-89c8-a2ccaa85dd06",
+      "createTime": "2025-10-13T16:25:06.162Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/tasks",
+      "id": "871e2f9e-c95f-4e78-9a6c-4de430fb35c2",
+      "createTime": "2025-10-13T16:25:06.136Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "7.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/talent",
+      "id": "7773f319-78df-4c75-a9b5-0217d2353571",
+      "createTime": "2025-10-13T16:25:06.040Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/support",
+      "id": "ea40b8b4-5562-4480-a02a-adde5b24dc1e",
+      "createTime": "2025-10-13T16:25:05.993Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/storageinsights",
+      "id": "8660dbe4-e8bb-4f29-afaf-1b84f214a541",
+      "createTime": "2025-10-13T16:25:05.969Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.21.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "0789b4b9-5bbf-49cf-8293-ac3b8c0361dd",
+      "createTime": "2025-10-13T16:25:05.941Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/speech",
+      "id": "a8470ab0-6c96-4198-b932-d768093c77a7",
+      "createTime": "2025-10-13T16:25:05.915Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/shell",
+      "id": "51471491-b9c4-4e12-9958-c7c2b8294f2d",
+      "createTime": "2025-10-13T16:25:05.887Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-directory",
+      "id": "28e7404e-3df7-46e7-8333-8489a5b319d8",
+      "createTime": "2025-10-13T16:25:05.861Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "9.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-center",
+      "id": "304ca13e-09c0-4cf5-9e40-5d4a153ed1d7",
+      "createTime": "2025-10-13T16:25:05.832Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/publicca",
+      "id": "348e847a-7e58-43a4-9f88-246a4d936005",
+      "createTime": "2025-10-13T16:25:05.806Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "7.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/security-private-ca",
+      "id": "cc55defe-f8e2-4f0c-b217-013970393317",
+      "createTime": "2025-10-13T16:25:05.778Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5540190bfce6a97615191ecd36835376b919f487",
+          "message": "Remove unmaintained modules",
+          "issues": [
+            "6789"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/secret-manager",
+      "id": "2bda4901-93a1-4ca4-bcb3-abad04fba064",
+      "createTime": "2025-10-13T16:25:05.750Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/scheduler",
+      "id": "7ee622ba-39e0-445b-8865-d05c1457b2d2",
+      "createTime": "2025-10-13T16:25:05.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/run",
+      "id": "b294cf2f-ae0b-4b6c-abd6-7cbb1729167d",
+      "createTime": "2025-10-13T16:25:05.698Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/retail",
+      "id": "622a243b-46fa-425c-b93b-b6093c9cd71b",
+      "createTime": "2025-10-13T16:25:05.672Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/resource-manager",
+      "id": "1d71fb00-9e50-4bb6-a1c7-ddb79c53468c",
+      "createTime": "2025-10-13T16:25:05.646Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/redis",
+      "id": "5c52aae7-3a33-4b34-bcc7-a4cafc734be8",
+      "createTime": "2025-10-13T16:25:05.620Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recommender",
+      "id": "5a039e64-cb4f-498e-93bc-5c33187b1cd5",
+      "createTime": "2025-10-13T16:25:05.596Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/recaptcha-enterprise",
+      "id": "b9933491-954c-467b-8d59-d50890151115",
+      "createTime": "2025-10-13T16:25:05.569Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/rapidmigrationassessment",
+      "id": "4f529cde-db82-48e0-97fc-187294dbb438",
+      "createTime": "2025-10-13T16:25:05.544Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/private-catalog",
+      "id": "088b6bd7-4a32-4f36-8f01-0a88a0a58824",
+      "createTime": "2025-10-13T16:25:05.516Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter-iam",
+      "id": "58d4b363-3984-467d-b3e3-6809f2e15c98",
+      "createTime": "2025-10-13T16:25:05.491Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policy-troubleshooter",
+      "id": "908fb028-d045-4b23-84d4-4eda95212d9c",
+      "createTime": "2025-10-13T16:25:05.463Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/policysimulator",
+      "id": "ba6624d6-0b16-422f-a03b-555db8147cc0",
+      "createTime": "2025-10-13T16:25:05.439Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/phishing-protection",
+      "id": "e9be092b-1440-4978-9812-821b8a107550",
+      "createTime": "2025-10-13T16:25:05.411Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-login",
+      "id": "5237dc88-6f85-431e-ae3b-907a1c923e07",
+      "createTime": "2025-10-13T16:25:05.384Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/os-config",
+      "id": "338f97ed-8d04-40f8-9c95-0ffb26cf3873",
+      "createTime": "2025-10-13T16:25:05.354Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/org-policy",
+      "id": "6da46908-425f-4af3-9548-217ddab04624",
+      "createTime": "2025-10-13T16:25:05.329Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/orchestration-airflow",
+      "id": "62b96e76-d07f-479c-a522-e154c813df4c",
+      "createTime": "2025-10-13T16:25:05.237Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/notebooks",
+      "id": "dbada027-1edd-4987-96d6-403811bd3e5d",
+      "createTime": "2025-10-13T16:25:05.194Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/networkservices",
+      "id": "fa4232e0-5322-442c-863f-f6f03d2d868c",
+      "createTime": "2025-10-13T16:25:05.169Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-security",
+      "id": "e0920181-9bd5-4f67-abe9-bfa9384de5b0",
+      "createTime": "2025-10-13T16:25:05.142Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-management",
+      "id": "c3b3f2b0-d18c-4ba8-8c60-5a52a7f3fd35",
+      "createTime": "2025-10-13T16:25:05.117Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/network-connectivity",
+      "id": "8397128e-4406-4c73-b4f2-5782846bb1cb",
+      "createTime": "2025-10-13T16:25:05.091Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.14.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/netapp",
+      "id": "a371819c-7f4c-45cd-902c-3de5f36fab88",
+      "createTime": "2025-10-13T16:25:05.065Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/monitoring",
+      "id": "9051517e-3b9e-4f88-902f-b1c47fc29148",
+      "createTime": "2025-10-13T16:25:05.038Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/migrationcenter",
+      "id": "215a43de-92ae-405d-825f-8e1919ea055c",
+      "createTime": "2025-10-13T16:25:05.013Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc-metastore",
+      "id": "6450af1d-ebb9-42b3-ab2f-20e76f6293bf",
+      "createTime": "2025-10-13T16:25:04.986Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/memcache",
+      "id": "57ce99c5-274f-4073-8cd9-22f27d64fdeb",
+      "createTime": "2025-10-13T16:25:04.960Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/media-translation",
+      "id": "da3aa56e-94d7-48ab-8103-191e69daace3",
+      "createTime": "2025-10-13T16:25:04.933Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/managed-identities",
+      "id": "0c3798ff-1029-43e9-9c24-fb35c0a0a1cb",
+      "createTime": "2025-10-13T16:25:04.909Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/life-sciences",
+      "id": "3b1ccaf2-cb02-4f16-b9a0-7a5a1d78e438",
+      "createTime": "2025-10-13T16:25:04.883Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/language",
+      "id": "648a9fe2-2767-40ac-b407-d2fea6a3f8a8",
+      "createTime": "2025-10-13T16:25:04.858Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms-inventory",
+      "id": "2ec0bb89-2e4c-4c1b-9a40-34aba8fbc734",
+      "createTime": "2025-10-13T16:25:04.831Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/kms",
+      "id": "39f6299f-3d0d-48cc-81f1-cd092a21e8f3",
+      "createTime": "2025-10-13T16:25:04.803Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iot",
+      "id": "351bce70-558f-4536-9c05-ea91c127f64c",
+      "createTime": "2025-10-13T16:25:04.776Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/ids",
+      "id": "9492c742-0022-4d19-9f76-31813d124b9c",
+      "createTime": "2025-10-13T16:25:04.751Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/iap",
+      "id": "97ede2a8-8946-47ab-8544-7b96d4ce7ef0",
+      "createTime": "2025-10-13T16:25:04.723Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gsuiteaddons",
+      "id": "106bb94c-b61c-4684-b2d5-74f008e5c2ab",
+      "createTime": "2025-10-13T16:25:04.696Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gkemulticloud",
+      "id": "a5e83422-ffe2-4966-b000-fc77fbdadf52",
+      "createTime": "2025-10-13T16:25:04.667Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5540190bfce6a97615191ecd36835376b919f487",
+          "message": "Remove unmaintained modules",
+          "issues": [
+            "6789"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-hub",
+      "id": "8f068ad2-42d8-47c6-a065-4a7e38fb3046",
+      "createTime": "2025-10-13T16:25:04.643Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-connect-gateway",
+      "id": "90c7747a-7c7e-479f-a847-272455a4578c",
+      "createTime": "2025-10-13T16:25:04.614Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/gke-backup",
+      "id": "33ebaf0c-913d-449c-be9a-ffadc311aeb7",
+      "createTime": "2025-10-13T16:25:04.588Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/functions",
+      "id": "585edaea-b86b-4331-a68d-063a815ceb01",
+      "createTime": "2025-10-13T16:25:04.560Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/filestore",
+      "id": "cf4e68bb-590f-466a-a981-26f46ef071d7",
+      "createTime": "2025-10-13T16:25:04.535Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc-publishing",
+      "id": "d8407cb9-dd45-47de-9c73-11e03e9781b8",
+      "createTime": "2025-10-13T16:25:04.437Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/eventarc",
+      "id": "eb50ea60-c2ef-4460-8ad1-9a410e5cbca6",
+      "createTime": "2025-10-13T16:25:04.396Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/essential-contacts",
+      "id": "7e9dc955-ae3c-40bd-abe8-dda552bf6c35",
+      "createTime": "2025-10-13T16:25:04.370Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.8.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgecontainer",
+      "id": "7c7ec0e4-8c5b-472d-a969-3b2e655c2f49",
+      "createTime": "2025-10-13T16:25:04.342Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/domains",
+      "id": "22dcdedb-ce2b-4ab2-b73d-3d6112245a48",
+      "createTime": "2025-10-13T16:25:04.316Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "40bfb8b69831e8b84f429871328a594d3bc0e1f2",
+          "message": "[documentai] Added new messages `EntityValidationOutput` and `EntitiesRevision`",
+          "issues": [
+            "6796"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "5540190bfce6a97615191ecd36835376b919f487",
+          "message": "Remove unmaintained modules",
+          "issues": [
+            "6789"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "9.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/documentai",
+      "id": "8984e4d6-044d-4619-864c-e52cc3689733",
+      "createTime": "2025-10-13T16:25:04.289Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dns",
+      "id": "65f9ae96-ac83-433a-8d47-a56be24a6360",
+      "createTime": "2025-10-13T16:25:04.266Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "eb380795-3a48-4073-910d-c005dbe5a1ca",
+      "createTime": "2025-10-13T16:25:04.240Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8d9d6601f047fc0b7f2a2139a77792d416ff1054",
+          "message": "[cx] Add parameters to adjust LLM input and output token limit and temperature in v3beta1 API",
+          "issues": [
+            "6806"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow-cx",
+      "id": "e472906f-5545-4136-87b0-3340d8bc1125",
+      "createTime": "2025-10-13T16:25:04.217Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "7.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "c8d40ecf-5365-4089-967b-2ed6b54817f9",
+      "createTime": "2025-10-13T16:25:04.191Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/deploy",
+      "id": "071f6a2d-5f8f-4282-80d0-fb8897a3afda",
+      "createTime": "2025-10-13T16:25:04.166Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datastream",
+      "id": "024bcf74-c905-4847-ac68-3bbaa1c137e4",
+      "createTime": "2025-10-13T16:25:04.138Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-qna",
+      "id": "41ca9681-bcc3-4567-99f6-e4e662f59ec4",
+      "createTime": "2025-10-13T16:25:04.114Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataproc",
+      "id": "71781b00-a8a7-4131-9597-80d845a03b96",
+      "createTime": "2025-10-13T16:25:04.087Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "65eae17f-c7be-4e2c-b6c4-660605771368",
+      "createTime": "2025-10-13T16:25:04.061Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datalabeling",
+      "id": "075b9848-5fa8-469c-9f6b-1934f6c07dc0",
+      "createTime": "2025-10-13T16:25:04.034Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/data-fusion",
+      "id": "01c73bd0-667a-4af4-bfef-18bd11c1a140",
+      "createTime": "2025-10-13T16:25:04.007Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataform",
+      "id": "4a4707ec-dd09-4a09-ba74-df755057d3ff",
+      "createTime": "2025-10-13T16:25:03.979Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/lineage",
+      "id": "999da80b-2c89-4e73-b478-0277b4b9d2fd",
+      "createTime": "2025-10-13T16:25:03.952Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/datacatalog",
+      "id": "7464809e-eb6f-49b6-a68d-ee6d9c67dffa",
+      "createTime": "2025-10-13T16:25:03.919Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "4816238881c50b1174907d1b17b8ece52a689bd0",
+          "message": "[contentwarehouse] Added new messages `EntityValidationOutput` and `EntitiesRevision`",
+          "issues": [
+            "6797"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contentwarehouse",
+      "id": "c3b0a3ec-f3ea-4b0d-8552-b962dd02de0e",
+      "createTime": "2025-10-13T16:25:03.895Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/contact-center-insights",
+      "id": "8abe4fe0-a421-4dac-b1a9-635e8f877f46",
+      "createTime": "2025-10-13T16:25:03.867Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.5.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/connectors",
+      "id": "52bb2019-e69c-4329-9b38-30959e78bf5d",
+      "createTime": "2025-10-13T16:25:03.842Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.11.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/config",
+      "id": "e533c8ff-e698-44a8-8307-b3bc553dd8b2",
+      "createTime": "2025-10-13T16:25:03.813Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/confidentialcomputing",
+      "id": "398c3249-d05e-4507-8cfa-2baab690cebd",
+      "createTime": "2025-10-13T16:25:03.786Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d37c02c033319677d7a77da80bb6b09d42ad1730",
+          "message": "[compute] Update Compute Engine v1 API to revision 20250916 (#1107)",
+          "issues": [
+            "6800"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "bf313ec644dab4e0c6a1037891cfbdf6f13e98ee",
+          "message": "[compute] Update Compute Engine v1beta API to revision 20250916 (#1106)",
+          "issues": [
+            "6798"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "f9cc6b0420308912faa9930fa82529e691c3f2c3",
+          "message": "Update Compute Engine v1 API to revision 20250909",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "f9cc6b0420308912faa9930fa82529e691c3f2c3",
+          "message": "Update Compute Engine v1beta API to revision 20250909",
+          "issues": []
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/compute",
+      "id": "3933897c-9cb0-4616-a4b9-44ae2479597c",
+      "createTime": "2025-10-13T16:25:03.754Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.7.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/procurement",
+      "id": "e1a40b95-b911-48cc-a365-0da99c90255a",
+      "createTime": "2025-10-13T16:25:03.729Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dms",
+      "id": "a1b63454-5620-48c7-abc6-10b3401b8840",
+      "createTime": "2025-10-13T16:25:03.637Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/channel",
+      "id": "f6d1b9f6-c4f8-4f30-8e54-57efd44697a9",
+      "createTime": "2025-10-13T16:25:03.592Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/certificate-manager",
+      "id": "1f629e37-9faa-44d2-9ae9-fd97b849b4ab",
+      "createTime": "2025-10-13T16:25:03.568Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/binary-authorization",
+      "id": "a71a6d40-d4b4-408d-a060-9b45f317d583",
+      "createTime": "2025-10-13T16:25:03.541Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing-budgets",
+      "id": "2ee2ba76-a003-4152-a588-d5868d05d60c",
+      "createTime": "2025-10-13T16:25:03.516Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/billing",
+      "id": "250de94e-0ccf-4076-8c62-c1f351ce07b6",
+      "createTime": "2025-10-13T16:25:03.482Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "73797fd29aab42ef5751e72a7b31a3e3a7336881",
+          "message": "[bigquery-reservation] Add new `BACKGROUND_CHANGE_DATA_CAPTURE`, `BACKGROUND_COLUMN_METADATA_INDEX`, and `BACKGROUND_SEARCH_INDEX_REFRESH` reservation assignment types",
+          "issues": [
+            "6785"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "73797fd29aab42ef5751e72a7b31a3e3a7336881",
+          "message": "Add support for creation and modification of new reservation groups",
+          "issues": []
+        },
+        {
+          "type": "feat",
+          "sha": "73797fd29aab42ef5751e72a7b31a3e3a7336881",
+          "message": "Add new reservation IAM policy get/set/test methods",
+          "issues": []
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-reservation",
+      "id": "aaceb398-0fce-4a80-8a7f-b2c9b1c66a36",
+      "createTime": "2025-10-13T16:25:03.458Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-migration",
+      "id": "a73bb8d6-6efb-42ef-b929-66bc7c05d7b7",
+      "createTime": "2025-10-13T16:25:03.431Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-transfer",
+      "id": "21ac015b-1b05-42f3-b5ef-d8d10e76a5b5",
+      "createTime": "2025-10-13T16:25:03.406Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-datapolicies",
+      "id": "45b1d9fc-2e00-42ec-871c-443ad9cc9530",
+      "createTime": "2025-10-13T16:25:03.378Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-data-exchange",
+      "id": "aa5b2c51-ba52-4ae3-9a95-0d61a8299ecc",
+      "createTime": "2025-10-13T16:25:03.355Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-connection",
+      "id": "e0cee52d-4ade-4e26-9055-eb84cfe4f6d8",
+      "createTime": "2025-10-13T16:25:03.329Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bigquery-analyticshub",
+      "id": "8c0669e3-5d1c-48d2-99c2-37166e26cc3d",
+      "createTime": "2025-10-13T16:25:03.305Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientgateways",
+      "id": "c5586d00-4c83-4d14-82c9-2b61817ed7eb",
+      "createTime": "2025-10-13T16:25:03.279Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/clientconnectorservices",
+      "id": "09ce2991-9dee-4c9c-941e-372a9d3db0ea",
+      "createTime": "2025-10-13T16:25:03.255Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appgateways",
+      "id": "4b21e9b1-8add-47a3-9e6c-a344959bf3a4",
+      "createTime": "2025-10-13T16:25:03.229Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnectors",
+      "id": "9b7291d5-8bdd-47e6-97df-571d69d0859b",
+      "createTime": "2025-10-13T16:25:03.205Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appconnections",
+      "id": "2da801ea-995c-4bf8-aa93-b15dca796823",
+      "createTime": "2025-10-13T16:25:03.179Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/batch",
+      "id": "a1fc47d8-f99e-4d92-8f69-b56bbeff8083",
+      "createTime": "2025-10-13T16:25:03.153Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/bare-metal-solution",
+      "id": "210d5ac1-9d0d-497b-a842-87f82ec1fc3b",
+      "createTime": "2025-10-13T16:25:03.125Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/automl",
+      "id": "3a808e72-156a-4000-b999-36773e302a15",
+      "createTime": "2025-10-13T16:25:03.099Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.1.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/assured-workloads",
+      "id": "8b3e35ea-65f9-4327-857a-543baebd48cd",
+      "createTime": "2025-10-13T16:25:03.072Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "5540190bfce6a97615191ecd36835376b919f487",
+          "message": "Remove unmaintained modules",
+          "issues": [
+            "6789"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "6.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/asset",
+      "id": "471e7a58-5f6e-49a3-9fcd-2117c0f70a35",
+      "createTime": "2025-10-13T16:25:03.047Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-registry",
+      "id": "bdc5df07-201d-42ca-aa86-fac8ecf1b695",
+      "createTime": "2025-10-13T16:25:03.016Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apigee-connect",
+      "id": "4b5c0e59-0992-42ac-b148-e8a6c2a2e42d",
+      "createTime": "2025-10-13T16:25:02.979Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/api-gateway",
+      "id": "3b204a15-cb0d-4900-a99f-10255400e285",
+      "createTime": "2025-10-13T16:25:02.950Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/alloydb",
+      "id": "1c04e6d4-136c-4da4-bc6f-428e531f7b35",
+      "createTime": "2025-10-13T16:25:02.926Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "fcf84bf1ece803b25b8719e80afb852ea515a4c0",
+          "message": "Add JAILBREAK category to SafetySettings for prediction service",
+          "issues": [
+            "6801"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "6a0eeb493f3f2eef6bbec8baa2f27aa9b9841bda",
+          "message": "Add labels field for Predict API for Imagen use case (v1beta and v1)",
+          "issues": [
+            "6788"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.8.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "1b2327db-8c2f-48d2-a24d-33a515ba11f6",
+      "createTime": "2025-10-13T16:25:02.842Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/advisorynotifications",
+      "id": "617258d6-863b-4a44-83a3-43bb9a422982",
+      "createTime": "2025-10-13T16:25:02.797Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/access-approval",
+      "id": "0cceeb8b-6fb0-4876-ba54-585b6b172128",
+      "createTime": "2025-10-13T16:25:02.773Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google/area120-tables",
+      "id": "029c1196-6456-4a82-a58e-c1d284c21c33",
+      "createTime": "2025-10-13T16:25:02.747Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/appengine-admin",
+      "id": "915f7bf5-5a47-4345-a109-6b07c88a0c84",
+      "createTime": "2025-10-13T16:25:02.722Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-usage",
+      "id": "7e74ea1b-a774-463e-bf10-79f9a49dcac7",
+      "createTime": "2025-10-13T16:25:02.695Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-management",
+      "id": "1e749c1e-0a1b-43e8-9a32-d60ced48de40",
+      "createTime": "2025-10-13T16:25:02.672Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "4.3.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/service-control",
+      "id": "14951f68-0189-4173-b004-7e17afe9f777",
+      "createTime": "2025-10-13T16:25:02.644Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "2.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/apikeys",
+      "id": "d476a5bc-fd87-4385-bb56-b55c9622175f",
+      "createTime": "2025-10-13T16:25:02.619Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "5.2.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/data",
+      "id": "5c17c313-64f7-4f7f-8e7f-8cdfd244f264",
+      "createTime": "2025-10-13T16:25:02.592Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "9.0.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-analytics/admin",
+      "id": "36496304-388c-4b0a-b177-79a23d2f60b9",
+      "createTime": "2025-10-13T16:25:02.569Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "3.4.1",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "6ee8c761-8e8d-402e-9fbd-cad07cbc1254",
+      "createTime": "2025-10-13T16:25:02.535Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "e0f29f6c87a158e68ce7be53aad9e8fe237d0877",
+          "message": "Make sure we are only generating default version system tests",
+          "issues": [
+            "6795"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.5",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "77d29cef-f961-4d52-8fef-adbd21053f01",
+      "createTime": "2025-10-13T16:25:02.497Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
           "sha": "88c89f456af4d6347e46d2919cbb757733bd7e19",
           "message": "Add 'esm' to src path for esm-specific structure",
           "issues": [
@@ -62528,5 +66327,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-10-01T12:43:36.214Z"
+  "updateTime": "2025-10-13T16:25:08.956Z"
 }

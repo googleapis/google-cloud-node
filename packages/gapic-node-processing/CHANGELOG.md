@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.5](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.4...gapic-node-processing-v0.1.5) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+* Make sure we are only generating default version system tests ([#6795](https://github.com/googleapis/google-cloud-node/issues/6795)) ([e0f29f6](https://github.com/googleapis/google-cloud-node/commit/e0f29f6c87a158e68ce7be53aad9e8fe237d0877))
+
 ## [0.1.4](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.3...gapic-node-processing-v0.1.4) (2025-10-01)
 
 

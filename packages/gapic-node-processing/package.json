@@ -1,6 +1,6 @@
 {
   "name": "gapic-node-processing",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Does various processing functions for Nodejs gapic libraries",
   "bin": "./build/src/cli.js",
   "scripts": {
