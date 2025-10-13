@@ -2576,6 +2576,46 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1_generated_FeatureOnlineStoreService_GenerateFetchAccessToken_async",
+      "title": "DataFoundryService generateFetchAccessToken Sample",
+      "origin": "API_DEFINITION",
+      "description": " RPC to generate an access token for the given feature view. FeatureViews under the same FeatureOnlineStore share the same access token.",
+      "canonical": true,
+      "file": "feature_online_store_service.generate_fetch_access_token.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 53,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "GenerateFetchAccessToken",
+        "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService.GenerateFetchAccessToken",
+        "async": true,
+        "parameters": [
+          {
+            "name": "feature_view",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse",
+        "client": {
+          "shortName": "FeatureOnlineStoreServiceClient",
+          "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreServiceClient"
+        },
+        "method": {
+          "shortName": "GenerateFetchAccessToken",
+          "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService.GenerateFetchAccessToken",
+          "service": {
+            "shortName": "FeatureOnlineStoreService",
+            "fullName": "google.cloud.aiplatform.v1.FeatureOnlineStoreService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1_generated_FeatureRegistryService_CreateFeatureGroup_async",
       "title": "DataFoundryService createFeatureGroup Sample",
       "origin": "API_DEFINITION",

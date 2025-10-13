@@ -11147,7 +11147,8 @@ export namespace google {
                     HARM_CATEGORY_DANGEROUS_CONTENT = 2,
                     HARM_CATEGORY_HARASSMENT = 3,
                     HARM_CATEGORY_SEXUALLY_EXPLICIT = 4,
-                    HARM_CATEGORY_CIVIC_INTEGRITY = 5
+                    HARM_CATEGORY_CIVIC_INTEGRITY = 5,
+                    HARM_CATEGORY_JAILBREAK = 6
                 }
 
                 /** Modality enum. */
@@ -48427,6 +48428,12 @@ export namespace google {
 
                         /** Bigtable autoScaling */
                         autoScaling?: (google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IAutoScaling|null);
+
+                        /** Bigtable enableDirectBigtableAccess */
+                        enableDirectBigtableAccess?: (boolean|null);
+
+                        /** Bigtable bigtableMetadata */
+                        bigtableMetadata?: (google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IBigtableMetadata|null);
                     }
 
                     /** Represents a Bigtable. */
@@ -48440,6 +48447,12 @@ export namespace google {
 
                         /** Bigtable autoScaling. */
                         public autoScaling?: (google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IAutoScaling|null);
+
+                        /** Bigtable enableDirectBigtableAccess. */
+                        public enableDirectBigtableAccess: boolean;
+
+                        /** Bigtable bigtableMetadata. */
+                        public bigtableMetadata?: (google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IBigtableMetadata|null);
 
                         /**
                          * Creates a new Bigtable instance using the specified properties.
@@ -48624,6 +48637,115 @@ export namespace google {
 
                             /**
                              * Gets the default type url for AutoScaling
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a BigtableMetadata. */
+                        interface IBigtableMetadata {
+
+                            /** BigtableMetadata tenantProjectId */
+                            tenantProjectId?: (string|null);
+
+                            /** BigtableMetadata instanceId */
+                            instanceId?: (string|null);
+
+                            /** BigtableMetadata tableId */
+                            tableId?: (string|null);
+                        }
+
+                        /** Represents a BigtableMetadata. */
+                        class BigtableMetadata implements IBigtableMetadata {
+
+                            /**
+                             * Constructs a new BigtableMetadata.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IBigtableMetadata);
+
+                            /** BigtableMetadata tenantProjectId. */
+                            public tenantProjectId: string;
+
+                            /** BigtableMetadata instanceId. */
+                            public instanceId: string;
+
+                            /** BigtableMetadata tableId. */
+                            public tableId: string;
+
+                            /**
+                             * Creates a new BigtableMetadata instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BigtableMetadata instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IBigtableMetadata): google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.BigtableMetadata;
+
+                            /**
+                             * Encodes the specified BigtableMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.BigtableMetadata.verify|verify} messages.
+                             * @param message BigtableMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IBigtableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BigtableMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.BigtableMetadata.verify|verify} messages.
+                             * @param message BigtableMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.IBigtableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BigtableMetadata message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BigtableMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.BigtableMetadata;
+
+                            /**
+                             * Decodes a BigtableMetadata message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BigtableMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.BigtableMetadata;
+
+                            /**
+                             * Verifies a BigtableMetadata message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BigtableMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BigtableMetadata
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.BigtableMetadata;
+
+                            /**
+                             * Creates a plain object from a BigtableMetadata message. Also converts values to other types if specified.
+                             * @param message BigtableMetadata
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1.FeatureOnlineStore.Bigtable.BigtableMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BigtableMetadata to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BigtableMetadata
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -51358,6 +51480,9 @@ export namespace google {
 
                     /** FeatureView satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** FeatureView bigtableMetadata */
+                    bigtableMetadata?: (google.cloud.aiplatform.v1.FeatureView.IBigtableMetadata|null);
                 }
 
                 /** Represents a FeatureView. */
@@ -51413,6 +51538,9 @@ export namespace google {
 
                     /** FeatureView satisfiesPzi. */
                     public satisfiesPzi: boolean;
+
+                    /** FeatureView bigtableMetadata. */
+                    public bigtableMetadata?: (google.cloud.aiplatform.v1.FeatureView.IBigtableMetadata|null);
 
                     /** FeatureView source. */
                     public source?: ("bigQuerySource"|"featureRegistrySource"|"vertexRagSource");
@@ -52453,6 +52581,103 @@ export namespace google {
                         SERVICE_AGENT_TYPE_PROJECT = 1,
                         SERVICE_AGENT_TYPE_FEATURE_VIEW = 2
                     }
+
+                    /** Properties of a BigtableMetadata. */
+                    interface IBigtableMetadata {
+
+                        /** BigtableMetadata readAppProfile */
+                        readAppProfile?: (string|null);
+                    }
+
+                    /** Represents a BigtableMetadata. */
+                    class BigtableMetadata implements IBigtableMetadata {
+
+                        /**
+                         * Constructs a new BigtableMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.FeatureView.IBigtableMetadata);
+
+                        /** BigtableMetadata readAppProfile. */
+                        public readAppProfile: string;
+
+                        /**
+                         * Creates a new BigtableMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BigtableMetadata instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.FeatureView.IBigtableMetadata): google.cloud.aiplatform.v1.FeatureView.BigtableMetadata;
+
+                        /**
+                         * Encodes the specified BigtableMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureView.BigtableMetadata.verify|verify} messages.
+                         * @param message BigtableMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.FeatureView.IBigtableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BigtableMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FeatureView.BigtableMetadata.verify|verify} messages.
+                         * @param message BigtableMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.FeatureView.IBigtableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BigtableMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BigtableMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FeatureView.BigtableMetadata;
+
+                        /**
+                         * Decodes a BigtableMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BigtableMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FeatureView.BigtableMetadata;
+
+                        /**
+                         * Verifies a BigtableMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BigtableMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BigtableMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FeatureView.BigtableMetadata;
+
+                        /**
+                         * Creates a plain object from a BigtableMetadata message. Also converts values to other types if specified.
+                         * @param message BigtableMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.FeatureView.BigtableMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BigtableMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigtableMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a FeatureViewSync. */
@@ -52761,6 +52986,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public featureViewDirectWrite(request: google.cloud.aiplatform.v1.IFeatureViewDirectWriteRequest): Promise<google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse>;
+
+                    /**
+                     * Calls GenerateFetchAccessToken.
+                     * @param request GenerateFetchAccessTokenRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateFetchAccessTokenResponse
+                     */
+                    public generateFetchAccessToken(request: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenRequest, callback: google.cloud.aiplatform.v1.FeatureOnlineStoreService.GenerateFetchAccessTokenCallback): void;
+
+                    /**
+                     * Calls GenerateFetchAccessToken.
+                     * @param request GenerateFetchAccessTokenRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateFetchAccessToken(request: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenRequest): Promise<google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse>;
                 }
 
                 namespace FeatureOnlineStoreService {
@@ -52785,6 +53024,13 @@ export namespace google {
                      * @param [response] FeatureViewDirectWriteResponse
                      */
                     type FeatureViewDirectWriteCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.FeatureViewDirectWriteResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.FeatureOnlineStoreService|generateFetchAccessToken}.
+                     * @param error Error, if any
+                     * @param [response] GenerateFetchAccessTokenResponse
+                     */
+                    type GenerateFetchAccessTokenCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse) => void;
                 }
 
                 /** FeatureViewDataFormat enum. */
@@ -54956,6 +55202,206 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a GenerateFetchAccessTokenRequest. */
+                interface IGenerateFetchAccessTokenRequest {
+
+                    /** GenerateFetchAccessTokenRequest featureView */
+                    featureView?: (string|null);
+                }
+
+                /** Represents a GenerateFetchAccessTokenRequest. */
+                class GenerateFetchAccessTokenRequest implements IGenerateFetchAccessTokenRequest {
+
+                    /**
+                     * Constructs a new GenerateFetchAccessTokenRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenRequest);
+
+                    /** GenerateFetchAccessTokenRequest featureView. */
+                    public featureView: string;
+
+                    /**
+                     * Creates a new GenerateFetchAccessTokenRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateFetchAccessTokenRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenRequest): google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest;
+
+                    /**
+                     * Encodes the specified GenerateFetchAccessTokenRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest.verify|verify} messages.
+                     * @param message GenerateFetchAccessTokenRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateFetchAccessTokenRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest.verify|verify} messages.
+                     * @param message GenerateFetchAccessTokenRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateFetchAccessTokenRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateFetchAccessTokenRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest;
+
+                    /**
+                     * Decodes a GenerateFetchAccessTokenRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateFetchAccessTokenRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest;
+
+                    /**
+                     * Verifies a GenerateFetchAccessTokenRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateFetchAccessTokenRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateFetchAccessTokenRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateFetchAccessTokenRequest message. Also converts values to other types if specified.
+                     * @param message GenerateFetchAccessTokenRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.GenerateFetchAccessTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateFetchAccessTokenRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateFetchAccessTokenRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateFetchAccessTokenResponse. */
+                interface IGenerateFetchAccessTokenResponse {
+
+                    /** GenerateFetchAccessTokenResponse accessToken */
+                    accessToken?: (string|null);
+
+                    /** GenerateFetchAccessTokenResponse expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GenerateFetchAccessTokenResponse. */
+                class GenerateFetchAccessTokenResponse implements IGenerateFetchAccessTokenResponse {
+
+                    /**
+                     * Constructs a new GenerateFetchAccessTokenResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenResponse);
+
+                    /** GenerateFetchAccessTokenResponse accessToken. */
+                    public accessToken: string;
+
+                    /** GenerateFetchAccessTokenResponse expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GenerateFetchAccessTokenResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateFetchAccessTokenResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenResponse): google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse;
+
+                    /**
+                     * Encodes the specified GenerateFetchAccessTokenResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse.verify|verify} messages.
+                     * @param message GenerateFetchAccessTokenResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateFetchAccessTokenResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse.verify|verify} messages.
+                     * @param message GenerateFetchAccessTokenResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IGenerateFetchAccessTokenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateFetchAccessTokenResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateFetchAccessTokenResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse;
+
+                    /**
+                     * Decodes a GenerateFetchAccessTokenResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateFetchAccessTokenResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse;
+
+                    /**
+                     * Verifies a GenerateFetchAccessTokenResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateFetchAccessTokenResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateFetchAccessTokenResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateFetchAccessTokenResponse message. Also converts values to other types if specified.
+                     * @param message GenerateFetchAccessTokenResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.GenerateFetchAccessTokenResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateFetchAccessTokenResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateFetchAccessTokenResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a FeaturestoreOnlineServingService */
@@ -88070,7 +88516,8 @@ export namespace google {
                             OTHER = 2,
                             BLOCKLIST = 3,
                             PROHIBITED_CONTENT = 4,
-                            MODEL_ARMOR = 5
+                            MODEL_ARMOR = 5,
+                            JAILBREAK = 6
                         }
                     }
 
@@ -148073,6 +148520,9 @@ export namespace google {
                     /** DedicatedResources requiredReplicaCount */
                     requiredReplicaCount?: (number|null);
 
+                    /** DedicatedResources initialReplicaCount */
+                    initialReplicaCount?: (number|null);
+
                     /** DedicatedResources autoscalingMetricSpecs */
                     autoscalingMetricSpecs?: (google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec[]|null);
 
@@ -148081,6 +148531,9 @@ export namespace google {
 
                     /** DedicatedResources flexStart */
                     flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
+
+                    /** DedicatedResources scaleToZeroSpec */
+                    scaleToZeroSpec?: (google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec|null);
                 }
 
                 /** Represents a DedicatedResources. */
@@ -148104,6 +148557,9 @@ export namespace google {
                     /** DedicatedResources requiredReplicaCount. */
                     public requiredReplicaCount: number;
 
+                    /** DedicatedResources initialReplicaCount. */
+                    public initialReplicaCount: number;
+
                     /** DedicatedResources autoscalingMetricSpecs. */
                     public autoscalingMetricSpecs: google.cloud.aiplatform.v1beta1.IAutoscalingMetricSpec[];
 
@@ -148112,6 +148568,9 @@ export namespace google {
 
                     /** DedicatedResources flexStart. */
                     public flexStart?: (google.cloud.aiplatform.v1beta1.IFlexStart|null);
+
+                    /** DedicatedResources scaleToZeroSpec. */
+                    public scaleToZeroSpec?: (google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec|null);
 
                     /**
                      * Creates a new DedicatedResources instance using the specified properties.
@@ -148189,6 +148648,112 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DedicatedResources {
+
+                    /** Properties of a ScaleToZeroSpec. */
+                    interface IScaleToZeroSpec {
+
+                        /** ScaleToZeroSpec minScaleupPeriod */
+                        minScaleupPeriod?: (google.protobuf.IDuration|null);
+
+                        /** ScaleToZeroSpec idleScaledownPeriod */
+                        idleScaledownPeriod?: (google.protobuf.IDuration|null);
+                    }
+
+                    /** Represents a ScaleToZeroSpec. */
+                    class ScaleToZeroSpec implements IScaleToZeroSpec {
+
+                        /**
+                         * Constructs a new ScaleToZeroSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec);
+
+                        /** ScaleToZeroSpec minScaleupPeriod. */
+                        public minScaleupPeriod?: (google.protobuf.IDuration|null);
+
+                        /** ScaleToZeroSpec idleScaledownPeriod. */
+                        public idleScaledownPeriod?: (google.protobuf.IDuration|null);
+
+                        /**
+                         * Creates a new ScaleToZeroSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ScaleToZeroSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec): google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec;
+
+                        /**
+                         * Encodes the specified ScaleToZeroSpec message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec.verify|verify} messages.
+                         * @param message ScaleToZeroSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ScaleToZeroSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec.verify|verify} messages.
+                         * @param message ScaleToZeroSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.DedicatedResources.IScaleToZeroSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ScaleToZeroSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ScaleToZeroSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec;
+
+                        /**
+                         * Decodes a ScaleToZeroSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ScaleToZeroSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec;
+
+                        /**
+                         * Verifies a ScaleToZeroSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ScaleToZeroSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ScaleToZeroSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec;
+
+                        /**
+                         * Creates a plain object from a ScaleToZeroSpec message. Also converts values to other types if specified.
+                         * @param message ScaleToZeroSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.DedicatedResources.ScaleToZeroSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ScaleToZeroSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ScaleToZeroSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of an AutomaticResources. */
@@ -154762,7 +155327,8 @@ export namespace google {
                     HARM_CATEGORY_DANGEROUS_CONTENT = 2,
                     HARM_CATEGORY_HARASSMENT = 3,
                     HARM_CATEGORY_SEXUALLY_EXPLICIT = 4,
-                    HARM_CATEGORY_CIVIC_INTEGRITY = 5
+                    HARM_CATEGORY_CIVIC_INTEGRITY = 5,
+                    HARM_CATEGORY_JAILBREAK = 6
                 }
 
                 /** Modality enum. */
@@ -208414,6 +208980,12 @@ export namespace google {
 
                         /** Bigtable autoScaling */
                         autoScaling?: (google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IAutoScaling|null);
+
+                        /** Bigtable enableDirectBigtableAccess */
+                        enableDirectBigtableAccess?: (boolean|null);
+
+                        /** Bigtable bigtableMetadata */
+                        bigtableMetadata?: (google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IBigtableMetadata|null);
                     }
 
                     /** Represents a Bigtable. */
@@ -208427,6 +208999,12 @@ export namespace google {
 
                         /** Bigtable autoScaling. */
                         public autoScaling?: (google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IAutoScaling|null);
+
+                        /** Bigtable enableDirectBigtableAccess. */
+                        public enableDirectBigtableAccess: boolean;
+
+                        /** Bigtable bigtableMetadata. */
+                        public bigtableMetadata?: (google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IBigtableMetadata|null);
 
                         /**
                          * Creates a new Bigtable instance using the specified properties.
@@ -208611,6 +209189,115 @@ export namespace google {
 
                             /**
                              * Gets the default type url for AutoScaling
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a BigtableMetadata. */
+                        interface IBigtableMetadata {
+
+                            /** BigtableMetadata tenantProjectId */
+                            tenantProjectId?: (string|null);
+
+                            /** BigtableMetadata instanceId */
+                            instanceId?: (string|null);
+
+                            /** BigtableMetadata tableId */
+                            tableId?: (string|null);
+                        }
+
+                        /** Represents a BigtableMetadata. */
+                        class BigtableMetadata implements IBigtableMetadata {
+
+                            /**
+                             * Constructs a new BigtableMetadata.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IBigtableMetadata);
+
+                            /** BigtableMetadata tenantProjectId. */
+                            public tenantProjectId: string;
+
+                            /** BigtableMetadata instanceId. */
+                            public instanceId: string;
+
+                            /** BigtableMetadata tableId. */
+                            public tableId: string;
+
+                            /**
+                             * Creates a new BigtableMetadata instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns BigtableMetadata instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IBigtableMetadata): google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.BigtableMetadata;
+
+                            /**
+                             * Encodes the specified BigtableMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.BigtableMetadata.verify|verify} messages.
+                             * @param message BigtableMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IBigtableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified BigtableMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.BigtableMetadata.verify|verify} messages.
+                             * @param message BigtableMetadata message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.IBigtableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a BigtableMetadata message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns BigtableMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.BigtableMetadata;
+
+                            /**
+                             * Decodes a BigtableMetadata message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns BigtableMetadata
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.BigtableMetadata;
+
+                            /**
+                             * Verifies a BigtableMetadata message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a BigtableMetadata message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns BigtableMetadata
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.BigtableMetadata;
+
+                            /**
+                             * Creates a plain object from a BigtableMetadata message. Also converts values to other types if specified.
+                             * @param message BigtableMetadata
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1beta1.FeatureOnlineStore.Bigtable.BigtableMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this BigtableMetadata to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for BigtableMetadata
                              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                              * @returns The default type url
                              */
@@ -211445,6 +212132,9 @@ export namespace google {
 
                     /** FeatureView satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** FeatureView bigtableMetadata */
+                    bigtableMetadata?: (google.cloud.aiplatform.v1beta1.FeatureView.IBigtableMetadata|null);
                 }
 
                 /** Represents a FeatureView. */
@@ -211503,6 +212193,9 @@ export namespace google {
 
                     /** FeatureView satisfiesPzi. */
                     public satisfiesPzi: boolean;
+
+                    /** FeatureView bigtableMetadata. */
+                    public bigtableMetadata?: (google.cloud.aiplatform.v1beta1.FeatureView.IBigtableMetadata|null);
 
                     /** FeatureView source. */
                     public source?: ("bigQuerySource"|"featureRegistrySource"|"vertexRagSource");
@@ -212872,6 +213565,103 @@ export namespace google {
                         SERVICE_AGENT_TYPE_PROJECT = 1,
                         SERVICE_AGENT_TYPE_FEATURE_VIEW = 2
                     }
+
+                    /** Properties of a BigtableMetadata. */
+                    interface IBigtableMetadata {
+
+                        /** BigtableMetadata readAppProfile */
+                        readAppProfile?: (string|null);
+                    }
+
+                    /** Represents a BigtableMetadata. */
+                    class BigtableMetadata implements IBigtableMetadata {
+
+                        /**
+                         * Constructs a new BigtableMetadata.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1beta1.FeatureView.IBigtableMetadata);
+
+                        /** BigtableMetadata readAppProfile. */
+                        public readAppProfile: string;
+
+                        /**
+                         * Creates a new BigtableMetadata instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BigtableMetadata instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1beta1.FeatureView.IBigtableMetadata): google.cloud.aiplatform.v1beta1.FeatureView.BigtableMetadata;
+
+                        /**
+                         * Encodes the specified BigtableMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.FeatureView.BigtableMetadata.verify|verify} messages.
+                         * @param message BigtableMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1beta1.FeatureView.IBigtableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BigtableMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.FeatureView.BigtableMetadata.verify|verify} messages.
+                         * @param message BigtableMetadata message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.FeatureView.IBigtableMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BigtableMetadata message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BigtableMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.FeatureView.BigtableMetadata;
+
+                        /**
+                         * Decodes a BigtableMetadata message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BigtableMetadata
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.FeatureView.BigtableMetadata;
+
+                        /**
+                         * Verifies a BigtableMetadata message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BigtableMetadata message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BigtableMetadata
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.FeatureView.BigtableMetadata;
+
+                        /**
+                         * Creates a plain object from a BigtableMetadata message. Also converts values to other types if specified.
+                         * @param message BigtableMetadata
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1beta1.FeatureView.BigtableMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BigtableMetadata to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BigtableMetadata
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
                 }
 
                 /** Properties of a FeatureViewSync. */
@@ -213194,6 +213984,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public featureViewDirectWrite(request: google.cloud.aiplatform.v1beta1.IFeatureViewDirectWriteRequest): Promise<google.cloud.aiplatform.v1beta1.FeatureViewDirectWriteResponse>;
+
+                    /**
+                     * Calls GenerateFetchAccessToken.
+                     * @param request GenerateFetchAccessTokenRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateFetchAccessTokenResponse
+                     */
+                    public generateFetchAccessToken(request: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenRequest, callback: google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService.GenerateFetchAccessTokenCallback): void;
+
+                    /**
+                     * Calls GenerateFetchAccessToken.
+                     * @param request GenerateFetchAccessTokenRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateFetchAccessToken(request: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenRequest): Promise<google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenResponse>;
                 }
 
                 namespace FeatureOnlineStoreService {
@@ -213225,6 +214029,13 @@ export namespace google {
                      * @param [response] FeatureViewDirectWriteResponse
                      */
                     type FeatureViewDirectWriteCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.FeatureViewDirectWriteResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1beta1.FeatureOnlineStoreService|generateFetchAccessToken}.
+                     * @param error Error, if any
+                     * @param [response] GenerateFetchAccessTokenResponse
+                     */
+                    type GenerateFetchAccessTokenCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenResponse) => void;
                 }
 
                 /** FeatureViewDataFormat enum. */
@@ -215751,6 +216562,206 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+                }
+
+                /** Properties of a GenerateFetchAccessTokenRequest. */
+                interface IGenerateFetchAccessTokenRequest {
+
+                    /** GenerateFetchAccessTokenRequest featureView */
+                    featureView?: (string|null);
+                }
+
+                /** Represents a GenerateFetchAccessTokenRequest. */
+                class GenerateFetchAccessTokenRequest implements IGenerateFetchAccessTokenRequest {
+
+                    /**
+                     * Constructs a new GenerateFetchAccessTokenRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenRequest);
+
+                    /** GenerateFetchAccessTokenRequest featureView. */
+                    public featureView: string;
+
+                    /**
+                     * Creates a new GenerateFetchAccessTokenRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateFetchAccessTokenRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenRequest): google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenRequest;
+
+                    /**
+                     * Encodes the specified GenerateFetchAccessTokenRequest message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenRequest.verify|verify} messages.
+                     * @param message GenerateFetchAccessTokenRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateFetchAccessTokenRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenRequest.verify|verify} messages.
+                     * @param message GenerateFetchAccessTokenRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateFetchAccessTokenRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateFetchAccessTokenRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenRequest;
+
+                    /**
+                     * Decodes a GenerateFetchAccessTokenRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateFetchAccessTokenRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenRequest;
+
+                    /**
+                     * Verifies a GenerateFetchAccessTokenRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateFetchAccessTokenRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateFetchAccessTokenRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateFetchAccessTokenRequest message. Also converts values to other types if specified.
+                     * @param message GenerateFetchAccessTokenRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateFetchAccessTokenRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateFetchAccessTokenRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GenerateFetchAccessTokenResponse. */
+                interface IGenerateFetchAccessTokenResponse {
+
+                    /** GenerateFetchAccessTokenResponse accessToken */
+                    accessToken?: (string|null);
+
+                    /** GenerateFetchAccessTokenResponse expireTime */
+                    expireTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a GenerateFetchAccessTokenResponse. */
+                class GenerateFetchAccessTokenResponse implements IGenerateFetchAccessTokenResponse {
+
+                    /**
+                     * Constructs a new GenerateFetchAccessTokenResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenResponse);
+
+                    /** GenerateFetchAccessTokenResponse accessToken. */
+                    public accessToken: string;
+
+                    /** GenerateFetchAccessTokenResponse expireTime. */
+                    public expireTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new GenerateFetchAccessTokenResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateFetchAccessTokenResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenResponse): google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenResponse;
+
+                    /**
+                     * Encodes the specified GenerateFetchAccessTokenResponse message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenResponse.verify|verify} messages.
+                     * @param message GenerateFetchAccessTokenResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateFetchAccessTokenResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenResponse.verify|verify} messages.
+                     * @param message GenerateFetchAccessTokenResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IGenerateFetchAccessTokenResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateFetchAccessTokenResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateFetchAccessTokenResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenResponse;
+
+                    /**
+                     * Decodes a GenerateFetchAccessTokenResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateFetchAccessTokenResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenResponse;
+
+                    /**
+                     * Verifies a GenerateFetchAccessTokenResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateFetchAccessTokenResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateFetchAccessTokenResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateFetchAccessTokenResponse message. Also converts values to other types if specified.
+                     * @param message GenerateFetchAccessTokenResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.GenerateFetchAccessTokenResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateFetchAccessTokenResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateFetchAccessTokenResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
                 /** Represents a FeaturestoreOnlineServingService */
