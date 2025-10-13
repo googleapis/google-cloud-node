@@ -18,7 +18,7 @@
 
 /* global window */
 import type * as gax from 'google-gax';
-import type {Callback, CallOptions, Descriptors, ClientOptions, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions, GrpcClientOptions, LROperation, PaginationCallback, GaxCall, LocationsClient, LocationProtos} from 'google-gax';
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -61,6 +61,7 @@ export class PlaybooksClient {
   innerApiCalls: {[name: string]: Function};
   locationsClient: LocationsClient;
   pathTemplates: {[name: string]: gax.PathTemplate};
+  operationsClient: gax.OperationsClient;
   playbooksStub?: Promise<{[name: string]: Function}>;
 
   /**
@@ -289,6 +290,42 @@ export class PlaybooksClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'playbookVersions')
     };
 
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+    };
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = [{selector: 'google.cloud.location.Locations.GetLocation',get: '/v3beta1/{name=projects/*/locations/*}',},{selector: 'google.cloud.location.Locations.ListLocations',get: '/v3beta1/{name=projects/*}/locations',},{selector: 'google.longrunning.Operations.CancelOperation',post: '/v3beta1/{name=projects/*/operations/*}:cancel',additional_bindings: [{post: '/v3beta1/{name=projects/*/locations/*/operations/*}:cancel',}],
+      },{selector: 'google.longrunning.Operations.GetOperation',get: '/v3beta1/{name=projects/*/operations/*}',additional_bindings: [{get: '/v3beta1/{name=projects/*/locations/*/operations/*}',}],
+      },{selector: 'google.longrunning.Operations.ListOperations',get: '/v3beta1/{name=projects/*}/operations',additional_bindings: [{get: '/v3beta1/{name=projects/*/locations/*}/operations',}],
+      }];
+    }
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+    const exportPlaybookResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse') as gax.protobuf.Type;
+    const exportPlaybookMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Struct') as gax.protobuf.Type;
+    const importPlaybookResponse = protoFilesRoot.lookup(
+      '.google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse') as gax.protobuf.Type;
+    const importPlaybookMetadata = protoFilesRoot.lookup(
+      '.google.protobuf.Struct') as gax.protobuf.Type;
+
+    this.descriptors.longrunning = {
+      exportPlaybook: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        exportPlaybookResponse.decode.bind(exportPlaybookResponse),
+        exportPlaybookMetadata.decode.bind(exportPlaybookMetadata)),
+      importPlaybook: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        importPlaybookResponse.decode.bind(importPlaybookResponse),
+        importPlaybookMetadata.decode.bind(importPlaybookMetadata))
+    };
+
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
         'google.cloud.dialogflow.cx.v3beta1.Playbooks', gapicConfig as gax.ClientConfig,
@@ -332,7 +369,7 @@ export class PlaybooksClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const playbooksStubMethods =
-        ['createPlaybook', 'deletePlaybook', 'listPlaybooks', 'getPlaybook', 'updatePlaybook', 'createPlaybookVersion', 'getPlaybookVersion', 'listPlaybookVersions', 'deletePlaybookVersion'];
+        ['createPlaybook', 'deletePlaybook', 'listPlaybooks', 'getPlaybook', 'exportPlaybook', 'importPlaybook', 'updatePlaybook', 'createPlaybookVersion', 'getPlaybookVersion', 'restorePlaybookVersion', 'listPlaybookVersions', 'deletePlaybookVersion'];
     for (const methodName of playbooksStubMethods) {
       const callPromise = this.playbooksStub.then(
         stub => (...args: Array<{}>) => {
@@ -348,6 +385,7 @@ export class PlaybooksClient {
 
       const descriptor =
         this.descriptors.page[methodName] ||
+        this.descriptors.longrunning[methodName] ||
         undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
@@ -1017,6 +1055,103 @@ export class PlaybooksClient {
       });
   }
 /**
+ * Retrieves the specified version of the Playbook and stores it as the
+ * current playbook draft, returning the playbook with resources updated.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the playbook version.
+ *   Format:
+ *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>/versions/<VersionID>`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse|RestorePlaybookVersionResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3beta1/playbooks.restore_playbook_version.js</caption>
+ * region_tag:dialogflow_v3beta1_generated_Playbooks_RestorePlaybookVersion_async
+ */
+  restorePlaybookVersion(
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest|undefined, {}|undefined
+      ]>;
+  restorePlaybookVersion(
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse,
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  restorePlaybookVersion(
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest,
+      callback: Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse,
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest|null|undefined,
+          {}|null|undefined>): void;
+  restorePlaybookVersion(
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse,
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse,
+          protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('restorePlaybookVersion request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('restorePlaybookVersion response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.restorePlaybookVersion(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionResponse,
+        protos.google.cloud.dialogflow.cx.v3beta1.IRestorePlaybookVersionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('restorePlaybookVersion response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Deletes the specified version of the Playbook.
  *
  * @param {Object} request
@@ -1113,6 +1248,249 @@ export class PlaybooksClient {
       });
   }
 
+/**
+ * Exports the specified playbook to a binary file.
+ *
+ * Note that resources (e.g. examples, tools) that the playbook
+ * references will also be exported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the playbook to export.
+ *   Format:
+ *   `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>/playbooks/<PlaybookID>`.
+ * @param {string} [request.playbookUri]
+ *   Optional. The [Google Cloud
+ *   Storage](https://cloud.google.com/storage/docs/) URI to export the playbook
+ *   to. The format of this URI must be `gs://<bucket-name>/<object-name>`. If
+ *   left unspecified, the serialized playbook is returned inline.
+ *
+ *   Dialogflow performs a write operation for the Cloud Storage object
+ *   on the caller's behalf, so your request authentication must
+ *   have write permissions for the object. For more information, see
+ *   [Dialogflow access
+ *   control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+ * @param {google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest.DataFormat} [request.dataFormat]
+ *   Optional. The data format of the exported agent. If not specified, `BLOB`
+ *   is assumed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3beta1/playbooks.export_playbook.js</caption>
+ * region_tag:dialogflow_v3beta1_generated_Playbooks_ExportPlaybook_async
+ */
+  exportPlaybook(
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, protos.google.protobuf.IStruct>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  exportPlaybook(
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  exportPlaybook(
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  exportPlaybook(
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, protos.google.protobuf.IStruct>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('exportPlaybook response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('exportPlaybook request %j', request);
+    return this.innerApiCalls.exportPlaybook(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IExportPlaybookResponse, protos.google.protobuf.IStruct>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('exportPlaybook response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `exportPlaybook()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3beta1/playbooks.export_playbook.js</caption>
+ * region_tag:dialogflow_v3beta1_generated_Playbooks_ExportPlaybook_async
+ */
+  async checkExportPlaybookProgress(name: string): Promise<LROperation<protos.google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse, protos.google.protobuf.Struct>>{
+    this._log.info('exportPlaybook long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.exportPlaybook, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dialogflow.cx.v3beta1.ExportPlaybookResponse, protos.google.protobuf.Struct>;
+  }
+/**
+ * Imports the specified playbook to the specified agent from a binary file.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The agent to import the playbook into.
+ *   Format: `projects/<ProjectID>/locations/<LocationID>/agents/<AgentID>`.
+ * @param {string} request.playbookUri
+ *   [Dialogflow access
+ *   control]
+ *   (https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+ * @param {Buffer} request.playbookContent
+ *   Uncompressed raw byte content for playbook.
+ * @param {google.cloud.dialogflow.cx.v3beta1.PlaybookImportStrategy} [request.importStrategy]
+ *   Optional. Specifies the import strategy used when resolving resource
+ *   conflicts.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3beta1/playbooks.import_playbook.js</caption>
+ * region_tag:dialogflow_v3beta1_generated_Playbooks_ImportPlaybook_async
+ */
+  importPlaybook(
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, protos.google.protobuf.IStruct>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  importPlaybook(
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  importPlaybook(
+      request: protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  importPlaybook(
+      request?: protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, protos.google.protobuf.IStruct>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, protos.google.protobuf.IStruct>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('importPlaybook response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('importPlaybook request %j', request);
+    return this.innerApiCalls.importPlaybook(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.dialogflow.cx.v3beta1.IImportPlaybookResponse, protos.google.protobuf.IStruct>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('importPlaybook response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `importPlaybook()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3beta1/playbooks.import_playbook.js</caption>
+ * region_tag:dialogflow_v3beta1_generated_Playbooks_ImportPlaybook_async
+ */
+  async checkImportPlaybookProgress(name: string): Promise<LROperation<protos.google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse, protos.google.protobuf.Struct>>{
+    this._log.info('importPlaybook long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.importPlaybook, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.dialogflow.cx.v3beta1.ImportPlaybookResponse, protos.google.protobuf.Struct>;
+  }
  /**
  * Returns a list of playbooks in the specified agent.
  *
@@ -1586,6 +1964,230 @@ export class PlaybooksClient {
     options?: CallOptions
   ): AsyncIterable<LocationProtos.google.cloud.location.ILocation> {
     return this.locationsClient.listLocationsAsync(request, options);
+  }
+
+/**
+   * Gets the latest state of a long-running operation.  Clients can use this
+   * method to poll the operation result at intervals as recommended by the API
+   * service.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   *   for the details.
+   * @param {function(?Error, ?Object)=} callback
+   *   The function which will be called with the result of the API call.
+   *
+   *   The second parameter to the callback is an object representing
+   *   {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * @return {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   * {@link google.longrunning.Operation | google.longrunning.Operation}.
+   * The promise has a method named "cancel" which cancels the ongoing API call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * const name = '';
+   * const [response] = await client.getOperation({name});
+   * // doThingsWith(response)
+   * ```
+   */
+  getOperation(
+    request: protos.google.longrunning.GetOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.Operation,
+          protos.google.longrunning.GetOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.longrunning.Operation,
+      protos.google.longrunning.GetOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<[protos.google.longrunning.Operation]> {
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.getOperation(request, options, callback);
+  }
+  /**
+   * Lists operations that match the specified filter in the request. If the
+   * server doesn't support this method, it returns `UNIMPLEMENTED`. Returns an iterable object.
+   *
+   * For-await-of syntax is used with the iterable to recursively get response element on-demand.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation collection.
+   * @param {string} request.filter - The standard list filter.
+   * @param {number=} request.pageSize -
+   *   The maximum number of resources contained in the underlying API
+   *   response. If page streaming is performed per-resource, this
+   *   parameter does not affect the return value. If page streaming is
+   *   performed per-page, this determines the maximum number of
+   *   resources in a page.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   *   e.g, timeout, retries, paginations, etc. See {@link
+   *   https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   *   details.
+   * @returns {Object}
+   *   An iterable Object that conforms to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | iteration protocols}.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * for await (const response of client.listOperationsAsync(request));
+   * // doThingsWith(response)
+   * ```
+   */
+  listOperationsAsync(
+    request: protos.google.longrunning.ListOperationsRequest,
+    options?: gax.CallOptions
+  ): AsyncIterable<protos.google.longrunning.IOperation> {
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.listOperationsAsync(request, options);
+  }
+  /**
+   * Starts asynchronous cancellation on a long-running operation.  The server
+   * makes a best effort to cancel the operation, but success is not
+   * guaranteed.  If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
+   * {@link Operations.GetOperation} or
+   * other methods to check whether the cancellation succeeded or whether the
+   * operation completed despite cancellation. On successful cancellation,
+   * the operation is not deleted; instead, it becomes an operation with
+   * an {@link Operation.error} value with a {@link google.rpc.Status.code} of
+   * 1, corresponding to `Code.CANCELLED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be cancelled.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions} for the
+   * details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.cancelOperation({name: ''});
+   * ```
+   */
+   cancelOperation(
+    request: protos.google.longrunning.CancelOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.longrunning.CancelOperationRequest,
+          protos.google.protobuf.Empty,
+          {} | undefined | null
+        >,
+    callback?: Callback<
+      protos.google.longrunning.CancelOperationRequest,
+      protos.google.protobuf.Empty,
+      {} | undefined | null
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.cancelOperation(request, options, callback);
+  }
+
+  /**
+   * Deletes a long-running operation. This method indicates that the client is
+   * no longer interested in the operation result. It does not cancel the
+   * operation. If the server doesn't support this method, it returns
+   * `google.rpc.Code.UNIMPLEMENTED`.
+   *
+   * @param {Object} request - The request object that will be sent.
+   * @param {string} request.name - The name of the operation resource to be deleted.
+   * @param {Object=} options
+   *   Optional parameters. You can override the default settings for this call,
+   * e.g, timeout, retries, paginations, etc. See {@link
+   * https://googleapis.github.io/gax-nodejs/global.html#CallOptions | gax.CallOptions}
+   * for the details.
+   * @param {function(?Error)=} callback
+   *   The function which will be called with the result of the API call.
+   * @return {Promise} - The promise which resolves when API call finishes.
+   *   The promise has a method named "cancel" which cancels the ongoing API
+   * call.
+   *
+   * @example
+   * ```
+   * const client = longrunning.operationsClient();
+   * await client.deleteOperation({name: ''});
+   * ```
+   */
+  deleteOperation(
+    request: protos.google.longrunning.DeleteOperationRequest,
+    optionsOrCallback?:
+      | gax.CallOptions
+      | Callback<
+          protos.google.protobuf.Empty,
+          protos.google.longrunning.DeleteOperationRequest,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.protobuf.Empty,
+      protos.google.longrunning.DeleteOperationRequest,
+      {} | null | undefined
+    >
+  ): Promise<protos.google.protobuf.Empty> {
+     let options: gax.CallOptions;
+     if (typeof optionsOrCallback === 'function' && callback === undefined) {
+       callback = optionsOrCallback;
+       options = {};
+     } else {
+       options = optionsOrCallback as gax.CallOptions;
+     }
+     options = options || {};
+     options.otherArgs = options.otherArgs || {};
+     options.otherArgs.headers = options.otherArgs.headers || {};
+     options.otherArgs.headers['x-goog-request-params'] =
+       this._gaxModule.routingHeader.fromParams({
+         name: request.name ?? '',
+       });
+    return this.operationsClient.deleteOperation(request, options, callback);
   }
 
   // --------------------
@@ -3579,6 +4181,7 @@ export class PlaybooksClient {
         this._terminated = true;
         stub.close();
         this.locationsClient.close().catch(err => {throw err});
+        void this.operationsClient.close();
       });
     }
     return Promise.resolve();

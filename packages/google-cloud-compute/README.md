@@ -105,6 +105,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.delete.js) |
 | delete signed url key | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.delete_signed_url_key.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.get.js) |
+| get effective security policies | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.get_effective_security_policies.js) |
 | get health | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.get_health.js) |
 | get iam policy | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.get_iam_policy.js) |
 | insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/backend_services.insert.js) |
@@ -481,6 +482,22 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/node_types.aggregated_list.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/node_types.get.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/node_types.list.js) |
+| add association | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.add_association.js) |
+| add rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.add_rule.js) |
+| copy rules | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.copy_rules.js) |
+| delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.delete.js) |
+| get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.get.js) |
+| get association | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.get_association.js) |
+| get rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.get_rule.js) |
+| insert | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.insert.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.list.js) |
+| list associations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.list_associations.js) |
+| list preconfigured expression sets | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.list_preconfigured_expression_sets.js) |
+| move | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.move.js) |
+| patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.patch.js) |
+| patch rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.patch_rule.js) |
+| remove association | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.remove_association.js) |
+| remove rule | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/organization_security_policies.remove_rule.js) |
 | aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/packet_mirrorings.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/packet_mirrorings.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/packet_mirrorings.get.js) |
@@ -488,6 +505,9 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/packet_mirrorings.list.js) |
 | patch | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/packet_mirrorings.patch.js) |
 | test iam permissions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/packet_mirrorings.test_iam_permissions.js) |
+| get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/preview_features.get.js) |
+| list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/preview_features.list.js) |
+| update | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/preview_features.update.js) |
 | disable xpn host | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/projects.disable_xpn_host.js) |
 | disable xpn resource | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/projects.disable_xpn_resource.js) |
 | enable xpn host | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/projects.enable_xpn_host.js) |
@@ -695,6 +715,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.get.js) |
 | list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.list.js) |
 | perform maintenance | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.perform_maintenance.js) |
+| report faulty | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservation_sub_blocks.report_faulty.js) |
 | aggregated list | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservations.aggregated_list.js) |
 | delete | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservations.delete.js) |
 | get | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-compute/samples/generated/v1/reservations.get.js) |

@@ -414,6 +414,11 @@
                 "get"
               ]
             },
+            "GetEffectiveSecurityPolicies": {
+              "methods": [
+                "getEffectiveSecurityPolicies"
+              ]
+            },
             "GetHealth": {
               "methods": [
                 "getHealth"
@@ -503,6 +508,11 @@
             "Get": {
               "methods": [
                 "get"
+              ]
+            },
+            "GetEffectiveSecurityPolicies": {
+              "methods": [
+                "getEffectiveSecurityPolicies"
               ]
             },
             "GetHealth": {
@@ -5059,6 +5069,184 @@
         }
       }
     },
+    "OrganizationSecurityPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "OrganizationSecurityPoliciesClient",
+          "rpcs": {
+            "AddAssociation": {
+              "methods": [
+                "addAssociation"
+              ]
+            },
+            "AddRule": {
+              "methods": [
+                "addRule"
+              ]
+            },
+            "CopyRules": {
+              "methods": [
+                "copyRules"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetAssociation": {
+              "methods": [
+                "getAssociation"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "ListAssociations": {
+              "methods": [
+                "listAssociations"
+              ]
+            },
+            "ListPreconfiguredExpressionSets": {
+              "methods": [
+                "listPreconfiguredExpressionSets"
+              ]
+            },
+            "Move": {
+              "methods": [
+                "move"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patchRule"
+              ]
+            },
+            "RemoveAssociation": {
+              "methods": [
+                "removeAssociation"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "removeRule"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "OrganizationSecurityPoliciesClient",
+          "rpcs": {
+            "AddAssociation": {
+              "methods": [
+                "addAssociation"
+              ]
+            },
+            "AddRule": {
+              "methods": [
+                "addRule"
+              ]
+            },
+            "CopyRules": {
+              "methods": [
+                "copyRules"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetAssociation": {
+              "methods": [
+                "getAssociation"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "ListAssociations": {
+              "methods": [
+                "listAssociations"
+              ]
+            },
+            "ListPreconfiguredExpressionSets": {
+              "methods": [
+                "listPreconfiguredExpressionSets"
+              ]
+            },
+            "Move": {
+              "methods": [
+                "move"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patchRule"
+              ]
+            },
+            "RemoveAssociation": {
+              "methods": [
+                "removeAssociation"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "removeRule"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
     "PacketMirrorings": {
       "clients": {
         "grpc": {
@@ -5138,6 +5326,54 @@
                 "aggregatedList",
                 "aggregatedListStream",
                 "aggregatedListAsync"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PreviewFeatures": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PreviewFeaturesClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list",
+                "listStream",
+                "listAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PreviewFeaturesClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
               ]
             },
             "List": {
@@ -7892,6 +8128,11 @@
                 "performMaintenance"
               ]
             },
+            "ReportFaulty": {
+              "methods": [
+                "reportFaulty"
+              ]
+            },
             "List": {
               "methods": [
                 "list",
@@ -7912,6 +8153,11 @@
             "PerformMaintenance": {
               "methods": [
                 "performMaintenance"
+              ]
+            },
+            "ReportFaulty": {
+              "methods": [
+                "reportFaulty"
               ]
             },
             "List": {

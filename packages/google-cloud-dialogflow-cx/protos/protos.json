@@ -11427,6 +11427,22 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "inputParameterDefinitions": {
+                              "rule": "repeated",
+                              "type": "ParameterDefinition",
+                              "id": 26,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "outputParameterDefinitions": {
+                              "rule": "repeated",
+                              "type": "ParameterDefinition",
+                              "id": 27,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "multiLanguageSettings": {
                               "type": "MultiLanguageSettings",
                               "id": 28,
@@ -12375,6 +12391,10 @@
                                 "text": {
                                   "type": "string",
                                   "id": 3
+                                },
+                                "metadata": {
+                                  "type": "google.protobuf.Struct",
+                                  "id": 5
                                 }
                               }
                             },
@@ -12539,6 +12559,11 @@
                             "enableGenerativeFallback": {
                               "type": "bool",
                               "id": 12
+                            },
+                            "generators": {
+                              "rule": "repeated",
+                              "type": "GeneratorSettings",
+                              "id": 13
                             }
                           },
                           "nested": {
@@ -12596,6 +12621,30 @@
                                         }
                                       }
                                     }
+                                  }
+                                }
+                              }
+                            },
+                            "GeneratorSettings": {
+                              "fields": {
+                                "generator": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED",
+                                    "(google.api.resource_reference).type": "dialogflow.googleapis.com/Generator"
+                                  }
+                                },
+                                "inputParameters": {
+                                  "keyType": "string",
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "outputParameter": {
+                                  "type": "string",
+                                  "id": 3,
+                                  "options": {
+                                    "(google.api.field_behavior)": "REQUIRED"
                                   }
                                 }
                               }
@@ -12892,6 +12941,103 @@
                             }
                           }
                         },
+                        "ParameterDefinition": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "type": {
+                              "type": "ParameterType",
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "typeSchema": {
+                              "type": "TypeSchema",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "ParameterType": {
+                              "values": {
+                                "PARAMETER_TYPE_UNSPECIFIED": 0,
+                                "STRING": 1,
+                                "NUMBER": 2,
+                                "BOOLEAN": 3,
+                                "NULL": 4,
+                                "OBJECT": 5,
+                                "LIST": 6
+                              }
+                            }
+                          }
+                        },
+                        "TypeSchema": {
+                          "oneofs": {
+                            "schema": {
+                              "oneof": [
+                                "inlineSchema",
+                                "schemaReference"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "inlineSchema": {
+                              "type": "InlineSchema",
+                              "id": 1
+                            },
+                            "schemaReference": {
+                              "type": "SchemaReference",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "SchemaReference": {
+                              "fields": {
+                                "tool": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "schema": {
+                                  "type": "string",
+                                  "id": 2
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "InlineSchema": {
+                          "fields": {
+                            "type": {
+                              "type": "DataType",
+                              "id": 1
+                            },
+                            "items": {
+                              "type": "TypeSchema",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "DataType": {
+                          "values": {
+                            "DATA_TYPE_UNSPECIFIED": 0,
+                            "STRING": 1,
+                            "NUMBER": 2,
+                            "BOOLEAN": 3,
+                            "ARRAY": 6
+                          }
+                        },
                         "ValidationMessage": {
                           "fields": {
                             "resourceType": {
@@ -13064,6 +13210,72 @@
                             "promptText": {
                               "type": "string",
                               "id": 2
+                            },
+                            "parameters": {
+                              "type": "Parameters",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "Parameters": {
+                              "oneofs": {
+                                "_temperature": {
+                                  "oneof": [
+                                    "temperature"
+                                  ]
+                                },
+                                "_inputTokenLimit": {
+                                  "oneof": [
+                                    "inputTokenLimit"
+                                  ]
+                                },
+                                "_outputTokenLimit": {
+                                  "oneof": [
+                                    "outputTokenLimit"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "temperature": {
+                                  "type": "float",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "inputTokenLimit": {
+                                  "type": "InputTokenLimit",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "outputTokenLimit": {
+                                  "type": "OutputTokenLimit",
+                                  "id": 3,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              },
+                              "nested": {
+                                "InputTokenLimit": {
+                                  "values": {
+                                    "INPUT_TOKEN_LIMIT_UNSPECIFIED": 0,
+                                    "INPUT_TOKEN_LIMIT_SHORT": 1,
+                                    "INPUT_TOKEN_LIMIT_MEDIUM": 2,
+                                    "INPUT_TOKEN_LIMIT_LONG": 3
+                                  }
+                                },
+                                "OutputTokenLimit": {
+                                  "values": {
+                                    "OUTPUT_TOKEN_LIMIT_UNSPECIFIED": 0,
+                                    "OUTPUT_TOKEN_LIMIT_SHORT": 1,
+                                    "OUTPUT_TOKEN_LIMIT_MEDIUM": 2,
+                                    "OUTPUT_TOKEN_LIMIT_LONG": 3
+                                  }
+                                }
+                              }
                             }
                           }
                         },
@@ -13080,6 +13292,13 @@
                               "rule": "repeated",
                               "type": "Phrase",
                               "id": 1
+                            },
+                            "promptSecuritySettings": {
+                              "type": "PromptSecuritySettings",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -13106,6 +13325,17 @@
                                 "PHRASE_MATCH_STRATEGY_UNSPECIFIED": 0,
                                 "PARTIAL_MATCH": 1,
                                 "WORD_MATCH": 2
+                              }
+                            },
+                            "PromptSecuritySettings": {
+                              "fields": {
+                                "enablePromptSecurity": {
+                                  "type": "bool",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
                               }
                             }
                           }
@@ -16269,6 +16499,10 @@
                               "type": "google.protobuf.Struct",
                               "id": 5
                             },
+                            "parameterScope": {
+                              "type": "string",
+                              "id": 12
+                            },
                             "currentPage": {
                               "type": "string",
                               "id": 6,
@@ -17221,51 +17455,23 @@
                             }
                           }
                         },
-                        "PlaybookInput": {
-                          "fields": {
-                            "precedingConversationSummary": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "actionParameters": {
-                              "type": "google.protobuf.Struct",
-                              "id": 3,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
-                        "PlaybookOutput": {
-                          "fields": {
-                            "executionSummary": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            },
-                            "actionParameters": {
-                              "type": "google.protobuf.Struct",
-                              "id": 4,
-                              "options": {
-                                "(google.api.field_behavior)": "OPTIONAL"
-                              }
-                            }
-                          }
-                        },
                         "Action": {
                           "oneofs": {
                             "action": {
                               "oneof": [
                                 "userUtterance",
+                                "event",
                                 "agentUtterance",
                                 "toolUse",
+                                "llmCall",
+                                "intentMatch",
+                                "flowStateUpdate",
                                 "playbookInvocation",
-                                "flowInvocation"
+                                "flowInvocation",
+                                "playbookTransition",
+                                "flowTransition",
+                                "tts",
+                                "stt"
                               ]
                             }
                           },
@@ -17273,6 +17479,13 @@
                             "userUtterance": {
                               "type": "UserUtterance",
                               "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "event": {
+                              "type": "Event",
+                              "id": 7,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
@@ -17291,6 +17504,27 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "llmCall": {
+                              "type": "LlmCall",
+                              "id": 14,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "intentMatch": {
+                              "type": "IntentMatch",
+                              "id": 17,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "flowStateUpdate": {
+                              "type": "FlowStateUpdate",
+                              "id": 18,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "playbookInvocation": {
                               "type": "PlaybookInvocation",
                               "id": 4,
@@ -17304,6 +17538,159 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "playbookTransition": {
+                              "type": "PlaybookTransition",
+                              "id": 12,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "flowTransition": {
+                              "type": "FlowTransition",
+                              "id": 13,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "tts": {
+                              "type": "TTS",
+                              "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "stt": {
+                              "type": "STT",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 15,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 8,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "completeTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "subExecutionSteps": {
+                              "rule": "repeated",
+                              "type": "Span",
+                              "id": 11,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "status": {
+                              "type": "Status",
+                              "id": 16,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "IntentMatch": {
+                              "fields": {
+                                "matchedIntents": {
+                                  "rule": "repeated",
+                                  "type": "MatchedIntent",
+                                  "id": 1
+                                }
+                              },
+                              "nested": {
+                                "MatchedIntent": {
+                                  "fields": {
+                                    "intentId": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "score": {
+                                      "type": "float",
+                                      "id": 3
+                                    },
+                                    "generativeFallback": {
+                                      "type": "google.protobuf.Struct",
+                                      "id": 4
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "FlowStateUpdate": {
+                              "fields": {
+                                "eventType": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "pageState": {
+                                  "type": "PageState",
+                                  "id": 2
+                                },
+                                "updatedParameters": {
+                                  "type": "google.protobuf.Struct",
+                                  "id": 3
+                                },
+                                "destination": {
+                                  "type": "string",
+                                  "id": 4
+                                },
+                                "functionCall": {
+                                  "type": "FunctionCall",
+                                  "id": 5
+                                }
+                              },
+                              "nested": {
+                                "PageState": {
+                                  "fields": {
+                                    "page": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "displayName": {
+                                      "type": "string",
+                                      "id": 2
+                                    },
+                                    "status": {
+                                      "type": "string",
+                                      "id": 3
+                                    }
+                                  }
+                                },
+                                "FunctionCall": {
+                                  "fields": {
+                                    "name": {
+                                      "type": "string",
+                                      "id": 1
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "TTS": {
+                              "fields": {}
+                            },
+                            "STT": {
+                              "fields": {}
                             }
                           }
                         },
@@ -17314,6 +17701,46 @@
                               "id": 1,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "audioTokens": {
+                              "rule": "repeated",
+                              "type": "int32",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "audio": {
+                              "type": "bytes",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "Event": {
+                          "oneofs": {
+                            "payload": {
+                              "oneof": [
+                                "text"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "event": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -17326,10 +17753,25 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "requireGeneration": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
                         "ToolUse": {
+                          "oneofs": {
+                            "ToolTrace": {
+                              "oneof": [
+                                "dataStoreToolTrace",
+                                "webhookToolTrace"
+                              ]
+                            }
+                          },
                           "fields": {
                             "tool": {
                               "type": "string",
@@ -17365,6 +17807,117 @@
                               "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dataStoreToolTrace": {
+                              "type": "DataStoreToolTrace",
+                              "id": 7,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "webhookToolTrace": {
+                              "type": "WebhookToolTrace",
+                              "id": 9,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DataStoreToolTrace": {
+                              "fields": {
+                                "dataStoreConnectionSignals": {
+                                  "type": "DataStoreConnectionSignals",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "WebhookToolTrace": {
+                              "fields": {
+                                "webhookTag": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
+                                "webhookUri": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "LlmCall": {
+                          "fields": {
+                            "retrievedExamples": {
+                              "rule": "repeated",
+                              "type": "RetrievedExample",
+                              "id": 1
+                            },
+                            "tokenCount": {
+                              "type": "TokenCount",
+                              "id": 2
+                            },
+                            "model": {
+                              "type": "string",
+                              "id": 3
+                            },
+                            "temperature": {
+                              "type": "float",
+                              "id": 4
+                            }
+                          },
+                          "nested": {
+                            "RetrievedExample": {
+                              "fields": {
+                                "exampleId": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "exampleDisplayName": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "retrievalStrategy": {
+                                  "type": "RetrievalStrategy",
+                                  "id": 3
+                                },
+                                "matchedRetrievalLabel": {
+                                  "type": "string",
+                                  "id": 14,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                }
+                              }
+                            },
+                            "TokenCount": {
+                              "fields": {
+                                "totalInputTokenCount": {
+                                  "type": "int64",
+                                  "id": 1
+                                },
+                                "conversationContextTokenCount": {
+                                  "type": "int64",
+                                  "id": 3
+                                },
+                                "exampleTokenCount": {
+                                  "type": "int64",
+                                  "id": 4
+                                },
+                                "totalOutputTokenCount": {
+                                  "type": "int64",
+                                  "id": 5
+                                }
                               }
                             }
                           }
@@ -17449,6 +18002,179 @@
                             }
                           }
                         },
+                        "PlaybookTransition": {
+                          "fields": {
+                            "playbook": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "inputActionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
+                            }
+                          }
+                        },
+                        "FlowTransition": {
+                          "fields": {
+                            "flow": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Flow"
+                              }
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "inputActionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
+                            }
+                          }
+                        },
+                        "PlaybookInput": {
+                          "fields": {
+                            "precedingConversationSummary": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "actionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "PlaybookOutput": {
+                          "fields": {
+                            "executionSummary": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "state": {
+                              "type": "State",
+                              "id": 2,
+                              "options": {
+                                "deprecated": true
+                              }
+                            },
+                            "actionParameters": {
+                              "type": "google.protobuf.Struct",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "State": {
+                              "options": {
+                                "deprecated": true
+                              },
+                              "values": {
+                                "STATE_UNSPECIFIED": 0,
+                                "OK": 1,
+                                "CANCELLED": 2,
+                                "FAILED": 3,
+                                "ESCALATED": 4
+                              }
+                            }
+                          }
+                        },
+                        "Span": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "tags": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2
+                            },
+                            "metrics": {
+                              "rule": "repeated",
+                              "type": "NamedMetric",
+                              "id": 3
+                            },
+                            "startTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 4
+                            },
+                            "completeTime": {
+                              "type": "google.protobuf.Timestamp",
+                              "id": 5
+                            }
+                          }
+                        },
+                        "NamedMetric": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "value": {
+                              "type": "google.protobuf.Value",
+                              "id": 2
+                            },
+                            "unit": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "Status": {
+                          "fields": {
+                            "exception": {
+                              "type": "ExceptionDetail",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ExceptionDetail": {
+                          "fields": {
+                            "errorMessage": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "OutputState": {
                           "values": {
                             "OUTPUT_STATE_UNSPECIFIED": 0,
@@ -17457,6 +18183,14 @@
                             "OUTPUT_STATE_FAILED": 3,
                             "OUTPUT_STATE_ESCALATED": 4,
                             "OUTPUT_STATE_PENDING": 5
+                          }
+                        },
+                        "RetrievalStrategy": {
+                          "values": {
+                            "RETRIEVAL_STRATEGY_UNSPECIFIED": 0,
+                            "DEFAULT": 1,
+                            "STATIC": 2,
+                            "NEVER": 3
                           }
                         },
                         "SessionEntityTypes": {
@@ -18679,10 +19413,26 @@
                                     "deprecated": true
                                   }
                                 },
+                                "secretVersionForUsernamePassword": {
+                                  "type": "string",
+                                  "id": 19,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL",
+                                    "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                                  }
+                                },
                                 "requestHeaders": {
                                   "keyType": "string",
                                   "type": "string",
                                   "id": 4
+                                },
+                                "secretVersionsForRequestHeaders": {
+                                  "keyType": "string",
+                                  "type": "SecretVersionHeaderValue",
+                                  "id": 20,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
                                 },
                                 "allowedCaCerts": {
                                   "rule": "repeated",
@@ -18737,6 +19487,18 @@
                                 }
                               },
                               "nested": {
+                                "SecretVersionHeaderValue": {
+                                  "fields": {
+                                    "secretVersion": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED",
+                                        "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                                      }
+                                    }
+                                  }
+                                },
                                 "OAuthConfig": {
                                   "fields": {
                                     "clientId": {
@@ -18751,6 +19513,14 @@
                                       "id": 2,
                                       "options": {
                                         "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "secretVersionForClientSecret": {
+                                      "type": "string",
+                                      "id": 5,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL",
+                                        "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                                       }
                                     },
                                     "tokenEndpoint": {
@@ -20266,41 +21036,6 @@
                             }
                           }
                         },
-                        "ParameterDefinition": {
-                          "fields": {
-                            "name": {
-                              "type": "string",
-                              "id": 1,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "type": {
-                              "type": "ParameterType",
-                              "id": 2,
-                              "options": {
-                                "(google.api.field_behavior)": "REQUIRED"
-                              }
-                            },
-                            "description": {
-                              "type": "string",
-                              "id": 3
-                            }
-                          },
-                          "nested": {
-                            "ParameterType": {
-                              "values": {
-                                "PARAMETER_TYPE_UNSPECIFIED": 0,
-                                "STRING": 1,
-                                "NUMBER": 2,
-                                "BOOLEAN": 3,
-                                "NULL": 4,
-                                "OBJECT": 5,
-                                "LIST": 6
-                              }
-                            }
-                          }
-                        },
                         "Playbooks": {
                           "options": {
                             "(google.api.default_host)": "dialogflow.googleapis.com",
@@ -20381,6 +21116,54 @@
                                 }
                               ]
                             },
+                            "ExportPlaybook": {
+                              "requestType": "ExportPlaybookRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*/playbooks/*}:export",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ExportPlaybookResponse",
+                                "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*/playbooks/*}:export",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ExportPlaybookResponse",
+                                    "metadata_type": "google.protobuf.Struct"
+                                  }
+                                }
+                              ]
+                            },
+                            "ImportPlaybook": {
+                              "requestType": "ImportPlaybookRequest",
+                              "responseType": "google.longrunning.Operation",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/playbooks:import",
+                                "(google.api.http).body": "*",
+                                "(google.longrunning.operation_info).response_type": "ImportPlaybookResponse",
+                                "(google.longrunning.operation_info).metadata_type": "google.protobuf.Struct"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{parent=projects/*/locations/*/agents/*}/playbooks:import",
+                                    "body": "*"
+                                  }
+                                },
+                                {
+                                  "(google.longrunning.operation_info)": {
+                                    "response_type": "ImportPlaybookResponse",
+                                    "metadata_type": "google.protobuf.Struct"
+                                  }
+                                }
+                              ]
+                            },
                             "UpdatePlaybook": {
                               "requestType": "UpdatePlaybookRequest",
                               "responseType": "Playbook",
@@ -20432,6 +21215,26 @@
                                 {
                                   "(google.api.http)": {
                                     "get": "/v3beta1/{name=projects/*/locations/*/agents/*/playbooks/*/versions/*}"
+                                  }
+                                },
+                                {
+                                  "(google.api.method_signature)": "name"
+                                }
+                              ]
+                            },
+                            "RestorePlaybookVersion": {
+                              "requestType": "RestorePlaybookVersionRequest",
+                              "responseType": "RestorePlaybookVersionResponse",
+                              "options": {
+                                "(google.api.http).post": "/v3beta1/{name=projects/*/locations/*/agents/*/playbooks/*/versions/*}:restore",
+                                "(google.api.http).body": "*",
+                                "(google.api.method_signature)": "name"
+                              },
+                              "parsedOptions": [
+                                {
+                                  "(google.api.http)": {
+                                    "post": "/v3beta1/{name=projects/*/locations/*/agents/*/playbooks/*/versions/*}:restore",
+                                    "body": "*"
                                   }
                                 },
                                 {
@@ -20594,7 +21397,7 @@
                             },
                             "inputParameterDefinitions": {
                               "rule": "repeated",
-                              "type": "google.cloud.dialogflow.cx.v3beta1.ParameterDefinition",
+                              "type": "ParameterDefinition",
                               "id": 5,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
@@ -20602,7 +21405,7 @@
                             },
                             "outputParameterDefinitions": {
                               "rule": "repeated",
-                              "type": "google.cloud.dialogflow.cx.v3beta1.ParameterDefinition",
+                              "type": "ParameterDefinition",
                               "id": 6,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
@@ -20681,6 +21484,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
+                            },
+                            "playbookType": {
+                              "type": "PlaybookType",
+                              "id": 19,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -20715,6 +21525,13 @@
                                   "type": "Step",
                                   "id": 2
                                 }
+                              }
+                            },
+                            "PlaybookType": {
+                              "values": {
+                                "PLAYBOOK_TYPE_UNSPECIFIED": 0,
+                                "TASK": 1,
+                                "ROUTINE": 3
                               }
                             }
                           }
@@ -20793,6 +21610,26 @@
                             }
                           }
                         },
+                        "RestorePlaybookVersionRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/PlaybookVersion"
+                              }
+                            }
+                          }
+                        },
+                        "RestorePlaybookVersionResponse": {
+                          "fields": {
+                            "playbook": {
+                              "type": "Playbook",
+                              "id": 2
+                            }
+                          }
+                        },
                         "ListPlaybookVersionsRequest": {
                           "fields": {
                             "parent": {
@@ -20841,6 +21678,156 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/PlaybookVersion"
                               }
+                            }
+                          }
+                        },
+                        "ExportPlaybookRequest": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
+                              }
+                            },
+                            "playbookUri": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "dataFormat": {
+                              "type": "DataFormat",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "DataFormat": {
+                              "values": {
+                                "DATA_FORMAT_UNSPECIFIED": 0,
+                                "BLOB": 1,
+                                "JSON": 2
+                              }
+                            }
+                          }
+                        },
+                        "ImportPlaybookRequest": {
+                          "oneofs": {
+                            "playbook": {
+                              "oneof": [
+                                "playbookUri",
+                                "playbookContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "parent": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED",
+                                "(google.api.resource_reference).child_type": "dialogflow.googleapis.com/Playbook"
+                              }
+                            },
+                            "playbookUri": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "playbookContent": {
+                              "type": "bytes",
+                              "id": 3
+                            },
+                            "importStrategy": {
+                              "type": "PlaybookImportStrategy",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "PlaybookImportStrategy": {
+                          "fields": {
+                            "mainPlaybookImportStrategy": {
+                              "type": "ImportStrategy",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "nestedResourceImportStrategy": {
+                              "type": "ImportStrategy",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "toolImportStrategy": {
+                              "type": "ImportStrategy",
+                              "id": 6,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ImportPlaybookResponse": {
+                          "fields": {
+                            "playbook": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.resource_reference).type": "dialogflow.googleapis.com/Playbook"
+                              }
+                            },
+                            "conflictingResources": {
+                              "type": "ConflictingResources",
+                              "id": 2
+                            }
+                          },
+                          "nested": {
+                            "ConflictingResources": {
+                              "fields": {
+                                "mainPlaybookDisplayName": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "nestedPlaybookDisplayNames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "toolDisplayNames": {
+                                  "rule": "repeated",
+                                  "type": "string",
+                                  "id": 3
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "ExportPlaybookResponse": {
+                          "oneofs": {
+                            "playbook": {
+                              "oneof": [
+                                "playbookUri",
+                                "playbookContent"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "playbookUri": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "playbookContent": {
+                              "type": "bytes",
+                              "id": 2
                             }
                           }
                         },
@@ -21587,8 +22574,7 @@
                             "DataFormat": {
                               "values": {
                                 "DATA_FORMAT_UNSPECIFIED": 0,
-                                "BLOB": 1,
-                                "JSON": 2
+                                "BLOB": 1
                               }
                             }
                           }
@@ -21942,6 +22928,14 @@
                                         "(google.api.field_behavior)": "OPTIONAL"
                                       }
                                     },
+                                    "secretVersionForApiKey": {
+                                      "type": "string",
+                                      "id": 4,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL",
+                                        "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                                      }
+                                    },
                                     "requestLocation": {
                                       "type": "RequestLocation",
                                       "id": 3,
@@ -21979,6 +22973,14 @@
                                       "id": 3,
                                       "options": {
                                         "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "secretVersionForClientSecret": {
+                                      "type": "string",
+                                      "id": 6,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL",
+                                        "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                                       }
                                     },
                                     "tokenEndpoint": {
@@ -22033,6 +23035,14 @@
                                       "id": 1,
                                       "options": {
                                         "(google.api.field_behavior)": "OPTIONAL"
+                                      }
+                                    },
+                                    "secretVersionForToken": {
+                                      "type": "string",
+                                      "id": 2,
+                                      "options": {
+                                        "(google.api.field_behavior)": "OPTIONAL",
+                                        "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
                                       }
                                     }
                                   }
