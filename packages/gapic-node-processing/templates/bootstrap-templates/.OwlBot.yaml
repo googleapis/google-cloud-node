@@ -13,7 +13,7 @@
 # limitations under the License.
 
 deep-copy-regex:
-    - source: /{{apiPath}}/(.*)/.*-{{language}}
-      dest: /owl-bot-staging/{{apiPathDashes}}/$1
+    - source: /{{apiPath}}/{{apiPathDashes}}-nodejs
+      dest: /owl-bot-staging/{{apiPathDashes}}
 
 api-name: {{name}}
