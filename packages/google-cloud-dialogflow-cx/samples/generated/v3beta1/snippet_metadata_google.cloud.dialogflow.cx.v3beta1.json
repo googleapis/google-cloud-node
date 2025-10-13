@@ -3552,6 +3552,106 @@
       }
     },
     {
+      "regionTag": "dialogflow_v3beta1_generated_Playbooks_ExportPlaybook_async",
+      "title": "Agents exportPlaybook Sample",
+      "origin": "API_DEFINITION",
+      "description": " Exports the specified playbook to a binary file. Note that resources (e.g. examples, tools) that the playbook references will also be exported.",
+      "canonical": true,
+      "file": "playbooks.export_playbook.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 73,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ExportPlaybook",
+        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.ExportPlaybook",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "playbook_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "data_format",
+            "type": ".google.cloud.dialogflow.cx.v3beta1.ExportPlaybookRequest.DataFormat"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "PlaybooksClient",
+          "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+        },
+        "method": {
+          "shortName": "ExportPlaybook",
+          "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.ExportPlaybook",
+          "service": {
+            "shortName": "Playbooks",
+            "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v3beta1_generated_Playbooks_ImportPlaybook_async",
+      "title": "Agents importPlaybook Sample",
+      "origin": "API_DEFINITION",
+      "description": " Imports the specified playbook to the specified agent from a binary file.",
+      "canonical": true,
+      "file": "playbooks.import_playbook.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "ImportPlaybook",
+        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.ImportPlaybook",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "playbook_uri",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "playbook_content",
+            "type": "TYPE_BYTES"
+          },
+          {
+            "name": "import_strategy",
+            "type": ".google.cloud.dialogflow.cx.v3beta1.PlaybookImportStrategy"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "PlaybooksClient",
+          "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+        },
+        "method": {
+          "shortName": "ImportPlaybook",
+          "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.ImportPlaybook",
+          "service": {
+            "shortName": "Playbooks",
+            "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "dialogflow_v3beta1_generated_Playbooks_UpdatePlaybook_async",
       "title": "Agents updatePlaybook Sample",
       "origin": "API_DEFINITION",
@@ -3672,6 +3772,46 @@
         "method": {
           "shortName": "GetPlaybookVersion",
           "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.GetPlaybookVersion",
+          "service": {
+            "shortName": "Playbooks",
+            "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "dialogflow_v3beta1_generated_Playbooks_RestorePlaybookVersion_async",
+      "title": "Agents restorePlaybookVersion Sample",
+      "origin": "API_DEFINITION",
+      "description": " Retrieves the specified version of the Playbook and stores it as the current playbook draft, returning the playbook with resources updated.",
+      "canonical": true,
+      "file": "playbooks.restore_playbook_version.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 55,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RestorePlaybookVersion",
+        "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.RestorePlaybookVersion",
+        "async": true,
+        "parameters": [
+          {
+            "name": "name",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.dialogflow.cx.v3beta1.RestorePlaybookVersionResponse",
+        "client": {
+          "shortName": "PlaybooksClient",
+          "fullName": "google.cloud.dialogflow.cx.v3beta1.PlaybooksClient"
+        },
+        "method": {
+          "shortName": "RestorePlaybookVersion",
+          "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks.RestorePlaybookVersion",
           "service": {
             "shortName": "Playbooks",
             "fullName": "google.cloud.dialogflow.cx.v3beta1.Playbooks"

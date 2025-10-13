@@ -882,6 +882,11 @@
                 "searchNearestEntities"
               ]
             },
+            "GenerateFetchAccessToken": {
+              "methods": [
+                "generateFetchAccessToken"
+              ]
+            },
             "StreamingFetchFeatureValues": {
               "methods": [
                 "streamingFetchFeatureValues"
@@ -905,6 +910,11 @@
             "SearchNearestEntities": {
               "methods": [
                 "searchNearestEntities"
+              ]
+            },
+            "GenerateFetchAccessToken": {
+              "methods": [
+                "generateFetchAccessToken"
               ]
             }
           }

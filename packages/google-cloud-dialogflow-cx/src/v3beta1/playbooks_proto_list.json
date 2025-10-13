@@ -30,6 +30,7 @@
   "../../protos/google/cloud/dialogflow/cx/v3beta1/test_case.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/tool.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/tool_call.proto",
+  "../../protos/google/cloud/dialogflow/cx/v3beta1/trace.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/transition_route_group.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/validation_message.proto",
   "../../protos/google/cloud/dialogflow/cx/v3beta1/version.proto",

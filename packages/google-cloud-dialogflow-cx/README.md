@@ -246,10 +246,13 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | create playbook version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.create_playbook_version.js) |
 | delete playbook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.delete_playbook.js) |
 | delete playbook version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.delete_playbook_version.js) |
+| export playbook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.export_playbook.js) |
 | get playbook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.get_playbook.js) |
 | get playbook version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.get_playbook_version.js) |
+| import playbook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.import_playbook.js) |
 | list playbook versions | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.list_playbook_versions.js) |
 | list playbooks | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.list_playbooks.js) |
+| restore playbook version | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.restore_playbook_version.js) |
 | update playbook | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/playbooks.update_playbook.js) |
 | create security settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/security_settings_service.create_security_settings.js) |
 | delete security settings | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-dialogflow-cx/samples/generated/v3beta1/security_settings_service.delete_security_settings.js) |

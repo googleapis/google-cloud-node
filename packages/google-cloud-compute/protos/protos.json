@@ -812,6 +812,50 @@
                         }
                       }
                     },
+                    "AddAssociationOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_replaceExistingAssociation": {
+                          "oneof": [
+                            "replaceExistingAssociation"
+                          ]
+                        },
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "replaceExistingAssociation": {
+                          "type": "bool",
+                          "id": 209541240,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "securityPolicyAssociationResource": {
+                          "type": "SecurityPolicyAssociation",
+                          "id": 11761274,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "AddAssociationRegionNetworkFirewallPolicyRequest": {
                       "oneofs": {
                         "_replaceExistingAssociation": {
@@ -1452,6 +1496,38 @@
                           "id": 37109963,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "AddRuleOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "securityPolicyRuleResource": {
+                          "type": "SecurityPolicyRule",
+                          "id": 402693443,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -13148,6 +13224,43 @@
                         }
                       }
                     },
+                    "CopyRulesOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        },
+                        "_sourceSecurityPolicy": {
+                          "oneof": [
+                            "sourceSecurityPolicy"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "sourceSecurityPolicy": {
+                          "type": "string",
+                          "id": 234793709,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "CorsPolicy": {
                       "oneofs": {
                         "_allowCredentials": {
@@ -13623,6 +13736,48 @@
                         "value": {
                           "type": "string",
                           "id": 111972721,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "Date": {
+                      "oneofs": {
+                        "_day": {
+                          "oneof": [
+                            "day"
+                          ]
+                        },
+                        "_month": {
+                          "oneof": [
+                            "month"
+                          ]
+                        },
+                        "_year": {
+                          "oneof": [
+                            "year"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "day": {
+                          "type": "int32",
+                          "id": 99228,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "month": {
+                          "type": "int32",
+                          "id": 104080000,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "year": {
+                          "type": "int32",
+                          "id": 3704893,
                           "options": {
                             "proto3_optional": true
                           }
@@ -15162,6 +15317,31 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.cloud.operation_request_field)": "zone"
+                          }
+                        }
+                      }
+                    },
+                    "DeleteOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -21615,6 +21795,31 @@
                         }
                       }
                     },
+                    "GetAssociationOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetAssociationRegionNetworkFirewallPolicyRequest": {
                       "oneofs": {
                         "_name": {
@@ -21857,6 +22062,27 @@
                           }
                         }
                       }
+                    },
+                    "GetEffectiveSecurityPoliciesBackendServiceRequest": {
+                      "fields": {
+                        "backendService": {
+                          "type": "string",
+                          "id": 306946058,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetEffectiveSecurityPoliciesBackendServiceResponse": {
+                      "fields": {}
                     },
                     "GetExternalVpnGatewayRequest": {
                       "fields": {
@@ -23954,6 +24180,17 @@
                         }
                       }
                     },
+                    "GetOrganizationSecurityPolicyRequest": {
+                      "fields": {
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "GetPacketMirroringRequest": {
                       "fields": {
                         "packetMirroring": {
@@ -24000,6 +24237,24 @@
                           "id": 445151652,
                           "options": {
                             "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetPreviewFeatureRequest": {
+                      "fields": {
+                        "previewFeature": {
+                          "type": "string",
+                          "id": 454999423,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         },
                         "project": {
@@ -24930,6 +25185,31 @@
                         "project": {
                           "type": "string",
                           "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "GetRuleOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_priority": {
+                          "oneof": [
+                            "priority"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "priority": {
+                          "type": "int32",
+                          "id": 445151652,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
                           }
@@ -28279,6 +28559,11 @@
                             "name"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_rawDisk": {
                           "oneof": [
                             "rawDisk"
@@ -28468,6 +28753,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "ImageParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -28702,6 +28994,15 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "ImageParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -30074,6 +30375,44 @@
                           "id": 37109963,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "InsertOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_parentId": {
+                          "oneof": [
+                            "parentId"
+                          ]
+                        },
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentId": {
+                          "type": "string",
+                          "id": 459714768,
+                          "options": {
+                            "(google.cloud.operation_request_field)": "parent_id",
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicyResource": {
+                          "type": "SecurityPolicy",
+                          "id": 216159612,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -36795,6 +37134,11 @@
                           "oneof": [
                             "state"
                           ]
+                        },
+                        "_subzone": {
+                          "oneof": [
+                            "subzone"
+                          ]
                         }
                       },
                       "fields": {
@@ -37014,6 +37358,13 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "subzone": {
+                          "type": "string",
+                          "id": 280084972,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       },
                       "nested": {
@@ -37055,6 +37406,13 @@
                             "UNDEFINED_STATE": 0,
                             "ACTIVE": 314733318,
                             "UNPROVISIONED": 517333979
+                          }
+                        },
+                        "Subzone": {
+                          "values": {
+                            "UNDEFINED_SUBZONE": 0,
+                            "SUBZONE_A": 291575438,
+                            "SUBZONE_B": 291575439
                           }
                         }
                       }
@@ -41849,6 +42207,24 @@
                         }
                       }
                     },
+                    "ListAssociationsOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_targetResource": {
+                          "oneof": [
+                            "targetResource"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "targetResource": {
+                          "type": "string",
+                          "id": 467318524,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListAutoscalersRequest": {
                       "oneofs": {
                         "_filter": {
@@ -46187,6 +46563,84 @@
                         }
                       }
                     },
+                    "ListOrganizationSecurityPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_parentId": {
+                          "oneof": [
+                            "parentId"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "parentId": {
+                          "type": "string",
+                          "id": 459714768,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListPacketMirroringsRequest": {
                       "oneofs": {
                         "_filter": {
@@ -46566,7 +47020,158 @@
                         }
                       }
                     },
+                    "ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_parentId": {
+                          "oneof": [
+                            "parentId"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "parentId": {
+                          "type": "string",
+                          "id": 459714768,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "ListPreconfiguredExpressionSetsSecurityPoliciesRequest": {
+                      "oneofs": {
+                        "_filter": {
+                          "oneof": [
+                            "filter"
+                          ]
+                        },
+                        "_maxResults": {
+                          "oneof": [
+                            "maxResults"
+                          ]
+                        },
+                        "_orderBy": {
+                          "oneof": [
+                            "orderBy"
+                          ]
+                        },
+                        "_pageToken": {
+                          "oneof": [
+                            "pageToken"
+                          ]
+                        },
+                        "_returnPartialSuccess": {
+                          "oneof": [
+                            "returnPartialSuccess"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "filter": {
+                          "type": "string",
+                          "id": 336120696,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "maxResults": {
+                          "type": "uint32",
+                          "id": 54715419,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 160562920,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 19994697,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "returnPartialSuccess": {
+                          "type": "bool",
+                          "id": 517198390,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ListPreviewFeaturesRequest": {
                       "oneofs": {
                         "_filter": {
                           "oneof": [
@@ -52710,6 +53315,44 @@
                         }
                       }
                     },
+                    "MoveOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_parentId": {
+                          "oneof": [
+                            "parentId"
+                          ]
+                        },
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentId": {
+                          "type": "string",
+                          "id": 459714768,
+                          "options": {
+                            "(google.cloud.operation_request_field)": "parent_id",
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "NamedPort": {
                       "oneofs": {
                         "_name": {
@@ -58786,6 +59429,29 @@
                         }
                       }
                     },
+                    "OrganizationSecurityPoliciesListAssociationsResponse": {
+                      "oneofs": {
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "associations": {
+                          "rule": "repeated",
+                          "type": "SecurityPolicyAssociation",
+                          "id": 508736530
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "OutlierDetection": {
                       "oneofs": {
                         "_baseEjectionTime": {
@@ -60494,6 +61160,38 @@
                         }
                       }
                     },
+                    "PatchOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "securityPolicyResource": {
+                          "type": "SecurityPolicy",
+                          "id": 216159612,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "PatchPacketMirroringRequest": {
                       "oneofs": {
                         "_requestId": {
@@ -61523,6 +62221,50 @@
                           "id": 37109963,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PatchRuleOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_priority": {
+                          "oneof": [
+                            "priority"
+                          ]
+                        },
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "priority": {
+                          "type": "int32",
+                          "id": 445151652,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "securityPolicyRuleResource": {
+                          "type": "SecurityPolicyRule",
+                          "id": 402693443,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
                           }
                         }
                       }
@@ -62802,6 +63544,347 @@
                           "id": 182460591,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PreviewFeature": {
+                      "oneofs": {
+                        "_activationStatus": {
+                          "oneof": [
+                            "activationStatus"
+                          ]
+                        },
+                        "_creationTimestamp": {
+                          "oneof": [
+                            "creationTimestamp"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_kind": {
+                          "oneof": [
+                            "kind"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_rolloutOperation": {
+                          "oneof": [
+                            "rolloutOperation"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_status": {
+                          "oneof": [
+                            "status"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "activationStatus": {
+                          "type": "string",
+                          "id": 71960379,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "creationTimestamp": {
+                          "type": "string",
+                          "id": 30525366,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "uint64",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "kind": {
+                          "type": "string",
+                          "id": 3292052,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "rolloutOperation": {
+                          "type": "PreviewFeatureRolloutOperation",
+                          "id": 486746201,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "status": {
+                          "type": "PreviewFeatureStatus",
+                          "id": 181260274,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "ActivationStatus": {
+                          "values": {
+                            "UNDEFINED_ACTIVATION_STATUS": 0,
+                            "ACTIVATION_STATE_UNSPECIFIED": 632160,
+                            "DISABLED": 516696700,
+                            "ENABLED": 182130465
+                          }
+                        }
+                      }
+                    },
+                    "PreviewFeatureList": {
+                      "oneofs": {
+                        "_etag": {
+                          "oneof": [
+                            "etag"
+                          ]
+                        },
+                        "_id": {
+                          "oneof": [
+                            "id"
+                          ]
+                        },
+                        "_nextPageToken": {
+                          "oneof": [
+                            "nextPageToken"
+                          ]
+                        },
+                        "_selfLink": {
+                          "oneof": [
+                            "selfLink"
+                          ]
+                        },
+                        "_warning": {
+                          "oneof": [
+                            "warning"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "etag": {
+                          "type": "string",
+                          "id": 3123477,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "id": 3355,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "PreviewFeature",
+                          "id": 100526016
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 79797525,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "selfLink": {
+                          "type": "string",
+                          "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "unreachables": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 243372063
+                        },
+                        "warning": {
+                          "type": "Warning",
+                          "id": 50704284,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PreviewFeatureRolloutOperation": {
+                      "oneofs": {
+                        "_rolloutInput": {
+                          "oneof": [
+                            "rolloutInput"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "rolloutInput": {
+                          "type": "PreviewFeatureRolloutOperationRolloutInput",
+                          "id": 265745340,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PreviewFeatureRolloutOperationRolloutInput": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_predefinedRolloutPlan": {
+                          "oneof": [
+                            "predefinedRolloutPlan"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "predefinedRolloutPlan": {
+                          "type": "string",
+                          "id": 364023440,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "PredefinedRolloutPlan": {
+                          "values": {
+                            "UNDEFINED_PREDEFINED_ROLLOUT_PLAN": 0,
+                            "ROLLOUT_PLAN_FAST_ROLLOUT": 167808726,
+                            "ROLLOUT_PLAN_TWO_DAY_ROLLOUT": 349866771,
+                            "ROLLOUT_PLAN_UNSPECIFIED": 144511983
+                          }
+                        }
+                      }
+                    },
+                    "PreviewFeatureStatus": {
+                      "oneofs": {
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        },
+                        "_helpLink": {
+                          "oneof": [
+                            "helpLink"
+                          ]
+                        },
+                        "_releaseStatus": {
+                          "oneof": [
+                            "releaseStatus"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "helpLink": {
+                          "type": "string",
+                          "id": 223410744,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "releaseStatus": {
+                          "type": "PreviewFeatureStatusReleaseStatus",
+                          "id": 508026666,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "PreviewFeatureStatusReleaseStatus": {
+                      "oneofs": {
+                        "_stage": {
+                          "oneof": [
+                            "stage"
+                          ]
+                        },
+                        "_updateDate": {
+                          "oneof": [
+                            "updateDate"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "stage": {
+                          "type": "string",
+                          "id": 109757182,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "updateDate": {
+                          "type": "Date",
+                          "id": 499811684,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Stage": {
+                          "values": {
+                            "UNDEFINED_STAGE": 0,
+                            "DEPRECATED": 463360435,
+                            "GA": 2266,
+                            "PREVIEW": 399798184,
+                            "STAGE_UNSPECIFIED": 63695670
                           }
                         }
                       }
@@ -65937,6 +67020,43 @@
                         }
                       }
                     },
+                    "RemoveAssociationOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "RemoveAssociationRegionNetworkFirewallPolicyRequest": {
                       "oneofs": {
                         "_name": {
@@ -66445,6 +67565,43 @@
                         }
                       }
                     },
+                    "RemoveRuleOrganizationSecurityPolicyRequest": {
+                      "oneofs": {
+                        "_priority": {
+                          "oneof": [
+                            "priority"
+                          ]
+                        },
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "priority": {
+                          "type": "int32",
+                          "id": 445151652,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicy": {
+                          "type": "string",
+                          "id": 171082513,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
                     "RemoveRuleRegionNetworkFirewallPolicyRequest": {
                       "oneofs": {
                         "_priority": {
@@ -66568,6 +67725,61 @@
                           "id": 171082513,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ReportFaultyReservationSubBlockRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "parentName": {
+                          "type": "string",
+                          "id": 478151936,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "reservationSubBlock": {
+                          "type": "string",
+                          "id": 22750491,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reservationSubBlocksReportFaultyRequestResource": {
+                          "type": "ReservationSubBlocksReportFaultyRequest",
+                          "id": 450847938,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "zone": {
+                          "type": "string",
+                          "id": 3744684,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "zone"
                           }
                         }
                       }
@@ -68039,6 +69251,99 @@
                           "id": 50704284,
                           "options": {
                             "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
+                    "ReservationSubBlocksReportFaultyRequest": {
+                      "oneofs": {
+                        "_disruptionSchedule": {
+                          "oneof": [
+                            "disruptionSchedule"
+                          ]
+                        },
+                        "_failureComponent": {
+                          "oneof": [
+                            "failureComponent"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "disruptionSchedule": {
+                          "type": "string",
+                          "id": 95871619,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "failureComponent": {
+                          "type": "string",
+                          "id": 25912456,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "faultReasons": {
+                          "rule": "repeated",
+                          "type": "ReservationSubBlocksReportFaultyRequestFaultReason",
+                          "id": 168056210
+                        }
+                      },
+                      "nested": {
+                        "DisruptionSchedule": {
+                          "values": {
+                            "UNDEFINED_DISRUPTION_SCHEDULE": 0,
+                            "DISRUPTION_SCHEDULE_UNSPECIFIED": 332543835,
+                            "IMMEDIATE": 152881041
+                          }
+                        },
+                        "FailureComponent": {
+                          "values": {
+                            "UNDEFINED_FAILURE_COMPONENT": 0,
+                            "FAILURE_COMPONENT_UNSPECIFIED": 332003744,
+                            "MULTIPLE_FAULTY_HOSTS": 423545298,
+                            "NVLINK_SWITCH": 239107153
+                          }
+                        }
+                      }
+                    },
+                    "ReservationSubBlocksReportFaultyRequestFaultReason": {
+                      "oneofs": {
+                        "_behavior": {
+                          "oneof": [
+                            "behavior"
+                          ]
+                        },
+                        "_description": {
+                          "oneof": [
+                            "description"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "behavior": {
+                          "type": "string",
+                          "id": 437170770,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 422937596,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Behavior": {
+                          "values": {
+                            "UNDEFINED_BEHAVIOR": 0,
+                            "FAULT_BEHAVIOR_UNSPECIFIED": 447660743,
+                            "GPU_ERROR": 198817909,
+                            "PERFORMANCE": 135701520,
+                            "SWITCH_FAILURE": 254909279
                           }
                         }
                       }
@@ -73410,6 +74715,11 @@
                             "selfLink"
                           ]
                         },
+                        "_shortName": {
+                          "oneof": [
+                            "shortName"
+                          ]
+                        },
                         "_type": {
                           "oneof": [
                             "type"
@@ -73430,6 +74740,11 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        },
+                        "associations": {
+                          "rule": "repeated",
+                          "type": "SecurityPolicyAssociation",
+                          "id": 508736530
                         },
                         "creationTimestamp": {
                           "type": "string",
@@ -73514,6 +74829,13 @@
                         "selfLink": {
                           "type": "string",
                           "id": 456214797,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "shortName": {
+                          "type": "string",
+                          "id": 492051566,
                           "options": {
                             "proto3_optional": true
                           }
@@ -73833,6 +75155,82 @@
                           "rule": "repeated",
                           "type": "string",
                           "id": 17428787
+                        }
+                      }
+                    },
+                    "SecurityPolicyAssociation": {
+                      "oneofs": {
+                        "_attachmentId": {
+                          "oneof": [
+                            "attachmentId"
+                          ]
+                        },
+                        "_displayName": {
+                          "oneof": [
+                            "displayName"
+                          ]
+                        },
+                        "_name": {
+                          "oneof": [
+                            "name"
+                          ]
+                        },
+                        "_securityPolicyId": {
+                          "oneof": [
+                            "securityPolicyId"
+                          ]
+                        },
+                        "_shortName": {
+                          "oneof": [
+                            "shortName"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "attachmentId": {
+                          "type": "string",
+                          "id": 103768503,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 4473832,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "excludedFolders": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 310611024
+                        },
+                        "excludedProjects": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 283070287
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "securityPolicyId": {
+                          "type": "string",
+                          "id": 203671817,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "shortName": {
+                          "type": "string",
+                          "id": 492051566,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         }
                       }
                     },
@@ -79591,6 +80989,11 @@
                             "name"
                           ]
                         },
+                        "_params": {
+                          "oneof": [
+                            "params"
+                          ]
+                        },
                         "_satisfiesPzi": {
                           "oneof": [
                             "satisfiesPzi"
@@ -79799,6 +81202,13 @@
                         "name": {
                           "type": "string",
                           "id": 3373707,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "params": {
+                          "type": "SnapshotParams",
+                          "id": 78313862,
                           "options": {
                             "proto3_optional": true
                           }
@@ -80031,6 +81441,15 @@
                           "options": {
                             "proto3_optional": true
                           }
+                        }
+                      }
+                    },
+                    "SnapshotParams": {
+                      "fields": {
+                        "resourceManagerTags": {
+                          "keyType": "string",
+                          "type": "string",
+                          "id": 377671164
                         }
                       }
                     },
@@ -88926,6 +90345,46 @@
                         }
                       }
                     },
+                    "UpdatePreviewFeatureRequest": {
+                      "oneofs": {
+                        "_requestId": {
+                          "oneof": [
+                            "requestId"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "previewFeature": {
+                          "type": "string",
+                          "id": 454999423,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "previewFeatureResource": {
+                          "type": "PreviewFeature",
+                          "id": 10876622,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "project": {
+                          "type": "string",
+                          "id": 227560217,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.cloud.operation_request_field)": "project"
+                          }
+                        },
+                        "requestId": {
+                          "type": "string",
+                          "id": 37109963,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "UpdateRegionAutoscalerRequest": {
                       "oneofs": {
                         "_autoscaler": {
@@ -93387,6 +94846,24 @@
                             {
                               "(google.api.http)": {
                                 "get": "/compute/v1/projects/{project}/global/backendServices/{backend_service}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,backend_service"
+                            }
+                          ]
+                        },
+                        "GetEffectiveSecurityPolicies": {
+                          "requestType": "GetEffectiveSecurityPoliciesBackendServiceRequest",
+                          "responseType": "GetEffectiveSecurityPoliciesBackendServiceResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/global/backendServices/{backend_service}/getEffectiveSecurityPolicies",
+                            "(google.api.method_signature)": "project,backend_service"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/global/backendServices/{backend_service}/getEffectiveSecurityPolicies"
                               }
                             },
                             {
@@ -101644,6 +103121,352 @@
                         }
                       }
                     },
+                    "OrganizationSecurityPolicies": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "AddAssociation": {
+                          "requestType": "AddAssociationOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "security_policy_association_resource",
+                            "(google.api.http).post": "/compute/v1/locations/global/securityPolicies/{security_policy}/addAssociation",
+                            "(google.api.method_signature)": "security_policy,security_policy_association_resource",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "security_policy_association_resource",
+                                "post": "/compute/v1/locations/global/securityPolicies/{security_policy}/addAssociation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy,security_policy_association_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        },
+                        "AddRule": {
+                          "requestType": "AddRuleOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "security_policy_rule_resource",
+                            "(google.api.http).post": "/compute/v1/locations/global/securityPolicies/{security_policy}/addRule",
+                            "(google.api.method_signature)": "security_policy,security_policy_rule_resource",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "security_policy_rule_resource",
+                                "post": "/compute/v1/locations/global/securityPolicies/{security_policy}/addRule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy,security_policy_rule_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        },
+                        "CopyRules": {
+                          "requestType": "CopyRulesOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/locations/global/securityPolicies/{security_policy}/copyRules",
+                            "(google.api.method_signature)": "security_policy",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/locations/global/securityPolicies/{security_policy}/copyRules"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        },
+                        "Delete": {
+                          "requestType": "DeleteOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).delete": "/compute/v1/locations/global/securityPolicies/{security_policy}",
+                            "(google.api.method_signature)": "security_policy",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "delete": "/compute/v1/locations/global/securityPolicies/{security_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        },
+                        "Get": {
+                          "requestType": "GetOrganizationSecurityPolicyRequest",
+                          "responseType": "SecurityPolicy",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/locations/global/securityPolicies/{security_policy}",
+                            "(google.api.method_signature)": "security_policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/locations/global/securityPolicies/{security_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy"
+                            }
+                          ]
+                        },
+                        "GetAssociation": {
+                          "requestType": "GetAssociationOrganizationSecurityPolicyRequest",
+                          "responseType": "SecurityPolicyAssociation",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/locations/global/securityPolicies/{security_policy}/getAssociation",
+                            "(google.api.method_signature)": "security_policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/locations/global/securityPolicies/{security_policy}/getAssociation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy"
+                            }
+                          ]
+                        },
+                        "GetRule": {
+                          "requestType": "GetRuleOrganizationSecurityPolicyRequest",
+                          "responseType": "SecurityPolicyRule",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/locations/global/securityPolicies/{security_policy}/getRule",
+                            "(google.api.method_signature)": "security_policy"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/locations/global/securityPolicies/{security_policy}/getRule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy"
+                            }
+                          ]
+                        },
+                        "Insert": {
+                          "requestType": "InsertOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "security_policy_resource",
+                            "(google.api.http).post": "/compute/v1/locations/global/securityPolicies",
+                            "(google.api.method_signature)": "security_policy_resource",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "security_policy_resource",
+                                "post": "/compute/v1/locations/global/securityPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListOrganizationSecurityPoliciesRequest",
+                          "responseType": "SecurityPolicyList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/locations/global/securityPolicies",
+                            "(google.api.method_signature)": ""
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/locations/global/securityPolicies"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": ""
+                            }
+                          ]
+                        },
+                        "ListAssociations": {
+                          "requestType": "ListAssociationsOrganizationSecurityPolicyRequest",
+                          "responseType": "OrganizationSecurityPoliciesListAssociationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/locations/global/securityPolicies/listAssociations",
+                            "(google.api.method_signature)": ""
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/locations/global/securityPolicies/listAssociations"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": ""
+                            }
+                          ]
+                        },
+                        "ListPreconfiguredExpressionSets": {
+                          "requestType": "ListPreconfiguredExpressionSetsOrganizationSecurityPoliciesRequest",
+                          "responseType": "SecurityPoliciesListPreconfiguredExpressionSetsResponse",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/locations/global/securityPolicies/listPreconfiguredExpressionSets",
+                            "(google.api.method_signature)": ""
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/locations/global/securityPolicies/listPreconfiguredExpressionSets"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": ""
+                            }
+                          ]
+                        },
+                        "Move": {
+                          "requestType": "MoveOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/locations/global/securityPolicies/{security_policy}/move",
+                            "(google.api.method_signature)": "security_policy",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/locations/global/securityPolicies/{security_policy}/move"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        },
+                        "Patch": {
+                          "requestType": "PatchOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "security_policy_resource",
+                            "(google.api.http).patch": "/compute/v1/locations/global/securityPolicies/{security_policy}",
+                            "(google.api.method_signature)": "security_policy,security_policy_resource",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "security_policy_resource",
+                                "patch": "/compute/v1/locations/global/securityPolicies/{security_policy}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy,security_policy_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        },
+                        "PatchRule": {
+                          "requestType": "PatchRuleOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "security_policy_rule_resource",
+                            "(google.api.http).post": "/compute/v1/locations/global/securityPolicies/{security_policy}/patchRule",
+                            "(google.api.method_signature)": "security_policy,security_policy_rule_resource",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "security_policy_rule_resource",
+                                "post": "/compute/v1/locations/global/securityPolicies/{security_policy}/patchRule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy,security_policy_rule_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        },
+                        "RemoveAssociation": {
+                          "requestType": "RemoveAssociationOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/locations/global/securityPolicies/{security_policy}/removeAssociation",
+                            "(google.api.method_signature)": "security_policy",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/locations/global/securityPolicies/{security_policy}/removeAssociation"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        },
+                        "RemoveRule": {
+                          "requestType": "RemoveRuleOrganizationSecurityPolicyRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).post": "/compute/v1/locations/global/securityPolicies/{security_policy}/removeRule",
+                            "(google.api.method_signature)": "security_policy",
+                            "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/compute/v1/locations/global/securityPolicies/{security_policy}/removeRule"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "security_policy"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOrganizationOperations"
+                            }
+                          ]
+                        }
+                      }
+                    },
                     "PacketMirrorings": {
                       "options": {
                         "(google.api.default_host)": "compute.googleapis.com",
@@ -101791,6 +103614,74 @@
                             },
                             {
                               "(google.api.method_signature)": "project,region,resource,test_permissions_request_resource"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "PreviewFeatures": {
+                      "options": {
+                        "(google.api.default_host)": "compute.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "Get": {
+                          "requestType": "GetPreviewFeatureRequest",
+                          "responseType": "PreviewFeature",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/global/previewFeatures/{preview_feature}",
+                            "(google.api.method_signature)": "project,preview_feature"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/global/previewFeatures/{preview_feature}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,preview_feature"
+                            }
+                          ]
+                        },
+                        "List": {
+                          "requestType": "ListPreviewFeaturesRequest",
+                          "responseType": "PreviewFeatureList",
+                          "options": {
+                            "(google.api.http).get": "/compute/v1/projects/{project}/global/previewFeatures",
+                            "(google.api.method_signature)": "project"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/compute/v1/projects/{project}/global/previewFeatures"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project"
+                            }
+                          ]
+                        },
+                        "Update": {
+                          "requestType": "UpdatePreviewFeatureRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "preview_feature_resource",
+                            "(google.api.http).patch": "/compute/v1/projects/{project}/global/previewFeatures/{preview_feature}",
+                            "(google.api.method_signature)": "project,preview_feature,preview_feature_resource",
+                            "(google.cloud.operation_service)": "GlobalOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "preview_feature_resource",
+                                "patch": "/compute/v1/projects/{project}/global/previewFeatures/{preview_feature}"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,preview_feature,preview_feature_resource"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "GlobalOperations"
                             }
                           ]
                         }
@@ -106426,6 +108317,30 @@
                             },
                             {
                               "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block"
+                            },
+                            {
+                              "(google.cloud.operation_service)": "ZoneOperations"
+                            }
+                          ]
+                        },
+                        "ReportFaulty": {
+                          "requestType": "ReportFaultyReservationSubBlockRequest",
+                          "responseType": "Operation",
+                          "options": {
+                            "(google.api.http).body": "reservation_sub_blocks_report_faulty_request_resource",
+                            "(google.api.http).post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/reportFaulty",
+                            "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block,reservation_sub_blocks_report_faulty_request_resource",
+                            "(google.cloud.operation_service)": "ZoneOperations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "body": "reservation_sub_blocks_report_faulty_request_resource",
+                                "post": "/compute/v1/projects/{project}/zones/{zone}/{parent_name}/reservationSubBlocks/{reservation_sub_block}/reportFaulty"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "project,zone,parent_name,reservation_sub_block,reservation_sub_blocks_report_faulty_request_resource"
                             },
                             {
                               "(google.cloud.operation_service)": "ZoneOperations"
