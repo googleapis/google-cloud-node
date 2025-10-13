@@ -4,6 +4,87 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [8.1.1](https://github.com/googleapis/google-cloud-node-core/compare/gcp-metadata-v7.0.1...gcp-metadata-v8.1.1) (2025-10-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* typescript@3.7.x has breaking changes; compiler now targets es2015
+* monorepo migration
+* upgrade to node 18 ([#627](https://github.com/googleapis/google-cloud-node-core/issues/627))
+* upgrade to Node 14, and update gaxios, ts, and gts ([#571](https://github.com/googleapis/google-cloud-node-core/issues/571))
+* drop node 10, update typescript to 4.6.3 ([#519](https://github.com/googleapis/google-cloud-node-core/issues/519))
+* typescript@3.7.x has breaking changes; compiler now targets es2015
+* drops Node 8 from engines field ([#315](https://github.com/googleapis/google-cloud-node-core/issues/315))
+
+### Features
+
+* Add `gcf-owl-bot[bot]` to `ignoreAuthors` ([#450](https://github.com/googleapis/google-cloud-node-core/issues/450)) ([7db1f92](https://github.com/googleapis/google-cloud-node-core/commit/7db1f928edddf732b5f7da02b852d556f771a050))
+* Add `universe` metadata handler ([#596](https://github.com/googleapis/google-cloud-node-core/issues/596)) ([cfca19a](https://github.com/googleapis/google-cloud-node-core/commit/cfca19a0192e7cb558f493a3067c175691e0bdaa))
+* Add ECONNREFUSED to list of known errors for isAvailable() ([#309](https://github.com/googleapis/google-cloud-node-core/issues/309)) ([1372fdc](https://github.com/googleapis/google-cloud-node-core/commit/1372fdcce50d45103e2097420dadf2b908a01495))
+* Add environment variable for configuring environment detection ([#275](https://github.com/googleapis/google-cloud-node-core/issues/275)) ([51ef6e4](https://github.com/googleapis/google-cloud-node-core/commit/51ef6e4480f74a2196730564354918d895f96361))
+* Add support for GCE_METADATA_HOST environment variable ([#406](https://github.com/googleapis/google-cloud-node-core/issues/406)) ([04ee1b8](https://github.com/googleapis/google-cloud-node-core/commit/04ee1b8356cc033e96f87d800b9a042ce813c92c))
+* Bulk Metadata Requests ([#598](https://github.com/googleapis/google-cloud-node-core/issues/598)) ([782ac9c](https://github.com/googleapis/google-cloud-node-core/commit/782ac9c9dac955ea7cf1df97b198ed50e45461c9))
+* Cache response from isAvailable() method ([#274](https://github.com/googleapis/google-cloud-node-core/issues/274)) ([6f68346](https://github.com/googleapis/google-cloud-node-core/commit/6f68346c2b1007ff163d1bf52fb00453a9036e59))
+* Drops Node 8 from engines field ([#315](https://github.com/googleapis/google-cloud-node-core/issues/315)) ([2ef14f2](https://github.com/googleapis/google-cloud-node-core/commit/2ef14f28cd7cd35cb475fe69f9d4581f3123ddd7))
+* Export `gcp-residency` tools ([#552](https://github.com/googleapis/google-cloud-node-core/issues/552)) ([6fde6e5](https://github.com/googleapis/google-cloud-node-core/commit/6fde6e5e87fb066eeae317f111b913c1d8b6a7fe))
+* Extend GCP Residency Detection Support ([#528](https://github.com/googleapis/google-cloud-node-core/issues/528)) ([da98aaf](https://github.com/googleapis/google-cloud-node-core/commit/da98aafa4a14447ed353501424fdb20d7aacb594))
+* Introduces the GCE_METADATA_IP to allow using a different IP address for the GCE metadata server. ([#346](https://github.com/googleapis/google-cloud-node-core/issues/346)) ([04f2050](https://github.com/googleapis/google-cloud-node-core/commit/04f2050eeaa9c3abefab116bb56360c16885c19f))
+* Metadata Server Detection Configuration ([#562](https://github.com/googleapis/google-cloud-node-core/issues/562)) ([add7286](https://github.com/googleapis/google-cloud-node-core/commit/add728653a1ed4e38015fc45ac9eae1762d48a2b))
+* Release 6.2.0 ([#641](https://github.com/googleapis/google-cloud-node-core/issues/641)) ([cb27c2b](https://github.com/googleapis/google-cloud-node-core/commit/cb27c2bef34b5aba71656abca6b58e01ffa4f9f2))
+* Remove gts extension from tsconfig in gcp-metadata ([#66](https://github.com/googleapis/google-cloud-node-core/issues/66)) ([25cbd89](https://github.com/googleapis/google-cloud-node-core/commit/25cbd891347c78aab387903f7fc419d1af78dbe3))
+* Significantly increase timeout if GCF environment detected ([#300](https://github.com/googleapis/google-cloud-node-core/issues/300)) ([8cdd7e0](https://github.com/googleapis/google-cloud-node-core/commit/8cdd7e050bfd4c6026be7f3bf6103e0de1a3bae9))
+
+
+### Bug Fixes
+
+* Add extra logging for incorrect headers ([#637](https://github.com/googleapis/google-cloud-node-core/issues/637)) ([b100ef4](https://github.com/googleapis/google-cloud-node-core/commit/b100ef4fefe7a642252470944bf6c60a3a5cbdb5))
+* Apache license URL ([#468](https://github.com/googleapis/google-cloud-node-core/issues/468)) ([#336](https://github.com/googleapis/google-cloud-node-core/issues/336)) ([8a3cf41](https://github.com/googleapis/google-cloud-node-core/commit/8a3cf41eccc0588e8c4df59e4c457d26b40929d0))
+* **build:** Switch primary branch to main ([#481](https://github.com/googleapis/google-cloud-node-core/issues/481)) ([aaabae4](https://github.com/googleapis/google-cloud-node-core/commit/aaabae49243c42510d4e3210021d5a8a3d75cc7c))
+* **deps:** Pin TypeScript below 3.7.0 ([c58a544](https://github.com/googleapis/google-cloud-node-core/commit/c58a544a54b3131312ad5a6ec63738eb3a5ae9fe))
+* **deps:** Roll back dependency gcp-metadata to ^4.1.0 ([#373](https://github.com/googleapis/google-cloud-node-core/issues/373)) ([f17bd29](https://github.com/googleapis/google-cloud-node-core/commit/f17bd290389da7250ce795efc203225c006cd32e))
+* **deps:** Update dependency gaxios to v3 ([#326](https://github.com/googleapis/google-cloud-node-core/issues/326)) ([5aa5f48](https://github.com/googleapis/google-cloud-node-core/commit/5aa5f488579b0e3ecaef7d99856fe3340c53be46))
+* **deps:** Update dependency gaxios to v4 ([#420](https://github.com/googleapis/google-cloud-node-core/issues/420)) ([180cea4](https://github.com/googleapis/google-cloud-node-core/commit/180cea49b1df670c1b971ec0f594a986d37b0c5b))
+* **deps:** Update dependency google-logging-utils to v1 ([#638](https://github.com/googleapis/google-cloud-node-core/issues/638)) ([8ca0217](https://github.com/googleapis/google-cloud-node-core/commit/8ca021709420166ce31ea27f6b7c28917a26193a))
+* **deps:** Update dependency json-bigint to ^0.4.0 ([#378](https://github.com/googleapis/google-cloud-node-core/issues/378)) ([b4d7964](https://github.com/googleapis/google-cloud-node-core/commit/b4d79646fb578aa40423b4cc139aff39cabe6253))
+* **deps:** Update dependency json-bigint to v1 ([#382](https://github.com/googleapis/google-cloud-node-core/issues/382)) ([ff797a7](https://github.com/googleapis/google-cloud-node-core/commit/ff797a7702bb872144d92abd13217d2e15baa12c))
+* **deps:** Update gaxios ([#257](https://github.com/googleapis/google-cloud-node-core/issues/257)) ([16de8a9](https://github.com/googleapis/google-cloud-node-core/commit/16de8a9ca5026951c3ddd5b9e3f251c1d328a384))
+* Do not check secondary host if GCE_METADATA_IP set ([#352](https://github.com/googleapis/google-cloud-node-core/issues/352)) ([88e4f74](https://github.com/googleapis/google-cloud-node-core/commit/88e4f741653c06cb4cd64b72084d6334320c4fe1))
+* **docs:** Add jsdoc-region-tag plugin ([#264](https://github.com/googleapis/google-cloud-node-core/issues/264)) ([3069049](https://github.com/googleapis/google-cloud-node-core/commit/306904906b2037d0f36c46c1270a897a5a7363db))
+* FastFailMetadataRequest should not reject, if response already happened ([#273](https://github.com/googleapis/google-cloud-node-core/issues/273)) ([3b93082](https://github.com/googleapis/google-cloud-node-core/commit/3b93082babdb27343c9070d0005a3783a52d49fb))
+* Gcp-metadata sample tests ([#76](https://github.com/googleapis/google-cloud-node-core/issues/76)) ([d11dfa9](https://github.com/googleapis/google-cloud-node-core/commit/d11dfa908a13ff8b756a2eaed6c92ba09e59905d))
+* Increase time in gcp-metadata system-test ([#75](https://github.com/googleapis/google-cloud-node-core/issues/75)) ([9b19752](https://github.com/googleapis/google-cloud-node-core/commit/9b197525814e442823575d8b77121ba0f4b342cd))
+* **isAvailable:** Handle EHOSTDOWN and EHOSTUNREACH error codes ([#291](https://github.com/googleapis/google-cloud-node-core/issues/291)) ([cbfb588](https://github.com/googleapis/google-cloud-node-core/commit/cbfb58841841e712210f1724e2004e43c4f060b0))
+* Lint and docs ([#77](https://github.com/googleapis/google-cloud-node-core/issues/77)) ([eba0f27](https://github.com/googleapis/google-cloud-node-core/commit/eba0f276f31f8d86f959f1cd673c7e581d1bcd6a))
+* Lint and docs scripts ([#73](https://github.com/googleapis/google-cloud-node-core/issues/73)) ([b09bbcb](https://github.com/googleapis/google-cloud-node-core/commit/b09bbcbcc0846553443366998a9b174442d98cbd))
+* Monorepo migration ([86a7376](https://github.com/googleapis/google-cloud-node-core/commit/86a7376da60852dae8eacf9ca97a6d302b6b7eb4))
+* Remove the space from the log system string ([#653](https://github.com/googleapis/google-cloud-node-core/issues/653)) ([6e999e9](https://github.com/googleapis/google-cloud-node-core/commit/6e999e9e7030da5ce4ba09687be2628ec06a0778))
+* Repo Metadata ([#595](https://github.com/googleapis/google-cloud-node-core/issues/595)) ([d6abe2f](https://github.com/googleapis/google-cloud-node-core/commit/d6abe2f736501f1a7d2906ce2c6ea403475d5a52))
+* Tsconfig in gcp-metadata ([#68](https://github.com/googleapis/google-cloud-node-core/issues/68)) ([80a338c](https://github.com/googleapis/google-cloud-node-core/commit/80a338c41b8a6bc2d139621b426e6097df0f3606))
+* Typeo in nodejs .gitattribute ([#371](https://github.com/googleapis/google-cloud-node-core/issues/371)) ([cc61764](https://github.com/googleapis/google-cloud-node-core/commit/cc61764a8ac4dd5ac16c1ee4f14cb52e55e784a6))
+* Warn rather than throwing when we fail to connect to metadata server ([#351](https://github.com/googleapis/google-cloud-node-core/issues/351)) ([538288c](https://github.com/googleapis/google-cloud-node-core/commit/538288c98c66f0710cd9c61565a95359698833ec))
+
+
+### Miscellaneous Chores
+
+* Migrate code from googleapis/gcp-metadata ([#53](https://github.com/googleapis/google-cloud-node-core/issues/53)) ([46bb52b](https://github.com/googleapis/google-cloud-node-core/commit/46bb52b5fdcf3dbed50b5a34ad3f86a63e1d2a20))
+* Release 8.1.1 ([c4cb31d](https://github.com/googleapis/google-cloud-node-core/commit/c4cb31d10c65d5f4b3581fc9bfdf15b885e98ffd))
+* Release 8.1.1 ([5b68ad8](https://github.com/googleapis/google-cloud-node-core/commit/5b68ad832c845c7e04f2ee80699bed7e7744d46c))
+* Release 8.1.1 ([142a89d](https://github.com/googleapis/google-cloud-node-core/commit/142a89d0332d0e1a3fdb26849c13a7d006774c81))
+* Release 8.1.1 ([b421074](https://github.com/googleapis/google-cloud-node-core/commit/b421074c29d3da95d698cb949384c89cbc92644c))
+* Release 8.1.1 ([882cd99](https://github.com/googleapis/google-cloud-node-core/commit/882cd991b77520b4a6aceb75289c08956efacc79))
+* Release 8.1.1 ([9b90266](https://github.com/googleapis/google-cloud-node-core/commit/9b90266e07edc748cd57df898e9e4c5a222e231a))
+* Release 8.1.1 ([a493710](https://github.com/googleapis/google-cloud-node-core/commit/a493710bfc56ed275a13fd5ebe72a0acf8d50ad7))
+* Release 8.1.1 ([cb196c9](https://github.com/googleapis/google-cloud-node-core/commit/cb196c9c9b129b10f7d186aa0c9ca7e3c6969616))
+* Upgrade to Node 14, and update gaxios, ts, and gts ([#571](https://github.com/googleapis/google-cloud-node-core/issues/571)) ([b1242ac](https://github.com/googleapis/google-cloud-node-core/commit/b1242ac60937e9d144e50af4b7cd5d75821b0935))
+* Upgrade to node 18 ([#627](https://github.com/googleapis/google-cloud-node-core/issues/627)) ([824fb17](https://github.com/googleapis/google-cloud-node-core/commit/824fb1793f1e0806e7f0e70f35f65d939b5b502b))
+
+
+### Build System
+
+* Drop node 10, update typescript to 4.6.3 ([#519](https://github.com/googleapis/google-cloud-node-core/issues/519)) ([c9d21ae](https://github.com/googleapis/google-cloud-node-core/commit/c9d21aea86caac0b11c21a1b3788a23c88179e42))
+* Switch to latest typescirpt/gts ([#317](https://github.com/googleapis/google-cloud-node-core/issues/317)) ([5769f19](https://github.com/googleapis/google-cloud-node-core/commit/5769f191e8c3fa7919f7a91b51fc8db59131c601))
+
 ## [7.0.1](https://github.com/googleapis/gcp-metadata/compare/v7.0.0...v7.0.1) (2025-06-25)
 
 

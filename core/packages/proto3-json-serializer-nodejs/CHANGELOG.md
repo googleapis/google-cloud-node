@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.0.3](https://github.com/googleapis/google-cloud-node-core/compare/proto3-json-serializer-v3.0.2...proto3-json-serializer-v3.0.3) (2025-10-13)
+
+
+### Bug Fixes
+
+* Proto3jsonserializer eslint file ([5625b53](https://github.com/googleapis/google-cloud-node-core/commit/5625b531d36eefa322196ff88c3bc524b4011a95))
+* Proto3jsonserializer jsdoc file ([30e9c21](https://github.com/googleapis/google-cloud-node-core/commit/30e9c211d7aaf88acde25462c9fa36c150af6c28))
+* Proto3jsonserializer samples test ([4274d25](https://github.com/googleapis/google-cloud-node-core/commit/4274d25ce1fc75d60305507e7cb534b3cdb6ae21))
+* Proto3jsonserializer tsconfig file ([14e924f](https://github.com/googleapis/google-cloud-node-core/commit/14e924fcf76b21f892d72eee2ae79c2fb79d1de5))
+
 ## [3.0.2](https://github.com/googleapis/proto3-json-serializer-nodejs/compare/v3.0.1...v3.0.2) (2025-08-12)
 
 
