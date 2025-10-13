@@ -2026,6 +2026,14 @@
                         "byteItem": {
                           "type": "ByteContentItem",
                           "id": 7
+                        },
+                        "inspectTemplate": {
+                          "type": "string",
+                          "id": 9
+                        },
+                        "deidentifyTemplate": {
+                          "type": "string",
+                          "id": 10
                         }
                       },
                       "nested": {
@@ -2221,7 +2229,8 @@
                       "oneofs": {
                         "type": {
                           "oneof": [
-                            "table"
+                            "table",
+                            "storagePath"
                           ]
                         }
                       },
@@ -2229,6 +2238,10 @@
                         "table": {
                           "type": "BigQueryTable",
                           "id": 1
+                        },
+                        "storagePath": {
+                          "type": "CloudStoragePath",
+                          "id": 5
                         },
                         "outputSchema": {
                           "type": "OutputSchema",
@@ -4475,6 +4488,7 @@
                             "pubSub",
                             "publishSummaryToCscc",
                             "publishFindingsToCloudDataCatalog",
+                            "publishFindingsToDataplexCatalog",
                             "deidentify",
                             "jobNotificationEmails",
                             "publishToStackdriver"
@@ -4497,6 +4511,10 @@
                         "publishFindingsToCloudDataCatalog": {
                           "type": "PublishFindingsToCloudDataCatalog",
                           "id": 5
+                        },
+                        "publishFindingsToDataplexCatalog": {
+                          "type": "PublishFindingsToDataplexCatalog",
+                          "id": 10
                         },
                         "deidentify": {
                           "type": "Deidentify",
@@ -4532,6 +4550,9 @@
                           "fields": {}
                         },
                         "PublishFindingsToCloudDataCatalog": {
+                          "fields": {}
+                        },
+                        "PublishFindingsToDataplexCatalog": {
                           "fields": {}
                         },
                         "Deidentify": {
@@ -5968,6 +5989,13 @@
                         "includeRegexes": {
                           "type": "FileStoreRegexes",
                           "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "includeTags": {
+                          "type": "TagFilters",
+                          "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
@@ -7924,6 +7952,38 @@
                         "value": {
                           "type": "string",
                           "id": 3
+                        }
+                      }
+                    },
+                    "TagFilters": {
+                      "fields": {
+                        "tagFilters": {
+                          "rule": "repeated",
+                          "type": "TagFilter",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "TagFilter": {
+                      "oneofs": {
+                        "format": {
+                          "oneof": [
+                            "namespacedTagValue",
+                            "namespacedTagKey"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "namespacedTagValue": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "namespacedTagKey": {
+                          "type": "string",
+                          "id": 2
                         }
                       }
                     },

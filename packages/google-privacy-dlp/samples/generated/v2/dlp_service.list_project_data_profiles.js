@@ -49,12 +49,12 @@ function main(parent) {
    *  Examples:
    *  * `project_id`
    *  * `sensitivity_level desc`
-   *  Supported fields are:
+   *  Supported fields:
    *  - `project_id`: Google Cloud project ID
-   *  - `sensitivity_level`: How sensitive the data in a project is, at most.
-   *  - `data_risk_level`: How much risk is associated with this data.
-   *  - `profile_last_generated`: When the profile was last updated in epoch
-   *  seconds.
+   *  - `sensitivity_level`: How sensitive the data in a project is, at most
+   *  - `data_risk_level`: How much risk is associated with this data
+   *  - `profile_last_generated`: Date and time (in epoch seconds) the profile
+   *    was last generated
    */
   // const orderBy = 'abc123'
   /**
@@ -64,15 +64,21 @@ function main(parent) {
    *  * Restrictions can be combined by `AND` or `OR` logical operators. A
    *  sequence of restrictions implicitly uses `AND`.
    *  * A restriction has the form of `{field} {operator} {value}`.
-   *  * Supported fields/values:
-   *      - `sensitivity_level` - HIGH|MODERATE|LOW
-   *      - `data_risk_level` - HIGH|MODERATE|LOW
-   *      - `status_code` - an RPC status code as defined in
+   *  * Supported fields:
+   *      - `project_id`: the Google Cloud project ID
+   *      - `sensitivity_level`: HIGH|MODERATE|LOW
+   *      - `data_risk_level`: HIGH|MODERATE|LOW
+   *      - `status_code`: an RPC status code as defined in
    *      https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
-   *  * The operator must be `=` or `!=`.
+   *      - `profile_last_generated`: Date and time the profile was last
+   *        generated
+   *  * The operator must be `=` or `!=`. The `profile_last_generated` filter
+   *    also supports `<` and `>`.
+   *  The syntax is based on https://google.aip.dev/160.
    *  Examples:
    *  * `project_id = 12345 AND status_code = 1`
    *  * `project_id = 12345 AND sensitivity_level = HIGH`
+   *  * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
    *  The length of this field should be no more than 500 characters.
    */
   // const filter = 'abc123'

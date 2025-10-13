@@ -61,6 +61,7 @@ function main(parent) {
    *      - 'end_time` - Corresponds to the time the job finished.
    *      - 'start_time` - Corresponds to the time the job finished.
    *  * The operator must be `=` or `!=`.
+   *  The syntax is based on https://google.aip.dev/160.
    *  Examples:
    *  * inspected_storage = cloud_storage AND state = done
    *  * inspected_storage = cloud_storage OR inspected_storage = bigquery

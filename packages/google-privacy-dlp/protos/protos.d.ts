@@ -4144,6 +4144,12 @@ export namespace google {
 
                     /** RedactImageRequest byteItem */
                     byteItem?: (google.privacy.dlp.v2.IByteContentItem|null);
+
+                    /** RedactImageRequest inspectTemplate */
+                    inspectTemplate?: (string|null);
+
+                    /** RedactImageRequest deidentifyTemplate */
+                    deidentifyTemplate?: (string|null);
                 }
 
                 /** Represents a RedactImageRequest. */
@@ -4172,6 +4178,12 @@ export namespace google {
 
                     /** RedactImageRequest byteItem. */
                     public byteItem?: (google.privacy.dlp.v2.IByteContentItem|null);
+
+                    /** RedactImageRequest inspectTemplate. */
+                    public inspectTemplate: string;
+
+                    /** RedactImageRequest deidentifyTemplate. */
+                    public deidentifyTemplate: string;
 
                     /**
                      * Creates a new RedactImageRequest instance using the specified properties.
@@ -5280,6 +5292,9 @@ export namespace google {
                     /** OutputStorageConfig table */
                     table?: (google.privacy.dlp.v2.IBigQueryTable|null);
 
+                    /** OutputStorageConfig storagePath */
+                    storagePath?: (google.privacy.dlp.v2.ICloudStoragePath|null);
+
                     /** OutputStorageConfig outputSchema */
                     outputSchema?: (google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|keyof typeof google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|null);
                 }
@@ -5296,11 +5311,14 @@ export namespace google {
                     /** OutputStorageConfig table. */
                     public table?: (google.privacy.dlp.v2.IBigQueryTable|null);
 
+                    /** OutputStorageConfig storagePath. */
+                    public storagePath?: (google.privacy.dlp.v2.ICloudStoragePath|null);
+
                     /** OutputStorageConfig outputSchema. */
                     public outputSchema: (google.privacy.dlp.v2.OutputStorageConfig.OutputSchema|keyof typeof google.privacy.dlp.v2.OutputStorageConfig.OutputSchema);
 
                     /** OutputStorageConfig type. */
-                    public type?: "table";
+                    public type?: ("table"|"storagePath");
 
                     /**
                      * Creates a new OutputStorageConfig instance using the specified properties.
@@ -17059,6 +17077,9 @@ export namespace google {
                     /** Action publishFindingsToCloudDataCatalog */
                     publishFindingsToCloudDataCatalog?: (google.privacy.dlp.v2.Action.IPublishFindingsToCloudDataCatalog|null);
 
+                    /** Action publishFindingsToDataplexCatalog */
+                    publishFindingsToDataplexCatalog?: (google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog|null);
+
                     /** Action deidentify */
                     deidentify?: (google.privacy.dlp.v2.Action.IDeidentify|null);
 
@@ -17090,6 +17111,9 @@ export namespace google {
                     /** Action publishFindingsToCloudDataCatalog. */
                     public publishFindingsToCloudDataCatalog?: (google.privacy.dlp.v2.Action.IPublishFindingsToCloudDataCatalog|null);
 
+                    /** Action publishFindingsToDataplexCatalog. */
+                    public publishFindingsToDataplexCatalog?: (google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog|null);
+
                     /** Action deidentify. */
                     public deidentify?: (google.privacy.dlp.v2.Action.IDeidentify|null);
 
@@ -17100,7 +17124,7 @@ export namespace google {
                     public publishToStackdriver?: (google.privacy.dlp.v2.Action.IPublishToStackdriver|null);
 
                     /** Action action. */
-                    public action?: ("saveFindings"|"pubSub"|"publishSummaryToCscc"|"publishFindingsToCloudDataCatalog"|"deidentify"|"jobNotificationEmails"|"publishToStackdriver");
+                    public action?: ("saveFindings"|"pubSub"|"publishSummaryToCscc"|"publishFindingsToCloudDataCatalog"|"publishFindingsToDataplexCatalog"|"deidentify"|"jobNotificationEmails"|"publishToStackdriver");
 
                     /**
                      * Creates a new Action instance using the specified properties.
@@ -17552,6 +17576,97 @@ export namespace google {
 
                         /**
                          * Gets the default type url for PublishFindingsToCloudDataCatalog
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a PublishFindingsToDataplexCatalog. */
+                    interface IPublishFindingsToDataplexCatalog {
+                    }
+
+                    /** Represents a PublishFindingsToDataplexCatalog. */
+                    class PublishFindingsToDataplexCatalog implements IPublishFindingsToDataplexCatalog {
+
+                        /**
+                         * Constructs a new PublishFindingsToDataplexCatalog.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog);
+
+                        /**
+                         * Creates a new PublishFindingsToDataplexCatalog instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns PublishFindingsToDataplexCatalog instance
+                         */
+                        public static create(properties?: google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog): google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog;
+
+                        /**
+                         * Encodes the specified PublishFindingsToDataplexCatalog message. Does not implicitly {@link google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify|verify} messages.
+                         * @param message PublishFindingsToDataplexCatalog message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified PublishFindingsToDataplexCatalog message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog.verify|verify} messages.
+                         * @param message PublishFindingsToDataplexCatalog message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.privacy.dlp.v2.Action.IPublishFindingsToDataplexCatalog, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a PublishFindingsToDataplexCatalog message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns PublishFindingsToDataplexCatalog
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog;
+
+                        /**
+                         * Decodes a PublishFindingsToDataplexCatalog message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns PublishFindingsToDataplexCatalog
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog;
+
+                        /**
+                         * Verifies a PublishFindingsToDataplexCatalog message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a PublishFindingsToDataplexCatalog message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns PublishFindingsToDataplexCatalog
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog;
+
+                        /**
+                         * Creates a plain object from a PublishFindingsToDataplexCatalog message. Also converts values to other types if specified.
+                         * @param message PublishFindingsToDataplexCatalog
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.privacy.dlp.v2.Action.PublishFindingsToDataplexCatalog, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this PublishFindingsToDataplexCatalog to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for PublishFindingsToDataplexCatalog
                          * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                          * @returns The default type url
                          */
@@ -25114,6 +25229,9 @@ export namespace google {
 
                     /** FileStoreCollection includeRegexes */
                     includeRegexes?: (google.privacy.dlp.v2.IFileStoreRegexes|null);
+
+                    /** FileStoreCollection includeTags */
+                    includeTags?: (google.privacy.dlp.v2.ITagFilters|null);
                 }
 
                 /** Represents a FileStoreCollection. */
@@ -25127,6 +25245,9 @@ export namespace google {
 
                     /** FileStoreCollection includeRegexes. */
                     public includeRegexes?: (google.privacy.dlp.v2.IFileStoreRegexes|null);
+
+                    /** FileStoreCollection includeTags. */
+                    public includeTags?: (google.privacy.dlp.v2.ITagFilters|null);
 
                     /** FileStoreCollection pattern. */
                     public pattern?: "includeRegexes";
@@ -34165,6 +34286,209 @@ export namespace google {
 
                     /**
                      * Gets the default type url for Tag
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TagFilters. */
+                interface ITagFilters {
+
+                    /** TagFilters tagFilters */
+                    tagFilters?: (google.privacy.dlp.v2.ITagFilter[]|null);
+                }
+
+                /** Represents a TagFilters. */
+                class TagFilters implements ITagFilters {
+
+                    /**
+                     * Constructs a new TagFilters.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ITagFilters);
+
+                    /** TagFilters tagFilters. */
+                    public tagFilters: google.privacy.dlp.v2.ITagFilter[];
+
+                    /**
+                     * Creates a new TagFilters instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TagFilters instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ITagFilters): google.privacy.dlp.v2.TagFilters;
+
+                    /**
+                     * Encodes the specified TagFilters message. Does not implicitly {@link google.privacy.dlp.v2.TagFilters.verify|verify} messages.
+                     * @param message TagFilters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ITagFilters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TagFilters message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TagFilters.verify|verify} messages.
+                     * @param message TagFilters message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ITagFilters, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TagFilters message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TagFilters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.TagFilters;
+
+                    /**
+                     * Decodes a TagFilters message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TagFilters
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.TagFilters;
+
+                    /**
+                     * Verifies a TagFilters message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TagFilters message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TagFilters
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.TagFilters;
+
+                    /**
+                     * Creates a plain object from a TagFilters message. Also converts values to other types if specified.
+                     * @param message TagFilters
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.TagFilters, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TagFilters to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TagFilters
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TagFilter. */
+                interface ITagFilter {
+
+                    /** TagFilter namespacedTagValue */
+                    namespacedTagValue?: (string|null);
+
+                    /** TagFilter namespacedTagKey */
+                    namespacedTagKey?: (string|null);
+                }
+
+                /** Represents a TagFilter. */
+                class TagFilter implements ITagFilter {
+
+                    /**
+                     * Constructs a new TagFilter.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.privacy.dlp.v2.ITagFilter);
+
+                    /** TagFilter namespacedTagValue. */
+                    public namespacedTagValue?: (string|null);
+
+                    /** TagFilter namespacedTagKey. */
+                    public namespacedTagKey?: (string|null);
+
+                    /** TagFilter format. */
+                    public format?: ("namespacedTagValue"|"namespacedTagKey");
+
+                    /**
+                     * Creates a new TagFilter instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TagFilter instance
+                     */
+                    public static create(properties?: google.privacy.dlp.v2.ITagFilter): google.privacy.dlp.v2.TagFilter;
+
+                    /**
+                     * Encodes the specified TagFilter message. Does not implicitly {@link google.privacy.dlp.v2.TagFilter.verify|verify} messages.
+                     * @param message TagFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.privacy.dlp.v2.ITagFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TagFilter message, length delimited. Does not implicitly {@link google.privacy.dlp.v2.TagFilter.verify|verify} messages.
+                     * @param message TagFilter message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.privacy.dlp.v2.ITagFilter, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TagFilter message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TagFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.privacy.dlp.v2.TagFilter;
+
+                    /**
+                     * Decodes a TagFilter message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TagFilter
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.privacy.dlp.v2.TagFilter;
+
+                    /**
+                     * Verifies a TagFilter message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TagFilter message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TagFilter
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.privacy.dlp.v2.TagFilter;
+
+                    /**
+                     * Creates a plain object from a TagFilter message. Also converts values to other types if specified.
+                     * @param message TagFilter
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.privacy.dlp.v2.TagFilter, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TagFilter to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TagFilter
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

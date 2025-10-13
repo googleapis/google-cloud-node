@@ -640,6 +640,23 @@ export class DlpServiceClient {
  *   image.
  * @param {google.privacy.dlp.v2.ByteContentItem} request.byteItem
  *   The content must be PNG, JPEG, SVG or BMP.
+ * @param {string} request.inspectTemplate
+ *   The full resource name of the inspection template to use. Settings in the
+ *   main `inspect_config` field override the corresponding settings in this
+ *   inspection template.
+ *
+ *   The merge behavior is as follows:
+ *
+ *     - Singular field: The main field's value replaces the value of the
+ *     corresponding field in the template.
+ *     - Repeated fields: The field values are appended to the list defined in
+ *     the template.
+ *     - Sub-messages and groups: The fields are recursively merged.
+ * @param {string} request.deidentifyTemplate
+ *   The full resource name of the de-identification template to use. Settings
+ *   in the main `image_redaction_configs` field override the corresponding
+ *   settings in this de-identification template. The request fails if the
+ *   type of the template's deidentify_config is not image_transformations.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -5695,6 +5712,8 @@ export class DlpServiceClient {
  *       - 'error_count' - Number of errors that have occurred while running.
  *   * The operator must be `=` or `!=` for status and inspected_storage.
  *
+ *   The syntax is based on https://google.aip.dev/160.
+ *
  *   Examples:
  *
  *   * inspected_storage = cloud_storage AND status = HEALTHY
@@ -5855,6 +5874,8 @@ export class DlpServiceClient {
  *       - 'error_count' - Number of errors that have occurred while running.
  *   * The operator must be `=` or `!=` for status and inspected_storage.
  *
+ *   The syntax is based on https://google.aip.dev/160.
+ *
  *   Examples:
  *
  *   * inspected_storage = cloud_storage AND status = HEALTHY
@@ -5963,6 +5984,8 @@ export class DlpServiceClient {
  *       quotation marks. Nanoseconds are ignored.
  *       - 'error_count' - Number of errors that have occurred while running.
  *   * The operator must be `=` or `!=` for status and inspected_storage.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
@@ -6322,6 +6345,8 @@ export class DlpServiceClient {
  *       - 'start_time` - Corresponds to the time the job finished.
  *   * The operator must be `=` or `!=`.
  *
+ *   The syntax is based on https://google.aip.dev/160.
+ *
  *   Examples:
  *
  *   * inspected_storage = cloud_storage AND state = done
@@ -6482,6 +6507,8 @@ export class DlpServiceClient {
  *       - 'start_time` - Corresponds to the time the job finished.
  *   * The operator must be `=` or `!=`.
  *
+ *   The syntax is based on https://google.aip.dev/160.
+ *
  *   Examples:
  *
  *   * inspected_storage = cloud_storage AND state = done
@@ -6590,6 +6617,8 @@ export class DlpServiceClient {
  *       - 'end_time` - Corresponds to the time the job finished.
  *       - 'start_time` - Corresponds to the time the job finished.
  *   * The operator must be `=` or `!=`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
@@ -6974,13 +7003,13 @@ export class DlpServiceClient {
  *   * `project_id`
  *   * `sensitivity_level desc`
  *
- *   Supported fields are:
+ *   Supported fields:
  *
  *   - `project_id`: Google Cloud project ID
- *   - `sensitivity_level`: How sensitive the data in a project is, at most.
- *   - `data_risk_level`: How much risk is associated with this data.
- *   - `profile_last_generated`: When the profile was last updated in epoch
- *   seconds.
+ *   - `sensitivity_level`: How sensitive the data in a project is, at most
+ *   - `data_risk_level`: How much risk is associated with this data
+ *   - `profile_last_generated`: Date and time (in epoch seconds) the profile
+ *     was last generated
  * @param {string} request.filter
  *   Allows filtering.
  *
@@ -6990,17 +7019,24 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `sensitivity_level` - HIGH|MODERATE|LOW
- *       - `data_risk_level` - HIGH|MODERATE|LOW
- *       - `status_code` - an RPC status code as defined in
+ *   * Supported fields:
+ *       - `project_id`: the Google Cloud project ID
+ *       - `sensitivity_level`: HIGH|MODERATE|LOW
+ *       - `data_risk_level`: HIGH|MODERATE|LOW
+ *       - `status_code`: an RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
- *   * The operator must be `=` or `!=`.
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
+ *   * The operator must be `=` or `!=`. The `profile_last_generated` filter
+ *     also supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
  *   * `project_id = 12345 AND status_code = 1`
  *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *   * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -7112,13 +7148,13 @@ export class DlpServiceClient {
  *   * `project_id`
  *   * `sensitivity_level desc`
  *
- *   Supported fields are:
+ *   Supported fields:
  *
  *   - `project_id`: Google Cloud project ID
- *   - `sensitivity_level`: How sensitive the data in a project is, at most.
- *   - `data_risk_level`: How much risk is associated with this data.
- *   - `profile_last_generated`: When the profile was last updated in epoch
- *   seconds.
+ *   - `sensitivity_level`: How sensitive the data in a project is, at most
+ *   - `data_risk_level`: How much risk is associated with this data
+ *   - `profile_last_generated`: Date and time (in epoch seconds) the profile
+ *     was last generated
  * @param {string} request.filter
  *   Allows filtering.
  *
@@ -7128,17 +7164,24 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `sensitivity_level` - HIGH|MODERATE|LOW
- *       - `data_risk_level` - HIGH|MODERATE|LOW
- *       - `status_code` - an RPC status code as defined in
+ *   * Supported fields:
+ *       - `project_id`: the Google Cloud project ID
+ *       - `sensitivity_level`: HIGH|MODERATE|LOW
+ *       - `data_risk_level`: HIGH|MODERATE|LOW
+ *       - `status_code`: an RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
- *   * The operator must be `=` or `!=`.
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
+ *   * The operator must be `=` or `!=`. The `profile_last_generated` filter
+ *     also supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
  *   * `project_id = 12345 AND status_code = 1`
  *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *   * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -7199,13 +7242,13 @@ export class DlpServiceClient {
  *   * `project_id`
  *   * `sensitivity_level desc`
  *
- *   Supported fields are:
+ *   Supported fields:
  *
  *   - `project_id`: Google Cloud project ID
- *   - `sensitivity_level`: How sensitive the data in a project is, at most.
- *   - `data_risk_level`: How much risk is associated with this data.
- *   - `profile_last_generated`: When the profile was last updated in epoch
- *   seconds.
+ *   - `sensitivity_level`: How sensitive the data in a project is, at most
+ *   - `data_risk_level`: How much risk is associated with this data
+ *   - `profile_last_generated`: Date and time (in epoch seconds) the profile
+ *     was last generated
  * @param {string} request.filter
  *   Allows filtering.
  *
@@ -7215,17 +7258,24 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `sensitivity_level` - HIGH|MODERATE|LOW
- *       - `data_risk_level` - HIGH|MODERATE|LOW
- *       - `status_code` - an RPC status code as defined in
+ *   * Supported fields:
+ *       - `project_id`: the Google Cloud project ID
+ *       - `sensitivity_level`: HIGH|MODERATE|LOW
+ *       - `data_risk_level`: HIGH|MODERATE|LOW
+ *       - `status_code`: an RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
- *   * The operator must be `=` or `!=`.
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
+ *   * The operator must be `=` or `!=`. The `profile_last_generated` filter
+ *     also supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
  *   * `project_id = 12345 AND status_code = 1`
  *   * `project_id = 12345 AND sensitivity_level = HIGH`
+ *   * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -7309,23 +7359,29 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `project_id` - The Google Cloud project ID.
- *       - `dataset_id` - The BigQuery dataset ID.
- *       - `table_id` - The ID of the BigQuery table.
- *       - `sensitivity_level` - HIGH|MODERATE|LOW
- *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *   * Supported fields:
+ *       - `project_id`: The Google Cloud project ID
+ *       - `dataset_id`: The BigQuery dataset ID
+ *       - `table_id`: The ID of the BigQuery table
+ *       - `sensitivity_level`: HIGH|MODERATE|LOW
+ *       - `data_risk_level`: HIGH|MODERATE|LOW
  *       - `resource_visibility`: PUBLIC|RESTRICTED
- *       - `status_code` - an RPC status code as defined in
+ *       - `status_code`: an RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
  *
- *   * The operator must be `=` or `!=`.
+ *   * The operator must be `=` or `!=`. The `profile_last_generated` filter
+ *     also supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
  *   * `project_id = 12345 AND status_code = 1`
  *   * `project_id = 12345 AND sensitivity_level = HIGH`
  *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+ *   * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -7461,23 +7517,29 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `project_id` - The Google Cloud project ID.
- *       - `dataset_id` - The BigQuery dataset ID.
- *       - `table_id` - The ID of the BigQuery table.
- *       - `sensitivity_level` - HIGH|MODERATE|LOW
- *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *   * Supported fields:
+ *       - `project_id`: The Google Cloud project ID
+ *       - `dataset_id`: The BigQuery dataset ID
+ *       - `table_id`: The ID of the BigQuery table
+ *       - `sensitivity_level`: HIGH|MODERATE|LOW
+ *       - `data_risk_level`: HIGH|MODERATE|LOW
  *       - `resource_visibility`: PUBLIC|RESTRICTED
- *       - `status_code` - an RPC status code as defined in
+ *       - `status_code`: an RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
  *
- *   * The operator must be `=` or `!=`.
+ *   * The operator must be `=` or `!=`. The `profile_last_generated` filter
+ *     also supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
  *   * `project_id = 12345 AND status_code = 1`
  *   * `project_id = 12345 AND sensitivity_level = HIGH`
  *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+ *   * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -7562,23 +7624,29 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `project_id` - The Google Cloud project ID.
- *       - `dataset_id` - The BigQuery dataset ID.
- *       - `table_id` - The ID of the BigQuery table.
- *       - `sensitivity_level` - HIGH|MODERATE|LOW
- *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *   * Supported fields:
+ *       - `project_id`: The Google Cloud project ID
+ *       - `dataset_id`: The BigQuery dataset ID
+ *       - `table_id`: The ID of the BigQuery table
+ *       - `sensitivity_level`: HIGH|MODERATE|LOW
+ *       - `data_risk_level`: HIGH|MODERATE|LOW
  *       - `resource_visibility`: PUBLIC|RESTRICTED
- *       - `status_code` - an RPC status code as defined in
+ *       - `status_code`: an RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
  *
- *   * The operator must be `=` or `!=`.
+ *   * The operator must be `=` or `!=`. The `profile_last_generated` filter
+ *     also supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
  *   * `project_id = 12345 AND status_code = 1`
  *   * `project_id = 12345 AND sensitivity_level = HIGH`
  *   * `project_id = 12345 AND resource_visibility = PUBLIC`
+ *   * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -7660,26 +7728,32 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `table_data_profile_name` - The name of the related table data
- *       profile.
- *       - `project_id` - The Google Cloud project ID. (REQUIRED)
- *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
- *       - `table_id` - The BigQuery table ID. (REQUIRED)
- *       - `field_id` - The ID of the BigQuery field.
- *       - `info_type` - The infotype detected in the resource.
- *       - `sensitivity_level` - HIGH|MEDIUM|LOW
- *       - `data_risk_level`: How much risk is associated with this data.
- *       - `status_code` - an RPC status code as defined in
+ *   * Supported fields:
+ *       - `table_data_profile_name`: The name of the related table data
+ *       profile
+ *       - `project_id`: The Google Cloud project ID (REQUIRED)
+ *       - `dataset_id`: The BigQuery dataset ID (REQUIRED)
+ *       - `table_id`: The BigQuery table ID (REQUIRED)
+ *       - `field_id`: The ID of the BigQuery field
+ *       - `info_type`: The infotype detected in the resource
+ *       - `sensitivity_level`: HIGH|MEDIUM|LOW
+ *       - `data_risk_level`: How much risk is associated with this data
+ *       - `status_code`: An RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
  *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
- *     filters also support `!=`.
+ *     filters also support `!=`. The `profile_last_generated` filter also
+ *     supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
  *   * project_id = 12345 AND status_code = 1
  *   * project_id = 12345 AND sensitivity_level = HIGH
  *   * project_id = 12345 AND info_type = STREET_ADDRESS
+ *   * profile_last_generated < "2025-01-01T00:00:00.000Z"
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -7813,26 +7887,32 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `table_data_profile_name` - The name of the related table data
- *       profile.
- *       - `project_id` - The Google Cloud project ID. (REQUIRED)
- *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
- *       - `table_id` - The BigQuery table ID. (REQUIRED)
- *       - `field_id` - The ID of the BigQuery field.
- *       - `info_type` - The infotype detected in the resource.
- *       - `sensitivity_level` - HIGH|MEDIUM|LOW
- *       - `data_risk_level`: How much risk is associated with this data.
- *       - `status_code` - an RPC status code as defined in
+ *   * Supported fields:
+ *       - `table_data_profile_name`: The name of the related table data
+ *       profile
+ *       - `project_id`: The Google Cloud project ID (REQUIRED)
+ *       - `dataset_id`: The BigQuery dataset ID (REQUIRED)
+ *       - `table_id`: The BigQuery table ID (REQUIRED)
+ *       - `field_id`: The ID of the BigQuery field
+ *       - `info_type`: The infotype detected in the resource
+ *       - `sensitivity_level`: HIGH|MEDIUM|LOW
+ *       - `data_risk_level`: How much risk is associated with this data
+ *       - `status_code`: An RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
  *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
- *     filters also support `!=`.
+ *     filters also support `!=`. The `profile_last_generated` filter also
+ *     supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
  *   * project_id = 12345 AND status_code = 1
  *   * project_id = 12345 AND sensitivity_level = HIGH
  *   * project_id = 12345 AND info_type = STREET_ADDRESS
+ *   * profile_last_generated < "2025-01-01T00:00:00.000Z"
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -7915,26 +7995,32 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `table_data_profile_name` - The name of the related table data
- *       profile.
- *       - `project_id` - The Google Cloud project ID. (REQUIRED)
- *       - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
- *       - `table_id` - The BigQuery table ID. (REQUIRED)
- *       - `field_id` - The ID of the BigQuery field.
- *       - `info_type` - The infotype detected in the resource.
- *       - `sensitivity_level` - HIGH|MEDIUM|LOW
- *       - `data_risk_level`: How much risk is associated with this data.
- *       - `status_code` - an RPC status code as defined in
+ *   * Supported fields:
+ *       - `table_data_profile_name`: The name of the related table data
+ *       profile
+ *       - `project_id`: The Google Cloud project ID (REQUIRED)
+ *       - `dataset_id`: The BigQuery dataset ID (REQUIRED)
+ *       - `table_id`: The BigQuery table ID (REQUIRED)
+ *       - `field_id`: The ID of the BigQuery field
+ *       - `info_type`: The infotype detected in the resource
+ *       - `sensitivity_level`: HIGH|MEDIUM|LOW
+ *       - `data_risk_level`: How much risk is associated with this data
+ *       - `status_code`: An RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
  *   * The operator must be `=` for project_id, dataset_id, and table_id. Other
- *     filters also support `!=`.
+ *     filters also support `!=`. The `profile_last_generated` filter also
+ *     supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
  *   * project_id = 12345 AND status_code = 1
  *   * project_id = 12345 AND sensitivity_level = HIGH
  *   * project_id = 12345 AND info_type = STREET_ADDRESS
+ *   * profile_last_generated < "2025-01-01T00:00:00.000Z"
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -8018,21 +8104,26 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `project_id` - The Google Cloud project ID.
- *       - `account_id` - The AWS account ID.
- *       - `file_store_path` - The path like "gs://bucket".
- *       - `data_source_type` - The profile's data source type, like
- *       "google/storage/bucket".
- *       - `data_storage_location` - The location where the file store's data is
- *       stored, like "us-central1".
- *       - `sensitivity_level` - HIGH|MODERATE|LOW
- *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *   * Supported fields:
+ *       - `project_id`: The Google Cloud project ID
+ *       - `account_id`: The AWS account ID
+ *       - `file_store_path`: The path like "gs://bucket"
+ *       - `data_source_type`: The profile's data source type, like
+ *       "google/storage/bucket"
+ *       - `data_storage_location`: The location where the file store's data is
+ *       stored, like "us-central1"
+ *       - `sensitivity_level`: HIGH|MODERATE|LOW
+ *       - `data_risk_level`: HIGH|MODERATE|LOW
  *       - `resource_visibility`: PUBLIC|RESTRICTED
- *       - `status_code` - an RPC status code as defined in
+ *       - `status_code`: an RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
  *
- *   * The operator must be `=` or `!=`.
+ *   * The operator must be `=` or `!=`. The `profile_last_generated` filter
+ *     also supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
@@ -8040,6 +8131,7 @@ export class DlpServiceClient {
  *   * `project_id = 12345 AND sensitivity_level = HIGH`
  *   * `project_id = 12345 AND resource_visibility = PUBLIC`
  *   * `file_store_path = "gs://mybucket"`
+ *   * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -8175,21 +8267,26 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `project_id` - The Google Cloud project ID.
- *       - `account_id` - The AWS account ID.
- *       - `file_store_path` - The path like "gs://bucket".
- *       - `data_source_type` - The profile's data source type, like
- *       "google/storage/bucket".
- *       - `data_storage_location` - The location where the file store's data is
- *       stored, like "us-central1".
- *       - `sensitivity_level` - HIGH|MODERATE|LOW
- *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *   * Supported fields:
+ *       - `project_id`: The Google Cloud project ID
+ *       - `account_id`: The AWS account ID
+ *       - `file_store_path`: The path like "gs://bucket"
+ *       - `data_source_type`: The profile's data source type, like
+ *       "google/storage/bucket"
+ *       - `data_storage_location`: The location where the file store's data is
+ *       stored, like "us-central1"
+ *       - `sensitivity_level`: HIGH|MODERATE|LOW
+ *       - `data_risk_level`: HIGH|MODERATE|LOW
  *       - `resource_visibility`: PUBLIC|RESTRICTED
- *       - `status_code` - an RPC status code as defined in
+ *       - `status_code`: an RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
  *
- *   * The operator must be `=` or `!=`.
+ *   * The operator must be `=` or `!=`. The `profile_last_generated` filter
+ *     also supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
@@ -8197,6 +8294,7 @@ export class DlpServiceClient {
  *   * `project_id = 12345 AND sensitivity_level = HIGH`
  *   * `project_id = 12345 AND resource_visibility = PUBLIC`
  *   * `file_store_path = "gs://mybucket"`
+ *   * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -8281,21 +8379,26 @@ export class DlpServiceClient {
  *   * Restrictions can be combined by `AND` or `OR` logical operators. A
  *   sequence of restrictions implicitly uses `AND`.
  *   * A restriction has the form of `{field} {operator} {value}`.
- *   * Supported fields/values:
- *       - `project_id` - The Google Cloud project ID.
- *       - `account_id` - The AWS account ID.
- *       - `file_store_path` - The path like "gs://bucket".
- *       - `data_source_type` - The profile's data source type, like
- *       "google/storage/bucket".
- *       - `data_storage_location` - The location where the file store's data is
- *       stored, like "us-central1".
- *       - `sensitivity_level` - HIGH|MODERATE|LOW
- *       - `data_risk_level` - HIGH|MODERATE|LOW
+ *   * Supported fields:
+ *       - `project_id`: The Google Cloud project ID
+ *       - `account_id`: The AWS account ID
+ *       - `file_store_path`: The path like "gs://bucket"
+ *       - `data_source_type`: The profile's data source type, like
+ *       "google/storage/bucket"
+ *       - `data_storage_location`: The location where the file store's data is
+ *       stored, like "us-central1"
+ *       - `sensitivity_level`: HIGH|MODERATE|LOW
+ *       - `data_risk_level`: HIGH|MODERATE|LOW
  *       - `resource_visibility`: PUBLIC|RESTRICTED
- *       - `status_code` - an RPC status code as defined in
+ *       - `status_code`: an RPC status code as defined in
  *       https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+ *       - `profile_last_generated`: Date and time the profile was last
+ *         generated
  *
- *   * The operator must be `=` or `!=`.
+ *   * The operator must be `=` or `!=`. The `profile_last_generated` filter
+ *     also supports `<` and `>`.
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  *
  *   Examples:
  *
@@ -8303,6 +8406,7 @@ export class DlpServiceClient {
  *   * `project_id = 12345 AND sensitivity_level = HIGH`
  *   * `project_id = 12345 AND resource_visibility = PUBLIC`
  *   * `file_store_path = "gs://mybucket"`
+ *   * `profile_last_generated < "2025-01-01T00:00:00.000Z"`
  *
  *   The length of this field should be no more than 500 characters.
  * @param {object} [options]
@@ -8357,6 +8461,8 @@ export class DlpServiceClient {
  *   results. If set, all other request fields must match the original request.
  * @param {string} [request.filter]
  *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -8460,6 +8566,8 @@ export class DlpServiceClient {
  *   results. If set, all other request fields must match the original request.
  * @param {string} [request.filter]
  *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -8512,6 +8620,8 @@ export class DlpServiceClient {
  *   results. If set, all other request fields must match the original request.
  * @param {string} [request.filter]
  *   Optional. Supported field/value: `state` - MISSING|AVAILABLE|ERROR
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -8563,6 +8673,8 @@ export class DlpServiceClient {
  *   results. If set, all other request fields must match the original request.
  * @param {string} [request.filter]
  *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -8666,6 +8778,8 @@ export class DlpServiceClient {
  *   results. If set, all other request fields must match the original request.
  * @param {string} [request.filter]
  *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -8718,6 +8832,8 @@ export class DlpServiceClient {
  *   results. If set, all other request fields must match the original request.
  * @param {string} [request.filter]
  *   Optional. Supported field/value: - `state` - MISSING|AVAILABLE|ERROR
+ *
+ *   The syntax is based on https://google.aip.dev/160.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}

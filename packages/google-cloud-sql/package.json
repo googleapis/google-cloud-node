@@ -57,7 +57,7 @@
     "jsdoc": "^4.0.2",
     "jsdoc-fresh": "^4.0.0",
     "jsdoc-region-tag": "^3.0.0",
-    "linkinator": "4.1.2",
+    "linkinator": "4.1.3",
     "long": "^5.2.3",
     "mocha": "^9.2.2",
     "null-loader": "^4.0.1",

@@ -69,24 +69,29 @@ function main(parent) {
    *  * Restrictions can be combined by `AND` or `OR` logical operators. A
    *  sequence of restrictions implicitly uses `AND`.
    *  * A restriction has the form of `{field} {operator} {value}`.
-   *  * Supported fields/values:
-   *      - `table_data_profile_name` - The name of the related table data
-   *      profile.
-   *      - `project_id` - The Google Cloud project ID. (REQUIRED)
-   *      - `dataset_id` - The BigQuery dataset ID. (REQUIRED)
-   *      - `table_id` - The BigQuery table ID. (REQUIRED)
-   *      - `field_id` - The ID of the BigQuery field.
-   *      - `info_type` - The infotype detected in the resource.
-   *      - `sensitivity_level` - HIGH|MEDIUM|LOW
-   *      - `data_risk_level`: How much risk is associated with this data.
-   *      - `status_code` - an RPC status code as defined in
+   *  * Supported fields:
+   *      - `table_data_profile_name`: The name of the related table data
+   *      profile
+   *      - `project_id`: The Google Cloud project ID (REQUIRED)
+   *      - `dataset_id`: The BigQuery dataset ID (REQUIRED)
+   *      - `table_id`: The BigQuery table ID (REQUIRED)
+   *      - `field_id`: The ID of the BigQuery field
+   *      - `info_type`: The infotype detected in the resource
+   *      - `sensitivity_level`: HIGH|MEDIUM|LOW
+   *      - `data_risk_level`: How much risk is associated with this data
+   *      - `status_code`: An RPC status code as defined in
    *      https://github.com/googleapis/googleapis/blob/master/google/rpc/code.proto
+   *      - `profile_last_generated`: Date and time the profile was last
+   *        generated
    *  * The operator must be `=` for project_id, dataset_id, and table_id. Other
-   *    filters also support `!=`.
+   *    filters also support `!=`. The `profile_last_generated` filter also
+   *    supports `<` and `>`.
+   *  The syntax is based on https://google.aip.dev/160.
    *  Examples:
    *  * project_id = 12345 AND status_code = 1
    *  * project_id = 12345 AND sensitivity_level = HIGH
    *  * project_id = 12345 AND info_type = STREET_ADDRESS
+   *  * profile_last_generated < "2025-01-01T00:00:00.000Z"
    *  The length of this field should be no more than 500 characters.
    */
   // const filter = 'abc123'
