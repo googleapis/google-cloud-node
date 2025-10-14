@@ -156204,6 +156204,103 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an ImageConfig. */
+                interface IImageConfig {
+
+                    /** ImageConfig aspectRatio */
+                    aspectRatio?: (string|null);
+                }
+
+                /** Represents an ImageConfig. */
+                class ImageConfig implements IImageConfig {
+
+                    /**
+                     * Constructs a new ImageConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1beta1.IImageConfig);
+
+                    /** ImageConfig aspectRatio. */
+                    public aspectRatio?: (string|null);
+
+                    /**
+                     * Creates a new ImageConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ImageConfig instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1beta1.IImageConfig): google.cloud.aiplatform.v1beta1.ImageConfig;
+
+                    /**
+                     * Encodes the specified ImageConfig message. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ImageConfig.verify|verify} messages.
+                     * @param message ImageConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1beta1.IImageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ImageConfig message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1beta1.ImageConfig.verify|verify} messages.
+                     * @param message ImageConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1beta1.IImageConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ImageConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ImageConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1beta1.ImageConfig;
+
+                    /**
+                     * Decodes an ImageConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ImageConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1beta1.ImageConfig;
+
+                    /**
+                     * Verifies an ImageConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ImageConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ImageConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1beta1.ImageConfig;
+
+                    /**
+                     * Creates a plain object from an ImageConfig message. Also converts values to other types if specified.
+                     * @param message ImageConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1beta1.ImageConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ImageConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ImageConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GenerationConfig. */
                 interface IGenerationConfig {
 
@@ -156269,6 +156366,9 @@ export namespace google {
 
                     /** GenerationConfig modelConfig */
                     modelConfig?: (google.cloud.aiplatform.v1beta1.GenerationConfig.IModelConfig|null);
+
+                    /** GenerationConfig imageConfig */
+                    imageConfig?: (google.cloud.aiplatform.v1beta1.IImageConfig|null);
                 }
 
                 /** Represents a GenerationConfig. */
@@ -156342,6 +156442,9 @@ export namespace google {
 
                     /** GenerationConfig modelConfig. */
                     public modelConfig?: (google.cloud.aiplatform.v1beta1.GenerationConfig.IModelConfig|null);
+
+                    /** GenerationConfig imageConfig. */
+                    public imageConfig?: (google.cloud.aiplatform.v1beta1.IImageConfig|null);
 
                     /**
                      * Creates a new GenerationConfig instance using the specified properties.
