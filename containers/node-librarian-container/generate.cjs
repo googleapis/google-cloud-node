@@ -13,6 +13,8 @@ try {
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
 
+  const idToGenerate = fs.readFileSync('/.librarian/generate-request.json', 'utf8').trim();
+  console.log(idToGenerate);
   if (directories.length > 0) {
     console.log('Directories found:');
     console.log(directories.join('\n'));
