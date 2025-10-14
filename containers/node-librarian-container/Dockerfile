@@ -13,6 +13,7 @@ RUN echo "This is a test file." > testfile.txt
 # It prints "Hello, World!" and then lists the contents of the current directory (/source)
 CMD ["sh", "-c", "echo 'Hello, World!' && ls -l"]
 
+COPY entrypoint.sh /usr/local/bin/
 RUN chmod 755 /usr/local/bin/entrypoint.sh
 
 ENTRYPOINT ["entrypoint.sh"]
