@@ -15,11 +15,13 @@
 
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   opts: {
     readme: './README.md',
     package: './package.json',
-    template: './node_modules/jsdoc-fresh',
+    template: path.dirname(require.resolve('jsdoc-fresh/package.json')),
     recurse: true,
     verbose: true,
     destination: './docs/',
