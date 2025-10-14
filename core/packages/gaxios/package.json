@@ -23,7 +23,7 @@
     "lint": "gts check --no-inline-config",
     "test": "c8 mocha build/esm/test",
     "presystem-test": "npm run compile",
-    "system-test": "mocha build/esm/system-test --timeout 80000",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "compile": "tsc -b ./tsconfig.json ./tsconfig.cjs.json && node utils/enable-esm.mjs",
     "fix": "gts fix",
     "prepare": "npm run compile",
@@ -34,11 +34,15 @@
     "docs": "jsdoc -c .jsdoc.js",
     "docs-test": "linkinator docs",
     "predocs-test": "npm run docs",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "prelint": "cd samples; npm link ../; npm install",
     "clean": "gts clean"
   },
-  "repository": "googleapis/gaxios",
+  "repository": {
+    "type": "git",
+    "directory": "packages/gaxios",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+  },
   "keywords": [
     "google"
   ],
@@ -98,5 +102,6 @@
     "extend": "^3.0.2",
     "https-proxy-agent": "^7.0.1",
     "node-fetch": "^3.3.2"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gaxios"
 }
