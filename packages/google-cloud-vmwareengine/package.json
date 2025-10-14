@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/vmwareengine",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "VMware Engine API client for Node.js",
   "repository": {
     "type": "git",

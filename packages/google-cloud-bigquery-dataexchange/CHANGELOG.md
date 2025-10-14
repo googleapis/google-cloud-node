@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-exchange-v2.1.0...bigquery-data-exchange-v2.1.1) (2025-10-13)
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [2.1.0](https://github.com/googleapis/google-cloud-node/compare/bigquery-data-exchange-v2.0.1...bigquery-data-exchange-v2.1.0) (2025-07-09)
 
 

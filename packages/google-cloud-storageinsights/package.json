@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/storageinsights",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Storage Insights API client for Node.js",
   "repository": {
     "type": "git",

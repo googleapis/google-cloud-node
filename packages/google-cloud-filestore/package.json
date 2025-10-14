@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/filestore",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "file client for Node.js",
   "repository": {
     "type": "git",

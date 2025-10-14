@@ -41621,6 +41621,25 @@
                         }
                       }
                     },
+                    "ImageConfig": {
+                      "oneofs": {
+                        "_aspectRatio": {
+                          "oneof": [
+                            "aspectRatio"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "aspectRatio": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "GenerationConfig": {
                       "oneofs": {
                         "_temperature": {
@@ -41701,6 +41720,11 @@
                         "_speechConfig": {
                           "oneof": [
                             "speechConfig"
+                          ]
+                        },
+                        "_imageConfig": {
+                          "oneof": [
+                            "imageConfig"
                           ]
                         }
                       },
@@ -41868,6 +41892,14 @@
                           "id": 27,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "imageConfig": {
+                          "type": "ImageConfig",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },

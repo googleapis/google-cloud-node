@@ -1,5 +1,18 @@
 # Changelog
 
+## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.7.0...aiplatform-v5.8.0) (2025-10-13)
+
+
+### Features
+
+* Add JAILBREAK category to SafetySettings for prediction service ([#6801](https://github.com/googleapis/google-cloud-node/issues/6801)) ([fcf84bf](https://github.com/googleapis/google-cloud-node/commit/fcf84bf1ece803b25b8719e80afb852ea515a4c0))
+* Add labels field for Predict API for Imagen use case (v1beta and v1) ([#6788](https://github.com/googleapis/google-cloud-node/issues/6788)) ([6a0eeb4](https://github.com/googleapis/google-cloud-node/commit/6a0eeb493f3f2eef6bbec8baa2f27aa9b9841bda))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [5.7.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.6.0...aiplatform-v5.7.0) (2025-09-09)
 
 

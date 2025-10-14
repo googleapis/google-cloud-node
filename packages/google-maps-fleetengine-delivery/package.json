@@ -1,6 +1,6 @@
 {
   "name": "@googlemaps/fleetengine-delivery",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Last Mile Fleet Solution Delivery API client for Node.js",
   "repository": {
     "type": "git",

@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.3.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.2.0...contentwarehouse-v2.3.0) (2025-10-13)
+
+
+### Features
+
+* [contentwarehouse] Added new messages `EntityValidationOutput` and `EntitiesRevision` ([#6797](https://github.com/googleapis/google-cloud-node/issues/6797)) ([4816238](https://github.com/googleapis/google-cloud-node/commit/4816238881c50b1174907d1b17b8ece52a689bd0))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/contentwarehouse-v2.1.0...contentwarehouse-v2.2.0) (2025-08-21)
 
 

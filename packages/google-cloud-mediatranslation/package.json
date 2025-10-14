@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/media-translation",
-  "version": "5.2.0",
+  "version": "5.2.1",
   "description": "Mediatranslation client for Node.js",
   "repository": {
     "type": "git",

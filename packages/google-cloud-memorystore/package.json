@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/memorystore",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Memorystore API client for Node.js",
   "repository": {
     "type": "git",

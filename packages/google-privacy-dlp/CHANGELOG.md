@@ -4,6 +4,18 @@
 
 [1]: https://www.npmjs.com/package/PACKAGE NAME?activeTab=versions
 
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.4.0...dlp-v6.5.0) (2025-10-13)
+
+
+### Features
+
+* [dlp] inspect and deid templates in RedactImage ([#6810](https://github.com/googleapis/google-cloud-node/issues/6810)) ([5d228b9](https://github.com/googleapis/google-cloud-node/commit/5d228b9d9852c4e3e9d309335f36abd7e1085801))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+
 ## [6.4.0](https://github.com/googleapis/google-cloud-node/compare/dlp-v6.3.0...dlp-v6.4.0) (2025-09-09)
 
 

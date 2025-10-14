@@ -1,5 +1,18 @@
 # Changelog
 
+## [9.5.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.4.0...documentai-v9.5.0) (2025-10-13)
+
+
+### Features
+
+* [documentai] Added new messages `EntityValidationOutput` and `EntitiesRevision` ([#6796](https://github.com/googleapis/google-cloud-node/issues/6796)) ([40bfb8b](https://github.com/googleapis/google-cloud-node/commit/40bfb8b69831e8b84f429871328a594d3bc0e1f2))
+
+
+### Bug Fixes
+
+* [gkeconnect-gateway] remove unused GatewayServiceClient ([#6775](https://github.com/googleapis/google-cloud-node/issues/6775)) ([41c2ff2](https://github.com/googleapis/google-cloud-node/commit/41c2ff2851b5fdadabf4f9bd3500167c34b32ff7))
+* Remove unmaintained modules ([#6789](https://github.com/googleapis/google-cloud-node/issues/6789)) ([5540190](https://github.com/googleapis/google-cloud-node/commit/5540190bfce6a97615191ecd36835376b919f487))
+
 ## [9.4.0](https://github.com/googleapis/google-cloud-node/compare/documentai-v9.3.0...documentai-v9.4.0) (2025-08-21)
 
 

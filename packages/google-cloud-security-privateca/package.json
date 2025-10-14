@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/security-private-ca",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Privateca client for Node.js",
   "repository": {
     "type": "git",
