@@ -1,4 +1,4 @@
-image: us-docker.pkg.dev/coleleah-sofialeon/node-librarian-generator/node-librarian-generator@sha256:11a887e932847fd91e61ec800c5309fb5e4cfeb9e4b716352ef4902855e2ba21
+image: us-docker.pkg.dev/coleleah-sofialeon/node-librarian-generator/node-librarian-generator@sha256:c066bd7e875b58be7d1319f72dc277dc4f3933b7499282b9a08a317143abb7d6
 libraries:
   - id: google-cloud-asset
     version: 6.3.0
