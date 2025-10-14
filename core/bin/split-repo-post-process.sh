@@ -31,32 +31,6 @@ echo "Adding release-please manifest version"
 cat .release-please-manifest.json | jq --sort-keys ". * {\"${PACKAGE_PATH}\": \"${LATEST_VERSION}\"}" > .release-please-manifest2.json
 mv .release-please-manifest2.json .release-please-manifest.json
  
-echo "Moving ${PACKAGE_PATH}/.github/.OwlBot.yaml"
-mv "${PACKAGE_PATH}/.github/.OwlBot.yaml" "${PACKAGE_PATH}/.OwlBot.yaml"
- 
-echo "Fixing format of ${PACKAGE_PATH}/.OwlBot.yaml"
-# remove `docker:` line
-sed -i "/docker:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
-# remove `image:` line
-sed -i "/image:/d" "${PACKAGE_PATH}/.OwlBot.yaml"
- 
-if grep -q "/owl-bot-staging/\$1/\$2" "${PACKAGE_PATH}/.OwlBot.yaml"
-then
-  echo "OwlBot config is copying each folder"
-  sed -i 's/\.\*-nodejs\/(.*)/.*-nodejs/' "${PACKAGE_PATH}/.OwlBot.yaml"
-  sed -i "s/dest: \/owl-bot-staging\/\$1\/\$2/dest: \/owl-bot-staging\/${PACKAGE_NAME}\/\$1/" "${PACKAGE_PATH}/.OwlBot.yaml"
-else
-  sed -i "s/dest: \/owl-bot-staging/dest: \/owl-bot-staging\/${PACKAGE_NAME}/" "${PACKAGE_PATH}/.OwlBot.yaml"
-fi
- 
-echo "fixing owlbot.py file"
- 
-if test -f "${PACKAGE_PATH}/owlbot.py"; then
-  sed -i "s/import synthtool.languages.node as node/import synthtool.languages.node_mono_repo as node/" "${PACKAGE_PATH}/owlbot.py"
-  echo sed -i "s/node.owlbot_main(/node.owlbot_main(relative_dir=${PACKAGE_PATH},/" "${PACKAGE_PATH}/owlbot.py"
-  sed -i "s|node.owlbot_main(|node.owlbot_main(relative_dir=\"${PACKAGE_PATH}\",|" "${PACKAGE_PATH}/owlbot.py"
-fi
- 
 # update .repo and .issue_tracker in .repo-metadata.json
 echo "Update .repo-metadata.json"
 echo "updating .repo to googleapis/google-cloud-node-core"
@@ -89,19 +63,8 @@ echo "updating homepage"
 # using a temp file because jq doesn't like writing to the input file as it reads
 jq -r ".homepage = \"https://github.com/googleapis/google-cloud-node-core/tree/main/packages/${PACKAGE_NAME}\"" ${PACKAGE_PATH}/package.json > ${PACKAGE_PATH}/package2.json
 mv ${PACKAGE_PATH}/package2.json ${PACKAGE_PATH}/package.json
- 
-if !(test -f "${PACKAGE_PATH}/owlbot.py"); then
-IMAGE="gcr.io/cloud-devrel-public-resources/owlbot-nodejs-mono-repo:latest"
-echo "Running post-processor: ${IMAGE}"
-docker pull "${IMAGE}"
-docker run --rm \
-  --user $(id -u):$(id -g) \
-  -v $(pwd):/workspace/google-cloud-node-core \
-  -w /workspace/google-cloud-node-core \
-  -e "DEFAULT_BRANCH=main" \
-  "${IMAGE}"
-fi
+
  
 # add changes to local git directory
 git add .
-git commit -am "build: add release-please config, fix owlbot-config"
+git commit -am "build: add release-please config, delete owlbot-config"
