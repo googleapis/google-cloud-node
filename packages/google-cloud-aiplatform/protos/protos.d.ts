@@ -117317,6 +117317,9 @@ export namespace google {
                 /** Properties of a ReasoningEngineSpec. */
                 interface IReasoningEngineSpec {
 
+                    /** ReasoningEngineSpec sourceCodeSpec */
+                    sourceCodeSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.ISourceCodeSpec|null);
+
                     /** ReasoningEngineSpec serviceAccount */
                     serviceAccount?: (string|null);
 
@@ -117342,6 +117345,9 @@ export namespace google {
                      */
                     constructor(properties?: google.cloud.aiplatform.v1.IReasoningEngineSpec);
 
+                    /** ReasoningEngineSpec sourceCodeSpec. */
+                    public sourceCodeSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.ISourceCodeSpec|null);
+
                     /** ReasoningEngineSpec serviceAccount. */
                     public serviceAccount?: (string|null);
 
@@ -117356,6 +117362,9 @@ export namespace google {
 
                     /** ReasoningEngineSpec agentFramework. */
                     public agentFramework: string;
+
+                    /** ReasoningEngineSpec deploymentSource. */
+                    public deploymentSource?: "sourceCodeSpec";
 
                     /**
                      * Creates a new ReasoningEngineSpec instance using the specified properties.
@@ -117684,6 +117693,330 @@ export namespace google {
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
+
+                    /** Properties of a SourceCodeSpec. */
+                    interface ISourceCodeSpec {
+
+                        /** SourceCodeSpec inlineSource */
+                        inlineSource?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IInlineSource|null);
+
+                        /** SourceCodeSpec pythonSpec */
+                        pythonSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec|null);
+                    }
+
+                    /** Represents a SourceCodeSpec. */
+                    class SourceCodeSpec implements ISourceCodeSpec {
+
+                        /**
+                         * Constructs a new SourceCodeSpec.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.ISourceCodeSpec);
+
+                        /** SourceCodeSpec inlineSource. */
+                        public inlineSource?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IInlineSource|null);
+
+                        /** SourceCodeSpec pythonSpec. */
+                        public pythonSpec?: (google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec|null);
+
+                        /** SourceCodeSpec source. */
+                        public source?: "inlineSource";
+
+                        /** SourceCodeSpec languageSpec. */
+                        public languageSpec?: "pythonSpec";
+
+                        /**
+                         * Creates a new SourceCodeSpec instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns SourceCodeSpec instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.ISourceCodeSpec): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec;
+
+                        /**
+                         * Encodes the specified SourceCodeSpec message. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.verify|verify} messages.
+                         * @param message SourceCodeSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.ISourceCodeSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified SourceCodeSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.verify|verify} messages.
+                         * @param message SourceCodeSpec message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.ISourceCodeSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a SourceCodeSpec message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns SourceCodeSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec;
+
+                        /**
+                         * Decodes a SourceCodeSpec message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns SourceCodeSpec
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec;
+
+                        /**
+                         * Verifies a SourceCodeSpec message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a SourceCodeSpec message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns SourceCodeSpec
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec;
+
+                        /**
+                         * Creates a plain object from a SourceCodeSpec message. Also converts values to other types if specified.
+                         * @param message SourceCodeSpec
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this SourceCodeSpec to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for SourceCodeSpec
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace SourceCodeSpec {
+
+                        /** Properties of an InlineSource. */
+                        interface IInlineSource {
+
+                            /** InlineSource sourceArchive */
+                            sourceArchive?: (Uint8Array|Buffer|string|null);
+                        }
+
+                        /** Represents an InlineSource. */
+                        class InlineSource implements IInlineSource {
+
+                            /**
+                             * Constructs a new InlineSource.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IInlineSource);
+
+                            /** InlineSource sourceArchive. */
+                            public sourceArchive: (Uint8Array|Buffer|string);
+
+                            /**
+                             * Creates a new InlineSource instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns InlineSource instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IInlineSource): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.InlineSource;
+
+                            /**
+                             * Encodes the specified InlineSource message. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.InlineSource.verify|verify} messages.
+                             * @param message InlineSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IInlineSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified InlineSource message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.InlineSource.verify|verify} messages.
+                             * @param message InlineSource message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IInlineSource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes an InlineSource message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns InlineSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.InlineSource;
+
+                            /**
+                             * Decodes an InlineSource message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns InlineSource
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.InlineSource;
+
+                            /**
+                             * Verifies an InlineSource message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates an InlineSource message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns InlineSource
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.InlineSource;
+
+                            /**
+                             * Creates a plain object from an InlineSource message. Also converts values to other types if specified.
+                             * @param message InlineSource
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.InlineSource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this InlineSource to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for InlineSource
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        /** Properties of a PythonSpec. */
+                        interface IPythonSpec {
+
+                            /** PythonSpec version */
+                            version?: (string|null);
+
+                            /** PythonSpec entrypointModule */
+                            entrypointModule?: (string|null);
+
+                            /** PythonSpec entrypointObject */
+                            entrypointObject?: (string|null);
+
+                            /** PythonSpec requirementsFile */
+                            requirementsFile?: (string|null);
+                        }
+
+                        /** Represents a PythonSpec. */
+                        class PythonSpec implements IPythonSpec {
+
+                            /**
+                             * Constructs a new PythonSpec.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec);
+
+                            /** PythonSpec version. */
+                            public version: string;
+
+                            /** PythonSpec entrypointModule. */
+                            public entrypointModule: string;
+
+                            /** PythonSpec entrypointObject. */
+                            public entrypointObject: string;
+
+                            /** PythonSpec requirementsFile. */
+                            public requirementsFile: string;
+
+                            /**
+                             * Creates a new PythonSpec instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns PythonSpec instance
+                             */
+                            public static create(properties?: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.PythonSpec;
+
+                            /**
+                             * Encodes the specified PythonSpec message. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.PythonSpec.verify|verify} messages.
+                             * @param message PythonSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified PythonSpec message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.PythonSpec.verify|verify} messages.
+                             * @param message PythonSpec message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.IPythonSpec, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a PythonSpec message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns PythonSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.PythonSpec;
+
+                            /**
+                             * Decodes a PythonSpec message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns PythonSpec
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.PythonSpec;
+
+                            /**
+                             * Verifies a PythonSpec message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a PythonSpec message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns PythonSpec
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.PythonSpec;
+
+                            /**
+                             * Creates a plain object from a PythonSpec message. Also converts values to other types if specified.
+                             * @param message PythonSpec
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.PythonSpec, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this PythonSpec to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for PythonSpec
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+                    }
                 }
 
                 /** Properties of a ReasoningEngine. */
@@ -117712,6 +118045,9 @@ export namespace google {
 
                     /** ReasoningEngine encryptionSpec */
                     encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
+
+                    /** ReasoningEngine labels */
+                    labels?: ({ [k: string]: string }|null);
                 }
 
                 /** Represents a ReasoningEngine. */
@@ -117746,6 +118082,9 @@ export namespace google {
 
                     /** ReasoningEngine encryptionSpec. */
                     public encryptionSpec?: (google.cloud.aiplatform.v1.IEncryptionSpec|null);
+
+                    /** ReasoningEngine labels. */
+                    public labels: { [k: string]: string };
 
                     /**
                      * Creates a new ReasoningEngine instance using the specified properties.
