@@ -2,7 +2,7 @@ image: us-docker.pkg.dev/coleleah-sofialeon/node-librarian-generator/node-librar
 libraries:
   - id: google-cloud-asset
     version: 6.3.0
-    last_generated_commit: 5540190bfce6a97615191ecd36835376b919f487
+    last_generated_commit: 7e90a532b8fc4a127ffda6932dc0af894c2ac3c8
     apis:
       - path: google/cloud/asset/v1p5beta1
         service_config: cloudasset_v1p5beta1.yaml
@@ -14,4 +14,6 @@ libraries:
         service_config: cloudasset_v1p2beta1.yaml
     source_roots:
       - packages/google-cloud-asset
+    preserve_regex: []
+    remove_regex: []
     tag_format: '{id}-v{version}'
