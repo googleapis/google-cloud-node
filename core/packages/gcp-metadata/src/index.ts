@@ -13,8 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import {GaxiosError, GaxiosOptions, GaxiosResponse, request} from 'gaxios';
+import {
+  type GaxiosError,
+  type GaxiosOptions,
+  type GaxiosResponse,
+  request,
+} from 'gaxios';
 import jsonBigint = require('json-bigint');
 import {detectGCPResidency} from './gcp-residency';
 import * as logger from 'google-logging-utils';

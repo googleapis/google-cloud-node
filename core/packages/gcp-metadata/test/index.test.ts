@@ -237,7 +237,7 @@ describe('unit test', () => {
 
     try {
       await gcp.instance();
-    } catch (err) {
+    } catch (err: any) {
       assert(err instanceof GaxiosError);
       assert.strictEqual(err.status, 404);
     }
