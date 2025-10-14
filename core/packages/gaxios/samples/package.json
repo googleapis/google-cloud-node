@@ -1,0 +1,17 @@
+{
+  "name": "gaxios-samples",
+  "private": true,
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "test": "mocha"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "gaxios": "^7.1.2"
+  },
+  "devDependencies": {
+    "mocha": "^8.0.0"
+  }
+}
