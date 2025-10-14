@@ -3,7 +3,7 @@ const path = require('path');
 
 // This script is expected to run inside a container where the source code
 // has been copied to /usr/local/bin/source.
-const sourceDir = '/usr/local/bin/source';
+const sourceDir = '/source';
 
 console.log(`--- Listing directories in ${sourceDir} ---`);
 
@@ -25,9 +25,9 @@ try {
 
 } catch (error) {
   console.error(`Error accessing directory ${sourceDir}:`, error.message);
-  console.log('--- Listing contents of /usr/local/bin for debugging ---');
+  console.log('--- Listing contents of . for debugging ---');
   try {
-    const parentDirContents = fs.readdirSync('/usr/local/bin');
+    const parentDirContents = fs.readdirSync('.');
     console.log(parentDirContents.join('\n'));
   } catch (e) {
     console.error('Failed to list /usr/local/bin contents.', e.message);

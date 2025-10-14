@@ -30,9 +30,6 @@ CMD ["sh", "-c", "echo 'Hello, World!' && ls -l"]
 COPY entrypoint.sh /usr/local/bin/
 COPY generate.cjs /usr/local/bin/
 
-WORKDIR /source
-COPY . /usr/local/bin/
-
 RUN chmod 755 /usr/local/bin/generate.cjs
 RUN chmod 755 /usr/local/bin/entrypoint.sh
 
