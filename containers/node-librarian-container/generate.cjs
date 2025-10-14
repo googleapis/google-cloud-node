@@ -1,3 +1,4 @@
+const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -13,8 +14,11 @@ try {
     .filter(dirent => dirent.isDirectory())
     .map(dirent => dirent.name);
 
-  const idToGenerate = fs.readFileSync('/librarian/generate-request.json', 'utf8').trim();
-  console.log(idToGenerate);
+  const idToGenerate = (JSON.parse(fs.readFileSync('/librarian/generate-request.json', 'utf8').trim())).id;
+  const pathToFollow = idToGenerate.replace(/-/g, '/');
+
+  execSync(`bazel build //${pathToFollow}:${sourceDir}-nodejs`, {cwd: `${sourceDir}`});
+  
   if (directories.length > 0) {
     console.log('Directories found:');
     console.log(directories.join('\n'));
