@@ -32,6 +32,6 @@ execSync(`bazelisk --output_base=/tmp/bazel_output build --disk_cache="" --spawn
 });
 console.log(execSync('ls -a', {cwd: `/tmp/bazel_output/execroot/com_google_googleapis/bazel-out/k8-fastbuild/bin/${pathToFollow}`}).toString());
 // console.log(execSync('ls -a', {cwd: '/output'}));
-// execSync(`tar -xzf ${idToGenerate}-nodejs.tar.gz`, {
-//     cwd: '/output ',
-// });
+execSync(`tar -xzf ${idToGenerate}-nodejs.tar.gz -C /output`, {
+    cwd: `/tmp/bazel_output/execroot/com_google_googleapis/bazel-out/k8-fastbuild/bin/${pathToFollow}`,
+});
