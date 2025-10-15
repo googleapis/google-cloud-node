@@ -14,4 +14,4 @@ const directories = allEntries
 const idToGenerate = (JSON.parse(fs.readFileSync('/librarian/generate-request.json', 'utf8').trim())).id;
 const pathToFollow = idToGenerate.replace(/-/g, '/');
 
-execSync(`bazel build //${pathToFollow}:${idToGenerate}-nodejs`, {cwd: `${sourceDir}`});
+execSync(`bazelisk build //${pathToFollow}:${idToGenerate}-nodejs`, {cwd: `${sourceDir}`});

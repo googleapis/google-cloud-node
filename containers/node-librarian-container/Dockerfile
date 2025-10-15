@@ -15,13 +15,8 @@ RUN apt-get update && apt-get install -y curl && \
 # Remove unnecessary cross-spawn from npm to resolve CVE-2024-21538
 RUN rm -r /usr/lib/node_modules/npm/node_modules/cross-spawn
 
- # Install Bazel                                                                             
-RUN apt-get update && apt-get install -y apt-transport-https curl gnupg && \                                      
-    curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > /etc/apt/trusted.gpg.d/bazel.gpg && \  
-    echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \                                                                             
-    apt-get update && \                                                                                           
-    apt-get install -y bazel && \                                                                                 
-    rm -rf /var/lib/apt/lists/*                                                                                   
+# Install bazelisk
+RUN npm install -g @bazel/bazelisk
 
 # Create a dummy file in /source to show it works
 RUN echo "This is a test file." > testfile.txt
