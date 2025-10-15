@@ -2962,6 +2962,25 @@
                         }
                       }
                     },
+                    "ImageConfig": {
+                      "oneofs": {
+                        "_aspectRatio": {
+                          "oneof": [
+                            "aspectRatio"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "aspectRatio": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "GenerationConfig": {
                       "oneofs": {
                         "_temperature": {
@@ -3027,6 +3046,11 @@
                         "_routingConfig": {
                           "oneof": [
                             "routingConfig"
+                          ]
+                        },
+                        "_imageConfig": {
+                          "oneof": [
+                            "imageConfig"
                           ]
                         }
                       },
@@ -3155,6 +3179,14 @@
                           "id": 25,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "imageConfig": {
+                          "type": "ImageConfig",
+                          "id": 30,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         }
                       },
