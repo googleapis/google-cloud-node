@@ -3,9 +3,6 @@
 # Use a minimal base image
 FROM marketplace.gcr.io/google/debian12:latest
 
-# Set the USER environment variable
-ENV USER=node
-
 # Add NodeSource APT repository for Node.js v18
 RUN apt-get update && apt-get install -y curl && \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
@@ -17,6 +14,9 @@ RUN rm -r /usr/lib/node_modules/npm/node_modules/cross-spawn
 
 # Install bazelisk
 RUN npm install -g @bazel/bazelisk
+
+# Set HOME directory for root user to ensure bazelisk can write to its cache.
+ENV HOME=/root
 
 # Create a dummy file in /source to show it works
 RUN echo "This is a test file." > testfile.txt
