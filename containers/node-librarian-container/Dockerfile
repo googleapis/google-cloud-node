@@ -3,6 +3,9 @@
 # Use a minimal base image
 FROM marketplace.gcr.io/google/debian12:latest
 
+# Set the USER environment variable
+ENV USER=node
+
 # Add NodeSource APT repository for Node.js v18
 RUN apt-get update && apt-get install -y curl && \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
