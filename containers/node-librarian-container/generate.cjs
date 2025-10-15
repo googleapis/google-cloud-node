@@ -14,13 +14,17 @@ const directories = allEntries
 const idToGenerate = (JSON.parse(fs.readFileSync('/librarian/generate-request.json', 'utf8').trim())).id;
 const pathToFollow = idToGenerate.replace(/-/g, '/');
 
+// The arbitrary user environment often does not define $USER, which causes Bazel (run by Bazelisk) to crash.
+// We pass an explicit environment to execSync, ensuring USER is set to a safe, generic value.
 const bazelEnv = {
     ...process.env,
     // Set a generic USER name to satisfy Bazel's check for a defined user.
     USER: 'container_user'
 };
 
-execSync(`bazelisk build --output_base=/tmp/bazel_output --disk_cache="" //${pathToFollow}:${idToGenerate}-nodejs`, {
+// CRITICAL FIX: The --output_base flag MUST be a startup option, meaning it must 
+// appear before the 'build' command. Moving it ensures Bazel recognizes it correctly.
+execSync(`bazelisk --output_base=/tmp/bazel_output --disk_cache="" build //${pathToFollow}:${idToGenerate}-nodejs`, {
     cwd: `${sourceDir}`,
     env: bazelEnv // Pass the augmented environment
-})
+});
