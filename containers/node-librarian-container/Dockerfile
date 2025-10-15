@@ -15,6 +15,11 @@ RUN npm install -g @bazel/bazelisk
 
 # --- START of Arbitrary User Fixes for Bazel/Bazelisk ---
 
+# IMPORTANT FIX: Set HOME to a world-writable directory.
+# This prevents Bazel (run by Bazelisk) from defaulting its execution cache 
+# location to unwritable paths like '/.cache' when running as an arbitrary user.
+ENV HOME=/tmp
+
 # Set environment variables for both Bazelisk and the underlying Bazel binary
 # to ensure they operate in world-writable /tmp directories. This is critical
 # for running the container as an arbitrary, non-root user (UID/GID specified by Librarian).
@@ -33,7 +38,12 @@ RUN mkdir -p ${BAZEL_HOME} && \
     chmod -R a+rwx ${BAZEL_CACHE_DIR} && \
     # CRITICAL FIX: Ensure the output_base used in generate.cjs is writable
     mkdir -p /tmp/bazel_output && \
-    chmod -R a+rwx /tmp/bazel_output
+    chmod -R a+rwx /tmp/bazel_output && \
+    # FIX for FATAL: mkdir('/.cache/...'): Permission denied
+    # Create the cache directory Bazelisk uses for the downloaded Bazel binary.
+    # Because HOME is now /tmp, this path is /tmp/.cache/bazel.
+    mkdir -p /tmp/.cache/bazel && \
+    chmod -R a+rwx /tmp/.cache/bazel
 
 # --- END of Arbitrary User Fixes for Bazel/Bazelisk ---
 
