@@ -4,7 +4,7 @@ FROM marketplace.gcr.io/google/debian12:latest
 # Add NodeSource APT repository for Node.js v18
 RUN apt-get update && apt-get install -y curl && \
     curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
-    apt-get install -y nodejs && \
+    apt-get install -y nodejs openjdk-17-jre-headless && \
     rm -rf /var/lib/apt/lists/*
 
 # Remove unnecessary cross-spawn from npm to resolve CVE-2024-21538
