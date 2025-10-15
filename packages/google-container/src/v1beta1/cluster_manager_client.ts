@@ -833,6 +833,14 @@ export class ClusterManagerClient {
  *   in which the node pool's nodes should be located. Changing the locations
  *   for a node pool will result in nodes being either created or removed from
  *   the node pool, depending on whether locations are being added or removed.
+ *
+ *   Warning: It is recommended to update node pool locations in a standalone
+ *   API call. Do not combine a location update with changes to other fields
+ *   (such as `tags`, `labels`, `taints`, etc.) in the same request.
+ *   Otherwise, the API performs a structural modification where changes to
+ *   other fields will only apply to newly created nodes and will not be
+ *   applied to existing nodes in the node pool. To ensure all nodes are updated
+ *   consistently, use a separate API call for location changes.
  * @param {google.container.v1beta1.WorkloadMetadataConfig} request.workloadMetadataConfig
  *   The desired workload metadata config for the node pool.
  * @param {string} request.name
