@@ -30,6 +30,7 @@ execSync(`bazelisk --output_base=/tmp/bazel_output build --disk_cache="" --spawn
     cwd: sourceDir,
     env: bazelEnv // Pass the augmented environment
 });
+console.log(execSync('ls -a', {cwd: '/tmp/bazel_output/execroot/com_google_googleapis/bazel-out/k8-fastbuild/bin'}));
 execSync(`tar -xzf /tmp/bazel_output/execroot/com_google_googleapis/bazel-out/k8-fastbuild/bin/${pathToFollow}/${idToGenerate}-nodejs.tar.gz -C /output`, {
     cwd: sourceDir,
     env: bazelEnv
