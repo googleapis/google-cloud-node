@@ -21,6 +21,11 @@ RUN npm install -g @bazel/bazelisk
 # Set BAZELISK_HOME to a writable directory
 ENV BAZELISK_HOME=/tmp/bazelisk_home
 
+# Create a non-root user, create and chown directories for bazel, then switch to the new user
+RUN useradd -ms /bin/bash node && \
+    mkdir -p /tmp/bazelisk_home /tmp/bazel_output_root && \
+    chown -R node:node /tmp/bazelisk_home /tmp/bazel_output_root
+
 # Create a dummy file in /source to show it works
 RUN echo "This is a test file." > testfile.txt
 
@@ -34,5 +39,6 @@ COPY generate.cjs /usr/local/bin/
 RUN chmod 755 /usr/local/bin/generate.cjs
 RUN chmod 755 /usr/local/bin/entrypoint.sh
 
+USER node
 ENTRYPOINT ["entrypoint.sh"]
 
