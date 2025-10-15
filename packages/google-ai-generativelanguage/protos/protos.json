@@ -491,6 +491,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "responseJsonSchemaOrdered": {
+                          "type": "google.protobuf.Value",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "presencePenalty": {
                           "type": "float",
                           "id": 15,
@@ -665,6 +672,11 @@
                           "oneof": [
                             "index"
                           ]
+                        },
+                        "_finishMessage": {
+                          "oneof": [
+                            "finishMessage"
+                          ]
                         }
                       },
                       "fields": {
@@ -688,6 +700,14 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finishMessage": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         },
                         "safetyRatings": {
@@ -753,7 +773,11 @@
                             "SPII": 9,
                             "MALFORMED_FUNCTION_CALL": 10,
                             "IMAGE_SAFETY": 11,
-                            "UNEXPECTED_TOOL_CALL": 12
+                            "IMAGE_PROHIBITED_CONTENT": 14,
+                            "IMAGE_OTHER": 15,
+                            "NO_IMAGE": 16,
+                            "UNEXPECTED_TOOL_CALL": 12,
+                            "TOO_MANY_TOOL_CALLS": 13
                           }
                         }
                       }
@@ -783,13 +807,29 @@
                           "values": {
                             "URL_RETRIEVAL_STATUS_UNSPECIFIED": 0,
                             "URL_RETRIEVAL_STATUS_SUCCESS": 1,
-                            "URL_RETRIEVAL_STATUS_ERROR": 2
+                            "URL_RETRIEVAL_STATUS_ERROR": 2,
+                            "URL_RETRIEVAL_STATUS_PAYWALL": 3,
+                            "URL_RETRIEVAL_STATUS_UNSAFE": 4
                           }
                         }
                       }
                     },
                     "LogprobsResult": {
+                      "oneofs": {
+                        "_logProbabilitySum": {
+                          "oneof": [
+                            "logProbabilitySum"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "logProbabilitySum": {
+                          "type": "float",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "topCandidates": {
                           "rule": "repeated",
                           "type": "TopCandidates",
@@ -1201,6 +1241,11 @@
                       }
                     },
                     "HarmCategory": {
+                      "valuesOptions": {
+                        "HARM_CATEGORY_CIVIC_INTEGRITY": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "HARM_CATEGORY_UNSPECIFIED": 0,
                         "HARM_CATEGORY_DEROGATORY": 1,
@@ -7654,10 +7699,41 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "partMetadata": {
+                          "type": "google.protobuf.Struct",
+                          "id": 8
+                        }
+                      }
+                    },
+                    "FunctionResponsePart": {
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "inlineData"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inlineData": {
+                          "type": "FunctionResponseBlob",
+                          "id": 1
                         }
                       }
                     },
                     "Blob": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "data": {
+                          "type": "bytes",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FunctionResponseBlob": {
                       "fields": {
                         "mimeType": {
                           "type": "string",
@@ -7797,6 +7873,13 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
+                        "computerUse": {
+                          "type": "ComputerUse",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "urlContext": {
                           "type": "UrlContext",
                           "id": 8,
@@ -7813,6 +7896,33 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
+                        "ComputerUse": {
+                          "fields": {
+                            "environment": {
+                              "type": "Environment",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "excludedPredefinedFunctions": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 5,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "Environment": {
+                              "values": {
+                                "ENVIRONMENT_UNSPECIFIED": 0,
+                                "ENVIRONMENT_BROWSER": 1
                               }
                             }
                           }
@@ -8053,6 +8163,14 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parts": {
+                          "rule": "repeated",
+                          "type": "FunctionResponsePart",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
                         "willContinue": {
@@ -8610,6 +8728,11 @@
                       }
                     },
                     "HarmCategory": {
+                      "valuesOptions": {
+                        "HARM_CATEGORY_CIVIC_INTEGRITY": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "HARM_CATEGORY_UNSPECIFIED": 0,
                         "HARM_CATEGORY_DEROGATORY": 1,
@@ -8855,7 +8978,8 @@
                           "values": {
                             "SOURCE_UNSPECIFIED": 0,
                             "UPLOADED": 1,
-                            "GENERATED": 2
+                            "GENERATED": 2,
+                            "REGISTERED": 3
                           }
                         }
                       }
@@ -9419,6 +9543,25 @@
                         }
                       }
                     },
+                    "ImageConfig": {
+                      "oneofs": {
+                        "_aspectRatio": {
+                          "oneof": [
+                            "aspectRatio"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "aspectRatio": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      }
+                    },
                     "GenerationConfig": {
                       "oneofs": {
                         "_candidateCount": {
@@ -9484,6 +9627,11 @@
                         "_thinkingConfig": {
                           "oneof": [
                             "thinkingConfig"
+                          ]
+                        },
+                        "_imageConfig": {
+                          "oneof": [
+                            "imageConfig"
                           ]
                         },
                         "_mediaResolution": {
@@ -9567,6 +9715,15 @@
                           "type": "google.protobuf.Value",
                           "id": 24,
                           "options": {
+                            "json_name": "_responseJsonSchema",
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "responseJsonSchemaOrdered": {
+                          "type": "google.protobuf.Value",
+                          "id": 28,
+                          "options": {
+                            "json_name": "responseJsonSchema",
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
@@ -9629,6 +9786,14 @@
                         "thinkingConfig": {
                           "type": "ThinkingConfig",
                           "id": 22,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "imageConfig": {
+                          "type": "ImageConfig",
+                          "id": 27,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL",
                             "proto3_optional": true
@@ -9852,6 +10017,11 @@
                           "oneof": [
                             "index"
                           ]
+                        },
+                        "_finishMessage": {
+                          "oneof": [
+                            "finishMessage"
+                          ]
                         }
                       },
                       "fields": {
@@ -9875,6 +10045,14 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finishMessage": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         },
                         "safetyRatings": {
@@ -9948,7 +10126,12 @@
                             "SPII": 9,
                             "MALFORMED_FUNCTION_CALL": 10,
                             "IMAGE_SAFETY": 11,
-                            "UNEXPECTED_TOOL_CALL": 12
+                            "IMAGE_PROHIBITED_CONTENT": 14,
+                            "IMAGE_OTHER": 15,
+                            "NO_IMAGE": 16,
+                            "IMAGE_RECITATION": 17,
+                            "UNEXPECTED_TOOL_CALL": 12,
+                            "TOO_MANY_TOOL_CALLS": 13
                           }
                         }
                       }
@@ -9978,13 +10161,29 @@
                           "values": {
                             "URL_RETRIEVAL_STATUS_UNSPECIFIED": 0,
                             "URL_RETRIEVAL_STATUS_SUCCESS": 1,
-                            "URL_RETRIEVAL_STATUS_ERROR": 2
+                            "URL_RETRIEVAL_STATUS_ERROR": 2,
+                            "URL_RETRIEVAL_STATUS_PAYWALL": 3,
+                            "URL_RETRIEVAL_STATUS_UNSAFE": 4
                           }
                         }
                       }
                     },
                     "LogprobsResult": {
+                      "oneofs": {
+                        "_logProbabilitySum": {
+                          "oneof": [
+                            "logProbabilitySum"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "logProbabilitySum": {
+                          "type": "float",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "topCandidates": {
                           "rule": "repeated",
                           "type": "TopCandidates",
@@ -11109,6 +11308,13 @@
                         "urlContextMetadata": {
                           "type": "UrlContextMetadata",
                           "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "waitingForInput": {
+                          "type": "bool",
+                          "id": 10,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -12796,7 +13002,7 @@
                       },
                       "fields": {
                         "generateVideoResponse": {
-                          "type": "GenerateVideoResponse",
+                          "type": "PredictLongRunningGeneratedVideoResponse",
                           "id": 1
                         }
                       }
@@ -12839,7 +13045,7 @@
                         }
                       }
                     },
-                    "GenerateVideoResponse": {
+                    "PredictLongRunningGeneratedVideoResponse": {
                       "fields": {
                         "generatedSamples": {
                           "rule": "repeated",
