@@ -158,6 +158,158 @@
           }
         }
       }
+    },
+    {
+      "regionTag": "routeoptimization_v1_generated_RouteOptimization_OptimizeToursLongRunning_async",
+      "title": "RouteOptimization optimizeToursLongRunning Sample",
+      "origin": "API_DEFINITION",
+      "description": " This is a variant of the [OptimizeTours][google.maps.routeoptimization.v1.RouteOptimization.OptimizeTours] method designed for optimizations with large timeout values. It should be preferred over the `OptimizeTours` method for optimizations that take longer than a few minutes. The returned [long-running operation][google.longrunning.Operation] (LRO) will have a name of the format `<parent>/operations/<operation_id>` and can be used to track progress of the computation. The [metadata][google.longrunning.Operation.metadata] field type is [OptimizeToursLongRunningMetadata][google.maps.routeoptimization.v1.OptimizeToursLongRunningMetadata]. The [response][google.longrunning.Operation.response] field type is [OptimizeToursResponse][google.maps.routeoptimization.v1.OptimizeToursResponse], if successful. Experimental: See https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request for more details.",
+      "canonical": true,
+      "file": "route_optimization.optimize_tours_long_running.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 247,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "OptimizeToursLongRunning",
+        "fullName": "google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursLongRunning",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "timeout",
+            "type": ".google.protobuf.Duration"
+          },
+          {
+            "name": "model",
+            "type": ".google.maps.routeoptimization.v1.ShipmentModel"
+          },
+          {
+            "name": "solving_mode",
+            "type": ".google.maps.routeoptimization.v1.OptimizeToursRequest.SolvingMode"
+          },
+          {
+            "name": "search_mode",
+            "type": ".google.maps.routeoptimization.v1.OptimizeToursRequest.SearchMode"
+          },
+          {
+            "name": "injected_first_solution_routes",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "injected_solution_constraint",
+            "type": ".google.maps.routeoptimization.v1.InjectedSolutionConstraint"
+          },
+          {
+            "name": "refresh_details_routes",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "interpret_injected_solutions_using_labels",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "consider_road_traffic",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "populate_polylines",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "populate_transition_polylines",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "allow_large_deadline_despite_interruption_risk",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "use_geodesic_distances",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "geodesic_meters_per_second",
+            "type": "TYPE_DOUBLE"
+          },
+          {
+            "name": "max_validation_errors",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "label",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "RouteOptimizationClient",
+          "fullName": "google.maps.routeoptimization.v1.RouteOptimizationClient"
+        },
+        "method": {
+          "shortName": "OptimizeToursLongRunning",
+          "fullName": "google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursLongRunning",
+          "service": {
+            "shortName": "RouteOptimization",
+            "fullName": "google.maps.routeoptimization.v1.RouteOptimization"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "routeoptimization_v1_generated_RouteOptimization_OptimizeToursUri_async",
+      "title": "RouteOptimization optimizeToursUri Sample",
+      "origin": "API_DEFINITION",
+      "description": " This is a variant of the [OptimizeToursLongRunning][google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursLongRunning] method designed for optimizations with large timeout values and large input/output sizes. The client specifies the URI of the `OptimizeToursRequest` stored in Google Cloud Storage and the server writes the `OptimizeToursResponse` to a client-specified Google Cloud Storage URI. This method should be preferred over the `OptimizeTours` method for optimizations that take longer than a few minutes and input/output sizes that are larger than 8MB, though it can be used for shorter and smaller optimizations as well. The returned [long-running operation][google.longrunning.Operation] (LRO) will have a name of the format `<parent>/operations/<operation_id>` and can be used to track progress of the computation. The [metadata][google.longrunning.Operation.metadata] field type is [OptimizeToursLongRunningMetadata][google.maps.routeoptimization.v1.OptimizeToursUriMetadata]. The [response][google.longrunning.Operation.response] field type is [OptimizeToursUriResponse][google.maps.routeoptimization.v1.OptimizeToursUriResponse], if successful. Experimental: See https://developers.google.com/maps/tt/route-optimization/experimental/otlr/make-request for more details.",
+      "canonical": true,
+      "file": "route_optimization.optimize_tours_uri.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 70,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "OptimizeToursUri",
+        "fullName": "google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursUri",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "input",
+            "type": ".google.maps.routeoptimization.v1.Uri"
+          },
+          {
+            "name": "output",
+            "type": ".google.maps.routeoptimization.v1.Uri"
+          }
+        ],
+        "resultType": ".google.longrunning.Operation",
+        "client": {
+          "shortName": "RouteOptimizationClient",
+          "fullName": "google.maps.routeoptimization.v1.RouteOptimizationClient"
+        },
+        "method": {
+          "shortName": "OptimizeToursUri",
+          "fullName": "google.maps.routeoptimization.v1.RouteOptimization.OptimizeToursUri",
+          "service": {
+            "shortName": "RouteOptimization",
+            "fullName": "google.maps.routeoptimization.v1.RouteOptimization"
+          }
+        }
+      }
     }
   ]
 }

@@ -509,6 +509,314 @@ describe('v1.RouteOptimizationClient', () => {
                 .getCall(0));
         });
     });
+
+    describe('optimizeToursLongRunning', () => {
+        it('invokes optimizeToursLongRunning without error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routeoptimization.v1.OptimizeToursRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.routeoptimization.v1.OptimizeToursRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.optimizeToursLongRunning = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.optimizeToursLongRunning(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.optimizeToursLongRunning as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.optimizeToursLongRunning as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes optimizeToursLongRunning without error using callback', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routeoptimization.v1.OptimizeToursRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.routeoptimization.v1.OptimizeToursRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.optimizeToursLongRunning = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.optimizeToursLongRunning(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursLongRunningMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.optimizeToursLongRunning as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.optimizeToursLongRunning as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes optimizeToursLongRunning with call error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routeoptimization.v1.OptimizeToursRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.routeoptimization.v1.OptimizeToursRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.optimizeToursLongRunning = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.optimizeToursLongRunning(request), expectedError);
+            const actualRequest = (client.innerApiCalls.optimizeToursLongRunning as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.optimizeToursLongRunning as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes optimizeToursLongRunning with LRO error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routeoptimization.v1.OptimizeToursRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.routeoptimization.v1.OptimizeToursRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.optimizeToursLongRunning = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.optimizeToursLongRunning(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.optimizeToursLongRunning as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.optimizeToursLongRunning as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkOptimizeToursLongRunningProgress without error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkOptimizeToursLongRunningProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkOptimizeToursLongRunningProgress with error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkOptimizeToursLongRunningProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
+
+    describe('optimizeToursUri', () => {
+        it('invokes optimizeToursUri without error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routeoptimization.v1.OptimizeToursUriRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.routeoptimization.v1.OptimizeToursUriRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.optimizeToursUri = stubLongRunningCall(expectedResponse);
+            const [operation] = await client.optimizeToursUri(request);
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.optimizeToursUri as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.optimizeToursUri as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes optimizeToursUri without error using callback', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routeoptimization.v1.OptimizeToursUriRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.routeoptimization.v1.OptimizeToursUriRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.longrunning.Operation()
+            );
+            client.innerApiCalls.optimizeToursUri = stubLongRunningCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.optimizeToursUri(
+                    request,
+                    (err?: Error|null,
+                     result?: LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>|null
+                    ) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const operation = await promise as LROperation<protos.google.maps.routeoptimization.v1.IOptimizeToursUriResponse, protos.google.maps.routeoptimization.v1.IOptimizeToursUriMetadata>;
+            const [response] = await operation.promise();
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.optimizeToursUri as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.optimizeToursUri as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes optimizeToursUri with call error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routeoptimization.v1.OptimizeToursUriRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.routeoptimization.v1.OptimizeToursUriRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.optimizeToursUri = stubLongRunningCall(undefined, expectedError);
+            await assert.rejects(client.optimizeToursUri(request), expectedError);
+            const actualRequest = (client.innerApiCalls.optimizeToursUri as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.optimizeToursUri as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes optimizeToursUri with LRO error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.maps.routeoptimization.v1.OptimizeToursUriRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.maps.routeoptimization.v1.OptimizeToursUriRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.optimizeToursUri = stubLongRunningCall(undefined, undefined, expectedError);
+            const [operation] = await client.optimizeToursUri(request);
+            await assert.rejects(operation.promise(), expectedError);
+            const actualRequest = (client.innerApiCalls.optimizeToursUri as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.optimizeToursUri as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes checkOptimizeToursUriProgress without error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedResponse = generateSampleMessage(
+              new operationsProtos.google.longrunning.Operation()
+            );
+            expectedResponse.name = 'test';
+            expectedResponse.response = {type_url: 'url', value: Buffer.from('')};
+            expectedResponse.metadata = {type_url: 'url', value: Buffer.from('')}
+
+            client.operationsClient.getOperation = stubSimpleCall(expectedResponse);
+            const decodedOperation = await client.checkOptimizeToursUriProgress(expectedResponse.name);
+            assert.deepStrictEqual(decodedOperation.name, expectedResponse.name);
+            assert(decodedOperation.metadata);
+            assert((client.operationsClient.getOperation as SinonStub).getCall(0));
+        });
+
+        it('invokes checkOptimizeToursUriProgress with error', async () => {
+            const client = new routeoptimizationModule.v1.RouteOptimizationClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const expectedError = new Error('expected');
+
+            client.operationsClient.getOperation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.checkOptimizeToursUriProgress(''), expectedError);
+            assert((client.operationsClient.getOperation as SinonStub)
+                .getCall(0));
+        });
+    });
     describe('getOperation', () => {
         it('invokes getOperation without error', async () => {
             const client = new routeoptimizationModule.v1.RouteOptimizationClient({
