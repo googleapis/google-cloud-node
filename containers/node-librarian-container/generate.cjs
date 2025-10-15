@@ -23,10 +23,15 @@ const bazelEnv = {
 };
 
 console.log('PROOF WE CHANGED STUFF:')
-console.log("A")
+console.log("B")
 // FIX: --output_base is a startup option (before 'build').
 // FIX: --disk_cache is a command option (after 'build').
 execSync(`bazelisk --output_base=/tmp/bazel_output build --disk_cache="" --spawn_strategy=local //${pathToFollow}:${idToGenerate}-nodejs`, {
-    cwd: `${sourceDir}`,
+    cwd: sourceDir,
     env: bazelEnv // Pass the augmented environment
 });
+execSync(`tar -xzf /tmp/bazel_output/execroot/com_google_googleapis/bazel-out/k8-fastbuild/bin/${pathToFollow}/${idToGenerate}-nodejs.tar.gz -C /output`, {
+    cwd: sourceDir,
+    env: bazelEnv
+});
+execSync('ls -a', {cwd: sourceDir})
