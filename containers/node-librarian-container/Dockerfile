@@ -15,8 +15,9 @@ RUN rm -r /usr/lib/node_modules/npm/node_modules/cross-spawn
 # Install bazelisk
 RUN npm install -g @bazel/bazelisk
 
-# Set HOME directory for root user to ensure bazelisk can write to its cache.
-ENV HOME=/root
+# Set paths for bazelisk to a writable directory.
+ENV BAZELISK_RC_FILE=/tmp/.bazeliskrc
+ENV BAZELISK_HOME=/tmp/bazelisk_home
 
 # Create a dummy file in /source to show it works
 RUN echo "This is a test file." > testfile.txt
