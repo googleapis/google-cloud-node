@@ -22,9 +22,11 @@ const bazelEnv = {
     USER: 'container_user'
 };
 
-// CRITICAL FIX: The --output_base flag MUST be a startup option, meaning it must 
-// appear before the 'build' command. Moving it ensures Bazel recognizes it correctly.
-execSync(`bazelisk --output_base=/tmp/bazel_output --disk_cache="" build //${pathToFollow}:${idToGenerate}-nodejs`, {
+console.log('PROOF WE CHANGED STUFF:')
+console.log("A")
+// FIX: --output_base is a startup option (before 'build').
+// FIX: --disk_cache is a command option (after 'build').
+execSync(`bazelisk --output_base=/tmp/bazel_output build --disk_cache="" //${pathToFollow}:${idToGenerate}-nodejs`, {
     cwd: `${sourceDir}`,
     env: bazelEnv // Pass the augmented environment
 });
