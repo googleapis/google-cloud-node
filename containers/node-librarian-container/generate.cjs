@@ -34,4 +34,3 @@ execSync(`tar -xzf /tmp/bazel_output/execroot/com_google_googleapis/bazel-out/k8
     cwd: sourceDir,
     env: bazelEnv
 });
-execSync('ls -a', {cwd: sourceDir})
