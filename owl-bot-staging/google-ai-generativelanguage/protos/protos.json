@@ -491,6 +491,13 @@
                             "proto3_optional": true
                           }
                         },
+                        "responseJsonSchemaOrdered": {
+                          "type": "google.protobuf.Value",
+                          "id": 28,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
                         "presencePenalty": {
                           "type": "float",
                           "id": 15,
@@ -665,6 +672,11 @@
                           "oneof": [
                             "index"
                           ]
+                        },
+                        "_finishMessage": {
+                          "oneof": [
+                            "finishMessage"
+                          ]
                         }
                       },
                       "fields": {
@@ -688,6 +700,14 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finishMessage": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY",
+                            "proto3_optional": true
                           }
                         },
                         "safetyRatings": {
@@ -753,7 +773,11 @@
                             "SPII": 9,
                             "MALFORMED_FUNCTION_CALL": 10,
                             "IMAGE_SAFETY": 11,
-                            "UNEXPECTED_TOOL_CALL": 12
+                            "IMAGE_PROHIBITED_CONTENT": 14,
+                            "IMAGE_OTHER": 15,
+                            "NO_IMAGE": 16,
+                            "UNEXPECTED_TOOL_CALL": 12,
+                            "TOO_MANY_TOOL_CALLS": 13
                           }
                         }
                       }
@@ -783,13 +807,29 @@
                           "values": {
                             "URL_RETRIEVAL_STATUS_UNSPECIFIED": 0,
                             "URL_RETRIEVAL_STATUS_SUCCESS": 1,
-                            "URL_RETRIEVAL_STATUS_ERROR": 2
+                            "URL_RETRIEVAL_STATUS_ERROR": 2,
+                            "URL_RETRIEVAL_STATUS_PAYWALL": 3,
+                            "URL_RETRIEVAL_STATUS_UNSAFE": 4
                           }
                         }
                       }
                     },
                     "LogprobsResult": {
+                      "oneofs": {
+                        "_logProbabilitySum": {
+                          "oneof": [
+                            "logProbabilitySum"
+                          ]
+                        }
+                      },
                       "fields": {
+                        "logProbabilitySum": {
+                          "type": "float",
+                          "id": 3,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
                         "topCandidates": {
                           "rule": "repeated",
                           "type": "TopCandidates",
@@ -1201,6 +1241,11 @@
                       }
                     },
                     "HarmCategory": {
+                      "valuesOptions": {
+                        "HARM_CATEGORY_CIVIC_INTEGRITY": {
+                          "deprecated": true
+                        }
+                      },
                       "values": {
                         "HARM_CATEGORY_UNSPECIFIED": 0,
                         "HARM_CATEGORY_DEROGATORY": 1,

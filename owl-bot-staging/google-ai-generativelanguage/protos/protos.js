@@ -2530,6 +2530,7 @@
                          * @property {number|null} [topP] GenerationConfig topP
                          * @property {number|null} [topK] GenerationConfig topK
                          * @property {number|null} [seed] GenerationConfig seed
+                         * @property {google.protobuf.IValue|null} [responseJsonSchemaOrdered] GenerationConfig responseJsonSchemaOrdered
                          * @property {number|null} [presencePenalty] GenerationConfig presencePenalty
                          * @property {number|null} [frequencyPenalty] GenerationConfig frequencyPenalty
                          * @property {boolean|null} [responseLogprobs] GenerationConfig responseLogprobs
@@ -2608,6 +2609,14 @@
                          * @instance
                          */
                         GenerationConfig.prototype.seed = null;
+    
+                        /**
+                         * GenerationConfig responseJsonSchemaOrdered.
+                         * @member {google.protobuf.IValue|null|undefined} responseJsonSchemaOrdered
+                         * @memberof google.ai.generativelanguage.v1.GenerationConfig
+                         * @instance
+                         */
+                        GenerationConfig.prototype.responseJsonSchemaOrdered = null;
     
                         /**
                          * GenerationConfig presencePenalty.
@@ -2767,6 +2776,8 @@
                                 writer.uint32(/* id 18, wireType 0 =*/144).int32(message.logprobs);
                             if (message.enableEnhancedCivicAnswers != null && Object.hasOwnProperty.call(message, "enableEnhancedCivicAnswers"))
                                 writer.uint32(/* id 19, wireType 0 =*/152).bool(message.enableEnhancedCivicAnswers);
+                            if (message.responseJsonSchemaOrdered != null && Object.hasOwnProperty.call(message, "responseJsonSchemaOrdered"))
+                                $root.google.protobuf.Value.encode(message.responseJsonSchemaOrdered, writer.uint32(/* id 28, wireType 2 =*/226).fork()).ldelim();
                             return writer;
                         };
     
@@ -2831,6 +2842,10 @@
                                     }
                                 case 8: {
                                         message.seed = reader.int32();
+                                        break;
+                                    }
+                                case 28: {
+                                        message.responseJsonSchemaOrdered = $root.google.protobuf.Value.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 15: {
@@ -2926,6 +2941,11 @@
                                 if (!$util.isInteger(message.seed))
                                     return "seed: integer expected";
                             }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered")) {
+                                var error = $root.google.protobuf.Value.verify(message.responseJsonSchemaOrdered);
+                                if (error)
+                                    return "responseJsonSchemaOrdered." + error;
+                            }
                             if (message.presencePenalty != null && message.hasOwnProperty("presencePenalty")) {
                                 properties._presencePenalty = 1;
                                 if (typeof message.presencePenalty !== "number")
@@ -2985,6 +3005,11 @@
                                 message.topK = object.topK | 0;
                             if (object.seed != null)
                                 message.seed = object.seed | 0;
+                            if (object.responseJsonSchemaOrdered != null) {
+                                if (typeof object.responseJsonSchemaOrdered !== "object")
+                                    throw TypeError(".google.ai.generativelanguage.v1.GenerationConfig.responseJsonSchemaOrdered: object expected");
+                                message.responseJsonSchemaOrdered = $root.google.protobuf.Value.fromObject(object.responseJsonSchemaOrdered);
+                            }
                             if (object.presencePenalty != null)
                                 message.presencePenalty = Number(object.presencePenalty);
                             if (object.frequencyPenalty != null)
@@ -3013,6 +3038,8 @@
                             var object = {};
                             if (options.arrays || options.defaults)
                                 object.stopSequences = [];
+                            if (options.defaults)
+                                object.responseJsonSchemaOrdered = null;
                             if (message.candidateCount != null && message.hasOwnProperty("candidateCount")) {
                                 object.candidateCount = message.candidateCount;
                                 if (options.oneofs)
@@ -3073,6 +3100,8 @@
                                 if (options.oneofs)
                                     object._enableEnhancedCivicAnswers = "enableEnhancedCivicAnswers";
                             }
+                            if (message.responseJsonSchemaOrdered != null && message.hasOwnProperty("responseJsonSchemaOrdered"))
+                                object.responseJsonSchemaOrdered = $root.google.protobuf.Value.toObject(message.responseJsonSchemaOrdered, options);
                             return object;
                         };
     
@@ -4231,6 +4260,7 @@
                          * @property {number|null} [index] Candidate index
                          * @property {google.ai.generativelanguage.v1.IContent|null} [content] Candidate content
                          * @property {google.ai.generativelanguage.v1.Candidate.FinishReason|null} [finishReason] Candidate finishReason
+                         * @property {string|null} [finishMessage] Candidate finishMessage
                          * @property {Array.<google.ai.generativelanguage.v1.ISafetyRating>|null} [safetyRatings] Candidate safetyRatings
                          * @property {google.ai.generativelanguage.v1.ICitationMetadata|null} [citationMetadata] Candidate citationMetadata
                          * @property {number|null} [tokenCount] Candidate tokenCount
@@ -4279,6 +4309,14 @@
                          * @instance
                          */
                         Candidate.prototype.finishReason = 0;
+    
+                        /**
+                         * Candidate finishMessage.
+                         * @member {string|null|undefined} finishMessage
+                         * @memberof google.ai.generativelanguage.v1.Candidate
+                         * @instance
+                         */
+                        Candidate.prototype.finishMessage = null;
     
                         /**
                          * Candidate safetyRatings.
@@ -4345,6 +4383,12 @@
                             set: $util.oneOfSetter($oneOfFields)
                         });
     
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(Candidate.prototype, "_finishMessage", {
+                            get: $util.oneOfGetter($oneOfFields = ["finishMessage"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
+    
                         /**
                          * Creates a new Candidate instance using the specified properties.
                          * @function create
@@ -4375,6 +4419,8 @@
                                 writer.uint32(/* id 2, wireType 0 =*/16).int32(message.finishReason);
                             if (message.index != null && Object.hasOwnProperty.call(message, "index"))
                                 writer.uint32(/* id 3, wireType 0 =*/24).int32(message.index);
+                            if (message.finishMessage != null && Object.hasOwnProperty.call(message, "finishMessage"))
+                                writer.uint32(/* id 4, wireType 2 =*/34).string(message.finishMessage);
                             if (message.safetyRatings != null && message.safetyRatings.length)
                                 for (var i = 0; i < message.safetyRatings.length; ++i)
                                     $root.google.ai.generativelanguage.v1.SafetyRating.encode(message.safetyRatings[i], writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
@@ -4436,6 +4482,10 @@
                                     }
                                 case 2: {
                                         message.finishReason = reader.int32();
+                                        break;
+                                    }
+                                case 4: {
+                                        message.finishMessage = reader.string();
                                         break;
                                     }
                                 case 5: {
@@ -4530,9 +4580,18 @@
                                 case 9:
                                 case 10:
                                 case 11:
+                                case 14:
+                                case 15:
+                                case 16:
                                 case 12:
+                                case 13:
                                     break;
                                 }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                properties._finishMessage = 1;
+                                if (!$util.isString(message.finishMessage))
+                                    return "finishMessage: string expected";
+                            }
                             if (message.safetyRatings != null && message.hasOwnProperty("safetyRatings")) {
                                 if (!Array.isArray(message.safetyRatings))
                                     return "safetyRatings: array expected";
@@ -4645,11 +4704,29 @@
                             case 11:
                                 message.finishReason = 11;
                                 break;
+                            case "IMAGE_PROHIBITED_CONTENT":
+                            case 14:
+                                message.finishReason = 14;
+                                break;
+                            case "IMAGE_OTHER":
+                            case 15:
+                                message.finishReason = 15;
+                                break;
+                            case "NO_IMAGE":
+                            case 16:
+                                message.finishReason = 16;
+                                break;
                             case "UNEXPECTED_TOOL_CALL":
                             case 12:
                                 message.finishReason = 12;
                                 break;
+                            case "TOO_MANY_TOOL_CALLS":
+                            case 13:
+                                message.finishReason = 13;
+                                break;
                             }
+                            if (object.finishMessage != null)
+                                message.finishMessage = String(object.finishMessage);
                             if (object.safetyRatings) {
                                 if (!Array.isArray(object.safetyRatings))
                                     throw TypeError(".google.ai.generativelanguage.v1.Candidate.safetyRatings: array expected");
@@ -4721,6 +4798,11 @@
                                 if (options.oneofs)
                                     object._index = "index";
                             }
+                            if (message.finishMessage != null && message.hasOwnProperty("finishMessage")) {
+                                object.finishMessage = message.finishMessage;
+                                if (options.oneofs)
+                                    object._finishMessage = "finishMessage";
+                            }
                             if (message.safetyRatings && message.safetyRatings.length) {
                                 object.safetyRatings = [];
                                 for (var j = 0; j < message.safetyRatings.length; ++j)
@@ -4783,7 +4865,11 @@
                          * @property {number} SPII=9 SPII value
                          * @property {number} MALFORMED_FUNCTION_CALL=10 MALFORMED_FUNCTION_CALL value
                          * @property {number} IMAGE_SAFETY=11 IMAGE_SAFETY value
+                         * @property {number} IMAGE_PROHIBITED_CONTENT=14 IMAGE_PROHIBITED_CONTENT value
+                         * @property {number} IMAGE_OTHER=15 IMAGE_OTHER value
+                         * @property {number} NO_IMAGE=16 NO_IMAGE value
                          * @property {number} UNEXPECTED_TOOL_CALL=12 UNEXPECTED_TOOL_CALL value
+                         * @property {number} TOO_MANY_TOOL_CALLS=13 TOO_MANY_TOOL_CALLS value
                          */
                         Candidate.FinishReason = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
@@ -4799,7 +4885,11 @@
                             values[valuesById[9] = "SPII"] = 9;
                             values[valuesById[10] = "MALFORMED_FUNCTION_CALL"] = 10;
                             values[valuesById[11] = "IMAGE_SAFETY"] = 11;
+                            values[valuesById[14] = "IMAGE_PROHIBITED_CONTENT"] = 14;
+                            values[valuesById[15] = "IMAGE_OTHER"] = 15;
+                            values[valuesById[16] = "NO_IMAGE"] = 16;
                             values[valuesById[12] = "UNEXPECTED_TOOL_CALL"] = 12;
+                            values[valuesById[13] = "TOO_MANY_TOOL_CALLS"] = 13;
                             return values;
                         })();
     
@@ -5190,6 +5280,8 @@
                                 case 0:
                                 case 1:
                                 case 2:
+                                case 3:
+                                case 4:
                                     break;
                                 }
                             return null;
@@ -5227,6 +5319,14 @@
                             case "URL_RETRIEVAL_STATUS_ERROR":
                             case 2:
                                 message.urlRetrievalStatus = 2;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_PAYWALL":
+                            case 3:
+                                message.urlRetrievalStatus = 3;
+                                break;
+                            case "URL_RETRIEVAL_STATUS_UNSAFE":
+                            case 4:
+                                message.urlRetrievalStatus = 4;
                                 break;
                             }
                             return message;
@@ -5289,12 +5389,16 @@
                          * @property {number} URL_RETRIEVAL_STATUS_UNSPECIFIED=0 URL_RETRIEVAL_STATUS_UNSPECIFIED value
                          * @property {number} URL_RETRIEVAL_STATUS_SUCCESS=1 URL_RETRIEVAL_STATUS_SUCCESS value
                          * @property {number} URL_RETRIEVAL_STATUS_ERROR=2 URL_RETRIEVAL_STATUS_ERROR value
+                         * @property {number} URL_RETRIEVAL_STATUS_PAYWALL=3 URL_RETRIEVAL_STATUS_PAYWALL value
+                         * @property {number} URL_RETRIEVAL_STATUS_UNSAFE=4 URL_RETRIEVAL_STATUS_UNSAFE value
                          */
                         UrlMetadata.UrlRetrievalStatus = (function() {
                             var valuesById = {}, values = Object.create(valuesById);
                             values[valuesById[0] = "URL_RETRIEVAL_STATUS_UNSPECIFIED"] = 0;
                             values[valuesById[1] = "URL_RETRIEVAL_STATUS_SUCCESS"] = 1;
                             values[valuesById[2] = "URL_RETRIEVAL_STATUS_ERROR"] = 2;
+                            values[valuesById[3] = "URL_RETRIEVAL_STATUS_PAYWALL"] = 3;
+                            values[valuesById[4] = "URL_RETRIEVAL_STATUS_UNSAFE"] = 4;
                             return values;
                         })();
     
@@ -5307,6 +5411,7 @@
                          * Properties of a LogprobsResult.
                          * @memberof google.ai.generativelanguage.v1
                          * @interface ILogprobsResult
+                         * @property {number|null} [logProbabilitySum] LogprobsResult logProbabilitySum
                          * @property {Array.<google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates>|null} [topCandidates] LogprobsResult topCandidates
                          * @property {Array.<google.ai.generativelanguage.v1.LogprobsResult.ICandidate>|null} [chosenCandidates] LogprobsResult chosenCandidates
                          */
@@ -5329,6 +5434,14 @@
                         }
     
                         /**
+                         * LogprobsResult logProbabilitySum.
+                         * @member {number|null|undefined} logProbabilitySum
+                         * @memberof google.ai.generativelanguage.v1.LogprobsResult
+                         * @instance
+                         */
+                        LogprobsResult.prototype.logProbabilitySum = null;
+    
+                        /**
                          * LogprobsResult topCandidates.
                          * @member {Array.<google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates>} topCandidates
                          * @memberof google.ai.generativelanguage.v1.LogprobsResult
@@ -5343,6 +5456,15 @@
                          * @instance
                          */
                         LogprobsResult.prototype.chosenCandidates = $util.emptyArray;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(LogprobsResult.prototype, "_logProbabilitySum", {
+                            get: $util.oneOfGetter($oneOfFields = ["logProbabilitySum"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new LogprobsResult instance using the specified properties.
@@ -5374,6 +5496,8 @@
                             if (message.chosenCandidates != null && message.chosenCandidates.length)
                                 for (var i = 0; i < message.chosenCandidates.length; ++i)
                                     $root.google.ai.generativelanguage.v1.LogprobsResult.Candidate.encode(message.chosenCandidates[i], writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                            if (message.logProbabilitySum != null && Object.hasOwnProperty.call(message, "logProbabilitySum"))
+                                writer.uint32(/* id 3, wireType 5 =*/29).float(message.logProbabilitySum);
                             return writer;
                         };
     
@@ -5410,6 +5534,10 @@
                                 if (tag === error)
                                     break;
                                 switch (tag >>> 3) {
+                                case 3: {
+                                        message.logProbabilitySum = reader.float();
+                                        break;
+                                    }
                                 case 1: {
                                         if (!(message.topCandidates && message.topCandidates.length))
                                             message.topCandidates = [];
@@ -5457,6 +5585,12 @@
                         LogprobsResult.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                properties._logProbabilitySum = 1;
+                                if (typeof message.logProbabilitySum !== "number")
+                                    return "logProbabilitySum: number expected";
+                            }
                             if (message.topCandidates != null && message.hasOwnProperty("topCandidates")) {
                                 if (!Array.isArray(message.topCandidates))
                                     return "topCandidates: array expected";
@@ -5490,6 +5624,8 @@
                             if (object instanceof $root.google.ai.generativelanguage.v1.LogprobsResult)
                                 return object;
                             var message = new $root.google.ai.generativelanguage.v1.LogprobsResult();
+                            if (object.logProbabilitySum != null)
+                                message.logProbabilitySum = Number(object.logProbabilitySum);
                             if (object.topCandidates) {
                                 if (!Array.isArray(object.topCandidates))
                                     throw TypeError(".google.ai.generativelanguage.v1.LogprobsResult.topCandidates: array expected");
@@ -5539,6 +5675,11 @@
                                 object.chosenCandidates = [];
                                 for (var j = 0; j < message.chosenCandidates.length; ++j)
                                     object.chosenCandidates[j] = $root.google.ai.generativelanguage.v1.LogprobsResult.Candidate.toObject(message.chosenCandidates[j], options);
+                            }
+                            if (message.logProbabilitySum != null && message.hasOwnProperty("logProbabilitySum")) {
+                                object.logProbabilitySum = options.json && !isFinite(message.logProbabilitySum) ? String(message.logProbabilitySum) : message.logProbabilitySum;
+                                if (options.oneofs)
+                                    object._logProbabilitySum = "logProbabilitySum";
                             }
                             return object;
                         };

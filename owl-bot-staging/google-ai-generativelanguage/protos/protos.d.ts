@@ -1062,6 +1062,9 @@ export namespace google {
                     /** GenerationConfig seed */
                     seed?: (number|null);
 
+                    /** GenerationConfig responseJsonSchemaOrdered */
+                    responseJsonSchemaOrdered?: (google.protobuf.IValue|null);
+
                     /** GenerationConfig presencePenalty */
                     presencePenalty?: (number|null);
 
@@ -1107,6 +1110,9 @@ export namespace google {
 
                     /** GenerationConfig seed. */
                     public seed?: (number|null);
+
+                    /** GenerationConfig responseJsonSchemaOrdered. */
+                    public responseJsonSchemaOrdered?: (google.protobuf.IValue|null);
 
                     /** GenerationConfig presencePenalty. */
                     public presencePenalty?: (number|null);
@@ -1598,6 +1604,9 @@ export namespace google {
                     /** Candidate finishReason */
                     finishReason?: (google.ai.generativelanguage.v1.Candidate.FinishReason|keyof typeof google.ai.generativelanguage.v1.Candidate.FinishReason|null);
 
+                    /** Candidate finishMessage */
+                    finishMessage?: (string|null);
+
                     /** Candidate safetyRatings */
                     safetyRatings?: (google.ai.generativelanguage.v1.ISafetyRating[]|null);
 
@@ -1637,6 +1646,9 @@ export namespace google {
 
                     /** Candidate finishReason. */
                     public finishReason: (google.ai.generativelanguage.v1.Candidate.FinishReason|keyof typeof google.ai.generativelanguage.v1.Candidate.FinishReason);
+
+                    /** Candidate finishMessage. */
+                    public finishMessage?: (string|null);
 
                     /** Candidate safetyRatings. */
                     public safetyRatings: google.ai.generativelanguage.v1.ISafetyRating[];
@@ -1753,7 +1765,11 @@ export namespace google {
                         SPII = 9,
                         MALFORMED_FUNCTION_CALL = 10,
                         IMAGE_SAFETY = 11,
-                        UNEXPECTED_TOOL_CALL = 12
+                        IMAGE_PROHIBITED_CONTENT = 14,
+                        IMAGE_OTHER = 15,
+                        NO_IMAGE = 16,
+                        UNEXPECTED_TOOL_CALL = 12,
+                        TOO_MANY_TOOL_CALLS = 13
                     }
                 }
 
@@ -1963,12 +1979,17 @@ export namespace google {
                     enum UrlRetrievalStatus {
                         URL_RETRIEVAL_STATUS_UNSPECIFIED = 0,
                         URL_RETRIEVAL_STATUS_SUCCESS = 1,
-                        URL_RETRIEVAL_STATUS_ERROR = 2
+                        URL_RETRIEVAL_STATUS_ERROR = 2,
+                        URL_RETRIEVAL_STATUS_PAYWALL = 3,
+                        URL_RETRIEVAL_STATUS_UNSAFE = 4
                     }
                 }
 
                 /** Properties of a LogprobsResult. */
                 interface ILogprobsResult {
+
+                    /** LogprobsResult logProbabilitySum */
+                    logProbabilitySum?: (number|null);
 
                     /** LogprobsResult topCandidates */
                     topCandidates?: (google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates[]|null);
@@ -1985,6 +2006,9 @@ export namespace google {
                      * @param [properties] Properties to set
                      */
                     constructor(properties?: google.ai.generativelanguage.v1.ILogprobsResult);
+
+                    /** LogprobsResult logProbabilitySum. */
+                    public logProbabilitySum?: (number|null);
 
                     /** LogprobsResult topCandidates. */
                     public topCandidates: google.ai.generativelanguage.v1.LogprobsResult.ITopCandidates[];
