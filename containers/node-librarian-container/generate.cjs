@@ -39,3 +39,5 @@ execSync(`tar -xzf ${idToGenerate}-nodejs.tar.gz -C /output`, {
 execSync(`mv /output/${idToGenerate}-nodejs ${idToGenerate}`, {
     cwd: '/output',
 });
+
+console.log(execSync('ls -a', {cwd: '/output'}).toString());
