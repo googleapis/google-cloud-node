@@ -25,16 +25,15 @@ ENV BAZELISK_HOME=/tmp/bazelisk_home
 ENV BAZEL_HOME="/tmp/.bazel"
 ENV BAZEL_CACHE_DIR="/tmp/.bazel_cache"
 
-# Create and set permissions for the required cache directories.
-# The directories must be created and set to a+rwx (read/write/execute for all)
-# before the container runs as the arbitrary non-root user.
+# Create and set permissions for all required directories.
+# This ensures that even arbitrary UIDs can write here.
 RUN mkdir -p ${BAZEL_HOME} && \
     chmod -R a+rwx ${BAZEL_HOME} && \
     mkdir -p ${BAZEL_CACHE_DIR} && \
-    chmod -R a+rwx ${BAZEL_CACHE_DIR}
-
-# NOTE: The previous 'ENV USER=root' has been removed to prevent Bazel/Node
-# from looking for configuration files in the non-writable /root directory.
+    chmod -R a+rwx ${BAZEL_CACHE_DIR} && \
+    # CRITICAL FIX: Ensure the output_base used in generate.cjs is writable
+    mkdir -p /tmp/bazel_output && \
+    chmod -R a+rwx /tmp/bazel_output
 
 # --- END of Arbitrary User Fixes for Bazel/Bazelisk ---
 

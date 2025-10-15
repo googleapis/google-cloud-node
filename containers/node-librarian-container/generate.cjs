@@ -14,4 +14,13 @@ const directories = allEntries
 const idToGenerate = (JSON.parse(fs.readFileSync('/librarian/generate-request.json', 'utf8').trim())).id;
 const pathToFollow = idToGenerate.replace(/-/g, '/');
 
-execSync(`bazelisk build --output_base=/tmp/bazel_output --disk_cache="" //${pathToFollow}:${idToGenerate}-nodejs`, {cwd: `${sourceDir}`});
+const bazelEnv = {
+    ...process.env,
+    // Set a generic USER name to satisfy Bazel's check for a defined user.
+    USER: 'container_user'
+};
+
+execSync(`bazelisk build --output_base=/tmp/bazel_output --disk_cache="" //${pathToFollow}:${idToGenerate}-nodejs`, {
+    cwd: `${sourceDir}`,
+    env: bazelEnv // Pass the augmented environment
+})
