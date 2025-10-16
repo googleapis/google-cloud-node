@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.19.1...chat-v0.20.0) (2025-10-16)
+
+
+### Features
+
+* [chat] Add `Carousel` widget ([#6821](https://github.com/googleapis/google-cloud-node/issues/6821)) ([7365b32](https://github.com/googleapis/google-cloud-node/commit/7365b32f30e259c4839aad81e4c5cc5a91e6ebee))
+
 ## [0.19.1](https://github.com/googleapis/google-cloud-node/compare/chat-v0.19.0...chat-v0.19.1) (2025-10-13)
 
 

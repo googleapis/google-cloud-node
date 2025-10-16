@@ -14,7 +14,7 @@
     "publish": "echo 'sample test; do not publish'"
   },
   "dependencies": {
-    "@google-ai/generativelanguage": "^3.4.1"
+    "@google-ai/generativelanguage": "^3.5.0"
   },
   "devDependencies": {
     "c8": "^9.0.0",

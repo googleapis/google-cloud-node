@@ -4,6 +4,99 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "68fd63cd8c3d91e7f0c8e0193c9521e51fdeb33f",
+          "message": "[routeoptimization] add experimental Load Costs feature",
+          "issues": [
+            "6819"
+          ]
+        }
+      ],
+      "version": "0.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/routeoptimization",
+      "id": "a1715bbf-a7df-48ba-ace1-6b85ba2e9a91",
+      "createTime": "2025-10-16T22:02:18.319Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7365b32f30e259c4839aad81e4c5cc5a91e6ebee",
+          "message": "[chat] Add `Carousel` widget",
+          "issues": [
+            "6821"
+          ]
+        }
+      ],
+      "version": "0.20.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "172efab2-620e-4d79-8138-7cffc0efeebe",
+      "createTime": "2025-10-16T22:02:18.267Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "ee1aabfb23f3e6c6c6b26298188ab3411f4073ae",
+          "message": "[container] Add SwapConfig to enable and configure swap memory for node pools",
+          "issues": [
+            "6818"
+          ]
+        }
+      ],
+      "version": "6.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "4105c77e-5e88-41ce-888d-d9f8adcb7134",
+      "createTime": "2025-10-16T22:02:18.235Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "9f40bf125a2e32fee4da4cd391265e9d4b380bcd",
+          "message": "Add aspect_ratio and image_config for v1 version",
+          "issues": [
+            "6817"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "8d38a0919218be1c4ba6de4e283786facf2eb0b4",
+          "message": "Add aspect_ratio and image_config for v1beta1 version",
+          "issues": [
+            "6814"
+          ]
+        }
+      ],
+      "version": "5.9.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "0735d357-7175-4d65-8d4a-4ecab5d85566",
+      "createTime": "2025-10-16T22:02:18.199Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "3290633a3b1d99a8c696aebe79f38984fda44460",
+          "message": "[generativelanguage] add support for additional reasons to stop image generation",
+          "issues": [
+            "6820"
+          ]
+        }
+      ],
+      "version": "3.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ai/generativelanguage",
+      "id": "95a3c5b0-6374-415f-989e-b7a77f3636df",
+      "createTime": "2025-10-16T22:02:18.146Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
           "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
@@ -66327,5 +66420,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-10-13T16:25:08.956Z"
+  "updateTime": "2025-10-16T22:02:18.319Z"
 }

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/googleapis/google-cloud-node/compare/routeoptimization-v0.5.1...routeoptimization-v0.6.0) (2025-10-16)
+
+
+### Features
+
+* [routeoptimization] add experimental Load Costs feature ([#6819](https://github.com/googleapis/google-cloud-node/issues/6819)) ([68fd63c](https://github.com/googleapis/google-cloud-node/commit/68fd63cd8c3d91e7f0c8e0193c9521e51fdeb33f))
+
 ## [0.5.1](https://github.com/googleapis/google-cloud-node/compare/routeoptimization-v0.5.0...routeoptimization-v0.5.1) (2025-10-13)
 
 

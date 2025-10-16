@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.8.0...aiplatform-v5.9.0) (2025-10-16)
+
+
+### Features
+
+* Add aspect_ratio and image_config for v1 version ([#6817](https://github.com/googleapis/google-cloud-node/issues/6817)) ([9f40bf1](https://github.com/googleapis/google-cloud-node/commit/9f40bf125a2e32fee4da4cd391265e9d4b380bcd))
+* Add aspect_ratio and image_config for v1beta1 version ([#6814](https://github.com/googleapis/google-cloud-node/issues/6814)) ([8d38a09](https://github.com/googleapis/google-cloud-node/commit/8d38a0919218be1c4ba6de4e283786facf2eb0b4))
+
 ## [5.8.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.7.0...aiplatform-v5.8.0) (2025-10-13)
 
 

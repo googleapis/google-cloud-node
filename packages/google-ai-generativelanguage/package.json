@@ -1,6 +1,6 @@
 {
   "name": "@google-ai/generativelanguage",
-  "version": "3.4.1",
+  "version": "3.5.0",
   "description": "Generative Language API client for Node.js",
   "repository": {
     "type": "git",

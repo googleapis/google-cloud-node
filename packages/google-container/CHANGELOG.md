@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.4.1...container-v6.5.0) (2025-10-16)
+
+
+### Features
+
+* [container] Add SwapConfig to enable and configure swap memory for node pools ([#6818](https://github.com/googleapis/google-cloud-node/issues/6818)) ([ee1aabf](https://github.com/googleapis/google-cloud-node/commit/ee1aabfb23f3e6c6c6b26298188ab3411f4073ae))
+
 ## [6.4.1](https://github.com/googleapis/google-cloud-node/compare/container-v6.4.0...container-v6.4.1) (2025-10-13)
 
 
