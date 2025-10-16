@@ -44,4 +44,4 @@ execSync(`mv /output/${idToGenerate}-nodejs /output/packages/${idToGenerate}`, {
     cwd: '/output',
 });
 
-console.log(execSync('ls -a', {cwd: '/output/google-cloud-asset'}).toString());
+console.log(execSync('ls -a', {cwd: '/output/packages/google-cloud-asset'}).toString());
