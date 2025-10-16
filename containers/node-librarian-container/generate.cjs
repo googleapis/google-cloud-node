@@ -36,6 +36,10 @@ execSync(`tar -xzf ${idToGenerate}-nodejs.tar.gz -C /output`, {
     cwd: `/tmp/bazel_output/execroot/com_google_googleapis/bazel-out/k8-fastbuild/bin/${pathToFollow}`,
 });
 
+execSync('mkdir -p packages', {
+    cwd: '/output',
+});
+
 execSync(`mv /output/${idToGenerate}-nodejs /output/packages/${idToGenerate}`, {
     cwd: '/output',
 });
