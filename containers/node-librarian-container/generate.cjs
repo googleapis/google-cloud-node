@@ -22,8 +22,6 @@ const bazelEnv = {
     USER: 'container_user'
 };
 
-console.log('PROOF WE CHANGED STUFF:')
-console.log("B")
 // FIX: --output_base is a startup option (before 'build').
 // FIX: --disk_cache is a command option (after 'build').
 execSync(`bazelisk --output_base=/tmp/bazel_output build --disk_cache="" --spawn_strategy=local //${pathToFollow}:${idToGenerate}-nodejs`, {
