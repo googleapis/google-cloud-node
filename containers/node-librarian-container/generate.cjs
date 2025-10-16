@@ -1,3 +1,4 @@
+console.time('myOperation');
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
@@ -7,9 +8,6 @@ const path = require('path');
 const sourceDir = '/source';
 
 const allEntries = fs.readdirSync(sourceDir, { withFileTypes: true });
-const directories = allEntries
-.filter(dirent => dirent.isDirectory())
-.map(dirent => dirent.name);
 
 const idToGenerate = (JSON.parse(fs.readFileSync('/librarian/generate-request.json', 'utf8').trim())).id;
 const pathToFollow = idToGenerate.replace(/-/g, '/');
@@ -43,3 +41,4 @@ execSync(`mv /output/${idToGenerate}-nodejs /output/packages/${idToGenerate}`, {
 });
 
 console.log(execSync('ls -a', {cwd: '/output/packages/google-cloud-asset'}).toString());
+console.timeEnd('myOperation');
