@@ -1518,6 +1518,10 @@
                             "uncollapsibleWidgetsCount": {
                               "type": "int32",
                               "id": 6
+                            },
+                            "collapseControl": {
+                              "type": "CollapseControl",
+                              "id": 8
                             }
                           }
                         },
@@ -1537,6 +1541,31 @@
                             "onClick": {
                               "type": "OnClick",
                               "id": 2
+                            }
+                          }
+                        },
+                        "NestedWidget": {
+                          "oneofs": {
+                            "data": {
+                              "oneof": [
+                                "textParagraph",
+                                "buttonList",
+                                "image"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "textParagraph": {
+                              "type": "TextParagraph",
+                              "id": 1
+                            },
+                            "buttonList": {
+                              "type": "ButtonList",
+                              "id": 3
+                            },
+                            "image": {
+                              "type": "Image",
+                              "id": 10
                             }
                           }
                         },
@@ -1574,7 +1603,9 @@
                             "dateTimePicker",
                             "divider",
                             "grid",
-                            "columns"
+                            "columns",
+                            "carousel",
+                            "chipList"
                           ]
                         }
                       },
@@ -1619,6 +1650,14 @@
                           "type": "Columns",
                           "id": 11
                         },
+                        "carousel": {
+                          "type": "Carousel",
+                          "id": 13
+                        },
+                        "chipList": {
+                          "type": "ChipList",
+                          "id": 14
+                        },
                         "horizontalAlignment": {
                           "type": "HorizontalAlignment",
                           "id": 8
@@ -1638,6 +1677,14 @@
                             "CENTER": 2,
                             "END": 3
                           }
+                        },
+                        "VerticalAlignment": {
+                          "values": {
+                            "VERTICAL_ALIGNMENT_UNSPECIFIED": 0,
+                            "TOP": 1,
+                            "MIDDLE": 2,
+                            "BOTTOM": 3
+                          }
                         }
                       }
                     },
@@ -1646,6 +1693,23 @@
                         "text": {
                           "type": "string",
                           "id": 1
+                        },
+                        "maxLines": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "textSyntax": {
+                          "type": "TextSyntax",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "TextSyntax": {
+                          "values": {
+                            "TEXT_SYNTAX_UNSPECIFIED": 0,
+                            "HTML": 1,
+                            "MARKDOWN": 2
+                          }
                         }
                       }
                     },
@@ -1690,13 +1754,25 @@
                           "type": "Icon",
                           "id": 12
                         },
+                        "startIconVerticalAlignment": {
+                          "type": "Widget.VerticalAlignment",
+                          "id": 13
+                        },
                         "topLabel": {
                           "type": "string",
                           "id": 3
                         },
+                        "topLabelText": {
+                          "type": "TextParagraph",
+                          "id": 17
+                        },
                         "text": {
                           "type": "string",
                           "id": 4
+                        },
+                        "contentText": {
+                          "type": "TextParagraph",
+                          "id": 18
                         },
                         "wrapText": {
                           "type": "bool",
@@ -1705,6 +1781,10 @@
                         "bottomLabel": {
                           "type": "string",
                           "id": 6
+                        },
+                        "bottomLabelText": {
+                          "type": "TextParagraph",
+                          "id": 19
                         },
                         "onClick": {
                           "type": "OnClick",
@@ -1793,6 +1873,10 @@
                           "type": "Action",
                           "id": 8
                         },
+                        "validation": {
+                          "type": "Validation",
+                          "id": 11
+                        },
                         "placeholderText": {
                           "type": "string",
                           "id": 12
@@ -1844,6 +1928,11 @@
                     },
                     "SelectionInput": {
                       "oneofs": {
+                        "_multiSelectMaxSelectedItems": {
+                          "oneof": [
+                            "multiSelectMaxSelectedItems"
+                          ]
+                        },
                         "multiSelectDataSource": {
                           "oneof": [
                             "externalDataSource",
@@ -1875,7 +1964,10 @@
                         },
                         "multiSelectMaxSelectedItems": {
                           "type": "int32",
-                          "id": 6
+                          "id": 6,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "multiSelectMinQueryLength": {
                           "type": "int32",
@@ -1901,6 +1993,13 @@
                           }
                         },
                         "SelectionItem": {
+                          "oneofs": {
+                            "startIcon": {
+                              "oneof": [
+                                "startIconUri"
+                              ]
+                            }
+                          },
                           "fields": {
                             "text": {
                               "type": "string",
@@ -1950,6 +2049,13 @@
                       }
                     },
                     "DateTimePicker": {
+                      "oneofs": {
+                        "_valueMsEpoch": {
+                          "oneof": [
+                            "valueMsEpoch"
+                          ]
+                        }
+                      },
                       "fields": {
                         "name": {
                           "type": "string",
@@ -1965,7 +2071,10 @@
                         },
                         "valueMsEpoch": {
                           "type": "int64",
-                          "id": 4
+                          "id": 4,
+                          "options": {
+                            "proto3_optional": true
+                          }
                         },
                         "timezoneOffsetDate": {
                           "type": "int32",
@@ -1982,6 +2091,37 @@
                             "DATE_AND_TIME": 0,
                             "DATE_ONLY": 1,
                             "TIME_ONLY": 2
+                          }
+                        }
+                      }
+                    },
+                    "OverflowMenu": {
+                      "fields": {
+                        "items": {
+                          "rule": "repeated",
+                          "type": "OverflowMenuItem",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "OverflowMenuItem": {
+                          "fields": {
+                            "startIcon": {
+                              "type": "Icon",
+                              "id": 1
+                            },
+                            "text": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "onClick": {
+                              "type": "OnClick",
+                              "id": 3
+                            },
+                            "disabled": {
+                              "type": "bool",
+                              "id": 4
+                            }
                           }
                         }
                       }
@@ -2011,6 +2151,21 @@
                         "altText": {
                           "type": "string",
                           "id": 6
+                        },
+                        "type": {
+                          "type": "Type",
+                          "id": 7
+                        }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "OUTLINED": 1,
+                            "FILLED": 2,
+                            "FILLED_TONAL": 3,
+                            "BORDERLESS": 4
+                          }
                         }
                       }
                     },
@@ -2250,7 +2405,8 @@
                                     "buttonList",
                                     "textInput",
                                     "selectionInput",
-                                    "dateTimePicker"
+                                    "dateTimePicker",
+                                    "chipList"
                                   ]
                                 }
                               },
@@ -2282,10 +2438,55 @@
                                 "dateTimePicker": {
                                   "type": "DateTimePicker",
                                   "id": 7
+                                },
+                                "chipList": {
+                                  "type": "ChipList",
+                                  "id": 8
                                 }
                               }
                             }
                           }
+                        }
+                      }
+                    },
+                    "Carousel": {
+                      "fields": {
+                        "carouselCards": {
+                          "rule": "repeated",
+                          "type": "CarouselCard",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "CarouselCard": {
+                          "fields": {
+                            "widgets": {
+                              "rule": "repeated",
+                              "type": "Card.NestedWidget",
+                              "id": 1
+                            },
+                            "footerWidgets": {
+                              "rule": "repeated",
+                              "type": "Card.NestedWidget",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "CollapseControl": {
+                      "fields": {
+                        "horizontalAlignment": {
+                          "type": "Widget.HorizontalAlignment",
+                          "id": 1
+                        },
+                        "expandButton": {
+                          "type": "Button",
+                          "id": 2
+                        },
+                        "collapseButton": {
+                          "type": "Button",
+                          "id": 3
                         }
                       }
                     },
@@ -2296,7 +2497,8 @@
                             "action",
                             "openLink",
                             "openDynamicLinkAction",
-                            "card"
+                            "card",
+                            "overflowMenu"
                           ]
                         }
                       },
@@ -2316,6 +2518,10 @@
                         "card": {
                           "type": "Card",
                           "id": 4
+                        },
+                        "overflowMenu": {
+                          "type": "OverflowMenu",
+                          "id": 8
                         }
                       }
                     },
@@ -2371,6 +2577,15 @@
                         "interaction": {
                           "type": "Interaction",
                           "id": 5
+                        },
+                        "requiredWidgets": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 6
+                        },
+                        "allWidgetsAreRequired": {
+                          "type": "bool",
+                          "id": 7
                         }
                       },
                       "nested": {
@@ -2397,6 +2612,83 @@
                             "INTERACTION_UNSPECIFIED": 0,
                             "OPEN_DIALOG": 1
                           }
+                        }
+                      }
+                    },
+                    "Validation": {
+                      "fields": {
+                        "characterLimit": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "inputType": {
+                          "type": "InputType",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "InputType": {
+                          "values": {
+                            "INPUT_TYPE_UNSPECIFIED": 0,
+                            "TEXT": 1,
+                            "INTEGER": 2,
+                            "FLOAT": 3,
+                            "EMAIL": 4,
+                            "EMOJI_PICKER": 5
+                          }
+                        }
+                      }
+                    },
+                    "ChipList": {
+                      "fields": {
+                        "layout": {
+                          "type": "Layout",
+                          "id": 1
+                        },
+                        "chips": {
+                          "rule": "repeated",
+                          "type": "Chip",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "Layout": {
+                          "values": {
+                            "LAYOUT_UNSPECIFIED": 0,
+                            "WRAPPED": 1,
+                            "HORIZONTAL_SCROLLABLE": 2
+                          }
+                        }
+                      }
+                    },
+                    "Chip": {
+                      "fields": {
+                        "icon": {
+                          "type": "Icon",
+                          "id": 1
+                        },
+                        "label": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "onClick": {
+                          "type": "OnClick",
+                          "id": 3
+                        },
+                        "enabled": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "disabled": {
+                          "type": "bool",
+                          "id": 6
+                        },
+                        "altText": {
+                          "type": "string",
+                          "id": 5
                         }
                       }
                     }
