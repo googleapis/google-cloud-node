@@ -3303,6 +3303,9 @@ export namespace google {
 
                     /** AdvancedVoiceOptions lowLatencyJourneySynthesis */
                     lowLatencyJourneySynthesis?: (boolean|null);
+
+                    /** AdvancedVoiceOptions relaxSafetyFilters */
+                    relaxSafetyFilters?: (boolean|null);
                 }
 
                 /** Represents an AdvancedVoiceOptions. */
@@ -3316,6 +3319,9 @@ export namespace google {
 
                     /** AdvancedVoiceOptions lowLatencyJourneySynthesis. */
                     public lowLatencyJourneySynthesis?: (boolean|null);
+
+                    /** AdvancedVoiceOptions relaxSafetyFilters. */
+                    public relaxSafetyFilters: boolean;
 
                     /**
                      * Creates a new AdvancedVoiceOptions instance using the specified properties.
