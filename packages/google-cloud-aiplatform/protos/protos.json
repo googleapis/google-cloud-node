@@ -43291,6 +43291,14 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "excludedPredefinedFunctions": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           },
                           "nested": {
@@ -43444,6 +43452,76 @@
                         }
                       }
                     },
+                    "FunctionResponsePart": {
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "inlineData",
+                            "fileData"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "inlineData": {
+                          "type": "FunctionResponseBlob",
+                          "id": 1
+                        },
+                        "fileData": {
+                          "type": "FunctionResponseFileData",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FunctionResponseBlob": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "data": {
+                          "type": "bytes",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FunctionResponseFileData": {
+                      "fields": {
+                        "mimeType": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "fileUri": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
                     "FunctionResponse": {
                       "fields": {
                         "id": {
@@ -43465,6 +43543,14 @@
                           "id": 2,
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "parts": {
+                          "rule": "repeated",
+                          "type": "FunctionResponsePart",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
