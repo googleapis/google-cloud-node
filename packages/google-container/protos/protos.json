@@ -12181,6 +12181,10 @@
                     "desiredNetworkTierConfig": {
                       "type": "NetworkTierConfig",
                       "id": 155
+                    },
+                    "desiredSecretSyncConfig": {
+                      "type": "SecretSyncConfig",
+                      "id": 158
                     }
                   }
                 },

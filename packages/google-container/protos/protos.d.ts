@@ -38748,6 +38748,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNetworkTierConfig */
                 desiredNetworkTierConfig?: (google.container.v1beta1.INetworkTierConfig|null);
+
+                /** ClusterUpdate desiredSecretSyncConfig */
+                desiredSecretSyncConfig?: (google.container.v1beta1.ISecretSyncConfig|null);
             }
 
             /** Represents a ClusterUpdate. */
@@ -39001,6 +39004,9 @@ export namespace google {
 
                 /** ClusterUpdate desiredNetworkTierConfig. */
                 public desiredNetworkTierConfig?: (google.container.v1beta1.INetworkTierConfig|null);
+
+                /** ClusterUpdate desiredSecretSyncConfig. */
+                public desiredSecretSyncConfig?: (google.container.v1beta1.ISecretSyncConfig|null);
 
                 /**
                  * Creates a new ClusterUpdate instance using the specified properties.

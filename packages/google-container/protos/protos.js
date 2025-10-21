@@ -100351,6 +100351,7 @@
                      * @property {google.container.v1beta1.IAnonymousAuthenticationConfig|null} [desiredAnonymousAuthenticationConfig] ClusterUpdate desiredAnonymousAuthenticationConfig
                      * @property {google.container.v1beta1.IGkeAutoUpgradeConfig|null} [gkeAutoUpgradeConfig] ClusterUpdate gkeAutoUpgradeConfig
                      * @property {google.container.v1beta1.INetworkTierConfig|null} [desiredNetworkTierConfig] ClusterUpdate desiredNetworkTierConfig
+                     * @property {google.container.v1beta1.ISecretSyncConfig|null} [desiredSecretSyncConfig] ClusterUpdate desiredSecretSyncConfig
                      */
     
                     /**
@@ -101017,6 +101018,14 @@
                      */
                     ClusterUpdate.prototype.desiredNetworkTierConfig = null;
     
+                    /**
+                     * ClusterUpdate desiredSecretSyncConfig.
+                     * @member {google.container.v1beta1.ISecretSyncConfig|null|undefined} desiredSecretSyncConfig
+                     * @memberof google.container.v1beta1.ClusterUpdate
+                     * @instance
+                     */
+                    ClusterUpdate.prototype.desiredSecretSyncConfig = null;
+    
                     // OneOf field names bound to virtual getters and setters
                     var $oneOfFields;
     
@@ -101273,6 +101282,8 @@
                             $root.google.container.v1beta1.NetworkTierConfig.encode(message.desiredNetworkTierConfig, writer.uint32(/* id 155, wireType 2 =*/1242).fork()).ldelim();
                         if (message.desiredAnonymousAuthenticationConfig != null && Object.hasOwnProperty.call(message, "desiredAnonymousAuthenticationConfig"))
                             $root.google.container.v1beta1.AnonymousAuthenticationConfig.encode(message.desiredAnonymousAuthenticationConfig, writer.uint32(/* id 156, wireType 2 =*/1250).fork()).ldelim();
+                        if (message.desiredSecretSyncConfig != null && Object.hasOwnProperty.call(message, "desiredSecretSyncConfig"))
+                            $root.google.container.v1beta1.SecretSyncConfig.encode(message.desiredSecretSyncConfig, writer.uint32(/* id 158, wireType 2 =*/1266).fork()).ldelim();
                         return writer;
                     };
     
@@ -101633,6 +101644,10 @@
                                 }
                             case 155: {
                                     message.desiredNetworkTierConfig = $root.google.container.v1beta1.NetworkTierConfig.decode(reader, reader.uint32());
+                                    break;
+                                }
+                            case 158: {
+                                    message.desiredSecretSyncConfig = $root.google.container.v1beta1.SecretSyncConfig.decode(reader, reader.uint32());
                                     break;
                                 }
                             default:
@@ -102095,6 +102110,11 @@
                             if (error)
                                 return "desiredNetworkTierConfig." + error;
                         }
+                        if (message.desiredSecretSyncConfig != null && message.hasOwnProperty("desiredSecretSyncConfig")) {
+                            var error = $root.google.container.v1beta1.SecretSyncConfig.verify(message.desiredSecretSyncConfig);
+                            if (error)
+                                return "desiredSecretSyncConfig." + error;
+                        }
                         return null;
                     };
     
@@ -102542,6 +102562,11 @@
                                 throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredNetworkTierConfig: object expected");
                             message.desiredNetworkTierConfig = $root.google.container.v1beta1.NetworkTierConfig.fromObject(object.desiredNetworkTierConfig);
                         }
+                        if (object.desiredSecretSyncConfig != null) {
+                            if (typeof object.desiredSecretSyncConfig !== "object")
+                                throw TypeError(".google.container.v1beta1.ClusterUpdate.desiredSecretSyncConfig: object expected");
+                            message.desiredSecretSyncConfig = $root.google.container.v1beta1.SecretSyncConfig.fromObject(object.desiredSecretSyncConfig);
+                        }
                         return message;
                     };
     
@@ -102630,6 +102655,7 @@
                             object.gkeAutoUpgradeConfig = null;
                             object.desiredNetworkTierConfig = null;
                             object.desiredAnonymousAuthenticationConfig = null;
+                            object.desiredSecretSyncConfig = null;
                         }
                         if (message.desiredNodeVersion != null && message.hasOwnProperty("desiredNodeVersion"))
                             object.desiredNodeVersion = message.desiredNodeVersion;
@@ -102829,6 +102855,8 @@
                             object.desiredNetworkTierConfig = $root.google.container.v1beta1.NetworkTierConfig.toObject(message.desiredNetworkTierConfig, options);
                         if (message.desiredAnonymousAuthenticationConfig != null && message.hasOwnProperty("desiredAnonymousAuthenticationConfig"))
                             object.desiredAnonymousAuthenticationConfig = $root.google.container.v1beta1.AnonymousAuthenticationConfig.toObject(message.desiredAnonymousAuthenticationConfig, options);
+                        if (message.desiredSecretSyncConfig != null && message.hasOwnProperty("desiredSecretSyncConfig"))
+                            object.desiredSecretSyncConfig = $root.google.container.v1beta1.SecretSyncConfig.toObject(message.desiredSecretSyncConfig, options);
                         return object;
                     };
     
