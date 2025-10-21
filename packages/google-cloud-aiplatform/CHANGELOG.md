@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.9.0...aiplatform-v5.10.0) (2025-10-21)
+
+
+### Features
+
+* Add FunctionResponsePart and excluded_predefined_functions in ComputerUse ([#6825](https://github.com/googleapis/google-cloud-node/issues/6825)) ([0d3274e](https://github.com/googleapis/google-cloud-node/commit/0d3274e0fa00cf2cf9cc15488b2f33672a97fe00))
+* Add FunctionResponsePart and excluded_predefined_functions in ComputerUse ([#6829](https://github.com/googleapis/google-cloud-node/issues/6829)) ([6001de8](https://github.com/googleapis/google-cloud-node/commit/6001de8c9b62274d067b58b346e835c97dc249ea))
+
 ## [5.9.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.8.0...aiplatform-v5.9.0) (2025-10-16)
 
 

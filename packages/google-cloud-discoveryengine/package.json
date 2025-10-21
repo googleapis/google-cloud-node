@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/discoveryengine",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "Discovery Engine API client for Node.js",
   "repository": {
     "type": "git",

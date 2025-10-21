@@ -5,6 +5,82 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "a00faa8f3da51868df3e5d7a4a418bdb2f0de840",
+          "message": "[oracledatabase] Expand Oracle Database v1 API to add support for Exadata Exascale (`ExadbVmCluster`, `ExascaleDbStorageVault`), Base Database (`DbSystem`, `Database`, `PluggableDatabase`), and Networking (`OdbNetwork`, `OdbSubnet`). Adds enhance...",
+          "issues": [
+            "6831"
+          ]
+        }
+      ],
+      "version": "0.7.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/oracledatabase",
+      "id": "6d3ec81f-7403-4f83-99f4-0b5d44151e04",
+      "createTime": "2025-10-21T17:28:44.603Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "eeaccdba2f06c01d6fca5427bc5b2fa9b22b5021",
+          "message": "[texttospeech] add `relax_safety_filters` proto field for Gemini TTS",
+          "issues": [
+            "6823"
+          ]
+        }
+      ],
+      "version": "6.4.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/text-to-speech",
+      "id": "28359df8-7d94-46bc-93d7-c85cfe331741",
+      "createTime": "2025-10-21T17:28:44.582Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "9eb1fef3ff79fc73a5b890d69b5187baf87897e3",
+          "message": "[discoveryengine] Include AssistAnswer as a part of the Session",
+          "issues": [
+            "6824"
+          ]
+        }
+      ],
+      "version": "2.5.2",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/discoveryengine",
+      "id": "d5d0986d-d100-4b61-a199-5580180ff3b5",
+      "createTime": "2025-10-21T17:28:44.529Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "6001de8c9b62274d067b58b346e835c97dc249ea",
+          "message": "Add FunctionResponsePart and excluded_predefined_functions in ComputerUse",
+          "issues": [
+            "6829"
+          ]
+        },
+        {
+          "type": "feat",
+          "sha": "0d3274e0fa00cf2cf9cc15488b2f33672a97fe00",
+          "message": "Add FunctionResponsePart and excluded_predefined_functions in ComputerUse",
+          "issues": [
+            "6825"
+          ]
+        }
+      ],
+      "version": "5.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "1c80e9b3-5187-4056-b7b8-57a3123dd690",
+      "createTime": "2025-10-21T17:28:44.493Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "68fd63cd8c3d91e7f0c8e0193c9521e51fdeb33f",
           "message": "[routeoptimization] add experimental Load Costs feature",
           "issues": [
@@ -66420,5 +66496,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-10-16T22:02:18.319Z"
+  "updateTime": "2025-10-21T17:28:44.603Z"
 }

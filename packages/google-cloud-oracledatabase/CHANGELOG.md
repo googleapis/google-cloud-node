@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.6.1...oracledatabase-v0.7.0) (2025-10-21)
+
+
+### Features
+
+* [oracledatabase] Expand Oracle Database v1 API to add support for Exadata Exascale (`ExadbVmCluster`, `ExascaleDbStorageVault`), Base Database (`DbSystem`, `Database`, `PluggableDatabase`), and Networking (`OdbNetwork`, `OdbSubnet`). Adds enhance... ([#6831](https://github.com/googleapis/google-cloud-node/issues/6831)) ([a00faa8](https://github.com/googleapis/google-cloud-node/commit/a00faa8f3da51868df3e5d7a4a418bdb2f0de840))
+
 ## [0.6.1](https://github.com/googleapis/google-cloud-node/compare/oracledatabase-v0.6.0...oracledatabase-v0.6.1) (2025-10-13)
 
 
