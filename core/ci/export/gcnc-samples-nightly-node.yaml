@@ -1,11 +1,13 @@
+createTime: '2025-10-20T21:38:10.237057452Z'
 description: Nightly build with node 18
 gitFileSource:
   path: ci/cloudbuild.yaml
   repoType: GITHUB
   revision: refs/heads/main
-  uri: https://github.com/googleapis/google-cloud-node-coreid: 25a89188-0ae6-4faf-9131-9b1e3c8b9720
+  uri: https://github.com/googleapis/google-cloud-node-core
+id: 24cf75bd-a428-4f4f-9afa-ffc797c70e22
 name: gcnc-samples-nightly-node
-resourceName: projects/long-door-651/locations/global/triggers/25a89188-0ae6-4faf-9131-9b1e3c8b9720
+resourceName: projects/long-door-651/locations/global/triggers/24cf75bd-a428-4f4f-9afa-ffc797c70e22
 serviceAccount: projects/long-door-651/serviceAccounts/kokoro-system-test@long-door-651.iam.gserviceaccount.com
 sourceToBuild:
   ref: refs/heads/main
