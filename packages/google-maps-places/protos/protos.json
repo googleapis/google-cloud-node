@@ -1229,6 +1229,14 @@
                         "neighborhoodSummary": {
                           "type": "NeighborhoodSummary",
                           "id": 91
+                        },
+                        "movedPlace": {
+                          "type": "string",
+                          "id": 93
+                        },
+                        "movedPlaceId": {
+                          "type": "string",
+                          "id": 94
                         }
                       },
                       "nested": {
@@ -1679,6 +1687,10 @@
                             "disclosureText": {
                               "type": "google.type.LocalizedText",
                               "id": 3
+                            },
+                            "reviewsUri": {
+                              "type": "string",
+                              "id": 4
                             }
                           }
                         },

@@ -8232,6 +8232,8 @@
                          * @property {google.maps.places.v1.Place.IReviewSummary|null} [reviewSummary] Place reviewSummary
                          * @property {google.maps.places.v1.Place.IEvChargeAmenitySummary|null} [evChargeAmenitySummary] Place evChargeAmenitySummary
                          * @property {google.maps.places.v1.Place.INeighborhoodSummary|null} [neighborhoodSummary] Place neighborhoodSummary
+                         * @property {string|null} [movedPlace] Place movedPlace
+                         * @property {string|null} [movedPlaceId] Place movedPlaceId
                          */
     
                         /**
@@ -8826,6 +8828,22 @@
                          */
                         Place.prototype.neighborhoodSummary = null;
     
+                        /**
+                         * Place movedPlace.
+                         * @member {string} movedPlace
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.movedPlace = "";
+    
+                        /**
+                         * Place movedPlaceId.
+                         * @member {string} movedPlaceId
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.movedPlaceId = "";
+    
                         // OneOf field names bound to virtual getters and setters
                         var $oneOfFields;
     
@@ -9166,6 +9184,10 @@
                                 $root.google.type.PostalAddress.encode(message.postalAddress, writer.uint32(/* id 90, wireType 2 =*/722).fork()).ldelim();
                             if (message.neighborhoodSummary != null && Object.hasOwnProperty.call(message, "neighborhoodSummary"))
                                 $root.google.maps.places.v1.Place.NeighborhoodSummary.encode(message.neighborhoodSummary, writer.uint32(/* id 91, wireType 2 =*/730).fork()).ldelim();
+                            if (message.movedPlace != null && Object.hasOwnProperty.call(message, "movedPlace"))
+                                writer.uint32(/* id 93, wireType 2 =*/746).string(message.movedPlace);
+                            if (message.movedPlaceId != null && Object.hasOwnProperty.call(message, "movedPlaceId"))
+                                writer.uint32(/* id 94, wireType 2 =*/754).string(message.movedPlaceId);
                             return writer;
                         };
     
@@ -9502,6 +9524,14 @@
                                     }
                                 case 91: {
                                         message.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 93: {
+                                        message.movedPlace = reader.string();
+                                        break;
+                                    }
+                                case 94: {
+                                        message.movedPlaceId = reader.string();
                                         break;
                                     }
                                 default:
@@ -9918,6 +9948,12 @@
                                 if (error)
                                     return "neighborhoodSummary." + error;
                             }
+                            if (message.movedPlace != null && message.hasOwnProperty("movedPlace"))
+                                if (!$util.isString(message.movedPlace))
+                                    return "movedPlace: string expected";
+                            if (message.movedPlaceId != null && message.hasOwnProperty("movedPlaceId"))
+                                if (!$util.isString(message.movedPlaceId))
+                                    return "movedPlaceId: string expected";
                             return null;
                         };
     
@@ -10259,6 +10295,10 @@
                                     throw TypeError(".google.maps.places.v1.Place.neighborhoodSummary: object expected");
                                 message.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.fromObject(object.neighborhoodSummary);
                             }
+                            if (object.movedPlace != null)
+                                message.movedPlace = String(object.movedPlace);
+                            if (object.movedPlaceId != null)
+                                message.movedPlaceId = String(object.movedPlaceId);
                             return message;
                         };
     
@@ -10322,6 +10362,8 @@
                                 object.evChargeAmenitySummary = null;
                                 object.postalAddress = null;
                                 object.neighborhoodSummary = null;
+                                object.movedPlace = "";
+                                object.movedPlaceId = "";
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -10573,6 +10615,10 @@
                                 object.postalAddress = $root.google.type.PostalAddress.toObject(message.postalAddress, options);
                             if (message.neighborhoodSummary != null && message.hasOwnProperty("neighborhoodSummary"))
                                 object.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.toObject(message.neighborhoodSummary, options);
+                            if (message.movedPlace != null && message.hasOwnProperty("movedPlace"))
+                                object.movedPlace = message.movedPlace;
+                            if (message.movedPlaceId != null && message.hasOwnProperty("movedPlaceId"))
+                                object.movedPlaceId = message.movedPlaceId;
                             return object;
                         };
     
@@ -14480,6 +14526,7 @@
                              * @property {google.type.ILocalizedText|null} [text] ReviewSummary text
                              * @property {string|null} [flagContentUri] ReviewSummary flagContentUri
                              * @property {google.type.ILocalizedText|null} [disclosureText] ReviewSummary disclosureText
+                             * @property {string|null} [reviewsUri] ReviewSummary reviewsUri
                              */
     
                             /**
@@ -14522,6 +14569,14 @@
                             ReviewSummary.prototype.disclosureText = null;
     
                             /**
+                             * ReviewSummary reviewsUri.
+                             * @member {string} reviewsUri
+                             * @memberof google.maps.places.v1.Place.ReviewSummary
+                             * @instance
+                             */
+                            ReviewSummary.prototype.reviewsUri = "";
+    
+                            /**
                              * Creates a new ReviewSummary instance using the specified properties.
                              * @function create
                              * @memberof google.maps.places.v1.Place.ReviewSummary
@@ -14551,6 +14606,8 @@
                                     writer.uint32(/* id 2, wireType 2 =*/18).string(message.flagContentUri);
                                 if (message.disclosureText != null && Object.hasOwnProperty.call(message, "disclosureText"))
                                     $root.google.type.LocalizedText.encode(message.disclosureText, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                if (message.reviewsUri != null && Object.hasOwnProperty.call(message, "reviewsUri"))
+                                    writer.uint32(/* id 4, wireType 2 =*/34).string(message.reviewsUri);
                                 return writer;
                             };
     
@@ -14597,6 +14654,10 @@
                                         }
                                     case 3: {
                                             message.disclosureText = $root.google.type.LocalizedText.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 4: {
+                                            message.reviewsUri = reader.string();
                                             break;
                                         }
                                     default:
@@ -14647,6 +14708,9 @@
                                     if (error)
                                         return "disclosureText." + error;
                                 }
+                                if (message.reviewsUri != null && message.hasOwnProperty("reviewsUri"))
+                                    if (!$util.isString(message.reviewsUri))
+                                        return "reviewsUri: string expected";
                                 return null;
                             };
     
@@ -14674,6 +14738,8 @@
                                         throw TypeError(".google.maps.places.v1.Place.ReviewSummary.disclosureText: object expected");
                                     message.disclosureText = $root.google.type.LocalizedText.fromObject(object.disclosureText);
                                 }
+                                if (object.reviewsUri != null)
+                                    message.reviewsUri = String(object.reviewsUri);
                                 return message;
                             };
     
@@ -14694,6 +14760,7 @@
                                     object.text = null;
                                     object.flagContentUri = "";
                                     object.disclosureText = null;
+                                    object.reviewsUri = "";
                                 }
                                 if (message.text != null && message.hasOwnProperty("text"))
                                     object.text = $root.google.type.LocalizedText.toObject(message.text, options);
@@ -14701,6 +14768,8 @@
                                     object.flagContentUri = message.flagContentUri;
                                 if (message.disclosureText != null && message.hasOwnProperty("disclosureText"))
                                     object.disclosureText = $root.google.type.LocalizedText.toObject(message.disclosureText, options);
+                                if (message.reviewsUri != null && message.hasOwnProperty("reviewsUri"))
+                                    object.reviewsUri = message.reviewsUri;
                                 return object;
                             };
     

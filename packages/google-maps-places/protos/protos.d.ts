@@ -3393,6 +3393,12 @@ export namespace google {
 
                     /** Place neighborhoodSummary */
                     neighborhoodSummary?: (google.maps.places.v1.Place.INeighborhoodSummary|null);
+
+                    /** Place movedPlace */
+                    movedPlace?: (string|null);
+
+                    /** Place movedPlaceId */
+                    movedPlaceId?: (string|null);
                 }
 
                 /** Represents a Place. */
@@ -3616,6 +3622,12 @@ export namespace google {
 
                     /** Place neighborhoodSummary. */
                     public neighborhoodSummary?: (google.maps.places.v1.Place.INeighborhoodSummary|null);
+
+                    /** Place movedPlace. */
+                    public movedPlace: string;
+
+                    /** Place movedPlaceId. */
+                    public movedPlaceId: string;
 
                     /**
                      * Creates a new Place instance using the specified properties.
@@ -5193,6 +5205,9 @@ export namespace google {
 
                         /** ReviewSummary disclosureText */
                         disclosureText?: (google.type.ILocalizedText|null);
+
+                        /** ReviewSummary reviewsUri */
+                        reviewsUri?: (string|null);
                     }
 
                     /** Represents a ReviewSummary. */
@@ -5212,6 +5227,9 @@ export namespace google {
 
                         /** ReviewSummary disclosureText. */
                         public disclosureText?: (google.type.ILocalizedText|null);
+
+                        /** ReviewSummary reviewsUri. */
+                        public reviewsUri: string;
 
                         /**
                          * Creates a new ReviewSummary instance using the specified properties.
