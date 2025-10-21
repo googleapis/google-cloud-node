@@ -14716,6 +14716,66 @@
       }
     },
     {
+      "regionTag": "aiplatform_v1beta1_generated_PredictionService_EmbedContent_async",
+      "title": "DatasetService embedContent Sample",
+      "origin": "API_DEFINITION",
+      "description": " Embed content with multimodal inputs.",
+      "canonical": true,
+      "file": "prediction_service.embed_content.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 76,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "EmbedContent",
+        "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.EmbedContent",
+        "async": true,
+        "parameters": [
+          {
+            "name": "model",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "content",
+            "type": ".google.cloud.aiplatform.v1beta1.Content"
+          },
+          {
+            "name": "title",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "task_type",
+            "type": ".google.cloud.aiplatform.v1beta1.EmbedContentRequest.EmbeddingTaskType"
+          },
+          {
+            "name": "output_dimensionality",
+            "type": "TYPE_INT32"
+          },
+          {
+            "name": "auto_truncate",
+            "type": "TYPE_BOOL"
+          }
+        ],
+        "resultType": ".google.cloud.aiplatform.v1beta1.EmbedContentResponse",
+        "client": {
+          "shortName": "PredictionServiceClient",
+          "fullName": "google.cloud.aiplatform.v1beta1.PredictionServiceClient"
+        },
+        "method": {
+          "shortName": "EmbedContent",
+          "fullName": "google.cloud.aiplatform.v1beta1.PredictionService.EmbedContent",
+          "service": {
+            "shortName": "PredictionService",
+            "fullName": "google.cloud.aiplatform.v1beta1.PredictionService"
+          }
+        }
+      }
+    },
+    {
       "regionTag": "aiplatform_v1beta1_generated_ReasoningEngineExecutionService_QueryReasoningEngine_async",
       "title": "DatasetService queryReasoningEngine Sample",
       "origin": "API_DEFINITION",

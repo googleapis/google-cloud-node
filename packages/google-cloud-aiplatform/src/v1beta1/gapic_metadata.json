@@ -3594,6 +3594,11 @@
                 "generateContent"
               ]
             },
+            "EmbedContent": {
+              "methods": [
+                "embedContent"
+              ]
+            },
             "StreamRawPredict": {
               "methods": [
                 "streamRawPredict"
@@ -3672,6 +3677,11 @@
             "GenerateContent": {
               "methods": [
                 "generateContent"
+              ]
+            },
+            "EmbedContent": {
+              "methods": [
+                "embedContent"
               ]
             }
           }

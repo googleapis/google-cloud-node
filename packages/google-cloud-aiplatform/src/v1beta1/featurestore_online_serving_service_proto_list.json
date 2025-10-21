@@ -175,6 +175,7 @@
   "../../protos/google/cloud/aiplatform/v1beta1/types.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/ui_pipeline_spec.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/unmanaged_container_model.proto",
+  "../../protos/google/cloud/aiplatform/v1beta1/usage_metadata.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/user_action_reference.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/value.proto",
   "../../protos/google/cloud/aiplatform/v1beta1/vertex_rag_data.proto",
