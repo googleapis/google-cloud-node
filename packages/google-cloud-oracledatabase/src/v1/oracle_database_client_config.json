@@ -6,12 +6,6 @@
         "idempotent": [
           "DEADLINE_EXCEEDED",
           "UNAVAILABLE"
-        ],
-        "deadline_exceeded_resource_exhausted_internal_unavailable": [
-          "DEADLINE_EXCEEDED",
-          "RESOURCE_EXHAUSTED",
-          "INTERNAL",
-          "UNAVAILABLE"
         ]
       },
       "retry_params": {
@@ -37,12 +31,12 @@
       "methods": {
         "ListCloudExadataInfrastructures": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetCloudExadataInfrastructure": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "CreateCloudExadataInfrastructure": {
@@ -57,12 +51,12 @@
         },
         "ListCloudVmClusters": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetCloudVmCluster": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "CreateCloudVmCluster": {
@@ -77,40 +71,50 @@
         },
         "ListEntitlements": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListDbServers": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListDbNodes": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListGiVersions": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListMinorVersions": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListDbSystemShapes": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListAutonomousDatabases": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "GetAutonomousDatabase": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "CreateAutonomousDatabase": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateAutonomousDatabase": {
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
@@ -132,17 +136,17 @@
         },
         "ListAutonomousDbVersions": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListAutonomousDatabaseCharacterSets": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "ListAutonomousDatabaseBackups": {
           "timeout_millis": 60000,
-          "retry_codes_name": "deadline_exceeded_resource_exhausted_internal_unavailable",
+          "retry_codes_name": "idempotent",
           "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         },
         "StopAutonomousDatabase": {
@@ -159,6 +163,161 @@
           "timeout_millis": 60000,
           "retry_codes_name": "non_idempotent",
           "retry_params_name": "default"
+        },
+        "SwitchoverAutonomousDatabase": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "FailoverAutonomousDatabase": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListOdbNetworks": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetOdbNetwork": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateOdbNetwork": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteOdbNetwork": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListOdbSubnets": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetOdbSubnet": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateOdbSubnet": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteOdbSubnet": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListExadbVmClusters": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetExadbVmCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateExadbVmCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteExadbVmCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "UpdateExadbVmCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "RemoveVirtualMachineExadbVmCluster": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListExascaleDbStorageVaults": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetExascaleDbStorageVault": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateExascaleDbStorageVault": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteExascaleDbStorageVault": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDbSystemInitialStorageSizes": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListDatabases": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetDatabase": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListPluggableDatabases": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetPluggableDatabase": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListDbSystems": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "GetDbSystem": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "CreateDbSystem": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "DeleteDbSystem": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "non_idempotent",
+          "retry_params_name": "default"
+        },
+        "ListDbVersions": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
+        },
+        "ListDatabaseCharacterSets": {
+          "timeout_millis": 60000,
+          "retry_codes_name": "idempotent",
+          "retry_params_name": "ce5b960a6ed052e690863808e4f0deff3dc7d49f"
         }
       }
     }

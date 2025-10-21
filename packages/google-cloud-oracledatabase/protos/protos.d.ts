@@ -109,8 +109,23 @@ export namespace google {
                     /** AutonomousDatabase cidr */
                     cidr?: (string|null);
 
+                    /** AutonomousDatabase odbNetwork */
+                    odbNetwork?: (string|null);
+
+                    /** AutonomousDatabase odbSubnet */
+                    odbSubnet?: (string|null);
+
+                    /** AutonomousDatabase sourceConfig */
+                    sourceConfig?: (google.cloud.oracledatabase.v1.ISourceConfig|null);
+
+                    /** AutonomousDatabase peerAutonomousDatabases */
+                    peerAutonomousDatabases?: (string[]|null);
+
                     /** AutonomousDatabase createTime */
                     createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutonomousDatabase disasterRecoverySupportedLocations */
+                    disasterRecoverySupportedLocations?: (string[]|null);
                 }
 
                 /** Represents an AutonomousDatabase. */
@@ -149,8 +164,23 @@ export namespace google {
                     /** AutonomousDatabase cidr. */
                     public cidr: string;
 
+                    /** AutonomousDatabase odbNetwork. */
+                    public odbNetwork: string;
+
+                    /** AutonomousDatabase odbSubnet. */
+                    public odbSubnet: string;
+
+                    /** AutonomousDatabase sourceConfig. */
+                    public sourceConfig?: (google.cloud.oracledatabase.v1.ISourceConfig|null);
+
+                    /** AutonomousDatabase peerAutonomousDatabases. */
+                    public peerAutonomousDatabases: string[];
+
                     /** AutonomousDatabase createTime. */
                     public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutonomousDatabase disasterRecoverySupportedLocations. */
+                    public disasterRecoverySupportedLocations: string[];
 
                     /**
                      * Creates a new AutonomousDatabase instance using the specified properties.
@@ -224,6 +254,109 @@ export namespace google {
 
                     /**
                      * Gets the default type url for AutonomousDatabase
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SourceConfig. */
+                interface ISourceConfig {
+
+                    /** SourceConfig autonomousDatabase */
+                    autonomousDatabase?: (string|null);
+
+                    /** SourceConfig automaticBackupsReplicationEnabled */
+                    automaticBackupsReplicationEnabled?: (boolean|null);
+                }
+
+                /** Represents a SourceConfig. */
+                class SourceConfig implements ISourceConfig {
+
+                    /**
+                     * Constructs a new SourceConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ISourceConfig);
+
+                    /** SourceConfig autonomousDatabase. */
+                    public autonomousDatabase: string;
+
+                    /** SourceConfig automaticBackupsReplicationEnabled. */
+                    public automaticBackupsReplicationEnabled: boolean;
+
+                    /**
+                     * Creates a new SourceConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SourceConfig instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ISourceConfig): google.cloud.oracledatabase.v1.SourceConfig;
+
+                    /**
+                     * Encodes the specified SourceConfig message. Does not implicitly {@link google.cloud.oracledatabase.v1.SourceConfig.verify|verify} messages.
+                     * @param message SourceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ISourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SourceConfig message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.SourceConfig.verify|verify} messages.
+                     * @param message SourceConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ISourceConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SourceConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SourceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.SourceConfig;
+
+                    /**
+                     * Decodes a SourceConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SourceConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.SourceConfig;
+
+                    /**
+                     * Verifies a SourceConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SourceConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SourceConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.SourceConfig;
+
+                    /**
+                     * Creates a plain object from a SourceConfig message. Also converts values to other types if specified.
+                     * @param message SourceConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.SourceConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SourceConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SourceConfig
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -398,11 +531,29 @@ export namespace google {
                     /** AutonomousDatabaseProperties nextLongTermBackupTime */
                     nextLongTermBackupTime?: (google.protobuf.ITimestamp|null);
 
+                    /** AutonomousDatabaseProperties dataGuardRoleChangedTime */
+                    dataGuardRoleChangedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutonomousDatabaseProperties disasterRecoveryRoleChangedTime */
+                    disasterRecoveryRoleChangedTime?: (google.protobuf.ITimestamp|null);
+
                     /** AutonomousDatabaseProperties maintenanceBeginTime */
                     maintenanceBeginTime?: (google.protobuf.ITimestamp|null);
 
                     /** AutonomousDatabaseProperties maintenanceEndTime */
                     maintenanceEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutonomousDatabaseProperties allowlistedIps */
+                    allowlistedIps?: (string[]|null);
+
+                    /** AutonomousDatabaseProperties encryptionKey */
+                    encryptionKey?: (google.cloud.oracledatabase.v1.IEncryptionKey|null);
+
+                    /** AutonomousDatabaseProperties encryptionKeyHistoryEntries */
+                    encryptionKeyHistoryEntries?: (google.cloud.oracledatabase.v1.IEncryptionKeyHistoryEntry[]|null);
+
+                    /** AutonomousDatabaseProperties serviceAgentEmail */
+                    serviceAgentEmail?: (string|null);
                 }
 
                 /** Represents an AutonomousDatabaseProperties. */
@@ -579,11 +730,29 @@ export namespace google {
                     /** AutonomousDatabaseProperties nextLongTermBackupTime. */
                     public nextLongTermBackupTime?: (google.protobuf.ITimestamp|null);
 
+                    /** AutonomousDatabaseProperties dataGuardRoleChangedTime. */
+                    public dataGuardRoleChangedTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutonomousDatabaseProperties disasterRecoveryRoleChangedTime. */
+                    public disasterRecoveryRoleChangedTime?: (google.protobuf.ITimestamp|null);
+
                     /** AutonomousDatabaseProperties maintenanceBeginTime. */
                     public maintenanceBeginTime?: (google.protobuf.ITimestamp|null);
 
                     /** AutonomousDatabaseProperties maintenanceEndTime. */
                     public maintenanceEndTime?: (google.protobuf.ITimestamp|null);
+
+                    /** AutonomousDatabaseProperties allowlistedIps. */
+                    public allowlistedIps: string[];
+
+                    /** AutonomousDatabaseProperties encryptionKey. */
+                    public encryptionKey?: (google.cloud.oracledatabase.v1.IEncryptionKey|null);
+
+                    /** AutonomousDatabaseProperties encryptionKeyHistoryEntries. */
+                    public encryptionKeyHistoryEntries: google.cloud.oracledatabase.v1.IEncryptionKeyHistoryEntry[];
+
+                    /** AutonomousDatabaseProperties serviceAgentEmail. */
+                    public serviceAgentEmail: string;
 
                     /**
                      * Creates a new AutonomousDatabaseProperties instance using the specified properties.
@@ -750,6 +919,222 @@ export namespace google {
                         DISABLED_STANDBY = 3,
                         BACKUP_COPY = 4,
                         SNAPSHOT_STANDBY = 5
+                    }
+                }
+
+                /** Properties of an EncryptionKeyHistoryEntry. */
+                interface IEncryptionKeyHistoryEntry {
+
+                    /** EncryptionKeyHistoryEntry encryptionKey */
+                    encryptionKey?: (google.cloud.oracledatabase.v1.IEncryptionKey|null);
+
+                    /** EncryptionKeyHistoryEntry activationTime */
+                    activationTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an EncryptionKeyHistoryEntry. */
+                class EncryptionKeyHistoryEntry implements IEncryptionKeyHistoryEntry {
+
+                    /**
+                     * Constructs a new EncryptionKeyHistoryEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IEncryptionKeyHistoryEntry);
+
+                    /** EncryptionKeyHistoryEntry encryptionKey. */
+                    public encryptionKey?: (google.cloud.oracledatabase.v1.IEncryptionKey|null);
+
+                    /** EncryptionKeyHistoryEntry activationTime. */
+                    public activationTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new EncryptionKeyHistoryEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionKeyHistoryEntry instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IEncryptionKeyHistoryEntry): google.cloud.oracledatabase.v1.EncryptionKeyHistoryEntry;
+
+                    /**
+                     * Encodes the specified EncryptionKeyHistoryEntry message. Does not implicitly {@link google.cloud.oracledatabase.v1.EncryptionKeyHistoryEntry.verify|verify} messages.
+                     * @param message EncryptionKeyHistoryEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IEncryptionKeyHistoryEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionKeyHistoryEntry message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.EncryptionKeyHistoryEntry.verify|verify} messages.
+                     * @param message EncryptionKeyHistoryEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IEncryptionKeyHistoryEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionKeyHistoryEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionKeyHistoryEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.EncryptionKeyHistoryEntry;
+
+                    /**
+                     * Decodes an EncryptionKeyHistoryEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionKeyHistoryEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.EncryptionKeyHistoryEntry;
+
+                    /**
+                     * Verifies an EncryptionKeyHistoryEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionKeyHistoryEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionKeyHistoryEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.EncryptionKeyHistoryEntry;
+
+                    /**
+                     * Creates a plain object from an EncryptionKeyHistoryEntry message. Also converts values to other types if specified.
+                     * @param message EncryptionKeyHistoryEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.EncryptionKeyHistoryEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionKeyHistoryEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionKeyHistoryEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EncryptionKey. */
+                interface IEncryptionKey {
+
+                    /** EncryptionKey provider */
+                    provider?: (google.cloud.oracledatabase.v1.EncryptionKey.Provider|keyof typeof google.cloud.oracledatabase.v1.EncryptionKey.Provider|null);
+
+                    /** EncryptionKey kmsKey */
+                    kmsKey?: (string|null);
+                }
+
+                /** Represents an EncryptionKey. */
+                class EncryptionKey implements IEncryptionKey {
+
+                    /**
+                     * Constructs a new EncryptionKey.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IEncryptionKey);
+
+                    /** EncryptionKey provider. */
+                    public provider: (google.cloud.oracledatabase.v1.EncryptionKey.Provider|keyof typeof google.cloud.oracledatabase.v1.EncryptionKey.Provider);
+
+                    /** EncryptionKey kmsKey. */
+                    public kmsKey: string;
+
+                    /**
+                     * Creates a new EncryptionKey instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EncryptionKey instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IEncryptionKey): google.cloud.oracledatabase.v1.EncryptionKey;
+
+                    /**
+                     * Encodes the specified EncryptionKey message. Does not implicitly {@link google.cloud.oracledatabase.v1.EncryptionKey.verify|verify} messages.
+                     * @param message EncryptionKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IEncryptionKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EncryptionKey message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.EncryptionKey.verify|verify} messages.
+                     * @param message EncryptionKey message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IEncryptionKey, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EncryptionKey message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EncryptionKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.EncryptionKey;
+
+                    /**
+                     * Decodes an EncryptionKey message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EncryptionKey
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.EncryptionKey;
+
+                    /**
+                     * Verifies an EncryptionKey message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EncryptionKey message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EncryptionKey
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.EncryptionKey;
+
+                    /**
+                     * Creates a plain object from an EncryptionKey message. Also converts values to other types if specified.
+                     * @param message EncryptionKey
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.EncryptionKey, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EncryptionKey to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EncryptionKey
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EncryptionKey {
+
+                    /** Provider enum. */
+                    enum Provider {
+                        PROVIDER_UNSPECIFIED = 0,
+                        GOOGLE_MANAGED = 1,
+                        ORACLE_MANAGED = 2
                     }
                 }
 
@@ -1655,6 +2040,13 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** ComputeModel enum. */
+                enum ComputeModel {
+                    COMPUTE_MODEL_UNSPECIFIED = 0,
+                    COMPUTE_MODEL_ECPU = 1,
+                    COMPUTE_MODEL_OCPU = 2
+                }
+
                 /** Properties of a CustomerContact. */
                 interface ICustomerContact {
 
@@ -1746,6 +2138,230 @@ export namespace google {
 
                     /**
                      * Gets the default type url for CustomerContact
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an IdentityConnector. */
+                interface IIdentityConnector {
+
+                    /** IdentityConnector serviceAgentEmail */
+                    serviceAgentEmail?: (string|null);
+
+                    /** IdentityConnector connectionState */
+                    connectionState?: (google.cloud.oracledatabase.v1.IdentityConnector.ConnectionState|keyof typeof google.cloud.oracledatabase.v1.IdentityConnector.ConnectionState|null);
+                }
+
+                /** Represents an IdentityConnector. */
+                class IdentityConnector implements IIdentityConnector {
+
+                    /**
+                     * Constructs a new IdentityConnector.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IIdentityConnector);
+
+                    /** IdentityConnector serviceAgentEmail. */
+                    public serviceAgentEmail: string;
+
+                    /** IdentityConnector connectionState. */
+                    public connectionState: (google.cloud.oracledatabase.v1.IdentityConnector.ConnectionState|keyof typeof google.cloud.oracledatabase.v1.IdentityConnector.ConnectionState);
+
+                    /**
+                     * Creates a new IdentityConnector instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns IdentityConnector instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IIdentityConnector): google.cloud.oracledatabase.v1.IdentityConnector;
+
+                    /**
+                     * Encodes the specified IdentityConnector message. Does not implicitly {@link google.cloud.oracledatabase.v1.IdentityConnector.verify|verify} messages.
+                     * @param message IdentityConnector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IIdentityConnector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified IdentityConnector message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.IdentityConnector.verify|verify} messages.
+                     * @param message IdentityConnector message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IIdentityConnector, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an IdentityConnector message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns IdentityConnector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.IdentityConnector;
+
+                    /**
+                     * Decodes an IdentityConnector message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns IdentityConnector
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.IdentityConnector;
+
+                    /**
+                     * Verifies an IdentityConnector message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an IdentityConnector message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns IdentityConnector
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.IdentityConnector;
+
+                    /**
+                     * Creates a plain object from an IdentityConnector message. Also converts values to other types if specified.
+                     * @param message IdentityConnector
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.IdentityConnector, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this IdentityConnector to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for IdentityConnector
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace IdentityConnector {
+
+                    /** ConnectionState enum. */
+                    enum ConnectionState {
+                        CONNECTION_STATE_UNSPECIFIED = 0,
+                        CONNECTED = 1,
+                        PARTIALLY_CONNECTED = 2,
+                        DISCONNECTED = 3,
+                        UNKNOWN = 4
+                    }
+                }
+
+                /** Properties of a DataCollectionOptionsCommon. */
+                interface IDataCollectionOptionsCommon {
+
+                    /** DataCollectionOptionsCommon isDiagnosticsEventsEnabled */
+                    isDiagnosticsEventsEnabled?: (boolean|null);
+
+                    /** DataCollectionOptionsCommon isHealthMonitoringEnabled */
+                    isHealthMonitoringEnabled?: (boolean|null);
+
+                    /** DataCollectionOptionsCommon isIncidentLogsEnabled */
+                    isIncidentLogsEnabled?: (boolean|null);
+                }
+
+                /** Represents a DataCollectionOptionsCommon. */
+                class DataCollectionOptionsCommon implements IDataCollectionOptionsCommon {
+
+                    /**
+                     * Constructs a new DataCollectionOptionsCommon.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDataCollectionOptionsCommon);
+
+                    /** DataCollectionOptionsCommon isDiagnosticsEventsEnabled. */
+                    public isDiagnosticsEventsEnabled: boolean;
+
+                    /** DataCollectionOptionsCommon isHealthMonitoringEnabled. */
+                    public isHealthMonitoringEnabled: boolean;
+
+                    /** DataCollectionOptionsCommon isIncidentLogsEnabled. */
+                    public isIncidentLogsEnabled: boolean;
+
+                    /**
+                     * Creates a new DataCollectionOptionsCommon instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataCollectionOptionsCommon instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDataCollectionOptionsCommon): google.cloud.oracledatabase.v1.DataCollectionOptionsCommon;
+
+                    /**
+                     * Encodes the specified DataCollectionOptionsCommon message. Does not implicitly {@link google.cloud.oracledatabase.v1.DataCollectionOptionsCommon.verify|verify} messages.
+                     * @param message DataCollectionOptionsCommon message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDataCollectionOptionsCommon, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataCollectionOptionsCommon message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DataCollectionOptionsCommon.verify|verify} messages.
+                     * @param message DataCollectionOptionsCommon message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDataCollectionOptionsCommon, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataCollectionOptionsCommon message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataCollectionOptionsCommon
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DataCollectionOptionsCommon;
+
+                    /**
+                     * Decodes a DataCollectionOptionsCommon message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataCollectionOptionsCommon
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DataCollectionOptionsCommon;
+
+                    /**
+                     * Verifies a DataCollectionOptionsCommon message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataCollectionOptionsCommon message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataCollectionOptionsCommon
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DataCollectionOptionsCommon;
+
+                    /**
+                     * Creates a plain object from a DataCollectionOptionsCommon message. Also converts values to other types if specified.
+                     * @param message DataCollectionOptionsCommon
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DataCollectionOptionsCommon, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataCollectionOptionsCommon to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataCollectionOptionsCommon
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -2340,6 +2956,2331 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a Database. */
+                interface IDatabase {
+
+                    /** Database name */
+                    name?: (string|null);
+
+                    /** Database dbName */
+                    dbName?: (string|null);
+
+                    /** Database dbUniqueName */
+                    dbUniqueName?: (string|null);
+
+                    /** Database adminPassword */
+                    adminPassword?: (string|null);
+
+                    /** Database tdeWalletPassword */
+                    tdeWalletPassword?: (string|null);
+
+                    /** Database characterSet */
+                    characterSet?: (string|null);
+
+                    /** Database ncharacterSet */
+                    ncharacterSet?: (string|null);
+
+                    /** Database ociUrl */
+                    ociUrl?: (string|null);
+
+                    /** Database createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Database properties */
+                    properties?: (google.cloud.oracledatabase.v1.IDatabaseProperties|null);
+
+                    /** Database databaseId */
+                    databaseId?: (string|null);
+
+                    /** Database dbHomeName */
+                    dbHomeName?: (string|null);
+
+                    /** Database gcpOracleZone */
+                    gcpOracleZone?: (string|null);
+
+                    /** Database opsInsightsStatus */
+                    opsInsightsStatus?: (google.cloud.oracledatabase.v1.Database.OperationsInsightsStatus|keyof typeof google.cloud.oracledatabase.v1.Database.OperationsInsightsStatus|null);
+                }
+
+                /** Represents a Database. */
+                class Database implements IDatabase {
+
+                    /**
+                     * Constructs a new Database.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDatabase);
+
+                    /** Database name. */
+                    public name: string;
+
+                    /** Database dbName. */
+                    public dbName: string;
+
+                    /** Database dbUniqueName. */
+                    public dbUniqueName: string;
+
+                    /** Database adminPassword. */
+                    public adminPassword: string;
+
+                    /** Database tdeWalletPassword. */
+                    public tdeWalletPassword: string;
+
+                    /** Database characterSet. */
+                    public characterSet: string;
+
+                    /** Database ncharacterSet. */
+                    public ncharacterSet: string;
+
+                    /** Database ociUrl. */
+                    public ociUrl: string;
+
+                    /** Database createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** Database properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IDatabaseProperties|null);
+
+                    /** Database databaseId. */
+                    public databaseId: string;
+
+                    /** Database dbHomeName. */
+                    public dbHomeName: string;
+
+                    /** Database gcpOracleZone. */
+                    public gcpOracleZone: string;
+
+                    /** Database opsInsightsStatus. */
+                    public opsInsightsStatus: (google.cloud.oracledatabase.v1.Database.OperationsInsightsStatus|keyof typeof google.cloud.oracledatabase.v1.Database.OperationsInsightsStatus);
+
+                    /**
+                     * Creates a new Database instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns Database instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDatabase): google.cloud.oracledatabase.v1.Database;
+
+                    /**
+                     * Encodes the specified Database message. Does not implicitly {@link google.cloud.oracledatabase.v1.Database.verify|verify} messages.
+                     * @param message Database message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDatabase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Database message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.Database.verify|verify} messages.
+                     * @param message Database message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDatabase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a Database message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns Database
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.Database;
+
+                    /**
+                     * Decodes a Database message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns Database
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.Database;
+
+                    /**
+                     * Verifies a Database message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a Database message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns Database
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.Database;
+
+                    /**
+                     * Creates a plain object from a Database message. Also converts values to other types if specified.
+                     * @param message Database
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.Database, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this Database to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for Database
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace Database {
+
+                    /** OperationsInsightsStatus enum. */
+                    enum OperationsInsightsStatus {
+                        OPERATIONS_INSIGHTS_STATUS_UNSPECIFIED = 0,
+                        ENABLING = 1,
+                        ENABLED = 2,
+                        DISABLING = 3,
+                        NOT_ENABLED = 4,
+                        FAILED_ENABLING = 5,
+                        FAILED_DISABLING = 6
+                    }
+                }
+
+                /** Properties of a DatabaseProperties. */
+                interface IDatabaseProperties {
+
+                    /** DatabaseProperties state */
+                    state?: (google.cloud.oracledatabase.v1.DatabaseProperties.DatabaseLifecycleState|keyof typeof google.cloud.oracledatabase.v1.DatabaseProperties.DatabaseLifecycleState|null);
+
+                    /** DatabaseProperties dbVersion */
+                    dbVersion?: (string|null);
+
+                    /** DatabaseProperties dbBackupConfig */
+                    dbBackupConfig?: (google.cloud.oracledatabase.v1.IDbBackupConfig|null);
+
+                    /** DatabaseProperties databaseManagementConfig */
+                    databaseManagementConfig?: (google.cloud.oracledatabase.v1.IDatabaseManagementConfig|null);
+                }
+
+                /** Represents a DatabaseProperties. */
+                class DatabaseProperties implements IDatabaseProperties {
+
+                    /**
+                     * Constructs a new DatabaseProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDatabaseProperties);
+
+                    /** DatabaseProperties state. */
+                    public state: (google.cloud.oracledatabase.v1.DatabaseProperties.DatabaseLifecycleState|keyof typeof google.cloud.oracledatabase.v1.DatabaseProperties.DatabaseLifecycleState);
+
+                    /** DatabaseProperties dbVersion. */
+                    public dbVersion: string;
+
+                    /** DatabaseProperties dbBackupConfig. */
+                    public dbBackupConfig?: (google.cloud.oracledatabase.v1.IDbBackupConfig|null);
+
+                    /** DatabaseProperties databaseManagementConfig. */
+                    public databaseManagementConfig?: (google.cloud.oracledatabase.v1.IDatabaseManagementConfig|null);
+
+                    /**
+                     * Creates a new DatabaseProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDatabaseProperties): google.cloud.oracledatabase.v1.DatabaseProperties;
+
+                    /**
+                     * Encodes the specified DatabaseProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.DatabaseProperties.verify|verify} messages.
+                     * @param message DatabaseProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDatabaseProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DatabaseProperties.verify|verify} messages.
+                     * @param message DatabaseProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDatabaseProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DatabaseProperties;
+
+                    /**
+                     * Decodes a DatabaseProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DatabaseProperties;
+
+                    /**
+                     * Verifies a DatabaseProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DatabaseProperties;
+
+                    /**
+                     * Creates a plain object from a DatabaseProperties message. Also converts values to other types if specified.
+                     * @param message DatabaseProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DatabaseProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatabaseProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DatabaseProperties {
+
+                    /** DatabaseLifecycleState enum. */
+                    enum DatabaseLifecycleState {
+                        DATABASE_LIFECYCLE_STATE_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        AVAILABLE = 2,
+                        UPDATING = 3,
+                        BACKUP_IN_PROGRESS = 4,
+                        UPGRADING = 5,
+                        CONVERTING = 6,
+                        TERMINATING = 7,
+                        TERMINATED = 8,
+                        RESTORE_FAILED = 9,
+                        FAILED = 10
+                    }
+                }
+
+                /** Properties of a DbBackupConfig. */
+                interface IDbBackupConfig {
+
+                    /** DbBackupConfig autoBackupEnabled */
+                    autoBackupEnabled?: (boolean|null);
+
+                    /** DbBackupConfig backupDestinationDetails */
+                    backupDestinationDetails?: (google.cloud.oracledatabase.v1.DbBackupConfig.IBackupDestinationDetails[]|null);
+
+                    /** DbBackupConfig retentionPeriodDays */
+                    retentionPeriodDays?: (number|null);
+
+                    /** DbBackupConfig backupDeletionPolicy */
+                    backupDeletionPolicy?: (google.cloud.oracledatabase.v1.DbBackupConfig.BackupDeletionPolicy|keyof typeof google.cloud.oracledatabase.v1.DbBackupConfig.BackupDeletionPolicy|null);
+
+                    /** DbBackupConfig autoFullBackupDay */
+                    autoFullBackupDay?: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek|null);
+
+                    /** DbBackupConfig autoFullBackupWindow */
+                    autoFullBackupWindow?: (google.cloud.oracledatabase.v1.DbBackupConfig.BackupWindow|keyof typeof google.cloud.oracledatabase.v1.DbBackupConfig.BackupWindow|null);
+
+                    /** DbBackupConfig autoIncrementalBackupWindow */
+                    autoIncrementalBackupWindow?: (google.cloud.oracledatabase.v1.DbBackupConfig.BackupWindow|keyof typeof google.cloud.oracledatabase.v1.DbBackupConfig.BackupWindow|null);
+                }
+
+                /** Represents a DbBackupConfig. */
+                class DbBackupConfig implements IDbBackupConfig {
+
+                    /**
+                     * Constructs a new DbBackupConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDbBackupConfig);
+
+                    /** DbBackupConfig autoBackupEnabled. */
+                    public autoBackupEnabled: boolean;
+
+                    /** DbBackupConfig backupDestinationDetails. */
+                    public backupDestinationDetails: google.cloud.oracledatabase.v1.DbBackupConfig.IBackupDestinationDetails[];
+
+                    /** DbBackupConfig retentionPeriodDays. */
+                    public retentionPeriodDays: number;
+
+                    /** DbBackupConfig backupDeletionPolicy. */
+                    public backupDeletionPolicy: (google.cloud.oracledatabase.v1.DbBackupConfig.BackupDeletionPolicy|keyof typeof google.cloud.oracledatabase.v1.DbBackupConfig.BackupDeletionPolicy);
+
+                    /** DbBackupConfig autoFullBackupDay. */
+                    public autoFullBackupDay: (google.type.DayOfWeek|keyof typeof google.type.DayOfWeek);
+
+                    /** DbBackupConfig autoFullBackupWindow. */
+                    public autoFullBackupWindow: (google.cloud.oracledatabase.v1.DbBackupConfig.BackupWindow|keyof typeof google.cloud.oracledatabase.v1.DbBackupConfig.BackupWindow);
+
+                    /** DbBackupConfig autoIncrementalBackupWindow. */
+                    public autoIncrementalBackupWindow: (google.cloud.oracledatabase.v1.DbBackupConfig.BackupWindow|keyof typeof google.cloud.oracledatabase.v1.DbBackupConfig.BackupWindow);
+
+                    /**
+                     * Creates a new DbBackupConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DbBackupConfig instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDbBackupConfig): google.cloud.oracledatabase.v1.DbBackupConfig;
+
+                    /**
+                     * Encodes the specified DbBackupConfig message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbBackupConfig.verify|verify} messages.
+                     * @param message DbBackupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDbBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DbBackupConfig message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbBackupConfig.verify|verify} messages.
+                     * @param message DbBackupConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDbBackupConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DbBackupConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DbBackupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbBackupConfig;
+
+                    /**
+                     * Decodes a DbBackupConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DbBackupConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbBackupConfig;
+
+                    /**
+                     * Verifies a DbBackupConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DbBackupConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DbBackupConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbBackupConfig;
+
+                    /**
+                     * Creates a plain object from a DbBackupConfig message. Also converts values to other types if specified.
+                     * @param message DbBackupConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DbBackupConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DbBackupConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DbBackupConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DbBackupConfig {
+
+                    /** Properties of a BackupDestinationDetails. */
+                    interface IBackupDestinationDetails {
+
+                        /** BackupDestinationDetails type */
+                        type?: (google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationType|keyof typeof google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationType|null);
+                    }
+
+                    /** Represents a BackupDestinationDetails. */
+                    class BackupDestinationDetails implements IBackupDestinationDetails {
+
+                        /**
+                         * Constructs a new BackupDestinationDetails.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.oracledatabase.v1.DbBackupConfig.IBackupDestinationDetails);
+
+                        /** BackupDestinationDetails type. */
+                        public type: (google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationType|keyof typeof google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationType);
+
+                        /**
+                         * Creates a new BackupDestinationDetails instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns BackupDestinationDetails instance
+                         */
+                        public static create(properties?: google.cloud.oracledatabase.v1.DbBackupConfig.IBackupDestinationDetails): google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationDetails;
+
+                        /**
+                         * Encodes the specified BackupDestinationDetails message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationDetails.verify|verify} messages.
+                         * @param message BackupDestinationDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.oracledatabase.v1.DbBackupConfig.IBackupDestinationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified BackupDestinationDetails message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationDetails.verify|verify} messages.
+                         * @param message BackupDestinationDetails message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.oracledatabase.v1.DbBackupConfig.IBackupDestinationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a BackupDestinationDetails message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns BackupDestinationDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationDetails;
+
+                        /**
+                         * Decodes a BackupDestinationDetails message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns BackupDestinationDetails
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationDetails;
+
+                        /**
+                         * Verifies a BackupDestinationDetails message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a BackupDestinationDetails message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns BackupDestinationDetails
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationDetails;
+
+                        /**
+                         * Creates a plain object from a BackupDestinationDetails message. Also converts values to other types if specified.
+                         * @param message BackupDestinationDetails
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.oracledatabase.v1.DbBackupConfig.BackupDestinationDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this BackupDestinationDetails to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for BackupDestinationDetails
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** BackupDestinationType enum. */
+                    enum BackupDestinationType {
+                        BACKUP_DESTINATION_TYPE_UNSPECIFIED = 0,
+                        NFS = 1,
+                        RECOVERY_APPLIANCE = 2,
+                        OBJECT_STORE = 3,
+                        LOCAL = 4,
+                        DBRS = 5
+                    }
+
+                    /** BackupWindow enum. */
+                    enum BackupWindow {
+                        BACKUP_WINDOW_UNSPECIFIED = 0,
+                        SLOT_ONE = 1,
+                        SLOT_TWO = 2,
+                        SLOT_THREE = 3,
+                        SLOT_FOUR = 4,
+                        SLOT_FIVE = 5,
+                        SLOT_SIX = 6,
+                        SLOT_SEVEN = 7,
+                        SLOT_EIGHT = 8,
+                        SLOT_NINE = 9,
+                        SLOT_TEN = 10,
+                        SLOT_ELEVEN = 11,
+                        SLOT_TWELVE = 12
+                    }
+
+                    /** BackupDeletionPolicy enum. */
+                    enum BackupDeletionPolicy {
+                        BACKUP_DELETION_POLICY_UNSPECIFIED = 0,
+                        DELETE_IMMEDIATELY = 1,
+                        DELETE_AFTER_RETENTION_PERIOD = 2
+                    }
+                }
+
+                /** Properties of a GetDatabaseRequest. */
+                interface IGetDatabaseRequest {
+
+                    /** GetDatabaseRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDatabaseRequest. */
+                class GetDatabaseRequest implements IGetDatabaseRequest {
+
+                    /**
+                     * Constructs a new GetDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetDatabaseRequest);
+
+                    /** GetDatabaseRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetDatabaseRequest): google.cloud.oracledatabase.v1.GetDatabaseRequest;
+
+                    /**
+                     * Encodes the specified GetDatabaseRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetDatabaseRequest.verify|verify} messages.
+                     * @param message GetDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetDatabaseRequest.verify|verify} messages.
+                     * @param message GetDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetDatabaseRequest;
+
+                    /**
+                     * Decodes a GetDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetDatabaseRequest;
+
+                    /**
+                     * Verifies a GetDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from a GetDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message GetDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDatabasesRequest. */
+                interface IListDatabasesRequest {
+
+                    /** ListDatabasesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDatabasesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDatabasesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDatabasesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListDatabasesRequest. */
+                class ListDatabasesRequest implements IListDatabasesRequest {
+
+                    /**
+                     * Constructs a new ListDatabasesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDatabasesRequest);
+
+                    /** ListDatabasesRequest parent. */
+                    public parent: string;
+
+                    /** ListDatabasesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDatabasesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDatabasesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListDatabasesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatabasesRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDatabasesRequest): google.cloud.oracledatabase.v1.ListDatabasesRequest;
+
+                    /**
+                     * Encodes the specified ListDatabasesRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDatabasesRequest.verify|verify} messages.
+                     * @param message ListDatabasesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDatabasesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatabasesRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDatabasesRequest.verify|verify} messages.
+                     * @param message ListDatabasesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDatabasesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatabasesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatabasesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDatabasesRequest;
+
+                    /**
+                     * Decodes a ListDatabasesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatabasesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDatabasesRequest;
+
+                    /**
+                     * Verifies a ListDatabasesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatabasesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatabasesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDatabasesRequest;
+
+                    /**
+                     * Creates a plain object from a ListDatabasesRequest message. Also converts values to other types if specified.
+                     * @param message ListDatabasesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDatabasesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatabasesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatabasesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDatabasesResponse. */
+                interface IListDatabasesResponse {
+
+                    /** ListDatabasesResponse databases */
+                    databases?: (google.cloud.oracledatabase.v1.IDatabase[]|null);
+
+                    /** ListDatabasesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDatabasesResponse. */
+                class ListDatabasesResponse implements IListDatabasesResponse {
+
+                    /**
+                     * Constructs a new ListDatabasesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDatabasesResponse);
+
+                    /** ListDatabasesResponse databases. */
+                    public databases: google.cloud.oracledatabase.v1.IDatabase[];
+
+                    /** ListDatabasesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDatabasesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatabasesResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDatabasesResponse): google.cloud.oracledatabase.v1.ListDatabasesResponse;
+
+                    /**
+                     * Encodes the specified ListDatabasesResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDatabasesResponse.verify|verify} messages.
+                     * @param message ListDatabasesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDatabasesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatabasesResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDatabasesResponse.verify|verify} messages.
+                     * @param message ListDatabasesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDatabasesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatabasesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatabasesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDatabasesResponse;
+
+                    /**
+                     * Decodes a ListDatabasesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatabasesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDatabasesResponse;
+
+                    /**
+                     * Verifies a ListDatabasesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatabasesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatabasesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDatabasesResponse;
+
+                    /**
+                     * Creates a plain object from a ListDatabasesResponse message. Also converts values to other types if specified.
+                     * @param message ListDatabasesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDatabasesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatabasesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatabasesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PluggableDatabase. */
+                interface IPluggableDatabase {
+
+                    /** PluggableDatabase name */
+                    name?: (string|null);
+
+                    /** PluggableDatabase properties */
+                    properties?: (google.cloud.oracledatabase.v1.IPluggableDatabaseProperties|null);
+
+                    /** PluggableDatabase ociUrl */
+                    ociUrl?: (string|null);
+
+                    /** PluggableDatabase createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a PluggableDatabase. */
+                class PluggableDatabase implements IPluggableDatabase {
+
+                    /**
+                     * Constructs a new PluggableDatabase.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IPluggableDatabase);
+
+                    /** PluggableDatabase name. */
+                    public name: string;
+
+                    /** PluggableDatabase properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IPluggableDatabaseProperties|null);
+
+                    /** PluggableDatabase ociUrl. */
+                    public ociUrl: string;
+
+                    /** PluggableDatabase createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new PluggableDatabase instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PluggableDatabase instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IPluggableDatabase): google.cloud.oracledatabase.v1.PluggableDatabase;
+
+                    /**
+                     * Encodes the specified PluggableDatabase message. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabase.verify|verify} messages.
+                     * @param message PluggableDatabase message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IPluggableDatabase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PluggableDatabase message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabase.verify|verify} messages.
+                     * @param message PluggableDatabase message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IPluggableDatabase, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PluggableDatabase message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PluggableDatabase
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.PluggableDatabase;
+
+                    /**
+                     * Decodes a PluggableDatabase message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PluggableDatabase
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.PluggableDatabase;
+
+                    /**
+                     * Verifies a PluggableDatabase message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PluggableDatabase message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PluggableDatabase
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.PluggableDatabase;
+
+                    /**
+                     * Creates a plain object from a PluggableDatabase message. Also converts values to other types if specified.
+                     * @param message PluggableDatabase
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.PluggableDatabase, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PluggableDatabase to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PluggableDatabase
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PluggableDatabaseProperties. */
+                interface IPluggableDatabaseProperties {
+
+                    /** PluggableDatabaseProperties compartmentId */
+                    compartmentId?: (string|null);
+
+                    /** PluggableDatabaseProperties connectionStrings */
+                    connectionStrings?: (google.cloud.oracledatabase.v1.IPluggableDatabaseConnectionStrings|null);
+
+                    /** PluggableDatabaseProperties containerDatabaseOcid */
+                    containerDatabaseOcid?: (string|null);
+
+                    /** PluggableDatabaseProperties definedTags */
+                    definedTags?: ({ [k: string]: google.cloud.oracledatabase.v1.PluggableDatabaseProperties.IDefinedTagValue }|null);
+
+                    /** PluggableDatabaseProperties freeformTags */
+                    freeformTags?: ({ [k: string]: string }|null);
+
+                    /** PluggableDatabaseProperties ocid */
+                    ocid?: (string|null);
+
+                    /** PluggableDatabaseProperties isRestricted */
+                    isRestricted?: (boolean|null);
+
+                    /** PluggableDatabaseProperties lifecycleDetails */
+                    lifecycleDetails?: (string|null);
+
+                    /** PluggableDatabaseProperties lifecycleState */
+                    lifecycleState?: (google.cloud.oracledatabase.v1.PluggableDatabaseProperties.PluggableDatabaseLifecycleState|keyof typeof google.cloud.oracledatabase.v1.PluggableDatabaseProperties.PluggableDatabaseLifecycleState|null);
+
+                    /** PluggableDatabaseProperties pdbName */
+                    pdbName?: (string|null);
+
+                    /** PluggableDatabaseProperties pdbNodeLevelDetails */
+                    pdbNodeLevelDetails?: (google.cloud.oracledatabase.v1.IPluggableDatabaseNodeLevelDetails[]|null);
+
+                    /** PluggableDatabaseProperties databaseManagementConfig */
+                    databaseManagementConfig?: (google.cloud.oracledatabase.v1.IDatabaseManagementConfig|null);
+
+                    /** PluggableDatabaseProperties operationsInsightsState */
+                    operationsInsightsState?: (google.cloud.oracledatabase.v1.PluggableDatabaseProperties.OperationsInsightsState|keyof typeof google.cloud.oracledatabase.v1.PluggableDatabaseProperties.OperationsInsightsState|null);
+                }
+
+                /** Represents a PluggableDatabaseProperties. */
+                class PluggableDatabaseProperties implements IPluggableDatabaseProperties {
+
+                    /**
+                     * Constructs a new PluggableDatabaseProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IPluggableDatabaseProperties);
+
+                    /** PluggableDatabaseProperties compartmentId. */
+                    public compartmentId: string;
+
+                    /** PluggableDatabaseProperties connectionStrings. */
+                    public connectionStrings?: (google.cloud.oracledatabase.v1.IPluggableDatabaseConnectionStrings|null);
+
+                    /** PluggableDatabaseProperties containerDatabaseOcid. */
+                    public containerDatabaseOcid: string;
+
+                    /** PluggableDatabaseProperties definedTags. */
+                    public definedTags: { [k: string]: google.cloud.oracledatabase.v1.PluggableDatabaseProperties.IDefinedTagValue };
+
+                    /** PluggableDatabaseProperties freeformTags. */
+                    public freeformTags: { [k: string]: string };
+
+                    /** PluggableDatabaseProperties ocid. */
+                    public ocid: string;
+
+                    /** PluggableDatabaseProperties isRestricted. */
+                    public isRestricted: boolean;
+
+                    /** PluggableDatabaseProperties lifecycleDetails. */
+                    public lifecycleDetails: string;
+
+                    /** PluggableDatabaseProperties lifecycleState. */
+                    public lifecycleState: (google.cloud.oracledatabase.v1.PluggableDatabaseProperties.PluggableDatabaseLifecycleState|keyof typeof google.cloud.oracledatabase.v1.PluggableDatabaseProperties.PluggableDatabaseLifecycleState);
+
+                    /** PluggableDatabaseProperties pdbName. */
+                    public pdbName: string;
+
+                    /** PluggableDatabaseProperties pdbNodeLevelDetails. */
+                    public pdbNodeLevelDetails: google.cloud.oracledatabase.v1.IPluggableDatabaseNodeLevelDetails[];
+
+                    /** PluggableDatabaseProperties databaseManagementConfig. */
+                    public databaseManagementConfig?: (google.cloud.oracledatabase.v1.IDatabaseManagementConfig|null);
+
+                    /** PluggableDatabaseProperties operationsInsightsState. */
+                    public operationsInsightsState: (google.cloud.oracledatabase.v1.PluggableDatabaseProperties.OperationsInsightsState|keyof typeof google.cloud.oracledatabase.v1.PluggableDatabaseProperties.OperationsInsightsState);
+
+                    /**
+                     * Creates a new PluggableDatabaseProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PluggableDatabaseProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IPluggableDatabaseProperties): google.cloud.oracledatabase.v1.PluggableDatabaseProperties;
+
+                    /**
+                     * Encodes the specified PluggableDatabaseProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabaseProperties.verify|verify} messages.
+                     * @param message PluggableDatabaseProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IPluggableDatabaseProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PluggableDatabaseProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabaseProperties.verify|verify} messages.
+                     * @param message PluggableDatabaseProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IPluggableDatabaseProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PluggableDatabaseProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PluggableDatabaseProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.PluggableDatabaseProperties;
+
+                    /**
+                     * Decodes a PluggableDatabaseProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PluggableDatabaseProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.PluggableDatabaseProperties;
+
+                    /**
+                     * Verifies a PluggableDatabaseProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PluggableDatabaseProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PluggableDatabaseProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.PluggableDatabaseProperties;
+
+                    /**
+                     * Creates a plain object from a PluggableDatabaseProperties message. Also converts values to other types if specified.
+                     * @param message PluggableDatabaseProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.PluggableDatabaseProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PluggableDatabaseProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PluggableDatabaseProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PluggableDatabaseProperties {
+
+                    /** Properties of a DefinedTagValue. */
+                    interface IDefinedTagValue {
+
+                        /** DefinedTagValue tags */
+                        tags?: ({ [k: string]: string }|null);
+                    }
+
+                    /** Represents a DefinedTagValue. */
+                    class DefinedTagValue implements IDefinedTagValue {
+
+                        /**
+                         * Constructs a new DefinedTagValue.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.oracledatabase.v1.PluggableDatabaseProperties.IDefinedTagValue);
+
+                        /** DefinedTagValue tags. */
+                        public tags: { [k: string]: string };
+
+                        /**
+                         * Creates a new DefinedTagValue instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns DefinedTagValue instance
+                         */
+                        public static create(properties?: google.cloud.oracledatabase.v1.PluggableDatabaseProperties.IDefinedTagValue): google.cloud.oracledatabase.v1.PluggableDatabaseProperties.DefinedTagValue;
+
+                        /**
+                         * Encodes the specified DefinedTagValue message. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabaseProperties.DefinedTagValue.verify|verify} messages.
+                         * @param message DefinedTagValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.oracledatabase.v1.PluggableDatabaseProperties.IDefinedTagValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified DefinedTagValue message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabaseProperties.DefinedTagValue.verify|verify} messages.
+                         * @param message DefinedTagValue message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.oracledatabase.v1.PluggableDatabaseProperties.IDefinedTagValue, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a DefinedTagValue message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns DefinedTagValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.PluggableDatabaseProperties.DefinedTagValue;
+
+                        /**
+                         * Decodes a DefinedTagValue message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns DefinedTagValue
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.PluggableDatabaseProperties.DefinedTagValue;
+
+                        /**
+                         * Verifies a DefinedTagValue message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a DefinedTagValue message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns DefinedTagValue
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.PluggableDatabaseProperties.DefinedTagValue;
+
+                        /**
+                         * Creates a plain object from a DefinedTagValue message. Also converts values to other types if specified.
+                         * @param message DefinedTagValue
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.oracledatabase.v1.PluggableDatabaseProperties.DefinedTagValue, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this DefinedTagValue to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for DefinedTagValue
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** PluggableDatabaseLifecycleState enum. */
+                    enum PluggableDatabaseLifecycleState {
+                        PLUGGABLE_DATABASE_LIFECYCLE_STATE_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        AVAILABLE = 2,
+                        TERMINATING = 3,
+                        TERMINATED = 4,
+                        UPDATING = 5,
+                        FAILED = 6,
+                        RELOCATING = 7,
+                        RELOCATED = 8,
+                        REFRESHING = 9,
+                        RESTORE_IN_PROGRESS = 10,
+                        RESTORE_FAILED = 11,
+                        BACKUP_IN_PROGRESS = 12,
+                        DISABLED = 13
+                    }
+
+                    /** OperationsInsightsState enum. */
+                    enum OperationsInsightsState {
+                        OPERATIONS_INSIGHTS_STATE_UNSPECIFIED = 0,
+                        ENABLING = 1,
+                        ENABLED = 2,
+                        DISABLING = 3,
+                        NOT_ENABLED = 4,
+                        FAILED_ENABLING = 5,
+                        FAILED_DISABLING = 6
+                    }
+                }
+
+                /** Properties of a PluggableDatabaseConnectionStrings. */
+                interface IPluggableDatabaseConnectionStrings {
+
+                    /** PluggableDatabaseConnectionStrings allConnectionStrings */
+                    allConnectionStrings?: ({ [k: string]: string }|null);
+
+                    /** PluggableDatabaseConnectionStrings pdbDefault */
+                    pdbDefault?: (string|null);
+
+                    /** PluggableDatabaseConnectionStrings pdbIpDefault */
+                    pdbIpDefault?: (string|null);
+                }
+
+                /** Represents a PluggableDatabaseConnectionStrings. */
+                class PluggableDatabaseConnectionStrings implements IPluggableDatabaseConnectionStrings {
+
+                    /**
+                     * Constructs a new PluggableDatabaseConnectionStrings.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IPluggableDatabaseConnectionStrings);
+
+                    /** PluggableDatabaseConnectionStrings allConnectionStrings. */
+                    public allConnectionStrings: { [k: string]: string };
+
+                    /** PluggableDatabaseConnectionStrings pdbDefault. */
+                    public pdbDefault: string;
+
+                    /** PluggableDatabaseConnectionStrings pdbIpDefault. */
+                    public pdbIpDefault: string;
+
+                    /**
+                     * Creates a new PluggableDatabaseConnectionStrings instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PluggableDatabaseConnectionStrings instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IPluggableDatabaseConnectionStrings): google.cloud.oracledatabase.v1.PluggableDatabaseConnectionStrings;
+
+                    /**
+                     * Encodes the specified PluggableDatabaseConnectionStrings message. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabaseConnectionStrings.verify|verify} messages.
+                     * @param message PluggableDatabaseConnectionStrings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IPluggableDatabaseConnectionStrings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PluggableDatabaseConnectionStrings message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabaseConnectionStrings.verify|verify} messages.
+                     * @param message PluggableDatabaseConnectionStrings message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IPluggableDatabaseConnectionStrings, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PluggableDatabaseConnectionStrings message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PluggableDatabaseConnectionStrings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.PluggableDatabaseConnectionStrings;
+
+                    /**
+                     * Decodes a PluggableDatabaseConnectionStrings message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PluggableDatabaseConnectionStrings
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.PluggableDatabaseConnectionStrings;
+
+                    /**
+                     * Verifies a PluggableDatabaseConnectionStrings message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PluggableDatabaseConnectionStrings message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PluggableDatabaseConnectionStrings
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.PluggableDatabaseConnectionStrings;
+
+                    /**
+                     * Creates a plain object from a PluggableDatabaseConnectionStrings message. Also converts values to other types if specified.
+                     * @param message PluggableDatabaseConnectionStrings
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.PluggableDatabaseConnectionStrings, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PluggableDatabaseConnectionStrings to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PluggableDatabaseConnectionStrings
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a PluggableDatabaseNodeLevelDetails. */
+                interface IPluggableDatabaseNodeLevelDetails {
+
+                    /** PluggableDatabaseNodeLevelDetails nodeName */
+                    nodeName?: (string|null);
+
+                    /** PluggableDatabaseNodeLevelDetails openMode */
+                    openMode?: (google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails.PluggableDatabaseOpenMode|keyof typeof google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails.PluggableDatabaseOpenMode|null);
+
+                    /** PluggableDatabaseNodeLevelDetails pluggableDatabaseId */
+                    pluggableDatabaseId?: (string|null);
+                }
+
+                /** Represents a PluggableDatabaseNodeLevelDetails. */
+                class PluggableDatabaseNodeLevelDetails implements IPluggableDatabaseNodeLevelDetails {
+
+                    /**
+                     * Constructs a new PluggableDatabaseNodeLevelDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IPluggableDatabaseNodeLevelDetails);
+
+                    /** PluggableDatabaseNodeLevelDetails nodeName. */
+                    public nodeName: string;
+
+                    /** PluggableDatabaseNodeLevelDetails openMode. */
+                    public openMode: (google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails.PluggableDatabaseOpenMode|keyof typeof google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails.PluggableDatabaseOpenMode);
+
+                    /** PluggableDatabaseNodeLevelDetails pluggableDatabaseId. */
+                    public pluggableDatabaseId: string;
+
+                    /**
+                     * Creates a new PluggableDatabaseNodeLevelDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns PluggableDatabaseNodeLevelDetails instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IPluggableDatabaseNodeLevelDetails): google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails;
+
+                    /**
+                     * Encodes the specified PluggableDatabaseNodeLevelDetails message. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails.verify|verify} messages.
+                     * @param message PluggableDatabaseNodeLevelDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IPluggableDatabaseNodeLevelDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified PluggableDatabaseNodeLevelDetails message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails.verify|verify} messages.
+                     * @param message PluggableDatabaseNodeLevelDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IPluggableDatabaseNodeLevelDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a PluggableDatabaseNodeLevelDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns PluggableDatabaseNodeLevelDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails;
+
+                    /**
+                     * Decodes a PluggableDatabaseNodeLevelDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns PluggableDatabaseNodeLevelDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails;
+
+                    /**
+                     * Verifies a PluggableDatabaseNodeLevelDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a PluggableDatabaseNodeLevelDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns PluggableDatabaseNodeLevelDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails;
+
+                    /**
+                     * Creates a plain object from a PluggableDatabaseNodeLevelDetails message. Also converts values to other types if specified.
+                     * @param message PluggableDatabaseNodeLevelDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.PluggableDatabaseNodeLevelDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this PluggableDatabaseNodeLevelDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for PluggableDatabaseNodeLevelDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace PluggableDatabaseNodeLevelDetails {
+
+                    /** PluggableDatabaseOpenMode enum. */
+                    enum PluggableDatabaseOpenMode {
+                        PLUGGABLE_DATABASE_OPEN_MODE_UNSPECIFIED = 0,
+                        READ_ONLY = 1,
+                        READ_WRITE = 2,
+                        MOUNTED = 3,
+                        MIGRATE = 4
+                    }
+                }
+
+                /** Properties of a DatabaseManagementConfig. */
+                interface IDatabaseManagementConfig {
+
+                    /** DatabaseManagementConfig managementState */
+                    managementState?: (google.cloud.oracledatabase.v1.DatabaseManagementConfig.ManagementState|keyof typeof google.cloud.oracledatabase.v1.DatabaseManagementConfig.ManagementState|null);
+
+                    /** DatabaseManagementConfig managementType */
+                    managementType?: (google.cloud.oracledatabase.v1.DatabaseManagementConfig.ManagementType|keyof typeof google.cloud.oracledatabase.v1.DatabaseManagementConfig.ManagementType|null);
+                }
+
+                /** Represents a DatabaseManagementConfig. */
+                class DatabaseManagementConfig implements IDatabaseManagementConfig {
+
+                    /**
+                     * Constructs a new DatabaseManagementConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDatabaseManagementConfig);
+
+                    /** DatabaseManagementConfig managementState. */
+                    public managementState: (google.cloud.oracledatabase.v1.DatabaseManagementConfig.ManagementState|keyof typeof google.cloud.oracledatabase.v1.DatabaseManagementConfig.ManagementState);
+
+                    /** DatabaseManagementConfig managementType. */
+                    public managementType: (google.cloud.oracledatabase.v1.DatabaseManagementConfig.ManagementType|keyof typeof google.cloud.oracledatabase.v1.DatabaseManagementConfig.ManagementType);
+
+                    /**
+                     * Creates a new DatabaseManagementConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseManagementConfig instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDatabaseManagementConfig): google.cloud.oracledatabase.v1.DatabaseManagementConfig;
+
+                    /**
+                     * Encodes the specified DatabaseManagementConfig message. Does not implicitly {@link google.cloud.oracledatabase.v1.DatabaseManagementConfig.verify|verify} messages.
+                     * @param message DatabaseManagementConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDatabaseManagementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseManagementConfig message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DatabaseManagementConfig.verify|verify} messages.
+                     * @param message DatabaseManagementConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDatabaseManagementConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseManagementConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseManagementConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DatabaseManagementConfig;
+
+                    /**
+                     * Decodes a DatabaseManagementConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseManagementConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DatabaseManagementConfig;
+
+                    /**
+                     * Verifies a DatabaseManagementConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseManagementConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseManagementConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DatabaseManagementConfig;
+
+                    /**
+                     * Creates a plain object from a DatabaseManagementConfig message. Also converts values to other types if specified.
+                     * @param message DatabaseManagementConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DatabaseManagementConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseManagementConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatabaseManagementConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DatabaseManagementConfig {
+
+                    /** ManagementState enum. */
+                    enum ManagementState {
+                        MANAGEMENT_STATE_UNSPECIFIED = 0,
+                        ENABLING = 1,
+                        ENABLED = 2,
+                        DISABLING = 3,
+                        DISABLED = 4,
+                        UPDATING = 5,
+                        FAILED_ENABLING = 6,
+                        FAILED_DISABLING = 7,
+                        FAILED_UPDATING = 8
+                    }
+
+                    /** ManagementType enum. */
+                    enum ManagementType {
+                        MANAGEMENT_TYPE_UNSPECIFIED = 0,
+                        BASIC = 1,
+                        ADVANCED = 2
+                    }
+                }
+
+                /** Properties of a GetPluggableDatabaseRequest. */
+                interface IGetPluggableDatabaseRequest {
+
+                    /** GetPluggableDatabaseRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetPluggableDatabaseRequest. */
+                class GetPluggableDatabaseRequest implements IGetPluggableDatabaseRequest {
+
+                    /**
+                     * Constructs a new GetPluggableDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetPluggableDatabaseRequest);
+
+                    /** GetPluggableDatabaseRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetPluggableDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetPluggableDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetPluggableDatabaseRequest): google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest;
+
+                    /**
+                     * Encodes the specified GetPluggableDatabaseRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest.verify|verify} messages.
+                     * @param message GetPluggableDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetPluggableDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetPluggableDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest.verify|verify} messages.
+                     * @param message GetPluggableDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetPluggableDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetPluggableDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetPluggableDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest;
+
+                    /**
+                     * Decodes a GetPluggableDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetPluggableDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest;
+
+                    /**
+                     * Verifies a GetPluggableDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetPluggableDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetPluggableDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from a GetPluggableDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message GetPluggableDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetPluggableDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetPluggableDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetPluggableDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPluggableDatabasesRequest. */
+                interface IListPluggableDatabasesRequest {
+
+                    /** ListPluggableDatabasesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListPluggableDatabasesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListPluggableDatabasesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListPluggableDatabasesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListPluggableDatabasesRequest. */
+                class ListPluggableDatabasesRequest implements IListPluggableDatabasesRequest {
+
+                    /**
+                     * Constructs a new ListPluggableDatabasesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListPluggableDatabasesRequest);
+
+                    /** ListPluggableDatabasesRequest parent. */
+                    public parent: string;
+
+                    /** ListPluggableDatabasesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListPluggableDatabasesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListPluggableDatabasesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListPluggableDatabasesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPluggableDatabasesRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListPluggableDatabasesRequest): google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest;
+
+                    /**
+                     * Encodes the specified ListPluggableDatabasesRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest.verify|verify} messages.
+                     * @param message ListPluggableDatabasesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListPluggableDatabasesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPluggableDatabasesRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest.verify|verify} messages.
+                     * @param message ListPluggableDatabasesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListPluggableDatabasesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPluggableDatabasesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPluggableDatabasesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest;
+
+                    /**
+                     * Decodes a ListPluggableDatabasesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPluggableDatabasesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest;
+
+                    /**
+                     * Verifies a ListPluggableDatabasesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPluggableDatabasesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPluggableDatabasesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest;
+
+                    /**
+                     * Creates a plain object from a ListPluggableDatabasesRequest message. Also converts values to other types if specified.
+                     * @param message ListPluggableDatabasesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListPluggableDatabasesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPluggableDatabasesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPluggableDatabasesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListPluggableDatabasesResponse. */
+                interface IListPluggableDatabasesResponse {
+
+                    /** ListPluggableDatabasesResponse pluggableDatabases */
+                    pluggableDatabases?: (google.cloud.oracledatabase.v1.IPluggableDatabase[]|null);
+
+                    /** ListPluggableDatabasesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListPluggableDatabasesResponse. */
+                class ListPluggableDatabasesResponse implements IListPluggableDatabasesResponse {
+
+                    /**
+                     * Constructs a new ListPluggableDatabasesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListPluggableDatabasesResponse);
+
+                    /** ListPluggableDatabasesResponse pluggableDatabases. */
+                    public pluggableDatabases: google.cloud.oracledatabase.v1.IPluggableDatabase[];
+
+                    /** ListPluggableDatabasesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListPluggableDatabasesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListPluggableDatabasesResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListPluggableDatabasesResponse): google.cloud.oracledatabase.v1.ListPluggableDatabasesResponse;
+
+                    /**
+                     * Encodes the specified ListPluggableDatabasesResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListPluggableDatabasesResponse.verify|verify} messages.
+                     * @param message ListPluggableDatabasesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListPluggableDatabasesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListPluggableDatabasesResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListPluggableDatabasesResponse.verify|verify} messages.
+                     * @param message ListPluggableDatabasesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListPluggableDatabasesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListPluggableDatabasesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListPluggableDatabasesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListPluggableDatabasesResponse;
+
+                    /**
+                     * Decodes a ListPluggableDatabasesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListPluggableDatabasesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListPluggableDatabasesResponse;
+
+                    /**
+                     * Verifies a ListPluggableDatabasesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListPluggableDatabasesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListPluggableDatabasesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListPluggableDatabasesResponse;
+
+                    /**
+                     * Creates a plain object from a ListPluggableDatabasesResponse message. Also converts values to other types if specified.
+                     * @param message ListPluggableDatabasesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListPluggableDatabasesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListPluggableDatabasesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListPluggableDatabasesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DatabaseCharacterSet. */
+                interface IDatabaseCharacterSet {
+
+                    /** DatabaseCharacterSet name */
+                    name?: (string|null);
+
+                    /** DatabaseCharacterSet characterSetType */
+                    characterSetType?: (google.cloud.oracledatabase.v1.DatabaseCharacterSet.CharacterSetType|keyof typeof google.cloud.oracledatabase.v1.DatabaseCharacterSet.CharacterSetType|null);
+
+                    /** DatabaseCharacterSet characterSet */
+                    characterSet?: (string|null);
+                }
+
+                /** Represents a DatabaseCharacterSet. */
+                class DatabaseCharacterSet implements IDatabaseCharacterSet {
+
+                    /**
+                     * Constructs a new DatabaseCharacterSet.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDatabaseCharacterSet);
+
+                    /** DatabaseCharacterSet name. */
+                    public name: string;
+
+                    /** DatabaseCharacterSet characterSetType. */
+                    public characterSetType: (google.cloud.oracledatabase.v1.DatabaseCharacterSet.CharacterSetType|keyof typeof google.cloud.oracledatabase.v1.DatabaseCharacterSet.CharacterSetType);
+
+                    /** DatabaseCharacterSet characterSet. */
+                    public characterSet: string;
+
+                    /**
+                     * Creates a new DatabaseCharacterSet instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DatabaseCharacterSet instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDatabaseCharacterSet): google.cloud.oracledatabase.v1.DatabaseCharacterSet;
+
+                    /**
+                     * Encodes the specified DatabaseCharacterSet message. Does not implicitly {@link google.cloud.oracledatabase.v1.DatabaseCharacterSet.verify|verify} messages.
+                     * @param message DatabaseCharacterSet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDatabaseCharacterSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DatabaseCharacterSet message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DatabaseCharacterSet.verify|verify} messages.
+                     * @param message DatabaseCharacterSet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDatabaseCharacterSet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DatabaseCharacterSet message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DatabaseCharacterSet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DatabaseCharacterSet;
+
+                    /**
+                     * Decodes a DatabaseCharacterSet message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DatabaseCharacterSet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DatabaseCharacterSet;
+
+                    /**
+                     * Verifies a DatabaseCharacterSet message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DatabaseCharacterSet message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DatabaseCharacterSet
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DatabaseCharacterSet;
+
+                    /**
+                     * Creates a plain object from a DatabaseCharacterSet message. Also converts values to other types if specified.
+                     * @param message DatabaseCharacterSet
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DatabaseCharacterSet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DatabaseCharacterSet to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DatabaseCharacterSet
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DatabaseCharacterSet {
+
+                    /** CharacterSetType enum. */
+                    enum CharacterSetType {
+                        CHARACTER_SET_TYPE_UNSPECIFIED = 0,
+                        DATABASE = 1,
+                        NATIONAL = 2
+                    }
+                }
+
+                /** Properties of a ListDatabaseCharacterSetsRequest. */
+                interface IListDatabaseCharacterSetsRequest {
+
+                    /** ListDatabaseCharacterSetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDatabaseCharacterSetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDatabaseCharacterSetsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDatabaseCharacterSetsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListDatabaseCharacterSetsRequest. */
+                class ListDatabaseCharacterSetsRequest implements IListDatabaseCharacterSetsRequest {
+
+                    /**
+                     * Constructs a new ListDatabaseCharacterSetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsRequest);
+
+                    /** ListDatabaseCharacterSetsRequest parent. */
+                    public parent: string;
+
+                    /** ListDatabaseCharacterSetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDatabaseCharacterSetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDatabaseCharacterSetsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListDatabaseCharacterSetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatabaseCharacterSetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsRequest): google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest;
+
+                    /**
+                     * Encodes the specified ListDatabaseCharacterSetsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest.verify|verify} messages.
+                     * @param message ListDatabaseCharacterSetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatabaseCharacterSetsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest.verify|verify} messages.
+                     * @param message ListDatabaseCharacterSetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatabaseCharacterSetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatabaseCharacterSetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest;
+
+                    /**
+                     * Decodes a ListDatabaseCharacterSetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatabaseCharacterSetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest;
+
+                    /**
+                     * Verifies a ListDatabaseCharacterSetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatabaseCharacterSetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatabaseCharacterSetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDatabaseCharacterSetsRequest message. Also converts values to other types if specified.
+                     * @param message ListDatabaseCharacterSetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatabaseCharacterSetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatabaseCharacterSetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDatabaseCharacterSetsResponse. */
+                interface IListDatabaseCharacterSetsResponse {
+
+                    /** ListDatabaseCharacterSetsResponse databaseCharacterSets */
+                    databaseCharacterSets?: (google.cloud.oracledatabase.v1.IDatabaseCharacterSet[]|null);
+
+                    /** ListDatabaseCharacterSetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDatabaseCharacterSetsResponse. */
+                class ListDatabaseCharacterSetsResponse implements IListDatabaseCharacterSetsResponse {
+
+                    /**
+                     * Constructs a new ListDatabaseCharacterSetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsResponse);
+
+                    /** ListDatabaseCharacterSetsResponse databaseCharacterSets. */
+                    public databaseCharacterSets: google.cloud.oracledatabase.v1.IDatabaseCharacterSet[];
+
+                    /** ListDatabaseCharacterSetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDatabaseCharacterSetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDatabaseCharacterSetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsResponse): google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse;
+
+                    /**
+                     * Encodes the specified ListDatabaseCharacterSetsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse.verify|verify} messages.
+                     * @param message ListDatabaseCharacterSetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDatabaseCharacterSetsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse.verify|verify} messages.
+                     * @param message ListDatabaseCharacterSetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDatabaseCharacterSetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDatabaseCharacterSetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse;
+
+                    /**
+                     * Decodes a ListDatabaseCharacterSetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDatabaseCharacterSetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse;
+
+                    /**
+                     * Verifies a ListDatabaseCharacterSetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDatabaseCharacterSetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDatabaseCharacterSetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDatabaseCharacterSetsResponse message. Also converts values to other types if specified.
+                     * @param message ListDatabaseCharacterSetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDatabaseCharacterSetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDatabaseCharacterSetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DbNode. */
                 interface IDbNode {
 
@@ -2469,6 +5410,9 @@ export namespace google {
 
                     /** DbNodeProperties totalCpuCoreCount */
                     totalCpuCoreCount?: (number|null);
+
+                    /** DbNodeProperties createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a DbNodeProperties. */
@@ -2503,6 +5447,9 @@ export namespace google {
 
                     /** DbNodeProperties totalCpuCoreCount. */
                     public totalCpuCoreCount: number;
+
+                    /** DbNodeProperties createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new DbNodeProperties instance using the specified properties.
@@ -2872,6 +5819,1827 @@ export namespace google {
                     }
                 }
 
+                /** Properties of a DbSystem. */
+                interface IDbSystem {
+
+                    /** DbSystem name */
+                    name?: (string|null);
+
+                    /** DbSystem properties */
+                    properties?: (google.cloud.oracledatabase.v1.IDbSystemProperties|null);
+
+                    /** DbSystem gcpOracleZone */
+                    gcpOracleZone?: (string|null);
+
+                    /** DbSystem labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** DbSystem odbNetwork */
+                    odbNetwork?: (string|null);
+
+                    /** DbSystem odbSubnet */
+                    odbSubnet?: (string|null);
+
+                    /** DbSystem entitlementId */
+                    entitlementId?: (string|null);
+
+                    /** DbSystem displayName */
+                    displayName?: (string|null);
+
+                    /** DbSystem createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DbSystem ociUrl */
+                    ociUrl?: (string|null);
+                }
+
+                /** Represents a DbSystem. */
+                class DbSystem implements IDbSystem {
+
+                    /**
+                     * Constructs a new DbSystem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDbSystem);
+
+                    /** DbSystem name. */
+                    public name: string;
+
+                    /** DbSystem properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IDbSystemProperties|null);
+
+                    /** DbSystem gcpOracleZone. */
+                    public gcpOracleZone: string;
+
+                    /** DbSystem labels. */
+                    public labels: { [k: string]: string };
+
+                    /** DbSystem odbNetwork. */
+                    public odbNetwork: string;
+
+                    /** DbSystem odbSubnet. */
+                    public odbSubnet: string;
+
+                    /** DbSystem entitlementId. */
+                    public entitlementId: string;
+
+                    /** DbSystem displayName. */
+                    public displayName: string;
+
+                    /** DbSystem createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** DbSystem ociUrl. */
+                    public ociUrl: string;
+
+                    /**
+                     * Creates a new DbSystem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DbSystem instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDbSystem): google.cloud.oracledatabase.v1.DbSystem;
+
+                    /**
+                     * Encodes the specified DbSystem message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystem.verify|verify} messages.
+                     * @param message DbSystem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDbSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DbSystem message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystem.verify|verify} messages.
+                     * @param message DbSystem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDbSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DbSystem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DbSystem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbSystem;
+
+                    /**
+                     * Decodes a DbSystem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DbSystem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbSystem;
+
+                    /**
+                     * Verifies a DbSystem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DbSystem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DbSystem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbSystem;
+
+                    /**
+                     * Creates a plain object from a DbSystem message. Also converts values to other types if specified.
+                     * @param message DbSystem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DbSystem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DbSystem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DbSystem
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DbSystemProperties. */
+                interface IDbSystemProperties {
+
+                    /** DbSystemProperties shape */
+                    shape?: (string|null);
+
+                    /** DbSystemProperties computeCount */
+                    computeCount?: (number|null);
+
+                    /** DbSystemProperties initialDataStorageSizeGb */
+                    initialDataStorageSizeGb?: (number|null);
+
+                    /** DbSystemProperties databaseEdition */
+                    databaseEdition?: (google.cloud.oracledatabase.v1.DbSystemProperties.DbSystemDatabaseEdition|keyof typeof google.cloud.oracledatabase.v1.DbSystemProperties.DbSystemDatabaseEdition|null);
+
+                    /** DbSystemProperties licenseModel */
+                    licenseModel?: (google.cloud.oracledatabase.v1.DbSystemProperties.LicenseModel|keyof typeof google.cloud.oracledatabase.v1.DbSystemProperties.LicenseModel|null);
+
+                    /** DbSystemProperties sshPublicKeys */
+                    sshPublicKeys?: (string[]|null);
+
+                    /** DbSystemProperties hostnamePrefix */
+                    hostnamePrefix?: (string|null);
+
+                    /** DbSystemProperties hostname */
+                    hostname?: (string|null);
+
+                    /** DbSystemProperties privateIp */
+                    privateIp?: (string|null);
+
+                    /** DbSystemProperties dataCollectionOptions */
+                    dataCollectionOptions?: (google.cloud.oracledatabase.v1.IDataCollectionOptionsDbSystem|null);
+
+                    /** DbSystemProperties timeZone */
+                    timeZone?: (google.type.ITimeZone|null);
+
+                    /** DbSystemProperties lifecycleState */
+                    lifecycleState?: (google.cloud.oracledatabase.v1.DbSystemProperties.DbSystemLifecycleState|keyof typeof google.cloud.oracledatabase.v1.DbSystemProperties.DbSystemLifecycleState|null);
+
+                    /** DbSystemProperties dbHome */
+                    dbHome?: (google.cloud.oracledatabase.v1.IDbHome|null);
+
+                    /** DbSystemProperties ocid */
+                    ocid?: (string|null);
+
+                    /** DbSystemProperties memorySizeGb */
+                    memorySizeGb?: (number|null);
+
+                    /** DbSystemProperties computeModel */
+                    computeModel?: (google.cloud.oracledatabase.v1.DbSystemProperties.ComputeModel|keyof typeof google.cloud.oracledatabase.v1.DbSystemProperties.ComputeModel|null);
+
+                    /** DbSystemProperties dataStorageSizeGb */
+                    dataStorageSizeGb?: (number|null);
+
+                    /** DbSystemProperties recoStorageSizeGb */
+                    recoStorageSizeGb?: (number|null);
+
+                    /** DbSystemProperties domain */
+                    domain?: (string|null);
+
+                    /** DbSystemProperties nodeCount */
+                    nodeCount?: (number|null);
+
+                    /** DbSystemProperties dbSystemOptions */
+                    dbSystemOptions?: (google.cloud.oracledatabase.v1.IDbSystemOptions|null);
+                }
+
+                /** Represents a DbSystemProperties. */
+                class DbSystemProperties implements IDbSystemProperties {
+
+                    /**
+                     * Constructs a new DbSystemProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDbSystemProperties);
+
+                    /** DbSystemProperties shape. */
+                    public shape: string;
+
+                    /** DbSystemProperties computeCount. */
+                    public computeCount: number;
+
+                    /** DbSystemProperties initialDataStorageSizeGb. */
+                    public initialDataStorageSizeGb: number;
+
+                    /** DbSystemProperties databaseEdition. */
+                    public databaseEdition: (google.cloud.oracledatabase.v1.DbSystemProperties.DbSystemDatabaseEdition|keyof typeof google.cloud.oracledatabase.v1.DbSystemProperties.DbSystemDatabaseEdition);
+
+                    /** DbSystemProperties licenseModel. */
+                    public licenseModel: (google.cloud.oracledatabase.v1.DbSystemProperties.LicenseModel|keyof typeof google.cloud.oracledatabase.v1.DbSystemProperties.LicenseModel);
+
+                    /** DbSystemProperties sshPublicKeys. */
+                    public sshPublicKeys: string[];
+
+                    /** DbSystemProperties hostnamePrefix. */
+                    public hostnamePrefix: string;
+
+                    /** DbSystemProperties hostname. */
+                    public hostname: string;
+
+                    /** DbSystemProperties privateIp. */
+                    public privateIp: string;
+
+                    /** DbSystemProperties dataCollectionOptions. */
+                    public dataCollectionOptions?: (google.cloud.oracledatabase.v1.IDataCollectionOptionsDbSystem|null);
+
+                    /** DbSystemProperties timeZone. */
+                    public timeZone?: (google.type.ITimeZone|null);
+
+                    /** DbSystemProperties lifecycleState. */
+                    public lifecycleState: (google.cloud.oracledatabase.v1.DbSystemProperties.DbSystemLifecycleState|keyof typeof google.cloud.oracledatabase.v1.DbSystemProperties.DbSystemLifecycleState);
+
+                    /** DbSystemProperties dbHome. */
+                    public dbHome?: (google.cloud.oracledatabase.v1.IDbHome|null);
+
+                    /** DbSystemProperties ocid. */
+                    public ocid: string;
+
+                    /** DbSystemProperties memorySizeGb. */
+                    public memorySizeGb: number;
+
+                    /** DbSystemProperties computeModel. */
+                    public computeModel: (google.cloud.oracledatabase.v1.DbSystemProperties.ComputeModel|keyof typeof google.cloud.oracledatabase.v1.DbSystemProperties.ComputeModel);
+
+                    /** DbSystemProperties dataStorageSizeGb. */
+                    public dataStorageSizeGb: number;
+
+                    /** DbSystemProperties recoStorageSizeGb. */
+                    public recoStorageSizeGb: number;
+
+                    /** DbSystemProperties domain. */
+                    public domain: string;
+
+                    /** DbSystemProperties nodeCount. */
+                    public nodeCount: number;
+
+                    /** DbSystemProperties dbSystemOptions. */
+                    public dbSystemOptions?: (google.cloud.oracledatabase.v1.IDbSystemOptions|null);
+
+                    /**
+                     * Creates a new DbSystemProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DbSystemProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDbSystemProperties): google.cloud.oracledatabase.v1.DbSystemProperties;
+
+                    /**
+                     * Encodes the specified DbSystemProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystemProperties.verify|verify} messages.
+                     * @param message DbSystemProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDbSystemProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DbSystemProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystemProperties.verify|verify} messages.
+                     * @param message DbSystemProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDbSystemProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DbSystemProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DbSystemProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbSystemProperties;
+
+                    /**
+                     * Decodes a DbSystemProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DbSystemProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbSystemProperties;
+
+                    /**
+                     * Verifies a DbSystemProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DbSystemProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DbSystemProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbSystemProperties;
+
+                    /**
+                     * Creates a plain object from a DbSystemProperties message. Also converts values to other types if specified.
+                     * @param message DbSystemProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DbSystemProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DbSystemProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DbSystemProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DbSystemProperties {
+
+                    /** DbSystemDatabaseEdition enum. */
+                    enum DbSystemDatabaseEdition {
+                        DB_SYSTEM_DATABASE_EDITION_UNSPECIFIED = 0,
+                        STANDARD_EDITION = 1,
+                        ENTERPRISE_EDITION = 2,
+                        ENTERPRISE_EDITION_HIGH_PERFORMANCE = 3
+                    }
+
+                    /** LicenseModel enum. */
+                    enum LicenseModel {
+                        LICENSE_MODEL_UNSPECIFIED = 0,
+                        LICENSE_INCLUDED = 1,
+                        BRING_YOUR_OWN_LICENSE = 2
+                    }
+
+                    /** DbSystemLifecycleState enum. */
+                    enum DbSystemLifecycleState {
+                        DB_SYSTEM_LIFECYCLE_STATE_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        AVAILABLE = 2,
+                        UPDATING = 3,
+                        TERMINATING = 4,
+                        TERMINATED = 5,
+                        FAILED = 6,
+                        MIGRATED = 7,
+                        MAINTENANCE_IN_PROGRESS = 8,
+                        NEEDS_ATTENTION = 9,
+                        UPGRADING = 10
+                    }
+
+                    /** ComputeModel enum. */
+                    enum ComputeModel {
+                        COMPUTE_MODEL_UNSPECIFIED = 0,
+                        ECPU = 1,
+                        OCPU = 2
+                    }
+                }
+
+                /** Properties of a DataCollectionOptionsDbSystem. */
+                interface IDataCollectionOptionsDbSystem {
+
+                    /** DataCollectionOptionsDbSystem isDiagnosticsEventsEnabled */
+                    isDiagnosticsEventsEnabled?: (boolean|null);
+
+                    /** DataCollectionOptionsDbSystem isIncidentLogsEnabled */
+                    isIncidentLogsEnabled?: (boolean|null);
+                }
+
+                /** Represents a DataCollectionOptionsDbSystem. */
+                class DataCollectionOptionsDbSystem implements IDataCollectionOptionsDbSystem {
+
+                    /**
+                     * Constructs a new DataCollectionOptionsDbSystem.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDataCollectionOptionsDbSystem);
+
+                    /** DataCollectionOptionsDbSystem isDiagnosticsEventsEnabled. */
+                    public isDiagnosticsEventsEnabled: boolean;
+
+                    /** DataCollectionOptionsDbSystem isIncidentLogsEnabled. */
+                    public isIncidentLogsEnabled: boolean;
+
+                    /**
+                     * Creates a new DataCollectionOptionsDbSystem instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataCollectionOptionsDbSystem instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDataCollectionOptionsDbSystem): google.cloud.oracledatabase.v1.DataCollectionOptionsDbSystem;
+
+                    /**
+                     * Encodes the specified DataCollectionOptionsDbSystem message. Does not implicitly {@link google.cloud.oracledatabase.v1.DataCollectionOptionsDbSystem.verify|verify} messages.
+                     * @param message DataCollectionOptionsDbSystem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDataCollectionOptionsDbSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataCollectionOptionsDbSystem message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DataCollectionOptionsDbSystem.verify|verify} messages.
+                     * @param message DataCollectionOptionsDbSystem message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDataCollectionOptionsDbSystem, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataCollectionOptionsDbSystem message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataCollectionOptionsDbSystem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DataCollectionOptionsDbSystem;
+
+                    /**
+                     * Decodes a DataCollectionOptionsDbSystem message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataCollectionOptionsDbSystem
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DataCollectionOptionsDbSystem;
+
+                    /**
+                     * Verifies a DataCollectionOptionsDbSystem message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataCollectionOptionsDbSystem message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataCollectionOptionsDbSystem
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DataCollectionOptionsDbSystem;
+
+                    /**
+                     * Creates a plain object from a DataCollectionOptionsDbSystem message. Also converts values to other types if specified.
+                     * @param message DataCollectionOptionsDbSystem
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DataCollectionOptionsDbSystem, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataCollectionOptionsDbSystem to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataCollectionOptionsDbSystem
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DbSystemOptions. */
+                interface IDbSystemOptions {
+
+                    /** DbSystemOptions storageManagement */
+                    storageManagement?: (google.cloud.oracledatabase.v1.DbSystemOptions.StorageManagement|keyof typeof google.cloud.oracledatabase.v1.DbSystemOptions.StorageManagement|null);
+                }
+
+                /** Represents a DbSystemOptions. */
+                class DbSystemOptions implements IDbSystemOptions {
+
+                    /**
+                     * Constructs a new DbSystemOptions.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDbSystemOptions);
+
+                    /** DbSystemOptions storageManagement. */
+                    public storageManagement: (google.cloud.oracledatabase.v1.DbSystemOptions.StorageManagement|keyof typeof google.cloud.oracledatabase.v1.DbSystemOptions.StorageManagement);
+
+                    /**
+                     * Creates a new DbSystemOptions instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DbSystemOptions instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDbSystemOptions): google.cloud.oracledatabase.v1.DbSystemOptions;
+
+                    /**
+                     * Encodes the specified DbSystemOptions message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystemOptions.verify|verify} messages.
+                     * @param message DbSystemOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDbSystemOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DbSystemOptions message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystemOptions.verify|verify} messages.
+                     * @param message DbSystemOptions message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDbSystemOptions, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DbSystemOptions message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DbSystemOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbSystemOptions;
+
+                    /**
+                     * Decodes a DbSystemOptions message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DbSystemOptions
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbSystemOptions;
+
+                    /**
+                     * Verifies a DbSystemOptions message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DbSystemOptions message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DbSystemOptions
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbSystemOptions;
+
+                    /**
+                     * Creates a plain object from a DbSystemOptions message. Also converts values to other types if specified.
+                     * @param message DbSystemOptions
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DbSystemOptions, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DbSystemOptions to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DbSystemOptions
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DbSystemOptions {
+
+                    /** StorageManagement enum. */
+                    enum StorageManagement {
+                        STORAGE_MANAGEMENT_UNSPECIFIED = 0,
+                        ASM = 1,
+                        LVM = 2
+                    }
+                }
+
+                /** Properties of a DbHome. */
+                interface IDbHome {
+
+                    /** DbHome displayName */
+                    displayName?: (string|null);
+
+                    /** DbHome dbVersion */
+                    dbVersion?: (string|null);
+
+                    /** DbHome database */
+                    database?: (google.cloud.oracledatabase.v1.IDatabase|null);
+
+                    /** DbHome isUnifiedAuditingEnabled */
+                    isUnifiedAuditingEnabled?: (boolean|null);
+                }
+
+                /** Represents a DbHome. */
+                class DbHome implements IDbHome {
+
+                    /**
+                     * Constructs a new DbHome.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDbHome);
+
+                    /** DbHome displayName. */
+                    public displayName: string;
+
+                    /** DbHome dbVersion. */
+                    public dbVersion: string;
+
+                    /** DbHome database. */
+                    public database?: (google.cloud.oracledatabase.v1.IDatabase|null);
+
+                    /** DbHome isUnifiedAuditingEnabled. */
+                    public isUnifiedAuditingEnabled: boolean;
+
+                    /**
+                     * Creates a new DbHome instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DbHome instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDbHome): google.cloud.oracledatabase.v1.DbHome;
+
+                    /**
+                     * Encodes the specified DbHome message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbHome.verify|verify} messages.
+                     * @param message DbHome message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDbHome, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DbHome message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbHome.verify|verify} messages.
+                     * @param message DbHome message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDbHome, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DbHome message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DbHome
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbHome;
+
+                    /**
+                     * Decodes a DbHome message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DbHome
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbHome;
+
+                    /**
+                     * Verifies a DbHome message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DbHome message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DbHome
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbHome;
+
+                    /**
+                     * Creates a plain object from a DbHome message. Also converts values to other types if specified.
+                     * @param message DbHome
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DbHome, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DbHome to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DbHome
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateDbSystemRequest. */
+                interface ICreateDbSystemRequest {
+
+                    /** CreateDbSystemRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateDbSystemRequest dbSystemId */
+                    dbSystemId?: (string|null);
+
+                    /** CreateDbSystemRequest dbSystem */
+                    dbSystem?: (google.cloud.oracledatabase.v1.IDbSystem|null);
+
+                    /** CreateDbSystemRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateDbSystemRequest. */
+                class CreateDbSystemRequest implements ICreateDbSystemRequest {
+
+                    /**
+                     * Constructs a new CreateDbSystemRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ICreateDbSystemRequest);
+
+                    /** CreateDbSystemRequest parent. */
+                    public parent: string;
+
+                    /** CreateDbSystemRequest dbSystemId. */
+                    public dbSystemId: string;
+
+                    /** CreateDbSystemRequest dbSystem. */
+                    public dbSystem?: (google.cloud.oracledatabase.v1.IDbSystem|null);
+
+                    /** CreateDbSystemRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateDbSystemRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateDbSystemRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ICreateDbSystemRequest): google.cloud.oracledatabase.v1.CreateDbSystemRequest;
+
+                    /**
+                     * Encodes the specified CreateDbSystemRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateDbSystemRequest.verify|verify} messages.
+                     * @param message CreateDbSystemRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ICreateDbSystemRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateDbSystemRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateDbSystemRequest.verify|verify} messages.
+                     * @param message CreateDbSystemRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ICreateDbSystemRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateDbSystemRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateDbSystemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.CreateDbSystemRequest;
+
+                    /**
+                     * Decodes a CreateDbSystemRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateDbSystemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.CreateDbSystemRequest;
+
+                    /**
+                     * Verifies a CreateDbSystemRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateDbSystemRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateDbSystemRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.CreateDbSystemRequest;
+
+                    /**
+                     * Creates a plain object from a CreateDbSystemRequest message. Also converts values to other types if specified.
+                     * @param message CreateDbSystemRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.CreateDbSystemRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateDbSystemRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateDbSystemRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteDbSystemRequest. */
+                interface IDeleteDbSystemRequest {
+
+                    /** DeleteDbSystemRequest name */
+                    name?: (string|null);
+
+                    /** DeleteDbSystemRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteDbSystemRequest. */
+                class DeleteDbSystemRequest implements IDeleteDbSystemRequest {
+
+                    /**
+                     * Constructs a new DeleteDbSystemRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeleteDbSystemRequest);
+
+                    /** DeleteDbSystemRequest name. */
+                    public name: string;
+
+                    /** DeleteDbSystemRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteDbSystemRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteDbSystemRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeleteDbSystemRequest): google.cloud.oracledatabase.v1.DeleteDbSystemRequest;
+
+                    /**
+                     * Encodes the specified DeleteDbSystemRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteDbSystemRequest.verify|verify} messages.
+                     * @param message DeleteDbSystemRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeleteDbSystemRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteDbSystemRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteDbSystemRequest.verify|verify} messages.
+                     * @param message DeleteDbSystemRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeleteDbSystemRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteDbSystemRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteDbSystemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeleteDbSystemRequest;
+
+                    /**
+                     * Decodes a DeleteDbSystemRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteDbSystemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeleteDbSystemRequest;
+
+                    /**
+                     * Verifies a DeleteDbSystemRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteDbSystemRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteDbSystemRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeleteDbSystemRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteDbSystemRequest message. Also converts values to other types if specified.
+                     * @param message DeleteDbSystemRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeleteDbSystemRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteDbSystemRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteDbSystemRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetDbSystemRequest. */
+                interface IGetDbSystemRequest {
+
+                    /** GetDbSystemRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetDbSystemRequest. */
+                class GetDbSystemRequest implements IGetDbSystemRequest {
+
+                    /**
+                     * Constructs a new GetDbSystemRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetDbSystemRequest);
+
+                    /** GetDbSystemRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetDbSystemRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetDbSystemRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetDbSystemRequest): google.cloud.oracledatabase.v1.GetDbSystemRequest;
+
+                    /**
+                     * Encodes the specified GetDbSystemRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetDbSystemRequest.verify|verify} messages.
+                     * @param message GetDbSystemRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetDbSystemRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetDbSystemRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetDbSystemRequest.verify|verify} messages.
+                     * @param message GetDbSystemRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetDbSystemRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetDbSystemRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetDbSystemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetDbSystemRequest;
+
+                    /**
+                     * Decodes a GetDbSystemRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetDbSystemRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetDbSystemRequest;
+
+                    /**
+                     * Verifies a GetDbSystemRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetDbSystemRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetDbSystemRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetDbSystemRequest;
+
+                    /**
+                     * Creates a plain object from a GetDbSystemRequest message. Also converts values to other types if specified.
+                     * @param message GetDbSystemRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetDbSystemRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetDbSystemRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetDbSystemRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDbSystemsRequest. */
+                interface IListDbSystemsRequest {
+
+                    /** ListDbSystemsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDbSystemsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDbSystemsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDbSystemsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListDbSystemsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListDbSystemsRequest. */
+                class ListDbSystemsRequest implements IListDbSystemsRequest {
+
+                    /**
+                     * Constructs a new ListDbSystemsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDbSystemsRequest);
+
+                    /** ListDbSystemsRequest parent. */
+                    public parent: string;
+
+                    /** ListDbSystemsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDbSystemsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDbSystemsRequest filter. */
+                    public filter: string;
+
+                    /** ListDbSystemsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListDbSystemsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDbSystemsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDbSystemsRequest): google.cloud.oracledatabase.v1.ListDbSystemsRequest;
+
+                    /**
+                     * Encodes the specified ListDbSystemsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbSystemsRequest.verify|verify} messages.
+                     * @param message ListDbSystemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDbSystemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDbSystemsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbSystemsRequest.verify|verify} messages.
+                     * @param message ListDbSystemsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDbSystemsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDbSystemsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDbSystemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDbSystemsRequest;
+
+                    /**
+                     * Decodes a ListDbSystemsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDbSystemsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDbSystemsRequest;
+
+                    /**
+                     * Verifies a ListDbSystemsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDbSystemsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDbSystemsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDbSystemsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDbSystemsRequest message. Also converts values to other types if specified.
+                     * @param message ListDbSystemsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDbSystemsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDbSystemsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDbSystemsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDbSystemsResponse. */
+                interface IListDbSystemsResponse {
+
+                    /** ListDbSystemsResponse dbSystems */
+                    dbSystems?: (google.cloud.oracledatabase.v1.IDbSystem[]|null);
+
+                    /** ListDbSystemsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDbSystemsResponse. */
+                class ListDbSystemsResponse implements IListDbSystemsResponse {
+
+                    /**
+                     * Constructs a new ListDbSystemsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDbSystemsResponse);
+
+                    /** ListDbSystemsResponse dbSystems. */
+                    public dbSystems: google.cloud.oracledatabase.v1.IDbSystem[];
+
+                    /** ListDbSystemsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDbSystemsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDbSystemsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDbSystemsResponse): google.cloud.oracledatabase.v1.ListDbSystemsResponse;
+
+                    /**
+                     * Encodes the specified ListDbSystemsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbSystemsResponse.verify|verify} messages.
+                     * @param message ListDbSystemsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDbSystemsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDbSystemsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbSystemsResponse.verify|verify} messages.
+                     * @param message ListDbSystemsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDbSystemsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDbSystemsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDbSystemsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDbSystemsResponse;
+
+                    /**
+                     * Decodes a ListDbSystemsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDbSystemsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDbSystemsResponse;
+
+                    /**
+                     * Verifies a ListDbSystemsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDbSystemsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDbSystemsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDbSystemsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDbSystemsResponse message. Also converts values to other types if specified.
+                     * @param message ListDbSystemsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDbSystemsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDbSystemsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDbSystemsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DbSystemInitialStorageSize. */
+                interface IDbSystemInitialStorageSize {
+
+                    /** DbSystemInitialStorageSize name */
+                    name?: (string|null);
+
+                    /** DbSystemInitialStorageSize properties */
+                    properties?: (google.cloud.oracledatabase.v1.IDbSystemInitialStorageSizeProperties|null);
+                }
+
+                /** Represents a DbSystemInitialStorageSize. */
+                class DbSystemInitialStorageSize implements IDbSystemInitialStorageSize {
+
+                    /**
+                     * Constructs a new DbSystemInitialStorageSize.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDbSystemInitialStorageSize);
+
+                    /** DbSystemInitialStorageSize name. */
+                    public name: string;
+
+                    /** DbSystemInitialStorageSize properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IDbSystemInitialStorageSizeProperties|null);
+
+                    /**
+                     * Creates a new DbSystemInitialStorageSize instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DbSystemInitialStorageSize instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDbSystemInitialStorageSize): google.cloud.oracledatabase.v1.DbSystemInitialStorageSize;
+
+                    /**
+                     * Encodes the specified DbSystemInitialStorageSize message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystemInitialStorageSize.verify|verify} messages.
+                     * @param message DbSystemInitialStorageSize message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDbSystemInitialStorageSize, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DbSystemInitialStorageSize message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystemInitialStorageSize.verify|verify} messages.
+                     * @param message DbSystemInitialStorageSize message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDbSystemInitialStorageSize, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DbSystemInitialStorageSize message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DbSystemInitialStorageSize
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbSystemInitialStorageSize;
+
+                    /**
+                     * Decodes a DbSystemInitialStorageSize message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DbSystemInitialStorageSize
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbSystemInitialStorageSize;
+
+                    /**
+                     * Verifies a DbSystemInitialStorageSize message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DbSystemInitialStorageSize message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DbSystemInitialStorageSize
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbSystemInitialStorageSize;
+
+                    /**
+                     * Creates a plain object from a DbSystemInitialStorageSize message. Also converts values to other types if specified.
+                     * @param message DbSystemInitialStorageSize
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DbSystemInitialStorageSize, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DbSystemInitialStorageSize to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DbSystemInitialStorageSize
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DbSystemInitialStorageSizeProperties. */
+                interface IDbSystemInitialStorageSizeProperties {
+
+                    /** DbSystemInitialStorageSizeProperties storageManagement */
+                    storageManagement?: (google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.StorageManagement|keyof typeof google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.StorageManagement|null);
+
+                    /** DbSystemInitialStorageSizeProperties shapeType */
+                    shapeType?: (google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.ShapeType|keyof typeof google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.ShapeType|null);
+
+                    /** DbSystemInitialStorageSizeProperties storageSizeDetails */
+                    storageSizeDetails?: (google.cloud.oracledatabase.v1.IStorageSizeDetails[]|null);
+
+                    /** DbSystemInitialStorageSizeProperties launchFromBackupStorageSizeDetails */
+                    launchFromBackupStorageSizeDetails?: (google.cloud.oracledatabase.v1.IStorageSizeDetails[]|null);
+                }
+
+                /** Represents a DbSystemInitialStorageSizeProperties. */
+                class DbSystemInitialStorageSizeProperties implements IDbSystemInitialStorageSizeProperties {
+
+                    /**
+                     * Constructs a new DbSystemInitialStorageSizeProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDbSystemInitialStorageSizeProperties);
+
+                    /** DbSystemInitialStorageSizeProperties storageManagement. */
+                    public storageManagement: (google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.StorageManagement|keyof typeof google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.StorageManagement);
+
+                    /** DbSystemInitialStorageSizeProperties shapeType. */
+                    public shapeType: (google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.ShapeType|keyof typeof google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.ShapeType);
+
+                    /** DbSystemInitialStorageSizeProperties storageSizeDetails. */
+                    public storageSizeDetails: google.cloud.oracledatabase.v1.IStorageSizeDetails[];
+
+                    /** DbSystemInitialStorageSizeProperties launchFromBackupStorageSizeDetails. */
+                    public launchFromBackupStorageSizeDetails: google.cloud.oracledatabase.v1.IStorageSizeDetails[];
+
+                    /**
+                     * Creates a new DbSystemInitialStorageSizeProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DbSystemInitialStorageSizeProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDbSystemInitialStorageSizeProperties): google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties;
+
+                    /**
+                     * Encodes the specified DbSystemInitialStorageSizeProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.verify|verify} messages.
+                     * @param message DbSystemInitialStorageSizeProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDbSystemInitialStorageSizeProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DbSystemInitialStorageSizeProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties.verify|verify} messages.
+                     * @param message DbSystemInitialStorageSizeProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDbSystemInitialStorageSizeProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DbSystemInitialStorageSizeProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DbSystemInitialStorageSizeProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties;
+
+                    /**
+                     * Decodes a DbSystemInitialStorageSizeProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DbSystemInitialStorageSizeProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties;
+
+                    /**
+                     * Verifies a DbSystemInitialStorageSizeProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DbSystemInitialStorageSizeProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DbSystemInitialStorageSizeProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties;
+
+                    /**
+                     * Creates a plain object from a DbSystemInitialStorageSizeProperties message. Also converts values to other types if specified.
+                     * @param message DbSystemInitialStorageSizeProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DbSystemInitialStorageSizeProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DbSystemInitialStorageSizeProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DbSystemInitialStorageSizeProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DbSystemInitialStorageSizeProperties {
+
+                    /** StorageManagement enum. */
+                    enum StorageManagement {
+                        STORAGE_MANAGEMENT_UNSPECIFIED = 0,
+                        ASM = 1,
+                        LVM = 2
+                    }
+
+                    /** ShapeType enum. */
+                    enum ShapeType {
+                        SHAPE_TYPE_UNSPECIFIED = 0,
+                        STANDARD_X86 = 1
+                    }
+                }
+
+                /** Properties of a StorageSizeDetails. */
+                interface IStorageSizeDetails {
+
+                    /** StorageSizeDetails dataStorageSizeInGbs */
+                    dataStorageSizeInGbs?: (number|null);
+
+                    /** StorageSizeDetails recoStorageSizeInGbs */
+                    recoStorageSizeInGbs?: (number|null);
+                }
+
+                /** Represents a StorageSizeDetails. */
+                class StorageSizeDetails implements IStorageSizeDetails {
+
+                    /**
+                     * Constructs a new StorageSizeDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IStorageSizeDetails);
+
+                    /** StorageSizeDetails dataStorageSizeInGbs. */
+                    public dataStorageSizeInGbs: number;
+
+                    /** StorageSizeDetails recoStorageSizeInGbs. */
+                    public recoStorageSizeInGbs: number;
+
+                    /**
+                     * Creates a new StorageSizeDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns StorageSizeDetails instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IStorageSizeDetails): google.cloud.oracledatabase.v1.StorageSizeDetails;
+
+                    /**
+                     * Encodes the specified StorageSizeDetails message. Does not implicitly {@link google.cloud.oracledatabase.v1.StorageSizeDetails.verify|verify} messages.
+                     * @param message StorageSizeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IStorageSizeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified StorageSizeDetails message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.StorageSizeDetails.verify|verify} messages.
+                     * @param message StorageSizeDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IStorageSizeDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a StorageSizeDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns StorageSizeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.StorageSizeDetails;
+
+                    /**
+                     * Decodes a StorageSizeDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns StorageSizeDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.StorageSizeDetails;
+
+                    /**
+                     * Verifies a StorageSizeDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a StorageSizeDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns StorageSizeDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.StorageSizeDetails;
+
+                    /**
+                     * Creates a plain object from a StorageSizeDetails message. Also converts values to other types if specified.
+                     * @param message StorageSizeDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.StorageSizeDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this StorageSizeDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for StorageSizeDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDbSystemInitialStorageSizesRequest. */
+                interface IListDbSystemInitialStorageSizesRequest {
+
+                    /** ListDbSystemInitialStorageSizesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDbSystemInitialStorageSizesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDbSystemInitialStorageSizesRequest pageToken */
+                    pageToken?: (string|null);
+                }
+
+                /** Represents a ListDbSystemInitialStorageSizesRequest. */
+                class ListDbSystemInitialStorageSizesRequest implements IListDbSystemInitialStorageSizesRequest {
+
+                    /**
+                     * Constructs a new ListDbSystemInitialStorageSizesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesRequest);
+
+                    /** ListDbSystemInitialStorageSizesRequest parent. */
+                    public parent: string;
+
+                    /** ListDbSystemInitialStorageSizesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDbSystemInitialStorageSizesRequest pageToken. */
+                    public pageToken: string;
+
+                    /**
+                     * Creates a new ListDbSystemInitialStorageSizesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDbSystemInitialStorageSizesRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesRequest): google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest;
+
+                    /**
+                     * Encodes the specified ListDbSystemInitialStorageSizesRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest.verify|verify} messages.
+                     * @param message ListDbSystemInitialStorageSizesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDbSystemInitialStorageSizesRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest.verify|verify} messages.
+                     * @param message ListDbSystemInitialStorageSizesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDbSystemInitialStorageSizesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDbSystemInitialStorageSizesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest;
+
+                    /**
+                     * Decodes a ListDbSystemInitialStorageSizesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDbSystemInitialStorageSizesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest;
+
+                    /**
+                     * Verifies a ListDbSystemInitialStorageSizesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDbSystemInitialStorageSizesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDbSystemInitialStorageSizesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest;
+
+                    /**
+                     * Creates a plain object from a ListDbSystemInitialStorageSizesRequest message. Also converts values to other types if specified.
+                     * @param message ListDbSystemInitialStorageSizesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDbSystemInitialStorageSizesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDbSystemInitialStorageSizesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDbSystemInitialStorageSizesResponse. */
+                interface IListDbSystemInitialStorageSizesResponse {
+
+                    /** ListDbSystemInitialStorageSizesResponse dbSystemInitialStorageSizes */
+                    dbSystemInitialStorageSizes?: (google.cloud.oracledatabase.v1.IDbSystemInitialStorageSize[]|null);
+
+                    /** ListDbSystemInitialStorageSizesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDbSystemInitialStorageSizesResponse. */
+                class ListDbSystemInitialStorageSizesResponse implements IListDbSystemInitialStorageSizesResponse {
+
+                    /**
+                     * Constructs a new ListDbSystemInitialStorageSizesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesResponse);
+
+                    /** ListDbSystemInitialStorageSizesResponse dbSystemInitialStorageSizes. */
+                    public dbSystemInitialStorageSizes: google.cloud.oracledatabase.v1.IDbSystemInitialStorageSize[];
+
+                    /** ListDbSystemInitialStorageSizesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDbSystemInitialStorageSizesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDbSystemInitialStorageSizesResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesResponse): google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesResponse;
+
+                    /**
+                     * Encodes the specified ListDbSystemInitialStorageSizesResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesResponse.verify|verify} messages.
+                     * @param message ListDbSystemInitialStorageSizesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDbSystemInitialStorageSizesResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesResponse.verify|verify} messages.
+                     * @param message ListDbSystemInitialStorageSizesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDbSystemInitialStorageSizesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDbSystemInitialStorageSizesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesResponse;
+
+                    /**
+                     * Decodes a ListDbSystemInitialStorageSizesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDbSystemInitialStorageSizesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesResponse;
+
+                    /**
+                     * Verifies a ListDbSystemInitialStorageSizesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDbSystemInitialStorageSizesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDbSystemInitialStorageSizesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesResponse;
+
+                    /**
+                     * Creates a plain object from a ListDbSystemInitialStorageSizesResponse message. Also converts values to other types if specified.
+                     * @param message ListDbSystemInitialStorageSizesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDbSystemInitialStorageSizesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDbSystemInitialStorageSizesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DbSystemShape. */
                 interface IDbSystemShape {
 
@@ -3029,6 +7797,448 @@ export namespace google {
 
                     /**
                      * Gets the default type url for DbSystemShape
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DbVersion. */
+                interface IDbVersion {
+
+                    /** DbVersion name */
+                    name?: (string|null);
+
+                    /** DbVersion properties */
+                    properties?: (google.cloud.oracledatabase.v1.IDbVersionProperties|null);
+                }
+
+                /** Represents a DbVersion. */
+                class DbVersion implements IDbVersion {
+
+                    /**
+                     * Constructs a new DbVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDbVersion);
+
+                    /** DbVersion name. */
+                    public name: string;
+
+                    /** DbVersion properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IDbVersionProperties|null);
+
+                    /**
+                     * Creates a new DbVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DbVersion instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDbVersion): google.cloud.oracledatabase.v1.DbVersion;
+
+                    /**
+                     * Encodes the specified DbVersion message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbVersion.verify|verify} messages.
+                     * @param message DbVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDbVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DbVersion message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbVersion.verify|verify} messages.
+                     * @param message DbVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDbVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DbVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DbVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbVersion;
+
+                    /**
+                     * Decodes a DbVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DbVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbVersion;
+
+                    /**
+                     * Verifies a DbVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DbVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DbVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbVersion;
+
+                    /**
+                     * Creates a plain object from a DbVersion message. Also converts values to other types if specified.
+                     * @param message DbVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DbVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DbVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DbVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DbVersionProperties. */
+                interface IDbVersionProperties {
+
+                    /** DbVersionProperties version */
+                    version?: (string|null);
+
+                    /** DbVersionProperties isLatestForMajorVersion */
+                    isLatestForMajorVersion?: (boolean|null);
+
+                    /** DbVersionProperties supportsPdb */
+                    supportsPdb?: (boolean|null);
+
+                    /** DbVersionProperties isPreviewDbVersion */
+                    isPreviewDbVersion?: (boolean|null);
+
+                    /** DbVersionProperties isUpgradeSupported */
+                    isUpgradeSupported?: (boolean|null);
+                }
+
+                /** Represents a DbVersionProperties. */
+                class DbVersionProperties implements IDbVersionProperties {
+
+                    /**
+                     * Constructs a new DbVersionProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDbVersionProperties);
+
+                    /** DbVersionProperties version. */
+                    public version: string;
+
+                    /** DbVersionProperties isLatestForMajorVersion. */
+                    public isLatestForMajorVersion: boolean;
+
+                    /** DbVersionProperties supportsPdb. */
+                    public supportsPdb: boolean;
+
+                    /** DbVersionProperties isPreviewDbVersion. */
+                    public isPreviewDbVersion: boolean;
+
+                    /** DbVersionProperties isUpgradeSupported. */
+                    public isUpgradeSupported: boolean;
+
+                    /**
+                     * Creates a new DbVersionProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DbVersionProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDbVersionProperties): google.cloud.oracledatabase.v1.DbVersionProperties;
+
+                    /**
+                     * Encodes the specified DbVersionProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.DbVersionProperties.verify|verify} messages.
+                     * @param message DbVersionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDbVersionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DbVersionProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DbVersionProperties.verify|verify} messages.
+                     * @param message DbVersionProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDbVersionProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DbVersionProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DbVersionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DbVersionProperties;
+
+                    /**
+                     * Decodes a DbVersionProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DbVersionProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DbVersionProperties;
+
+                    /**
+                     * Verifies a DbVersionProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DbVersionProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DbVersionProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DbVersionProperties;
+
+                    /**
+                     * Creates a plain object from a DbVersionProperties message. Also converts values to other types if specified.
+                     * @param message DbVersionProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DbVersionProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DbVersionProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DbVersionProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDbVersionsRequest. */
+                interface IListDbVersionsRequest {
+
+                    /** ListDbVersionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDbVersionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDbVersionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDbVersionsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListDbVersionsRequest. */
+                class ListDbVersionsRequest implements IListDbVersionsRequest {
+
+                    /**
+                     * Constructs a new ListDbVersionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDbVersionsRequest);
+
+                    /** ListDbVersionsRequest parent. */
+                    public parent: string;
+
+                    /** ListDbVersionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDbVersionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDbVersionsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListDbVersionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDbVersionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDbVersionsRequest): google.cloud.oracledatabase.v1.ListDbVersionsRequest;
+
+                    /**
+                     * Encodes the specified ListDbVersionsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbVersionsRequest.verify|verify} messages.
+                     * @param message ListDbVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDbVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDbVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbVersionsRequest.verify|verify} messages.
+                     * @param message ListDbVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDbVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDbVersionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDbVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDbVersionsRequest;
+
+                    /**
+                     * Decodes a ListDbVersionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDbVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDbVersionsRequest;
+
+                    /**
+                     * Verifies a ListDbVersionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDbVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDbVersionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDbVersionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListDbVersionsRequest message. Also converts values to other types if specified.
+                     * @param message ListDbVersionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDbVersionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDbVersionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDbVersionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDbVersionsResponse. */
+                interface IListDbVersionsResponse {
+
+                    /** ListDbVersionsResponse dbVersions */
+                    dbVersions?: (google.cloud.oracledatabase.v1.IDbVersion[]|null);
+
+                    /** ListDbVersionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListDbVersionsResponse. */
+                class ListDbVersionsResponse implements IListDbVersionsResponse {
+
+                    /**
+                     * Constructs a new ListDbVersionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListDbVersionsResponse);
+
+                    /** ListDbVersionsResponse dbVersions. */
+                    public dbVersions: google.cloud.oracledatabase.v1.IDbVersion[];
+
+                    /** ListDbVersionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListDbVersionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDbVersionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListDbVersionsResponse): google.cloud.oracledatabase.v1.ListDbVersionsResponse;
+
+                    /**
+                     * Encodes the specified ListDbVersionsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbVersionsResponse.verify|verify} messages.
+                     * @param message ListDbVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListDbVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDbVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListDbVersionsResponse.verify|verify} messages.
+                     * @param message ListDbVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListDbVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDbVersionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDbVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListDbVersionsResponse;
+
+                    /**
+                     * Decodes a ListDbVersionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDbVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListDbVersionsResponse;
+
+                    /**
+                     * Verifies a ListDbVersionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDbVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDbVersionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListDbVersionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListDbVersionsResponse message. Also converts values to other types if specified.
+                     * @param message ListDbVersionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListDbVersionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDbVersionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDbVersionsResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -3494,6 +8704,15 @@ export namespace google {
 
                     /** CloudExadataInfrastructureProperties monthlyDbServerVersion */
                     monthlyDbServerVersion?: (string|null);
+
+                    /** CloudExadataInfrastructureProperties computeModel */
+                    computeModel?: (google.cloud.oracledatabase.v1.ComputeModel|keyof typeof google.cloud.oracledatabase.v1.ComputeModel|null);
+
+                    /** CloudExadataInfrastructureProperties databaseServerType */
+                    databaseServerType?: (string|null);
+
+                    /** CloudExadataInfrastructureProperties storageServerType */
+                    storageServerType?: (string|null);
                 }
 
                 /** Represents a CloudExadataInfrastructureProperties. */
@@ -3585,6 +8804,15 @@ export namespace google {
 
                     /** CloudExadataInfrastructureProperties monthlyDbServerVersion. */
                     public monthlyDbServerVersion: string;
+
+                    /** CloudExadataInfrastructureProperties computeModel. */
+                    public computeModel: (google.cloud.oracledatabase.v1.ComputeModel|keyof typeof google.cloud.oracledatabase.v1.ComputeModel);
+
+                    /** CloudExadataInfrastructureProperties databaseServerType. */
+                    public databaseServerType: string;
+
+                    /** CloudExadataInfrastructureProperties storageServerType. */
+                    public storageServerType: string;
 
                     /**
                      * Creates a new CloudExadataInfrastructureProperties instance using the specified properties.
@@ -3841,6 +9069,1441 @@ export namespace google {
                     }
                 }
 
+                /** Properties of an ExadbVmCluster. */
+                interface IExadbVmCluster {
+
+                    /** ExadbVmCluster name */
+                    name?: (string|null);
+
+                    /** ExadbVmCluster properties */
+                    properties?: (google.cloud.oracledatabase.v1.IExadbVmClusterProperties|null);
+
+                    /** ExadbVmCluster gcpOracleZone */
+                    gcpOracleZone?: (string|null);
+
+                    /** ExadbVmCluster labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** ExadbVmCluster odbNetwork */
+                    odbNetwork?: (string|null);
+
+                    /** ExadbVmCluster odbSubnet */
+                    odbSubnet?: (string|null);
+
+                    /** ExadbVmCluster backupOdbSubnet */
+                    backupOdbSubnet?: (string|null);
+
+                    /** ExadbVmCluster displayName */
+                    displayName?: (string|null);
+
+                    /** ExadbVmCluster createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExadbVmCluster entitlementId */
+                    entitlementId?: (string|null);
+                }
+
+                /** Represents an ExadbVmCluster. */
+                class ExadbVmCluster implements IExadbVmCluster {
+
+                    /**
+                     * Constructs a new ExadbVmCluster.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IExadbVmCluster);
+
+                    /** ExadbVmCluster name. */
+                    public name: string;
+
+                    /** ExadbVmCluster properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IExadbVmClusterProperties|null);
+
+                    /** ExadbVmCluster gcpOracleZone. */
+                    public gcpOracleZone: string;
+
+                    /** ExadbVmCluster labels. */
+                    public labels: { [k: string]: string };
+
+                    /** ExadbVmCluster odbNetwork. */
+                    public odbNetwork: string;
+
+                    /** ExadbVmCluster odbSubnet. */
+                    public odbSubnet: string;
+
+                    /** ExadbVmCluster backupOdbSubnet. */
+                    public backupOdbSubnet: string;
+
+                    /** ExadbVmCluster displayName. */
+                    public displayName: string;
+
+                    /** ExadbVmCluster createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExadbVmCluster entitlementId. */
+                    public entitlementId: string;
+
+                    /**
+                     * Creates a new ExadbVmCluster instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExadbVmCluster instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IExadbVmCluster): google.cloud.oracledatabase.v1.ExadbVmCluster;
+
+                    /**
+                     * Encodes the specified ExadbVmCluster message. Does not implicitly {@link google.cloud.oracledatabase.v1.ExadbVmCluster.verify|verify} messages.
+                     * @param message ExadbVmCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IExadbVmCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExadbVmCluster message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ExadbVmCluster.verify|verify} messages.
+                     * @param message ExadbVmCluster message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IExadbVmCluster, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExadbVmCluster message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExadbVmCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ExadbVmCluster;
+
+                    /**
+                     * Decodes an ExadbVmCluster message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExadbVmCluster
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ExadbVmCluster;
+
+                    /**
+                     * Verifies an ExadbVmCluster message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExadbVmCluster message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExadbVmCluster
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ExadbVmCluster;
+
+                    /**
+                     * Creates a plain object from an ExadbVmCluster message. Also converts values to other types if specified.
+                     * @param message ExadbVmCluster
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ExadbVmCluster, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExadbVmCluster to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExadbVmCluster
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExadbVmClusterStorageDetails. */
+                interface IExadbVmClusterStorageDetails {
+
+                    /** ExadbVmClusterStorageDetails sizeInGbsPerNode */
+                    sizeInGbsPerNode?: (number|null);
+                }
+
+                /** Represents an ExadbVmClusterStorageDetails. */
+                class ExadbVmClusterStorageDetails implements IExadbVmClusterStorageDetails {
+
+                    /**
+                     * Constructs a new ExadbVmClusterStorageDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IExadbVmClusterStorageDetails);
+
+                    /** ExadbVmClusterStorageDetails sizeInGbsPerNode. */
+                    public sizeInGbsPerNode: number;
+
+                    /**
+                     * Creates a new ExadbVmClusterStorageDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExadbVmClusterStorageDetails instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IExadbVmClusterStorageDetails): google.cloud.oracledatabase.v1.ExadbVmClusterStorageDetails;
+
+                    /**
+                     * Encodes the specified ExadbVmClusterStorageDetails message. Does not implicitly {@link google.cloud.oracledatabase.v1.ExadbVmClusterStorageDetails.verify|verify} messages.
+                     * @param message ExadbVmClusterStorageDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IExadbVmClusterStorageDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExadbVmClusterStorageDetails message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ExadbVmClusterStorageDetails.verify|verify} messages.
+                     * @param message ExadbVmClusterStorageDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IExadbVmClusterStorageDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExadbVmClusterStorageDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExadbVmClusterStorageDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ExadbVmClusterStorageDetails;
+
+                    /**
+                     * Decodes an ExadbVmClusterStorageDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExadbVmClusterStorageDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ExadbVmClusterStorageDetails;
+
+                    /**
+                     * Verifies an ExadbVmClusterStorageDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExadbVmClusterStorageDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExadbVmClusterStorageDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ExadbVmClusterStorageDetails;
+
+                    /**
+                     * Creates a plain object from an ExadbVmClusterStorageDetails message. Also converts values to other types if specified.
+                     * @param message ExadbVmClusterStorageDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ExadbVmClusterStorageDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExadbVmClusterStorageDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExadbVmClusterStorageDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExadbVmClusterProperties. */
+                interface IExadbVmClusterProperties {
+
+                    /** ExadbVmClusterProperties clusterName */
+                    clusterName?: (string|null);
+
+                    /** ExadbVmClusterProperties gridImageId */
+                    gridImageId?: (string|null);
+
+                    /** ExadbVmClusterProperties nodeCount */
+                    nodeCount?: (number|null);
+
+                    /** ExadbVmClusterProperties enabledEcpuCountPerNode */
+                    enabledEcpuCountPerNode?: (number|null);
+
+                    /** ExadbVmClusterProperties additionalEcpuCountPerNode */
+                    additionalEcpuCountPerNode?: (number|null);
+
+                    /** ExadbVmClusterProperties vmFileSystemStorage */
+                    vmFileSystemStorage?: (google.cloud.oracledatabase.v1.IExadbVmClusterStorageDetails|null);
+
+                    /** ExadbVmClusterProperties licenseModel */
+                    licenseModel?: (google.cloud.oracledatabase.v1.ExadbVmClusterProperties.LicenseModel|keyof typeof google.cloud.oracledatabase.v1.ExadbVmClusterProperties.LicenseModel|null);
+
+                    /** ExadbVmClusterProperties exascaleDbStorageVault */
+                    exascaleDbStorageVault?: (string|null);
+
+                    /** ExadbVmClusterProperties hostnamePrefix */
+                    hostnamePrefix?: (string|null);
+
+                    /** ExadbVmClusterProperties hostname */
+                    hostname?: (string|null);
+
+                    /** ExadbVmClusterProperties sshPublicKeys */
+                    sshPublicKeys?: (string[]|null);
+
+                    /** ExadbVmClusterProperties dataCollectionOptions */
+                    dataCollectionOptions?: (google.cloud.oracledatabase.v1.IDataCollectionOptionsCommon|null);
+
+                    /** ExadbVmClusterProperties timeZone */
+                    timeZone?: (google.type.ITimeZone|null);
+
+                    /** ExadbVmClusterProperties lifecycleState */
+                    lifecycleState?: (google.cloud.oracledatabase.v1.ExadbVmClusterProperties.ExadbVmClusterLifecycleState|keyof typeof google.cloud.oracledatabase.v1.ExadbVmClusterProperties.ExadbVmClusterLifecycleState|null);
+
+                    /** ExadbVmClusterProperties shapeAttribute */
+                    shapeAttribute?: (google.cloud.oracledatabase.v1.ExadbVmClusterProperties.ShapeAttribute|keyof typeof google.cloud.oracledatabase.v1.ExadbVmClusterProperties.ShapeAttribute|null);
+
+                    /** ExadbVmClusterProperties memorySizeGb */
+                    memorySizeGb?: (number|null);
+
+                    /** ExadbVmClusterProperties scanListenerPortTcp */
+                    scanListenerPortTcp?: (number|null);
+
+                    /** ExadbVmClusterProperties ociUri */
+                    ociUri?: (string|null);
+
+                    /** ExadbVmClusterProperties giVersion */
+                    giVersion?: (string|null);
+                }
+
+                /** Represents an ExadbVmClusterProperties. */
+                class ExadbVmClusterProperties implements IExadbVmClusterProperties {
+
+                    /**
+                     * Constructs a new ExadbVmClusterProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IExadbVmClusterProperties);
+
+                    /** ExadbVmClusterProperties clusterName. */
+                    public clusterName: string;
+
+                    /** ExadbVmClusterProperties gridImageId. */
+                    public gridImageId: string;
+
+                    /** ExadbVmClusterProperties nodeCount. */
+                    public nodeCount: number;
+
+                    /** ExadbVmClusterProperties enabledEcpuCountPerNode. */
+                    public enabledEcpuCountPerNode: number;
+
+                    /** ExadbVmClusterProperties additionalEcpuCountPerNode. */
+                    public additionalEcpuCountPerNode: number;
+
+                    /** ExadbVmClusterProperties vmFileSystemStorage. */
+                    public vmFileSystemStorage?: (google.cloud.oracledatabase.v1.IExadbVmClusterStorageDetails|null);
+
+                    /** ExadbVmClusterProperties licenseModel. */
+                    public licenseModel: (google.cloud.oracledatabase.v1.ExadbVmClusterProperties.LicenseModel|keyof typeof google.cloud.oracledatabase.v1.ExadbVmClusterProperties.LicenseModel);
+
+                    /** ExadbVmClusterProperties exascaleDbStorageVault. */
+                    public exascaleDbStorageVault: string;
+
+                    /** ExadbVmClusterProperties hostnamePrefix. */
+                    public hostnamePrefix: string;
+
+                    /** ExadbVmClusterProperties hostname. */
+                    public hostname: string;
+
+                    /** ExadbVmClusterProperties sshPublicKeys. */
+                    public sshPublicKeys: string[];
+
+                    /** ExadbVmClusterProperties dataCollectionOptions. */
+                    public dataCollectionOptions?: (google.cloud.oracledatabase.v1.IDataCollectionOptionsCommon|null);
+
+                    /** ExadbVmClusterProperties timeZone. */
+                    public timeZone?: (google.type.ITimeZone|null);
+
+                    /** ExadbVmClusterProperties lifecycleState. */
+                    public lifecycleState: (google.cloud.oracledatabase.v1.ExadbVmClusterProperties.ExadbVmClusterLifecycleState|keyof typeof google.cloud.oracledatabase.v1.ExadbVmClusterProperties.ExadbVmClusterLifecycleState);
+
+                    /** ExadbVmClusterProperties shapeAttribute. */
+                    public shapeAttribute: (google.cloud.oracledatabase.v1.ExadbVmClusterProperties.ShapeAttribute|keyof typeof google.cloud.oracledatabase.v1.ExadbVmClusterProperties.ShapeAttribute);
+
+                    /** ExadbVmClusterProperties memorySizeGb. */
+                    public memorySizeGb: number;
+
+                    /** ExadbVmClusterProperties scanListenerPortTcp. */
+                    public scanListenerPortTcp: number;
+
+                    /** ExadbVmClusterProperties ociUri. */
+                    public ociUri: string;
+
+                    /** ExadbVmClusterProperties giVersion. */
+                    public giVersion: string;
+
+                    /**
+                     * Creates a new ExadbVmClusterProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExadbVmClusterProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IExadbVmClusterProperties): google.cloud.oracledatabase.v1.ExadbVmClusterProperties;
+
+                    /**
+                     * Encodes the specified ExadbVmClusterProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.ExadbVmClusterProperties.verify|verify} messages.
+                     * @param message ExadbVmClusterProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IExadbVmClusterProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExadbVmClusterProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ExadbVmClusterProperties.verify|verify} messages.
+                     * @param message ExadbVmClusterProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IExadbVmClusterProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExadbVmClusterProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExadbVmClusterProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ExadbVmClusterProperties;
+
+                    /**
+                     * Decodes an ExadbVmClusterProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExadbVmClusterProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ExadbVmClusterProperties;
+
+                    /**
+                     * Verifies an ExadbVmClusterProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExadbVmClusterProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExadbVmClusterProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ExadbVmClusterProperties;
+
+                    /**
+                     * Creates a plain object from an ExadbVmClusterProperties message. Also converts values to other types if specified.
+                     * @param message ExadbVmClusterProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ExadbVmClusterProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExadbVmClusterProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExadbVmClusterProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExadbVmClusterProperties {
+
+                    /** LicenseModel enum. */
+                    enum LicenseModel {
+                        LICENSE_MODEL_UNSPECIFIED = 0,
+                        LICENSE_INCLUDED = 1,
+                        BRING_YOUR_OWN_LICENSE = 2
+                    }
+
+                    /** ExadbVmClusterLifecycleState enum. */
+                    enum ExadbVmClusterLifecycleState {
+                        EXADB_VM_CLUSTER_LIFECYCLE_STATE_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        AVAILABLE = 2,
+                        UPDATING = 3,
+                        TERMINATING = 4,
+                        TERMINATED = 5,
+                        FAILED = 6,
+                        MAINTENANCE_IN_PROGRESS = 7
+                    }
+
+                    /** ShapeAttribute enum. */
+                    enum ShapeAttribute {
+                        SHAPE_ATTRIBUTE_UNSPECIFIED = 0,
+                        SMART_STORAGE = 1,
+                        BLOCK_STORAGE = 2
+                    }
+                }
+
+                /** Properties of an ExascaleDbStorageVault. */
+                interface IExascaleDbStorageVault {
+
+                    /** ExascaleDbStorageVault name */
+                    name?: (string|null);
+
+                    /** ExascaleDbStorageVault displayName */
+                    displayName?: (string|null);
+
+                    /** ExascaleDbStorageVault gcpOracleZone */
+                    gcpOracleZone?: (string|null);
+
+                    /** ExascaleDbStorageVault properties */
+                    properties?: (google.cloud.oracledatabase.v1.IExascaleDbStorageVaultProperties|null);
+
+                    /** ExascaleDbStorageVault createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExascaleDbStorageVault entitlementId */
+                    entitlementId?: (string|null);
+
+                    /** ExascaleDbStorageVault labels */
+                    labels?: ({ [k: string]: string }|null);
+                }
+
+                /** Represents an ExascaleDbStorageVault. */
+                class ExascaleDbStorageVault implements IExascaleDbStorageVault {
+
+                    /**
+                     * Constructs a new ExascaleDbStorageVault.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IExascaleDbStorageVault);
+
+                    /** ExascaleDbStorageVault name. */
+                    public name: string;
+
+                    /** ExascaleDbStorageVault displayName. */
+                    public displayName: string;
+
+                    /** ExascaleDbStorageVault gcpOracleZone. */
+                    public gcpOracleZone: string;
+
+                    /** ExascaleDbStorageVault properties. */
+                    public properties?: (google.cloud.oracledatabase.v1.IExascaleDbStorageVaultProperties|null);
+
+                    /** ExascaleDbStorageVault createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ExascaleDbStorageVault entitlementId. */
+                    public entitlementId: string;
+
+                    /** ExascaleDbStorageVault labels. */
+                    public labels: { [k: string]: string };
+
+                    /**
+                     * Creates a new ExascaleDbStorageVault instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExascaleDbStorageVault instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IExascaleDbStorageVault): google.cloud.oracledatabase.v1.ExascaleDbStorageVault;
+
+                    /**
+                     * Encodes the specified ExascaleDbStorageVault message. Does not implicitly {@link google.cloud.oracledatabase.v1.ExascaleDbStorageVault.verify|verify} messages.
+                     * @param message ExascaleDbStorageVault message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IExascaleDbStorageVault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExascaleDbStorageVault message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ExascaleDbStorageVault.verify|verify} messages.
+                     * @param message ExascaleDbStorageVault message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IExascaleDbStorageVault, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExascaleDbStorageVault message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExascaleDbStorageVault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ExascaleDbStorageVault;
+
+                    /**
+                     * Decodes an ExascaleDbStorageVault message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExascaleDbStorageVault
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ExascaleDbStorageVault;
+
+                    /**
+                     * Verifies an ExascaleDbStorageVault message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExascaleDbStorageVault message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExascaleDbStorageVault
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ExascaleDbStorageVault;
+
+                    /**
+                     * Creates a plain object from an ExascaleDbStorageVault message. Also converts values to other types if specified.
+                     * @param message ExascaleDbStorageVault
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ExascaleDbStorageVault, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExascaleDbStorageVault to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExascaleDbStorageVault
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ExascaleDbStorageVaultProperties. */
+                interface IExascaleDbStorageVaultProperties {
+
+                    /** ExascaleDbStorageVaultProperties ocid */
+                    ocid?: (string|null);
+
+                    /** ExascaleDbStorageVaultProperties timeZone */
+                    timeZone?: (google.type.ITimeZone|null);
+
+                    /** ExascaleDbStorageVaultProperties exascaleDbStorageDetails */
+                    exascaleDbStorageDetails?: (google.cloud.oracledatabase.v1.IExascaleDbStorageDetails|null);
+
+                    /** ExascaleDbStorageVaultProperties state */
+                    state?: (google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.State|keyof typeof google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.State|null);
+
+                    /** ExascaleDbStorageVaultProperties description */
+                    description?: (string|null);
+
+                    /** ExascaleDbStorageVaultProperties vmClusterIds */
+                    vmClusterIds?: (string[]|null);
+
+                    /** ExascaleDbStorageVaultProperties vmClusterCount */
+                    vmClusterCount?: (number|null);
+
+                    /** ExascaleDbStorageVaultProperties additionalFlashCachePercent */
+                    additionalFlashCachePercent?: (number|null);
+
+                    /** ExascaleDbStorageVaultProperties ociUri */
+                    ociUri?: (string|null);
+
+                    /** ExascaleDbStorageVaultProperties attachedShapeAttributes */
+                    attachedShapeAttributes?: (google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.ShapeAttribute[]|null);
+
+                    /** ExascaleDbStorageVaultProperties availableShapeAttributes */
+                    availableShapeAttributes?: (google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.ShapeAttribute[]|null);
+                }
+
+                /** Represents an ExascaleDbStorageVaultProperties. */
+                class ExascaleDbStorageVaultProperties implements IExascaleDbStorageVaultProperties {
+
+                    /**
+                     * Constructs a new ExascaleDbStorageVaultProperties.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IExascaleDbStorageVaultProperties);
+
+                    /** ExascaleDbStorageVaultProperties ocid. */
+                    public ocid: string;
+
+                    /** ExascaleDbStorageVaultProperties timeZone. */
+                    public timeZone?: (google.type.ITimeZone|null);
+
+                    /** ExascaleDbStorageVaultProperties exascaleDbStorageDetails. */
+                    public exascaleDbStorageDetails?: (google.cloud.oracledatabase.v1.IExascaleDbStorageDetails|null);
+
+                    /** ExascaleDbStorageVaultProperties state. */
+                    public state: (google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.State|keyof typeof google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.State);
+
+                    /** ExascaleDbStorageVaultProperties description. */
+                    public description: string;
+
+                    /** ExascaleDbStorageVaultProperties vmClusterIds. */
+                    public vmClusterIds: string[];
+
+                    /** ExascaleDbStorageVaultProperties vmClusterCount. */
+                    public vmClusterCount: number;
+
+                    /** ExascaleDbStorageVaultProperties additionalFlashCachePercent. */
+                    public additionalFlashCachePercent: number;
+
+                    /** ExascaleDbStorageVaultProperties ociUri. */
+                    public ociUri: string;
+
+                    /** ExascaleDbStorageVaultProperties attachedShapeAttributes. */
+                    public attachedShapeAttributes: google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.ShapeAttribute[];
+
+                    /** ExascaleDbStorageVaultProperties availableShapeAttributes. */
+                    public availableShapeAttributes: google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.ShapeAttribute[];
+
+                    /**
+                     * Creates a new ExascaleDbStorageVaultProperties instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExascaleDbStorageVaultProperties instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IExascaleDbStorageVaultProperties): google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties;
+
+                    /**
+                     * Encodes the specified ExascaleDbStorageVaultProperties message. Does not implicitly {@link google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.verify|verify} messages.
+                     * @param message ExascaleDbStorageVaultProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IExascaleDbStorageVaultProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExascaleDbStorageVaultProperties message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties.verify|verify} messages.
+                     * @param message ExascaleDbStorageVaultProperties message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IExascaleDbStorageVaultProperties, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExascaleDbStorageVaultProperties message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExascaleDbStorageVaultProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties;
+
+                    /**
+                     * Decodes an ExascaleDbStorageVaultProperties message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExascaleDbStorageVaultProperties
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties;
+
+                    /**
+                     * Verifies an ExascaleDbStorageVaultProperties message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExascaleDbStorageVaultProperties message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExascaleDbStorageVaultProperties
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties;
+
+                    /**
+                     * Creates a plain object from an ExascaleDbStorageVaultProperties message. Also converts values to other types if specified.
+                     * @param message ExascaleDbStorageVaultProperties
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ExascaleDbStorageVaultProperties, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExascaleDbStorageVaultProperties to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExascaleDbStorageVaultProperties
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace ExascaleDbStorageVaultProperties {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        AVAILABLE = 2,
+                        UPDATING = 3,
+                        TERMINATING = 4,
+                        TERMINATED = 5,
+                        FAILED = 6
+                    }
+
+                    /** ShapeAttribute enum. */
+                    enum ShapeAttribute {
+                        SHAPE_ATTRIBUTE_UNSPECIFIED = 0,
+                        SMART_STORAGE = 1,
+                        BLOCK_STORAGE = 2
+                    }
+                }
+
+                /** Properties of an ExascaleDbStorageDetails. */
+                interface IExascaleDbStorageDetails {
+
+                    /** ExascaleDbStorageDetails availableSizeGbs */
+                    availableSizeGbs?: (number|null);
+
+                    /** ExascaleDbStorageDetails totalSizeGbs */
+                    totalSizeGbs?: (number|null);
+                }
+
+                /** Represents an ExascaleDbStorageDetails. */
+                class ExascaleDbStorageDetails implements IExascaleDbStorageDetails {
+
+                    /**
+                     * Constructs a new ExascaleDbStorageDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IExascaleDbStorageDetails);
+
+                    /** ExascaleDbStorageDetails availableSizeGbs. */
+                    public availableSizeGbs: number;
+
+                    /** ExascaleDbStorageDetails totalSizeGbs. */
+                    public totalSizeGbs: number;
+
+                    /**
+                     * Creates a new ExascaleDbStorageDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ExascaleDbStorageDetails instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IExascaleDbStorageDetails): google.cloud.oracledatabase.v1.ExascaleDbStorageDetails;
+
+                    /**
+                     * Encodes the specified ExascaleDbStorageDetails message. Does not implicitly {@link google.cloud.oracledatabase.v1.ExascaleDbStorageDetails.verify|verify} messages.
+                     * @param message ExascaleDbStorageDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IExascaleDbStorageDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ExascaleDbStorageDetails message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ExascaleDbStorageDetails.verify|verify} messages.
+                     * @param message ExascaleDbStorageDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IExascaleDbStorageDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ExascaleDbStorageDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ExascaleDbStorageDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ExascaleDbStorageDetails;
+
+                    /**
+                     * Decodes an ExascaleDbStorageDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ExascaleDbStorageDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ExascaleDbStorageDetails;
+
+                    /**
+                     * Verifies an ExascaleDbStorageDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ExascaleDbStorageDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ExascaleDbStorageDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ExascaleDbStorageDetails;
+
+                    /**
+                     * Creates a plain object from an ExascaleDbStorageDetails message. Also converts values to other types if specified.
+                     * @param message ExascaleDbStorageDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ExascaleDbStorageDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ExascaleDbStorageDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ExascaleDbStorageDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetExascaleDbStorageVaultRequest. */
+                interface IGetExascaleDbStorageVaultRequest {
+
+                    /** GetExascaleDbStorageVaultRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetExascaleDbStorageVaultRequest. */
+                class GetExascaleDbStorageVaultRequest implements IGetExascaleDbStorageVaultRequest {
+
+                    /**
+                     * Constructs a new GetExascaleDbStorageVaultRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetExascaleDbStorageVaultRequest);
+
+                    /** GetExascaleDbStorageVaultRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetExascaleDbStorageVaultRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetExascaleDbStorageVaultRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetExascaleDbStorageVaultRequest): google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Encodes the specified GetExascaleDbStorageVaultRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest.verify|verify} messages.
+                     * @param message GetExascaleDbStorageVaultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetExascaleDbStorageVaultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetExascaleDbStorageVaultRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest.verify|verify} messages.
+                     * @param message GetExascaleDbStorageVaultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetExascaleDbStorageVaultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetExascaleDbStorageVaultRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetExascaleDbStorageVaultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Decodes a GetExascaleDbStorageVaultRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetExascaleDbStorageVaultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Verifies a GetExascaleDbStorageVaultRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetExascaleDbStorageVaultRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetExascaleDbStorageVaultRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Creates a plain object from a GetExascaleDbStorageVaultRequest message. Also converts values to other types if specified.
+                     * @param message GetExascaleDbStorageVaultRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetExascaleDbStorageVaultRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetExascaleDbStorageVaultRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetExascaleDbStorageVaultRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListExascaleDbStorageVaultsRequest. */
+                interface IListExascaleDbStorageVaultsRequest {
+
+                    /** ListExascaleDbStorageVaultsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListExascaleDbStorageVaultsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListExascaleDbStorageVaultsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListExascaleDbStorageVaultsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListExascaleDbStorageVaultsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListExascaleDbStorageVaultsRequest. */
+                class ListExascaleDbStorageVaultsRequest implements IListExascaleDbStorageVaultsRequest {
+
+                    /**
+                     * Constructs a new ListExascaleDbStorageVaultsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsRequest);
+
+                    /** ListExascaleDbStorageVaultsRequest parent. */
+                    public parent: string;
+
+                    /** ListExascaleDbStorageVaultsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListExascaleDbStorageVaultsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListExascaleDbStorageVaultsRequest filter. */
+                    public filter: string;
+
+                    /** ListExascaleDbStorageVaultsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListExascaleDbStorageVaultsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExascaleDbStorageVaultsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsRequest): google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest;
+
+                    /**
+                     * Encodes the specified ListExascaleDbStorageVaultsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest.verify|verify} messages.
+                     * @param message ListExascaleDbStorageVaultsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExascaleDbStorageVaultsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest.verify|verify} messages.
+                     * @param message ListExascaleDbStorageVaultsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExascaleDbStorageVaultsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExascaleDbStorageVaultsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest;
+
+                    /**
+                     * Decodes a ListExascaleDbStorageVaultsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExascaleDbStorageVaultsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest;
+
+                    /**
+                     * Verifies a ListExascaleDbStorageVaultsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExascaleDbStorageVaultsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExascaleDbStorageVaultsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest;
+
+                    /**
+                     * Creates a plain object from a ListExascaleDbStorageVaultsRequest message. Also converts values to other types if specified.
+                     * @param message ListExascaleDbStorageVaultsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExascaleDbStorageVaultsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExascaleDbStorageVaultsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListExascaleDbStorageVaultsResponse. */
+                interface IListExascaleDbStorageVaultsResponse {
+
+                    /** ListExascaleDbStorageVaultsResponse exascaleDbStorageVaults */
+                    exascaleDbStorageVaults?: (google.cloud.oracledatabase.v1.IExascaleDbStorageVault[]|null);
+
+                    /** ListExascaleDbStorageVaultsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListExascaleDbStorageVaultsResponse. */
+                class ListExascaleDbStorageVaultsResponse implements IListExascaleDbStorageVaultsResponse {
+
+                    /**
+                     * Constructs a new ListExascaleDbStorageVaultsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsResponse);
+
+                    /** ListExascaleDbStorageVaultsResponse exascaleDbStorageVaults. */
+                    public exascaleDbStorageVaults: google.cloud.oracledatabase.v1.IExascaleDbStorageVault[];
+
+                    /** ListExascaleDbStorageVaultsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListExascaleDbStorageVaultsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExascaleDbStorageVaultsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsResponse): google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsResponse;
+
+                    /**
+                     * Encodes the specified ListExascaleDbStorageVaultsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsResponse.verify|verify} messages.
+                     * @param message ListExascaleDbStorageVaultsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExascaleDbStorageVaultsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsResponse.verify|verify} messages.
+                     * @param message ListExascaleDbStorageVaultsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExascaleDbStorageVaultsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExascaleDbStorageVaultsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsResponse;
+
+                    /**
+                     * Decodes a ListExascaleDbStorageVaultsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExascaleDbStorageVaultsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsResponse;
+
+                    /**
+                     * Verifies a ListExascaleDbStorageVaultsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExascaleDbStorageVaultsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExascaleDbStorageVaultsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsResponse;
+
+                    /**
+                     * Creates a plain object from a ListExascaleDbStorageVaultsResponse message. Also converts values to other types if specified.
+                     * @param message ListExascaleDbStorageVaultsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExascaleDbStorageVaultsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExascaleDbStorageVaultsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateExascaleDbStorageVaultRequest. */
+                interface ICreateExascaleDbStorageVaultRequest {
+
+                    /** CreateExascaleDbStorageVaultRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateExascaleDbStorageVaultRequest exascaleDbStorageVaultId */
+                    exascaleDbStorageVaultId?: (string|null);
+
+                    /** CreateExascaleDbStorageVaultRequest exascaleDbStorageVault */
+                    exascaleDbStorageVault?: (google.cloud.oracledatabase.v1.IExascaleDbStorageVault|null);
+
+                    /** CreateExascaleDbStorageVaultRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateExascaleDbStorageVaultRequest. */
+                class CreateExascaleDbStorageVaultRequest implements ICreateExascaleDbStorageVaultRequest {
+
+                    /**
+                     * Constructs a new CreateExascaleDbStorageVaultRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ICreateExascaleDbStorageVaultRequest);
+
+                    /** CreateExascaleDbStorageVaultRequest parent. */
+                    public parent: string;
+
+                    /** CreateExascaleDbStorageVaultRequest exascaleDbStorageVaultId. */
+                    public exascaleDbStorageVaultId: string;
+
+                    /** CreateExascaleDbStorageVaultRequest exascaleDbStorageVault. */
+                    public exascaleDbStorageVault?: (google.cloud.oracledatabase.v1.IExascaleDbStorageVault|null);
+
+                    /** CreateExascaleDbStorageVaultRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateExascaleDbStorageVaultRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateExascaleDbStorageVaultRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ICreateExascaleDbStorageVaultRequest): google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Encodes the specified CreateExascaleDbStorageVaultRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest.verify|verify} messages.
+                     * @param message CreateExascaleDbStorageVaultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ICreateExascaleDbStorageVaultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateExascaleDbStorageVaultRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest.verify|verify} messages.
+                     * @param message CreateExascaleDbStorageVaultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ICreateExascaleDbStorageVaultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateExascaleDbStorageVaultRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateExascaleDbStorageVaultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Decodes a CreateExascaleDbStorageVaultRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateExascaleDbStorageVaultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Verifies a CreateExascaleDbStorageVaultRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateExascaleDbStorageVaultRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateExascaleDbStorageVaultRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Creates a plain object from a CreateExascaleDbStorageVaultRequest message. Also converts values to other types if specified.
+                     * @param message CreateExascaleDbStorageVaultRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.CreateExascaleDbStorageVaultRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateExascaleDbStorageVaultRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateExascaleDbStorageVaultRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteExascaleDbStorageVaultRequest. */
+                interface IDeleteExascaleDbStorageVaultRequest {
+
+                    /** DeleteExascaleDbStorageVaultRequest name */
+                    name?: (string|null);
+
+                    /** DeleteExascaleDbStorageVaultRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteExascaleDbStorageVaultRequest. */
+                class DeleteExascaleDbStorageVaultRequest implements IDeleteExascaleDbStorageVaultRequest {
+
+                    /**
+                     * Constructs a new DeleteExascaleDbStorageVaultRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeleteExascaleDbStorageVaultRequest);
+
+                    /** DeleteExascaleDbStorageVaultRequest name. */
+                    public name: string;
+
+                    /** DeleteExascaleDbStorageVaultRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteExascaleDbStorageVaultRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteExascaleDbStorageVaultRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeleteExascaleDbStorageVaultRequest): google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Encodes the specified DeleteExascaleDbStorageVaultRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest.verify|verify} messages.
+                     * @param message DeleteExascaleDbStorageVaultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeleteExascaleDbStorageVaultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteExascaleDbStorageVaultRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest.verify|verify} messages.
+                     * @param message DeleteExascaleDbStorageVaultRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeleteExascaleDbStorageVaultRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteExascaleDbStorageVaultRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteExascaleDbStorageVaultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Decodes a DeleteExascaleDbStorageVaultRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteExascaleDbStorageVaultRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Verifies a DeleteExascaleDbStorageVaultRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteExascaleDbStorageVaultRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteExascaleDbStorageVaultRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteExascaleDbStorageVaultRequest message. Also converts values to other types if specified.
+                     * @param message DeleteExascaleDbStorageVaultRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeleteExascaleDbStorageVaultRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteExascaleDbStorageVaultRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteExascaleDbStorageVaultRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a GiVersion. */
                 interface IGiVersion {
 
@@ -4041,6 +10704,1714 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a MinorVersion. */
+                interface IMinorVersion {
+
+                    /** MinorVersion name */
+                    name?: (string|null);
+
+                    /** MinorVersion gridImageId */
+                    gridImageId?: (string|null);
+
+                    /** MinorVersion version */
+                    version?: (string|null);
+                }
+
+                /** Represents a MinorVersion. */
+                class MinorVersion implements IMinorVersion {
+
+                    /**
+                     * Constructs a new MinorVersion.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IMinorVersion);
+
+                    /** MinorVersion name. */
+                    public name: string;
+
+                    /** MinorVersion gridImageId. */
+                    public gridImageId: string;
+
+                    /** MinorVersion version. */
+                    public version: string;
+
+                    /**
+                     * Creates a new MinorVersion instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns MinorVersion instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IMinorVersion): google.cloud.oracledatabase.v1.MinorVersion;
+
+                    /**
+                     * Encodes the specified MinorVersion message. Does not implicitly {@link google.cloud.oracledatabase.v1.MinorVersion.verify|verify} messages.
+                     * @param message MinorVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IMinorVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified MinorVersion message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.MinorVersion.verify|verify} messages.
+                     * @param message MinorVersion message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IMinorVersion, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a MinorVersion message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns MinorVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.MinorVersion;
+
+                    /**
+                     * Decodes a MinorVersion message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns MinorVersion
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.MinorVersion;
+
+                    /**
+                     * Verifies a MinorVersion message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a MinorVersion message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns MinorVersion
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.MinorVersion;
+
+                    /**
+                     * Creates a plain object from a MinorVersion message. Also converts values to other types if specified.
+                     * @param message MinorVersion
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.MinorVersion, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this MinorVersion to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for MinorVersion
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMinorVersionsRequest. */
+                interface IListMinorVersionsRequest {
+
+                    /** ListMinorVersionsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListMinorVersionsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListMinorVersionsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListMinorVersionsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListMinorVersionsRequest. */
+                class ListMinorVersionsRequest implements IListMinorVersionsRequest {
+
+                    /**
+                     * Constructs a new ListMinorVersionsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListMinorVersionsRequest);
+
+                    /** ListMinorVersionsRequest parent. */
+                    public parent: string;
+
+                    /** ListMinorVersionsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListMinorVersionsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListMinorVersionsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListMinorVersionsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMinorVersionsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListMinorVersionsRequest): google.cloud.oracledatabase.v1.ListMinorVersionsRequest;
+
+                    /**
+                     * Encodes the specified ListMinorVersionsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListMinorVersionsRequest.verify|verify} messages.
+                     * @param message ListMinorVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListMinorVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMinorVersionsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListMinorVersionsRequest.verify|verify} messages.
+                     * @param message ListMinorVersionsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListMinorVersionsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMinorVersionsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMinorVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListMinorVersionsRequest;
+
+                    /**
+                     * Decodes a ListMinorVersionsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMinorVersionsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListMinorVersionsRequest;
+
+                    /**
+                     * Verifies a ListMinorVersionsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMinorVersionsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMinorVersionsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListMinorVersionsRequest;
+
+                    /**
+                     * Creates a plain object from a ListMinorVersionsRequest message. Also converts values to other types if specified.
+                     * @param message ListMinorVersionsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListMinorVersionsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMinorVersionsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMinorVersionsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListMinorVersionsResponse. */
+                interface IListMinorVersionsResponse {
+
+                    /** ListMinorVersionsResponse minorVersions */
+                    minorVersions?: (google.cloud.oracledatabase.v1.IMinorVersion[]|null);
+
+                    /** ListMinorVersionsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListMinorVersionsResponse. */
+                class ListMinorVersionsResponse implements IListMinorVersionsResponse {
+
+                    /**
+                     * Constructs a new ListMinorVersionsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListMinorVersionsResponse);
+
+                    /** ListMinorVersionsResponse minorVersions. */
+                    public minorVersions: google.cloud.oracledatabase.v1.IMinorVersion[];
+
+                    /** ListMinorVersionsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListMinorVersionsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListMinorVersionsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListMinorVersionsResponse): google.cloud.oracledatabase.v1.ListMinorVersionsResponse;
+
+                    /**
+                     * Encodes the specified ListMinorVersionsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListMinorVersionsResponse.verify|verify} messages.
+                     * @param message ListMinorVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListMinorVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListMinorVersionsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListMinorVersionsResponse.verify|verify} messages.
+                     * @param message ListMinorVersionsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListMinorVersionsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListMinorVersionsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListMinorVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListMinorVersionsResponse;
+
+                    /**
+                     * Decodes a ListMinorVersionsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListMinorVersionsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListMinorVersionsResponse;
+
+                    /**
+                     * Verifies a ListMinorVersionsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListMinorVersionsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListMinorVersionsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListMinorVersionsResponse;
+
+                    /**
+                     * Creates a plain object from a ListMinorVersionsResponse message. Also converts values to other types if specified.
+                     * @param message ListMinorVersionsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListMinorVersionsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListMinorVersionsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListMinorVersionsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OdbNetwork. */
+                interface IOdbNetwork {
+
+                    /** OdbNetwork name */
+                    name?: (string|null);
+
+                    /** OdbNetwork network */
+                    network?: (string|null);
+
+                    /** OdbNetwork labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** OdbNetwork createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OdbNetwork state */
+                    state?: (google.cloud.oracledatabase.v1.OdbNetwork.State|keyof typeof google.cloud.oracledatabase.v1.OdbNetwork.State|null);
+
+                    /** OdbNetwork entitlementId */
+                    entitlementId?: (string|null);
+
+                    /** OdbNetwork gcpOracleZone */
+                    gcpOracleZone?: (string|null);
+                }
+
+                /** Represents an OdbNetwork. */
+                class OdbNetwork implements IOdbNetwork {
+
+                    /**
+                     * Constructs a new OdbNetwork.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IOdbNetwork);
+
+                    /** OdbNetwork name. */
+                    public name: string;
+
+                    /** OdbNetwork network. */
+                    public network: string;
+
+                    /** OdbNetwork labels. */
+                    public labels: { [k: string]: string };
+
+                    /** OdbNetwork createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OdbNetwork state. */
+                    public state: (google.cloud.oracledatabase.v1.OdbNetwork.State|keyof typeof google.cloud.oracledatabase.v1.OdbNetwork.State);
+
+                    /** OdbNetwork entitlementId. */
+                    public entitlementId: string;
+
+                    /** OdbNetwork gcpOracleZone. */
+                    public gcpOracleZone: string;
+
+                    /**
+                     * Creates a new OdbNetwork instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OdbNetwork instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IOdbNetwork): google.cloud.oracledatabase.v1.OdbNetwork;
+
+                    /**
+                     * Encodes the specified OdbNetwork message. Does not implicitly {@link google.cloud.oracledatabase.v1.OdbNetwork.verify|verify} messages.
+                     * @param message OdbNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IOdbNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OdbNetwork message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.OdbNetwork.verify|verify} messages.
+                     * @param message OdbNetwork message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IOdbNetwork, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OdbNetwork message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OdbNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.OdbNetwork;
+
+                    /**
+                     * Decodes an OdbNetwork message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OdbNetwork
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.OdbNetwork;
+
+                    /**
+                     * Verifies an OdbNetwork message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OdbNetwork message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OdbNetwork
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.OdbNetwork;
+
+                    /**
+                     * Creates a plain object from an OdbNetwork message. Also converts values to other types if specified.
+                     * @param message OdbNetwork
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.OdbNetwork, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OdbNetwork to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OdbNetwork
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OdbNetwork {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        AVAILABLE = 2,
+                        TERMINATING = 3,
+                        FAILED = 4
+                    }
+                }
+
+                /** Properties of a CreateOdbNetworkRequest. */
+                interface ICreateOdbNetworkRequest {
+
+                    /** CreateOdbNetworkRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateOdbNetworkRequest odbNetworkId */
+                    odbNetworkId?: (string|null);
+
+                    /** CreateOdbNetworkRequest odbNetwork */
+                    odbNetwork?: (google.cloud.oracledatabase.v1.IOdbNetwork|null);
+
+                    /** CreateOdbNetworkRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateOdbNetworkRequest. */
+                class CreateOdbNetworkRequest implements ICreateOdbNetworkRequest {
+
+                    /**
+                     * Constructs a new CreateOdbNetworkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ICreateOdbNetworkRequest);
+
+                    /** CreateOdbNetworkRequest parent. */
+                    public parent: string;
+
+                    /** CreateOdbNetworkRequest odbNetworkId. */
+                    public odbNetworkId: string;
+
+                    /** CreateOdbNetworkRequest odbNetwork. */
+                    public odbNetwork?: (google.cloud.oracledatabase.v1.IOdbNetwork|null);
+
+                    /** CreateOdbNetworkRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateOdbNetworkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateOdbNetworkRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ICreateOdbNetworkRequest): google.cloud.oracledatabase.v1.CreateOdbNetworkRequest;
+
+                    /**
+                     * Encodes the specified CreateOdbNetworkRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateOdbNetworkRequest.verify|verify} messages.
+                     * @param message CreateOdbNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ICreateOdbNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateOdbNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateOdbNetworkRequest.verify|verify} messages.
+                     * @param message CreateOdbNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ICreateOdbNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateOdbNetworkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateOdbNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.CreateOdbNetworkRequest;
+
+                    /**
+                     * Decodes a CreateOdbNetworkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateOdbNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.CreateOdbNetworkRequest;
+
+                    /**
+                     * Verifies a CreateOdbNetworkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateOdbNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateOdbNetworkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.CreateOdbNetworkRequest;
+
+                    /**
+                     * Creates a plain object from a CreateOdbNetworkRequest message. Also converts values to other types if specified.
+                     * @param message CreateOdbNetworkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.CreateOdbNetworkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateOdbNetworkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateOdbNetworkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteOdbNetworkRequest. */
+                interface IDeleteOdbNetworkRequest {
+
+                    /** DeleteOdbNetworkRequest name */
+                    name?: (string|null);
+
+                    /** DeleteOdbNetworkRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteOdbNetworkRequest. */
+                class DeleteOdbNetworkRequest implements IDeleteOdbNetworkRequest {
+
+                    /**
+                     * Constructs a new DeleteOdbNetworkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeleteOdbNetworkRequest);
+
+                    /** DeleteOdbNetworkRequest name. */
+                    public name: string;
+
+                    /** DeleteOdbNetworkRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteOdbNetworkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteOdbNetworkRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeleteOdbNetworkRequest): google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest;
+
+                    /**
+                     * Encodes the specified DeleteOdbNetworkRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest.verify|verify} messages.
+                     * @param message DeleteOdbNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeleteOdbNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteOdbNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest.verify|verify} messages.
+                     * @param message DeleteOdbNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeleteOdbNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteOdbNetworkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteOdbNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest;
+
+                    /**
+                     * Decodes a DeleteOdbNetworkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteOdbNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest;
+
+                    /**
+                     * Verifies a DeleteOdbNetworkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteOdbNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteOdbNetworkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteOdbNetworkRequest message. Also converts values to other types if specified.
+                     * @param message DeleteOdbNetworkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeleteOdbNetworkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteOdbNetworkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteOdbNetworkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOdbNetworksRequest. */
+                interface IListOdbNetworksRequest {
+
+                    /** ListOdbNetworksRequest parent */
+                    parent?: (string|null);
+
+                    /** ListOdbNetworksRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOdbNetworksRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListOdbNetworksRequest filter */
+                    filter?: (string|null);
+
+                    /** ListOdbNetworksRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListOdbNetworksRequest. */
+                class ListOdbNetworksRequest implements IListOdbNetworksRequest {
+
+                    /**
+                     * Constructs a new ListOdbNetworksRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListOdbNetworksRequest);
+
+                    /** ListOdbNetworksRequest parent. */
+                    public parent: string;
+
+                    /** ListOdbNetworksRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOdbNetworksRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListOdbNetworksRequest filter. */
+                    public filter: string;
+
+                    /** ListOdbNetworksRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListOdbNetworksRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOdbNetworksRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListOdbNetworksRequest): google.cloud.oracledatabase.v1.ListOdbNetworksRequest;
+
+                    /**
+                     * Encodes the specified ListOdbNetworksRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbNetworksRequest.verify|verify} messages.
+                     * @param message ListOdbNetworksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListOdbNetworksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOdbNetworksRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbNetworksRequest.verify|verify} messages.
+                     * @param message ListOdbNetworksRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListOdbNetworksRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOdbNetworksRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOdbNetworksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListOdbNetworksRequest;
+
+                    /**
+                     * Decodes a ListOdbNetworksRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOdbNetworksRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListOdbNetworksRequest;
+
+                    /**
+                     * Verifies a ListOdbNetworksRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOdbNetworksRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOdbNetworksRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListOdbNetworksRequest;
+
+                    /**
+                     * Creates a plain object from a ListOdbNetworksRequest message. Also converts values to other types if specified.
+                     * @param message ListOdbNetworksRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListOdbNetworksRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOdbNetworksRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOdbNetworksRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOdbNetworksResponse. */
+                interface IListOdbNetworksResponse {
+
+                    /** ListOdbNetworksResponse odbNetworks */
+                    odbNetworks?: (google.cloud.oracledatabase.v1.IOdbNetwork[]|null);
+
+                    /** ListOdbNetworksResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListOdbNetworksResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListOdbNetworksResponse. */
+                class ListOdbNetworksResponse implements IListOdbNetworksResponse {
+
+                    /**
+                     * Constructs a new ListOdbNetworksResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListOdbNetworksResponse);
+
+                    /** ListOdbNetworksResponse odbNetworks. */
+                    public odbNetworks: google.cloud.oracledatabase.v1.IOdbNetwork[];
+
+                    /** ListOdbNetworksResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListOdbNetworksResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListOdbNetworksResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOdbNetworksResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListOdbNetworksResponse): google.cloud.oracledatabase.v1.ListOdbNetworksResponse;
+
+                    /**
+                     * Encodes the specified ListOdbNetworksResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbNetworksResponse.verify|verify} messages.
+                     * @param message ListOdbNetworksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListOdbNetworksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOdbNetworksResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbNetworksResponse.verify|verify} messages.
+                     * @param message ListOdbNetworksResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListOdbNetworksResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOdbNetworksResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOdbNetworksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListOdbNetworksResponse;
+
+                    /**
+                     * Decodes a ListOdbNetworksResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOdbNetworksResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListOdbNetworksResponse;
+
+                    /**
+                     * Verifies a ListOdbNetworksResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOdbNetworksResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOdbNetworksResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListOdbNetworksResponse;
+
+                    /**
+                     * Creates a plain object from a ListOdbNetworksResponse message. Also converts values to other types if specified.
+                     * @param message ListOdbNetworksResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListOdbNetworksResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOdbNetworksResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOdbNetworksResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetOdbNetworkRequest. */
+                interface IGetOdbNetworkRequest {
+
+                    /** GetOdbNetworkRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetOdbNetworkRequest. */
+                class GetOdbNetworkRequest implements IGetOdbNetworkRequest {
+
+                    /**
+                     * Constructs a new GetOdbNetworkRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetOdbNetworkRequest);
+
+                    /** GetOdbNetworkRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetOdbNetworkRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetOdbNetworkRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetOdbNetworkRequest): google.cloud.oracledatabase.v1.GetOdbNetworkRequest;
+
+                    /**
+                     * Encodes the specified GetOdbNetworkRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetOdbNetworkRequest.verify|verify} messages.
+                     * @param message GetOdbNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetOdbNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetOdbNetworkRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetOdbNetworkRequest.verify|verify} messages.
+                     * @param message GetOdbNetworkRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetOdbNetworkRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetOdbNetworkRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetOdbNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetOdbNetworkRequest;
+
+                    /**
+                     * Decodes a GetOdbNetworkRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetOdbNetworkRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetOdbNetworkRequest;
+
+                    /**
+                     * Verifies a GetOdbNetworkRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetOdbNetworkRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetOdbNetworkRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetOdbNetworkRequest;
+
+                    /**
+                     * Creates a plain object from a GetOdbNetworkRequest message. Also converts values to other types if specified.
+                     * @param message GetOdbNetworkRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetOdbNetworkRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetOdbNetworkRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetOdbNetworkRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an OdbSubnet. */
+                interface IOdbSubnet {
+
+                    /** OdbSubnet name */
+                    name?: (string|null);
+
+                    /** OdbSubnet cidrRange */
+                    cidrRange?: (string|null);
+
+                    /** OdbSubnet purpose */
+                    purpose?: (google.cloud.oracledatabase.v1.OdbSubnet.Purpose|keyof typeof google.cloud.oracledatabase.v1.OdbSubnet.Purpose|null);
+
+                    /** OdbSubnet labels */
+                    labels?: ({ [k: string]: string }|null);
+
+                    /** OdbSubnet createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OdbSubnet state */
+                    state?: (google.cloud.oracledatabase.v1.OdbSubnet.State|keyof typeof google.cloud.oracledatabase.v1.OdbSubnet.State|null);
+                }
+
+                /** Represents an OdbSubnet. */
+                class OdbSubnet implements IOdbSubnet {
+
+                    /**
+                     * Constructs a new OdbSubnet.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IOdbSubnet);
+
+                    /** OdbSubnet name. */
+                    public name: string;
+
+                    /** OdbSubnet cidrRange. */
+                    public cidrRange: string;
+
+                    /** OdbSubnet purpose. */
+                    public purpose: (google.cloud.oracledatabase.v1.OdbSubnet.Purpose|keyof typeof google.cloud.oracledatabase.v1.OdbSubnet.Purpose);
+
+                    /** OdbSubnet labels. */
+                    public labels: { [k: string]: string };
+
+                    /** OdbSubnet createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** OdbSubnet state. */
+                    public state: (google.cloud.oracledatabase.v1.OdbSubnet.State|keyof typeof google.cloud.oracledatabase.v1.OdbSubnet.State);
+
+                    /**
+                     * Creates a new OdbSubnet instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns OdbSubnet instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IOdbSubnet): google.cloud.oracledatabase.v1.OdbSubnet;
+
+                    /**
+                     * Encodes the specified OdbSubnet message. Does not implicitly {@link google.cloud.oracledatabase.v1.OdbSubnet.verify|verify} messages.
+                     * @param message OdbSubnet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IOdbSubnet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified OdbSubnet message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.OdbSubnet.verify|verify} messages.
+                     * @param message OdbSubnet message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IOdbSubnet, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an OdbSubnet message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns OdbSubnet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.OdbSubnet;
+
+                    /**
+                     * Decodes an OdbSubnet message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns OdbSubnet
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.OdbSubnet;
+
+                    /**
+                     * Verifies an OdbSubnet message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an OdbSubnet message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns OdbSubnet
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.OdbSubnet;
+
+                    /**
+                     * Creates a plain object from an OdbSubnet message. Also converts values to other types if specified.
+                     * @param message OdbSubnet
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.OdbSubnet, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this OdbSubnet to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for OdbSubnet
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace OdbSubnet {
+
+                    /** Purpose enum. */
+                    enum Purpose {
+                        PURPOSE_UNSPECIFIED = 0,
+                        CLIENT_SUBNET = 1,
+                        BACKUP_SUBNET = 2
+                    }
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        PROVISIONING = 1,
+                        AVAILABLE = 2,
+                        TERMINATING = 3,
+                        FAILED = 4
+                    }
+                }
+
+                /** Properties of a CreateOdbSubnetRequest. */
+                interface ICreateOdbSubnetRequest {
+
+                    /** CreateOdbSubnetRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateOdbSubnetRequest odbSubnetId */
+                    odbSubnetId?: (string|null);
+
+                    /** CreateOdbSubnetRequest odbSubnet */
+                    odbSubnet?: (google.cloud.oracledatabase.v1.IOdbSubnet|null);
+
+                    /** CreateOdbSubnetRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateOdbSubnetRequest. */
+                class CreateOdbSubnetRequest implements ICreateOdbSubnetRequest {
+
+                    /**
+                     * Constructs a new CreateOdbSubnetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ICreateOdbSubnetRequest);
+
+                    /** CreateOdbSubnetRequest parent. */
+                    public parent: string;
+
+                    /** CreateOdbSubnetRequest odbSubnetId. */
+                    public odbSubnetId: string;
+
+                    /** CreateOdbSubnetRequest odbSubnet. */
+                    public odbSubnet?: (google.cloud.oracledatabase.v1.IOdbSubnet|null);
+
+                    /** CreateOdbSubnetRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateOdbSubnetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateOdbSubnetRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ICreateOdbSubnetRequest): google.cloud.oracledatabase.v1.CreateOdbSubnetRequest;
+
+                    /**
+                     * Encodes the specified CreateOdbSubnetRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateOdbSubnetRequest.verify|verify} messages.
+                     * @param message CreateOdbSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ICreateOdbSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateOdbSubnetRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateOdbSubnetRequest.verify|verify} messages.
+                     * @param message CreateOdbSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ICreateOdbSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateOdbSubnetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateOdbSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.CreateOdbSubnetRequest;
+
+                    /**
+                     * Decodes a CreateOdbSubnetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateOdbSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.CreateOdbSubnetRequest;
+
+                    /**
+                     * Verifies a CreateOdbSubnetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateOdbSubnetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateOdbSubnetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.CreateOdbSubnetRequest;
+
+                    /**
+                     * Creates a plain object from a CreateOdbSubnetRequest message. Also converts values to other types if specified.
+                     * @param message CreateOdbSubnetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.CreateOdbSubnetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateOdbSubnetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateOdbSubnetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteOdbSubnetRequest. */
+                interface IDeleteOdbSubnetRequest {
+
+                    /** DeleteOdbSubnetRequest name */
+                    name?: (string|null);
+
+                    /** DeleteOdbSubnetRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteOdbSubnetRequest. */
+                class DeleteOdbSubnetRequest implements IDeleteOdbSubnetRequest {
+
+                    /**
+                     * Constructs a new DeleteOdbSubnetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeleteOdbSubnetRequest);
+
+                    /** DeleteOdbSubnetRequest name. */
+                    public name: string;
+
+                    /** DeleteOdbSubnetRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteOdbSubnetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteOdbSubnetRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeleteOdbSubnetRequest): google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest;
+
+                    /**
+                     * Encodes the specified DeleteOdbSubnetRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest.verify|verify} messages.
+                     * @param message DeleteOdbSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeleteOdbSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteOdbSubnetRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest.verify|verify} messages.
+                     * @param message DeleteOdbSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeleteOdbSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteOdbSubnetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteOdbSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest;
+
+                    /**
+                     * Decodes a DeleteOdbSubnetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteOdbSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest;
+
+                    /**
+                     * Verifies a DeleteOdbSubnetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteOdbSubnetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteOdbSubnetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteOdbSubnetRequest message. Also converts values to other types if specified.
+                     * @param message DeleteOdbSubnetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeleteOdbSubnetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteOdbSubnetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteOdbSubnetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOdbSubnetsRequest. */
+                interface IListOdbSubnetsRequest {
+
+                    /** ListOdbSubnetsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListOdbSubnetsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListOdbSubnetsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListOdbSubnetsRequest filter */
+                    filter?: (string|null);
+
+                    /** ListOdbSubnetsRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListOdbSubnetsRequest. */
+                class ListOdbSubnetsRequest implements IListOdbSubnetsRequest {
+
+                    /**
+                     * Constructs a new ListOdbSubnetsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListOdbSubnetsRequest);
+
+                    /** ListOdbSubnetsRequest parent. */
+                    public parent: string;
+
+                    /** ListOdbSubnetsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListOdbSubnetsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListOdbSubnetsRequest filter. */
+                    public filter: string;
+
+                    /** ListOdbSubnetsRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListOdbSubnetsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOdbSubnetsRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListOdbSubnetsRequest): google.cloud.oracledatabase.v1.ListOdbSubnetsRequest;
+
+                    /**
+                     * Encodes the specified ListOdbSubnetsRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbSubnetsRequest.verify|verify} messages.
+                     * @param message ListOdbSubnetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListOdbSubnetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOdbSubnetsRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbSubnetsRequest.verify|verify} messages.
+                     * @param message ListOdbSubnetsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListOdbSubnetsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOdbSubnetsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOdbSubnetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListOdbSubnetsRequest;
+
+                    /**
+                     * Decodes a ListOdbSubnetsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOdbSubnetsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListOdbSubnetsRequest;
+
+                    /**
+                     * Verifies a ListOdbSubnetsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOdbSubnetsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOdbSubnetsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListOdbSubnetsRequest;
+
+                    /**
+                     * Creates a plain object from a ListOdbSubnetsRequest message. Also converts values to other types if specified.
+                     * @param message ListOdbSubnetsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListOdbSubnetsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOdbSubnetsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOdbSubnetsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListOdbSubnetsResponse. */
+                interface IListOdbSubnetsResponse {
+
+                    /** ListOdbSubnetsResponse odbSubnets */
+                    odbSubnets?: (google.cloud.oracledatabase.v1.IOdbSubnet[]|null);
+
+                    /** ListOdbSubnetsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListOdbSubnetsResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListOdbSubnetsResponse. */
+                class ListOdbSubnetsResponse implements IListOdbSubnetsResponse {
+
+                    /**
+                     * Constructs a new ListOdbSubnetsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListOdbSubnetsResponse);
+
+                    /** ListOdbSubnetsResponse odbSubnets. */
+                    public odbSubnets: google.cloud.oracledatabase.v1.IOdbSubnet[];
+
+                    /** ListOdbSubnetsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListOdbSubnetsResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListOdbSubnetsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListOdbSubnetsResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListOdbSubnetsResponse): google.cloud.oracledatabase.v1.ListOdbSubnetsResponse;
+
+                    /**
+                     * Encodes the specified ListOdbSubnetsResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbSubnetsResponse.verify|verify} messages.
+                     * @param message ListOdbSubnetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListOdbSubnetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListOdbSubnetsResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListOdbSubnetsResponse.verify|verify} messages.
+                     * @param message ListOdbSubnetsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListOdbSubnetsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListOdbSubnetsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListOdbSubnetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListOdbSubnetsResponse;
+
+                    /**
+                     * Decodes a ListOdbSubnetsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListOdbSubnetsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListOdbSubnetsResponse;
+
+                    /**
+                     * Verifies a ListOdbSubnetsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListOdbSubnetsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListOdbSubnetsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListOdbSubnetsResponse;
+
+                    /**
+                     * Creates a plain object from a ListOdbSubnetsResponse message. Also converts values to other types if specified.
+                     * @param message ListOdbSubnetsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListOdbSubnetsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListOdbSubnetsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListOdbSubnetsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetOdbSubnetRequest. */
+                interface IGetOdbSubnetRequest {
+
+                    /** GetOdbSubnetRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetOdbSubnetRequest. */
+                class GetOdbSubnetRequest implements IGetOdbSubnetRequest {
+
+                    /**
+                     * Constructs a new GetOdbSubnetRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetOdbSubnetRequest);
+
+                    /** GetOdbSubnetRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetOdbSubnetRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetOdbSubnetRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetOdbSubnetRequest): google.cloud.oracledatabase.v1.GetOdbSubnetRequest;
+
+                    /**
+                     * Encodes the specified GetOdbSubnetRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetOdbSubnetRequest.verify|verify} messages.
+                     * @param message GetOdbSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetOdbSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetOdbSubnetRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetOdbSubnetRequest.verify|verify} messages.
+                     * @param message GetOdbSubnetRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetOdbSubnetRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetOdbSubnetRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetOdbSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetOdbSubnetRequest;
+
+                    /**
+                     * Decodes a GetOdbSubnetRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetOdbSubnetRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetOdbSubnetRequest;
+
+                    /**
+                     * Verifies a GetOdbSubnetRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetOdbSubnetRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetOdbSubnetRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetOdbSubnetRequest;
+
+                    /**
+                     * Creates a plain object from a GetOdbSubnetRequest message. Also converts values to other types if specified.
+                     * @param message GetOdbSubnetRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetOdbSubnetRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetOdbSubnetRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetOdbSubnetRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Represents an OracleDatabase */
                 class OracleDatabase extends $protobuf.rpc.Service {
 
@@ -4230,6 +12601,20 @@ export namespace google {
                     public listGiVersions(request: google.cloud.oracledatabase.v1.IListGiVersionsRequest): Promise<google.cloud.oracledatabase.v1.ListGiVersionsResponse>;
 
                     /**
+                     * Calls ListMinorVersions.
+                     * @param request ListMinorVersionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListMinorVersionsResponse
+                     */
+                    public listMinorVersions(request: google.cloud.oracledatabase.v1.IListMinorVersionsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListMinorVersionsCallback): void;
+
+                    /**
+                     * Calls ListMinorVersions.
+                     * @param request ListMinorVersionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listMinorVersions(request: google.cloud.oracledatabase.v1.IListMinorVersionsRequest): Promise<google.cloud.oracledatabase.v1.ListMinorVersionsResponse>;
+
+                    /**
                      * Calls ListDbSystemShapes.
                      * @param request ListDbSystemShapesRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and ListDbSystemShapesResponse
@@ -4284,6 +12669,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public createAutonomousDatabase(request: google.cloud.oracledatabase.v1.ICreateAutonomousDatabaseRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateAutonomousDatabase.
+                     * @param request UpdateAutonomousDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateAutonomousDatabase(request: google.cloud.oracledatabase.v1.IUpdateAutonomousDatabaseRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.UpdateAutonomousDatabaseCallback): void;
+
+                    /**
+                     * Calls UpdateAutonomousDatabase.
+                     * @param request UpdateAutonomousDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateAutonomousDatabase(request: google.cloud.oracledatabase.v1.IUpdateAutonomousDatabaseRequest): Promise<google.longrunning.Operation>;
 
                     /**
                      * Calls DeleteAutonomousDatabase.
@@ -4410,6 +12809,440 @@ export namespace google {
                      * @returns Promise
                      */
                     public restartAutonomousDatabase(request: google.cloud.oracledatabase.v1.IRestartAutonomousDatabaseRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls SwitchoverAutonomousDatabase.
+                     * @param request SwitchoverAutonomousDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public switchoverAutonomousDatabase(request: google.cloud.oracledatabase.v1.ISwitchoverAutonomousDatabaseRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.SwitchoverAutonomousDatabaseCallback): void;
+
+                    /**
+                     * Calls SwitchoverAutonomousDatabase.
+                     * @param request SwitchoverAutonomousDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public switchoverAutonomousDatabase(request: google.cloud.oracledatabase.v1.ISwitchoverAutonomousDatabaseRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls FailoverAutonomousDatabase.
+                     * @param request FailoverAutonomousDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public failoverAutonomousDatabase(request: google.cloud.oracledatabase.v1.IFailoverAutonomousDatabaseRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.FailoverAutonomousDatabaseCallback): void;
+
+                    /**
+                     * Calls FailoverAutonomousDatabase.
+                     * @param request FailoverAutonomousDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public failoverAutonomousDatabase(request: google.cloud.oracledatabase.v1.IFailoverAutonomousDatabaseRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListOdbNetworks.
+                     * @param request ListOdbNetworksRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOdbNetworksResponse
+                     */
+                    public listOdbNetworks(request: google.cloud.oracledatabase.v1.IListOdbNetworksRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListOdbNetworksCallback): void;
+
+                    /**
+                     * Calls ListOdbNetworks.
+                     * @param request ListOdbNetworksRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOdbNetworks(request: google.cloud.oracledatabase.v1.IListOdbNetworksRequest): Promise<google.cloud.oracledatabase.v1.ListOdbNetworksResponse>;
+
+                    /**
+                     * Calls GetOdbNetwork.
+                     * @param request GetOdbNetworkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and OdbNetwork
+                     */
+                    public getOdbNetwork(request: google.cloud.oracledatabase.v1.IGetOdbNetworkRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetOdbNetworkCallback): void;
+
+                    /**
+                     * Calls GetOdbNetwork.
+                     * @param request GetOdbNetworkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getOdbNetwork(request: google.cloud.oracledatabase.v1.IGetOdbNetworkRequest): Promise<google.cloud.oracledatabase.v1.OdbNetwork>;
+
+                    /**
+                     * Calls CreateOdbNetwork.
+                     * @param request CreateOdbNetworkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createOdbNetwork(request: google.cloud.oracledatabase.v1.ICreateOdbNetworkRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.CreateOdbNetworkCallback): void;
+
+                    /**
+                     * Calls CreateOdbNetwork.
+                     * @param request CreateOdbNetworkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createOdbNetwork(request: google.cloud.oracledatabase.v1.ICreateOdbNetworkRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteOdbNetwork.
+                     * @param request DeleteOdbNetworkRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteOdbNetwork(request: google.cloud.oracledatabase.v1.IDeleteOdbNetworkRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.DeleteOdbNetworkCallback): void;
+
+                    /**
+                     * Calls DeleteOdbNetwork.
+                     * @param request DeleteOdbNetworkRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteOdbNetwork(request: google.cloud.oracledatabase.v1.IDeleteOdbNetworkRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListOdbSubnets.
+                     * @param request ListOdbSubnetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListOdbSubnetsResponse
+                     */
+                    public listOdbSubnets(request: google.cloud.oracledatabase.v1.IListOdbSubnetsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListOdbSubnetsCallback): void;
+
+                    /**
+                     * Calls ListOdbSubnets.
+                     * @param request ListOdbSubnetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listOdbSubnets(request: google.cloud.oracledatabase.v1.IListOdbSubnetsRequest): Promise<google.cloud.oracledatabase.v1.ListOdbSubnetsResponse>;
+
+                    /**
+                     * Calls GetOdbSubnet.
+                     * @param request GetOdbSubnetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and OdbSubnet
+                     */
+                    public getOdbSubnet(request: google.cloud.oracledatabase.v1.IGetOdbSubnetRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetOdbSubnetCallback): void;
+
+                    /**
+                     * Calls GetOdbSubnet.
+                     * @param request GetOdbSubnetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getOdbSubnet(request: google.cloud.oracledatabase.v1.IGetOdbSubnetRequest): Promise<google.cloud.oracledatabase.v1.OdbSubnet>;
+
+                    /**
+                     * Calls CreateOdbSubnet.
+                     * @param request CreateOdbSubnetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createOdbSubnet(request: google.cloud.oracledatabase.v1.ICreateOdbSubnetRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.CreateOdbSubnetCallback): void;
+
+                    /**
+                     * Calls CreateOdbSubnet.
+                     * @param request CreateOdbSubnetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createOdbSubnet(request: google.cloud.oracledatabase.v1.ICreateOdbSubnetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteOdbSubnet.
+                     * @param request DeleteOdbSubnetRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteOdbSubnet(request: google.cloud.oracledatabase.v1.IDeleteOdbSubnetRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.DeleteOdbSubnetCallback): void;
+
+                    /**
+                     * Calls DeleteOdbSubnet.
+                     * @param request DeleteOdbSubnetRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteOdbSubnet(request: google.cloud.oracledatabase.v1.IDeleteOdbSubnetRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListExadbVmClusters.
+                     * @param request ListExadbVmClustersRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListExadbVmClustersResponse
+                     */
+                    public listExadbVmClusters(request: google.cloud.oracledatabase.v1.IListExadbVmClustersRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListExadbVmClustersCallback): void;
+
+                    /**
+                     * Calls ListExadbVmClusters.
+                     * @param request ListExadbVmClustersRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listExadbVmClusters(request: google.cloud.oracledatabase.v1.IListExadbVmClustersRequest): Promise<google.cloud.oracledatabase.v1.ListExadbVmClustersResponse>;
+
+                    /**
+                     * Calls GetExadbVmCluster.
+                     * @param request GetExadbVmClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExadbVmCluster
+                     */
+                    public getExadbVmCluster(request: google.cloud.oracledatabase.v1.IGetExadbVmClusterRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetExadbVmClusterCallback): void;
+
+                    /**
+                     * Calls GetExadbVmCluster.
+                     * @param request GetExadbVmClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getExadbVmCluster(request: google.cloud.oracledatabase.v1.IGetExadbVmClusterRequest): Promise<google.cloud.oracledatabase.v1.ExadbVmCluster>;
+
+                    /**
+                     * Calls CreateExadbVmCluster.
+                     * @param request CreateExadbVmClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createExadbVmCluster(request: google.cloud.oracledatabase.v1.ICreateExadbVmClusterRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.CreateExadbVmClusterCallback): void;
+
+                    /**
+                     * Calls CreateExadbVmCluster.
+                     * @param request CreateExadbVmClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createExadbVmCluster(request: google.cloud.oracledatabase.v1.ICreateExadbVmClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteExadbVmCluster.
+                     * @param request DeleteExadbVmClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteExadbVmCluster(request: google.cloud.oracledatabase.v1.IDeleteExadbVmClusterRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.DeleteExadbVmClusterCallback): void;
+
+                    /**
+                     * Calls DeleteExadbVmCluster.
+                     * @param request DeleteExadbVmClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteExadbVmCluster(request: google.cloud.oracledatabase.v1.IDeleteExadbVmClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls UpdateExadbVmCluster.
+                     * @param request UpdateExadbVmClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public updateExadbVmCluster(request: google.cloud.oracledatabase.v1.IUpdateExadbVmClusterRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.UpdateExadbVmClusterCallback): void;
+
+                    /**
+                     * Calls UpdateExadbVmCluster.
+                     * @param request UpdateExadbVmClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateExadbVmCluster(request: google.cloud.oracledatabase.v1.IUpdateExadbVmClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RemoveVirtualMachineExadbVmCluster.
+                     * @param request RemoveVirtualMachineExadbVmClusterRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public removeVirtualMachineExadbVmCluster(request: google.cloud.oracledatabase.v1.IRemoveVirtualMachineExadbVmClusterRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.RemoveVirtualMachineExadbVmClusterCallback): void;
+
+                    /**
+                     * Calls RemoveVirtualMachineExadbVmCluster.
+                     * @param request RemoveVirtualMachineExadbVmClusterRequest message or plain object
+                     * @returns Promise
+                     */
+                    public removeVirtualMachineExadbVmCluster(request: google.cloud.oracledatabase.v1.IRemoveVirtualMachineExadbVmClusterRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListExascaleDbStorageVaults.
+                     * @param request ListExascaleDbStorageVaultsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListExascaleDbStorageVaultsResponse
+                     */
+                    public listExascaleDbStorageVaults(request: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListExascaleDbStorageVaultsCallback): void;
+
+                    /**
+                     * Calls ListExascaleDbStorageVaults.
+                     * @param request ListExascaleDbStorageVaultsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listExascaleDbStorageVaults(request: google.cloud.oracledatabase.v1.IListExascaleDbStorageVaultsRequest): Promise<google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsResponse>;
+
+                    /**
+                     * Calls GetExascaleDbStorageVault.
+                     * @param request GetExascaleDbStorageVaultRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ExascaleDbStorageVault
+                     */
+                    public getExascaleDbStorageVault(request: google.cloud.oracledatabase.v1.IGetExascaleDbStorageVaultRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetExascaleDbStorageVaultCallback): void;
+
+                    /**
+                     * Calls GetExascaleDbStorageVault.
+                     * @param request GetExascaleDbStorageVaultRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getExascaleDbStorageVault(request: google.cloud.oracledatabase.v1.IGetExascaleDbStorageVaultRequest): Promise<google.cloud.oracledatabase.v1.ExascaleDbStorageVault>;
+
+                    /**
+                     * Calls CreateExascaleDbStorageVault.
+                     * @param request CreateExascaleDbStorageVaultRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createExascaleDbStorageVault(request: google.cloud.oracledatabase.v1.ICreateExascaleDbStorageVaultRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.CreateExascaleDbStorageVaultCallback): void;
+
+                    /**
+                     * Calls CreateExascaleDbStorageVault.
+                     * @param request CreateExascaleDbStorageVaultRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createExascaleDbStorageVault(request: google.cloud.oracledatabase.v1.ICreateExascaleDbStorageVaultRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteExascaleDbStorageVault.
+                     * @param request DeleteExascaleDbStorageVaultRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteExascaleDbStorageVault(request: google.cloud.oracledatabase.v1.IDeleteExascaleDbStorageVaultRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.DeleteExascaleDbStorageVaultCallback): void;
+
+                    /**
+                     * Calls DeleteExascaleDbStorageVault.
+                     * @param request DeleteExascaleDbStorageVaultRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteExascaleDbStorageVault(request: google.cloud.oracledatabase.v1.IDeleteExascaleDbStorageVaultRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListDbSystemInitialStorageSizes.
+                     * @param request ListDbSystemInitialStorageSizesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDbSystemInitialStorageSizesResponse
+                     */
+                    public listDbSystemInitialStorageSizes(request: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListDbSystemInitialStorageSizesCallback): void;
+
+                    /**
+                     * Calls ListDbSystemInitialStorageSizes.
+                     * @param request ListDbSystemInitialStorageSizesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDbSystemInitialStorageSizes(request: google.cloud.oracledatabase.v1.IListDbSystemInitialStorageSizesRequest): Promise<google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesResponse>;
+
+                    /**
+                     * Calls ListDatabases.
+                     * @param request ListDatabasesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDatabasesResponse
+                     */
+                    public listDatabases(request: google.cloud.oracledatabase.v1.IListDatabasesRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListDatabasesCallback): void;
+
+                    /**
+                     * Calls ListDatabases.
+                     * @param request ListDatabasesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDatabases(request: google.cloud.oracledatabase.v1.IListDatabasesRequest): Promise<google.cloud.oracledatabase.v1.ListDatabasesResponse>;
+
+                    /**
+                     * Calls GetDatabase.
+                     * @param request GetDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Database
+                     */
+                    public getDatabase(request: google.cloud.oracledatabase.v1.IGetDatabaseRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetDatabaseCallback): void;
+
+                    /**
+                     * Calls GetDatabase.
+                     * @param request GetDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDatabase(request: google.cloud.oracledatabase.v1.IGetDatabaseRequest): Promise<google.cloud.oracledatabase.v1.Database>;
+
+                    /**
+                     * Calls ListPluggableDatabases.
+                     * @param request ListPluggableDatabasesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListPluggableDatabasesResponse
+                     */
+                    public listPluggableDatabases(request: google.cloud.oracledatabase.v1.IListPluggableDatabasesRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListPluggableDatabasesCallback): void;
+
+                    /**
+                     * Calls ListPluggableDatabases.
+                     * @param request ListPluggableDatabasesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listPluggableDatabases(request: google.cloud.oracledatabase.v1.IListPluggableDatabasesRequest): Promise<google.cloud.oracledatabase.v1.ListPluggableDatabasesResponse>;
+
+                    /**
+                     * Calls GetPluggableDatabase.
+                     * @param request GetPluggableDatabaseRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and PluggableDatabase
+                     */
+                    public getPluggableDatabase(request: google.cloud.oracledatabase.v1.IGetPluggableDatabaseRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetPluggableDatabaseCallback): void;
+
+                    /**
+                     * Calls GetPluggableDatabase.
+                     * @param request GetPluggableDatabaseRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getPluggableDatabase(request: google.cloud.oracledatabase.v1.IGetPluggableDatabaseRequest): Promise<google.cloud.oracledatabase.v1.PluggableDatabase>;
+
+                    /**
+                     * Calls ListDbSystems.
+                     * @param request ListDbSystemsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDbSystemsResponse
+                     */
+                    public listDbSystems(request: google.cloud.oracledatabase.v1.IListDbSystemsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListDbSystemsCallback): void;
+
+                    /**
+                     * Calls ListDbSystems.
+                     * @param request ListDbSystemsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDbSystems(request: google.cloud.oracledatabase.v1.IListDbSystemsRequest): Promise<google.cloud.oracledatabase.v1.ListDbSystemsResponse>;
+
+                    /**
+                     * Calls GetDbSystem.
+                     * @param request GetDbSystemRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and DbSystem
+                     */
+                    public getDbSystem(request: google.cloud.oracledatabase.v1.IGetDbSystemRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.GetDbSystemCallback): void;
+
+                    /**
+                     * Calls GetDbSystem.
+                     * @param request GetDbSystemRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getDbSystem(request: google.cloud.oracledatabase.v1.IGetDbSystemRequest): Promise<google.cloud.oracledatabase.v1.DbSystem>;
+
+                    /**
+                     * Calls CreateDbSystem.
+                     * @param request CreateDbSystemRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createDbSystem(request: google.cloud.oracledatabase.v1.ICreateDbSystemRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.CreateDbSystemCallback): void;
+
+                    /**
+                     * Calls CreateDbSystem.
+                     * @param request CreateDbSystemRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createDbSystem(request: google.cloud.oracledatabase.v1.ICreateDbSystemRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls DeleteDbSystem.
+                     * @param request DeleteDbSystemRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public deleteDbSystem(request: google.cloud.oracledatabase.v1.IDeleteDbSystemRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.DeleteDbSystemCallback): void;
+
+                    /**
+                     * Calls DeleteDbSystem.
+                     * @param request DeleteDbSystemRequest message or plain object
+                     * @returns Promise
+                     */
+                    public deleteDbSystem(request: google.cloud.oracledatabase.v1.IDeleteDbSystemRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListDbVersions.
+                     * @param request ListDbVersionsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDbVersionsResponse
+                     */
+                    public listDbVersions(request: google.cloud.oracledatabase.v1.IListDbVersionsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListDbVersionsCallback): void;
+
+                    /**
+                     * Calls ListDbVersions.
+                     * @param request ListDbVersionsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDbVersions(request: google.cloud.oracledatabase.v1.IListDbVersionsRequest): Promise<google.cloud.oracledatabase.v1.ListDbVersionsResponse>;
+
+                    /**
+                     * Calls ListDatabaseCharacterSets.
+                     * @param request ListDatabaseCharacterSetsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDatabaseCharacterSetsResponse
+                     */
+                    public listDatabaseCharacterSets(request: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsRequest, callback: google.cloud.oracledatabase.v1.OracleDatabase.ListDatabaseCharacterSetsCallback): void;
+
+                    /**
+                     * Calls ListDatabaseCharacterSets.
+                     * @param request ListDatabaseCharacterSetsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDatabaseCharacterSets(request: google.cloud.oracledatabase.v1.IListDatabaseCharacterSetsRequest): Promise<google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse>;
                 }
 
                 namespace OracleDatabase {
@@ -4499,6 +13332,13 @@ export namespace google {
                     type ListGiVersionsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListGiVersionsResponse) => void;
 
                     /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listMinorVersions}.
+                     * @param error Error, if any
+                     * @param [response] ListMinorVersionsResponse
+                     */
+                    type ListMinorVersionsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListMinorVersionsResponse) => void;
+
+                    /**
                      * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listDbSystemShapes}.
                      * @param error Error, if any
                      * @param [response] ListDbSystemShapesResponse
@@ -4525,6 +13365,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type CreateAutonomousDatabaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|updateAutonomousDatabase}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateAutonomousDatabaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteAutonomousDatabase}.
@@ -4588,6 +13435,223 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type RestartAutonomousDatabaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|switchoverAutonomousDatabase}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type SwitchoverAutonomousDatabaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|failoverAutonomousDatabase}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type FailoverAutonomousDatabaseCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listOdbNetworks}.
+                     * @param error Error, if any
+                     * @param [response] ListOdbNetworksResponse
+                     */
+                    type ListOdbNetworksCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListOdbNetworksResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getOdbNetwork}.
+                     * @param error Error, if any
+                     * @param [response] OdbNetwork
+                     */
+                    type GetOdbNetworkCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.OdbNetwork) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|createOdbNetwork}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateOdbNetworkCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteOdbNetwork}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteOdbNetworkCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listOdbSubnets}.
+                     * @param error Error, if any
+                     * @param [response] ListOdbSubnetsResponse
+                     */
+                    type ListOdbSubnetsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListOdbSubnetsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getOdbSubnet}.
+                     * @param error Error, if any
+                     * @param [response] OdbSubnet
+                     */
+                    type GetOdbSubnetCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.OdbSubnet) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|createOdbSubnet}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateOdbSubnetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteOdbSubnet}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteOdbSubnetCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listExadbVmClusters}.
+                     * @param error Error, if any
+                     * @param [response] ListExadbVmClustersResponse
+                     */
+                    type ListExadbVmClustersCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListExadbVmClustersResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getExadbVmCluster}.
+                     * @param error Error, if any
+                     * @param [response] ExadbVmCluster
+                     */
+                    type GetExadbVmClusterCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ExadbVmCluster) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|createExadbVmCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateExadbVmClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteExadbVmCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteExadbVmClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|updateExadbVmCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type UpdateExadbVmClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|removeVirtualMachineExadbVmCluster}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type RemoveVirtualMachineExadbVmClusterCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listExascaleDbStorageVaults}.
+                     * @param error Error, if any
+                     * @param [response] ListExascaleDbStorageVaultsResponse
+                     */
+                    type ListExascaleDbStorageVaultsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListExascaleDbStorageVaultsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getExascaleDbStorageVault}.
+                     * @param error Error, if any
+                     * @param [response] ExascaleDbStorageVault
+                     */
+                    type GetExascaleDbStorageVaultCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ExascaleDbStorageVault) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|createExascaleDbStorageVault}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateExascaleDbStorageVaultCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteExascaleDbStorageVault}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteExascaleDbStorageVaultCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listDbSystemInitialStorageSizes}.
+                     * @param error Error, if any
+                     * @param [response] ListDbSystemInitialStorageSizesResponse
+                     */
+                    type ListDbSystemInitialStorageSizesCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListDbSystemInitialStorageSizesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listDatabases}.
+                     * @param error Error, if any
+                     * @param [response] ListDatabasesResponse
+                     */
+                    type ListDatabasesCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListDatabasesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getDatabase}.
+                     * @param error Error, if any
+                     * @param [response] Database
+                     */
+                    type GetDatabaseCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.Database) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listPluggableDatabases}.
+                     * @param error Error, if any
+                     * @param [response] ListPluggableDatabasesResponse
+                     */
+                    type ListPluggableDatabasesCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListPluggableDatabasesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getPluggableDatabase}.
+                     * @param error Error, if any
+                     * @param [response] PluggableDatabase
+                     */
+                    type GetPluggableDatabaseCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.PluggableDatabase) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listDbSystems}.
+                     * @param error Error, if any
+                     * @param [response] ListDbSystemsResponse
+                     */
+                    type ListDbSystemsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListDbSystemsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|getDbSystem}.
+                     * @param error Error, if any
+                     * @param [response] DbSystem
+                     */
+                    type GetDbSystemCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.DbSystem) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|createDbSystem}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateDbSystemCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|deleteDbSystem}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type DeleteDbSystemCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listDbVersions}.
+                     * @param error Error, if any
+                     * @param [response] ListDbVersionsResponse
+                     */
+                    type ListDbVersionsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListDbVersionsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.oracledatabase.v1.OracleDatabase|listDatabaseCharacterSets}.
+                     * @param error Error, if any
+                     * @param [response] ListDatabaseCharacterSetsResponse
+                     */
+                    type ListDatabaseCharacterSetsCallback = (error: (Error|null), response?: google.cloud.oracledatabase.v1.ListDatabaseCharacterSetsResponse) => void;
                 }
 
                 /** Properties of a ListCloudExadataInfrastructuresRequest. */
@@ -4601,6 +13665,12 @@ export namespace google {
 
                     /** ListCloudExadataInfrastructuresRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListCloudExadataInfrastructuresRequest filter */
+                    filter?: (string|null);
+
+                    /** ListCloudExadataInfrastructuresRequest orderBy */
+                    orderBy?: (string|null);
                 }
 
                 /** Represents a ListCloudExadataInfrastructuresRequest. */
@@ -4620,6 +13690,12 @@ export namespace google {
 
                     /** ListCloudExadataInfrastructuresRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListCloudExadataInfrastructuresRequest filter. */
+                    public filter: string;
+
+                    /** ListCloudExadataInfrastructuresRequest orderBy. */
+                    public orderBy: string;
 
                     /**
                      * Creates a new ListCloudExadataInfrastructuresRequest instance using the specified properties.
@@ -6309,6 +15385,9 @@ export namespace google {
 
                     /** ListGiVersionsRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListGiVersionsRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListGiVersionsRequest. */
@@ -6328,6 +15407,9 @@ export namespace google {
 
                     /** ListGiVersionsRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListGiVersionsRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListGiVersionsRequest instance using the specified properties.
@@ -6521,6 +15603,9 @@ export namespace google {
 
                     /** ListDbSystemShapesRequest pageToken */
                     pageToken?: (string|null);
+
+                    /** ListDbSystemShapesRequest filter */
+                    filter?: (string|null);
                 }
 
                 /** Represents a ListDbSystemShapesRequest. */
@@ -6540,6 +15625,9 @@ export namespace google {
 
                     /** ListDbSystemShapesRequest pageToken. */
                     public pageToken: string;
+
+                    /** ListDbSystemShapesRequest filter. */
+                    public filter: string;
 
                     /**
                      * Creates a new ListDbSystemShapesRequest instance using the specified properties.
@@ -7297,6 +16385,115 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of an UpdateAutonomousDatabaseRequest. */
+                interface IUpdateAutonomousDatabaseRequest {
+
+                    /** UpdateAutonomousDatabaseRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutonomousDatabaseRequest autonomousDatabase */
+                    autonomousDatabase?: (google.cloud.oracledatabase.v1.IAutonomousDatabase|null);
+
+                    /** UpdateAutonomousDatabaseRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateAutonomousDatabaseRequest. */
+                class UpdateAutonomousDatabaseRequest implements IUpdateAutonomousDatabaseRequest {
+
+                    /**
+                     * Constructs a new UpdateAutonomousDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IUpdateAutonomousDatabaseRequest);
+
+                    /** UpdateAutonomousDatabaseRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateAutonomousDatabaseRequest autonomousDatabase. */
+                    public autonomousDatabase?: (google.cloud.oracledatabase.v1.IAutonomousDatabase|null);
+
+                    /** UpdateAutonomousDatabaseRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateAutonomousDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateAutonomousDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IUpdateAutonomousDatabaseRequest): google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest;
+
+                    /**
+                     * Encodes the specified UpdateAutonomousDatabaseRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest.verify|verify} messages.
+                     * @param message UpdateAutonomousDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IUpdateAutonomousDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateAutonomousDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest.verify|verify} messages.
+                     * @param message UpdateAutonomousDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IUpdateAutonomousDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateAutonomousDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateAutonomousDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest;
+
+                    /**
+                     * Decodes an UpdateAutonomousDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateAutonomousDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest;
+
+                    /**
+                     * Verifies an UpdateAutonomousDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateAutonomousDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateAutonomousDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateAutonomousDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message UpdateAutonomousDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.UpdateAutonomousDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateAutonomousDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateAutonomousDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a DeleteAutonomousDatabaseRequest. */
                 interface IDeleteAutonomousDatabaseRequest {
 
@@ -7788,6 +16985,212 @@ export namespace google {
 
                     /**
                      * Gets the default type url for RestartAutonomousDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SwitchoverAutonomousDatabaseRequest. */
+                interface ISwitchoverAutonomousDatabaseRequest {
+
+                    /** SwitchoverAutonomousDatabaseRequest name */
+                    name?: (string|null);
+
+                    /** SwitchoverAutonomousDatabaseRequest peerAutonomousDatabase */
+                    peerAutonomousDatabase?: (string|null);
+                }
+
+                /** Represents a SwitchoverAutonomousDatabaseRequest. */
+                class SwitchoverAutonomousDatabaseRequest implements ISwitchoverAutonomousDatabaseRequest {
+
+                    /**
+                     * Constructs a new SwitchoverAutonomousDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ISwitchoverAutonomousDatabaseRequest);
+
+                    /** SwitchoverAutonomousDatabaseRequest name. */
+                    public name: string;
+
+                    /** SwitchoverAutonomousDatabaseRequest peerAutonomousDatabase. */
+                    public peerAutonomousDatabase: string;
+
+                    /**
+                     * Creates a new SwitchoverAutonomousDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SwitchoverAutonomousDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ISwitchoverAutonomousDatabaseRequest): google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest;
+
+                    /**
+                     * Encodes the specified SwitchoverAutonomousDatabaseRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest.verify|verify} messages.
+                     * @param message SwitchoverAutonomousDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ISwitchoverAutonomousDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SwitchoverAutonomousDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest.verify|verify} messages.
+                     * @param message SwitchoverAutonomousDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ISwitchoverAutonomousDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SwitchoverAutonomousDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SwitchoverAutonomousDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest;
+
+                    /**
+                     * Decodes a SwitchoverAutonomousDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SwitchoverAutonomousDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest;
+
+                    /**
+                     * Verifies a SwitchoverAutonomousDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SwitchoverAutonomousDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SwitchoverAutonomousDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from a SwitchoverAutonomousDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message SwitchoverAutonomousDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.SwitchoverAutonomousDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SwitchoverAutonomousDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SwitchoverAutonomousDatabaseRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FailoverAutonomousDatabaseRequest. */
+                interface IFailoverAutonomousDatabaseRequest {
+
+                    /** FailoverAutonomousDatabaseRequest name */
+                    name?: (string|null);
+
+                    /** FailoverAutonomousDatabaseRequest peerAutonomousDatabase */
+                    peerAutonomousDatabase?: (string|null);
+                }
+
+                /** Represents a FailoverAutonomousDatabaseRequest. */
+                class FailoverAutonomousDatabaseRequest implements IFailoverAutonomousDatabaseRequest {
+
+                    /**
+                     * Constructs a new FailoverAutonomousDatabaseRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IFailoverAutonomousDatabaseRequest);
+
+                    /** FailoverAutonomousDatabaseRequest name. */
+                    public name: string;
+
+                    /** FailoverAutonomousDatabaseRequest peerAutonomousDatabase. */
+                    public peerAutonomousDatabase: string;
+
+                    /**
+                     * Creates a new FailoverAutonomousDatabaseRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FailoverAutonomousDatabaseRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IFailoverAutonomousDatabaseRequest): google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest;
+
+                    /**
+                     * Encodes the specified FailoverAutonomousDatabaseRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest.verify|verify} messages.
+                     * @param message FailoverAutonomousDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IFailoverAutonomousDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FailoverAutonomousDatabaseRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest.verify|verify} messages.
+                     * @param message FailoverAutonomousDatabaseRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IFailoverAutonomousDatabaseRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FailoverAutonomousDatabaseRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FailoverAutonomousDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest;
+
+                    /**
+                     * Decodes a FailoverAutonomousDatabaseRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FailoverAutonomousDatabaseRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest;
+
+                    /**
+                     * Verifies a FailoverAutonomousDatabaseRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FailoverAutonomousDatabaseRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FailoverAutonomousDatabaseRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest;
+
+                    /**
+                     * Creates a plain object from a FailoverAutonomousDatabaseRequest message. Also converts values to other types if specified.
+                     * @param message FailoverAutonomousDatabaseRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.FailoverAutonomousDatabaseRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FailoverAutonomousDatabaseRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FailoverAutonomousDatabaseRequest
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -8654,6 +18057,763 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a CreateExadbVmClusterRequest. */
+                interface ICreateExadbVmClusterRequest {
+
+                    /** CreateExadbVmClusterRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateExadbVmClusterRequest exadbVmClusterId */
+                    exadbVmClusterId?: (string|null);
+
+                    /** CreateExadbVmClusterRequest exadbVmCluster */
+                    exadbVmCluster?: (google.cloud.oracledatabase.v1.IExadbVmCluster|null);
+
+                    /** CreateExadbVmClusterRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a CreateExadbVmClusterRequest. */
+                class CreateExadbVmClusterRequest implements ICreateExadbVmClusterRequest {
+
+                    /**
+                     * Constructs a new CreateExadbVmClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.ICreateExadbVmClusterRequest);
+
+                    /** CreateExadbVmClusterRequest parent. */
+                    public parent: string;
+
+                    /** CreateExadbVmClusterRequest exadbVmClusterId. */
+                    public exadbVmClusterId: string;
+
+                    /** CreateExadbVmClusterRequest exadbVmCluster. */
+                    public exadbVmCluster?: (google.cloud.oracledatabase.v1.IExadbVmCluster|null);
+
+                    /** CreateExadbVmClusterRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new CreateExadbVmClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateExadbVmClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.ICreateExadbVmClusterRequest): google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest;
+
+                    /**
+                     * Encodes the specified CreateExadbVmClusterRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest.verify|verify} messages.
+                     * @param message CreateExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.ICreateExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateExadbVmClusterRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest.verify|verify} messages.
+                     * @param message CreateExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.ICreateExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateExadbVmClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest;
+
+                    /**
+                     * Decodes a CreateExadbVmClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest;
+
+                    /**
+                     * Verifies a CreateExadbVmClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateExadbVmClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateExadbVmClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest;
+
+                    /**
+                     * Creates a plain object from a CreateExadbVmClusterRequest message. Also converts values to other types if specified.
+                     * @param message CreateExadbVmClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.CreateExadbVmClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateExadbVmClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateExadbVmClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a DeleteExadbVmClusterRequest. */
+                interface IDeleteExadbVmClusterRequest {
+
+                    /** DeleteExadbVmClusterRequest name */
+                    name?: (string|null);
+
+                    /** DeleteExadbVmClusterRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents a DeleteExadbVmClusterRequest. */
+                class DeleteExadbVmClusterRequest implements IDeleteExadbVmClusterRequest {
+
+                    /**
+                     * Constructs a new DeleteExadbVmClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IDeleteExadbVmClusterRequest);
+
+                    /** DeleteExadbVmClusterRequest name. */
+                    public name: string;
+
+                    /** DeleteExadbVmClusterRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new DeleteExadbVmClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DeleteExadbVmClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IDeleteExadbVmClusterRequest): google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest;
+
+                    /**
+                     * Encodes the specified DeleteExadbVmClusterRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest.verify|verify} messages.
+                     * @param message DeleteExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IDeleteExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DeleteExadbVmClusterRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest.verify|verify} messages.
+                     * @param message DeleteExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IDeleteExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DeleteExadbVmClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DeleteExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest;
+
+                    /**
+                     * Decodes a DeleteExadbVmClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DeleteExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest;
+
+                    /**
+                     * Verifies a DeleteExadbVmClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DeleteExadbVmClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DeleteExadbVmClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest;
+
+                    /**
+                     * Creates a plain object from a DeleteExadbVmClusterRequest message. Also converts values to other types if specified.
+                     * @param message DeleteExadbVmClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.DeleteExadbVmClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DeleteExadbVmClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DeleteExadbVmClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetExadbVmClusterRequest. */
+                interface IGetExadbVmClusterRequest {
+
+                    /** GetExadbVmClusterRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetExadbVmClusterRequest. */
+                class GetExadbVmClusterRequest implements IGetExadbVmClusterRequest {
+
+                    /**
+                     * Constructs a new GetExadbVmClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IGetExadbVmClusterRequest);
+
+                    /** GetExadbVmClusterRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetExadbVmClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetExadbVmClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IGetExadbVmClusterRequest): google.cloud.oracledatabase.v1.GetExadbVmClusterRequest;
+
+                    /**
+                     * Encodes the specified GetExadbVmClusterRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.GetExadbVmClusterRequest.verify|verify} messages.
+                     * @param message GetExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IGetExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetExadbVmClusterRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.GetExadbVmClusterRequest.verify|verify} messages.
+                     * @param message GetExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IGetExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetExadbVmClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.GetExadbVmClusterRequest;
+
+                    /**
+                     * Decodes a GetExadbVmClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.GetExadbVmClusterRequest;
+
+                    /**
+                     * Verifies a GetExadbVmClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetExadbVmClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetExadbVmClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.GetExadbVmClusterRequest;
+
+                    /**
+                     * Creates a plain object from a GetExadbVmClusterRequest message. Also converts values to other types if specified.
+                     * @param message GetExadbVmClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.GetExadbVmClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetExadbVmClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetExadbVmClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListExadbVmClustersRequest. */
+                interface IListExadbVmClustersRequest {
+
+                    /** ListExadbVmClustersRequest parent */
+                    parent?: (string|null);
+
+                    /** ListExadbVmClustersRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListExadbVmClustersRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListExadbVmClustersRequest filter */
+                    filter?: (string|null);
+
+                    /** ListExadbVmClustersRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListExadbVmClustersRequest. */
+                class ListExadbVmClustersRequest implements IListExadbVmClustersRequest {
+
+                    /**
+                     * Constructs a new ListExadbVmClustersRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListExadbVmClustersRequest);
+
+                    /** ListExadbVmClustersRequest parent. */
+                    public parent: string;
+
+                    /** ListExadbVmClustersRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListExadbVmClustersRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListExadbVmClustersRequest filter. */
+                    public filter: string;
+
+                    /** ListExadbVmClustersRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListExadbVmClustersRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExadbVmClustersRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListExadbVmClustersRequest): google.cloud.oracledatabase.v1.ListExadbVmClustersRequest;
+
+                    /**
+                     * Encodes the specified ListExadbVmClustersRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListExadbVmClustersRequest.verify|verify} messages.
+                     * @param message ListExadbVmClustersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListExadbVmClustersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExadbVmClustersRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListExadbVmClustersRequest.verify|verify} messages.
+                     * @param message ListExadbVmClustersRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListExadbVmClustersRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExadbVmClustersRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExadbVmClustersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListExadbVmClustersRequest;
+
+                    /**
+                     * Decodes a ListExadbVmClustersRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExadbVmClustersRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListExadbVmClustersRequest;
+
+                    /**
+                     * Verifies a ListExadbVmClustersRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExadbVmClustersRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExadbVmClustersRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListExadbVmClustersRequest;
+
+                    /**
+                     * Creates a plain object from a ListExadbVmClustersRequest message. Also converts values to other types if specified.
+                     * @param message ListExadbVmClustersRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListExadbVmClustersRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExadbVmClustersRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExadbVmClustersRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListExadbVmClustersResponse. */
+                interface IListExadbVmClustersResponse {
+
+                    /** ListExadbVmClustersResponse exadbVmClusters */
+                    exadbVmClusters?: (google.cloud.oracledatabase.v1.IExadbVmCluster[]|null);
+
+                    /** ListExadbVmClustersResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListExadbVmClustersResponse. */
+                class ListExadbVmClustersResponse implements IListExadbVmClustersResponse {
+
+                    /**
+                     * Constructs a new ListExadbVmClustersResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IListExadbVmClustersResponse);
+
+                    /** ListExadbVmClustersResponse exadbVmClusters. */
+                    public exadbVmClusters: google.cloud.oracledatabase.v1.IExadbVmCluster[];
+
+                    /** ListExadbVmClustersResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListExadbVmClustersResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListExadbVmClustersResponse instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IListExadbVmClustersResponse): google.cloud.oracledatabase.v1.ListExadbVmClustersResponse;
+
+                    /**
+                     * Encodes the specified ListExadbVmClustersResponse message. Does not implicitly {@link google.cloud.oracledatabase.v1.ListExadbVmClustersResponse.verify|verify} messages.
+                     * @param message ListExadbVmClustersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IListExadbVmClustersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListExadbVmClustersResponse message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.ListExadbVmClustersResponse.verify|verify} messages.
+                     * @param message ListExadbVmClustersResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IListExadbVmClustersResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListExadbVmClustersResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListExadbVmClustersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.ListExadbVmClustersResponse;
+
+                    /**
+                     * Decodes a ListExadbVmClustersResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListExadbVmClustersResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.ListExadbVmClustersResponse;
+
+                    /**
+                     * Verifies a ListExadbVmClustersResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListExadbVmClustersResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListExadbVmClustersResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.ListExadbVmClustersResponse;
+
+                    /**
+                     * Creates a plain object from a ListExadbVmClustersResponse message. Also converts values to other types if specified.
+                     * @param message ListExadbVmClustersResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.ListExadbVmClustersResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListExadbVmClustersResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListExadbVmClustersResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an UpdateExadbVmClusterRequest. */
+                interface IUpdateExadbVmClusterRequest {
+
+                    /** UpdateExadbVmClusterRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateExadbVmClusterRequest exadbVmCluster */
+                    exadbVmCluster?: (google.cloud.oracledatabase.v1.IExadbVmCluster|null);
+
+                    /** UpdateExadbVmClusterRequest requestId */
+                    requestId?: (string|null);
+                }
+
+                /** Represents an UpdateExadbVmClusterRequest. */
+                class UpdateExadbVmClusterRequest implements IUpdateExadbVmClusterRequest {
+
+                    /**
+                     * Constructs a new UpdateExadbVmClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IUpdateExadbVmClusterRequest);
+
+                    /** UpdateExadbVmClusterRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /** UpdateExadbVmClusterRequest exadbVmCluster. */
+                    public exadbVmCluster?: (google.cloud.oracledatabase.v1.IExadbVmCluster|null);
+
+                    /** UpdateExadbVmClusterRequest requestId. */
+                    public requestId: string;
+
+                    /**
+                     * Creates a new UpdateExadbVmClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateExadbVmClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IUpdateExadbVmClusterRequest): google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest;
+
+                    /**
+                     * Encodes the specified UpdateExadbVmClusterRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest.verify|verify} messages.
+                     * @param message UpdateExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IUpdateExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateExadbVmClusterRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest.verify|verify} messages.
+                     * @param message UpdateExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IUpdateExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateExadbVmClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest;
+
+                    /**
+                     * Decodes an UpdateExadbVmClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest;
+
+                    /**
+                     * Verifies an UpdateExadbVmClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateExadbVmClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateExadbVmClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateExadbVmClusterRequest message. Also converts values to other types if specified.
+                     * @param message UpdateExadbVmClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.UpdateExadbVmClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateExadbVmClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateExadbVmClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RemoveVirtualMachineExadbVmClusterRequest. */
+                interface IRemoveVirtualMachineExadbVmClusterRequest {
+
+                    /** RemoveVirtualMachineExadbVmClusterRequest name */
+                    name?: (string|null);
+
+                    /** RemoveVirtualMachineExadbVmClusterRequest requestId */
+                    requestId?: (string|null);
+
+                    /** RemoveVirtualMachineExadbVmClusterRequest hostnames */
+                    hostnames?: (string[]|null);
+                }
+
+                /** Represents a RemoveVirtualMachineExadbVmClusterRequest. */
+                class RemoveVirtualMachineExadbVmClusterRequest implements IRemoveVirtualMachineExadbVmClusterRequest {
+
+                    /**
+                     * Constructs a new RemoveVirtualMachineExadbVmClusterRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.oracledatabase.v1.IRemoveVirtualMachineExadbVmClusterRequest);
+
+                    /** RemoveVirtualMachineExadbVmClusterRequest name. */
+                    public name: string;
+
+                    /** RemoveVirtualMachineExadbVmClusterRequest requestId. */
+                    public requestId: string;
+
+                    /** RemoveVirtualMachineExadbVmClusterRequest hostnames. */
+                    public hostnames: string[];
+
+                    /**
+                     * Creates a new RemoveVirtualMachineExadbVmClusterRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RemoveVirtualMachineExadbVmClusterRequest instance
+                     */
+                    public static create(properties?: google.cloud.oracledatabase.v1.IRemoveVirtualMachineExadbVmClusterRequest): google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest;
+
+                    /**
+                     * Encodes the specified RemoveVirtualMachineExadbVmClusterRequest message. Does not implicitly {@link google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest.verify|verify} messages.
+                     * @param message RemoveVirtualMachineExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.oracledatabase.v1.IRemoveVirtualMachineExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RemoveVirtualMachineExadbVmClusterRequest message, length delimited. Does not implicitly {@link google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest.verify|verify} messages.
+                     * @param message RemoveVirtualMachineExadbVmClusterRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.oracledatabase.v1.IRemoveVirtualMachineExadbVmClusterRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RemoveVirtualMachineExadbVmClusterRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RemoveVirtualMachineExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest;
+
+                    /**
+                     * Decodes a RemoveVirtualMachineExadbVmClusterRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RemoveVirtualMachineExadbVmClusterRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest;
+
+                    /**
+                     * Verifies a RemoveVirtualMachineExadbVmClusterRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RemoveVirtualMachineExadbVmClusterRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RemoveVirtualMachineExadbVmClusterRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest;
+
+                    /**
+                     * Creates a plain object from a RemoveVirtualMachineExadbVmClusterRequest message. Also converts values to other types if specified.
+                     * @param message RemoveVirtualMachineExadbVmClusterRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.oracledatabase.v1.RemoveVirtualMachineExadbVmClusterRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RemoveVirtualMachineExadbVmClusterRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RemoveVirtualMachineExadbVmClusterRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a CloudVmCluster. */
                 interface ICloudVmCluster {
 
@@ -8665,9 +18825,6 @@ export namespace google {
 
                     /** CloudVmCluster displayName */
                     displayName?: (string|null);
-
-                    /** CloudVmCluster gcpOracleZone */
-                    gcpOracleZone?: (string|null);
 
                     /** CloudVmCluster properties */
                     properties?: (google.cloud.oracledatabase.v1.ICloudVmClusterProperties|null);
@@ -8686,6 +18843,21 @@ export namespace google {
 
                     /** CloudVmCluster network */
                     network?: (string|null);
+
+                    /** CloudVmCluster gcpOracleZone */
+                    gcpOracleZone?: (string|null);
+
+                    /** CloudVmCluster odbNetwork */
+                    odbNetwork?: (string|null);
+
+                    /** CloudVmCluster odbSubnet */
+                    odbSubnet?: (string|null);
+
+                    /** CloudVmCluster backupOdbSubnet */
+                    backupOdbSubnet?: (string|null);
+
+                    /** CloudVmCluster identityConnector */
+                    identityConnector?: (google.cloud.oracledatabase.v1.IIdentityConnector|null);
                 }
 
                 /** Represents a CloudVmCluster. */
@@ -8706,9 +18878,6 @@ export namespace google {
                     /** CloudVmCluster displayName. */
                     public displayName: string;
 
-                    /** CloudVmCluster gcpOracleZone. */
-                    public gcpOracleZone: string;
-
                     /** CloudVmCluster properties. */
                     public properties?: (google.cloud.oracledatabase.v1.ICloudVmClusterProperties|null);
 
@@ -8726,6 +18895,21 @@ export namespace google {
 
                     /** CloudVmCluster network. */
                     public network: string;
+
+                    /** CloudVmCluster gcpOracleZone. */
+                    public gcpOracleZone: string;
+
+                    /** CloudVmCluster odbNetwork. */
+                    public odbNetwork: string;
+
+                    /** CloudVmCluster odbSubnet. */
+                    public odbSubnet: string;
+
+                    /** CloudVmCluster backupOdbSubnet. */
+                    public backupOdbSubnet: string;
+
+                    /** CloudVmCluster identityConnector. */
+                    public identityConnector?: (google.cloud.oracledatabase.v1.IIdentityConnector|null);
 
                     /**
                      * Creates a new CloudVmCluster instance using the specified properties.
@@ -8903,6 +19087,9 @@ export namespace google {
 
                     /** CloudVmClusterProperties clusterName */
                     clusterName?: (string|null);
+
+                    /** CloudVmClusterProperties computeModel */
+                    computeModel?: (google.cloud.oracledatabase.v1.ComputeModel|keyof typeof google.cloud.oracledatabase.v1.ComputeModel|null);
                 }
 
                 /** Represents a CloudVmClusterProperties. */
@@ -9009,6 +19196,9 @@ export namespace google {
 
                     /** CloudVmClusterProperties clusterName. */
                     public clusterName: string;
+
+                    /** CloudVmClusterProperties computeModel. */
+                    public computeModel: (google.cloud.oracledatabase.v1.ComputeModel|keyof typeof google.cloud.oracledatabase.v1.ComputeModel);
 
                     /**
                      * Creates a new CloudVmClusterProperties instance using the specified properties.
@@ -9495,6 +19685,115 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Properties of a FieldInfo. */
+        interface IFieldInfo {
+
+            /** FieldInfo format */
+            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+        }
+
+        /** Represents a FieldInfo. */
+        class FieldInfo implements IFieldInfo {
+
+            /**
+             * Constructs a new FieldInfo.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IFieldInfo);
+
+            /** FieldInfo format. */
+            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /**
+             * Creates a new FieldInfo instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldInfo instance
+             */
+            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
+
+            /**
+             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
+             * @param message FieldInfo message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
+
+            /**
+             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldInfo
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
+
+            /**
+             * Verifies a FieldInfo message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldInfo
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
+
+            /**
+             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
+             * @param message FieldInfo
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldInfo to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldInfo
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace FieldInfo {
+
+            /** Format enum. */
+            enum Format {
+                FORMAT_UNSPECIFIED = 0,
+                UUID4 = 1,
+                IPV4 = 2,
+                IPV6 = 3,
+                IPV4_OR_IPV6 = 4
+            }
         }
 
         /** Properties of a Http. */
@@ -11348,115 +21647,6 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
-        }
-
-        /** Properties of a FieldInfo. */
-        interface IFieldInfo {
-
-            /** FieldInfo format */
-            format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
-        }
-
-        /** Represents a FieldInfo. */
-        class FieldInfo implements IFieldInfo {
-
-            /**
-             * Constructs a new FieldInfo.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IFieldInfo);
-
-            /** FieldInfo format. */
-            public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
-
-            /**
-             * Creates a new FieldInfo instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns FieldInfo instance
-             */
-            public static create(properties?: google.api.IFieldInfo): google.api.FieldInfo;
-
-            /**
-             * Encodes the specified FieldInfo message. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified FieldInfo message, length delimited. Does not implicitly {@link google.api.FieldInfo.verify|verify} messages.
-             * @param message FieldInfo message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IFieldInfo, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.FieldInfo;
-
-            /**
-             * Decodes a FieldInfo message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns FieldInfo
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.FieldInfo;
-
-            /**
-             * Verifies a FieldInfo message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a FieldInfo message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns FieldInfo
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.FieldInfo;
-
-            /**
-             * Creates a plain object from a FieldInfo message. Also converts values to other types if specified.
-             * @param message FieldInfo
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.FieldInfo, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this FieldInfo to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for FieldInfo
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace FieldInfo {
-
-            /** Format enum. */
-            enum Format {
-                FORMAT_UNSPECIFIED = 0,
-                UUID4 = 1,
-                IPV4 = 2,
-                IPV6 = 3,
-                IPV4_OR_IPV6 = 4
-            }
         }
     }
 
@@ -15973,6 +26163,103 @@ export namespace google {
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
+
+        /** Properties of a FieldMask. */
+        interface IFieldMask {
+
+            /** FieldMask paths */
+            paths?: (string[]|null);
+        }
+
+        /** Represents a FieldMask. */
+        class FieldMask implements IFieldMask {
+
+            /**
+             * Constructs a new FieldMask.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IFieldMask);
+
+            /** FieldMask paths. */
+            public paths: string[];
+
+            /**
+             * Creates a new FieldMask instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns FieldMask instance
+             */
+            public static create(properties?: google.protobuf.IFieldMask): google.protobuf.FieldMask;
+
+            /**
+             * Encodes the specified FieldMask message. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified FieldMask message, length delimited. Does not implicitly {@link google.protobuf.FieldMask.verify|verify} messages.
+             * @param message FieldMask message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IFieldMask, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldMask;
+
+            /**
+             * Decodes a FieldMask message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns FieldMask
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldMask;
+
+            /**
+             * Verifies a FieldMask message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a FieldMask message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns FieldMask
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.FieldMask;
+
+            /**
+             * Creates a plain object from a FieldMask message. Also converts values to other types if specified.
+             * @param message FieldMask
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.FieldMask, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this FieldMask to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for FieldMask
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
     }
 
     /** Namespace type. */
@@ -16103,23 +26390,6 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Month enum. */
-        enum Month {
-            MONTH_UNSPECIFIED = 0,
-            JANUARY = 1,
-            FEBRUARY = 2,
-            MARCH = 3,
-            APRIL = 4,
-            MAY = 5,
-            JUNE = 6,
-            JULY = 7,
-            AUGUST = 8,
-            SEPTEMBER = 9,
-            OCTOBER = 10,
-            NOVEMBER = 11,
-            DECEMBER = 12
         }
 
         /** Properties of a DateTime. */
@@ -16371,6 +26641,23 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        /** Month enum. */
+        enum Month {
+            MONTH_UNSPECIFIED = 0,
+            JANUARY = 1,
+            FEBRUARY = 2,
+            MARCH = 3,
+            APRIL = 4,
+            MAY = 5,
+            JUNE = 6,
+            JULY = 7,
+            AUGUST = 8,
+            SEPTEMBER = 9,
+            OCTOBER = 10,
+            NOVEMBER = 11,
+            DECEMBER = 12
         }
     }
 
