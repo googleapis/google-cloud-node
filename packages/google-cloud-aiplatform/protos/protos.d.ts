@@ -15791,6 +15791,9 @@ export namespace google {
 
                         /** ComputerUse environment */
                         environment?: (google.cloud.aiplatform.v1.Tool.ComputerUse.Environment|keyof typeof google.cloud.aiplatform.v1.Tool.ComputerUse.Environment|null);
+
+                        /** ComputerUse excludedPredefinedFunctions */
+                        excludedPredefinedFunctions?: (string[]|null);
                     }
 
                     /** Represents a ComputerUse. */
@@ -15804,6 +15807,9 @@ export namespace google {
 
                         /** ComputerUse environment. */
                         public environment: (google.cloud.aiplatform.v1.Tool.ComputerUse.Environment|keyof typeof google.cloud.aiplatform.v1.Tool.ComputerUse.Environment);
+
+                        /** ComputerUse excludedPredefinedFunctions. */
+                        public excludedPredefinedFunctions: string[];
 
                         /**
                          * Creates a new ComputerUse instance using the specified properties.
@@ -16214,6 +16220,330 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a FunctionResponsePart. */
+                interface IFunctionResponsePart {
+
+                    /** FunctionResponsePart inlineData */
+                    inlineData?: (google.cloud.aiplatform.v1.IFunctionResponseBlob|null);
+
+                    /** FunctionResponsePart fileData */
+                    fileData?: (google.cloud.aiplatform.v1.IFunctionResponseFileData|null);
+                }
+
+                /** Represents a FunctionResponsePart. */
+                class FunctionResponsePart implements IFunctionResponsePart {
+
+                    /**
+                     * Constructs a new FunctionResponsePart.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IFunctionResponsePart);
+
+                    /** FunctionResponsePart inlineData. */
+                    public inlineData?: (google.cloud.aiplatform.v1.IFunctionResponseBlob|null);
+
+                    /** FunctionResponsePart fileData. */
+                    public fileData?: (google.cloud.aiplatform.v1.IFunctionResponseFileData|null);
+
+                    /** FunctionResponsePart data. */
+                    public data?: ("inlineData"|"fileData");
+
+                    /**
+                     * Creates a new FunctionResponsePart instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FunctionResponsePart instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IFunctionResponsePart): google.cloud.aiplatform.v1.FunctionResponsePart;
+
+                    /**
+                     * Encodes the specified FunctionResponsePart message. Does not implicitly {@link google.cloud.aiplatform.v1.FunctionResponsePart.verify|verify} messages.
+                     * @param message FunctionResponsePart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IFunctionResponsePart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FunctionResponsePart message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FunctionResponsePart.verify|verify} messages.
+                     * @param message FunctionResponsePart message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IFunctionResponsePart, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FunctionResponsePart message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FunctionResponsePart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FunctionResponsePart;
+
+                    /**
+                     * Decodes a FunctionResponsePart message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FunctionResponsePart
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FunctionResponsePart;
+
+                    /**
+                     * Verifies a FunctionResponsePart message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FunctionResponsePart message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FunctionResponsePart
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FunctionResponsePart;
+
+                    /**
+                     * Creates a plain object from a FunctionResponsePart message. Also converts values to other types if specified.
+                     * @param message FunctionResponsePart
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.FunctionResponsePart, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FunctionResponsePart to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FunctionResponsePart
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FunctionResponseBlob. */
+                interface IFunctionResponseBlob {
+
+                    /** FunctionResponseBlob mimeType */
+                    mimeType?: (string|null);
+
+                    /** FunctionResponseBlob data */
+                    data?: (Uint8Array|Buffer|string|null);
+
+                    /** FunctionResponseBlob displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a FunctionResponseBlob. */
+                class FunctionResponseBlob implements IFunctionResponseBlob {
+
+                    /**
+                     * Constructs a new FunctionResponseBlob.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IFunctionResponseBlob);
+
+                    /** FunctionResponseBlob mimeType. */
+                    public mimeType: string;
+
+                    /** FunctionResponseBlob data. */
+                    public data: (Uint8Array|Buffer|string);
+
+                    /** FunctionResponseBlob displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new FunctionResponseBlob instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FunctionResponseBlob instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IFunctionResponseBlob): google.cloud.aiplatform.v1.FunctionResponseBlob;
+
+                    /**
+                     * Encodes the specified FunctionResponseBlob message. Does not implicitly {@link google.cloud.aiplatform.v1.FunctionResponseBlob.verify|verify} messages.
+                     * @param message FunctionResponseBlob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IFunctionResponseBlob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FunctionResponseBlob message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FunctionResponseBlob.verify|verify} messages.
+                     * @param message FunctionResponseBlob message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IFunctionResponseBlob, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FunctionResponseBlob message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FunctionResponseBlob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FunctionResponseBlob;
+
+                    /**
+                     * Decodes a FunctionResponseBlob message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FunctionResponseBlob
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FunctionResponseBlob;
+
+                    /**
+                     * Verifies a FunctionResponseBlob message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FunctionResponseBlob message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FunctionResponseBlob
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FunctionResponseBlob;
+
+                    /**
+                     * Creates a plain object from a FunctionResponseBlob message. Also converts values to other types if specified.
+                     * @param message FunctionResponseBlob
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.FunctionResponseBlob, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FunctionResponseBlob to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FunctionResponseBlob
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FunctionResponseFileData. */
+                interface IFunctionResponseFileData {
+
+                    /** FunctionResponseFileData mimeType */
+                    mimeType?: (string|null);
+
+                    /** FunctionResponseFileData fileUri */
+                    fileUri?: (string|null);
+
+                    /** FunctionResponseFileData displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a FunctionResponseFileData. */
+                class FunctionResponseFileData implements IFunctionResponseFileData {
+
+                    /**
+                     * Constructs a new FunctionResponseFileData.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IFunctionResponseFileData);
+
+                    /** FunctionResponseFileData mimeType. */
+                    public mimeType: string;
+
+                    /** FunctionResponseFileData fileUri. */
+                    public fileUri: string;
+
+                    /** FunctionResponseFileData displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new FunctionResponseFileData instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FunctionResponseFileData instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IFunctionResponseFileData): google.cloud.aiplatform.v1.FunctionResponseFileData;
+
+                    /**
+                     * Encodes the specified FunctionResponseFileData message. Does not implicitly {@link google.cloud.aiplatform.v1.FunctionResponseFileData.verify|verify} messages.
+                     * @param message FunctionResponseFileData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IFunctionResponseFileData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FunctionResponseFileData message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.FunctionResponseFileData.verify|verify} messages.
+                     * @param message FunctionResponseFileData message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IFunctionResponseFileData, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FunctionResponseFileData message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FunctionResponseFileData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.FunctionResponseFileData;
+
+                    /**
+                     * Decodes a FunctionResponseFileData message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FunctionResponseFileData
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.FunctionResponseFileData;
+
+                    /**
+                     * Verifies a FunctionResponseFileData message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FunctionResponseFileData message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FunctionResponseFileData
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.FunctionResponseFileData;
+
+                    /**
+                     * Creates a plain object from a FunctionResponseFileData message. Also converts values to other types if specified.
+                     * @param message FunctionResponseFileData
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.FunctionResponseFileData, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FunctionResponseFileData to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FunctionResponseFileData
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
                 /** Properties of a FunctionResponse. */
                 interface IFunctionResponse {
 
@@ -16222,6 +16552,9 @@ export namespace google {
 
                     /** FunctionResponse response */
                     response?: (google.protobuf.IStruct|null);
+
+                    /** FunctionResponse parts */
+                    parts?: (google.cloud.aiplatform.v1.IFunctionResponsePart[]|null);
                 }
 
                 /** Represents a FunctionResponse. */
@@ -16238,6 +16571,9 @@ export namespace google {
 
                     /** FunctionResponse response. */
                     public response?: (google.protobuf.IStruct|null);
+
+                    /** FunctionResponse parts. */
+                    public parts: google.cloud.aiplatform.v1.IFunctionResponsePart[];
 
                     /**
                      * Creates a new FunctionResponse instance using the specified properties.
