@@ -1316,6 +1316,70 @@ describe('v2beta1.ParticipantsClient', () => {
         });
     });
 
+    describe('bidiStreamingAnalyzeContent', () => {
+        it('invokes bidiStreamingAnalyzeContent without error', async () => {
+            const client = new participantsModule.v2beta1.ParticipantsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest()
+            );
+            
+            const expectedResponse = generateSampleMessage(
+              new protos.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse()
+            );
+            client.innerApiCalls.bidiStreamingAnalyzeContent = stubBidiStreamingCall(expectedResponse);
+            const stream = client.bidiStreamingAnalyzeContent();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            assert((client.innerApiCalls.bidiStreamingAnalyzeContent as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
+        });
+
+        it('invokes bidiStreamingAnalyzeContent with error', async () => {
+            const client = new participantsModule.v2beta1.ParticipantsClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentRequest()
+            );
+            const expectedError = new Error('expected');
+            client.innerApiCalls.bidiStreamingAnalyzeContent = stubBidiStreamingCall(undefined, expectedError);
+            const stream = client.bidiStreamingAnalyzeContent();
+            const promise = new Promise((resolve, reject) => {
+                stream.on('data', (response: protos.google.cloud.dialogflow.v2beta1.BidiStreamingAnalyzeContentResponse) => {
+                    resolve(response);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+                stream.write(request);
+                stream.end();
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.innerApiCalls.bidiStreamingAnalyzeContent as SinonStub)
+                .getCall(0).calledWith(null));
+            assert.deepStrictEqual(((stream as unknown as PassThrough)
+                ._transform as SinonStub).getCall(0).args[0], request);
+        });
+    });
+
     describe('listParticipants', () => {
         it('invokes listParticipants without error', async () => {
             const client = new participantsModule.v2beta1.ParticipantsClient({
@@ -2068,6 +2132,60 @@ describe('v2beta1.ParticipantsClient', () => {
                 const result = client.matchGeneratorFromGeneratorName(fakePath);
                 assert.strictEqual(result, "generatorValue");
                 assert((client.pathTemplates.generatorPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('generatorEvaluation', async () => {
+            const fakePath = "/rendered/path/generatorEvaluation";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                generator: "generatorValue",
+                evaluation: "evaluationValue",
+            };
+            const client = new participantsModule.v2beta1.ParticipantsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.generatorEvaluationPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.generatorEvaluationPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('generatorEvaluationPath', () => {
+                const result = client.generatorEvaluationPath("projectValue", "locationValue", "generatorValue", "evaluationValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromGeneratorEvaluationName', () => {
+                const result = client.matchProjectFromGeneratorEvaluationName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromGeneratorEvaluationName', () => {
+                const result = client.matchLocationFromGeneratorEvaluationName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchGeneratorFromGeneratorEvaluationName', () => {
+                const result = client.matchGeneratorFromGeneratorEvaluationName(fakePath);
+                assert.strictEqual(result, "generatorValue");
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchEvaluationFromGeneratorEvaluationName', () => {
+                const result = client.matchEvaluationFromGeneratorEvaluationName(fakePath);
+                assert.strictEqual(result, "evaluationValue");
+                assert((client.pathTemplates.generatorEvaluationPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
@@ -3800,6 +3918,52 @@ describe('v2beta1.ParticipantsClient', () => {
                 const result = client.matchSiptrunkFromSipTrunkName(fakePath);
                 assert.strictEqual(result, "siptrunkValue");
                 assert((client.pathTemplates.sipTrunkPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
+        describe('tool', async () => {
+            const fakePath = "/rendered/path/tool";
+            const expectedParameters = {
+                project: "projectValue",
+                location: "locationValue",
+                tool: "toolValue",
+            };
+            const client = new participantsModule.v2beta1.ParticipantsClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.toolPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.toolPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('toolPath', () => {
+                const result = client.toolPath("projectValue", "locationValue", "toolValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.toolPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchProjectFromToolName', () => {
+                const result = client.matchProjectFromToolName(fakePath);
+                assert.strictEqual(result, "projectValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromToolName', () => {
+                const result = client.matchLocationFromToolName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchToolFromToolName', () => {
+                const result = client.matchToolFromToolName(fakePath);
+                assert.strictEqual(result, "toolValue");
+                assert((client.pathTemplates.toolPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
