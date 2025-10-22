@@ -16,19 +16,55 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {AdBreakServiceClient, AdUnitServiceClient, BandwidthGroupServiceClient, CompanyServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCategoryServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RoleServiceClient, TaxonomyCategoryServiceClient, UserServiceClient} from '@google-ads/admanager';
+import {AdBreakServiceClient, AdReviewCenterAdServiceClient, AdUnitServiceClient, ApplicationServiceClient, AudienceSegmentServiceClient, BandwidthGroupServiceClient, BrowserLanguageServiceClient, BrowserServiceClient, CmsMetadataKeyServiceClient, CmsMetadataValueServiceClient, CompanyServiceClient, ContactServiceClient, ContentBundleServiceClient, ContentLabelServiceClient, ContentServiceClient, CreativeTemplateServiceClient, CustomFieldServiceClient, CustomTargetingKeyServiceClient, CustomTargetingValueServiceClient, DeviceCapabilityServiceClient, DeviceCategoryServiceClient, DeviceManufacturerServiceClient, EntitySignalsMappingServiceClient, GeoTargetServiceClient, MobileCarrierServiceClient, MobileDeviceServiceClient, MobileDeviceSubmodelServiceClient, NetworkServiceClient, OperatingSystemServiceClient, OperatingSystemVersionServiceClient, OrderServiceClient, PlacementServiceClient, PrivateAuctionDealServiceClient, PrivateAuctionServiceClient, ProgrammaticBuyerServiceClient, ReportServiceClient, RoleServiceClient, SiteServiceClient, TaxonomyCategoryServiceClient, TeamServiceClient, UserServiceClient} from '@google-ads/admanager';
 
 // check that the client class type name can be used
 function doStuffWithAdBreakServiceClient(client: AdBreakServiceClient) {
   client.close();
 }
+function doStuffWithAdReviewCenterAdServiceClient(client: AdReviewCenterAdServiceClient) {
+  client.close();
+}
 function doStuffWithAdUnitServiceClient(client: AdUnitServiceClient) {
+  client.close();
+}
+function doStuffWithApplicationServiceClient(client: ApplicationServiceClient) {
+  client.close();
+}
+function doStuffWithAudienceSegmentServiceClient(client: AudienceSegmentServiceClient) {
   client.close();
 }
 function doStuffWithBandwidthGroupServiceClient(client: BandwidthGroupServiceClient) {
   client.close();
 }
+function doStuffWithBrowserLanguageServiceClient(client: BrowserLanguageServiceClient) {
+  client.close();
+}
+function doStuffWithBrowserServiceClient(client: BrowserServiceClient) {
+  client.close();
+}
+function doStuffWithCmsMetadataKeyServiceClient(client: CmsMetadataKeyServiceClient) {
+  client.close();
+}
+function doStuffWithCmsMetadataValueServiceClient(client: CmsMetadataValueServiceClient) {
+  client.close();
+}
 function doStuffWithCompanyServiceClient(client: CompanyServiceClient) {
+  client.close();
+}
+function doStuffWithContactServiceClient(client: ContactServiceClient) {
+  client.close();
+}
+function doStuffWithContentBundleServiceClient(client: ContentBundleServiceClient) {
+  client.close();
+}
+function doStuffWithContentLabelServiceClient(client: ContentLabelServiceClient) {
+  client.close();
+}
+function doStuffWithContentServiceClient(client: ContentServiceClient) {
+  client.close();
+}
+function doStuffWithCreativeTemplateServiceClient(client: CreativeTemplateServiceClient) {
   client.close();
 }
 function doStuffWithCustomFieldServiceClient(client: CustomFieldServiceClient) {
@@ -40,13 +76,28 @@ function doStuffWithCustomTargetingKeyServiceClient(client: CustomTargetingKeySe
 function doStuffWithCustomTargetingValueServiceClient(client: CustomTargetingValueServiceClient) {
   client.close();
 }
+function doStuffWithDeviceCapabilityServiceClient(client: DeviceCapabilityServiceClient) {
+  client.close();
+}
 function doStuffWithDeviceCategoryServiceClient(client: DeviceCategoryServiceClient) {
+  client.close();
+}
+function doStuffWithDeviceManufacturerServiceClient(client: DeviceManufacturerServiceClient) {
   client.close();
 }
 function doStuffWithEntitySignalsMappingServiceClient(client: EntitySignalsMappingServiceClient) {
   client.close();
 }
 function doStuffWithGeoTargetServiceClient(client: GeoTargetServiceClient) {
+  client.close();
+}
+function doStuffWithMobileCarrierServiceClient(client: MobileCarrierServiceClient) {
+  client.close();
+}
+function doStuffWithMobileDeviceServiceClient(client: MobileDeviceServiceClient) {
+  client.close();
+}
+function doStuffWithMobileDeviceSubmodelServiceClient(client: MobileDeviceSubmodelServiceClient) {
   client.close();
 }
 function doStuffWithNetworkServiceClient(client: NetworkServiceClient) {
@@ -79,7 +130,13 @@ function doStuffWithReportServiceClient(client: ReportServiceClient) {
 function doStuffWithRoleServiceClient(client: RoleServiceClient) {
   client.close();
 }
+function doStuffWithSiteServiceClient(client: SiteServiceClient) {
+  client.close();
+}
 function doStuffWithTaxonomyCategoryServiceClient(client: TaxonomyCategoryServiceClient) {
+  client.close();
+}
+function doStuffWithTeamServiceClient(client: TeamServiceClient) {
   client.close();
 }
 function doStuffWithUserServiceClient(client: UserServiceClient) {
@@ -91,14 +148,50 @@ function main() {
   const adBreakServiceClient = new AdBreakServiceClient();
   doStuffWithAdBreakServiceClient(adBreakServiceClient);
   // check that the client instance can be created
+  const adReviewCenterAdServiceClient = new AdReviewCenterAdServiceClient();
+  doStuffWithAdReviewCenterAdServiceClient(adReviewCenterAdServiceClient);
+  // check that the client instance can be created
   const adUnitServiceClient = new AdUnitServiceClient();
   doStuffWithAdUnitServiceClient(adUnitServiceClient);
+  // check that the client instance can be created
+  const applicationServiceClient = new ApplicationServiceClient();
+  doStuffWithApplicationServiceClient(applicationServiceClient);
+  // check that the client instance can be created
+  const audienceSegmentServiceClient = new AudienceSegmentServiceClient();
+  doStuffWithAudienceSegmentServiceClient(audienceSegmentServiceClient);
   // check that the client instance can be created
   const bandwidthGroupServiceClient = new BandwidthGroupServiceClient();
   doStuffWithBandwidthGroupServiceClient(bandwidthGroupServiceClient);
   // check that the client instance can be created
+  const browserLanguageServiceClient = new BrowserLanguageServiceClient();
+  doStuffWithBrowserLanguageServiceClient(browserLanguageServiceClient);
+  // check that the client instance can be created
+  const browserServiceClient = new BrowserServiceClient();
+  doStuffWithBrowserServiceClient(browserServiceClient);
+  // check that the client instance can be created
+  const cmsMetadataKeyServiceClient = new CmsMetadataKeyServiceClient();
+  doStuffWithCmsMetadataKeyServiceClient(cmsMetadataKeyServiceClient);
+  // check that the client instance can be created
+  const cmsMetadataValueServiceClient = new CmsMetadataValueServiceClient();
+  doStuffWithCmsMetadataValueServiceClient(cmsMetadataValueServiceClient);
+  // check that the client instance can be created
   const companyServiceClient = new CompanyServiceClient();
   doStuffWithCompanyServiceClient(companyServiceClient);
+  // check that the client instance can be created
+  const contactServiceClient = new ContactServiceClient();
+  doStuffWithContactServiceClient(contactServiceClient);
+  // check that the client instance can be created
+  const contentBundleServiceClient = new ContentBundleServiceClient();
+  doStuffWithContentBundleServiceClient(contentBundleServiceClient);
+  // check that the client instance can be created
+  const contentLabelServiceClient = new ContentLabelServiceClient();
+  doStuffWithContentLabelServiceClient(contentLabelServiceClient);
+  // check that the client instance can be created
+  const contentServiceClient = new ContentServiceClient();
+  doStuffWithContentServiceClient(contentServiceClient);
+  // check that the client instance can be created
+  const creativeTemplateServiceClient = new CreativeTemplateServiceClient();
+  doStuffWithCreativeTemplateServiceClient(creativeTemplateServiceClient);
   // check that the client instance can be created
   const customFieldServiceClient = new CustomFieldServiceClient();
   doStuffWithCustomFieldServiceClient(customFieldServiceClient);
@@ -109,14 +202,29 @@ function main() {
   const customTargetingValueServiceClient = new CustomTargetingValueServiceClient();
   doStuffWithCustomTargetingValueServiceClient(customTargetingValueServiceClient);
   // check that the client instance can be created
+  const deviceCapabilityServiceClient = new DeviceCapabilityServiceClient();
+  doStuffWithDeviceCapabilityServiceClient(deviceCapabilityServiceClient);
+  // check that the client instance can be created
   const deviceCategoryServiceClient = new DeviceCategoryServiceClient();
   doStuffWithDeviceCategoryServiceClient(deviceCategoryServiceClient);
+  // check that the client instance can be created
+  const deviceManufacturerServiceClient = new DeviceManufacturerServiceClient();
+  doStuffWithDeviceManufacturerServiceClient(deviceManufacturerServiceClient);
   // check that the client instance can be created
   const entitySignalsMappingServiceClient = new EntitySignalsMappingServiceClient();
   doStuffWithEntitySignalsMappingServiceClient(entitySignalsMappingServiceClient);
   // check that the client instance can be created
   const geoTargetServiceClient = new GeoTargetServiceClient();
   doStuffWithGeoTargetServiceClient(geoTargetServiceClient);
+  // check that the client instance can be created
+  const mobileCarrierServiceClient = new MobileCarrierServiceClient();
+  doStuffWithMobileCarrierServiceClient(mobileCarrierServiceClient);
+  // check that the client instance can be created
+  const mobileDeviceServiceClient = new MobileDeviceServiceClient();
+  doStuffWithMobileDeviceServiceClient(mobileDeviceServiceClient);
+  // check that the client instance can be created
+  const mobileDeviceSubmodelServiceClient = new MobileDeviceSubmodelServiceClient();
+  doStuffWithMobileDeviceSubmodelServiceClient(mobileDeviceSubmodelServiceClient);
   // check that the client instance can be created
   const networkServiceClient = new NetworkServiceClient();
   doStuffWithNetworkServiceClient(networkServiceClient);
@@ -148,8 +256,14 @@ function main() {
   const roleServiceClient = new RoleServiceClient();
   doStuffWithRoleServiceClient(roleServiceClient);
   // check that the client instance can be created
+  const siteServiceClient = new SiteServiceClient();
+  doStuffWithSiteServiceClient(siteServiceClient);
+  // check that the client instance can be created
   const taxonomyCategoryServiceClient = new TaxonomyCategoryServiceClient();
   doStuffWithTaxonomyCategoryServiceClient(taxonomyCategoryServiceClient);
+  // check that the client instance can be created
+  const teamServiceClient = new TeamServiceClient();
+  doStuffWithTeamServiceClient(teamServiceClient);
   // check that the client instance can be created
   const userServiceClient = new UserServiceClient();
   doStuffWithUserServiceClient(userServiceClient);
