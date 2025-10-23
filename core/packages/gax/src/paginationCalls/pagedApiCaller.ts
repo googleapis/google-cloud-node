@@ -28,7 +28,7 @@ import {CallOptions} from '../gax';
 import {GoogleError} from '../googleError';
 import {PageDescriptor} from './pageDescriptor';
 import {ResourceCollector} from './resourceCollector';
-import {warn} from '.././warnings';
+import {warn} from '../warnings';
 
 export class PagedApiCaller implements APICaller {
   pageDescriptor: PageDescriptor;

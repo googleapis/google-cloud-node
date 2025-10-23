@@ -28,7 +28,7 @@ import {
 import {Descriptor} from '../descriptor';
 import {CallSettings} from '../gax';
 import {NormalApiCaller} from '../normalCalls/normalApiCaller';
-import {warn} from '.././warnings';
+import {warn} from '../warnings';
 
 import {PagedApiCaller} from './pagedApiCaller';
 
