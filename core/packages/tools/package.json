@@ -35,7 +35,8 @@
     "protobufjs-cli": "^1.2.0",
     "uglify-js": "^3.19.3",
     "walk-up-path": "^3.0.0",
-    "walkdir": "^0.4.1"
+    "walkdir": "^0.4.1",
+    "rimraf": "^5.0.1"
   },
   "repository": {
     "type": "git",
