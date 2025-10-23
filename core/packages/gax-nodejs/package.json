@@ -3,12 +3,18 @@
   "private": true,
   "description": "Google API Extensions",
   "scripts": {
-    "test": "echo \"Please go into tools/ and gax/ to run tests separately\" && exit 1"
+    "test": "echo \"Please go into tools/ and gax/ to run tests separately\" && exit 1",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test"
   },
   "keywords": [
     "grpc"
   ],
-  "repository": "googleapis/gax-nodejs",
+  "repository": {
+    "type": "git",
+    "directory": "packages/gax-nodejs",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+  },
   "author": "Google API Authors",
   "license": "Apache-2.0",
   "bugs": {
@@ -17,5 +23,5 @@
   "engines": {
     "node": ">=18"
   },
-  "homepage": "https://github.com/googleapis/gax-nodejs#readme"
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gax-nodejs"
 }

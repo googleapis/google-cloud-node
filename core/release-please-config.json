@@ -5,6 +5,7 @@
     "dev-packages/jsdoc-fresh": {},
     "dev-packages/jsdoc-region-tag": {},
     "dev-packages/pack-n-play": {},
+    "packages/gax-nodejs": {},
     "packages/gaxios": {},
     "packages/gcp-metadata": {},
     "packages/proto3-json-serializer-nodejs": {}
