@@ -1702,6 +1702,9 @@ export namespace google {
 
                     /** Review googleMapsUri */
                     googleMapsUri?: (string|null);
+
+                    /** Review visitDate */
+                    visitDate?: (google.type.IDate|null);
                 }
 
                 /** Represents a Review. */
@@ -1739,6 +1742,9 @@ export namespace google {
 
                     /** Review googleMapsUri. */
                     public googleMapsUri: string;
+
+                    /** Review visitDate. */
+                    public visitDate?: (google.type.IDate|null);
 
                     /**
                      * Creates a new Review instance using the specified properties.
@@ -3394,6 +3400,9 @@ export namespace google {
                     /** Place neighborhoodSummary */
                     neighborhoodSummary?: (google.maps.places.v1.Place.INeighborhoodSummary|null);
 
+                    /** Place consumerAlert */
+                    consumerAlert?: (google.maps.places.v1.Place.IConsumerAlert|null);
+
                     /** Place movedPlace */
                     movedPlace?: (string|null);
 
@@ -3622,6 +3631,9 @@ export namespace google {
 
                     /** Place neighborhoodSummary. */
                     public neighborhoodSummary?: (google.maps.places.v1.Place.INeighborhoodSummary|null);
+
+                    /** Place consumerAlert. */
+                    public consumerAlert?: (google.maps.places.v1.Place.IConsumerAlert|null);
 
                     /** Place movedPlace. */
                     public movedPlace: string;
@@ -5549,6 +5561,333 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    /** Properties of a ConsumerAlert. */
+                    interface IConsumerAlert {
+
+                        /** ConsumerAlert overview */
+                        overview?: (string|null);
+
+                        /** ConsumerAlert details */
+                        details?: (google.maps.places.v1.Place.ConsumerAlert.IDetails|null);
+
+                        /** ConsumerAlert languageCode */
+                        languageCode?: (string|null);
+                    }
+
+                    /** Represents a ConsumerAlert. */
+                    class ConsumerAlert implements IConsumerAlert {
+
+                        /**
+                         * Constructs a new ConsumerAlert.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.maps.places.v1.Place.IConsumerAlert);
+
+                        /** ConsumerAlert overview. */
+                        public overview: string;
+
+                        /** ConsumerAlert details. */
+                        public details?: (google.maps.places.v1.Place.ConsumerAlert.IDetails|null);
+
+                        /** ConsumerAlert languageCode. */
+                        public languageCode: string;
+
+                        /**
+                         * Creates a new ConsumerAlert instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns ConsumerAlert instance
+                         */
+                        public static create(properties?: google.maps.places.v1.Place.IConsumerAlert): google.maps.places.v1.Place.ConsumerAlert;
+
+                        /**
+                         * Encodes the specified ConsumerAlert message. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.verify|verify} messages.
+                         * @param message ConsumerAlert message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.maps.places.v1.Place.IConsumerAlert, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified ConsumerAlert message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.verify|verify} messages.
+                         * @param message ConsumerAlert message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.maps.places.v1.Place.IConsumerAlert, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a ConsumerAlert message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns ConsumerAlert
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.ConsumerAlert;
+
+                        /**
+                         * Decodes a ConsumerAlert message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns ConsumerAlert
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.ConsumerAlert;
+
+                        /**
+                         * Verifies a ConsumerAlert message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a ConsumerAlert message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns ConsumerAlert
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.ConsumerAlert;
+
+                        /**
+                         * Creates a plain object from a ConsumerAlert message. Also converts values to other types if specified.
+                         * @param message ConsumerAlert
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.maps.places.v1.Place.ConsumerAlert, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this ConsumerAlert to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for ConsumerAlert
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
+                    namespace ConsumerAlert {
+
+                        /** Properties of a Details. */
+                        interface IDetails {
+
+                            /** Details title */
+                            title?: (string|null);
+
+                            /** Details description */
+                            description?: (string|null);
+
+                            /** Details aboutLink */
+                            aboutLink?: (google.maps.places.v1.Place.ConsumerAlert.Details.ILink|null);
+                        }
+
+                        /** Represents a Details. */
+                        class Details implements IDetails {
+
+                            /**
+                             * Constructs a new Details.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.maps.places.v1.Place.ConsumerAlert.IDetails);
+
+                            /** Details title. */
+                            public title: string;
+
+                            /** Details description. */
+                            public description: string;
+
+                            /** Details aboutLink. */
+                            public aboutLink?: (google.maps.places.v1.Place.ConsumerAlert.Details.ILink|null);
+
+                            /**
+                             * Creates a new Details instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns Details instance
+                             */
+                            public static create(properties?: google.maps.places.v1.Place.ConsumerAlert.IDetails): google.maps.places.v1.Place.ConsumerAlert.Details;
+
+                            /**
+                             * Encodes the specified Details message. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.Details.verify|verify} messages.
+                             * @param message Details message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.maps.places.v1.Place.ConsumerAlert.IDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified Details message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.Details.verify|verify} messages.
+                             * @param message Details message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.maps.places.v1.Place.ConsumerAlert.IDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a Details message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns Details
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.ConsumerAlert.Details;
+
+                            /**
+                             * Decodes a Details message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns Details
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.ConsumerAlert.Details;
+
+                            /**
+                             * Verifies a Details message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a Details message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns Details
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.ConsumerAlert.Details;
+
+                            /**
+                             * Creates a plain object from a Details message. Also converts values to other types if specified.
+                             * @param message Details
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.maps.places.v1.Place.ConsumerAlert.Details, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this Details to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for Details
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
+
+                        namespace Details {
+
+                            /** Properties of a Link. */
+                            interface ILink {
+
+                                /** Link title */
+                                title?: (string|null);
+
+                                /** Link uri */
+                                uri?: (string|null);
+                            }
+
+                            /** Represents a Link. */
+                            class Link implements ILink {
+
+                                /**
+                                 * Constructs a new Link.
+                                 * @param [properties] Properties to set
+                                 */
+                                constructor(properties?: google.maps.places.v1.Place.ConsumerAlert.Details.ILink);
+
+                                /** Link title. */
+                                public title: string;
+
+                                /** Link uri. */
+                                public uri: string;
+
+                                /**
+                                 * Creates a new Link instance using the specified properties.
+                                 * @param [properties] Properties to set
+                                 * @returns Link instance
+                                 */
+                                public static create(properties?: google.maps.places.v1.Place.ConsumerAlert.Details.ILink): google.maps.places.v1.Place.ConsumerAlert.Details.Link;
+
+                                /**
+                                 * Encodes the specified Link message. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.Details.Link.verify|verify} messages.
+                                 * @param message Link message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encode(message: google.maps.places.v1.Place.ConsumerAlert.Details.ILink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Encodes the specified Link message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.Details.Link.verify|verify} messages.
+                                 * @param message Link message or plain object to encode
+                                 * @param [writer] Writer to encode to
+                                 * @returns Writer
+                                 */
+                                public static encodeDelimited(message: google.maps.places.v1.Place.ConsumerAlert.Details.ILink, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                                /**
+                                 * Decodes a Link message from the specified reader or buffer.
+                                 * @param reader Reader or buffer to decode from
+                                 * @param [length] Message length if known beforehand
+                                 * @returns Link
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.maps.places.v1.Place.ConsumerAlert.Details.Link;
+
+                                /**
+                                 * Decodes a Link message from the specified reader or buffer, length delimited.
+                                 * @param reader Reader or buffer to decode from
+                                 * @returns Link
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.maps.places.v1.Place.ConsumerAlert.Details.Link;
+
+                                /**
+                                 * Verifies a Link message.
+                                 * @param message Plain object to verify
+                                 * @returns `null` if valid, otherwise the reason why it is not
+                                 */
+                                public static verify(message: { [k: string]: any }): (string|null);
+
+                                /**
+                                 * Creates a Link message from a plain object. Also converts values to their respective internal types.
+                                 * @param object Plain object
+                                 * @returns Link
+                                 */
+                                public static fromObject(object: { [k: string]: any }): google.maps.places.v1.Place.ConsumerAlert.Details.Link;
+
+                                /**
+                                 * Creates a plain object from a Link message. Also converts values to other types if specified.
+                                 * @param message Link
+                                 * @param [options] Conversion options
+                                 * @returns Plain object
+                                 */
+                                public static toObject(message: google.maps.places.v1.Place.ConsumerAlert.Details.Link, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                                /**
+                                 * Converts this Link to JSON.
+                                 * @returns JSON object
+                                 */
+                                public toJSON(): { [k: string]: any };
+
+                                /**
+                                 * Gets the default type url for Link
+                                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns The default type url
+                                 */
+                                public static getTypeUrl(typeUrlPrefix?: string): string;
+                            }
+                        }
                     }
                 }
 

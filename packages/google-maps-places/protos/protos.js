@@ -4284,6 +4284,7 @@
                          * @property {google.protobuf.ITimestamp|null} [publishTime] Review publishTime
                          * @property {string|null} [flagContentUri] Review flagContentUri
                          * @property {string|null} [googleMapsUri] Review googleMapsUri
+                         * @property {google.type.IDate|null} [visitDate] Review visitDate
                          */
     
                         /**
@@ -4374,6 +4375,14 @@
                         Review.prototype.googleMapsUri = "";
     
                         /**
+                         * Review visitDate.
+                         * @member {google.type.IDate|null|undefined} visitDate
+                         * @memberof google.maps.places.v1.Review
+                         * @instance
+                         */
+                        Review.prototype.visitDate = null;
+    
+                        /**
                          * Creates a new Review instance using the specified properties.
                          * @function create
                          * @memberof google.maps.places.v1.Review
@@ -4415,6 +4424,8 @@
                                 writer.uint32(/* id 15, wireType 2 =*/122).string(message.flagContentUri);
                             if (message.googleMapsUri != null && Object.hasOwnProperty.call(message, "googleMapsUri"))
                                 writer.uint32(/* id 16, wireType 2 =*/130).string(message.googleMapsUri);
+                            if (message.visitDate != null && Object.hasOwnProperty.call(message, "visitDate"))
+                                $root.google.type.Date.encode(message.visitDate, writer.uint32(/* id 17, wireType 2 =*/138).fork()).ldelim();
                             return writer;
                         };
     
@@ -4487,6 +4498,10 @@
                                         message.googleMapsUri = reader.string();
                                         break;
                                     }
+                                case 17: {
+                                        message.visitDate = $root.google.type.Date.decode(reader, reader.uint32());
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -4557,6 +4572,11 @@
                             if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri"))
                                 if (!$util.isString(message.googleMapsUri))
                                     return "googleMapsUri: string expected";
+                            if (message.visitDate != null && message.hasOwnProperty("visitDate")) {
+                                var error = $root.google.type.Date.verify(message.visitDate);
+                                if (error)
+                                    return "visitDate." + error;
+                            }
                             return null;
                         };
     
@@ -4602,6 +4622,11 @@
                                 message.flagContentUri = String(object.flagContentUri);
                             if (object.googleMapsUri != null)
                                 message.googleMapsUri = String(object.googleMapsUri);
+                            if (object.visitDate != null) {
+                                if (typeof object.visitDate !== "object")
+                                    throw TypeError(".google.maps.places.v1.Review.visitDate: object expected");
+                                message.visitDate = $root.google.type.Date.fromObject(object.visitDate);
+                            }
                             return message;
                         };
     
@@ -4628,6 +4653,7 @@
                                 object.publishTime = null;
                                 object.flagContentUri = "";
                                 object.googleMapsUri = "";
+                                object.visitDate = null;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -4647,6 +4673,8 @@
                                 object.flagContentUri = message.flagContentUri;
                             if (message.googleMapsUri != null && message.hasOwnProperty("googleMapsUri"))
                                 object.googleMapsUri = message.googleMapsUri;
+                            if (message.visitDate != null && message.hasOwnProperty("visitDate"))
+                                object.visitDate = $root.google.type.Date.toObject(message.visitDate, options);
                             return object;
                         };
     
@@ -8232,6 +8260,7 @@
                          * @property {google.maps.places.v1.Place.IReviewSummary|null} [reviewSummary] Place reviewSummary
                          * @property {google.maps.places.v1.Place.IEvChargeAmenitySummary|null} [evChargeAmenitySummary] Place evChargeAmenitySummary
                          * @property {google.maps.places.v1.Place.INeighborhoodSummary|null} [neighborhoodSummary] Place neighborhoodSummary
+                         * @property {google.maps.places.v1.Place.IConsumerAlert|null} [consumerAlert] Place consumerAlert
                          * @property {string|null} [movedPlace] Place movedPlace
                          * @property {string|null} [movedPlaceId] Place movedPlaceId
                          */
@@ -8829,6 +8858,14 @@
                         Place.prototype.neighborhoodSummary = null;
     
                         /**
+                         * Place consumerAlert.
+                         * @member {google.maps.places.v1.Place.IConsumerAlert|null|undefined} consumerAlert
+                         * @memberof google.maps.places.v1.Place
+                         * @instance
+                         */
+                        Place.prototype.consumerAlert = null;
+    
+                        /**
                          * Place movedPlace.
                          * @member {string} movedPlace
                          * @memberof google.maps.places.v1.Place
@@ -9184,6 +9221,8 @@
                                 $root.google.type.PostalAddress.encode(message.postalAddress, writer.uint32(/* id 90, wireType 2 =*/722).fork()).ldelim();
                             if (message.neighborhoodSummary != null && Object.hasOwnProperty.call(message, "neighborhoodSummary"))
                                 $root.google.maps.places.v1.Place.NeighborhoodSummary.encode(message.neighborhoodSummary, writer.uint32(/* id 91, wireType 2 =*/730).fork()).ldelim();
+                            if (message.consumerAlert != null && Object.hasOwnProperty.call(message, "consumerAlert"))
+                                $root.google.maps.places.v1.Place.ConsumerAlert.encode(message.consumerAlert, writer.uint32(/* id 92, wireType 2 =*/738).fork()).ldelim();
                             if (message.movedPlace != null && Object.hasOwnProperty.call(message, "movedPlace"))
                                 writer.uint32(/* id 93, wireType 2 =*/746).string(message.movedPlace);
                             if (message.movedPlaceId != null && Object.hasOwnProperty.call(message, "movedPlaceId"))
@@ -9524,6 +9563,10 @@
                                     }
                                 case 91: {
                                         message.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 92: {
+                                        message.consumerAlert = $root.google.maps.places.v1.Place.ConsumerAlert.decode(reader, reader.uint32());
                                         break;
                                     }
                                 case 93: {
@@ -9948,6 +9991,11 @@
                                 if (error)
                                     return "neighborhoodSummary." + error;
                             }
+                            if (message.consumerAlert != null && message.hasOwnProperty("consumerAlert")) {
+                                var error = $root.google.maps.places.v1.Place.ConsumerAlert.verify(message.consumerAlert);
+                                if (error)
+                                    return "consumerAlert." + error;
+                            }
                             if (message.movedPlace != null && message.hasOwnProperty("movedPlace"))
                                 if (!$util.isString(message.movedPlace))
                                     return "movedPlace: string expected";
@@ -10295,6 +10343,11 @@
                                     throw TypeError(".google.maps.places.v1.Place.neighborhoodSummary: object expected");
                                 message.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.fromObject(object.neighborhoodSummary);
                             }
+                            if (object.consumerAlert != null) {
+                                if (typeof object.consumerAlert !== "object")
+                                    throw TypeError(".google.maps.places.v1.Place.consumerAlert: object expected");
+                                message.consumerAlert = $root.google.maps.places.v1.Place.ConsumerAlert.fromObject(object.consumerAlert);
+                            }
                             if (object.movedPlace != null)
                                 message.movedPlace = String(object.movedPlace);
                             if (object.movedPlaceId != null)
@@ -10362,6 +10415,7 @@
                                 object.evChargeAmenitySummary = null;
                                 object.postalAddress = null;
                                 object.neighborhoodSummary = null;
+                                object.consumerAlert = null;
                                 object.movedPlace = "";
                                 object.movedPlaceId = "";
                             }
@@ -10615,6 +10669,8 @@
                                 object.postalAddress = $root.google.type.PostalAddress.toObject(message.postalAddress, options);
                             if (message.neighborhoodSummary != null && message.hasOwnProperty("neighborhoodSummary"))
                                 object.neighborhoodSummary = $root.google.maps.places.v1.Place.NeighborhoodSummary.toObject(message.neighborhoodSummary, options);
+                            if (message.consumerAlert != null && message.hasOwnProperty("consumerAlert"))
+                                object.consumerAlert = $root.google.maps.places.v1.Place.ConsumerAlert.toObject(message.consumerAlert, options);
                             if (message.movedPlace != null && message.hasOwnProperty("movedPlace"))
                                 object.movedPlace = message.movedPlace;
                             if (message.movedPlaceId != null && message.hasOwnProperty("movedPlaceId"))
@@ -15436,6 +15492,749 @@
                             };
     
                             return NeighborhoodSummary;
+                        })();
+    
+                        Place.ConsumerAlert = (function() {
+    
+                            /**
+                             * Properties of a ConsumerAlert.
+                             * @memberof google.maps.places.v1.Place
+                             * @interface IConsumerAlert
+                             * @property {string|null} [overview] ConsumerAlert overview
+                             * @property {google.maps.places.v1.Place.ConsumerAlert.IDetails|null} [details] ConsumerAlert details
+                             * @property {string|null} [languageCode] ConsumerAlert languageCode
+                             */
+    
+                            /**
+                             * Constructs a new ConsumerAlert.
+                             * @memberof google.maps.places.v1.Place
+                             * @classdesc Represents a ConsumerAlert.
+                             * @implements IConsumerAlert
+                             * @constructor
+                             * @param {google.maps.places.v1.Place.IConsumerAlert=} [properties] Properties to set
+                             */
+                            function ConsumerAlert(properties) {
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * ConsumerAlert overview.
+                             * @member {string} overview
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @instance
+                             */
+                            ConsumerAlert.prototype.overview = "";
+    
+                            /**
+                             * ConsumerAlert details.
+                             * @member {google.maps.places.v1.Place.ConsumerAlert.IDetails|null|undefined} details
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @instance
+                             */
+                            ConsumerAlert.prototype.details = null;
+    
+                            /**
+                             * ConsumerAlert languageCode.
+                             * @member {string} languageCode
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @instance
+                             */
+                            ConsumerAlert.prototype.languageCode = "";
+    
+                            /**
+                             * Creates a new ConsumerAlert instance using the specified properties.
+                             * @function create
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @static
+                             * @param {google.maps.places.v1.Place.IConsumerAlert=} [properties] Properties to set
+                             * @returns {google.maps.places.v1.Place.ConsumerAlert} ConsumerAlert instance
+                             */
+                            ConsumerAlert.create = function create(properties) {
+                                return new ConsumerAlert(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified ConsumerAlert message. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @static
+                             * @param {google.maps.places.v1.Place.IConsumerAlert} message ConsumerAlert message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConsumerAlert.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.overview != null && Object.hasOwnProperty.call(message, "overview"))
+                                    writer.uint32(/* id 1, wireType 2 =*/10).string(message.overview);
+                                if (message.details != null && Object.hasOwnProperty.call(message, "details"))
+                                    $root.google.maps.places.v1.Place.ConsumerAlert.Details.encode(message.details, writer.uint32(/* id 2, wireType 2 =*/18).fork()).ldelim();
+                                if (message.languageCode != null && Object.hasOwnProperty.call(message, "languageCode"))
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.languageCode);
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified ConsumerAlert message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @static
+                             * @param {google.maps.places.v1.Place.IConsumerAlert} message ConsumerAlert message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            ConsumerAlert.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a ConsumerAlert message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.maps.places.v1.Place.ConsumerAlert} ConsumerAlert
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConsumerAlert.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ConsumerAlert();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.overview = reader.string();
+                                            break;
+                                        }
+                                    case 2: {
+                                            message.details = $root.google.maps.places.v1.Place.ConsumerAlert.Details.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 3: {
+                                            message.languageCode = reader.string();
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a ConsumerAlert message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.maps.places.v1.Place.ConsumerAlert} ConsumerAlert
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            ConsumerAlert.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a ConsumerAlert message.
+                             * @function verify
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            ConsumerAlert.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.overview != null && message.hasOwnProperty("overview"))
+                                    if (!$util.isString(message.overview))
+                                        return "overview: string expected";
+                                if (message.details != null && message.hasOwnProperty("details")) {
+                                    var error = $root.google.maps.places.v1.Place.ConsumerAlert.Details.verify(message.details);
+                                    if (error)
+                                        return "details." + error;
+                                }
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    if (!$util.isString(message.languageCode))
+                                        return "languageCode: string expected";
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a ConsumerAlert message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.maps.places.v1.Place.ConsumerAlert} ConsumerAlert
+                             */
+                            ConsumerAlert.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.maps.places.v1.Place.ConsumerAlert)
+                                    return object;
+                                var message = new $root.google.maps.places.v1.Place.ConsumerAlert();
+                                if (object.overview != null)
+                                    message.overview = String(object.overview);
+                                if (object.details != null) {
+                                    if (typeof object.details !== "object")
+                                        throw TypeError(".google.maps.places.v1.Place.ConsumerAlert.details: object expected");
+                                    message.details = $root.google.maps.places.v1.Place.ConsumerAlert.Details.fromObject(object.details);
+                                }
+                                if (object.languageCode != null)
+                                    message.languageCode = String(object.languageCode);
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a ConsumerAlert message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @static
+                             * @param {google.maps.places.v1.Place.ConsumerAlert} message ConsumerAlert
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            ConsumerAlert.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.defaults) {
+                                    object.overview = "";
+                                    object.details = null;
+                                    object.languageCode = "";
+                                }
+                                if (message.overview != null && message.hasOwnProperty("overview"))
+                                    object.overview = message.overview;
+                                if (message.details != null && message.hasOwnProperty("details"))
+                                    object.details = $root.google.maps.places.v1.Place.ConsumerAlert.Details.toObject(message.details, options);
+                                if (message.languageCode != null && message.hasOwnProperty("languageCode"))
+                                    object.languageCode = message.languageCode;
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this ConsumerAlert to JSON.
+                             * @function toJSON
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            ConsumerAlert.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for ConsumerAlert
+                             * @function getTypeUrl
+                             * @memberof google.maps.places.v1.Place.ConsumerAlert
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            ConsumerAlert.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.maps.places.v1.Place.ConsumerAlert";
+                            };
+    
+                            ConsumerAlert.Details = (function() {
+    
+                                /**
+                                 * Properties of a Details.
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert
+                                 * @interface IDetails
+                                 * @property {string|null} [title] Details title
+                                 * @property {string|null} [description] Details description
+                                 * @property {google.maps.places.v1.Place.ConsumerAlert.Details.ILink|null} [aboutLink] Details aboutLink
+                                 */
+    
+                                /**
+                                 * Constructs a new Details.
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert
+                                 * @classdesc Represents a Details.
+                                 * @implements IDetails
+                                 * @constructor
+                                 * @param {google.maps.places.v1.Place.ConsumerAlert.IDetails=} [properties] Properties to set
+                                 */
+                                function Details(properties) {
+                                    if (properties)
+                                        for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                            if (properties[keys[i]] != null)
+                                                this[keys[i]] = properties[keys[i]];
+                                }
+    
+                                /**
+                                 * Details title.
+                                 * @member {string} title
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @instance
+                                 */
+                                Details.prototype.title = "";
+    
+                                /**
+                                 * Details description.
+                                 * @member {string} description
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @instance
+                                 */
+                                Details.prototype.description = "";
+    
+                                /**
+                                 * Details aboutLink.
+                                 * @member {google.maps.places.v1.Place.ConsumerAlert.Details.ILink|null|undefined} aboutLink
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @instance
+                                 */
+                                Details.prototype.aboutLink = null;
+    
+                                /**
+                                 * Creates a new Details instance using the specified properties.
+                                 * @function create
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @static
+                                 * @param {google.maps.places.v1.Place.ConsumerAlert.IDetails=} [properties] Properties to set
+                                 * @returns {google.maps.places.v1.Place.ConsumerAlert.Details} Details instance
+                                 */
+                                Details.create = function create(properties) {
+                                    return new Details(properties);
+                                };
+    
+                                /**
+                                 * Encodes the specified Details message. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.Details.verify|verify} messages.
+                                 * @function encode
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @static
+                                 * @param {google.maps.places.v1.Place.ConsumerAlert.IDetails} message Details message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Details.encode = function encode(message, writer) {
+                                    if (!writer)
+                                        writer = $Writer.create();
+                                    if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                        writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
+                                    if (message.description != null && Object.hasOwnProperty.call(message, "description"))
+                                        writer.uint32(/* id 2, wireType 2 =*/18).string(message.description);
+                                    if (message.aboutLink != null && Object.hasOwnProperty.call(message, "aboutLink"))
+                                        $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.encode(message.aboutLink, writer.uint32(/* id 3, wireType 2 =*/26).fork()).ldelim();
+                                    return writer;
+                                };
+    
+                                /**
+                                 * Encodes the specified Details message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.Details.verify|verify} messages.
+                                 * @function encodeDelimited
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @static
+                                 * @param {google.maps.places.v1.Place.ConsumerAlert.IDetails} message Details message or plain object to encode
+                                 * @param {$protobuf.Writer} [writer] Writer to encode to
+                                 * @returns {$protobuf.Writer} Writer
+                                 */
+                                Details.encodeDelimited = function encodeDelimited(message, writer) {
+                                    return this.encode(message, writer).ldelim();
+                                };
+    
+                                /**
+                                 * Decodes a Details message from the specified reader or buffer.
+                                 * @function decode
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @param {number} [length] Message length if known beforehand
+                                 * @returns {google.maps.places.v1.Place.ConsumerAlert.Details} Details
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Details.decode = function decode(reader, length, error) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = $Reader.create(reader);
+                                    var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ConsumerAlert.Details();
+                                    while (reader.pos < end) {
+                                        var tag = reader.uint32();
+                                        if (tag === error)
+                                            break;
+                                        switch (tag >>> 3) {
+                                        case 1: {
+                                                message.title = reader.string();
+                                                break;
+                                            }
+                                        case 2: {
+                                                message.description = reader.string();
+                                                break;
+                                            }
+                                        case 3: {
+                                                message.aboutLink = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.decode(reader, reader.uint32());
+                                                break;
+                                            }
+                                        default:
+                                            reader.skipType(tag & 7);
+                                            break;
+                                        }
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Decodes a Details message from the specified reader or buffer, length delimited.
+                                 * @function decodeDelimited
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @static
+                                 * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                 * @returns {google.maps.places.v1.Place.ConsumerAlert.Details} Details
+                                 * @throws {Error} If the payload is not a reader or valid buffer
+                                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                 */
+                                Details.decodeDelimited = function decodeDelimited(reader) {
+                                    if (!(reader instanceof $Reader))
+                                        reader = new $Reader(reader);
+                                    return this.decode(reader, reader.uint32());
+                                };
+    
+                                /**
+                                 * Verifies a Details message.
+                                 * @function verify
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @static
+                                 * @param {Object.<string,*>} message Plain object to verify
+                                 * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                 */
+                                Details.verify = function verify(message) {
+                                    if (typeof message !== "object" || message === null)
+                                        return "object expected";
+                                    if (message.title != null && message.hasOwnProperty("title"))
+                                        if (!$util.isString(message.title))
+                                            return "title: string expected";
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        if (!$util.isString(message.description))
+                                            return "description: string expected";
+                                    if (message.aboutLink != null && message.hasOwnProperty("aboutLink")) {
+                                        var error = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.verify(message.aboutLink);
+                                        if (error)
+                                            return "aboutLink." + error;
+                                    }
+                                    return null;
+                                };
+    
+                                /**
+                                 * Creates a Details message from a plain object. Also converts values to their respective internal types.
+                                 * @function fromObject
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @static
+                                 * @param {Object.<string,*>} object Plain object
+                                 * @returns {google.maps.places.v1.Place.ConsumerAlert.Details} Details
+                                 */
+                                Details.fromObject = function fromObject(object) {
+                                    if (object instanceof $root.google.maps.places.v1.Place.ConsumerAlert.Details)
+                                        return object;
+                                    var message = new $root.google.maps.places.v1.Place.ConsumerAlert.Details();
+                                    if (object.title != null)
+                                        message.title = String(object.title);
+                                    if (object.description != null)
+                                        message.description = String(object.description);
+                                    if (object.aboutLink != null) {
+                                        if (typeof object.aboutLink !== "object")
+                                            throw TypeError(".google.maps.places.v1.Place.ConsumerAlert.Details.aboutLink: object expected");
+                                        message.aboutLink = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.fromObject(object.aboutLink);
+                                    }
+                                    return message;
+                                };
+    
+                                /**
+                                 * Creates a plain object from a Details message. Also converts values to other types if specified.
+                                 * @function toObject
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @static
+                                 * @param {google.maps.places.v1.Place.ConsumerAlert.Details} message Details
+                                 * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                 * @returns {Object.<string,*>} Plain object
+                                 */
+                                Details.toObject = function toObject(message, options) {
+                                    if (!options)
+                                        options = {};
+                                    var object = {};
+                                    if (options.defaults) {
+                                        object.title = "";
+                                        object.description = "";
+                                        object.aboutLink = null;
+                                    }
+                                    if (message.title != null && message.hasOwnProperty("title"))
+                                        object.title = message.title;
+                                    if (message.description != null && message.hasOwnProperty("description"))
+                                        object.description = message.description;
+                                    if (message.aboutLink != null && message.hasOwnProperty("aboutLink"))
+                                        object.aboutLink = $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link.toObject(message.aboutLink, options);
+                                    return object;
+                                };
+    
+                                /**
+                                 * Converts this Details to JSON.
+                                 * @function toJSON
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @instance
+                                 * @returns {Object.<string,*>} JSON object
+                                 */
+                                Details.prototype.toJSON = function toJSON() {
+                                    return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                };
+    
+                                /**
+                                 * Gets the default type url for Details
+                                 * @function getTypeUrl
+                                 * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                 * @static
+                                 * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                 * @returns {string} The default type url
+                                 */
+                                Details.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                    if (typeUrlPrefix === undefined) {
+                                        typeUrlPrefix = "type.googleapis.com";
+                                    }
+                                    return typeUrlPrefix + "/google.maps.places.v1.Place.ConsumerAlert.Details";
+                                };
+    
+                                Details.Link = (function() {
+    
+                                    /**
+                                     * Properties of a Link.
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                     * @interface ILink
+                                     * @property {string|null} [title] Link title
+                                     * @property {string|null} [uri] Link uri
+                                     */
+    
+                                    /**
+                                     * Constructs a new Link.
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details
+                                     * @classdesc Represents a Link.
+                                     * @implements ILink
+                                     * @constructor
+                                     * @param {google.maps.places.v1.Place.ConsumerAlert.Details.ILink=} [properties] Properties to set
+                                     */
+                                    function Link(properties) {
+                                        if (properties)
+                                            for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                                if (properties[keys[i]] != null)
+                                                    this[keys[i]] = properties[keys[i]];
+                                    }
+    
+                                    /**
+                                     * Link title.
+                                     * @member {string} title
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @instance
+                                     */
+                                    Link.prototype.title = "";
+    
+                                    /**
+                                     * Link uri.
+                                     * @member {string} uri
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @instance
+                                     */
+                                    Link.prototype.uri = "";
+    
+                                    /**
+                                     * Creates a new Link instance using the specified properties.
+                                     * @function create
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @static
+                                     * @param {google.maps.places.v1.Place.ConsumerAlert.Details.ILink=} [properties] Properties to set
+                                     * @returns {google.maps.places.v1.Place.ConsumerAlert.Details.Link} Link instance
+                                     */
+                                    Link.create = function create(properties) {
+                                        return new Link(properties);
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Link message. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.Details.Link.verify|verify} messages.
+                                     * @function encode
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @static
+                                     * @param {google.maps.places.v1.Place.ConsumerAlert.Details.ILink} message Link message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Link.encode = function encode(message, writer) {
+                                        if (!writer)
+                                            writer = $Writer.create();
+                                        if (message.title != null && Object.hasOwnProperty.call(message, "title"))
+                                            writer.uint32(/* id 1, wireType 2 =*/10).string(message.title);
+                                        if (message.uri != null && Object.hasOwnProperty.call(message, "uri"))
+                                            writer.uint32(/* id 2, wireType 2 =*/18).string(message.uri);
+                                        return writer;
+                                    };
+    
+                                    /**
+                                     * Encodes the specified Link message, length delimited. Does not implicitly {@link google.maps.places.v1.Place.ConsumerAlert.Details.Link.verify|verify} messages.
+                                     * @function encodeDelimited
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @static
+                                     * @param {google.maps.places.v1.Place.ConsumerAlert.Details.ILink} message Link message or plain object to encode
+                                     * @param {$protobuf.Writer} [writer] Writer to encode to
+                                     * @returns {$protobuf.Writer} Writer
+                                     */
+                                    Link.encodeDelimited = function encodeDelimited(message, writer) {
+                                        return this.encode(message, writer).ldelim();
+                                    };
+    
+                                    /**
+                                     * Decodes a Link message from the specified reader or buffer.
+                                     * @function decode
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @param {number} [length] Message length if known beforehand
+                                     * @returns {google.maps.places.v1.Place.ConsumerAlert.Details.Link} Link
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Link.decode = function decode(reader, length, error) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = $Reader.create(reader);
+                                        var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link();
+                                        while (reader.pos < end) {
+                                            var tag = reader.uint32();
+                                            if (tag === error)
+                                                break;
+                                            switch (tag >>> 3) {
+                                            case 1: {
+                                                    message.title = reader.string();
+                                                    break;
+                                                }
+                                            case 2: {
+                                                    message.uri = reader.string();
+                                                    break;
+                                                }
+                                            default:
+                                                reader.skipType(tag & 7);
+                                                break;
+                                            }
+                                        }
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Decodes a Link message from the specified reader or buffer, length delimited.
+                                     * @function decodeDelimited
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @static
+                                     * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                                     * @returns {google.maps.places.v1.Place.ConsumerAlert.Details.Link} Link
+                                     * @throws {Error} If the payload is not a reader or valid buffer
+                                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                                     */
+                                    Link.decodeDelimited = function decodeDelimited(reader) {
+                                        if (!(reader instanceof $Reader))
+                                            reader = new $Reader(reader);
+                                        return this.decode(reader, reader.uint32());
+                                    };
+    
+                                    /**
+                                     * Verifies a Link message.
+                                     * @function verify
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @static
+                                     * @param {Object.<string,*>} message Plain object to verify
+                                     * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                                     */
+                                    Link.verify = function verify(message) {
+                                        if (typeof message !== "object" || message === null)
+                                            return "object expected";
+                                        if (message.title != null && message.hasOwnProperty("title"))
+                                            if (!$util.isString(message.title))
+                                                return "title: string expected";
+                                        if (message.uri != null && message.hasOwnProperty("uri"))
+                                            if (!$util.isString(message.uri))
+                                                return "uri: string expected";
+                                        return null;
+                                    };
+    
+                                    /**
+                                     * Creates a Link message from a plain object. Also converts values to their respective internal types.
+                                     * @function fromObject
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @static
+                                     * @param {Object.<string,*>} object Plain object
+                                     * @returns {google.maps.places.v1.Place.ConsumerAlert.Details.Link} Link
+                                     */
+                                    Link.fromObject = function fromObject(object) {
+                                        if (object instanceof $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link)
+                                            return object;
+                                        var message = new $root.google.maps.places.v1.Place.ConsumerAlert.Details.Link();
+                                        if (object.title != null)
+                                            message.title = String(object.title);
+                                        if (object.uri != null)
+                                            message.uri = String(object.uri);
+                                        return message;
+                                    };
+    
+                                    /**
+                                     * Creates a plain object from a Link message. Also converts values to other types if specified.
+                                     * @function toObject
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @static
+                                     * @param {google.maps.places.v1.Place.ConsumerAlert.Details.Link} message Link
+                                     * @param {$protobuf.IConversionOptions} [options] Conversion options
+                                     * @returns {Object.<string,*>} Plain object
+                                     */
+                                    Link.toObject = function toObject(message, options) {
+                                        if (!options)
+                                            options = {};
+                                        var object = {};
+                                        if (options.defaults) {
+                                            object.title = "";
+                                            object.uri = "";
+                                        }
+                                        if (message.title != null && message.hasOwnProperty("title"))
+                                            object.title = message.title;
+                                        if (message.uri != null && message.hasOwnProperty("uri"))
+                                            object.uri = message.uri;
+                                        return object;
+                                    };
+    
+                                    /**
+                                     * Converts this Link to JSON.
+                                     * @function toJSON
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @instance
+                                     * @returns {Object.<string,*>} JSON object
+                                     */
+                                    Link.prototype.toJSON = function toJSON() {
+                                        return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                                    };
+    
+                                    /**
+                                     * Gets the default type url for Link
+                                     * @function getTypeUrl
+                                     * @memberof google.maps.places.v1.Place.ConsumerAlert.Details.Link
+                                     * @static
+                                     * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                                     * @returns {string} The default type url
+                                     */
+                                    Link.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                        if (typeUrlPrefix === undefined) {
+                                            typeUrlPrefix = "type.googleapis.com";
+                                        }
+                                        return typeUrlPrefix + "/google.maps.places.v1.Place.ConsumerAlert.Details.Link";
+                                    };
+    
+                                    return Link;
+                                })();
+    
+                                return Details;
+                            })();
+    
+                            return ConsumerAlert;
                         })();
     
                         return Place;

@@ -422,6 +422,10 @@
                         "googleMapsUri": {
                           "type": "string",
                           "id": 16
+                        },
+                        "visitDate": {
+                          "type": "google.type.Date",
+                          "id": 17
                         }
                       }
                     },
@@ -1230,9 +1234,16 @@
                           "type": "NeighborhoodSummary",
                           "id": 91
                         },
+                        "consumerAlert": {
+                          "type": "ConsumerAlert",
+                          "id": 92
+                        },
                         "movedPlace": {
                           "type": "string",
-                          "id": 93
+                          "id": 93,
+                          "options": {
+                            "(google.api.resource_reference).type": "places.googleapis.com/Place"
+                          }
                         },
                         "movedPlaceId": {
                           "type": "string",
@@ -1739,6 +1750,54 @@
                             "disclosureText": {
                               "type": "google.type.LocalizedText",
                               "id": 4
+                            }
+                          }
+                        },
+                        "ConsumerAlert": {
+                          "fields": {
+                            "overview": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "details": {
+                              "type": "Details",
+                              "id": 2
+                            },
+                            "languageCode": {
+                              "type": "string",
+                              "id": 3
+                            }
+                          },
+                          "nested": {
+                            "Details": {
+                              "fields": {
+                                "title": {
+                                  "type": "string",
+                                  "id": 1
+                                },
+                                "description": {
+                                  "type": "string",
+                                  "id": 2
+                                },
+                                "aboutLink": {
+                                  "type": "Link",
+                                  "id": 3
+                                }
+                              },
+                              "nested": {
+                                "Link": {
+                                  "fields": {
+                                    "title": {
+                                      "type": "string",
+                                      "id": 1
+                                    },
+                                    "uri": {
+                                      "type": "string",
+                                      "id": 2
+                                    }
+                                  }
+                                }
+                              }
                             }
                           }
                         }
