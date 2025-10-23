@@ -214,7 +214,8 @@
     "packages/google-cloud-saasplatform-saasservicemgmt": {},
     "packages/google-cloud-cloudsecuritycompliance": {},
     "packages/google-cloud-capacityplanner": {},
-    "packages/google-cloud-locationfinder": {}
+    "packages/google-cloud-locationfinder": {},
+    "packages/google-cloud-geminidataanalytics": {}
   },
   "plugins": [
     {
