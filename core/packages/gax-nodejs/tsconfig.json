@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "./gax/tsconfig.json",
+    "./logging-utils/tsconfig.json",
+    "./tools/tsconfig.json"
+  ],
+  "include": ["**/*.ts"]
+}

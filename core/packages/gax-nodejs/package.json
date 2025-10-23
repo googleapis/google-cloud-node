@@ -1,0 +1,21 @@
+{
+  "name": "gax-nodejs",
+  "private": true,
+  "description": "Google API Extensions",
+  "scripts": {
+    "test": "echo \"Please go into tools/ and gax/ to run tests separately\" && exit 1"
+  },
+  "keywords": [
+    "grpc"
+  ],
+  "repository": "googleapis/gax-nodejs",
+  "author": "Google API Authors",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/googleapis/gax-nodejs/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "homepage": "https://github.com/googleapis/gax-nodejs#readme"
+}
