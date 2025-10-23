@@ -8,7 +8,7 @@ This library is considered to be in **preview**. This means it is still a
 work-in-progress and under active development. Any release is subject to
 backwards-incompatible changes at any time.
 
-[![npm version](https://img.shields.io/npm/v/@google-cloud/data.svg)](https://www.npmjs.org/package/@google-cloud/data)
+[![npm version](https://img.shields.io/npm/v/@google-analytics/data.svg)](https://www.npmjs.org/package/@google-analytics/data)
 
 Google Analytics Data API client for Node.js
 
@@ -46,7 +46,7 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Installing the client library
 
 ```bash
-npm install @google-cloud/data
+npm install @google-analytics/data
 ```
 
 [//]: # "partials.body"
@@ -104,7 +104,7 @@ best-efforts basis with the following warnings:
 Client libraries targeting some end-of-life versions of Node.js are available, and
 can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-For example, `npm install @google-cloud/data@legacy-8` installs client libraries
+For example, `npm install @google-analytics/data@legacy-8` installs client libraries
 for versions compatible with Node.js 8.
 
 ## Versioning

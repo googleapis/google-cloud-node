@@ -16,18 +16,17 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {PoliciesClient} from '@google-cloud/iam';
+import {WorkloadIdentityPoolsClient} from '@google-cloud/iam';
 
 // check that the client class type name can be used
-function doStuffWithPoliciesClient(client: PoliciesClient) {
+function doStuffWithWorkloadIdentityPoolsClient(client: WorkloadIdentityPoolsClient) {
   client.close();
 }
 
 function main() {
   // check that the client instance can be created
-  const policiesClient = new PoliciesClient();
-  doStuffWithPoliciesClient(policiesClient);
+  const workloadIdentityPoolsClient = new WorkloadIdentityPoolsClient();
+  doStuffWithWorkloadIdentityPoolsClient(workloadIdentityPoolsClient);
 }
 
 main();
-
