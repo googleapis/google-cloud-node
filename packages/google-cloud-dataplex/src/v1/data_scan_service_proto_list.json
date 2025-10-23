@@ -5,6 +5,7 @@
   "../../protos/google/cloud/dataplex/v1/cmek.proto",
   "../../protos/google/cloud/dataplex/v1/content.proto",
   "../../protos/google/cloud/dataplex/v1/data_discovery.proto",
+  "../../protos/google/cloud/dataplex/v1/data_documentation.proto",
   "../../protos/google/cloud/dataplex/v1/data_profile.proto",
   "../../protos/google/cloud/dataplex/v1/data_quality.proto",
   "../../protos/google/cloud/dataplex/v1/data_taxonomy.proto",

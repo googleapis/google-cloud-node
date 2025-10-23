@@ -5275,6 +5275,13 @@
                           "type": "string",
                           "id": 8
                         },
+                        "dataClassification": {
+                          "type": "DataClassification",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "IMMUTABLE"
+                          }
+                        },
                         "authorization": {
                           "type": "Authorization",
                           "id": 52,
@@ -5307,6 +5314,12 @@
                                 "(google.api.field_behavior)": "IMMUTABLE"
                               }
                             }
+                          }
+                        },
+                        "DataClassification": {
+                          "values": {
+                            "DATA_CLASSIFICATION_UNSPECIFIED": 0,
+                            "METADATA_AND_DATA": 1
                           }
                         },
                         "MetadataTemplate": {
@@ -7511,6 +7524,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "enableMetastoreEncryption": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8255,6 +8275,118 @@
                         }
                       }
                     },
+                    "DataDocumentationSpec": {
+                      "fields": {}
+                    },
+                    "DataDocumentationResult": {
+                      "oneofs": {
+                        "result": {
+                          "oneof": [
+                            "tableResult"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "tableResult": {
+                          "type": "TableResult",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TableResult": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "overview": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "schema": {
+                              "type": "Schema",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "queries": {
+                              "rule": "repeated",
+                              "type": "Query",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Query": {
+                          "fields": {
+                            "sql": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Schema": {
+                          "fields": {
+                            "fields": {
+                              "rule": "repeated",
+                              "type": "Field",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        },
+                        "Field": {
+                          "fields": {
+                            "name": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "description": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "fields": {
+                              "rule": "repeated",
+                              "type": "Field",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
                     "DataProfileSpec": {
                       "fields": {
                         "samplingPercent": {
@@ -8948,6 +9080,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
+                        },
+                        "anomalyDetectionGeneratedAssets": {
+                          "type": "AnomalyDetectionGeneratedAssets",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
                         }
                       },
                       "nested": {
@@ -8988,6 +9127,38 @@
                                     "SKIPPED": 3
                                   }
                                 }
+                              }
+                            }
+                          }
+                        },
+                        "AnomalyDetectionGeneratedAssets": {
+                          "fields": {
+                            "resultTable": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "dataIntermediateTable": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "freshnessIntermediateTable": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "volumeIntermediateTable": {
+                              "type": "string",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
                           }
@@ -11107,14 +11278,16 @@
                           "oneof": [
                             "dataQualitySpec",
                             "dataProfileSpec",
-                            "dataDiscoverySpec"
+                            "dataDiscoverySpec",
+                            "dataDocumentationSpec"
                           ]
                         },
                         "result": {
                           "oneof": [
                             "dataQualityResult",
                             "dataProfileResult",
-                            "dataDiscoveryResult"
+                            "dataDiscoveryResult",
+                            "dataDocumentationResult"
                           ]
                         }
                       },
@@ -11217,6 +11390,10 @@
                           "type": "DataDiscoverySpec",
                           "id": 102
                         },
+                        "dataDocumentationSpec": {
+                          "type": "DataDocumentationSpec",
+                          "id": 103
+                        },
                         "dataQualityResult": {
                           "type": "DataQualityResult",
                           "id": 200,
@@ -11234,6 +11411,13 @@
                         "dataDiscoveryResult": {
                           "type": "DataDiscoveryResult",
                           "id": 202,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataDocumentationResult": {
+                          "type": "DataDocumentationResult",
+                          "id": 203,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -11302,14 +11486,16 @@
                           "oneof": [
                             "dataQualitySpec",
                             "dataProfileSpec",
-                            "dataDiscoverySpec"
+                            "dataDiscoverySpec",
+                            "dataDocumentationSpec"
                           ]
                         },
                         "result": {
                           "oneof": [
                             "dataQualityResult",
                             "dataProfileResult",
-                            "dataDiscoveryResult"
+                            "dataDiscoveryResult",
+                            "dataDocumentationResult"
                           ]
                         }
                       },
@@ -11392,6 +11578,13 @@
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
                         },
+                        "dataDocumentationSpec": {
+                          "type": "DataDocumentationSpec",
+                          "id": 103,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
                         "dataQualityResult": {
                           "type": "DataQualityResult",
                           "id": 200,
@@ -11409,6 +11602,13 @@
                         "dataDiscoveryResult": {
                           "type": "DataDiscoveryResult",
                           "id": 202,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "dataDocumentationResult": {
+                          "type": "DataDocumentationResult",
+                          "id": 203,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -11433,7 +11633,8 @@
                         "DATA_SCAN_TYPE_UNSPECIFIED": 0,
                         "DATA_QUALITY": 1,
                         "DATA_PROFILE": 2,
-                        "DATA_DISCOVERY": 3
+                        "DATA_DISCOVERY": 3,
+                        "DATA_DOCUMENTATION": 4
                       }
                     },
                     "DiscoveryEvent": {
