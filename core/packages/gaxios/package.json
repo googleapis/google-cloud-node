@@ -101,7 +101,8 @@
   "dependencies": {
     "extend": "^3.0.2",
     "https-proxy-agent": "^7.0.1",
-    "node-fetch": "^3.3.2"
+    "node-fetch": "^3.3.2",
+    "rimraf": "^5.0.1"
   },
   "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gaxios"
 }
