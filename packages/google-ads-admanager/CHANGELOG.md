@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.4.1...admanager-v0.5.0) (2025-10-23)
+
+
+### Features
+
+* [admanager] Added Application resource ([#6834](https://github.com/googleapis/google-cloud-node/issues/6834)) ([79e9ddf](https://github.com/googleapis/google-cloud-node/commit/79e9ddf22a87f114cb7c692be5ee3b34424ad5d5))
+
 ## [0.4.1](https://github.com/googleapis/google-cloud-node/compare/admanager-v0.4.0...admanager-v0.4.1) (2025-10-13)
 
 

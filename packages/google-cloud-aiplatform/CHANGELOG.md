@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.11.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.10.0...aiplatform-v5.11.0) (2025-10-23)
+
+
+### Features
+
+* Add EmbedContent method v1beta1 ([#6833](https://github.com/googleapis/google-cloud-node/issues/6833)) ([8a7ce8e](https://github.com/googleapis/google-cloud-node/commit/8a7ce8e898273557543277bcdb664d5aee9183ce))
+
 ## [5.10.0](https://github.com/googleapis/google-cloud-node/compare/aiplatform-v5.9.0...aiplatform-v5.10.0) (2025-10-21)
 
 

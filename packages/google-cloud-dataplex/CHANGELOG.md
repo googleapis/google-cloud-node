@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.1.1...dataplex-v5.2.0) (2025-10-23)
+
+
+### Features
+
+* [dataplex] A new message `DataDocumentationSpec` is added representing Data Documentation Spec ([#6837](https://github.com/googleapis/google-cloud-node/issues/6837)) ([8cd5a4a](https://github.com/googleapis/google-cloud-node/commit/8cd5a4acb6460d56f4267abff60b00be93cf2a55))
+
 ## [5.1.1](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.1.0...dataplex-v5.1.1) (2025-10-13)
 
 

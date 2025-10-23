@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/dialogflow?activeTab=versions
 
+## [7.3.0](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.2.1...dialogflow-v7.3.0) (2025-10-23)
+
+
+### Features
+
+* [dialogflow] Added support for Build Your Own Assist feature ([#6835](https://github.com/googleapis/google-cloud-node/issues/6835)) ([b334162](https://github.com/googleapis/google-cloud-node/commit/b334162c5081489ffc9a970157723b3ffb9cc063))
+
 ## [7.2.1](https://github.com/googleapis/google-cloud-node/compare/dialogflow-v7.2.0...dialogflow-v7.2.1) (2025-10-13)
 
 

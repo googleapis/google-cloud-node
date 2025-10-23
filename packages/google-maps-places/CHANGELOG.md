@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.2.0](https://github.com/googleapis/google-cloud-node/compare/places-v2.1.1...places-v2.2.0) (2025-10-23)
+
+
+### Features
+
+* [places] Add Review.visitDate field to indicate when the review author visited ([#6836](https://github.com/googleapis/google-cloud-node/issues/6836)) ([31da8eb](https://github.com/googleapis/google-cloud-node/commit/31da8eb0033e4edd861695715eda47830a5b447a))
+
 ## [2.1.1](https://github.com/googleapis/google-cloud-node/compare/places-v2.1.0...places-v2.1.1) (2025-10-13)
 
 
