@@ -21,7 +21,7 @@
     "browserify": "^17.0.0",
     "gts": "^6.0.0",
     "null-loader": "^4.0.0",
-    "ts-loader": "^8.0.0",
+    "ts-loader": "^9.0.0",
     "typescript": "^5.0.0",
     "webpack": "^5.35.0",
     "webpack-cli": "^6.0.0"
