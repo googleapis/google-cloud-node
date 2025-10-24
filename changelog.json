@@ -4,6 +4,23 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "468c23374a64c1dbdbfb52707d43169fc8fda2dc",
+          "message": "Bug in system test deletion logic",
+          "issues": [
+            "6845"
+          ]
+        }
+      ],
+      "version": "0.1.6",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "e34cd443-08c5-4aeb-a38f-2a8c9a0102af",
+      "createTime": "2025-10-24T20:55:51.632Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "79e9ddf22a87f114cb7c692be5ee3b34424ad5d5",
           "message": "[admanager] Added Application resource",
@@ -66598,5 +66615,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-10-23T17:47:01.168Z"
+  "updateTime": "2025-10-24T20:55:51.632Z"
 }
