@@ -214,10 +214,7 @@
     "packages/google-cloud-saasplatform-saasservicemgmt": {},
     "packages/google-cloud-cloudsecuritycompliance": {},
     "packages/google-cloud-capacityplanner": {},
-    "packages/google-cloud-locationfinder": {},
-    "packages/gapic-node-processing/test/fixtures/combined-library/google-analytics-data": {},
-    "packages/gapic-node-processing/test/fixtures/combined-library/google-analytics-data-nodejs/analytics-data-v1alpha-nodejs": {},
-    "packages/gapic-node-processing/test/fixtures/combined-library/google-analytics-data-nodejs/google-analytics-data-v1beta-nodejs": {}
+    "packages/google-cloud-locationfinder": {}
   },
   "plugins": [
     {
