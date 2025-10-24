@@ -201,14 +201,17 @@ export function setOnlyDefaultSystemTests(
     'system-test/fixtures/sample/src',
   );
 
-  for (const filePathObj of filePaths) {
+  for (let i = filePaths.length - 1; i >= 0; i--) {
+    const filePathObj = filePaths[i];
     if (
       systemTestRegex.test(filePathObj.filePath) &&
       !filePathObj.filePath.includes(defaultVersion)
     ) {
-      filePaths.splice(filePaths.indexOf(filePathObj), 1);
+      console.log('Removing file path:', filePathObj.filePath);
+      filePaths.splice(i, 1);
     }
   }
+  // console.log('Filtered file paths system tests:', filePaths);
 }
 
 /**
