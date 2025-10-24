@@ -39297,6 +39297,7 @@
                             case 0:
                             case 1:
                             case 2:
+                            case 4:
                                 break;
                             }
                         if (message.member != null && message.hasOwnProperty("member")) {
@@ -39386,6 +39387,10 @@
                         case "ROLE_MANAGER":
                         case 2:
                             message.role = 2;
+                            break;
+                        case "ROLE_ASSISTANT_MANAGER":
+                        case 4:
+                            message.role = 4;
                             break;
                         }
                         if (object.member != null) {
@@ -39505,12 +39510,14 @@
                      * @property {number} MEMBERSHIP_ROLE_UNSPECIFIED=0 MEMBERSHIP_ROLE_UNSPECIFIED value
                      * @property {number} ROLE_MEMBER=1 ROLE_MEMBER value
                      * @property {number} ROLE_MANAGER=2 ROLE_MANAGER value
+                     * @property {number} ROLE_ASSISTANT_MANAGER=4 ROLE_ASSISTANT_MANAGER value
                      */
                     Membership.MembershipRole = (function() {
                         var valuesById = {}, values = Object.create(valuesById);
                         values[valuesById[0] = "MEMBERSHIP_ROLE_UNSPECIFIED"] = 0;
                         values[valuesById[1] = "ROLE_MEMBER"] = 1;
                         values[valuesById[2] = "ROLE_MANAGER"] = 2;
+                        values[valuesById[4] = "ROLE_ASSISTANT_MANAGER"] = 4;
                         return values;
                     })();
     
@@ -53889,6 +53896,7 @@
                          * @memberof google.chat.v1.Space
                          * @interface IPermissionSetting
                          * @property {boolean|null} [managersAllowed] PermissionSetting managersAllowed
+                         * @property {boolean|null} [assistantManagersAllowed] PermissionSetting assistantManagersAllowed
                          * @property {boolean|null} [membersAllowed] PermissionSetting membersAllowed
                          */
     
@@ -53916,12 +53924,29 @@
                         PermissionSetting.prototype.managersAllowed = false;
     
                         /**
+                         * PermissionSetting assistantManagersAllowed.
+                         * @member {boolean|null|undefined} assistantManagersAllowed
+                         * @memberof google.chat.v1.Space.PermissionSetting
+                         * @instance
+                         */
+                        PermissionSetting.prototype.assistantManagersAllowed = null;
+    
+                        /**
                          * PermissionSetting membersAllowed.
                          * @member {boolean} membersAllowed
                          * @memberof google.chat.v1.Space.PermissionSetting
                          * @instance
                          */
                         PermissionSetting.prototype.membersAllowed = false;
+    
+                        // OneOf field names bound to virtual getters and setters
+                        var $oneOfFields;
+    
+                        // Virtual OneOf for proto3 optional field
+                        Object.defineProperty(PermissionSetting.prototype, "_assistantManagersAllowed", {
+                            get: $util.oneOfGetter($oneOfFields = ["assistantManagersAllowed"]),
+                            set: $util.oneOfSetter($oneOfFields)
+                        });
     
                         /**
                          * Creates a new PermissionSetting instance using the specified properties.
@@ -53951,6 +53976,8 @@
                                 writer.uint32(/* id 1, wireType 0 =*/8).bool(message.managersAllowed);
                             if (message.membersAllowed != null && Object.hasOwnProperty.call(message, "membersAllowed"))
                                 writer.uint32(/* id 2, wireType 0 =*/16).bool(message.membersAllowed);
+                            if (message.assistantManagersAllowed != null && Object.hasOwnProperty.call(message, "assistantManagersAllowed"))
+                                writer.uint32(/* id 3, wireType 0 =*/24).bool(message.assistantManagersAllowed);
                             return writer;
                         };
     
@@ -53989,6 +54016,10 @@
                                 switch (tag >>> 3) {
                                 case 1: {
                                         message.managersAllowed = reader.bool();
+                                        break;
+                                    }
+                                case 3: {
+                                        message.assistantManagersAllowed = reader.bool();
                                         break;
                                     }
                                 case 2: {
@@ -54030,9 +54061,15 @@
                         PermissionSetting.verify = function verify(message) {
                             if (typeof message !== "object" || message === null)
                                 return "object expected";
+                            var properties = {};
                             if (message.managersAllowed != null && message.hasOwnProperty("managersAllowed"))
                                 if (typeof message.managersAllowed !== "boolean")
                                     return "managersAllowed: boolean expected";
+                            if (message.assistantManagersAllowed != null && message.hasOwnProperty("assistantManagersAllowed")) {
+                                properties._assistantManagersAllowed = 1;
+                                if (typeof message.assistantManagersAllowed !== "boolean")
+                                    return "assistantManagersAllowed: boolean expected";
+                            }
                             if (message.membersAllowed != null && message.hasOwnProperty("membersAllowed"))
                                 if (typeof message.membersAllowed !== "boolean")
                                     return "membersAllowed: boolean expected";
@@ -54053,6 +54090,8 @@
                             var message = new $root.google.chat.v1.Space.PermissionSetting();
                             if (object.managersAllowed != null)
                                 message.managersAllowed = Boolean(object.managersAllowed);
+                            if (object.assistantManagersAllowed != null)
+                                message.assistantManagersAllowed = Boolean(object.assistantManagersAllowed);
                             if (object.membersAllowed != null)
                                 message.membersAllowed = Boolean(object.membersAllowed);
                             return message;
@@ -54079,6 +54118,11 @@
                                 object.managersAllowed = message.managersAllowed;
                             if (message.membersAllowed != null && message.hasOwnProperty("membersAllowed"))
                                 object.membersAllowed = message.membersAllowed;
+                            if (message.assistantManagersAllowed != null && message.hasOwnProperty("assistantManagersAllowed")) {
+                                object.assistantManagersAllowed = message.assistantManagersAllowed;
+                                if (options.oneofs)
+                                    object._assistantManagersAllowed = "assistantManagersAllowed";
+                            }
                             return object;
                         };
     

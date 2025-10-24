@@ -4224,7 +4224,8 @@
                       "values": {
                         "MEMBERSHIP_ROLE_UNSPECIFIED": 0,
                         "ROLE_MEMBER": 1,
-                        "ROLE_MANAGER": 2
+                        "ROLE_MANAGER": 2,
+                        "ROLE_ASSISTANT_MANAGER": 4
                       }
                     }
                   }
@@ -5709,12 +5710,27 @@
                       }
                     },
                     "PermissionSetting": {
+                      "oneofs": {
+                        "_assistantManagersAllowed": {
+                          "oneof": [
+                            "assistantManagersAllowed"
+                          ]
+                        }
+                      },
                       "fields": {
                         "managersAllowed": {
                           "type": "bool",
                           "id": 1,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "assistantManagersAllowed": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
                           }
                         },
                         "membersAllowed": {
