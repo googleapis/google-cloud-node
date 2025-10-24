@@ -86402,6 +86402,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public streamGenerateContent(request: google.cloud.aiplatform.v1.IGenerateContentRequest): Promise<google.cloud.aiplatform.v1.GenerateContentResponse>;
+
+                    /**
+                     * Calls EmbedContent.
+                     * @param request EmbedContentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and EmbedContentResponse
+                     */
+                    public embedContent(request: google.cloud.aiplatform.v1.IEmbedContentRequest, callback: google.cloud.aiplatform.v1.PredictionService.EmbedContentCallback): void;
+
+                    /**
+                     * Calls EmbedContent.
+                     * @param request EmbedContentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public embedContent(request: google.cloud.aiplatform.v1.IEmbedContentRequest): Promise<google.cloud.aiplatform.v1.EmbedContentResponse>;
                 }
 
                 namespace PredictionService {
@@ -86496,6 +86510,13 @@ export namespace google {
                      * @param [response] GenerateContentResponse
                      */
                     type StreamGenerateContentCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.GenerateContentResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.aiplatform.v1.PredictionService|embedContent}.
+                     * @param error Error, if any
+                     * @param [response] EmbedContentResponse
+                     */
+                    type EmbedContentCallback = (error: (Error|null), response?: google.cloud.aiplatform.v1.EmbedContentResponse) => void;
                 }
 
                 /** Properties of a PredictRequest. */
@@ -89212,6 +89233,525 @@ export namespace google {
                          * @returns The default type url
                          */
                         public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of an EmbedContentRequest. */
+                interface IEmbedContentRequest {
+
+                    /** EmbedContentRequest model */
+                    model?: (string|null);
+
+                    /** EmbedContentRequest content */
+                    content?: (google.cloud.aiplatform.v1.IContent|null);
+
+                    /** EmbedContentRequest title */
+                    title?: (string|null);
+
+                    /** EmbedContentRequest taskType */
+                    taskType?: (google.cloud.aiplatform.v1.EmbedContentRequest.EmbeddingTaskType|keyof typeof google.cloud.aiplatform.v1.EmbedContentRequest.EmbeddingTaskType|null);
+
+                    /** EmbedContentRequest outputDimensionality */
+                    outputDimensionality?: (number|null);
+
+                    /** EmbedContentRequest autoTruncate */
+                    autoTruncate?: (boolean|null);
+                }
+
+                /** Represents an EmbedContentRequest. */
+                class EmbedContentRequest implements IEmbedContentRequest {
+
+                    /**
+                     * Constructs a new EmbedContentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IEmbedContentRequest);
+
+                    /** EmbedContentRequest model. */
+                    public model?: (string|null);
+
+                    /** EmbedContentRequest content. */
+                    public content?: (google.cloud.aiplatform.v1.IContent|null);
+
+                    /** EmbedContentRequest title. */
+                    public title?: (string|null);
+
+                    /** EmbedContentRequest taskType. */
+                    public taskType?: (google.cloud.aiplatform.v1.EmbedContentRequest.EmbeddingTaskType|keyof typeof google.cloud.aiplatform.v1.EmbedContentRequest.EmbeddingTaskType|null);
+
+                    /** EmbedContentRequest outputDimensionality. */
+                    public outputDimensionality?: (number|null);
+
+                    /** EmbedContentRequest autoTruncate. */
+                    public autoTruncate?: (boolean|null);
+
+                    /**
+                     * Creates a new EmbedContentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EmbedContentRequest instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IEmbedContentRequest): google.cloud.aiplatform.v1.EmbedContentRequest;
+
+                    /**
+                     * Encodes the specified EmbedContentRequest message. Does not implicitly {@link google.cloud.aiplatform.v1.EmbedContentRequest.verify|verify} messages.
+                     * @param message EmbedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IEmbedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EmbedContentRequest message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.EmbedContentRequest.verify|verify} messages.
+                     * @param message EmbedContentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IEmbedContentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EmbedContentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EmbedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.EmbedContentRequest;
+
+                    /**
+                     * Decodes an EmbedContentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EmbedContentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.EmbedContentRequest;
+
+                    /**
+                     * Verifies an EmbedContentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EmbedContentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EmbedContentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.EmbedContentRequest;
+
+                    /**
+                     * Creates a plain object from an EmbedContentRequest message. Also converts values to other types if specified.
+                     * @param message EmbedContentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.EmbedContentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EmbedContentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EmbedContentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EmbedContentRequest {
+
+                    /** EmbeddingTaskType enum. */
+                    enum EmbeddingTaskType {
+                        UNSPECIFIED = 0,
+                        RETRIEVAL_QUERY = 2,
+                        RETRIEVAL_DOCUMENT = 3,
+                        SEMANTIC_SIMILARITY = 4,
+                        CLASSIFICATION = 5,
+                        CLUSTERING = 6,
+                        QUESTION_ANSWERING = 7,
+                        FACT_VERIFICATION = 8,
+                        CODE_RETRIEVAL_QUERY = 9
+                    }
+                }
+
+                /** Properties of an EmbedContentResponse. */
+                interface IEmbedContentResponse {
+
+                    /** EmbedContentResponse embedding */
+                    embedding?: (google.cloud.aiplatform.v1.EmbedContentResponse.IEmbedding|null);
+
+                    /** EmbedContentResponse usageMetadata */
+                    usageMetadata?: (google.cloud.aiplatform.v1.IUsageMetadata|null);
+
+                    /** EmbedContentResponse truncated */
+                    truncated?: (boolean|null);
+                }
+
+                /** Represents an EmbedContentResponse. */
+                class EmbedContentResponse implements IEmbedContentResponse {
+
+                    /**
+                     * Constructs a new EmbedContentResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IEmbedContentResponse);
+
+                    /** EmbedContentResponse embedding. */
+                    public embedding?: (google.cloud.aiplatform.v1.EmbedContentResponse.IEmbedding|null);
+
+                    /** EmbedContentResponse usageMetadata. */
+                    public usageMetadata?: (google.cloud.aiplatform.v1.IUsageMetadata|null);
+
+                    /** EmbedContentResponse truncated. */
+                    public truncated: boolean;
+
+                    /**
+                     * Creates a new EmbedContentResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EmbedContentResponse instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IEmbedContentResponse): google.cloud.aiplatform.v1.EmbedContentResponse;
+
+                    /**
+                     * Encodes the specified EmbedContentResponse message. Does not implicitly {@link google.cloud.aiplatform.v1.EmbedContentResponse.verify|verify} messages.
+                     * @param message EmbedContentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IEmbedContentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EmbedContentResponse message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.EmbedContentResponse.verify|verify} messages.
+                     * @param message EmbedContentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IEmbedContentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EmbedContentResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EmbedContentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.EmbedContentResponse;
+
+                    /**
+                     * Decodes an EmbedContentResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EmbedContentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.EmbedContentResponse;
+
+                    /**
+                     * Verifies an EmbedContentResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EmbedContentResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EmbedContentResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.EmbedContentResponse;
+
+                    /**
+                     * Creates a plain object from an EmbedContentResponse message. Also converts values to other types if specified.
+                     * @param message EmbedContentResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.EmbedContentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EmbedContentResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EmbedContentResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace EmbedContentResponse {
+
+                    /** Properties of an Embedding. */
+                    interface IEmbedding {
+
+                        /** Embedding values */
+                        values?: (number[]|null);
+                    }
+
+                    /** Represents an Embedding. */
+                    class Embedding implements IEmbedding {
+
+                        /**
+                         * Constructs a new Embedding.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.aiplatform.v1.EmbedContentResponse.IEmbedding);
+
+                        /** Embedding values. */
+                        public values: number[];
+
+                        /**
+                         * Creates a new Embedding instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns Embedding instance
+                         */
+                        public static create(properties?: google.cloud.aiplatform.v1.EmbedContentResponse.IEmbedding): google.cloud.aiplatform.v1.EmbedContentResponse.Embedding;
+
+                        /**
+                         * Encodes the specified Embedding message. Does not implicitly {@link google.cloud.aiplatform.v1.EmbedContentResponse.Embedding.verify|verify} messages.
+                         * @param message Embedding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.aiplatform.v1.EmbedContentResponse.IEmbedding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified Embedding message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.EmbedContentResponse.Embedding.verify|verify} messages.
+                         * @param message Embedding message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.aiplatform.v1.EmbedContentResponse.IEmbedding, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes an Embedding message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns Embedding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.EmbedContentResponse.Embedding;
+
+                        /**
+                         * Decodes an Embedding message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns Embedding
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.EmbedContentResponse.Embedding;
+
+                        /**
+                         * Verifies an Embedding message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates an Embedding message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns Embedding
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.EmbedContentResponse.Embedding;
+
+                        /**
+                         * Creates a plain object from an Embedding message. Also converts values to other types if specified.
+                         * @param message Embedding
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.aiplatform.v1.EmbedContentResponse.Embedding, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this Embedding to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for Embedding
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
+                /** Properties of a UsageMetadata. */
+                interface IUsageMetadata {
+
+                    /** UsageMetadata promptTokenCount */
+                    promptTokenCount?: (number|null);
+
+                    /** UsageMetadata candidatesTokenCount */
+                    candidatesTokenCount?: (number|null);
+
+                    /** UsageMetadata totalTokenCount */
+                    totalTokenCount?: (number|null);
+
+                    /** UsageMetadata toolUsePromptTokenCount */
+                    toolUsePromptTokenCount?: (number|null);
+
+                    /** UsageMetadata thoughtsTokenCount */
+                    thoughtsTokenCount?: (number|null);
+
+                    /** UsageMetadata cachedContentTokenCount */
+                    cachedContentTokenCount?: (number|null);
+
+                    /** UsageMetadata promptTokensDetails */
+                    promptTokensDetails?: (google.cloud.aiplatform.v1.IModalityTokenCount[]|null);
+
+                    /** UsageMetadata cacheTokensDetails */
+                    cacheTokensDetails?: (google.cloud.aiplatform.v1.IModalityTokenCount[]|null);
+
+                    /** UsageMetadata candidatesTokensDetails */
+                    candidatesTokensDetails?: (google.cloud.aiplatform.v1.IModalityTokenCount[]|null);
+
+                    /** UsageMetadata toolUsePromptTokensDetails */
+                    toolUsePromptTokensDetails?: (google.cloud.aiplatform.v1.IModalityTokenCount[]|null);
+
+                    /** UsageMetadata trafficType */
+                    trafficType?: (google.cloud.aiplatform.v1.UsageMetadata.TrafficType|keyof typeof google.cloud.aiplatform.v1.UsageMetadata.TrafficType|null);
+                }
+
+                /** Represents a UsageMetadata. */
+                class UsageMetadata implements IUsageMetadata {
+
+                    /**
+                     * Constructs a new UsageMetadata.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.aiplatform.v1.IUsageMetadata);
+
+                    /** UsageMetadata promptTokenCount. */
+                    public promptTokenCount: number;
+
+                    /** UsageMetadata candidatesTokenCount. */
+                    public candidatesTokenCount: number;
+
+                    /** UsageMetadata totalTokenCount. */
+                    public totalTokenCount: number;
+
+                    /** UsageMetadata toolUsePromptTokenCount. */
+                    public toolUsePromptTokenCount: number;
+
+                    /** UsageMetadata thoughtsTokenCount. */
+                    public thoughtsTokenCount: number;
+
+                    /** UsageMetadata cachedContentTokenCount. */
+                    public cachedContentTokenCount: number;
+
+                    /** UsageMetadata promptTokensDetails. */
+                    public promptTokensDetails: google.cloud.aiplatform.v1.IModalityTokenCount[];
+
+                    /** UsageMetadata cacheTokensDetails. */
+                    public cacheTokensDetails: google.cloud.aiplatform.v1.IModalityTokenCount[];
+
+                    /** UsageMetadata candidatesTokensDetails. */
+                    public candidatesTokensDetails: google.cloud.aiplatform.v1.IModalityTokenCount[];
+
+                    /** UsageMetadata toolUsePromptTokensDetails. */
+                    public toolUsePromptTokensDetails: google.cloud.aiplatform.v1.IModalityTokenCount[];
+
+                    /** UsageMetadata trafficType. */
+                    public trafficType: (google.cloud.aiplatform.v1.UsageMetadata.TrafficType|keyof typeof google.cloud.aiplatform.v1.UsageMetadata.TrafficType);
+
+                    /**
+                     * Creates a new UsageMetadata instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UsageMetadata instance
+                     */
+                    public static create(properties?: google.cloud.aiplatform.v1.IUsageMetadata): google.cloud.aiplatform.v1.UsageMetadata;
+
+                    /**
+                     * Encodes the specified UsageMetadata message. Does not implicitly {@link google.cloud.aiplatform.v1.UsageMetadata.verify|verify} messages.
+                     * @param message UsageMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.aiplatform.v1.IUsageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UsageMetadata message, length delimited. Does not implicitly {@link google.cloud.aiplatform.v1.UsageMetadata.verify|verify} messages.
+                     * @param message UsageMetadata message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.aiplatform.v1.IUsageMetadata, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a UsageMetadata message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UsageMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.aiplatform.v1.UsageMetadata;
+
+                    /**
+                     * Decodes a UsageMetadata message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UsageMetadata
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.aiplatform.v1.UsageMetadata;
+
+                    /**
+                     * Verifies a UsageMetadata message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a UsageMetadata message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UsageMetadata
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.aiplatform.v1.UsageMetadata;
+
+                    /**
+                     * Creates a plain object from a UsageMetadata message. Also converts values to other types if specified.
+                     * @param message UsageMetadata
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.aiplatform.v1.UsageMetadata, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UsageMetadata to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UsageMetadata
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace UsageMetadata {
+
+                    /** TrafficType enum. */
+                    enum TrafficType {
+                        TRAFFIC_TYPE_UNSPECIFIED = 0,
+                        ON_DEMAND = 1,
+                        PROVISIONED_THROUGHPUT = 2
                     }
                 }
 
