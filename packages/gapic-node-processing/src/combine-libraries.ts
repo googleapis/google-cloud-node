@@ -207,11 +207,9 @@ export function setOnlyDefaultSystemTests(
       systemTestRegex.test(filePathObj.filePath) &&
       !filePathObj.filePath.includes(defaultVersion)
     ) {
-      console.log('Removing file path:', filePathObj.filePath);
       filePaths.splice(i, 1);
     }
   }
-  // console.log('Filtered file paths system tests:', filePaths);
 }
 
 /**

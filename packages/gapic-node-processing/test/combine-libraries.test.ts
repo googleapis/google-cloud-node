@@ -210,7 +210,7 @@ describe('combine libraries', () => {
     }
   });
 
-  it.only('should only have default system tests', async () => {
+  it('should only have default system tests', async () => {
     await combineLibraries(libraryConfigDefaultSystemTest);
 
     assert.match(
