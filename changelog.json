@@ -4,6 +4,40 @@
     {
       "changes": [
         {
+          "type": "feat",
+          "sha": "84654a5c0cc56d940b96a85b0e439dc6ac140699",
+          "message": "[chat] add ROLE_ASSISTANT_MANAGER to the MembershipRole enum in the Membership proto and assistant_managers_allowed to the PermissionSetting",
+          "issues": [
+            "6843"
+          ]
+        }
+      ],
+      "version": "0.21.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "81e740ea-4ebf-476c-81a6-e7a129e6020d",
+      "createTime": "2025-10-25T03:59:34.796Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "da2c71816dc16c6ec4d64d74b7913ae5e399a0bc",
+          "message": "Add EmbedContent method v1",
+          "issues": [
+            "6844"
+          ]
+        }
+      ],
+      "version": "5.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "07134093-8517-44f5-840b-6c0829e742fe",
+      "createTime": "2025-10-25T03:59:34.776Z"
+    },
+    {
+      "changes": [
+        {
           "type": "fix",
           "sha": "468c23374a64c1dbdbfb52707d43169fc8fda2dc",
           "message": "Bug in system test deletion logic",
@@ -66615,5 +66649,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-10-24T20:55:51.632Z"
+  "updateTime": "2025-10-25T03:59:34.796Z"
 }
