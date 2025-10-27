@@ -13361,14 +13361,14 @@
                             },
                             "enableDirectBigtableAccess": {
                               "type": "bool",
-                              "id": 2,
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "bigtableMetadata": {
                               "type": "BigtableMetadata",
-                              "id": 3,
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -14203,7 +14203,7 @@
                         },
                         "bigtableMetadata": {
                           "type": "BigtableMetadata",
-                          "id": 21,
+                          "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -56442,14 +56442,14 @@
                             },
                             "enableDirectBigtableAccess": {
                               "type": "bool",
-                              "id": 2,
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "bigtableMetadata": {
                               "type": "BigtableMetadata",
-                              "id": 3,
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -57306,7 +57306,7 @@
                         },
                         "bigtableMetadata": {
                           "type": "BigtableMetadata",
-                          "id": 21,
+                          "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
