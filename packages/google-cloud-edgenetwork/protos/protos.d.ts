@@ -36,6 +36,13 @@ export namespace google {
                     STATE_DELETING = 5
                 }
 
+                /** RemotePeeringNetworkType enum. */
+                enum RemotePeeringNetworkType {
+                    REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED = 0,
+                    REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNAL = 1,
+                    REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNET = 2
+                }
+
                 /** Properties of a Zone. */
                 interface IZone {
 
@@ -480,6 +487,9 @@ export namespace google {
 
                     /** Interconnect physicalPorts */
                     physicalPorts?: (string[]|null);
+
+                    /** Interconnect remotePeeringNetworkType */
+                    remotePeeringNetworkType?: (google.cloud.edgenetwork.v1.RemotePeeringNetworkType|keyof typeof google.cloud.edgenetwork.v1.RemotePeeringNetworkType|null);
                 }
 
                 /** Represents an Interconnect. */
@@ -517,6 +527,9 @@ export namespace google {
 
                     /** Interconnect physicalPorts. */
                     public physicalPorts: string[];
+
+                    /** Interconnect remotePeeringNetworkType. */
+                    public remotePeeringNetworkType: (google.cloud.edgenetwork.v1.RemotePeeringNetworkType|keyof typeof google.cloud.edgenetwork.v1.RemotePeeringNetworkType);
 
                     /**
                      * Creates a new Interconnect instance using the specified properties.
@@ -637,6 +650,9 @@ export namespace google {
 
                     /** InterconnectAttachment state */
                     state?: (google.cloud.edgenetwork.v1.ResourceState|keyof typeof google.cloud.edgenetwork.v1.ResourceState|null);
+
+                    /** InterconnectAttachment peeringType */
+                    peeringType?: (google.cloud.edgenetwork.v1.RemotePeeringNetworkType|keyof typeof google.cloud.edgenetwork.v1.RemotePeeringNetworkType|null);
                 }
 
                 /** Represents an InterconnectAttachment. */
@@ -677,6 +693,9 @@ export namespace google {
 
                     /** InterconnectAttachment state. */
                     public state: (google.cloud.edgenetwork.v1.ResourceState|keyof typeof google.cloud.edgenetwork.v1.ResourceState);
+
+                    /** InterconnectAttachment peeringType. */
+                    public peeringType: (google.cloud.edgenetwork.v1.RemotePeeringNetworkType|keyof typeof google.cloud.edgenetwork.v1.RemotePeeringNetworkType);
 
                     /**
                      * Creates a new InterconnectAttachment instance using the specified properties.

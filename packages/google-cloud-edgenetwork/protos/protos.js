@@ -88,6 +88,22 @@
                         return values;
                     })();
     
+                    /**
+                     * RemotePeeringNetworkType enum.
+                     * @name google.cloud.edgenetwork.v1.RemotePeeringNetworkType
+                     * @enum {number}
+                     * @property {number} REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED=0 REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED value
+                     * @property {number} REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNAL=1 REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNAL value
+                     * @property {number} REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNET=2 REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNET value
+                     */
+                    v1.RemotePeeringNetworkType = (function() {
+                        var valuesById = {}, values = Object.create(valuesById);
+                        values[valuesById[0] = "REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED"] = 0;
+                        values[valuesById[1] = "REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNAL"] = 1;
+                        values[valuesById[2] = "REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNET"] = 2;
+                        return values;
+                    })();
+    
                     v1.Zone = (function() {
     
                         /**
@@ -1409,6 +1425,7 @@
                          * @property {string|null} [uuid] Interconnect uuid
                          * @property {string|null} [deviceCloudResourceName] Interconnect deviceCloudResourceName
                          * @property {Array.<string>|null} [physicalPorts] Interconnect physicalPorts
+                         * @property {google.cloud.edgenetwork.v1.RemotePeeringNetworkType|null} [remotePeeringNetworkType] Interconnect remotePeeringNetworkType
                          */
     
                         /**
@@ -1501,6 +1518,14 @@
                         Interconnect.prototype.physicalPorts = $util.emptyArray;
     
                         /**
+                         * Interconnect remotePeeringNetworkType.
+                         * @member {google.cloud.edgenetwork.v1.RemotePeeringNetworkType} remotePeeringNetworkType
+                         * @memberof google.cloud.edgenetwork.v1.Interconnect
+                         * @instance
+                         */
+                        Interconnect.prototype.remotePeeringNetworkType = 0;
+    
+                        /**
                          * Creates a new Interconnect instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.edgenetwork.v1.Interconnect
@@ -1544,6 +1569,8 @@
                             if (message.physicalPorts != null && message.physicalPorts.length)
                                 for (var i = 0; i < message.physicalPorts.length; ++i)
                                     writer.uint32(/* id 9, wireType 2 =*/74).string(message.physicalPorts[i]);
+                            if (message.remotePeeringNetworkType != null && Object.hasOwnProperty.call(message, "remotePeeringNetworkType"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.remotePeeringNetworkType);
                             return writer;
                         };
     
@@ -1637,6 +1664,10 @@
                                         message.physicalPorts.push(reader.string());
                                         break;
                                     }
+                                case 10: {
+                                        message.remotePeeringNetworkType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -1717,6 +1748,15 @@
                                     if (!$util.isString(message.physicalPorts[i]))
                                         return "physicalPorts: string[] expected";
                             }
+                            if (message.remotePeeringNetworkType != null && message.hasOwnProperty("remotePeeringNetworkType"))
+                                switch (message.remotePeeringNetworkType) {
+                                default:
+                                    return "remotePeeringNetworkType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -1780,6 +1820,26 @@
                                 for (var i = 0; i < object.physicalPorts.length; ++i)
                                     message.physicalPorts[i] = String(object.physicalPorts[i]);
                             }
+                            switch (object.remotePeeringNetworkType) {
+                            default:
+                                if (typeof object.remotePeeringNetworkType === "number") {
+                                    message.remotePeeringNetworkType = object.remotePeeringNetworkType;
+                                    break;
+                                }
+                                break;
+                            case "REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.remotePeeringNetworkType = 0;
+                                break;
+                            case "REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNAL":
+                            case 1:
+                                message.remotePeeringNetworkType = 1;
+                                break;
+                            case "REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNET":
+                            case 2:
+                                message.remotePeeringNetworkType = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -1808,6 +1868,7 @@
                                 object.interconnectType = options.enums === String ? "INTERCONNECT_TYPE_UNSPECIFIED" : 0;
                                 object.uuid = "";
                                 object.deviceCloudResourceName = "";
+                                object.remotePeeringNetworkType = options.enums === String ? "REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -1834,6 +1895,8 @@
                                 for (var j = 0; j < message.physicalPorts.length; ++j)
                                     object.physicalPorts[j] = message.physicalPorts[j];
                             }
+                            if (message.remotePeeringNetworkType != null && message.hasOwnProperty("remotePeeringNetworkType"))
+                                object.remotePeeringNetworkType = options.enums === String ? $root.google.cloud.edgenetwork.v1.RemotePeeringNetworkType[message.remotePeeringNetworkType] === undefined ? message.remotePeeringNetworkType : $root.google.cloud.edgenetwork.v1.RemotePeeringNetworkType[message.remotePeeringNetworkType] : message.remotePeeringNetworkType;
                             return object;
                         };
     
@@ -1896,6 +1959,7 @@
                          * @property {number|null} [vlanId] InterconnectAttachment vlanId
                          * @property {number|null} [mtu] InterconnectAttachment mtu
                          * @property {google.cloud.edgenetwork.v1.ResourceState|null} [state] InterconnectAttachment state
+                         * @property {google.cloud.edgenetwork.v1.RemotePeeringNetworkType|null} [peeringType] InterconnectAttachment peeringType
                          */
     
                         /**
@@ -1995,6 +2059,14 @@
                         InterconnectAttachment.prototype.state = 0;
     
                         /**
+                         * InterconnectAttachment peeringType.
+                         * @member {google.cloud.edgenetwork.v1.RemotePeeringNetworkType} peeringType
+                         * @memberof google.cloud.edgenetwork.v1.InterconnectAttachment
+                         * @instance
+                         */
+                        InterconnectAttachment.prototype.peeringType = 0;
+    
+                        /**
                          * Creates a new InterconnectAttachment instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.edgenetwork.v1.InterconnectAttachment
@@ -2039,6 +2111,8 @@
                                 writer.uint32(/* id 10, wireType 0 =*/80).int32(message.state);
                             if (message.network != null && Object.hasOwnProperty.call(message, "network"))
                                 writer.uint32(/* id 11, wireType 2 =*/90).string(message.network);
+                            if (message.peeringType != null && Object.hasOwnProperty.call(message, "peeringType"))
+                                writer.uint32(/* id 12, wireType 0 =*/96).int32(message.peeringType);
                             return writer;
                         };
     
@@ -2134,6 +2208,10 @@
                                         message.state = reader.int32();
                                         break;
                                     }
+                                case 12: {
+                                        message.peeringType = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -2217,6 +2295,15 @@
                                 case 5:
                                     break;
                                 }
+                            if (message.peeringType != null && message.hasOwnProperty("peeringType"))
+                                switch (message.peeringType) {
+                                default:
+                                    return "peeringType: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -2293,6 +2380,26 @@
                                 message.state = 5;
                                 break;
                             }
+                            switch (object.peeringType) {
+                            default:
+                                if (typeof object.peeringType === "number") {
+                                    message.peeringType = object.peeringType;
+                                    break;
+                                }
+                                break;
+                            case "REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED":
+                            case 0:
+                                message.peeringType = 0;
+                                break;
+                            case "REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNAL":
+                            case 1:
+                                message.peeringType = 1;
+                                break;
+                            case "REMOTE_PEERING_NETWORK_TYPE_CUSTOMER_INTERNET":
+                            case 2:
+                                message.peeringType = 2;
+                                break;
+                            }
                             return message;
                         };
     
@@ -2321,6 +2428,7 @@
                                 object.mtu = 0;
                                 object.state = options.enums === String ? "STATE_UNKNOWN" : 0;
                                 object.network = "";
+                                object.peeringType = options.enums === String ? "REMOTE_PEERING_NETWORK_TYPE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -2346,6 +2454,8 @@
                                 object.state = options.enums === String ? $root.google.cloud.edgenetwork.v1.ResourceState[message.state] === undefined ? message.state : $root.google.cloud.edgenetwork.v1.ResourceState[message.state] : message.state;
                             if (message.network != null && message.hasOwnProperty("network"))
                                 object.network = message.network;
+                            if (message.peeringType != null && message.hasOwnProperty("peeringType"))
+                                object.peeringType = options.enums === String ? $root.google.cloud.edgenetwork.v1.RemotePeeringNetworkType[message.peeringType] === undefined ? message.peeringType : $root.google.cloud.edgenetwork.v1.RemotePeeringNetworkType[message.peeringType] : message.peeringType;
                             return object;
                         };
     
