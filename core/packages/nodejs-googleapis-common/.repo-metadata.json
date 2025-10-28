@@ -1,0 +1,12 @@
+{
+  "language": "nodejs",
+  "repo": "googleapis/nodejs-googleapis-common",
+  "release_level": "stable",
+  "name_pretty": "Google APIs Common Module",
+  "distribution_name": "googleapis-common",
+  "name": "googleapis-common",
+  "default_version": "v1",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/googleapis-common/latest",
+  "api_shortname": "googleapis-common",
+  "library_type": "OTHER"
+}
