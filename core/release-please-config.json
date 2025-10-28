@@ -6,7 +6,7 @@
     "dev-packages/jsdoc-region-tag": {},
     "dev-packages/pack-n-play": {},
     "dev-packages/logging-utils": {},
-    "packages/google-gax": {},
+    "packages/gax": {},
     "packages/gapic-tools": {},
     "packages/gaxios": {},
     "packages/gcp-metadata": {},

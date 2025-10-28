@@ -6,6 +6,6 @@
   "packages/gaxios": "7.1.2",
   "packages/gcp-metadata": "8.1.1",
   "packages/proto3-json-serializer-nodejs": "3.0.3",
-  "packages/google-gax": "5.0.4",
+  "packages/gax": "5.0.4",
   "packages/gapic-tools": "1.0.3"
 }
