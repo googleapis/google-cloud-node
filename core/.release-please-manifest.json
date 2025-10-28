@@ -2,8 +2,10 @@
   "dev-packages/jsdoc-fresh": "5.0.2",
   "dev-packages/jsdoc-region-tag": "4.0.1",
   "dev-packages/pack-n-play": "4.2.1",
-  "packages/gax-nodejs": "null",
+  "dev-packages/logging-utils": "1.1.1",
   "packages/gaxios": "7.1.2",
   "packages/gcp-metadata": "8.1.1",
-  "packages/proto3-json-serializer-nodejs": "3.0.3"
+  "packages/proto3-json-serializer-nodejs": "3.0.3",
+  "packages/google-gax": "5.0.4",
+  "packages/gapic-tools": "1.0.3"
 }
