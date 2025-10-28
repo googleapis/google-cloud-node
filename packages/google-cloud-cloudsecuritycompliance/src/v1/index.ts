@@ -16,5 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
+export {AuditClient} from './audit_client';
+export {CmEnrollmentServiceClient} from './cm_enrollment_service_client';
 export {ConfigClient} from './config_client';
 export {DeploymentClient} from './deployment_client';

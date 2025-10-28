@@ -57,6 +57,12 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| create framework audit | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/audit.create_framework_audit.js) |
+| generate framework audit scope report | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/audit.generate_framework_audit_scope_report.js) |
+| get framework audit | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/audit.get_framework_audit.js) |
+| list framework audits | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/audit.list_framework_audits.js) |
+| calculate effective cm enrollment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/cm_enrollment_service.calculate_effective_cm_enrollment.js) |
+| update cm enrollment | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/cm_enrollment_service.update_cm_enrollment.js) |
 | create cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_cloud_control.js) |
 | create framework | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.create_framework.js) |
 | delete cloud control | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-cloudsecuritycompliance/samples/generated/v1/config.delete_cloud_control.js) |

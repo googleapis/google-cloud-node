@@ -29,16 +29,17 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. name of the FrameworkDeployment to be deleted in the following
-   *  format:
-   *  organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}
+   *  Required. The name of the framework deployment that you want to delete,
+   *  in the format
+   *  `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+   *  The only supported location is `global`.
    */
   // const name = 'abc123'
   /**
    *  Optional. An opaque identifier for the current version of the resource.
    *  If you provide this value, then it must match the existing value. If the
    *  values don't match, then the request fails with an
-   *  ABORTED google.rpc.Code.ABORTED  error.
+   *  `ABORTED` google.rpc.Code.ABORTED  error.
    *  If you omit this value, then the resource is deleted regardless of its
    *  current `etag` value.
    */

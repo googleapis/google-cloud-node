@@ -29,14 +29,14 @@ function main(name) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The name of the framework to retrieve.
-   *  Format:
-   *  organizations/{organization}/locations/{location}/frameworks/{framework_id}
+   *  Required. The name of the framework to retrieve, in the format
+   *  `organizations/{organization}/locations/{location}/frameworks/{framework_id}`
+   *  The only supported location is `global`.
    */
   // const name = 'abc123'
   /**
-   *  Optional. The Framework major version to retrieve. If not specified, the
-   *  most recently updated revision_id is retrieved.
+   *  Optional. The framework major version to retrieve. If not specified, the
+   *  most recently updated `revision_id` is retrieved.
    */
   // const majorRevisionId = 1234
 

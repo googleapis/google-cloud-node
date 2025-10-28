@@ -26,6 +26,1930 @@ export namespace google {
             /** Namespace v1. */
             namespace v1 {
 
+                /** Represents an Audit */
+                class Audit extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new Audit service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new Audit service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Audit;
+
+                    /**
+                     * Calls GenerateFrameworkAuditScopeReport.
+                     * @param request GenerateFrameworkAuditScopeReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and GenerateFrameworkAuditScopeReportResponse
+                     */
+                    public generateFrameworkAuditScopeReport(request: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportRequest, callback: google.cloud.cloudsecuritycompliance.v1.Audit.GenerateFrameworkAuditScopeReportCallback): void;
+
+                    /**
+                     * Calls GenerateFrameworkAuditScopeReport.
+                     * @param request GenerateFrameworkAuditScopeReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public generateFrameworkAuditScopeReport(request: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportRequest): Promise<google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportResponse>;
+
+                    /**
+                     * Calls CreateFrameworkAudit.
+                     * @param request CreateFrameworkAuditRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and Operation
+                     */
+                    public createFrameworkAudit(request: google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkAuditRequest, callback: google.cloud.cloudsecuritycompliance.v1.Audit.CreateFrameworkAuditCallback): void;
+
+                    /**
+                     * Calls CreateFrameworkAudit.
+                     * @param request CreateFrameworkAuditRequest message or plain object
+                     * @returns Promise
+                     */
+                    public createFrameworkAudit(request: google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkAuditRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls ListFrameworkAudits.
+                     * @param request ListFrameworkAuditsRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFrameworkAuditsResponse
+                     */
+                    public listFrameworkAudits(request: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsRequest, callback: google.cloud.cloudsecuritycompliance.v1.Audit.ListFrameworkAuditsCallback): void;
+
+                    /**
+                     * Calls ListFrameworkAudits.
+                     * @param request ListFrameworkAuditsRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFrameworkAudits(request: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsRequest): Promise<google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsResponse>;
+
+                    /**
+                     * Calls GetFrameworkAudit.
+                     * @param request GetFrameworkAuditRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FrameworkAudit
+                     */
+                    public getFrameworkAudit(request: google.cloud.cloudsecuritycompliance.v1.IGetFrameworkAuditRequest, callback: google.cloud.cloudsecuritycompliance.v1.Audit.GetFrameworkAuditCallback): void;
+
+                    /**
+                     * Calls GetFrameworkAudit.
+                     * @param request GetFrameworkAuditRequest message or plain object
+                     * @returns Promise
+                     */
+                    public getFrameworkAudit(request: google.cloud.cloudsecuritycompliance.v1.IGetFrameworkAuditRequest): Promise<google.cloud.cloudsecuritycompliance.v1.FrameworkAudit>;
+                }
+
+                namespace Audit {
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.Audit|generateFrameworkAuditScopeReport}.
+                     * @param error Error, if any
+                     * @param [response] GenerateFrameworkAuditScopeReportResponse
+                     */
+                    type GenerateFrameworkAuditScopeReportCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.Audit|createFrameworkAudit}.
+                     * @param error Error, if any
+                     * @param [response] Operation
+                     */
+                    type CreateFrameworkAuditCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.Audit|listFrameworkAudits}.
+                     * @param error Error, if any
+                     * @param [response] ListFrameworkAuditsResponse
+                     */
+                    type ListFrameworkAuditsCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.Audit|getFrameworkAudit}.
+                     * @param error Error, if any
+                     * @param [response] FrameworkAudit
+                     */
+                    type GetFrameworkAuditCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.FrameworkAudit) => void;
+                }
+
+                /** ComplianceState enum. */
+                enum ComplianceState {
+                    COMPLIANCE_STATE_UNSPECIFIED = 0,
+                    COMPLIANT = 1,
+                    VIOLATION = 2,
+                    MANUAL_REVIEW_NEEDED = 3,
+                    ERROR = 4,
+                    AUDIT_NOT_SUPPORTED = 5
+                }
+
+                /** Properties of a GenerateFrameworkAuditScopeReportRequest. */
+                interface IGenerateFrameworkAuditScopeReportRequest {
+
+                    /** GenerateFrameworkAuditScopeReportRequest scope */
+                    scope?: (string|null);
+
+                    /** GenerateFrameworkAuditScopeReportRequest reportFormat */
+                    reportFormat?: (google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest.Format|keyof typeof google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest.Format|null);
+
+                    /** GenerateFrameworkAuditScopeReportRequest complianceFramework */
+                    complianceFramework?: (string|null);
+                }
+
+                /** Represents a GenerateFrameworkAuditScopeReportRequest. */
+                class GenerateFrameworkAuditScopeReportRequest implements IGenerateFrameworkAuditScopeReportRequest {
+
+                    /**
+                     * Constructs a new GenerateFrameworkAuditScopeReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportRequest);
+
+                    /** GenerateFrameworkAuditScopeReportRequest scope. */
+                    public scope: string;
+
+                    /** GenerateFrameworkAuditScopeReportRequest reportFormat. */
+                    public reportFormat: (google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest.Format|keyof typeof google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest.Format);
+
+                    /** GenerateFrameworkAuditScopeReportRequest complianceFramework. */
+                    public complianceFramework: string;
+
+                    /**
+                     * Creates a new GenerateFrameworkAuditScopeReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateFrameworkAuditScopeReportRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportRequest): google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest;
+
+                    /**
+                     * Encodes the specified GenerateFrameworkAuditScopeReportRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest.verify|verify} messages.
+                     * @param message GenerateFrameworkAuditScopeReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateFrameworkAuditScopeReportRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest.verify|verify} messages.
+                     * @param message GenerateFrameworkAuditScopeReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateFrameworkAuditScopeReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateFrameworkAuditScopeReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest;
+
+                    /**
+                     * Decodes a GenerateFrameworkAuditScopeReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateFrameworkAuditScopeReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest;
+
+                    /**
+                     * Verifies a GenerateFrameworkAuditScopeReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateFrameworkAuditScopeReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateFrameworkAuditScopeReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest;
+
+                    /**
+                     * Creates a plain object from a GenerateFrameworkAuditScopeReportRequest message. Also converts values to other types if specified.
+                     * @param message GenerateFrameworkAuditScopeReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateFrameworkAuditScopeReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateFrameworkAuditScopeReportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace GenerateFrameworkAuditScopeReportRequest {
+
+                    /** Format enum. */
+                    enum Format {
+                        FORMAT_UNSPECIFIED = 0,
+                        ODF = 1
+                    }
+                }
+
+                /** Properties of a GenerateFrameworkAuditScopeReportResponse. */
+                interface IGenerateFrameworkAuditScopeReportResponse {
+
+                    /** GenerateFrameworkAuditScopeReportResponse scopeReportContents */
+                    scopeReportContents?: (Uint8Array|Buffer|string|null);
+
+                    /** GenerateFrameworkAuditScopeReportResponse name */
+                    name?: (string|null);
+
+                    /** GenerateFrameworkAuditScopeReportResponse complianceFramework */
+                    complianceFramework?: (string|null);
+                }
+
+                /** Represents a GenerateFrameworkAuditScopeReportResponse. */
+                class GenerateFrameworkAuditScopeReportResponse implements IGenerateFrameworkAuditScopeReportResponse {
+
+                    /**
+                     * Constructs a new GenerateFrameworkAuditScopeReportResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportResponse);
+
+                    /** GenerateFrameworkAuditScopeReportResponse scopeReportContents. */
+                    public scopeReportContents?: (Uint8Array|Buffer|string|null);
+
+                    /** GenerateFrameworkAuditScopeReportResponse name. */
+                    public name: string;
+
+                    /** GenerateFrameworkAuditScopeReportResponse complianceFramework. */
+                    public complianceFramework: string;
+
+                    /** GenerateFrameworkAuditScopeReportResponse auditReport. */
+                    public auditReport?: "scopeReportContents";
+
+                    /**
+                     * Creates a new GenerateFrameworkAuditScopeReportResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GenerateFrameworkAuditScopeReportResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportResponse): google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportResponse;
+
+                    /**
+                     * Encodes the specified GenerateFrameworkAuditScopeReportResponse message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportResponse.verify|verify} messages.
+                     * @param message GenerateFrameworkAuditScopeReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GenerateFrameworkAuditScopeReportResponse message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportResponse.verify|verify} messages.
+                     * @param message GenerateFrameworkAuditScopeReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IGenerateFrameworkAuditScopeReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GenerateFrameworkAuditScopeReportResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GenerateFrameworkAuditScopeReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportResponse;
+
+                    /**
+                     * Decodes a GenerateFrameworkAuditScopeReportResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GenerateFrameworkAuditScopeReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportResponse;
+
+                    /**
+                     * Verifies a GenerateFrameworkAuditScopeReportResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GenerateFrameworkAuditScopeReportResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GenerateFrameworkAuditScopeReportResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportResponse;
+
+                    /**
+                     * Creates a plain object from a GenerateFrameworkAuditScopeReportResponse message. Also converts values to other types if specified.
+                     * @param message GenerateFrameworkAuditScopeReportResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.GenerateFrameworkAuditScopeReportResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GenerateFrameworkAuditScopeReportResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GenerateFrameworkAuditScopeReportResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ReportSummary. */
+                interface IReportSummary {
+
+                    /** ReportSummary totalCount */
+                    totalCount?: (number|null);
+
+                    /** ReportSummary compliantCount */
+                    compliantCount?: (number|null);
+
+                    /** ReportSummary violationCount */
+                    violationCount?: (number|null);
+
+                    /** ReportSummary manualReviewNeededCount */
+                    manualReviewNeededCount?: (number|null);
+
+                    /** ReportSummary errorCount */
+                    errorCount?: (number|null);
+                }
+
+                /** Represents a ReportSummary. */
+                class ReportSummary implements IReportSummary {
+
+                    /**
+                     * Constructs a new ReportSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IReportSummary);
+
+                    /** ReportSummary totalCount. */
+                    public totalCount: number;
+
+                    /** ReportSummary compliantCount. */
+                    public compliantCount: number;
+
+                    /** ReportSummary violationCount. */
+                    public violationCount: number;
+
+                    /** ReportSummary manualReviewNeededCount. */
+                    public manualReviewNeededCount: number;
+
+                    /** ReportSummary errorCount. */
+                    public errorCount: number;
+
+                    /**
+                     * Creates a new ReportSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ReportSummary instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IReportSummary): google.cloud.cloudsecuritycompliance.v1.ReportSummary;
+
+                    /**
+                     * Encodes the specified ReportSummary message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ReportSummary.verify|verify} messages.
+                     * @param message ReportSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IReportSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ReportSummary message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ReportSummary.verify|verify} messages.
+                     * @param message ReportSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IReportSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ReportSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ReportSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ReportSummary;
+
+                    /**
+                     * Decodes a ReportSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ReportSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ReportSummary;
+
+                    /**
+                     * Verifies a ReportSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ReportSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ReportSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ReportSummary;
+
+                    /**
+                     * Creates a plain object from a ReportSummary message. Also converts values to other types if specified.
+                     * @param message ReportSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ReportSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ReportSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ReportSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CreateFrameworkAuditRequest. */
+                interface ICreateFrameworkAuditRequest {
+
+                    /** CreateFrameworkAuditRequest parent */
+                    parent?: (string|null);
+
+                    /** CreateFrameworkAuditRequest frameworkAuditId */
+                    frameworkAuditId?: (string|null);
+
+                    /** CreateFrameworkAuditRequest frameworkAudit */
+                    frameworkAudit?: (google.cloud.cloudsecuritycompliance.v1.IFrameworkAudit|null);
+                }
+
+                /** Represents a CreateFrameworkAuditRequest. */
+                class CreateFrameworkAuditRequest implements ICreateFrameworkAuditRequest {
+
+                    /**
+                     * Constructs a new CreateFrameworkAuditRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkAuditRequest);
+
+                    /** CreateFrameworkAuditRequest parent. */
+                    public parent: string;
+
+                    /** CreateFrameworkAuditRequest frameworkAuditId. */
+                    public frameworkAuditId: string;
+
+                    /** CreateFrameworkAuditRequest frameworkAudit. */
+                    public frameworkAudit?: (google.cloud.cloudsecuritycompliance.v1.IFrameworkAudit|null);
+
+                    /**
+                     * Creates a new CreateFrameworkAuditRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CreateFrameworkAuditRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkAuditRequest): google.cloud.cloudsecuritycompliance.v1.CreateFrameworkAuditRequest;
+
+                    /**
+                     * Encodes the specified CreateFrameworkAuditRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CreateFrameworkAuditRequest.verify|verify} messages.
+                     * @param message CreateFrameworkAuditRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkAuditRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CreateFrameworkAuditRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CreateFrameworkAuditRequest.verify|verify} messages.
+                     * @param message CreateFrameworkAuditRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICreateFrameworkAuditRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CreateFrameworkAuditRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CreateFrameworkAuditRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CreateFrameworkAuditRequest;
+
+                    /**
+                     * Decodes a CreateFrameworkAuditRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CreateFrameworkAuditRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CreateFrameworkAuditRequest;
+
+                    /**
+                     * Verifies a CreateFrameworkAuditRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CreateFrameworkAuditRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CreateFrameworkAuditRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CreateFrameworkAuditRequest;
+
+                    /**
+                     * Creates a plain object from a CreateFrameworkAuditRequest message. Also converts values to other types if specified.
+                     * @param message CreateFrameworkAuditRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CreateFrameworkAuditRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CreateFrameworkAuditRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CreateFrameworkAuditRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FrameworkAuditDestination. */
+                interface IFrameworkAuditDestination {
+
+                    /** FrameworkAuditDestination bucket */
+                    bucket?: (google.cloud.cloudsecuritycompliance.v1.IBucketDestination|null);
+                }
+
+                /** Represents a FrameworkAuditDestination. */
+                class FrameworkAuditDestination implements IFrameworkAuditDestination {
+
+                    /**
+                     * Constructs a new FrameworkAuditDestination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IFrameworkAuditDestination);
+
+                    /** FrameworkAuditDestination bucket. */
+                    public bucket?: (google.cloud.cloudsecuritycompliance.v1.IBucketDestination|null);
+
+                    /** FrameworkAuditDestination destinationType. */
+                    public destinationType?: "bucket";
+
+                    /**
+                     * Creates a new FrameworkAuditDestination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FrameworkAuditDestination instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IFrameworkAuditDestination): google.cloud.cloudsecuritycompliance.v1.FrameworkAuditDestination;
+
+                    /**
+                     * Encodes the specified FrameworkAuditDestination message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FrameworkAuditDestination.verify|verify} messages.
+                     * @param message FrameworkAuditDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IFrameworkAuditDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FrameworkAuditDestination message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FrameworkAuditDestination.verify|verify} messages.
+                     * @param message FrameworkAuditDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IFrameworkAuditDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FrameworkAuditDestination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FrameworkAuditDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.FrameworkAuditDestination;
+
+                    /**
+                     * Decodes a FrameworkAuditDestination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FrameworkAuditDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.FrameworkAuditDestination;
+
+                    /**
+                     * Verifies a FrameworkAuditDestination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FrameworkAuditDestination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FrameworkAuditDestination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.FrameworkAuditDestination;
+
+                    /**
+                     * Creates a plain object from a FrameworkAuditDestination message. Also converts values to other types if specified.
+                     * @param message FrameworkAuditDestination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.FrameworkAuditDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FrameworkAuditDestination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FrameworkAuditDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BucketDestination. */
+                interface IBucketDestination {
+
+                    /** BucketDestination bucketUri */
+                    bucketUri?: (string|null);
+
+                    /** BucketDestination frameworkAuditFormat */
+                    frameworkAuditFormat?: (google.cloud.cloudsecuritycompliance.v1.BucketDestination.Format|keyof typeof google.cloud.cloudsecuritycompliance.v1.BucketDestination.Format|null);
+                }
+
+                /** Represents a BucketDestination. */
+                class BucketDestination implements IBucketDestination {
+
+                    /**
+                     * Constructs a new BucketDestination.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IBucketDestination);
+
+                    /** BucketDestination bucketUri. */
+                    public bucketUri: string;
+
+                    /** BucketDestination frameworkAuditFormat. */
+                    public frameworkAuditFormat: (google.cloud.cloudsecuritycompliance.v1.BucketDestination.Format|keyof typeof google.cloud.cloudsecuritycompliance.v1.BucketDestination.Format);
+
+                    /**
+                     * Creates a new BucketDestination instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BucketDestination instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IBucketDestination): google.cloud.cloudsecuritycompliance.v1.BucketDestination;
+
+                    /**
+                     * Encodes the specified BucketDestination message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.BucketDestination.verify|verify} messages.
+                     * @param message BucketDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IBucketDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BucketDestination message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.BucketDestination.verify|verify} messages.
+                     * @param message BucketDestination message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IBucketDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BucketDestination message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BucketDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.BucketDestination;
+
+                    /**
+                     * Decodes a BucketDestination message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BucketDestination
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.BucketDestination;
+
+                    /**
+                     * Verifies a BucketDestination message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BucketDestination message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BucketDestination
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.BucketDestination;
+
+                    /**
+                     * Creates a plain object from a BucketDestination message. Also converts values to other types if specified.
+                     * @param message BucketDestination
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.BucketDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BucketDestination to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BucketDestination
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace BucketDestination {
+
+                    /** Format enum. */
+                    enum Format {
+                        FORMAT_UNSPECIFIED = 0,
+                        ODF = 1
+                    }
+                }
+
+                /** Properties of a FrameworkAudit. */
+                interface IFrameworkAudit {
+
+                    /** FrameworkAudit name */
+                    name?: (string|null);
+
+                    /** FrameworkAudit frameworkAuditId */
+                    frameworkAuditId?: (string|null);
+
+                    /** FrameworkAudit complianceFramework */
+                    complianceFramework?: (string|null);
+
+                    /** FrameworkAudit scope */
+                    scope?: (string|null);
+
+                    /** FrameworkAudit frameworkAuditDestination */
+                    frameworkAuditDestination?: (google.cloud.cloudsecuritycompliance.v1.IFrameworkAuditDestination|null);
+
+                    /** FrameworkAudit startTime */
+                    startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FrameworkAudit finishTime */
+                    finishTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FrameworkAudit complianceState */
+                    complianceState?: (google.cloud.cloudsecuritycompliance.v1.ComplianceState|keyof typeof google.cloud.cloudsecuritycompliance.v1.ComplianceState|null);
+
+                    /** FrameworkAudit reportSummary */
+                    reportSummary?: (google.cloud.cloudsecuritycompliance.v1.IReportSummary|null);
+
+                    /** FrameworkAudit cloudControlGroupAuditDetails */
+                    cloudControlGroupAuditDetails?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupAuditDetails[]|null);
+
+                    /** FrameworkAudit cloudControlAuditDetails */
+                    cloudControlAuditDetails?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlAuditDetails[]|null);
+
+                    /** FrameworkAudit operationId */
+                    operationId?: (string|null);
+
+                    /** FrameworkAudit state */
+                    state?: (google.cloud.cloudsecuritycompliance.v1.FrameworkAudit.State|keyof typeof google.cloud.cloudsecuritycompliance.v1.FrameworkAudit.State|null);
+                }
+
+                /** Represents a FrameworkAudit. */
+                class FrameworkAudit implements IFrameworkAudit {
+
+                    /**
+                     * Constructs a new FrameworkAudit.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IFrameworkAudit);
+
+                    /** FrameworkAudit name. */
+                    public name: string;
+
+                    /** FrameworkAudit frameworkAuditId. */
+                    public frameworkAuditId: string;
+
+                    /** FrameworkAudit complianceFramework. */
+                    public complianceFramework: string;
+
+                    /** FrameworkAudit scope. */
+                    public scope: string;
+
+                    /** FrameworkAudit frameworkAuditDestination. */
+                    public frameworkAuditDestination?: (google.cloud.cloudsecuritycompliance.v1.IFrameworkAuditDestination|null);
+
+                    /** FrameworkAudit startTime. */
+                    public startTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FrameworkAudit finishTime. */
+                    public finishTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FrameworkAudit complianceState. */
+                    public complianceState: (google.cloud.cloudsecuritycompliance.v1.ComplianceState|keyof typeof google.cloud.cloudsecuritycompliance.v1.ComplianceState);
+
+                    /** FrameworkAudit reportSummary. */
+                    public reportSummary?: (google.cloud.cloudsecuritycompliance.v1.IReportSummary|null);
+
+                    /** FrameworkAudit cloudControlGroupAuditDetails. */
+                    public cloudControlGroupAuditDetails: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupAuditDetails[];
+
+                    /** FrameworkAudit cloudControlAuditDetails. */
+                    public cloudControlAuditDetails: google.cloud.cloudsecuritycompliance.v1.ICloudControlAuditDetails[];
+
+                    /** FrameworkAudit operationId. */
+                    public operationId: string;
+
+                    /** FrameworkAudit state. */
+                    public state: (google.cloud.cloudsecuritycompliance.v1.FrameworkAudit.State|keyof typeof google.cloud.cloudsecuritycompliance.v1.FrameworkAudit.State);
+
+                    /**
+                     * Creates a new FrameworkAudit instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FrameworkAudit instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IFrameworkAudit): google.cloud.cloudsecuritycompliance.v1.FrameworkAudit;
+
+                    /**
+                     * Encodes the specified FrameworkAudit message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FrameworkAudit.verify|verify} messages.
+                     * @param message FrameworkAudit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IFrameworkAudit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FrameworkAudit message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FrameworkAudit.verify|verify} messages.
+                     * @param message FrameworkAudit message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IFrameworkAudit, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FrameworkAudit message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FrameworkAudit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.FrameworkAudit;
+
+                    /**
+                     * Decodes a FrameworkAudit message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FrameworkAudit
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.FrameworkAudit;
+
+                    /**
+                     * Verifies a FrameworkAudit message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FrameworkAudit message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FrameworkAudit
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.FrameworkAudit;
+
+                    /**
+                     * Creates a plain object from a FrameworkAudit message. Also converts values to other types if specified.
+                     * @param message FrameworkAudit
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.FrameworkAudit, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FrameworkAudit to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FrameworkAudit
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace FrameworkAudit {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        SCHEDULED = 1,
+                        RUNNING = 2,
+                        UPLOADING = 3,
+                        FAILED = 4,
+                        SUCCEEDED = 5
+                    }
+                }
+
+                /** Properties of a ListFrameworkAuditsRequest. */
+                interface IListFrameworkAuditsRequest {
+
+                    /** ListFrameworkAuditsRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFrameworkAuditsRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFrameworkAuditsRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListFrameworkAuditsRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListFrameworkAuditsRequest. */
+                class ListFrameworkAuditsRequest implements IListFrameworkAuditsRequest {
+
+                    /**
+                     * Constructs a new ListFrameworkAuditsRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsRequest);
+
+                    /** ListFrameworkAuditsRequest parent. */
+                    public parent: string;
+
+                    /** ListFrameworkAuditsRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFrameworkAuditsRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListFrameworkAuditsRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListFrameworkAuditsRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFrameworkAuditsRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsRequest): google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsRequest;
+
+                    /**
+                     * Encodes the specified ListFrameworkAuditsRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsRequest.verify|verify} messages.
+                     * @param message ListFrameworkAuditsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFrameworkAuditsRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsRequest.verify|verify} messages.
+                     * @param message ListFrameworkAuditsRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFrameworkAuditsRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFrameworkAuditsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsRequest;
+
+                    /**
+                     * Decodes a ListFrameworkAuditsRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFrameworkAuditsRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsRequest;
+
+                    /**
+                     * Verifies a ListFrameworkAuditsRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFrameworkAuditsRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFrameworkAuditsRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsRequest;
+
+                    /**
+                     * Creates a plain object from a ListFrameworkAuditsRequest message. Also converts values to other types if specified.
+                     * @param message ListFrameworkAuditsRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFrameworkAuditsRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFrameworkAuditsRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFrameworkAuditsResponse. */
+                interface IListFrameworkAuditsResponse {
+
+                    /** ListFrameworkAuditsResponse frameworkAudits */
+                    frameworkAudits?: (google.cloud.cloudsecuritycompliance.v1.IFrameworkAudit[]|null);
+
+                    /** ListFrameworkAuditsResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFrameworkAuditsResponse. */
+                class ListFrameworkAuditsResponse implements IListFrameworkAuditsResponse {
+
+                    /**
+                     * Constructs a new ListFrameworkAuditsResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsResponse);
+
+                    /** ListFrameworkAuditsResponse frameworkAudits. */
+                    public frameworkAudits: google.cloud.cloudsecuritycompliance.v1.IFrameworkAudit[];
+
+                    /** ListFrameworkAuditsResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFrameworkAuditsResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFrameworkAuditsResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsResponse): google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsResponse;
+
+                    /**
+                     * Encodes the specified ListFrameworkAuditsResponse message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsResponse.verify|verify} messages.
+                     * @param message ListFrameworkAuditsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFrameworkAuditsResponse message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsResponse.verify|verify} messages.
+                     * @param message ListFrameworkAuditsResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IListFrameworkAuditsResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFrameworkAuditsResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFrameworkAuditsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsResponse;
+
+                    /**
+                     * Decodes a ListFrameworkAuditsResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFrameworkAuditsResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsResponse;
+
+                    /**
+                     * Verifies a ListFrameworkAuditsResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFrameworkAuditsResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFrameworkAuditsResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsResponse;
+
+                    /**
+                     * Creates a plain object from a ListFrameworkAuditsResponse message. Also converts values to other types if specified.
+                     * @param message ListFrameworkAuditsResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ListFrameworkAuditsResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFrameworkAuditsResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFrameworkAuditsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a GetFrameworkAuditRequest. */
+                interface IGetFrameworkAuditRequest {
+
+                    /** GetFrameworkAuditRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a GetFrameworkAuditRequest. */
+                class GetFrameworkAuditRequest implements IGetFrameworkAuditRequest {
+
+                    /**
+                     * Constructs a new GetFrameworkAuditRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IGetFrameworkAuditRequest);
+
+                    /** GetFrameworkAuditRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new GetFrameworkAuditRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns GetFrameworkAuditRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IGetFrameworkAuditRequest): google.cloud.cloudsecuritycompliance.v1.GetFrameworkAuditRequest;
+
+                    /**
+                     * Encodes the specified GetFrameworkAuditRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.GetFrameworkAuditRequest.verify|verify} messages.
+                     * @param message GetFrameworkAuditRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IGetFrameworkAuditRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified GetFrameworkAuditRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.GetFrameworkAuditRequest.verify|verify} messages.
+                     * @param message GetFrameworkAuditRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IGetFrameworkAuditRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a GetFrameworkAuditRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns GetFrameworkAuditRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.GetFrameworkAuditRequest;
+
+                    /**
+                     * Decodes a GetFrameworkAuditRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns GetFrameworkAuditRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.GetFrameworkAuditRequest;
+
+                    /**
+                     * Verifies a GetFrameworkAuditRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a GetFrameworkAuditRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns GetFrameworkAuditRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.GetFrameworkAuditRequest;
+
+                    /**
+                     * Creates a plain object from a GetFrameworkAuditRequest message. Also converts values to other types if specified.
+                     * @param message GetFrameworkAuditRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.GetFrameworkAuditRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this GetFrameworkAuditRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for GetFrameworkAuditRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudControlGroupAuditDetails. */
+                interface ICloudControlGroupAuditDetails {
+
+                    /** CloudControlGroupAuditDetails cloudControlGroupId */
+                    cloudControlGroupId?: (string|null);
+
+                    /** CloudControlGroupAuditDetails displayName */
+                    displayName?: (string|null);
+
+                    /** CloudControlGroupAuditDetails description */
+                    description?: (string|null);
+
+                    /** CloudControlGroupAuditDetails responsibilityType */
+                    responsibilityType?: (string|null);
+
+                    /** CloudControlGroupAuditDetails googleResponsibilityDescription */
+                    googleResponsibilityDescription?: (string|null);
+
+                    /** CloudControlGroupAuditDetails googleResponsibilityImplementation */
+                    googleResponsibilityImplementation?: (string|null);
+
+                    /** CloudControlGroupAuditDetails customerResponsibilityDescription */
+                    customerResponsibilityDescription?: (string|null);
+
+                    /** CloudControlGroupAuditDetails customerResponsibilityImplementation */
+                    customerResponsibilityImplementation?: (string|null);
+
+                    /** CloudControlGroupAuditDetails complianceState */
+                    complianceState?: (google.cloud.cloudsecuritycompliance.v1.ComplianceState|keyof typeof google.cloud.cloudsecuritycompliance.v1.ComplianceState|null);
+
+                    /** CloudControlGroupAuditDetails controlId */
+                    controlId?: (string|null);
+
+                    /** CloudControlGroupAuditDetails controlFamily */
+                    controlFamily?: (google.cloud.cloudsecuritycompliance.v1.IControlFamily|null);
+
+                    /** CloudControlGroupAuditDetails cloudControlDetails */
+                    cloudControlDetails?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlAuditDetails[]|null);
+
+                    /** CloudControlGroupAuditDetails reportSummary */
+                    reportSummary?: (google.cloud.cloudsecuritycompliance.v1.IReportSummary|null);
+                }
+
+                /** Represents a CloudControlGroupAuditDetails. */
+                class CloudControlGroupAuditDetails implements ICloudControlGroupAuditDetails {
+
+                    /**
+                     * Constructs a new CloudControlGroupAuditDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupAuditDetails);
+
+                    /** CloudControlGroupAuditDetails cloudControlGroupId. */
+                    public cloudControlGroupId: string;
+
+                    /** CloudControlGroupAuditDetails displayName. */
+                    public displayName: string;
+
+                    /** CloudControlGroupAuditDetails description. */
+                    public description: string;
+
+                    /** CloudControlGroupAuditDetails responsibilityType. */
+                    public responsibilityType: string;
+
+                    /** CloudControlGroupAuditDetails googleResponsibilityDescription. */
+                    public googleResponsibilityDescription: string;
+
+                    /** CloudControlGroupAuditDetails googleResponsibilityImplementation. */
+                    public googleResponsibilityImplementation: string;
+
+                    /** CloudControlGroupAuditDetails customerResponsibilityDescription. */
+                    public customerResponsibilityDescription: string;
+
+                    /** CloudControlGroupAuditDetails customerResponsibilityImplementation. */
+                    public customerResponsibilityImplementation: string;
+
+                    /** CloudControlGroupAuditDetails complianceState. */
+                    public complianceState: (google.cloud.cloudsecuritycompliance.v1.ComplianceState|keyof typeof google.cloud.cloudsecuritycompliance.v1.ComplianceState);
+
+                    /** CloudControlGroupAuditDetails controlId. */
+                    public controlId: string;
+
+                    /** CloudControlGroupAuditDetails controlFamily. */
+                    public controlFamily?: (google.cloud.cloudsecuritycompliance.v1.IControlFamily|null);
+
+                    /** CloudControlGroupAuditDetails cloudControlDetails. */
+                    public cloudControlDetails: google.cloud.cloudsecuritycompliance.v1.ICloudControlAuditDetails[];
+
+                    /** CloudControlGroupAuditDetails reportSummary. */
+                    public reportSummary?: (google.cloud.cloudsecuritycompliance.v1.IReportSummary|null);
+
+                    /**
+                     * Creates a new CloudControlGroupAuditDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudControlGroupAuditDetails instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupAuditDetails): google.cloud.cloudsecuritycompliance.v1.CloudControlGroupAuditDetails;
+
+                    /**
+                     * Encodes the specified CloudControlGroupAuditDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroupAuditDetails.verify|verify} messages.
+                     * @param message CloudControlGroupAuditDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupAuditDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudControlGroupAuditDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlGroupAuditDetails.verify|verify} messages.
+                     * @param message CloudControlGroupAuditDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlGroupAuditDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudControlGroupAuditDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudControlGroupAuditDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CloudControlGroupAuditDetails;
+
+                    /**
+                     * Decodes a CloudControlGroupAuditDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudControlGroupAuditDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CloudControlGroupAuditDetails;
+
+                    /**
+                     * Verifies a CloudControlGroupAuditDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudControlGroupAuditDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudControlGroupAuditDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CloudControlGroupAuditDetails;
+
+                    /**
+                     * Creates a plain object from a CloudControlGroupAuditDetails message. Also converts values to other types if specified.
+                     * @param message CloudControlGroupAuditDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CloudControlGroupAuditDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudControlGroupAuditDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudControlGroupAuditDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FindingDetails. */
+                interface IFindingDetails {
+
+                    /** FindingDetails name */
+                    name?: (string|null);
+
+                    /** FindingDetails complianceState */
+                    complianceState?: (google.cloud.cloudsecuritycompliance.v1.ComplianceState|keyof typeof google.cloud.cloudsecuritycompliance.v1.ComplianceState|null);
+
+                    /** FindingDetails observation */
+                    observation?: (google.cloud.cloudsecuritycompliance.v1.IObservationDetails|null);
+
+                    /** FindingDetails evidence */
+                    evidence?: (google.cloud.cloudsecuritycompliance.v1.IEvidenceDetails|null);
+                }
+
+                /** Represents a FindingDetails. */
+                class FindingDetails implements IFindingDetails {
+
+                    /**
+                     * Constructs a new FindingDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IFindingDetails);
+
+                    /** FindingDetails name. */
+                    public name: string;
+
+                    /** FindingDetails complianceState. */
+                    public complianceState: (google.cloud.cloudsecuritycompliance.v1.ComplianceState|keyof typeof google.cloud.cloudsecuritycompliance.v1.ComplianceState);
+
+                    /** FindingDetails observation. */
+                    public observation?: (google.cloud.cloudsecuritycompliance.v1.IObservationDetails|null);
+
+                    /** FindingDetails evidence. */
+                    public evidence?: (google.cloud.cloudsecuritycompliance.v1.IEvidenceDetails|null);
+
+                    /**
+                     * Creates a new FindingDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FindingDetails instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IFindingDetails): google.cloud.cloudsecuritycompliance.v1.FindingDetails;
+
+                    /**
+                     * Encodes the specified FindingDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FindingDetails.verify|verify} messages.
+                     * @param message FindingDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IFindingDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FindingDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FindingDetails.verify|verify} messages.
+                     * @param message FindingDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IFindingDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FindingDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FindingDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.FindingDetails;
+
+                    /**
+                     * Decodes a FindingDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FindingDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.FindingDetails;
+
+                    /**
+                     * Verifies a FindingDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FindingDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FindingDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.FindingDetails;
+
+                    /**
+                     * Creates a plain object from a FindingDetails message. Also converts values to other types if specified.
+                     * @param message FindingDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.FindingDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FindingDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindingDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an ObservationDetails. */
+                interface IObservationDetails {
+
+                    /** ObservationDetails currentValue */
+                    currentValue?: (string|null);
+
+                    /** ObservationDetails expectedValue */
+                    expectedValue?: (string|null);
+
+                    /** ObservationDetails guidance */
+                    guidance?: (string|null);
+                }
+
+                /** Represents an ObservationDetails. */
+                class ObservationDetails implements IObservationDetails {
+
+                    /**
+                     * Constructs a new ObservationDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IObservationDetails);
+
+                    /** ObservationDetails currentValue. */
+                    public currentValue: string;
+
+                    /** ObservationDetails expectedValue. */
+                    public expectedValue: string;
+
+                    /** ObservationDetails guidance. */
+                    public guidance: string;
+
+                    /**
+                     * Creates a new ObservationDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ObservationDetails instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IObservationDetails): google.cloud.cloudsecuritycompliance.v1.ObservationDetails;
+
+                    /**
+                     * Encodes the specified ObservationDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ObservationDetails.verify|verify} messages.
+                     * @param message ObservationDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IObservationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ObservationDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ObservationDetails.verify|verify} messages.
+                     * @param message ObservationDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IObservationDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an ObservationDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ObservationDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ObservationDetails;
+
+                    /**
+                     * Decodes an ObservationDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ObservationDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ObservationDetails;
+
+                    /**
+                     * Verifies an ObservationDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an ObservationDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ObservationDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ObservationDetails;
+
+                    /**
+                     * Creates a plain object from an ObservationDetails message. Also converts values to other types if specified.
+                     * @param message ObservationDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ObservationDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ObservationDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ObservationDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an EvidenceDetails. */
+                interface IEvidenceDetails {
+
+                    /** EvidenceDetails resource */
+                    resource?: (string|null);
+
+                    /** EvidenceDetails service */
+                    service?: (string|null);
+
+                    /** EvidenceDetails evidencePath */
+                    evidencePath?: (string|null);
+                }
+
+                /** Represents an EvidenceDetails. */
+                class EvidenceDetails implements IEvidenceDetails {
+
+                    /**
+                     * Constructs a new EvidenceDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IEvidenceDetails);
+
+                    /** EvidenceDetails resource. */
+                    public resource: string;
+
+                    /** EvidenceDetails service. */
+                    public service: string;
+
+                    /** EvidenceDetails evidencePath. */
+                    public evidencePath: string;
+
+                    /**
+                     * Creates a new EvidenceDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns EvidenceDetails instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IEvidenceDetails): google.cloud.cloudsecuritycompliance.v1.EvidenceDetails;
+
+                    /**
+                     * Encodes the specified EvidenceDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.EvidenceDetails.verify|verify} messages.
+                     * @param message EvidenceDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IEvidenceDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified EvidenceDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.EvidenceDetails.verify|verify} messages.
+                     * @param message EvidenceDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IEvidenceDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an EvidenceDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns EvidenceDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.EvidenceDetails;
+
+                    /**
+                     * Decodes an EvidenceDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns EvidenceDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.EvidenceDetails;
+
+                    /**
+                     * Verifies an EvidenceDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an EvidenceDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns EvidenceDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.EvidenceDetails;
+
+                    /**
+                     * Creates a plain object from an EvidenceDetails message. Also converts values to other types if specified.
+                     * @param message EvidenceDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.EvidenceDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this EvidenceDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for EvidenceDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudControlAuditDetails. */
+                interface ICloudControlAuditDetails {
+
+                    /** CloudControlAuditDetails cloudControl */
+                    cloudControl?: (string|null);
+
+                    /** CloudControlAuditDetails cloudControlId */
+                    cloudControlId?: (string|null);
+
+                    /** CloudControlAuditDetails cloudControlDescription */
+                    cloudControlDescription?: (string|null);
+
+                    /** CloudControlAuditDetails complianceState */
+                    complianceState?: (google.cloud.cloudsecuritycompliance.v1.ComplianceState|keyof typeof google.cloud.cloudsecuritycompliance.v1.ComplianceState|null);
+
+                    /** CloudControlAuditDetails reportSummary */
+                    reportSummary?: (google.cloud.cloudsecuritycompliance.v1.IReportSummary|null);
+
+                    /** CloudControlAuditDetails findings */
+                    findings?: (google.cloud.cloudsecuritycompliance.v1.IFindingDetails[]|null);
+                }
+
+                /** Represents a CloudControlAuditDetails. */
+                class CloudControlAuditDetails implements ICloudControlAuditDetails {
+
+                    /**
+                     * Constructs a new CloudControlAuditDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlAuditDetails);
+
+                    /** CloudControlAuditDetails cloudControl. */
+                    public cloudControl: string;
+
+                    /** CloudControlAuditDetails cloudControlId. */
+                    public cloudControlId: string;
+
+                    /** CloudControlAuditDetails cloudControlDescription. */
+                    public cloudControlDescription: string;
+
+                    /** CloudControlAuditDetails complianceState. */
+                    public complianceState: (google.cloud.cloudsecuritycompliance.v1.ComplianceState|keyof typeof google.cloud.cloudsecuritycompliance.v1.ComplianceState);
+
+                    /** CloudControlAuditDetails reportSummary. */
+                    public reportSummary?: (google.cloud.cloudsecuritycompliance.v1.IReportSummary|null);
+
+                    /** CloudControlAuditDetails findings. */
+                    public findings: google.cloud.cloudsecuritycompliance.v1.IFindingDetails[];
+
+                    /**
+                     * Creates a new CloudControlAuditDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudControlAuditDetails instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlAuditDetails): google.cloud.cloudsecuritycompliance.v1.CloudControlAuditDetails;
+
+                    /**
+                     * Encodes the specified CloudControlAuditDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlAuditDetails.verify|verify} messages.
+                     * @param message CloudControlAuditDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlAuditDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudControlAuditDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlAuditDetails.verify|verify} messages.
+                     * @param message CloudControlAuditDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlAuditDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudControlAuditDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudControlAuditDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CloudControlAuditDetails;
+
+                    /**
+                     * Decodes a CloudControlAuditDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudControlAuditDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CloudControlAuditDetails;
+
+                    /**
+                     * Verifies a CloudControlAuditDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudControlAuditDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudControlAuditDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CloudControlAuditDetails;
+
+                    /**
+                     * Creates a plain object from a CloudControlAuditDetails message. Also converts values to other types if specified.
+                     * @param message CloudControlAuditDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CloudControlAuditDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudControlAuditDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudControlAuditDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** RegulatoryControlResponsibilityType enum. */
+                enum RegulatoryControlResponsibilityType {
+                    REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED = 0,
+                    GOOGLE = 1,
+                    CUSTOMER = 2,
+                    SHARED = 3
+                }
+
                 /** EnforcementMode enum. */
                 enum EnforcementMode {
                     ENFORCEMENT_MODE_UNSPECIFIED = 0,
@@ -753,6 +2677,16 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace CloudControl {
+
+                    /** Type enum. */
+                    enum Type {
+                        TYPE_UNSPECIFIED = 0,
+                        CUSTOM = 1,
+                        BUILT_IN = 2
+                    }
                 }
 
                 /** Properties of a ParameterSpec. */
@@ -2194,6 +4128,781 @@ export namespace google {
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
 
+                /** Properties of a ControlFamily. */
+                interface IControlFamily {
+
+                    /** ControlFamily familyId */
+                    familyId?: (string|null);
+
+                    /** ControlFamily displayName */
+                    displayName?: (string|null);
+                }
+
+                /** Represents a ControlFamily. */
+                class ControlFamily implements IControlFamily {
+
+                    /**
+                     * Constructs a new ControlFamily.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IControlFamily);
+
+                    /** ControlFamily familyId. */
+                    public familyId: string;
+
+                    /** ControlFamily displayName. */
+                    public displayName: string;
+
+                    /**
+                     * Creates a new ControlFamily instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ControlFamily instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IControlFamily): google.cloud.cloudsecuritycompliance.v1.ControlFamily;
+
+                    /**
+                     * Encodes the specified ControlFamily message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlFamily.verify|verify} messages.
+                     * @param message ControlFamily message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IControlFamily, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ControlFamily message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlFamily.verify|verify} messages.
+                     * @param message ControlFamily message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IControlFamily, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ControlFamily message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ControlFamily
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ControlFamily;
+
+                    /**
+                     * Decodes a ControlFamily message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ControlFamily
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ControlFamily;
+
+                    /**
+                     * Verifies a ControlFamily message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ControlFamily message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ControlFamily
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ControlFamily;
+
+                    /**
+                     * Creates a plain object from a ControlFamily message. Also converts values to other types if specified.
+                     * @param message ControlFamily
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ControlFamily, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ControlFamily to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ControlFamily
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Represents a CmEnrollmentService */
+                class CmEnrollmentService extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new CmEnrollmentService service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new CmEnrollmentService service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): CmEnrollmentService;
+
+                    /**
+                     * Calls UpdateCmEnrollment.
+                     * @param request UpdateCmEnrollmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CmEnrollment
+                     */
+                    public updateCmEnrollment(request: google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest, callback: google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService.UpdateCmEnrollmentCallback): void;
+
+                    /**
+                     * Calls UpdateCmEnrollment.
+                     * @param request UpdateCmEnrollmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public updateCmEnrollment(request: google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest): Promise<google.cloud.cloudsecuritycompliance.v1.CmEnrollment>;
+
+                    /**
+                     * Calls CalculateEffectiveCmEnrollment.
+                     * @param request CalculateEffectiveCmEnrollmentRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and CalculateEffectiveCmEnrollmentResponse
+                     */
+                    public calculateEffectiveCmEnrollment(request: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest, callback: google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService.CalculateEffectiveCmEnrollmentCallback): void;
+
+                    /**
+                     * Calls CalculateEffectiveCmEnrollment.
+                     * @param request CalculateEffectiveCmEnrollmentRequest message or plain object
+                     * @returns Promise
+                     */
+                    public calculateEffectiveCmEnrollment(request: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest): Promise<google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse>;
+                }
+
+                namespace CmEnrollmentService {
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService|updateCmEnrollment}.
+                     * @param error Error, if any
+                     * @param [response] CmEnrollment
+                     */
+                    type UpdateCmEnrollmentCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.CmEnrollment) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.CmEnrollmentService|calculateEffectiveCmEnrollment}.
+                     * @param error Error, if any
+                     * @param [response] CalculateEffectiveCmEnrollmentResponse
+                     */
+                    type CalculateEffectiveCmEnrollmentCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse) => void;
+                }
+
+                /** Properties of an UpdateCmEnrollmentRequest. */
+                interface IUpdateCmEnrollmentRequest {
+
+                    /** UpdateCmEnrollmentRequest cmEnrollment */
+                    cmEnrollment?: (google.cloud.cloudsecuritycompliance.v1.ICmEnrollment|null);
+
+                    /** UpdateCmEnrollmentRequest updateMask */
+                    updateMask?: (google.protobuf.IFieldMask|null);
+                }
+
+                /** Represents an UpdateCmEnrollmentRequest. */
+                class UpdateCmEnrollmentRequest implements IUpdateCmEnrollmentRequest {
+
+                    /**
+                     * Constructs a new UpdateCmEnrollmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest);
+
+                    /** UpdateCmEnrollmentRequest cmEnrollment. */
+                    public cmEnrollment?: (google.cloud.cloudsecuritycompliance.v1.ICmEnrollment|null);
+
+                    /** UpdateCmEnrollmentRequest updateMask. */
+                    public updateMask?: (google.protobuf.IFieldMask|null);
+
+                    /**
+                     * Creates a new UpdateCmEnrollmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns UpdateCmEnrollmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest): google.cloud.cloudsecuritycompliance.v1.UpdateCmEnrollmentRequest;
+
+                    /**
+                     * Encodes the specified UpdateCmEnrollmentRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.UpdateCmEnrollmentRequest.verify|verify} messages.
+                     * @param message UpdateCmEnrollmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified UpdateCmEnrollmentRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.UpdateCmEnrollmentRequest.verify|verify} messages.
+                     * @param message UpdateCmEnrollmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IUpdateCmEnrollmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an UpdateCmEnrollmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns UpdateCmEnrollmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.UpdateCmEnrollmentRequest;
+
+                    /**
+                     * Decodes an UpdateCmEnrollmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns UpdateCmEnrollmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.UpdateCmEnrollmentRequest;
+
+                    /**
+                     * Verifies an UpdateCmEnrollmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an UpdateCmEnrollmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns UpdateCmEnrollmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.UpdateCmEnrollmentRequest;
+
+                    /**
+                     * Creates a plain object from an UpdateCmEnrollmentRequest message. Also converts values to other types if specified.
+                     * @param message UpdateCmEnrollmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.UpdateCmEnrollmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this UpdateCmEnrollmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for UpdateCmEnrollmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CalculateEffectiveCmEnrollmentRequest. */
+                interface ICalculateEffectiveCmEnrollmentRequest {
+
+                    /** CalculateEffectiveCmEnrollmentRequest name */
+                    name?: (string|null);
+                }
+
+                /** Represents a CalculateEffectiveCmEnrollmentRequest. */
+                class CalculateEffectiveCmEnrollmentRequest implements ICalculateEffectiveCmEnrollmentRequest {
+
+                    /**
+                     * Constructs a new CalculateEffectiveCmEnrollmentRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest);
+
+                    /** CalculateEffectiveCmEnrollmentRequest name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new CalculateEffectiveCmEnrollmentRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CalculateEffectiveCmEnrollmentRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest): google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentRequest;
+
+                    /**
+                     * Encodes the specified CalculateEffectiveCmEnrollmentRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentRequest.verify|verify} messages.
+                     * @param message CalculateEffectiveCmEnrollmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CalculateEffectiveCmEnrollmentRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentRequest.verify|verify} messages.
+                     * @param message CalculateEffectiveCmEnrollmentRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CalculateEffectiveCmEnrollmentRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CalculateEffectiveCmEnrollmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentRequest;
+
+                    /**
+                     * Decodes a CalculateEffectiveCmEnrollmentRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CalculateEffectiveCmEnrollmentRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentRequest;
+
+                    /**
+                     * Verifies a CalculateEffectiveCmEnrollmentRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CalculateEffectiveCmEnrollmentRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CalculateEffectiveCmEnrollmentRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentRequest;
+
+                    /**
+                     * Creates a plain object from a CalculateEffectiveCmEnrollmentRequest message. Also converts values to other types if specified.
+                     * @param message CalculateEffectiveCmEnrollmentRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CalculateEffectiveCmEnrollmentRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CalculateEffectiveCmEnrollmentRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CmEnrollment. */
+                interface ICmEnrollment {
+
+                    /** CmEnrollment name */
+                    name?: (string|null);
+
+                    /** CmEnrollment enrolled */
+                    enrolled?: (boolean|null);
+
+                    /** CmEnrollment auditConfig */
+                    auditConfig?: (google.cloud.cloudsecuritycompliance.v1.IAuditConfig|null);
+                }
+
+                /** Represents a CmEnrollment. */
+                class CmEnrollment implements ICmEnrollment {
+
+                    /**
+                     * Constructs a new CmEnrollment.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICmEnrollment);
+
+                    /** CmEnrollment name. */
+                    public name: string;
+
+                    /** CmEnrollment enrolled. */
+                    public enrolled: boolean;
+
+                    /** CmEnrollment auditConfig. */
+                    public auditConfig?: (google.cloud.cloudsecuritycompliance.v1.IAuditConfig|null);
+
+                    /**
+                     * Creates a new CmEnrollment instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CmEnrollment instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICmEnrollment): google.cloud.cloudsecuritycompliance.v1.CmEnrollment;
+
+                    /**
+                     * Encodes the specified CmEnrollment message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CmEnrollment.verify|verify} messages.
+                     * @param message CmEnrollment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICmEnrollment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CmEnrollment message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CmEnrollment.verify|verify} messages.
+                     * @param message CmEnrollment message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICmEnrollment, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CmEnrollment message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CmEnrollment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CmEnrollment;
+
+                    /**
+                     * Decodes a CmEnrollment message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CmEnrollment
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CmEnrollment;
+
+                    /**
+                     * Verifies a CmEnrollment message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CmEnrollment message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CmEnrollment
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CmEnrollment;
+
+                    /**
+                     * Creates a plain object from a CmEnrollment message. Also converts values to other types if specified.
+                     * @param message CmEnrollment
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CmEnrollment, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CmEnrollment to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CmEnrollment
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CalculateEffectiveCmEnrollmentResponse. */
+                interface ICalculateEffectiveCmEnrollmentResponse {
+
+                    /** CalculateEffectiveCmEnrollmentResponse cmEnrollment */
+                    cmEnrollment?: (google.cloud.cloudsecuritycompliance.v1.ICmEnrollment|null);
+                }
+
+                /** Represents a CalculateEffectiveCmEnrollmentResponse. */
+                class CalculateEffectiveCmEnrollmentResponse implements ICalculateEffectiveCmEnrollmentResponse {
+
+                    /**
+                     * Constructs a new CalculateEffectiveCmEnrollmentResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse);
+
+                    /** CalculateEffectiveCmEnrollmentResponse cmEnrollment. */
+                    public cmEnrollment?: (google.cloud.cloudsecuritycompliance.v1.ICmEnrollment|null);
+
+                    /**
+                     * Creates a new CalculateEffectiveCmEnrollmentResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CalculateEffectiveCmEnrollmentResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse): google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse;
+
+                    /**
+                     * Encodes the specified CalculateEffectiveCmEnrollmentResponse message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse.verify|verify} messages.
+                     * @param message CalculateEffectiveCmEnrollmentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CalculateEffectiveCmEnrollmentResponse message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse.verify|verify} messages.
+                     * @param message CalculateEffectiveCmEnrollmentResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICalculateEffectiveCmEnrollmentResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CalculateEffectiveCmEnrollmentResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CalculateEffectiveCmEnrollmentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse;
+
+                    /**
+                     * Decodes a CalculateEffectiveCmEnrollmentResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CalculateEffectiveCmEnrollmentResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse;
+
+                    /**
+                     * Verifies a CalculateEffectiveCmEnrollmentResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CalculateEffectiveCmEnrollmentResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CalculateEffectiveCmEnrollmentResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse;
+
+                    /**
+                     * Creates a plain object from a CalculateEffectiveCmEnrollmentResponse message. Also converts values to other types if specified.
+                     * @param message CalculateEffectiveCmEnrollmentResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CalculateEffectiveCmEnrollmentResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CalculateEffectiveCmEnrollmentResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AuditConfig. */
+                interface IAuditConfig {
+
+                    /** AuditConfig destinations */
+                    destinations?: (google.cloud.cloudsecuritycompliance.v1.AuditConfig.ICmEligibleDestination[]|null);
+                }
+
+                /** Represents an AuditConfig. */
+                class AuditConfig implements IAuditConfig {
+
+                    /**
+                     * Constructs a new AuditConfig.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IAuditConfig);
+
+                    /** AuditConfig destinations. */
+                    public destinations: google.cloud.cloudsecuritycompliance.v1.AuditConfig.ICmEligibleDestination[];
+
+                    /**
+                     * Creates a new AuditConfig instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AuditConfig instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IAuditConfig): google.cloud.cloudsecuritycompliance.v1.AuditConfig;
+
+                    /**
+                     * Encodes the specified AuditConfig message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AuditConfig.verify|verify} messages.
+                     * @param message AuditConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IAuditConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AuditConfig message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AuditConfig.verify|verify} messages.
+                     * @param message AuditConfig message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IAuditConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AuditConfig message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AuditConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.AuditConfig;
+
+                    /**
+                     * Decodes an AuditConfig message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AuditConfig
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.AuditConfig;
+
+                    /**
+                     * Verifies an AuditConfig message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AuditConfig message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AuditConfig
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.AuditConfig;
+
+                    /**
+                     * Creates a plain object from an AuditConfig message. Also converts values to other types if specified.
+                     * @param message AuditConfig
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.AuditConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AuditConfig to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AuditConfig
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace AuditConfig {
+
+                    /** Properties of a CmEligibleDestination. */
+                    interface ICmEligibleDestination {
+
+                        /** CmEligibleDestination gcsBucket */
+                        gcsBucket?: (string|null);
+                    }
+
+                    /** Represents a CmEligibleDestination. */
+                    class CmEligibleDestination implements ICmEligibleDestination {
+
+                        /**
+                         * Constructs a new CmEligibleDestination.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.cloud.cloudsecuritycompliance.v1.AuditConfig.ICmEligibleDestination);
+
+                        /** CmEligibleDestination gcsBucket. */
+                        public gcsBucket?: (string|null);
+
+                        /** CmEligibleDestination cmEligibleDestinations. */
+                        public cmEligibleDestinations?: "gcsBucket";
+
+                        /**
+                         * Creates a new CmEligibleDestination instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns CmEligibleDestination instance
+                         */
+                        public static create(properties?: google.cloud.cloudsecuritycompliance.v1.AuditConfig.ICmEligibleDestination): google.cloud.cloudsecuritycompliance.v1.AuditConfig.CmEligibleDestination;
+
+                        /**
+                         * Encodes the specified CmEligibleDestination message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AuditConfig.CmEligibleDestination.verify|verify} messages.
+                         * @param message CmEligibleDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.cloud.cloudsecuritycompliance.v1.AuditConfig.ICmEligibleDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified CmEligibleDestination message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AuditConfig.CmEligibleDestination.verify|verify} messages.
+                         * @param message CmEligibleDestination message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.AuditConfig.ICmEligibleDestination, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a CmEligibleDestination message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns CmEligibleDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.AuditConfig.CmEligibleDestination;
+
+                        /**
+                         * Decodes a CmEligibleDestination message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns CmEligibleDestination
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.AuditConfig.CmEligibleDestination;
+
+                        /**
+                         * Verifies a CmEligibleDestination message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a CmEligibleDestination message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns CmEligibleDestination
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.AuditConfig.CmEligibleDestination;
+
+                        /**
+                         * Creates a plain object from a CmEligibleDestination message. Also converts values to other types if specified.
+                         * @param message CmEligibleDestination
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.cloud.cloudsecuritycompliance.v1.AuditConfig.CmEligibleDestination, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this CmEligibleDestination to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for CmEligibleDestination
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+                }
+
                 /** Represents a Config */
                 class Config extends $protobuf.rpc.Service {
 
@@ -3275,6 +5984,9 @@ export namespace google {
 
                     /** GetCloudControlRequest name */
                     name?: (string|null);
+
+                    /** GetCloudControlRequest majorRevisionId */
+                    majorRevisionId?: (number|Long|string|null);
                 }
 
                 /** Represents a GetCloudControlRequest. */
@@ -3288,6 +6000,9 @@ export namespace google {
 
                     /** GetCloudControlRequest name. */
                     public name: string;
+
+                    /** GetCloudControlRequest majorRevisionId. */
+                    public majorRevisionId: (number|Long|string);
 
                     /**
                      * Creates a new GetCloudControlRequest instance using the specified properties.
@@ -5757,271 +8472,6 @@ export namespace google {
     /** Namespace api. */
     namespace api {
 
-        /** FieldBehavior enum. */
-        enum FieldBehavior {
-            FIELD_BEHAVIOR_UNSPECIFIED = 0,
-            OPTIONAL = 1,
-            REQUIRED = 2,
-            OUTPUT_ONLY = 3,
-            INPUT_ONLY = 4,
-            IMMUTABLE = 5,
-            UNORDERED_LIST = 6,
-            NON_EMPTY_DEFAULT = 7,
-            IDENTIFIER = 8
-        }
-
-        /** Properties of a ResourceDescriptor. */
-        interface IResourceDescriptor {
-
-            /** ResourceDescriptor type */
-            type?: (string|null);
-
-            /** ResourceDescriptor pattern */
-            pattern?: (string[]|null);
-
-            /** ResourceDescriptor nameField */
-            nameField?: (string|null);
-
-            /** ResourceDescriptor history */
-            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
-
-            /** ResourceDescriptor plural */
-            plural?: (string|null);
-
-            /** ResourceDescriptor singular */
-            singular?: (string|null);
-
-            /** ResourceDescriptor style */
-            style?: (google.api.ResourceDescriptor.Style[]|null);
-        }
-
-        /** Represents a ResourceDescriptor. */
-        class ResourceDescriptor implements IResourceDescriptor {
-
-            /**
-             * Constructs a new ResourceDescriptor.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceDescriptor);
-
-            /** ResourceDescriptor type. */
-            public type: string;
-
-            /** ResourceDescriptor pattern. */
-            public pattern: string[];
-
-            /** ResourceDescriptor nameField. */
-            public nameField: string;
-
-            /** ResourceDescriptor history. */
-            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
-
-            /** ResourceDescriptor plural. */
-            public plural: string;
-
-            /** ResourceDescriptor singular. */
-            public singular: string;
-
-            /** ResourceDescriptor style. */
-            public style: google.api.ResourceDescriptor.Style[];
-
-            /**
-             * Creates a new ResourceDescriptor instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceDescriptor instance
-             */
-            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
-
-            /**
-             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
-             * @param message ResourceDescriptor message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
-
-            /**
-             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceDescriptor
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
-
-            /**
-             * Verifies a ResourceDescriptor message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceDescriptor
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
-
-            /**
-             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
-             * @param message ResourceDescriptor
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceDescriptor to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceDescriptor
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        namespace ResourceDescriptor {
-
-            /** History enum. */
-            enum History {
-                HISTORY_UNSPECIFIED = 0,
-                ORIGINALLY_SINGLE_PATTERN = 1,
-                FUTURE_MULTI_PATTERN = 2
-            }
-
-            /** Style enum. */
-            enum Style {
-                STYLE_UNSPECIFIED = 0,
-                DECLARATIVE_FRIENDLY = 1
-            }
-        }
-
-        /** Properties of a ResourceReference. */
-        interface IResourceReference {
-
-            /** ResourceReference type */
-            type?: (string|null);
-
-            /** ResourceReference childType */
-            childType?: (string|null);
-        }
-
-        /** Represents a ResourceReference. */
-        class ResourceReference implements IResourceReference {
-
-            /**
-             * Constructs a new ResourceReference.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.api.IResourceReference);
-
-            /** ResourceReference type. */
-            public type: string;
-
-            /** ResourceReference childType. */
-            public childType: string;
-
-            /**
-             * Creates a new ResourceReference instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns ResourceReference instance
-             */
-            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
-
-            /**
-             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
-             * @param message ResourceReference message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
-
-            /**
-             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns ResourceReference
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
-
-            /**
-             * Verifies a ResourceReference message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns ResourceReference
-             */
-            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
-
-            /**
-             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
-             * @param message ResourceReference
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this ResourceReference to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for ResourceReference
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
         /** Properties of a Http. */
         interface IHttp {
 
@@ -7873,6 +10323,271 @@ export namespace google {
             BETA = 3,
             GA = 4,
             DEPRECATED = 5
+        }
+
+        /** FieldBehavior enum. */
+        enum FieldBehavior {
+            FIELD_BEHAVIOR_UNSPECIFIED = 0,
+            OPTIONAL = 1,
+            REQUIRED = 2,
+            OUTPUT_ONLY = 3,
+            INPUT_ONLY = 4,
+            IMMUTABLE = 5,
+            UNORDERED_LIST = 6,
+            NON_EMPTY_DEFAULT = 7,
+            IDENTIFIER = 8
+        }
+
+        /** Properties of a ResourceDescriptor. */
+        interface IResourceDescriptor {
+
+            /** ResourceDescriptor type */
+            type?: (string|null);
+
+            /** ResourceDescriptor pattern */
+            pattern?: (string[]|null);
+
+            /** ResourceDescriptor nameField */
+            nameField?: (string|null);
+
+            /** ResourceDescriptor history */
+            history?: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History|null);
+
+            /** ResourceDescriptor plural */
+            plural?: (string|null);
+
+            /** ResourceDescriptor singular */
+            singular?: (string|null);
+
+            /** ResourceDescriptor style */
+            style?: (google.api.ResourceDescriptor.Style[]|null);
+        }
+
+        /** Represents a ResourceDescriptor. */
+        class ResourceDescriptor implements IResourceDescriptor {
+
+            /**
+             * Constructs a new ResourceDescriptor.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceDescriptor);
+
+            /** ResourceDescriptor type. */
+            public type: string;
+
+            /** ResourceDescriptor pattern. */
+            public pattern: string[];
+
+            /** ResourceDescriptor nameField. */
+            public nameField: string;
+
+            /** ResourceDescriptor history. */
+            public history: (google.api.ResourceDescriptor.History|keyof typeof google.api.ResourceDescriptor.History);
+
+            /** ResourceDescriptor plural. */
+            public plural: string;
+
+            /** ResourceDescriptor singular. */
+            public singular: string;
+
+            /** ResourceDescriptor style. */
+            public style: google.api.ResourceDescriptor.Style[];
+
+            /**
+             * Creates a new ResourceDescriptor instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceDescriptor instance
+             */
+            public static create(properties?: google.api.IResourceDescriptor): google.api.ResourceDescriptor;
+
+            /**
+             * Encodes the specified ResourceDescriptor message. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceDescriptor message, length delimited. Does not implicitly {@link google.api.ResourceDescriptor.verify|verify} messages.
+             * @param message ResourceDescriptor message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceDescriptor, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceDescriptor;
+
+            /**
+             * Decodes a ResourceDescriptor message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceDescriptor
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceDescriptor;
+
+            /**
+             * Verifies a ResourceDescriptor message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceDescriptor message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceDescriptor
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceDescriptor;
+
+            /**
+             * Creates a plain object from a ResourceDescriptor message. Also converts values to other types if specified.
+             * @param message ResourceDescriptor
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceDescriptor, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceDescriptor to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceDescriptor
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace ResourceDescriptor {
+
+            /** History enum. */
+            enum History {
+                HISTORY_UNSPECIFIED = 0,
+                ORIGINALLY_SINGLE_PATTERN = 1,
+                FUTURE_MULTI_PATTERN = 2
+            }
+
+            /** Style enum. */
+            enum Style {
+                STYLE_UNSPECIFIED = 0,
+                DECLARATIVE_FRIENDLY = 1
+            }
+        }
+
+        /** Properties of a ResourceReference. */
+        interface IResourceReference {
+
+            /** ResourceReference type */
+            type?: (string|null);
+
+            /** ResourceReference childType */
+            childType?: (string|null);
+        }
+
+        /** Represents a ResourceReference. */
+        class ResourceReference implements IResourceReference {
+
+            /**
+             * Constructs a new ResourceReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.IResourceReference);
+
+            /** ResourceReference type. */
+            public type: string;
+
+            /** ResourceReference childType. */
+            public childType: string;
+
+            /**
+             * Creates a new ResourceReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns ResourceReference instance
+             */
+            public static create(properties?: google.api.IResourceReference): google.api.ResourceReference;
+
+            /**
+             * Encodes the specified ResourceReference message. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified ResourceReference message, length delimited. Does not implicitly {@link google.api.ResourceReference.verify|verify} messages.
+             * @param message ResourceReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.IResourceReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.ResourceReference;
+
+            /**
+             * Decodes a ResourceReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns ResourceReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.ResourceReference;
+
+            /**
+             * Verifies a ResourceReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a ResourceReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns ResourceReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.ResourceReference;
+
+            /**
+             * Creates a plain object from a ResourceReference message. Also converts values to other types if specified.
+             * @param message ResourceReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.ResourceReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this ResourceReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for ResourceReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
     }
 
@@ -11987,6 +14702,109 @@ export namespace google {
             }
         }
 
+        /** Properties of a Duration. */
+        interface IDuration {
+
+            /** Duration seconds */
+            seconds?: (number|Long|string|null);
+
+            /** Duration nanos */
+            nanos?: (number|null);
+        }
+
+        /** Represents a Duration. */
+        class Duration implements IDuration {
+
+            /**
+             * Constructs a new Duration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.protobuf.IDuration);
+
+            /** Duration seconds. */
+            public seconds: (number|Long|string);
+
+            /** Duration nanos. */
+            public nanos: number;
+
+            /**
+             * Creates a new Duration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Duration instance
+             */
+            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+
+            /**
+             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
+             * @param message Duration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+
+            /**
+             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Duration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+
+            /**
+             * Verifies a Duration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Duration
+             */
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+
+            /**
+             * Creates a plain object from a Duration message. Also converts values to other types if specified.
+             * @param message Duration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Duration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Duration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** Properties of a Timestamp. */
         interface ITimestamp {
 
@@ -12090,103 +14908,103 @@ export namespace google {
             public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
-        /** Properties of a Duration. */
-        interface IDuration {
+        /** Properties of an Any. */
+        interface IAny {
 
-            /** Duration seconds */
-            seconds?: (number|Long|string|null);
+            /** Any type_url */
+            type_url?: (string|null);
 
-            /** Duration nanos */
-            nanos?: (number|null);
+            /** Any value */
+            value?: (Uint8Array|Buffer|string|null);
         }
 
-        /** Represents a Duration. */
-        class Duration implements IDuration {
+        /** Represents an Any. */
+        class Any implements IAny {
 
             /**
-             * Constructs a new Duration.
+             * Constructs a new Any.
              * @param [properties] Properties to set
              */
-            constructor(properties?: google.protobuf.IDuration);
+            constructor(properties?: google.protobuf.IAny);
 
-            /** Duration seconds. */
-            public seconds: (number|Long|string);
+            /** Any type_url. */
+            public type_url: string;
 
-            /** Duration nanos. */
-            public nanos: number;
+            /** Any value. */
+            public value: (Uint8Array|Buffer|string);
 
             /**
-             * Creates a new Duration instance using the specified properties.
+             * Creates a new Any instance using the specified properties.
              * @param [properties] Properties to set
-             * @returns Duration instance
+             * @returns Any instance
              */
-            public static create(properties?: google.protobuf.IDuration): google.protobuf.Duration;
+            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
 
             /**
-             * Encodes the specified Duration message. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
+             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encode(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Encodes the specified Duration message, length delimited. Does not implicitly {@link google.protobuf.Duration.verify|verify} messages.
-             * @param message Duration message or plain object to encode
+             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
+             * @param message Any message or plain object to encode
              * @param [writer] Writer to encode to
              * @returns Writer
              */
-            public static encodeDelimited(message: google.protobuf.IDuration, writer?: $protobuf.Writer): $protobuf.Writer;
+            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
 
             /**
-             * Decodes a Duration message from the specified reader or buffer.
+             * Decodes an Any message from the specified reader or buffer.
              * @param reader Reader or buffer to decode from
              * @param [length] Message length if known beforehand
-             * @returns Duration
+             * @returns Any
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Duration;
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
 
             /**
-             * Decodes a Duration message from the specified reader or buffer, length delimited.
+             * Decodes an Any message from the specified reader or buffer, length delimited.
              * @param reader Reader or buffer to decode from
-             * @returns Duration
+             * @returns Any
              * @throws {Error} If the payload is not a reader or valid buffer
              * @throws {$protobuf.util.ProtocolError} If required fields are missing
              */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Duration;
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
 
             /**
-             * Verifies a Duration message.
+             * Verifies an Any message.
              * @param message Plain object to verify
              * @returns `null` if valid, otherwise the reason why it is not
              */
             public static verify(message: { [k: string]: any }): (string|null);
 
             /**
-             * Creates a Duration message from a plain object. Also converts values to their respective internal types.
+             * Creates an Any message from a plain object. Also converts values to their respective internal types.
              * @param object Plain object
-             * @returns Duration
+             * @returns Any
              */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Duration;
+            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
 
             /**
-             * Creates a plain object from a Duration message. Also converts values to other types if specified.
-             * @param message Duration
+             * Creates a plain object from an Any message. Also converts values to other types if specified.
+             * @param message Any
              * @param [options] Conversion options
              * @returns Plain object
              */
-            public static toObject(message: google.protobuf.Duration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
             /**
-             * Converts this Duration to JSON.
+             * Converts this Any to JSON.
              * @returns JSON object
              */
             public toJSON(): { [k: string]: any };
 
             /**
-             * Gets the default type url for Duration
+             * Gets the default type url for Any
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */
@@ -12375,109 +15193,6 @@ export namespace google {
 
             /**
              * Gets the default type url for FieldMask
-             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-             * @returns The default type url
-             */
-            public static getTypeUrl(typeUrlPrefix?: string): string;
-        }
-
-        /** Properties of an Any. */
-        interface IAny {
-
-            /** Any type_url */
-            type_url?: (string|null);
-
-            /** Any value */
-            value?: (Uint8Array|Buffer|string|null);
-        }
-
-        /** Represents an Any. */
-        class Any implements IAny {
-
-            /**
-             * Constructs a new Any.
-             * @param [properties] Properties to set
-             */
-            constructor(properties?: google.protobuf.IAny);
-
-            /** Any type_url. */
-            public type_url: string;
-
-            /** Any value. */
-            public value: (Uint8Array|Buffer|string);
-
-            /**
-             * Creates a new Any instance using the specified properties.
-             * @param [properties] Properties to set
-             * @returns Any instance
-             */
-            public static create(properties?: google.protobuf.IAny): google.protobuf.Any;
-
-            /**
-             * Encodes the specified Any message. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encode(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Encodes the specified Any message, length delimited. Does not implicitly {@link google.protobuf.Any.verify|verify} messages.
-             * @param message Any message or plain object to encode
-             * @param [writer] Writer to encode to
-             * @returns Writer
-             */
-            public static encodeDelimited(message: google.protobuf.IAny, writer?: $protobuf.Writer): $protobuf.Writer;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer.
-             * @param reader Reader or buffer to decode from
-             * @param [length] Message length if known beforehand
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.Any;
-
-            /**
-             * Decodes an Any message from the specified reader or buffer, length delimited.
-             * @param reader Reader or buffer to decode from
-             * @returns Any
-             * @throws {Error} If the payload is not a reader or valid buffer
-             * @throws {$protobuf.util.ProtocolError} If required fields are missing
-             */
-            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.Any;
-
-            /**
-             * Verifies an Any message.
-             * @param message Plain object to verify
-             * @returns `null` if valid, otherwise the reason why it is not
-             */
-            public static verify(message: { [k: string]: any }): (string|null);
-
-            /**
-             * Creates an Any message from a plain object. Also converts values to their respective internal types.
-             * @param object Plain object
-             * @returns Any
-             */
-            public static fromObject(object: { [k: string]: any }): google.protobuf.Any;
-
-            /**
-             * Creates a plain object from an Any message. Also converts values to other types if specified.
-             * @param message Any
-             * @param [options] Conversion options
-             * @returns Plain object
-             */
-            public static toObject(message: google.protobuf.Any, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-            /**
-             * Converts this Any to JSON.
-             * @returns JSON object
-             */
-            public toJSON(): { [k: string]: any };
-
-            /**
-             * Gets the default type url for Any
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

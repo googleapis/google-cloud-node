@@ -21,6 +21,8 @@
 const cloudsecuritycompliance = require('@google-cloud/cloudsecuritycompliance');
 
 function main() {
+  const auditClient = new cloudsecuritycompliance.AuditClient();
+  const cmEnrollmentServiceClient = new cloudsecuritycompliance.CmEnrollmentServiceClient();
   const configClient = new cloudsecuritycompliance.ConfigClient();
   const deploymentClient = new cloudsecuritycompliance.DeploymentClient();
 }

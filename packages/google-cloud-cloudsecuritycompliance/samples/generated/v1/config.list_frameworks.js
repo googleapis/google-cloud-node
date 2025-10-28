@@ -31,7 +31,7 @@ function main(parent) {
   /**
    *  Required. The parent resource name, in the format
    *  `organizations/{organization}/locations/{location}`.
-   *  Only global location is supported.
+   *  The only supported location is `global`.
    */
   // const parent = 'abc123'
   /**

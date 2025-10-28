@@ -31,21 +31,23 @@ function main(parent) {
   /**
    *  Required. The parent resource name, in the format
    *  `organizations/{organization}/locations/{location}`.
+   *  The only supported location is `global`.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. The maximum number of CloudControls to return. The default value
+   *  Optional. The maximum number of cloud controls to return. The default value
    *  is `500`.
    *  If you exceed the maximum value of `1000`, then the service uses the
    *  maximum value.
    */
   // const pageSize = 1234
   /**
-   *  Optional. A pagination token returned from a previous request to list
-   *  CloudControls. Provide this token to retrieve the next page of results.
-   *  When paginating, parent provided to
-   *  ListCloudControls request must match the call that provided the page
-   *  token.
+   *  Optional. A pagination token that's returned from a previous request to
+   *  list cloud controls. Provide this token to retrieve the next page of
+   *  results.
+   *  When paginating, the parent that you provide to the
+   *  ListCloudControls google.cloud.cloudsecuritycompliance.v1.Config.ListCloudControls 
+   *  request must match the call that provided the page token.
    */
   // const pageToken = 'abc123'
 

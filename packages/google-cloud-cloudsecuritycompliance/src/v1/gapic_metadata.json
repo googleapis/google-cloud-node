@@ -5,6 +5,98 @@
   "protoPackage": "google.cloud.cloudsecuritycompliance.v1",
   "libraryPackage": "@google-cloud/cloudsecuritycompliance",
   "services": {
+    "Audit": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AuditClient",
+          "rpcs": {
+            "GenerateFrameworkAuditScopeReport": {
+              "methods": [
+                "generateFrameworkAuditScopeReport"
+              ]
+            },
+            "GetFrameworkAudit": {
+              "methods": [
+                "getFrameworkAudit"
+              ]
+            },
+            "CreateFrameworkAudit": {
+              "methods": [
+                "createFrameworkAudit"
+              ]
+            },
+            "ListFrameworkAudits": {
+              "methods": [
+                "listFrameworkAudits",
+                "listFrameworkAuditsStream",
+                "listFrameworkAuditsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AuditClient",
+          "rpcs": {
+            "GenerateFrameworkAuditScopeReport": {
+              "methods": [
+                "generateFrameworkAuditScopeReport"
+              ]
+            },
+            "GetFrameworkAudit": {
+              "methods": [
+                "getFrameworkAudit"
+              ]
+            },
+            "CreateFrameworkAudit": {
+              "methods": [
+                "createFrameworkAudit"
+              ]
+            },
+            "ListFrameworkAudits": {
+              "methods": [
+                "listFrameworkAudits",
+                "listFrameworkAuditsStream",
+                "listFrameworkAuditsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "CmEnrollmentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "CmEnrollmentServiceClient",
+          "rpcs": {
+            "UpdateCmEnrollment": {
+              "methods": [
+                "updateCmEnrollment"
+              ]
+            },
+            "CalculateEffectiveCmEnrollment": {
+              "methods": [
+                "calculateEffectiveCmEnrollment"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "CmEnrollmentServiceClient",
+          "rpcs": {
+            "UpdateCmEnrollment": {
+              "methods": [
+                "updateCmEnrollment"
+              ]
+            },
+            "CalculateEffectiveCmEnrollment": {
+              "methods": [
+                "calculateEffectiveCmEnrollment"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Config": {
       "clients": {
         "grpc": {
