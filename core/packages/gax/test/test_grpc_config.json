@@ -1,0 +1,15 @@
+{
+	"channelPool": {
+		"maxSize": 1,
+		"maxConcurrentStreamsLowWatermark": 1
+    },
+    "method": [
+        {
+            "name": ["method1"],
+            "affinity": {
+                "command": "BIND",
+                "affinityKey": "key1"
+            }
+        }
+    ]
+}

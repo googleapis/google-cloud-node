@@ -1,0 +1,11 @@
+**/node_modules
+**/coverage
+test/fixtures
+build/
+docs/
+protos/
+samples/generated/
+test/browser-test/
+test/showcase-echo-client/src/
+test/showcase-server/
+test/test-application/src/
