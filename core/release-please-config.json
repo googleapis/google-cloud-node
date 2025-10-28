@@ -7,6 +7,7 @@
     "dev-packages/pack-n-play": {},
     "packages/gaxios": {},
     "packages/gcp-metadata": {},
+    "packages/nodejs-googleapis-common": {},
     "packages/proto3-json-serializer-nodejs": {}
   },
   "plugins": [

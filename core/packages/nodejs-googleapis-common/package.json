@@ -2,7 +2,11 @@
   "name": "googleapis-common",
   "version": "8.0.0",
   "description": "A common tooling library used by the googleapis npm module. You probably don't want to use this directly.",
-  "repository": "googleapis/nodejs-googleapis-common",
+  "repository": {
+    "type": "git",
+    "directory": "packages/nodejs-googleapis-common",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+  },
   "main": "build/src/index.js",
   "types": "build/src/index.d.ts",
   "files": [
@@ -14,13 +18,13 @@
     "benchmark": "node build/benchmark/bench.js",
     "compile": "tsc -p .",
     "test": "c8 mocha build/test",
-    "system-test": "c8 mocha build/system-test --timeout 600000",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "presystem-test": "npm run compile",
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "lint": "gts check",
-    "samples-test": "mocha build/samples-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
     "docs": "jsdoc -c .jsdoc.js",
     "predocs-test": "npm run docs",
     "docs-test": "linkinator docs",
@@ -86,5 +90,6 @@
   },
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/nodejs-googleapis-common"
 }

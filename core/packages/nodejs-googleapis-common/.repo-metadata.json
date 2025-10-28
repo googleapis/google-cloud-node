@@ -1,6 +1,6 @@
 {
   "language": "nodejs",
-  "repo": "googleapis/nodejs-googleapis-common",
+  "repo": "googleapis/google-cloud-node-core",
   "release_level": "stable",
   "name_pretty": "Google APIs Common Module",
   "distribution_name": "googleapis-common",

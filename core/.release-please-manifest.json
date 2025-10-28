@@ -4,5 +4,6 @@
   "dev-packages/pack-n-play": "4.2.1",
   "packages/gaxios": "7.1.2",
   "packages/gcp-metadata": "8.1.1",
+  "packages/nodejs-googleapis-common": "8.0.0",
   "packages/proto3-json-serializer-nodejs": "3.0.3"
 }
