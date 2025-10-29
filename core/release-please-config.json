@@ -7,7 +7,7 @@
     "dev-packages/pack-n-play": {},
     "dev-packages/logging-utils": {},
     "packages/gax": {},
-    "packages/gapic-tools": {},
+    "packages/tools": {},
     "packages/gaxios": {},
     "packages/gcp-metadata": {},
     "packages/proto3-json-serializer-nodejs": {}
