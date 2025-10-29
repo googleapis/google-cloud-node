@@ -3,13 +3,14 @@
   "version": "4.9.12",
   "type": "module",
   "description": "Google API Client Library Generator for TypeScript, written in TypeScript.",
-  "homepage": "https://github.com/googleapis/gapic-generator-typescript#readme",
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/gapic-generator-typescript",
   "bugs": {
     "url": "https://github.com/googleapis/gapic-generator-typescript/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/googleapis/gapic-generator-typescript.git"
+    "directory": "packages/gapic-generator-typescript",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
   },
   "license": "Apache-2.0",
   "author": "Google LLC",
@@ -42,7 +43,9 @@
     "postpack:esm": "cd templates/esm/typescript_gapic && mv package.json.njk package.json && ln -s package.json package.json.njk",
     "postpack": "npm run postpack:cjs && npm run postpack:esm",
     "test": "bazelisk test --test_output=errors //:unit_tests",
-    "ts-test-application": "mocha bazel-bin/typescript/test/test-application/test-ts --timeout 600000"
+    "ts-test-application": "mocha bazel-bin/typescript/test/test-application/test-ts --timeout 600000",
+    "system-test": "npm run compile && c8 mocha build/system-test",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.9",

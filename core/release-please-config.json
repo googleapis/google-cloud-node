@@ -4,13 +4,14 @@
   "packages": {
     "dev-packages/jsdoc-fresh": {},
     "dev-packages/jsdoc-region-tag": {},
-    "dev-packages/pack-n-play": {},
     "dev-packages/logging-utils": {},
+    "dev-packages/pack-n-play": {},
+    "generator/gapic-generator-typescript": {},
     "packages/gax": {},
-    "packages/tools": {},
     "packages/gaxios": {},
     "packages/gcp-metadata": {},
-    "packages/proto3-json-serializer-nodejs": {}
+    "packages/proto3-json-serializer-nodejs": {},
+    "packages/tools": {}
   },
   "plugins": [
     {
