@@ -1,0 +1,322 @@
+// Copyright 2018 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/api/client.proto";
+import "google/api/field_behavior.proto";
+import "google/api/routing.proto";
+import "google/longrunning/operations.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+
+package google.showcase.v1beta1;
+
+option go_package = "github.com/googleapis/gapic-showcase/server/genproto";
+option java_package = "com.google.showcase.v1beta1";
+option java_multiple_files = true;
+option ruby_package = "Google::Showcase::V1beta1";
+
+// This service is used showcase the four main types of rpcs - unary, server
+// side streaming, client side streaming, and bidirectional streaming. This
+// service also exposes methods that explicitly implement server delay, and
+// paginated calls. Set the 'showcase-trailer' metadata key on any method
+// to have the values echoed in the response trailers. Set the 
+// 'x-goog-request-params' metadata key on any method to have the values
+// echoed in the response headers.
+service Echo {
+  // This service is meant to only run locally on the port 7469 (keypad digits
+  // for "show").
+  option (google.api.default_host) = "localhost:7469";
+
+  // This method simply echoes the request. This method showcases unary RPCs.
+  rpc Echo(EchoRequest) returns (EchoResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/echo:echo"
+      body: "*"
+    };
+    option (google.api.routing) = {
+      routing_parameters{
+        field: "header"
+      }
+      routing_parameters{
+        field: "header"
+        path_template: "{routing_id=**}"
+      }
+      routing_parameters{
+        field: "header"
+        path_template: "{table_name=regions/*/zones/*/**}"
+      }
+      routing_parameters{
+        field: "header"
+        path_template: "{super_id=projects/*}/**"
+      }
+      routing_parameters{
+        field: "header"
+        path_template: "{table_name=projects/*/instances/*/**}"
+      }
+      routing_parameters{
+        field: "header"
+        path_template: "projects/*/{instance_id=instances/*}/**"
+      }
+      routing_parameters{
+        field: "other_header"
+        path_template: "{baz=**}"
+      }
+      routing_parameters{
+        field: "other_header"
+        path_template: "{qux=projects/*}/**"
+      }
+    };
+  }
+
+  // This method splits the given content into words and will pass each word back
+  // through the stream. This method showcases server-side streaming RPCs.
+  rpc Expand(ExpandRequest) returns (stream EchoResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/echo:expand"
+      body: "*"
+    };
+    // TODO(landrito): change this to be `fields: ["content", "error"]` once
+    // github.com/dcodeIO/protobuf.js/issues/1094 has been resolved.
+    option (google.api.method_signature) = "content,error";
+  }
+
+  // This method will collect the words given to it. When the stream is closed
+  // by the client, this method will return the a concatenation of the strings
+  // passed to it. This method showcases client-side streaming RPCs.
+  rpc Collect(stream EchoRequest) returns (EchoResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/echo:collect"
+      body: "*"
+    };
+  }
+
+  // This method, upon receiving a request on the stream, will pass the same
+  // content back on the stream. This method showcases bidirectional
+  // streaming RPCs.
+  rpc Chat(stream EchoRequest) returns (stream EchoResponse);
+
+  // This is similar to the Expand method but instead of returning a stream of
+  // expanded words, this method returns a paged list of expanded words.
+  rpc PagedExpand(PagedExpandRequest) returns (PagedExpandResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/echo:pagedExpand"
+      body: "*"
+    };
+  }
+
+  // This is similar to the PagedExpand except that it uses
+  // max_results instead of page_size, as some legacy APIs still
+  // do. New APIs should NOT use this pattern.
+  rpc PagedExpandLegacy(PagedExpandLegacyRequest) returns (PagedExpandResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/echo:pagedExpandLegacy"
+      body: "*"
+    };
+  }
+
+  // This method returns a map containing lists of words that appear in the input, keyed by their
+  // initial character. The only words returned are the ones included in the current page,
+  // as determined by page_token and page_size, which both refer to the word indices in the
+  // input. This paging result consisting of a map of lists is a pattern used by some legacy
+  // APIs. New APIs should NOT use this pattern.
+  rpc PagedExpandLegacyMapped(PagedExpandRequest) returns (PagedExpandLegacyMappedResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/echo:pagedExpandLegacyMapped"
+      body: "*"
+    };
+  }
+
+  // This method will wait for the requested amount of time and then return.
+  // This method showcases how a client handles a request timeout.
+  rpc Wait(WaitRequest) returns (google.longrunning.Operation) {
+    option (google.api.http) = {
+      post: "/v1beta1/echo:wait"
+      body: "*"
+    };
+    option (google.longrunning.operation_info) = {
+      response_type: "WaitResponse"
+      metadata_type: "WaitMetadata"
+    };
+  }
+
+  // This method will block (wait) for the requested amount of time
+  // and then return the response or error.
+  // This method showcases how a client handles delays or retries.
+  rpc Block(BlockRequest) returns (BlockResponse) {
+    option (google.api.http) = {
+      post: "/v1beta1/echo:block"
+      body: "*"
+    };
+  };
+}
+
+// A severity enum used to test enum capabilities in GAPIC surfaces.
+enum Severity {
+  UNNECESSARY = 0;
+  NECESSARY = 1;
+  URGENT = 2;
+  CRITICAL = 3;
+}
+
+
+// The request message used for the Echo, Collect and Chat methods.
+// If content or opt are set in this message then the request will succeed.
+// If status is set in this message then the status will be returned as an
+// error.
+message EchoRequest {
+  oneof response {
+    // The content to be echoed by the server.
+    string content = 1;
+
+    // The error to be thrown by the server.
+    google.rpc.Status error = 2;
+  }
+
+  // The severity to be echoed by the server.
+  Severity severity = 3;
+
+  // Optional. This field can be set to test the routing annotation on the Echo method.
+  string header = 4;
+
+  // Optional. This field can be set to test the routing annotation on the Echo method.
+  string other_header = 5;
+}
+
+// The response message for the Echo methods.
+message EchoResponse {
+  // The content specified in the request.
+  string content = 1;
+
+  // The severity specified in the request.
+  Severity severity = 2;
+}
+
+// The request message for the Expand method.
+message ExpandRequest {
+  // The content that will be split into words and returned on the stream.
+  string content = 1;
+
+  // The error that is thrown after all words are sent on the stream.
+  google.rpc.Status error = 2;
+}
+
+// The request for the PagedExpand method.
+message PagedExpandRequest {
+  // The string to expand.
+  string content = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // The number of words to returned in each page.
+  int32 page_size = 2;
+
+  // The position of the page to be returned.
+  string page_token = 3;
+}
+
+// The request for the PagedExpandLegacy method.  This is a pattern used by some legacy APIs. New
+// APIs should NOT use this pattern, but rather something like PagedExpandRequest which conforms to
+// aip.dev/158.
+message PagedExpandLegacyRequest {
+  // The string to expand.
+  string content = 1 [(google.api.field_behavior) = REQUIRED];
+
+  // The number of words to returned in each page.
+  // (-- aip.dev/not-precedent: This is a legacy, non-standard pattern that
+  //     violates aip.dev/158. Ordinarily, this should be page_size. --)
+  int32 max_results = 2;
+
+  // The position of the page to be returned.
+  string page_token = 3;
+}
+
+// The response for the PagedExpand method.
+message PagedExpandResponse {
+  // The words that were expanded.
+  repeated EchoResponse responses = 1;
+
+  // The next page token.
+  string next_page_token = 2;
+}
+
+// A list of words.
+message PagedExpandResponseList {
+  repeated string words = 1;
+}
+
+message PagedExpandLegacyMappedResponse {
+  // The words that were expanded, indexed by their initial character.
+  // (-- aip.dev/not-precedent: This is a legacy, non-standard pattern that violates
+  //     aip.dev/158. Ordinarily, this should be a `repeated` field, as in PagedExpandResponse. --)
+  map<string, PagedExpandResponseList> alphabetized = 1;
+
+  // The next page token.
+  string next_page_token = 2;
+}
+
+// The request for Wait method.
+message WaitRequest {
+  oneof end {
+    // The time that this operation will complete.
+    google.protobuf.Timestamp end_time = 1;
+
+    // The duration of this operation.
+    google.protobuf.Duration ttl = 4;
+  }
+
+  oneof response {
+    // The error that will be returned by the server. If this code is specified
+    // to be the OK rpc code, an empty response will be returned.
+    google.rpc.Status error = 2;
+
+    // The response to be returned on operation completion.
+    WaitResponse success = 3;
+  }
+}
+
+// The result of the Wait operation.
+message WaitResponse {
+  // This content of the result.
+  string content = 1;
+}
+
+// The metadata for Wait operation.
+message WaitMetadata {
+  // The time that this operation will complete.
+  google.protobuf.Timestamp end_time =1;
+}
+
+// The request for Block method.
+message BlockRequest {
+  // The amount of time to block before returning a response.
+  google.protobuf.Duration response_delay = 1;
+
+  oneof response {
+    // The error that will be returned by the server. If this code is specified
+    // to be the OK rpc code, an empty response will be returned.
+    google.rpc.Status error = 2;
+
+    // The response to be returned that will signify successful method call.
+    BlockResponse success = 3;
+  }
+}
+
+// The response for Block method.
+message BlockResponse {
+  // This content can contain anything, the server will not depend on a value
+  // here.
+  string content = 1;
+}

@@ -1,0 +1,77 @@
+{
+  "name": "@google-cloud/gapic-generator",
+  "version": "4.9.12",
+  "type": "module",
+  "description": "Google API Client Library Generator for TypeScript, written in TypeScript.",
+  "homepage": "https://github.com/googleapis/gapic-generator-typescript#readme",
+  "bugs": {
+    "url": "https://github.com/googleapis/gapic-generator-typescript/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/googleapis/gapic-generator-typescript.git"
+  },
+  "license": "Apache-2.0",
+  "author": "Google LLC",
+  "bin": {
+    "gapic-generator-typescript": "build/typescript/src/gapic-generator-typescript.js",
+    "protoc-gen-typescript_gapic": "build/typescript/src/protoc-plugin.js"
+  },
+  "files": [
+    "build/typescript/src/**/*.js",
+    "build/typescript/src/**/*.d.ts",
+    "build/protos",
+    "build/templates"
+  ],
+  "scripts": {
+    "baseline": "node bazel-bin/typescript/tools/update-baselines.js",
+    "clean": "bazelisk clean && rm -rf build",
+    "codecov": "c8 --reporter=lcov mocha bazel-bin/typescript/test/unit && c8 report",
+    "compile": "bazelisk build //...",
+    "compile-protos-json": "pbjs -t json -o protos/protos.json -p node_modules/google-gax/build/protos -p protos google/api/annotations.proto google/api/field_behavior.proto google/api/field_info.proto google/api/resource.proto google/api/routing.proto google/longrunning/operations.proto google/protobuf/compiler/plugin.proto service_config.proto snippet_index.proto",
+    "compile-protos-js": "pbjs -t static-module -o protos/index.js -p node_modules/google-gax/build/protos -p protos google/api/annotations.proto google/api/field_behavior.proto google/api/field_info.proto google/api/resource.proto google/api/routing.proto google/longrunning/operations.proto google/protobuf/compiler/plugin.proto service_config.proto snippet_index.proto",
+    "compile-protos-dts": "pbts protos/index.js -o protos/index.d.ts",
+    "docker-test": "sh docker/test.sh",
+    "fix": "gts fix",
+    "js-test-application": "mocha bazel-bin/typescript/test/test-application/test-js --timeout 600000",
+    "lint": "gts check",
+    "prepack:cjs": "npm run compile && cd templates/cjs/typescript_gapic && rm -f package.json.njk && mv package.json package.json.njk && cd ../../.. && mkdir -p build && cp -rf bazel-bin/typescript templates protos build/",
+    "prepack:esm": "npm run compile && cd templates/esm/typescript_gapic && rm -f package.json.njk && mv package.json package.json.njk && cd ../../.. && mkdir -p build && cp -rf bazel-bin/typescript templates protos build/",
+    "prepack": "npm run prepack:cjs && npm run prepack:esm",
+    "postpack:cjs": "cd templates/cjs/typescript_gapic && mv package.json.njk package.json && ln -s package.json package.json.njk",
+    "postpack:esm": "cd templates/esm/typescript_gapic && mv package.json.njk package.json && ln -s package.json package.json.njk",
+    "postpack": "npm run postpack:cjs && npm run postpack:esm",
+    "test": "bazelisk test --test_output=errors //:unit_tests",
+    "ts-test-application": "mocha bazel-bin/typescript/test/test-application/test-ts --timeout 600000"
+  },
+  "dependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "js-yaml": "^4.1.0",
+    "long": "^5.3.2",
+    "object-hash": "^3.0.0",
+    "proto3-json-serializer": "^3.0.3",
+    "protobufjs": "^7.5.4",
+    "protobufjs-cli": "^1.2.0",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@bazel/bazelisk": "^1.26.0",
+    "@types/mocha": "^10.0.10",
+    "@types/module-alias": "^2.0.4",
+    "@types/node": "^22.18.12",
+    "@types/nunjucks": "^3.2.6",
+    "@types/object-hash": "^3.0.6",
+    "@types/yargs": "^17.0.34",
+    "espower-typescript": "^10.0.1",
+    "gapic-node-processing": "^0.1.6",
+    "gapic-tools": "^1.0.3",
+    "google-gax": "^5.1.1-rc.1",
+    "gts": "^6.0.2",
+    "mocha": "^11.7.4",
+    "nunjucks": "^3.2.4",
+    "typescript": "5.6.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

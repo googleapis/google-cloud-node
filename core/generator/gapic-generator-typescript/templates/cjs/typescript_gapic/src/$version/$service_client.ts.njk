@@ -1,0 +1,1177 @@
+{#-
+
+Copyright 2019 Google LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-#}
+{% import "../../_license.njk" as license -%}
+{{license.license(commonParameters.copyrightYear)}}
+{%- if not api.legacyProtoLoad %}
+/* global window */
+{%- endif %}
+{% import "../../_util.njk" as util -%}
+{% import "../../_iam.njk" as iam -%}
+{% import "../../_locations.njk" as location -%}
+{% import "../../_operations.njk" as operations -%}
+{% import "../../_namer.njk" as namer -%}
+{{- namer.initialize(id, service) -}}
+{%- set autoPopulated = false -%}
+{%- for method in service.method -%}
+      {%- if method.autoPopulatedFields|length !== 0 %}
+        {%- set autoPopulated = true -%}
+      {%- endif %}
+{%- endfor -%}
+import {% if (not api.legacyProtoLoad) and (autoPopulated === false)  %}type {% endif %}* as gax from 'google-gax';
+import type {Callback, CallOptions, Descriptors, ClientOptions
+{%- if service.longRunning.length > 0 or service.LongRunningOperationsMixin > 0 %}, GrpcClientOptions{%- endif -%}
+{%- if service.longRunning.length > 0 or service.diregapicLRO.length > 0 %}, LROperation{%- endif -%}
+{%- if service.paging.length > 0 %}, PaginationCallback, GaxCall{%- endif -%}
+{%- if service.IAMPolicyMixin > 0 %}, IamClient, IamProtos{%- endif -%}
+{%- if service.LocationMixin > 0 %}, LocationsClient, LocationProtos{%- endif -%}
+} from 'google-gax';
+{% if service.paging.length > 0 or service.streaming.length > 0 -%}
+{% set importStreamJoiner = joiner(', ') -%}
+import {
+{%- if service.paging.length > 0 -%}{{- importStreamJoiner() -}}Transform{%- endif -%}
+{%- if service.streaming.length > 0 -%}{{- importStreamJoiner() -}}PassThrough{%- endif -%}
+} from 'stream';
+{%- endif %}
+import * as protos from '../../protos/protos';
+{%- if api.legacyProtoLoad %}
+import * as path from 'path';
+import {loggingUtils as logging} from 'google-gax';
+{%- else %}
+import jsonProtos = require('../../protos/protos.json');
+import {loggingUtils as logging, decodeAnyProtosInArray} from 'google-gax';
+{%- endif %}
+
+/**
+ * Client JSON configuration object, loaded from
+ * `src/{{ api.naming.version }}/{{ service.name.toSnakeCase() }}_client_config.json`.
+ * This file defines retry strategy and timeouts for all API methods in this library.
+ */
+import * as gapicConfig from './{{ service.name.toSnakeCase() }}_client_config.json';
+const version = require('../../../package.json').version;
+
+/**
+{{- util.printCommentsForService(service) }}
+ * @class
+ * @memberof {{ api.naming.version }}
+ {%- if service.options and service.options.deprecated %}
+ * @deprecated {{service.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+export class {{ service.name }}Client {
+  private _terminated = false;
+  private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
+  private _gaxModule: typeof gax{% if not api.legacyProtoLoad %} | typeof gax.fallback{% endif %};
+  private _gaxGrpc: gax.GrpcClient{% if not api.legacyProtoLoad %} | gax.fallback.GrpcClient{% endif %};
+  private _protos: {};
+  private _defaults: {[method: string]: gax.CallSettings};
+  private _universeDomain: string;
+  private _servicePath: string;
+  private _log = logging.log('{{api.loggingName}}');
+
+  auth: gax.GoogleAuth;
+  descriptors: Descriptors = {
+    page: {},
+    stream: {},
+    longrunning: {},
+    batching: {},
+  };
+  warn: (code: string, message: string, warnType?: string) => void;
+  innerApiCalls: {[name: string]: Function};
+  {%- if service.IAMPolicyMixin > 0 %}
+  iamClient: IamClient;
+  {%- endif %}
+  {%- if service.LocationMixin > 0 %}
+  locationsClient: LocationsClient;
+  {%- endif -%}
+  {%- if service.pathTemplates.length > 0 %}
+  pathTemplates: {[name: string]: gax.PathTemplate};
+  {%- endif %}
+{%- if service.longRunning.length > 0 or service.LongRunningOperationsMixin > 0 %}
+  operationsClient: gax.OperationsClient;
+{%- endif %}
+  {{ service.name.toCamelCase() }}Stub?: Promise<{[name: string]: Function}>;
+
+  /**
+   * Construct an instance of {{ service.name }}Client.
+   *
+   * @param {object} [options] - The configuration object.
+   * The options accepted by the constructor are described in detail
+   * in [this document](https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#creating-the-client-instance).
+   * The common options are:
+   * @param {object} [options.credentials] - Credentials object.
+   * @param {string} [options.credentials.client_email]
+   * @param {string} [options.credentials.private_key]
+   * @param {string} [options.email] - Account email address. Required when
+   *     using a .pem or .p12 keyFilename.
+   * @param {string} [options.keyFilename] - Full path to the a .json, .pem, or
+   *     .p12 key downloaded from the Google Developers Console. If you provide
+   *     a path to a JSON file, the projectId option below is not necessary.
+   *     NOTE: .pem and .p12 require you to specify options.email as well.
+   * @param {number} [options.port] - The port on which to connect to
+   *     the remote host.
+   * @param {string} [options.projectId] - The project ID from the Google
+   *     Developer's Console, e.g. 'grape-spaceship-123'. We will also check
+   *     the environment variable GCLOUD_PROJECT for your project ID. If your
+   *     app is running in an environment which supports
+   *     {@link https://cloud.google.com/docs/authentication/application-default-credentials Application Default Credentials},
+   *     your project ID will be detected automatically.
+   * @param {string} [options.apiEndpoint] - The domain name of the
+   *     API remote host.
+   * @param {gax.ClientConfig} [options.clientConfig] - Client configuration override.
+   *     Follows the structure of {@link gapicConfig}.
+{%- if not api.legacyProtoLoad %}
+   * @param {boolean} [options.fallback] - Use HTTP/1.1 REST mode.
+   *     For more information, please check the
+   *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new {{ service.name }}Client({fallback: true}, gax);
+   *     ```
+{%- endif %}
+   */
+  constructor(opts?: ClientOptions{% if not api.legacyProtoLoad %}, gaxInstance?: typeof gax | typeof gax.fallback{% endif %}) {
+    // Ensure that options include all the required fields.
+    const staticMembers = this.constructor as typeof {{ service.name }}Client;
+    if (opts?.universe_domain && opts?.universeDomain && opts?.universe_domain !== opts?.universeDomain) {
+      throw new Error('Please set either universe_domain or universeDomain, but not both.');
+    }
+    const universeDomainEnvVar = (typeof process === 'object' && typeof process.env === 'object') ? process.env['GOOGLE_CLOUD_UNIVERSE_DOMAIN'] : undefined;
+    this._universeDomain = opts?.universeDomain ?? opts?.universe_domain ?? universeDomainEnvVar ?? 'googleapis.com';
+    {%- if api.hostName.endsWith("googleapis.com") %}
+    this._servicePath = '{{ api.shortName }}.' + this._universeDomain;
+    {%- else %}
+    this._servicePath = '{{ api.hostName }}';
+    {%- endif %}
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || this._servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const port = opts?.port || staticMembers.{{ id.get("port") }};
+    const clientConfig = opts?.clientConfig ?? {};
+    {%- if api.rest %}
+    // Implicitly enable HTTP transport for the APIs that use REST as transport (e.g. Google Cloud Compute).
+    if (!opts) {
+      opts = {fallback: true};
+    } else {
+      opts.fallback = opts.fallback ?? true;
+    }
+    {%- endif %}
+    {%- if api.legacyProtoLoad %}
+    opts = Object.assign({servicePath, port, clientConfig}, opts);
+    {%- else %}
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
+    {%- endif %}
+    {%- if api.restNumericEnums %}
+
+    // Request numeric enum values if REST transport is used.
+    opts.numericEnums = true;
+    {%- endif %}
+
+    // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
+    if (servicePath !== this._servicePath && !('scopes' in opts)) {
+      opts['scopes'] = staticMembers.{{ id.get("scopes") }};
+    }
+    {%- if not api.legacyProtoLoad %}
+
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+    {%- endif %}
+
+    // Choose either gRPC or proto-over-HTTP implementation of google-gax.
+    this._gaxModule = {% if not api.legacyProtoLoad %}opts.fallback ? gaxInstance.fallback : gaxInstance{% else %}gax{% endif %};
+
+    // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
+    this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
+
+    // Save options to use in {{ id.get("initialize") }}() method.
+    this._opts = opts;
+
+    // Save the auth object to the client, for use by other methods.
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+
+{%- if not api.diregapic %}
+
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
+{%- endif %}
+
+    // Set defaultServicePath on the auth object.
+    this.auth.defaultServicePath = this._servicePath;
+
+    // Set the default scopes in auth client if needed.
+    if (servicePath === this._servicePath) {
+      this.auth.defaultScopes = staticMembers.{{ id.get("scopes") }};
+    }
+  {%- if service.IAMPolicyMixin > 0 %}
+    this.iamClient = new this._gaxModule.IamClient(this._gaxGrpc, opts);
+  {% endif %}
+
+  {%- if service.LocationMixin > 0 %}
+    this.locationsClient = new this._gaxModule.LocationsClient(
+      this._gaxGrpc,
+      opts
+    );
+  {% endif %}
+
+    // Determine the client header string.
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
+    if (typeof process === 'object' && 'versions' in process) {
+      clientHeader.push(`gl-node/${process.versions.node}`);
+    } else {
+      clientHeader.push(`gl-web/${this._gaxModule.version}`);
+    }
+{%- if api.legacyProtoLoad %}
+    clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+{%- else %}
+    if (!opts.fallback) {
+      clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
+    }
+{%- endif %}
+    if (opts.libName && opts.libVersion) {
+      clientHeader.push(`${opts.libName}/${opts.libVersion}`);
+    }
+    // Load the applicable protos.
+{%- if api.legacyProtoLoad %}
+    this._protos = this._gaxGrpc.loadProto(
+      path.join(__dirname, '..', '..', 'protos'),
+      '{{ service.protoFile }}'
+    );
+{%- else %}
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+{%- endif %}
+
+{%- if service.pathTemplates.length > 0 %}
+
+    // This API contains "path templates"; forward-slash-separated
+    // identifiers to uniquely identify resources within the API.
+    // Create useful helper objects for these.
+    this.pathTemplates = {
+{%- for template in service.pathTemplates %}
+      {{ template.name.toCamelCase() }}PathTemplate: new this._gaxModule.PathTemplate(
+        '{{ template.pattern }}'
+      ),
+{%- endfor %}
+    };
+{%- endif %}
+
+{%- if service.paging.length > 0 %}
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+{%- set pagingJoiner = joiner() %}
+{%- for method in service.paging %}
+      {%- if not method.ignoreMapPagingMethod %}
+      {{- pagingJoiner() }}
+      {{ method.name.toCamelCase() }}:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', '{{ method.pagingFieldName.toCamelCase() }}')
+      {%- endif %}
+{%- endfor %}
+    };
+{%- endif %}
+
+{%- if service.streaming.length > 0 %}
+
+    // Some of the methods on this service provide streaming responses.
+    // Provide descriptors for these.
+    this.descriptors.stream = {
+{%- set streamingJoiner = joiner() %}
+{%- for method in service.streaming %}
+  {%- if method.serverStreaming %}
+      {{- streamingJoiner() }}
+      {{ method.name.toCamelCase() }}: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.{{ method.streaming }}, !!opts.fallback, !!opts.gaxServerStreamingRetries)
+  {%- endif %}
+  {%- if not method.serverStreaming %}
+    {{- streamingJoiner() }}
+    {{ method.name.toCamelCase() }}: new this._gaxModule.StreamDescriptor(this._gaxModule.StreamType.{{ method.streaming }}, !!opts.fallback)
+  {%- endif %}
+{%- endfor %}
+    };
+{%- endif %}
+{%- if (service.longRunning.length > 0) or (service.bundleConfigs.length > 0) or (service.LongRunningOperationsMixin > 0) %}
+{%- if api.legacyProtoLoad %}
+
+    let protoFilesRoot = new this._gaxModule.GoogleProtoFilesRoot();
+    protoFilesRoot = this._gaxModule.protobuf.loadSync(
+      path.join(__dirname, '..', '..', 'protos', '{{ service.protoFile }}'),
+      protoFilesRoot) as (typeof protoFilesRoot);
+{%- else %}
+
+    const protoFilesRoot = this._gaxModule.protobufFromJSON(jsonProtos);
+{%- endif %}
+{%- endif %}
+{%- if service.longRunning.length > 0 or service.LongRunningOperationsMixin > 0%}
+    // This API contains "long-running operations", which return a
+    // an Operation object that allows for tracking of the operation,
+    // rather than holding a request open.
+    const lroOptions: GrpcClientOptions = {
+      auth: this.auth,
+      grpc: 'grpc' in this._gaxGrpc ? this._gaxGrpc.grpc : undefined
+    };
+{%- if not api.legacyProtoLoad %}
+    if (opts.fallback) {
+      lroOptions.protoJson = protoFilesRoot;
+      lroOptions.httpRules = {{ util.toHttpRules(service.httpRules) }};
+    }
+{%- endif %}
+    this.operationsClient = this._gaxModule.lro(lroOptions).operationsClient(opts);
+
+{%- for method in service.longRunning %}
+    const {{ method.name.toCamelCase() }}Response = protoFilesRoot.lookup(
+      '{{ method.longRunningResponseType }}') as gax.protobuf.Type;
+    const {{ method.name.toCamelCase() }}Metadata = protoFilesRoot.lookup(
+      '{{ method.longRunningMetadataType }}') as gax.protobuf.Type;
+{%- endfor %}
+
+    this.descriptors.longrunning = {
+{%- set longRunningJoiner = joiner() %}
+{%- for method in service.longRunning %}
+      {{- longRunningJoiner() }}
+      {{ method.name.toCamelCase() }}: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        {{ method.name.toCamelCase() }}Response.decode.bind({{ method.name.toCamelCase() }}Response),
+        {{ method.name.toCamelCase() }}Metadata.decode.bind({{ method.name.toCamelCase() }}Metadata))
+{%- endfor %}
+    };
+{%- endif %}
+
+{%- if service.bundleConfigs.length > 0 %}
+    // Some methods on this API support automatically batching
+    // requests; denote this.
+
+    this.descriptors.batching = {
+{%- for method in service.bundleConfigsMethods %}
+      {{ method.name.toCamelCase() }}: new this._gaxModule.BundleDescriptor(
+        '{{ method.bundleConfig.batchDescriptor.batched_field }}',
+        [
+{%- set pagingJoiner = joiner() -%}
+{%- for field in method.bundleConfig.batchDescriptor.discriminator_fields -%}
+        {{- pagingJoiner() -}}
+        '{{ field }}'
+{%- endfor -%}
+        ],
+{%- if method.bundleConfig.batchDescriptor.subresponse_field === 'null' %}
+        null,
+{%- else %}
+        '{{- method.bundleConfig.batchDescriptor.subresponse_field }}',
+{%- endif %}
+        this._gaxModule.GrpcClient.createByteLengthFunction(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          protoFilesRoot.lookupType('{{ method.bundleConfig.repeatedField }}') as any
+        )
+      ),
+    };
+{%- endfor %}
+{%- endif %}
+
+    // Put together the default options sent with requests.
+    this._defaults = this._gaxGrpc.constructSettings(
+        '{{ api.naming.protoPackage }}.{{ service.name }}', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')
+{%- if service.apiVersion -%}
+       , 'x-goog-api-version': '{{ service.apiVersion }}'
+{%- endif -%}});
+
+    // Set up a dictionary of "inner API calls"; the core implementation
+    // of calling the API is handled in `google-gax`, with this code
+    // merely providing the destination and request information.
+    this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = this._gaxModule.warn;
+  }
+
+  /**
+   * Initialize the client.
+   * Performs asynchronous operations (such as authentication) and prepares the client.
+   * This function will be called automatically when any class method is called for the
+   * first time, but if you need to initialize it before calling an actual method,
+   * feel free to call {{ id.get("initialize") }}() directly.
+   *
+   * You can await on this method if you want to make sure the client is initialized.
+   *
+   * @returns {Promise} A promise that resolves to an authenticated service stub.
+   */
+  {{ id.get("initialize") }}() {
+    // If the client stub promise is already initialized, return immediately.
+    if (this.{{ service.name.toCamelCase() }}Stub) {
+      {%- if service.options and service.options.deprecated %}
+      this.warn('DEP${{service.name}}', '{{service.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+      {%- endif %}
+      return this.{{ service.name.toCamelCase() }}Stub;
+    }
+
+    // Put together the "service stub" for
+    // {{api.naming.protoPackage}}.{{ service.name }}.
+    this.{{ service.name.toCamelCase() }}Stub = this._gaxGrpc.createStub(
+{%- if not api.legacyProtoLoad %}
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('{{api.naming.protoPackage}}.{{ service.name }}') :
+{%- endif %}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).{{api.naming.protoPackage}}.{{ service.name }},
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+
+    // Iterate over each of the methods that the service provides
+    // and create an API call method for each.
+    const {{ service.name.toCamelCase() }}StubMethods =
+        [
+{%- set stubMethodsJoiner = joiner(', ') -%}
+{%- for method in service.method -%}
+      {%- if not method.ignoreMapPagingMethod %}
+      {{- stubMethodsJoiner() -}}
+      '{{ method.name.toCamelCase(true) }}'
+      {%- endif %}
+{%- endfor -%}
+    ];
+    for (const methodName of {{ service.name.toCamelCase() }}StubMethods) {
+      const callPromise = this.{{ service.name.toCamelCase() }}Stub.then(
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            {%- if service.streaming.length > 0 %}
+            if (methodName in this.descriptors.stream) {
+              const stream = new PassThrough({objectMode: true});
+              setImmediate(() => {
+                stream.emit('error', new this._gaxModule.GoogleError('The client has already been closed.'));
+              });
+              return stream;
+            }
+            {%- endif %}
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
+          throw err;
+        });
+
+      const descriptor =
+{%- if service.paging.length > 0 %}
+        this.descriptors.page[methodName] ||
+{%- endif %}
+{%- if service.streaming.length > 0 %}
+        this.descriptors.stream[methodName] ||
+{%- endif %}
+{%- if service.longRunning.length > 0 %}
+        this.descriptors.longrunning[methodName] ||
+{%- endif %}
+{%- if service.bundleConfigs.length > 0 %}
+        this.descriptors.batching?.[methodName] ||
+{%- endif %}
+        undefined;
+      const apiCall = this._gaxModule.createApiCall(
+        callPromise,
+        this._defaults[methodName],
+        descriptor,
+        this._opts.fallback
+      );
+
+      this.innerApiCalls[methodName] = apiCall;
+    }
+    {%- if service.options and service.options.deprecated %}
+    this.warn('DEP${{service.name}}', '{{service.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+
+    return this.{{ service.name.toCamelCase() }}Stub;
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @deprecated Use the {{ id.get("apiEndpoint") }} method of the client instance.
+   * @returns {string} The DNS address for this service.
+   */
+  static get {{ id.get("servicePath") }}() {
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static {{ id.get("servicePath") }} is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    }
+    return '{{ api.hostName }}';
+  }
+
+  /**
+   * The DNS address for this API service - same as {{ id.get("servicePath") }}.
+   * @deprecated Use the {{ id.get("apiEndpoint") }} method of the client instance.
+   * @returns {string} The DNS address for this service.
+   */
+  static get {{ id.get("apiEndpoint") }}() {
+    if (typeof process === 'object' && typeof process.emitWarning === 'function') {
+      process.emitWarning('Static {{ id.get("apiEndpoint") }} is deprecated, please use the instance method instead.', 'DeprecationWarning');
+    }
+    return '{{ api.hostName }}';
+  }
+
+  /**
+   * The DNS address for this API service.
+   * @returns {string} The DNS address for this service.
+   */
+  get {{ id.get("apiEndpoint") }}() {
+    return this._servicePath;
+  }
+
+  get {{ id.get("universeDomain") }}() {
+    return this._universeDomain;
+  }
+
+  /**
+   * The port for this API service.
+   * @returns {number} The default port for this service.
+   */
+  static get {{ id.get("port") }}() {
+    return {{ api.port }};
+  }
+
+  /**
+   * The scopes needed to make gRPC calls for every method defined
+   * in this service.
+   * @returns {string[]} List of default scopes.
+   */
+  static get {{ id.get("scopes") }}() {
+{%- if (service.oauthScopes.length == 0) %}
+    return [];
+{%- else %}
+    return [
+{%- set scopesJoiner = joiner() %}
+{%- for scope in service.oauthScopes %}
+      {{- scopesJoiner() }}
+      '{{ scope }}'
+{%- endfor %}
+    ];
+{%- endif %}
+  }
+
+  {{ id.get("getProjectId") }}(): Promise<string>;
+  {{ id.get("getProjectId") }}(callback: Callback<string, undefined, undefined>): void;
+  /**
+   * Return the project ID used by this class.
+   * @returns {Promise} A promise that resolves to string containing the project ID.
+   */
+  {{ id.get("getProjectId") }}(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
+    if (callback) {
+      this.auth.getProjectId(callback);
+      return;
+    }
+    return this.auth.getProjectId();
+  }
+
+  // -------------------
+  // -- Service calls --
+  // -------------------
+
+{%- macro internalWarning(service, method, api) %}
+ {%- for internalMethod in service.internalMethods %}
+  {%- if method.name === internalMethod.name %}
+ * @internal WARNING: This method is internal to the {{api.hostName.split(".")[0]}}_{{api.naming.version}} api and should not be used by clients.
+ * 
+  {%- endif %}
+ {%- endfor %}
+{%- endmacro %}
+
+{%- for method in service.simpleMethods %}
+/**
+ {{- internalWarning(service, method, api) }}
+{{- util.printComments(method, service) }}
+ {%- if not api.handwrittenLayer %}
+ * @example <caption>include:samples/generated/{{api.naming.version}}/{{service.name.toSnakeCase()}}.{{method.name.toSnakeCase()}}.js</caption>
+ * region_tag:{{ api.hostName.split(".")[0] }}_{{ api.naming.version }}_generated_{{ service.name }}_{{ method.name }}_async
+ {%- endif %}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+  {{ method.name.toCamelCase() }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      options?: CallOptions):
+{%- if method.isDiregapicLRO %}
+      Promise<[
+        LROperation<{{ util.toInterface(method.outputInterface) }}, null>,
+        {{ util.toInterface(method.outputInterface) }}|undefined, {}|undefined
+      ]>;
+{%- else %}
+      Promise<[
+        {{ util.toInterface(method.outputInterface) }},
+        {{ util.toInterface(method.inputInterface) }}|undefined, {}|undefined
+      ]>;
+{%- endif %}
+  {{ method.name.toCamelCase() }}(
+      request: {{ util.toInterface(method.inputInterface) }},
+      options: CallOptions,
+      callback: Callback<
+          {{ util.toInterface(method.outputInterface) }},
+          {{ util.toInterface(method.inputInterface) }}|null|undefined,
+          {}|null|undefined>): void;
+  {{ method.name.toCamelCase() }}(
+      request: {{ util.toInterface(method.inputInterface) }},
+      callback: Callback<
+          {{ util.toInterface(method.outputInterface) }},
+          {{ util.toInterface(method.inputInterface) }}|null|undefined,
+          {}|null|undefined>): void;
+  {{ method.name.toCamelCase() }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      optionsOrCallback?: CallOptions|Callback<
+          {{ util.toInterface(method.outputInterface) }},
+          {{ util.toInterface(method.inputInterface) }}|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          {{ util.toInterface(method.outputInterface) }},
+          {{ util.toInterface(method.inputInterface) }}|null|undefined,
+          {}|null|undefined>):
+{%- if method.isDiregapicLRO %}
+      Promise<[
+        LROperation<{{ util.toInterface(method.outputInterface) }}, null>,
+        {{ util.toInterface(method.outputInterface) }}|undefined, {}|undefined
+{%- else %}
+      Promise<[
+        {{ util.toInterface(method.outputInterface) }},
+        {{ util.toInterface(method.inputInterface) }}|undefined, {}|undefined
+{%- endif %}
+      ]>|void {
+    request = request || {}; 
+{%- for field in method.autoPopulatedFields %}   
+    if (!request.{{ field.toCamelCase() }}) {
+      request.{{ field.toCamelCase() }} = gax.makeUUID();
+    } {%- endfor %}
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    {{ util.buildHeaderRequestParam(method) }}
+    this.{{ id.get("initialize") }}().catch(err => {throw err});
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{method.name}}','{{method.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    this._log.info('{{ method.name.toCamelCase() }} request %j', request);
+    {%- if method.isDiregapicLRO %}
+    const wrappedCallback: Callback<
+          {{ util.toInterface(method.outputInterface) }},
+          {{ util.toInterface(method.inputInterface) }}|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, nextRequest, rawResponse) => {
+          this._log.info('{{ method.name.toCamelCase() }} response %j', rawResponse);
+          callback!(error, response, nextRequest, rawResponse); // We verified `callback` above.
+        }
+      : undefined;
+    return this.innerApiCalls.{{ method.name.toCamelCase(true) }}(request, options, wrappedCallback)
+      ?.then(([response, operation, rawResponse]: [protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation, protos.google.cloud.compute.v1.IOperation]) => {
+        return [
+          { latestResponse: response, done: false, name: response.id, metadata: null, result: {}},
+          operation,
+          rawResponse
+        ];
+      }).catch((error: any) => {
+        {%- if not api.legacyProtoLoad %}
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        {%- endif %}
+        throw error;
+      });
+    {%- else %}
+    const wrappedCallback: Callback<
+        {{ util.toInterface(method.outputInterface) }},
+        {{ util.toInterface(method.inputInterface) }}|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('{{ method.name.toCamelCase() }} response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.{{ method.name.toCamelCase(true) }}(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        {{ util.toInterface(method.outputInterface) }},
+        {{ util.toInterface(method.inputInterface) }}|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('{{ method.name.toCamelCase() }} response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        {%- if not api.legacyProtoLoad %}
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        {%- endif %}
+        throw error;
+      });
+    {%- endif %}
+  }
+{%- endfor %}
+{% for method in service.streaming %}
+{%- if method.serverStreaming and method.clientStreaming %}
+/**
+ {{- internalWarning(service, method, api) }}
+{{- util.printComments(method, service) }}
+ {%- if not api.handwrittenLayer %}
+ * @example <caption>include:samples/generated/{{api.naming.version}}/{{service.name.toSnakeCase()}}.{{method.name.toSnakeCase()}}.js</caption>
+ * region_tag:{{ api.hostName.split(".")[0] }}_{{ api.naming.version }}_generated_{{ service.name }}_{{ method.name }}_async
+ {%- endif %}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+  {{ method.name.toCamelCase() }}(
+      options?: CallOptions):
+    gax.CancellableStream {
+    this.{{ id.get("initialize") }}().catch(err => {throw err});
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{method.name}}','{{method.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    this._log.info('{{ method.name.toCamelCase() }} stream %j', options);
+    return this.innerApiCalls.{{ method.name.toCamelCase(true) }}(null, options);
+  }
+{%- elif method.serverStreaming %}
+/**
+{{- util.printComments(method, service) }}
+ {%- if not api.handwrittenLayer %}
+ * @example <caption>include:samples/generated/{{api.naming.version}}/{{service.name.toSnakeCase()}}.{{method.name.toSnakeCase()}}.js</caption>
+ * region_tag:{{ api.hostName.split(".")[0] }}_{{ api.naming.version }}_generated_{{ service.name }}_{{ method.name }}_async
+ {%- endif %}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+  {{ method.name.toCamelCase() }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      options?: CallOptions):
+    gax.CancellableStream{
+    request = request || {};
+    {{ util.buildHeaderRequestParam(method) }}
+    this.{{ id.get("initialize") }}().catch(err => {throw err});
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{method.name}}','{{method.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    this._log.info('{{ method.name.toCamelCase() }} stream %j', options);
+    return this.innerApiCalls.{{ method.name.toCamelCase(true) }}(request, options);
+  }
+{%- elif method.clientStreaming %}
+/**
+{{- util.printComments(method, service) }}
+ {%- if not api.handwrittenLayer %}
+ * @example <caption>include:samples/generated/{{api.naming.version}}/{{service.name.toSnakeCase()}}.{{method.name.toSnakeCase()}}.js</caption>
+ * region_tag:{{ api.hostName.split(".")[0] }}_{{ api.naming.version }}_generated_{{ service.name }}_{{ method.name }}_async
+ {%- endif %}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+  {{ method.name.toCamelCase() }}(
+      options?: CallOptions,
+      callback?: Callback<
+        {{ util.toInterface(method.outputInterface) }},
+        {{ util.toInterface(method.inputInterface) }}|null|undefined,
+        {}|null|undefined>):
+    gax.CancellableStream;
+  {{ method.name.toCamelCase() }}(
+      callback?: Callback<
+        {{ util.toInterface(method.outputInterface) }},
+        {{ util.toInterface(method.inputInterface) }}|null|undefined,
+        {}|null|undefined>):
+    gax.CancellableStream;
+  {{ method.name.toCamelCase() }}(
+      optionsOrCallback?: CallOptions|Callback<
+        {{ util.toInterface(method.outputInterface) }},
+        {{ util.toInterface(method.inputInterface) }}|null|undefined,
+        {}|null|undefined>,
+      callback?: Callback<
+        {{ util.toInterface(method.outputInterface) }},
+        {{ util.toInterface(method.inputInterface) }}|null|undefined,
+        {}|null|undefined>):
+    gax.CancellableStream {
+    if (optionsOrCallback instanceof Function && callback === undefined) {
+        callback = optionsOrCallback;
+        optionsOrCallback = {};
+    }
+    const options = optionsOrCallback as CallOptions;
+    this.{{ id.get("initialize") }}().catch(err => {throw err});
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{method.name}}','{{method.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    this._log.info('{{ method.name.toCamelCase() }} stream %j', options);
+    return this.innerApiCalls.{{ method.name.toCamelCase(true) }}(null, options, callback);
+  }
+{%- endif %}
+{% endfor %}
+{%- for method in service.longRunning %}
+/**
+ {{- internalWarning(service, method, api) }}
+{{- util.printComments(method, service) }}
+ {%- if not api.handwrittenLayer %}
+ * @example <caption>include:samples/generated/{{api.naming.version}}/{{service.name.toSnakeCase()}}.{{method.name.toSnakeCase()}}.js</caption>
+ * region_tag:{{ api.hostName.split(".")[0] }}_{{ api.naming.version }}_generated_{{ service.name }}_{{ method.name }}_async
+ {%- endif %}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+  {{ method.name.toCamelCase() }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      options?: CallOptions):
+      Promise<[
+        LROperation<{{ util.toInterface(method.longRunningResponseType, method.inputType) }}, {{ util.toInterface(method.longRunningMetadataType, method.inputType) }}>,
+        {{ util.toInterface(method.outputInterface) }}|undefined, {}|undefined
+      ]>;
+  {{ method.name.toCamelCase() }}(
+      request: {{ util.toInterface(method.inputInterface) }},
+      options: CallOptions,
+      callback: Callback<
+          LROperation<{{ util.toInterface(method.longRunningResponseType, method.inputType) }}, {{ util.toInterface(method.longRunningMetadataType, method.inputType)  }}>,
+          {{ util.toInterface(method.outputInterface) }}|null|undefined,
+          {}|null|undefined>): void;
+  {{ method.name.toCamelCase() }}(
+      request: {{ util.toInterface(method.inputInterface) }},
+      callback: Callback<
+          LROperation<{{ util.toInterface(method.longRunningResponseType, method.inputType) }}, {{ util.toInterface(method.longRunningMetadataType, method.inputType)  }}>,
+          {{ util.toInterface(method.outputInterface) }}|null|undefined,
+          {}|null|undefined>): void;
+  {{ method.name.toCamelCase() }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<{{ util.toInterface(method.longRunningResponseType, method.inputType)}}, {{ util.toInterface(method.longRunningMetadataType, method.inputType)  }}>,
+          {{ util.toInterface(method.outputInterface) }}|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<{{ util.toInterface(method.longRunningResponseType, method.inputType) }}, {{ util.toInterface(method.longRunningMetadataType, method.inputType)  }}>,
+          {{ util.toInterface(method.outputInterface) }}|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<{{ util.toInterface(method.longRunningResponseType, method.inputType) }}, {{ util.toInterface(method.longRunningMetadataType, method.inputType)  }}>,
+        {{ util.toInterface(method.outputInterface) }}|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+{%- for field in method.autoPopulatedFields %}    
+    if (!request.{{ field.toCamelCase() }}) {
+      request.{{ field.toCamelCase() }} = gax.makeUUID();
+    } {%- endfor %}
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    {{ util.buildHeaderRequestParam(method) }}
+    this.{{ id.get("initialize") }}().catch(err => {throw err});
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{method.name}}','{{method.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    const wrappedCallback: Callback<
+          LROperation<{{ util.toInterface(method.longRunningResponseType, method.inputType)}}, {{ util.toInterface(method.longRunningMetadataType, method.inputType)  }}>,
+          {{ util.toInterface(method.outputInterface) }}|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('{{ method.name.toCamelCase() }} response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('{{ method.name.toCamelCase() }} request %j', request);
+    return this.innerApiCalls.{{ method.name.toCamelCase(true) }}(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<{{ util.toInterface(method.longRunningResponseType, method.inputType) }}, {{ util.toInterface(method.longRunningMetadataType, method.inputType)  }}>,
+      {{ util.toInterface(method.outputInterface) }}|undefined, {}|undefined
+    ]) => {
+      this._log.info('{{ method.name.toCamelCase() }} response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+{%- set decodeMethodName = id.get("check" + method.name.toPascalCase() + "Progress") -%}
+{{- util.printDecodeMethodComments(method, decodeMethodName) }}
+ {%- if not api.handwrittenLayer %}
+ * @example <caption>include:samples/generated/{{api.naming.version}}/{{service.name.toSnakeCase()}}.{{method.name.toSnakeCase()}}.js</caption>
+ * region_tag:{{ api.hostName.split(".")[0] }}_{{ api.naming.version }}_generated_{{ service.name }}_{{ method.name }}_async
+ {%- endif %}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+  async {{ decodeMethodName }}(name: string): Promise<LROperation<protos{{ method.longRunningResponseType }}, protos{{ method.longRunningMetadataType }}>>{
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{decodeMethodName}}','{{decodeMethodName}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    this._log.info('{{method.name.toCamelCase()}} long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.{{ method.name.toCamelCase() }}, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos{{ method.longRunningResponseType }}, protos{{ method.longRunningMetadataType }}>;
+  }
+{%- endfor %}
+{%- for method in service.paging %}
+{%- if not method.ignoreMapPagingMethod %}
+{%- if not method.pagingMapResponseType %}
+ /**
+ {{- internalWarning(service, method, api) }}
+{{- util.printComments(method, service, id.get(method.name.toCamelCase() + "Async")) }}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+  {{ method.name.toCamelCase() }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      options?: CallOptions):
+      Promise<[
+        {{ util.toInterface(method.pagingResponseType) }}[],
+        {{ util.toInterface(method.inputInterface) }}|null,
+        {{ util.toInterface(method.outputInterface) }}
+      ]>;
+  {{ method.name.toCamelCase() }}(
+      request: {{ util.toInterface(method.inputInterface) }},
+      options: CallOptions,
+      callback: PaginationCallback<
+          {{ util.toInterface(method.inputInterface) }},
+          {{ util.toInterface(method.outputInterface) }}|null|undefined,
+          {{ util.toInterface(method.pagingResponseType) }}>): void;
+  {{ method.name.toCamelCase() }}(
+      request: {{ util.toInterface(method.inputInterface) }},
+      callback: PaginationCallback<
+          {{ util.toInterface(method.inputInterface) }},
+          {{ util.toInterface(method.outputInterface) }}|null|undefined,
+          {{ util.toInterface(method.pagingResponseType) }}>): void;
+  {{ method.name.toCamelCase() }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          {{ util.toInterface(method.inputInterface) }},
+          {{ util.toInterface(method.outputInterface) }}|null|undefined,
+          {{ util.toInterface(method.pagingResponseType) }}>,
+      callback?: PaginationCallback<
+          {{ util.toInterface(method.inputInterface) }},
+          {{ util.toInterface(method.outputInterface) }}|null|undefined,
+          {{ util.toInterface(method.pagingResponseType) }}>):
+      Promise<[
+        {{ util.toInterface(method.pagingResponseType) }}[],
+        {{ util.toInterface(method.inputInterface) }}|null,
+        {{ util.toInterface(method.outputInterface) }}
+      ]>|void {
+    request = request || {};
+  {%- if method.maxResultsParameter %}
+    // Converts number to Unit32 or Int32 value for non-compliant APIs.
+    if(request.maxResults && typeof request.maxResults === "number"){
+      const maxResultsObject = {"value": request.maxResults}
+      request.maxResults = maxResultsObject
+    }
+
+  {%- endif %}
+
+{%- for field in method.autoPopulatedFields %}
+    if (!request.{{ field.toCamelCase() }}) {
+      request.{{ field.toCamelCase() }} = gax.makeUUID();
+    }
+
+    {%- endfor %}
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    {{ util.buildHeaderRequestParam(method) }}
+    this.{{ id.get("initialize") }}().catch(err => {throw err});
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{method.name}}','{{method.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    const wrappedCallback: PaginationCallback<
+      {{ util.toInterface(method.inputInterface) }},
+      {{ util.toInterface(method.outputInterface) }}|null|undefined,
+      {{ util.toInterface(method.pagingResponseType) }}>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('{{ method.name.toCamelCase() }} values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('{{ method.name.toCamelCase() }} request %j', request);
+    return this.innerApiCalls
+      .{{ method.name.toCamelCase(true) }}(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        {{ util.toInterface(method.pagingResponseType) }}[],
+        {{ util.toInterface(method.inputInterface) }}|null,
+        {{ util.toInterface(method.outputInterface) }}
+      ]) => {
+        this._log.info('{{ method.name.toCamelCase() }} values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+{{- util.printCommentsPageStream(method, id.get(method.name.toCamelCase() + "Async")) }}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+  {{ id.get(method.name.toCamelCase() + "Stream") }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+{%- for field in method.autoPopulatedFields %}    
+    if (!request.{{ field.toCamelCase() }}) {
+      request.{{ field.toCamelCase() }} = gax.makeUUID();
+    } {%- endfor %}
+    {{ util.buildHeaderRequestParam(method) }}
+    const defaultCallSettings = this._defaults['{{method.name.toCamelCase(true)}}'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.{{ id.get("initialize") }}().catch(err => {throw err});
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{method.name}}','{{method.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    this._log.info('{{ method.name.toCamelCase() }} stream %j', request);
+    return this.descriptors.page.{{ method.name.toCamelCase() }}.createStream(
+      this.innerApiCalls.{{ method.name.toCamelCase(true) }} as GaxCall,
+      request,
+      callSettings
+    );
+  }
+{%- endif %}
+
+/**
+{{- util.printCommentsPageAsync(method, id.get(method.name.toCamelCase() + "Async")) }}
+ {%- if not api.handwrittenLayer %}
+ * @example <caption>include:samples/generated/{{api.naming.version}}/{{service.name.toSnakeCase()}}.{{method.name.toSnakeCase()}}.js</caption>
+ * region_tag:{{ api.hostName.split(".")[0] }}_{{ api.naming.version }}_generated_{{ service.name }}_{{ method.name }}_async
+ {%- endif %}
+ {%- if method.options and method.options.deprecated %}
+ * @deprecated {{method.name}} is deprecated and may be removed in a future version.
+ {%- endif %}
+ */
+  {{ id.get(method.name.toCamelCase() + "Async") }}(
+      request?: {{ util.toInterface(method.inputInterface) }},
+      options?: CallOptions):
+    {%- if method.pagingMapResponseType %}
+    AsyncIterable<[string, {{ util.toInterface(method.pagingMapResponseType) }}]>{
+    {%- else %}
+    AsyncIterable<{{ util.toInterface(method.pagingResponseType) }}>{
+    {%- endif %}
+    request = request || {};
+{%- for field in method.autoPopulatedFields %}    
+    if (!request.{{ field.toCamelCase() }}) {
+      request.{{ field.toCamelCase() }} = gax.makeUUID();
+    } {%- endfor %}
+    {{ util.buildHeaderRequestParam(method) }}
+    const defaultCallSettings = this._defaults['{{method.name.toCamelCase(true)}}'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.{{ id.get("initialize") }}().catch(err => {throw err});
+    {%- if method.options and method.options.deprecated %}
+    this.warn('DEP${{service.name}}-${{method.name}}','{{method.name}} is deprecated and may be removed in a future version.', 'DeprecationWarning');
+    {%- endif %}
+    this._log.info('{{ method.name.toCamelCase() }} iterate %j', request);
+    return this.descriptors.page.{{ method.name.toCamelCase() }}.asyncIterate(
+      this.innerApiCalls['{{ method.name.toCamelCase(true) }}'] as GaxCall,
+      request as {},
+      callSettings
+    {%- if method.pagingMapResponseType %}
+    ) as AsyncIterable<[string, {{ util.toInterface(method.pagingMapResponseType) }}]>;
+    {%- else %}
+    ) as AsyncIterable<{{ util.toInterface(method.pagingResponseType) }}>;
+    {%- endif %}
+  }
+{%- endif %}
+{%- endfor %}
+{%- if service.IAMPolicyMixin > 0 %}
+{{ iam.iamServiceMethods()}}
+{% endif -%}
+{%- if service.LocationMixin > 0 %}
+{{ location.locationServiceMethods()}}
+{% endif -%}
+{%- if service.LongRunningOperationsMixin > 0 %}
+{{ operations.operationsServiceMethods()}}
+{% endif -%}
+{%- if service.pathTemplates.length > 0 %}
+  // --------------------
+  // -- Path templates --
+  // --------------------
+{%- for template in service.pathTemplates %}
+
+  /**
+   * Return a fully-qualified {{ template.name.toCamelCase() }} resource name string.
+   *
+{%- for param in template.params %}
+   * @param {string} {{ id.get(param) | replace(regExp, '{@link $2|$1}') }}
+{%- endfor %}
+   * @returns {string} Resource name string.
+   */
+  {{ id.get(template.name.toCamelCase() + "Path") }}(
+{%- set paramJoiner = joiner() %}
+{%- for param in template.params %}
+{{-paramJoiner()-}}{{ id.get(param.toCamelCase()) }}:string
+{%- endfor -%}
+  ) {
+    return this.pathTemplates.{{ template.name.toCamelCase() }}PathTemplate.render({
+{%- for param in template.params %}
+      {{ param }}: {{ id.get(param.toCamelCase()) }},
+{%- endfor %}
+    });
+  }
+{%- for param in template.params %}
+
+  /**
+   * Parse the {{ param }} from {{ template.name.toPascalCase() }} resource.
+   *
+   * @param {string} {{ template.name.toCamelCase() }}Name
+   *   A fully-qualified path representing {{ template.name }} resource.
+   * @returns {string} A string representing the {{ param }}.
+   */
+  {{ id.get("match" + param.toPascalCase() + "From" + template.name.toPascalCase() + "Name") }}({{ template.name.toCamelCase() }}Name: string) {
+    return this.pathTemplates.{{ template.name.toCamelCase() }}PathTemplate.match({{ template.name.toCamelCase() }}Name).{{ param }};
+  }
+{%- endfor %}
+{%- endfor %}
+{%- endif %}
+
+  /**
+   * Terminate the gRPC channel and close the client.
+   *
+   * The client will no longer be usable and all future behavior is undefined.
+   * @returns {Promise} A promise that resolves when the client is closed.
+   */
+  {{ id.get("close") }}(): Promise<void> {
+    if (this.{{ service.name.toCamelCase() }}Stub && !this._terminated) {
+      return this.{{ service.name.toCamelCase() }}Stub.then(stub => {
+        this._log.info('ending gRPC channel');
+        this._terminated = true;
+        stub.close();
+        {%- if service.IAMPolicyMixin > 0 %}
+        this.iamClient.close().catch(err => {throw err});
+        {%- endif %}
+        {%- if service.LocationMixin > 0 %}
+        this.locationsClient.close().catch(err => {throw err});
+        {%- endif %}
+        {%- if service.longRunning.length > 0 or service.LongRunningOperationsMixin > 0 %}
+        void this.operationsClient.close();
+        {%- endif %}
+      });
+    }
+    return Promise.resolve();
+  }
+}

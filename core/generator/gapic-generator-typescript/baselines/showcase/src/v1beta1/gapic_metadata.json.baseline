@@ -1,0 +1,591 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.showcase.v1beta1",
+  "libraryPackage": "showcase",
+  "services": {
+    "Compliance": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ComplianceClient",
+          "rpcs": {
+            "RepeatDataBody": {
+              "methods": [
+                "repeatDataBody"
+              ]
+            },
+            "RepeatDataBodyInfo": {
+              "methods": [
+                "repeatDataBodyInfo"
+              ]
+            },
+            "RepeatDataQuery": {
+              "methods": [
+                "repeatDataQuery"
+              ]
+            },
+            "RepeatDataSimplePath": {
+              "methods": [
+                "repeatDataSimplePath"
+              ]
+            },
+            "RepeatDataPathResource": {
+              "methods": [
+                "repeatDataPathResource"
+              ]
+            },
+            "RepeatDataPathTrailingResource": {
+              "methods": [
+                "repeatDataPathTrailingResource"
+              ]
+            },
+            "RepeatDataBodyPut": {
+              "methods": [
+                "repeatDataBodyPut"
+              ]
+            },
+            "RepeatDataBodyPatch": {
+              "methods": [
+                "repeatDataBodyPatch"
+              ]
+            },
+            "GetEnum": {
+              "methods": [
+                "getEnum"
+              ]
+            },
+            "VerifyEnum": {
+              "methods": [
+                "verifyEnum"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ComplianceClient",
+          "rpcs": {
+            "RepeatDataBody": {
+              "methods": [
+                "repeatDataBody"
+              ]
+            },
+            "RepeatDataBodyInfo": {
+              "methods": [
+                "repeatDataBodyInfo"
+              ]
+            },
+            "RepeatDataQuery": {
+              "methods": [
+                "repeatDataQuery"
+              ]
+            },
+            "RepeatDataSimplePath": {
+              "methods": [
+                "repeatDataSimplePath"
+              ]
+            },
+            "RepeatDataPathResource": {
+              "methods": [
+                "repeatDataPathResource"
+              ]
+            },
+            "RepeatDataPathTrailingResource": {
+              "methods": [
+                "repeatDataPathTrailingResource"
+              ]
+            },
+            "RepeatDataBodyPut": {
+              "methods": [
+                "repeatDataBodyPut"
+              ]
+            },
+            "RepeatDataBodyPatch": {
+              "methods": [
+                "repeatDataBodyPatch"
+              ]
+            },
+            "GetEnum": {
+              "methods": [
+                "getEnum"
+              ]
+            },
+            "VerifyEnum": {
+              "methods": [
+                "verifyEnum"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Echo": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "EchoClient",
+          "rpcs": {
+            "Echo": {
+              "methods": [
+                "echo"
+              ]
+            },
+            "EchoErrorDetails": {
+              "methods": [
+                "echoErrorDetails"
+              ]
+            },
+            "PagedExpandLegacy": {
+              "methods": [
+                "pagedExpandLegacy"
+              ]
+            },
+            "Block": {
+              "methods": [
+                "block"
+              ]
+            },
+            "Expand": {
+              "methods": [
+                "expand"
+              ]
+            },
+            "Collect": {
+              "methods": [
+                "collect"
+              ]
+            },
+            "Chat": {
+              "methods": [
+                "chat"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            },
+            "PagedExpand": {
+              "methods": [
+                "pagedExpand",
+                "pagedExpandStream",
+                "pagedExpandAsync"
+              ]
+            },
+            "PagedExpandLegacyMapped": {
+              "methods": [
+                "pagedExpandLegacyMapped",
+                "pagedExpandLegacyMappedStream",
+                "pagedExpandLegacyMappedAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "EchoClient",
+          "rpcs": {
+            "Echo": {
+              "methods": [
+                "echo"
+              ]
+            },
+            "EchoErrorDetails": {
+              "methods": [
+                "echoErrorDetails"
+              ]
+            },
+            "PagedExpandLegacy": {
+              "methods": [
+                "pagedExpandLegacy"
+              ]
+            },
+            "Block": {
+              "methods": [
+                "block"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            },
+            "PagedExpand": {
+              "methods": [
+                "pagedExpand",
+                "pagedExpandStream",
+                "pagedExpandAsync"
+              ]
+            },
+            "PagedExpandLegacyMapped": {
+              "methods": [
+                "pagedExpandLegacyMapped",
+                "pagedExpandLegacyMappedStream",
+                "pagedExpandLegacyMappedAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Identity": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IdentityClient",
+          "rpcs": {
+            "CreateUser": {
+              "methods": [
+                "createUser"
+              ]
+            },
+            "GetUser": {
+              "methods": [
+                "getUser"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "updateUser"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IdentityClient",
+          "rpcs": {
+            "CreateUser": {
+              "methods": [
+                "createUser"
+              ]
+            },
+            "GetUser": {
+              "methods": [
+                "getUser"
+              ]
+            },
+            "UpdateUser": {
+              "methods": [
+                "updateUser"
+              ]
+            },
+            "DeleteUser": {
+              "methods": [
+                "deleteUser"
+              ]
+            },
+            "ListUsers": {
+              "methods": [
+                "listUsers",
+                "listUsersStream",
+                "listUsersAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Messaging": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MessagingClient",
+          "rpcs": {
+            "CreateRoom": {
+              "methods": [
+                "createRoom"
+              ]
+            },
+            "GetRoom": {
+              "methods": [
+                "getRoom"
+              ]
+            },
+            "UpdateRoom": {
+              "methods": [
+                "updateRoom"
+              ]
+            },
+            "DeleteRoom": {
+              "methods": [
+                "deleteRoom"
+              ]
+            },
+            "CreateBlurb": {
+              "methods": [
+                "createBlurb"
+              ]
+            },
+            "GetBlurb": {
+              "methods": [
+                "getBlurb"
+              ]
+            },
+            "UpdateBlurb": {
+              "methods": [
+                "updateBlurb"
+              ]
+            },
+            "DeleteBlurb": {
+              "methods": [
+                "deleteBlurb"
+              ]
+            },
+            "StreamBlurbs": {
+              "methods": [
+                "streamBlurbs"
+              ]
+            },
+            "SendBlurbs": {
+              "methods": [
+                "sendBlurbs"
+              ]
+            },
+            "Connect": {
+              "methods": [
+                "connect"
+              ]
+            },
+            "SearchBlurbs": {
+              "methods": [
+                "searchBlurbs"
+              ]
+            },
+            "ListRooms": {
+              "methods": [
+                "listRooms",
+                "listRoomsStream",
+                "listRoomsAsync"
+              ]
+            },
+            "ListBlurbs": {
+              "methods": [
+                "listBlurbs",
+                "listBlurbsStream",
+                "listBlurbsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MessagingClient",
+          "rpcs": {
+            "CreateRoom": {
+              "methods": [
+                "createRoom"
+              ]
+            },
+            "GetRoom": {
+              "methods": [
+                "getRoom"
+              ]
+            },
+            "UpdateRoom": {
+              "methods": [
+                "updateRoom"
+              ]
+            },
+            "DeleteRoom": {
+              "methods": [
+                "deleteRoom"
+              ]
+            },
+            "CreateBlurb": {
+              "methods": [
+                "createBlurb"
+              ]
+            },
+            "GetBlurb": {
+              "methods": [
+                "getBlurb"
+              ]
+            },
+            "UpdateBlurb": {
+              "methods": [
+                "updateBlurb"
+              ]
+            },
+            "DeleteBlurb": {
+              "methods": [
+                "deleteBlurb"
+              ]
+            },
+            "SearchBlurbs": {
+              "methods": [
+                "searchBlurbs"
+              ]
+            },
+            "ListRooms": {
+              "methods": [
+                "listRooms",
+                "listRoomsStream",
+                "listRoomsAsync"
+              ]
+            },
+            "ListBlurbs": {
+              "methods": [
+                "listBlurbs",
+                "listBlurbsStream",
+                "listBlurbsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SequenceService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SequenceServiceClient",
+          "rpcs": {
+            "CreateSequence": {
+              "methods": [
+                "createSequence"
+              ]
+            },
+            "GetSequenceReport": {
+              "methods": [
+                "getSequenceReport"
+              ]
+            },
+            "AttemptSequence": {
+              "methods": [
+                "attemptSequence"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SequenceServiceClient",
+          "rpcs": {
+            "CreateSequence": {
+              "methods": [
+                "createSequence"
+              ]
+            },
+            "GetSequenceReport": {
+              "methods": [
+                "getSequenceReport"
+              ]
+            },
+            "AttemptSequence": {
+              "methods": [
+                "attemptSequence"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Testing": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TestingClient",
+          "rpcs": {
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ReportSession": {
+              "methods": [
+                "reportSession"
+              ]
+            },
+            "DeleteTest": {
+              "methods": [
+                "deleteTest"
+              ]
+            },
+            "VerifyTest": {
+              "methods": [
+                "verifyTest"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            },
+            "ListTests": {
+              "methods": [
+                "listTests",
+                "listTestsStream",
+                "listTestsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TestingClient",
+          "rpcs": {
+            "CreateSession": {
+              "methods": [
+                "createSession"
+              ]
+            },
+            "GetSession": {
+              "methods": [
+                "getSession"
+              ]
+            },
+            "DeleteSession": {
+              "methods": [
+                "deleteSession"
+              ]
+            },
+            "ReportSession": {
+              "methods": [
+                "reportSession"
+              ]
+            },
+            "DeleteTest": {
+              "methods": [
+                "deleteTest"
+              ]
+            },
+            "VerifyTest": {
+              "methods": [
+                "verifyTest"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "listSessions",
+                "listSessionsStream",
+                "listSessionsAsync"
+              ]
+            },
+            "ListTests": {
+              "methods": [
+                "listTests",
+                "listTestsStream",
+                "listTestsAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

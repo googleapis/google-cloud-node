@@ -1,0 +1,36 @@
+{#-
+
+Copyright 2021 Google LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+-#}
+
+{#-
+  initialize() macro should be called in the very beginning of
+  the template that wants to use the namer. It builds a local
+  dictionary of the names that are used by the given service
+  to prevent duplication (e.g. if the service has an RPC called
+  "FooAsync" and a paginated RPC called "Foo", the async iterator
+  implementation of the latter will conflict with the former;
+  initialize() will add "Foo" and "FooAsync" to the dictionary
+  and the conflicting "FooAsync" will become "FooAsync1".
+-#}
+
+{%- macro initialize(id, service) -%}
+{#- All method names from the given service are reserved -#}
+{%- for method in service.method -%}
+  {{- id.register(method.name.toCamelCase()) -}}
+{%- endfor -%}
+{{ id.register('function') }}
+{%- endmacro -%}
