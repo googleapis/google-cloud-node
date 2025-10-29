@@ -18328,6 +18328,8 @@
                      * @property {number} POSTGRES_14=110 POSTGRES_14 value
                      * @property {number} POSTGRES_15=172 POSTGRES_15 value
                      * @property {number} POSTGRES_16=272 POSTGRES_16 value
+                     * @property {number} POSTGRES_17=408 POSTGRES_17 value
+                     * @property {number} POSTGRES_18=557 POSTGRES_18 value
                      * @property {number} MYSQL_8_0=20 MYSQL_8_0 value
                      * @property {number} MYSQL_8_0_18=41 MYSQL_8_0_18 value
                      * @property {number} MYSQL_8_0_26=85 MYSQL_8_0_26 value
@@ -18375,6 +18377,8 @@
                         values[valuesById[110] = "POSTGRES_14"] = 110;
                         values[valuesById[172] = "POSTGRES_15"] = 172;
                         values[valuesById[272] = "POSTGRES_16"] = 272;
+                        values[valuesById[408] = "POSTGRES_17"] = 408;
+                        values[valuesById[557] = "POSTGRES_18"] = 557;
                         values[valuesById[20] = "MYSQL_8_0"] = 20;
                         values[valuesById[41] = "MYSQL_8_0_18"] = 41;
                         values[valuesById[85] = "MYSQL_8_0_26"] = 85;
@@ -19468,6 +19472,8 @@
                                 case 110:
                                 case 172:
                                 case 272:
+                                case 408:
+                                case 557:
                                 case 20:
                                 case 41:
                                 case 85:
@@ -19630,6 +19636,14 @@
                             case "POSTGRES_16":
                             case 272:
                                 message.databaseVersion = 272;
+                                break;
+                            case "POSTGRES_17":
+                            case 408:
+                                message.databaseVersion = 408;
+                                break;
+                            case "POSTGRES_18":
+                            case 557:
+                                message.databaseVersion = 557;
                                 break;
                             case "MYSQL_8_0":
                             case 20:
@@ -23074,6 +23088,8 @@
                                     case 110:
                                     case 172:
                                     case 272:
+                                    case 408:
+                                    case 557:
                                     case 20:
                                     case 41:
                                     case 85:
@@ -23276,6 +23292,14 @@
                                     case "POSTGRES_16":
                                     case 272:
                                         message.appliesTo[i] = 272;
+                                        break;
+                                    case "POSTGRES_17":
+                                    case 408:
+                                        message.appliesTo[i] = 408;
+                                        break;
+                                    case "POSTGRES_18":
+                                    case 557:
+                                        message.appliesTo[i] = 557;
                                         break;
                                     case "MYSQL_8_0":
                                     case 20:
@@ -38980,6 +39004,8 @@
                                 case 110:
                                 case 172:
                                 case 272:
+                                case 408:
+                                case 557:
                                 case 20:
                                 case 41:
                                 case 85:
@@ -39374,6 +39400,14 @@
                             case "POSTGRES_16":
                             case 272:
                                 message.databaseVersion = 272;
+                                break;
+                            case "POSTGRES_17":
+                            case 408:
+                                message.databaseVersion = 408;
+                                break;
+                            case "POSTGRES_18":
+                            case 557:
+                                message.databaseVersion = 557;
                                 break;
                             case "MYSQL_8_0":
                             case 20:
@@ -74930,6 +74964,8 @@
                                 case 110:
                                 case 172:
                                 case 272:
+                                case 408:
+                                case 557:
                                 case 20:
                                 case 41:
                                 case 85:
@@ -75314,6 +75350,14 @@
                             case "POSTGRES_16":
                             case 272:
                                 message.databaseVersion = 272;
+                                break;
+                            case "POSTGRES_17":
+                            case 408:
+                                message.databaseVersion = 408;
+                                break;
+                            case "POSTGRES_18":
+                            case 557:
+                                message.databaseVersion = 557;
                                 break;
                             case "MYSQL_8_0":
                             case 20:
@@ -81266,6 +81310,8 @@
                                     case 110:
                                     case 172:
                                     case 272:
+                                    case 408:
+                                    case 557:
                                     case 20:
                                     case 41:
                                     case 85:
@@ -81468,6 +81514,14 @@
                                     case "POSTGRES_16":
                                     case 272:
                                         message.appliesTo[i] = 272;
+                                        break;
+                                    case "POSTGRES_17":
+                                    case 408:
+                                        message.appliesTo[i] = 408;
+                                        break;
+                                    case "POSTGRES_18":
+                                    case 557:
+                                        message.appliesTo[i] = 557;
                                         break;
                                     case "MYSQL_8_0":
                                     case 20:
@@ -99197,6 +99251,8 @@
                      * @property {number} POSTGRES_14=110 POSTGRES_14 value
                      * @property {number} POSTGRES_15=172 POSTGRES_15 value
                      * @property {number} POSTGRES_16=272 POSTGRES_16 value
+                     * @property {number} POSTGRES_17=408 POSTGRES_17 value
+                     * @property {number} POSTGRES_18=557 POSTGRES_18 value
                      * @property {number} MYSQL_8_0=20 MYSQL_8_0 value
                      * @property {number} MYSQL_8_0_18=41 MYSQL_8_0_18 value
                      * @property {number} MYSQL_8_0_26=85 MYSQL_8_0_26 value
@@ -99244,6 +99300,8 @@
                         values[valuesById[110] = "POSTGRES_14"] = 110;
                         values[valuesById[172] = "POSTGRES_15"] = 172;
                         values[valuesById[272] = "POSTGRES_16"] = 272;
+                        values[valuesById[408] = "POSTGRES_17"] = 408;
+                        values[valuesById[557] = "POSTGRES_18"] = 557;
                         values[valuesById[20] = "MYSQL_8_0"] = 20;
                         values[valuesById[41] = "MYSQL_8_0_18"] = 41;
                         values[valuesById[85] = "MYSQL_8_0_26"] = 85;
@@ -100368,6 +100426,8 @@
                                 case 110:
                                 case 172:
                                 case 272:
+                                case 408:
+                                case 557:
                                 case 20:
                                 case 41:
                                 case 85:
@@ -100521,6 +100581,14 @@
                             case "POSTGRES_16":
                             case 272:
                                 message.databaseVersion = 272;
+                                break;
+                            case "POSTGRES_17":
+                            case 408:
+                                message.databaseVersion = 408;
+                                break;
+                            case "POSTGRES_18":
+                            case 557:
+                                message.databaseVersion = 557;
                                 break;
                             case "MYSQL_8_0":
                             case 20:
