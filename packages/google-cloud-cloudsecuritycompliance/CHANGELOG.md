@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/googleapis/google-cloud-node/compare/cloudsecuritycompliance-v0.1.1...cloudsecuritycompliance-v0.2.0) (2025-10-29)
+
+
+### Features
+
+* [cloudsecuritycompliance] add Audit API surface ([#6852](https://github.com/googleapis/google-cloud-node/issues/6852)) ([704574f](https://github.com/googleapis/google-cloud-node/commit/704574fd5a774a5444938ae1c7229bb7a2d4563e))
+
 ## [0.1.1](https://github.com/googleapis/google-cloud-node/compare/cloudsecuritycompliance-v0.1.0...cloudsecuritycompliance-v0.1.1) (2025-10-13)
 
 

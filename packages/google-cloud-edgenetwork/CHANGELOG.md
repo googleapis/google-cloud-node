@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.10.1...edgenetwork-v0.11.0) (2025-10-29)
+
+
+### Features
+
+* [edgenetwork] A new field `remote_peering_network_type` is added to message `google.cloud.edgenetwork.v1.Interconnect` ([#6851](https://github.com/googleapis/google-cloud-node/issues/6851)) ([d904acc](https://github.com/googleapis/google-cloud-node/commit/d904acc7ba1474e5acc9cb8ad4a38033e57f927e))
+
 ## [0.10.1](https://github.com/googleapis/google-cloud-node/compare/edgenetwork-v0.10.0...edgenetwork-v0.10.1) (2025-10-13)
 
 

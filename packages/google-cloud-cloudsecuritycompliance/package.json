@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/cloudsecuritycompliance",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Cloud Security Compliance API client for Node.js",
   "repository": {
     "type": "git",

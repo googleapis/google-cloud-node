@@ -5,6 +5,65 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "c1bfaf1f5b0b3dc1c9abbcd06ca4583e2e9b92c3",
+          "message": "Add initial files for google.cloud.geminidataanalytics.v1beta",
+          "issues": [
+            "6839"
+          ]
+        },
+        {
+          "type": "fix",
+          "sha": "41c2ff2851b5fdadabf4f9bd3500167c34b32ff7",
+          "message": "[gkeconnect-gateway] remove unused GatewayServiceClient",
+          "issues": [
+            "6775"
+          ]
+        }
+      ],
+      "version": "0.1.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/geminidataanalytics",
+      "id": "71695e47-01c0-4fd6-879c-1ddf07f2a885",
+      "createTime": "2025-10-29T18:52:27.981Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "704574fd5a774a5444938ae1c7229bb7a2d4563e",
+          "message": "[cloudsecuritycompliance] add Audit API surface",
+          "issues": [
+            "6852"
+          ]
+        }
+      ],
+      "version": "0.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/cloudsecuritycompliance",
+      "id": "b2360679-1bd7-4216-9243-89f1f3b0dbdb",
+      "createTime": "2025-10-29T18:52:27.904Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "d904acc7ba1474e5acc9cb8ad4a38033e57f927e",
+          "message": "[edgenetwork] A new field `remote_peering_network_type` is added to message `google.cloud.edgenetwork.v1.Interconnect`",
+          "issues": [
+            "6851"
+          ]
+        }
+      ],
+      "version": "0.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/edgenetwork",
+      "id": "5757c07c-f80b-476d-9fa6-b31f7ab254dc",
+      "createTime": "2025-10-29T18:52:27.846Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "84654a5c0cc56d940b96a85b0e439dc6ac140699",
           "message": "[chat] add ROLE_ASSISTANT_MANAGER to the MembershipRole enum in the Membership proto and assistant_managers_allowed to the PermissionSetting",
           "issues": [
@@ -66649,5 +66708,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-10-25T03:59:34.796Z"
+  "updateTime": "2025-10-29T18:52:27.981Z"
 }
