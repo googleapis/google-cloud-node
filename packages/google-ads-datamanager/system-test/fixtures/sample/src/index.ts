@@ -16,7 +16,7 @@
 // ** https://github.com/googleapis/gapic-generator-typescript **
 // ** All changes to this file may be overwritten. **
 
-import {IngestionServiceClient} from '@google-cloud/datamanager';
+import {IngestionServiceClient} from '@google-ads/datamanager';
 
 // check that the client class type name can be used
 function doStuffWithIngestionServiceClient(client: IngestionServiceClient) {

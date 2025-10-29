@@ -43,7 +43,7 @@ module.exports = {
     copyright: 'Copyright 2025 Google LLC',
     includeDate: false,
     sourceFiles: false,
-    systemName: '@google-cloud/datamanager',
+    systemName: '@google-ads/datamanager',
     theme: 'lumen',
     default: {
       outputSourceFiles: false

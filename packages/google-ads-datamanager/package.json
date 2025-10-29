@@ -1,5 +1,5 @@
 {
-  "name": "@google-cloud/datamanager",
+  "name": "@google-ads/datamanager",
   "version": "0.0.0",
   "description": "Data Manager API client for Node.js",
   "repository": {

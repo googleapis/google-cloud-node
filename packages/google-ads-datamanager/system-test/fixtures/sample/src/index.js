@@ -18,7 +18,7 @@
 
 
 /* eslint-disable node/no-missing-require, no-unused-vars */
-const datamanager = require('@google-cloud/datamanager');
+const datamanager = require('@google-ads/datamanager');
 
 function main() {
   const ingestionServiceClient = new datamanager.IngestionServiceClient();
