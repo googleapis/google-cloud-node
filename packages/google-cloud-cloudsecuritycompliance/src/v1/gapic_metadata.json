@@ -300,6 +300,82 @@
           }
         }
       }
+    },
+    "Monitoring": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MonitoringClient",
+          "rpcs": {
+            "FetchFrameworkComplianceReport": {
+              "methods": [
+                "fetchFrameworkComplianceReport"
+              ]
+            },
+            "AggregateFrameworkComplianceReport": {
+              "methods": [
+                "aggregateFrameworkComplianceReport"
+              ]
+            },
+            "ListFrameworkComplianceSummaries": {
+              "methods": [
+                "listFrameworkComplianceSummaries",
+                "listFrameworkComplianceSummariesStream",
+                "listFrameworkComplianceSummariesAsync"
+              ]
+            },
+            "ListFindingSummaries": {
+              "methods": [
+                "listFindingSummaries",
+                "listFindingSummariesStream",
+                "listFindingSummariesAsync"
+              ]
+            },
+            "ListControlComplianceSummaries": {
+              "methods": [
+                "listControlComplianceSummaries",
+                "listControlComplianceSummariesStream",
+                "listControlComplianceSummariesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MonitoringClient",
+          "rpcs": {
+            "FetchFrameworkComplianceReport": {
+              "methods": [
+                "fetchFrameworkComplianceReport"
+              ]
+            },
+            "AggregateFrameworkComplianceReport": {
+              "methods": [
+                "aggregateFrameworkComplianceReport"
+              ]
+            },
+            "ListFrameworkComplianceSummaries": {
+              "methods": [
+                "listFrameworkComplianceSummaries",
+                "listFrameworkComplianceSummariesStream",
+                "listFrameworkComplianceSummariesAsync"
+              ]
+            },
+            "ListFindingSummaries": {
+              "methods": [
+                "listFindingSummaries",
+                "listFindingSummariesStream",
+                "listFindingSummariesAsync"
+              ]
+            },
+            "ListControlComplianceSummaries": {
+              "methods": [
+                "listControlComplianceSummaries",
+                "listControlComplianceSummariesStream",
+                "listControlComplianceSummariesAsync"
+              ]
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -25,6 +25,7 @@ function main() {
   const cmEnrollmentServiceClient = new cloudsecuritycompliance.CmEnrollmentServiceClient();
   const configClient = new cloudsecuritycompliance.ConfigClient();
   const deploymentClient = new cloudsecuritycompliance.DeploymentClient();
+  const monitoringClient = new cloudsecuritycompliance.MonitoringClient();
 }
 
 main();

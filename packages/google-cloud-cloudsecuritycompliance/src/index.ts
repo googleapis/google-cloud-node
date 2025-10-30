@@ -26,8 +26,10 @@ const ConfigClient = v1.ConfigClient;
 type ConfigClient = v1.ConfigClient;
 const DeploymentClient = v1.DeploymentClient;
 type DeploymentClient = v1.DeploymentClient;
+const MonitoringClient = v1.MonitoringClient;
+type MonitoringClient = v1.MonitoringClient;
 
-export {v1, AuditClient, CmEnrollmentServiceClient, ConfigClient, DeploymentClient};
-export default {v1, AuditClient, CmEnrollmentServiceClient, ConfigClient, DeploymentClient};
+export {v1, AuditClient, CmEnrollmentServiceClient, ConfigClient, DeploymentClient, MonitoringClient};
+export default {v1, AuditClient, CmEnrollmentServiceClient, ConfigClient, DeploymentClient, MonitoringClient};
 import * as protos from '../protos/protos';
 export {protos};
