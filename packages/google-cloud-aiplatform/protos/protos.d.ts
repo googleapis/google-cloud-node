@@ -310723,9 +310723,6 @@ export namespace google {
                     /** EventActions artifactDelta */
                     artifactDelta?: ({ [k: string]: number }|null);
 
-                    /** EventActions transferToAgent */
-                    transferToAgent?: (boolean|null);
-
                     /** EventActions escalate */
                     escalate?: (boolean|null);
 
@@ -310753,9 +310750,6 @@ export namespace google {
 
                     /** EventActions artifactDelta. */
                     public artifactDelta: { [k: string]: number };
-
-                    /** EventActions transferToAgent. */
-                    public transferToAgent: boolean;
 
                     /** EventActions escalate. */
                     public escalate: boolean;

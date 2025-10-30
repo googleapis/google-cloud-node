@@ -82615,13 +82615,6 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "transferToAgent": {
-                          "type": "bool",
-                          "id": 5,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
                         "escalate": {
                           "type": "bool",
                           "id": 6,
