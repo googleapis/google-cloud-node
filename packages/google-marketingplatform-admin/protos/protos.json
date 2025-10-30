@@ -43,6 +43,36 @@
                             }
                           ]
                         },
+                        "ListOrganizations": {
+                          "requestType": "ListOrganizationsRequest",
+                          "responseType": "ListOrganizationsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1alpha/organizations"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1alpha/organizations"
+                              }
+                            }
+                          ]
+                        },
+                        "FindSalesPartnerManagedClients": {
+                          "requestType": "FindSalesPartnerManagedClientsRequest",
+                          "responseType": "FindSalesPartnerManagedClientsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{organization=organizations/*}:findSalesPartnerManagedClients",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{organization=organizations/*}:findSalesPartnerManagedClients",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
                         "ListAnalyticsAccountLinks": {
                           "requestType": "ListAnalyticsAccountLinksRequest",
                           "responseType": "ListAnalyticsAccountLinksResponse",
@@ -118,14 +148,27 @@
                               "(google.api.method_signature)": "analytics_account_link"
                             }
                           ]
+                        },
+                        "ReportPropertyUsage": {
+                          "requestType": "ReportPropertyUsageRequest",
+                          "responseType": "ReportPropertyUsageResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1alpha/{organization=organizations/*}:reportPropertyUsage",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "organization"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1alpha/{organization=organizations/*}:reportPropertyUsage",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "organization"
+                            }
+                          ]
                         }
-                      }
-                    },
-                    "AnalyticsServiceLevel": {
-                      "values": {
-                        "ANALYTICS_SERVICE_LEVEL_UNSPECIFIED": 0,
-                        "ANALYTICS_SERVICE_LEVEL_STANDARD": 1,
-                        "ANALYTICS_SERVICE_LEVEL_360": 2
                       }
                     },
                     "GetOrganizationRequest": {
@@ -136,6 +179,83 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "marketingplatformadmin.googleapis.com/Organization"
+                          }
+                        }
+                      }
+                    },
+                    "ListOrganizationsRequest": {
+                      "fields": {
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListOrganizationsResponse": {
+                      "fields": {
+                        "organizations": {
+                          "rule": "repeated",
+                          "type": "Organization",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "FindSalesPartnerManagedClientsRequest": {
+                      "fields": {
+                        "organization": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "marketingplatformadmin.googleapis.com/Organization"
+                          }
+                        },
+                        "isActive": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "FindSalesPartnerManagedClientsResponse": {
+                      "fields": {
+                        "clientData": {
+                          "rule": "repeated",
+                          "type": "ClientData",
+                          "id": 1
+                        }
+                      },
+                      "nested": {
+                        "ClientData": {
+                          "fields": {
+                            "organization": {
+                              "type": "Organization",
+                              "id": 1
+                            },
+                            "startDate": {
+                              "type": "google.type.Date",
+                              "id": 2
+                            },
+                            "endDate": {
+                              "type": "google.type.Date",
+                              "id": 3
+                            }
                           }
                         }
                       }
@@ -239,11 +359,111 @@
                     "SetPropertyServiceLevelResponse": {
                       "fields": {}
                     },
+                    "ReportPropertyUsageRequest": {
+                      "fields": {
+                        "organization": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "month": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ReportPropertyUsageResponse": {
+                      "fields": {
+                        "propertyUsages": {
+                          "rule": "repeated",
+                          "type": "PropertyUsage",
+                          "id": 1
+                        },
+                        "billInfo": {
+                          "type": "BillInfo",
+                          "id": 2
+                        }
+                      },
+                      "nested": {
+                        "PropertyUsage": {
+                          "fields": {
+                            "property": {
+                              "type": "string",
+                              "id": 1
+                            },
+                            "displayName": {
+                              "type": "string",
+                              "id": 2
+                            },
+                            "accountId": {
+                              "type": "int64",
+                              "id": 3
+                            },
+                            "serviceLevel": {
+                              "type": "AnalyticsServiceLevel",
+                              "id": 4
+                            },
+                            "propertyType": {
+                              "type": "AnalyticsPropertyType",
+                              "id": 5
+                            },
+                            "totalEventCount": {
+                              "type": "int64",
+                              "id": 6
+                            },
+                            "billableEventCount": {
+                              "type": "int64",
+                              "id": 7
+                            }
+                          }
+                        },
+                        "BillInfo": {
+                          "fields": {
+                            "baseFee": {
+                              "type": "google.type.Money",
+                              "id": 1
+                            },
+                            "eventFee": {
+                              "type": "google.type.Money",
+                              "id": 2
+                            },
+                            "priceProtectionCredit": {
+                              "type": "google.type.Money",
+                              "id": 3
+                            },
+                            "total": {
+                              "type": "google.type.Money",
+                              "id": 4
+                            }
+                          }
+                        }
+                      }
+                    },
                     "LinkVerificationState": {
                       "values": {
                         "LINK_VERIFICATION_STATE_UNSPECIFIED": 0,
                         "LINK_VERIFICATION_STATE_VERIFIED": 1,
                         "LINK_VERIFICATION_STATE_NOT_VERIFIED": 2
+                      }
+                    },
+                    "AnalyticsServiceLevel": {
+                      "values": {
+                        "ANALYTICS_SERVICE_LEVEL_UNSPECIFIED": 0,
+                        "ANALYTICS_SERVICE_LEVEL_STANDARD": 1,
+                        "ANALYTICS_SERVICE_LEVEL_360": 2
+                      }
+                    },
+                    "AnalyticsPropertyType": {
+                      "values": {
+                        "ANALYTICS_PROPERTY_TYPE_UNSPECIFIED": 0,
+                        "ANALYTICS_PROPERTY_TYPE_ORDINARY": 1,
+                        "ANALYTICS_PROPERTY_TYPE_SUBPROPERTY": 2,
+                        "ANALYTICS_PROPERTY_TYPE_ROLLUP": 3
                       }
                     },
                     "Organization": {
@@ -2139,6 +2359,50 @@
             },
             "Empty": {
               "fields": {}
+            }
+          }
+        },
+        "type": {
+          "options": {
+            "cc_enable_arenas": true,
+            "go_package": "google.golang.org/genproto/googleapis/type/money;money",
+            "java_multiple_files": true,
+            "java_outer_classname": "MoneyProto",
+            "java_package": "com.google.type",
+            "objc_class_prefix": "GTP"
+          },
+          "nested": {
+            "Date": {
+              "fields": {
+                "year": {
+                  "type": "int32",
+                  "id": 1
+                },
+                "month": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "day": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
+            },
+            "Money": {
+              "fields": {
+                "currencyCode": {
+                  "type": "string",
+                  "id": 1
+                },
+                "units": {
+                  "type": "int64",
+                  "id": 2
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 3
+                }
+              }
             }
           }
         }
