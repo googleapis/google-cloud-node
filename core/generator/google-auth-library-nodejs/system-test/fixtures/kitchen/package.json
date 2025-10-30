@@ -1,0 +1,28 @@
+{
+  "name": "google-auth-library-nodejs-fixture",
+  "version": "1.0.0",
+  "description": "An app we're using to test the library. ",
+  "scripts": {
+    "check": "gts check",
+    "clean": "gts clean",
+    "compile": "tsc -p .",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run check",
+    "start": "node build/src/index.js"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "google-auth-library": "file:./google-auth-library.tgz"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.0.0",
+    "gts": "^6.0.0",
+    "null-loader": "^4.0.0",
+    "ts-loader": "^8.0.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^4.0.0"
+  }
+}
