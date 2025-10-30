@@ -17,8 +17,8 @@ const path = require('path');
 module.exports = {
   entry: './src/index.ts',
   output: {
-    library: 'ReachabilityService',
-    filename: './reachability-service.js',
+    library: 'OrganizationVpcFlowLogsService',
+    filename: './organization-vpc-flow-logs-service.js',
   },
   node: {
     child_process: 'empty',

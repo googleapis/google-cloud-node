@@ -1093,6 +1093,496 @@ describe('v1.VpcFlowLogsServiceClient', () => {
             );
         });
     });
+
+    describe('queryOrgVpcFlowLogsConfigs', () => {
+        it('invokes queryOrgVpcFlowLogsConfigs without error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+            ];
+            client.innerApiCalls.queryOrgVpcFlowLogsConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.queryOrgVpcFlowLogsConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.queryOrgVpcFlowLogsConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryOrgVpcFlowLogsConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes queryOrgVpcFlowLogsConfigs without error using callback', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+            ];
+            client.innerApiCalls.queryOrgVpcFlowLogsConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.queryOrgVpcFlowLogsConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.queryOrgVpcFlowLogsConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryOrgVpcFlowLogsConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes queryOrgVpcFlowLogsConfigs with error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.queryOrgVpcFlowLogsConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.queryOrgVpcFlowLogsConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.queryOrgVpcFlowLogsConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.queryOrgVpcFlowLogsConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes queryOrgVpcFlowLogsConfigsStream without error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+            ];
+            client.descriptors.page.queryOrgVpcFlowLogsConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.queryOrgVpcFlowLogsConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.queryOrgVpcFlowLogsConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.queryOrgVpcFlowLogsConfigs, request));
+            assert(
+                (client.descriptors.page.queryOrgVpcFlowLogsConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes queryOrgVpcFlowLogsConfigsStream with error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.queryOrgVpcFlowLogsConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.queryOrgVpcFlowLogsConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.queryOrgVpcFlowLogsConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.queryOrgVpcFlowLogsConfigs, request));
+            assert(
+                (client.descriptors.page.queryOrgVpcFlowLogsConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with queryOrgVpcFlowLogsConfigs without error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.VpcFlowLogsConfig()),
+            ];
+            client.descriptors.page.queryOrgVpcFlowLogsConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[] = [];
+            const iterable = client.queryOrgVpcFlowLogsConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.queryOrgVpcFlowLogsConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.queryOrgVpcFlowLogsConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with queryOrgVpcFlowLogsConfigs with error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.QueryOrgVpcFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.queryOrgVpcFlowLogsConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.queryOrgVpcFlowLogsConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networkmanagement.v1.IVpcFlowLogsConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.queryOrgVpcFlowLogsConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.queryOrgVpcFlowLogsConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('showEffectiveFlowLogsConfigs', () => {
+        it('invokes showEffectiveFlowLogsConfigs without error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+            ];
+            client.innerApiCalls.showEffectiveFlowLogsConfigs = stubSimpleCall(expectedResponse);
+            const [response] = await client.showEffectiveFlowLogsConfigs(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.showEffectiveFlowLogsConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.showEffectiveFlowLogsConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes showEffectiveFlowLogsConfigs without error using callback', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+            ];
+            client.innerApiCalls.showEffectiveFlowLogsConfigs = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.showEffectiveFlowLogsConfigs(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.showEffectiveFlowLogsConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.showEffectiveFlowLogsConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes showEffectiveFlowLogsConfigs with error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.showEffectiveFlowLogsConfigs = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.showEffectiveFlowLogsConfigs(request), expectedError);
+            const actualRequest = (client.innerApiCalls.showEffectiveFlowLogsConfigs as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.showEffectiveFlowLogsConfigs as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes showEffectiveFlowLogsConfigsStream without error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+            ];
+            client.descriptors.page.showEffectiveFlowLogsConfigs.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.showEffectiveFlowLogsConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.showEffectiveFlowLogsConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.showEffectiveFlowLogsConfigs, request));
+            assert(
+                (client.descriptors.page.showEffectiveFlowLogsConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes showEffectiveFlowLogsConfigsStream with error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.showEffectiveFlowLogsConfigs.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.showEffectiveFlowLogsConfigsStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig[] = [];
+                stream.on('data', (response: protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.showEffectiveFlowLogsConfigs.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.showEffectiveFlowLogsConfigs, request));
+            assert(
+                (client.descriptors.page.showEffectiveFlowLogsConfigs.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with showEffectiveFlowLogsConfigs without error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+              generateSampleMessage(new protos.google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig()),
+            ];
+            client.descriptors.page.showEffectiveFlowLogsConfigs.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[] = [];
+            const iterable = client.showEffectiveFlowLogsConfigsAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.showEffectiveFlowLogsConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.showEffectiveFlowLogsConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with showEffectiveFlowLogsConfigs with error', async () => {
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.networkmanagement.v1.ShowEffectiveFlowLogsConfigsRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.showEffectiveFlowLogsConfigs.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.showEffectiveFlowLogsConfigsAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.networkmanagement.v1.IEffectiveVpcFlowLogsConfig[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.showEffectiveFlowLogsConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.showEffectiveFlowLogsConfigs.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
     describe('getIamPolicy', () => {
         it('invokes getIamPolicy without error', async () => {
             const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
@@ -1869,6 +2359,52 @@ describe('v1.VpcFlowLogsServiceClient', () => {
             });
         });
 
+        describe('organizationLocationVpcFlowLogsConfigs', async () => {
+            const fakePath = "/rendered/path/organizationLocationVpcFlowLogsConfigs";
+            const expectedParameters = {
+                organization: "organizationValue",
+                location: "locationValue",
+                vpc_flow_logs_config: "vpcFlowLogsConfigValue",
+            };
+            const client = new vpcflowlogsserviceModule.v1.VpcFlowLogsServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('organizationLocationVpcFlowLogsConfigsPath', () => {
+                const result = client.organizationLocationVpcFlowLogsConfigsPath("organizationValue", "locationValue", "vpcFlowLogsConfigValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchOrganizationFromOrganizationLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchOrganizationFromOrganizationLocationVpcFlowLogsConfigsName(fakePath);
+                assert.strictEqual(result, "organizationValue");
+                assert((client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLocationFromOrganizationLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchLocationFromOrganizationLocationVpcFlowLogsConfigsName(fakePath);
+                assert.strictEqual(result, "locationValue");
+                assert((client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchVpcFlowLogsConfigFromOrganizationLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchVpcFlowLogsConfigFromOrganizationLocationVpcFlowLogsConfigsName(fakePath);
+                assert.strictEqual(result, "vpcFlowLogsConfigValue");
+                assert((client.pathTemplates.organizationLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('project', async () => {
             const fakePath = "/rendered/path/project";
             const expectedParameters = {
@@ -1899,8 +2435,8 @@ describe('v1.VpcFlowLogsServiceClient', () => {
             });
         });
 
-        describe('vpcFlowLogsConfig', async () => {
-            const fakePath = "/rendered/path/vpcFlowLogsConfig";
+        describe('projectLocationVpcFlowLogsConfigs', async () => {
+            const fakePath = "/rendered/path/projectLocationVpcFlowLogsConfigs";
             const expectedParameters = {
                 project: "projectValue",
                 location: "locationValue",
@@ -1911,36 +2447,36 @@ describe('v1.VpcFlowLogsServiceClient', () => {
                 projectId: 'bogus',
             });
             await client.initialize();
-            client.pathTemplates.vpcFlowLogsConfigPathTemplate.render =
+            client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.render =
                 sinon.stub().returns(fakePath);
-            client.pathTemplates.vpcFlowLogsConfigPathTemplate.match =
+            client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match =
                 sinon.stub().returns(expectedParameters);
 
-            it('vpcFlowLogsConfigPath', () => {
-                const result = client.vpcFlowLogsConfigPath("projectValue", "locationValue", "vpcFlowLogsConfigValue");
+            it('projectLocationVpcFlowLogsConfigsPath', () => {
+                const result = client.projectLocationVpcFlowLogsConfigsPath("projectValue", "locationValue", "vpcFlowLogsConfigValue");
                 assert.strictEqual(result, fakePath);
-                assert((client.pathTemplates.vpcFlowLogsConfigPathTemplate.render as SinonStub)
+                assert((client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.render as SinonStub)
                     .getCall(-1).calledWith(expectedParameters));
             });
 
-            it('matchProjectFromVpcFlowLogsConfigName', () => {
-                const result = client.matchProjectFromVpcFlowLogsConfigName(fakePath);
+            it('matchProjectFromProjectLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchProjectFromProjectLocationVpcFlowLogsConfigsName(fakePath);
                 assert.strictEqual(result, "projectValue");
-                assert((client.pathTemplates.vpcFlowLogsConfigPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchLocationFromVpcFlowLogsConfigName', () => {
-                const result = client.matchLocationFromVpcFlowLogsConfigName(fakePath);
+            it('matchLocationFromProjectLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchLocationFromProjectLocationVpcFlowLogsConfigsName(fakePath);
                 assert.strictEqual(result, "locationValue");
-                assert((client.pathTemplates.vpcFlowLogsConfigPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
 
-            it('matchVpcFlowLogsConfigFromVpcFlowLogsConfigName', () => {
-                const result = client.matchVpcFlowLogsConfigFromVpcFlowLogsConfigName(fakePath);
+            it('matchVpcFlowLogsConfigFromProjectLocationVpcFlowLogsConfigsName', () => {
+                const result = client.matchVpcFlowLogsConfigFromProjectLocationVpcFlowLogsConfigsName(fakePath);
                 assert.strictEqual(result, "vpcFlowLogsConfigValue");
-                assert((client.pathTemplates.vpcFlowLogsConfigPathTemplate.match as SinonStub)
+                assert((client.pathTemplates.projectLocationVpcFlowLogsConfigsPathTemplate.match as SinonStub)
                     .getCall(-1).calledWith(fakePath));
             });
         });
