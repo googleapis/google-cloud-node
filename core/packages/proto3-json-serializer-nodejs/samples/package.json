@@ -15,7 +15,7 @@
   ],
   "dependencies": {
     "google-proto-files": "^5.0.0",
-    "proto3-json-serializer": "^3.0.3",
+    "proto3-json-serializer": "^3.0.4",
     "protobufjs": "^7.0.0"
   },
   "devDependencies": {

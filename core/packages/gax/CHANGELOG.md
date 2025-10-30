@@ -5,6 +5,15 @@
 [1]: https://www.npmjs.com/package/gax-nodejs?activeTab=versions
 
 
+## [5.0.5](https://github.com/googleapis/google-cloud-node-core/compare/google-gax-v5.0.4...google-gax-v5.0.5) (2025-10-29)
+
+
+### Bug Fixes
+
+* Add missing dependency in tools and gax ([f7a92ae](https://github.com/googleapis/google-cloud-node-core/commit/f7a92ae7f9c089761e082570ee711e6ddf64f596))
+* Monorepo migration ([b7fb314](https://github.com/googleapis/google-cloud-node-core/commit/b7fb314acfb1fde299849a2793e9bf5f0c355867))
+* Monorepo migration ([86a7376](https://github.com/googleapis/google-cloud-node-core/commit/86a7376da60852dae8eacf9ca97a6d302b6b7eb4))
+
 ## [5.0.4](https://github.com/googleapis/gax-nodejs/compare/google-gax-v5.0.3...google-gax-v5.0.4) (2025-09-30)
 
 

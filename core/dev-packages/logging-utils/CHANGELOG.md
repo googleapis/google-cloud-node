@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/googleapis/google-cloud-node-core/compare/google-logging-utils-v1.1.1...google-logging-utils-v1.1.2) (2025-10-29)
+
+
+### Bug Fixes
+
+* Monorepo migration ([b7fb314](https://github.com/googleapis/google-cloud-node-core/commit/b7fb314acfb1fde299849a2793e9bf5f0c355867))
+* Monorepo migration ([86a7376](https://github.com/googleapis/google-cloud-node-core/commit/86a7376da60852dae8eacf9ca97a6d302b6b7eb4))
+
 ## [1.1.1](https://github.com/googleapis/gax-nodejs/compare/google-logging-utils-v1.1.0...google-logging-utils-v1.1.1) (2025-03-08)
 
 

@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.0.4](https://github.com/googleapis/google-cloud-node-core/compare/gapic-tools-v1.0.3...gapic-tools-v1.0.4) (2025-10-29)
+
+
+### Bug Fixes
+
+* Add missing dependency in tools and gax ([87a9245](https://github.com/googleapis/google-cloud-node-core/commit/87a92452ef143543a6ba7cee6d9d84a2211140b1))
+* Monorepo migration ([b7fb314](https://github.com/googleapis/google-cloud-node-core/commit/b7fb314acfb1fde299849a2793e9bf5f0c355867))
+* Monorepo migration ([86a7376](https://github.com/googleapis/google-cloud-node-core/commit/86a7376da60852dae8eacf9ca97a6d302b6b7eb4))
+* Remove skipLibCheck from tools ([49a717a](https://github.com/googleapis/google-cloud-node-core/commit/49a717a21b6903cbe844c1474d5b0cf6246c454d))
+
 ## [1.0.3](https://github.com/googleapis/gax-nodejs/compare/gapic-tools-v1.0.2...gapic-tools-v1.0.3) (2025-06-24)
 
 

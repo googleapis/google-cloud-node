@@ -1,5 +1,16 @@
 # Changelog
 
+## [7.1.3](https://github.com/googleapis/google-cloud-node-core/compare/gaxios-v7.1.2...gaxios-v7.1.3) (2025-10-29)
+
+
+### Bug Fixes
+
+* Gaxios eslintrc config ([e5019c1](https://github.com/googleapis/google-cloud-node-core/commit/e5019c15950526a931236cee55722316f93ae62d))
+* Gaxios jsdoc template path ([41a809d](https://github.com/googleapis/google-cloud-node-core/commit/41a809d829b6409d21c4a997cd56ae2795591fd8))
+* Gaxios samples and system test scripts commands ([7a7ffe9](https://github.com/googleapis/google-cloud-node-core/commit/7a7ffe9724ad977bab14305987fc00084342414c))
+* Gaxios system test due to missing dependency ([#142](https://github.com/googleapis/google-cloud-node-core/issues/142)) ([9fe2f60](https://github.com/googleapis/google-cloud-node-core/commit/9fe2f601eb74a769cf08ca6556f8c76c1ec1a47e))
+* Gaxios test samples ([9a1b7b5](https://github.com/googleapis/google-cloud-node-core/commit/9a1b7b5978da5c4314cc0fdbb6e539ba44f7f905))
+
 ## [7.1.2](https://github.com/googleapis/gaxios/compare/v7.1.1...v7.1.2) (2025-09-19)
 
 
