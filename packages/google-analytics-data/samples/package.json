@@ -15,7 +15,7 @@
   "dependencies": {
     "@google-analytics/data": "^5.2.1",
     "google-auth-library": "^10.0.0",
-    "google-gax": "^5.0.0",
+    "google-gax": "^5.0.5",
     "http": "^0.0.1-security",
     "lint": "^0.8.0",
     "open": "^8.0.0",
