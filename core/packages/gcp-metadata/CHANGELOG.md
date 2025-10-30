@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/gcp-metadata?activeTab=versions
 
+## [8.1.2](https://github.com/googleapis/google-cloud-node-core/compare/gcp-metadata-v8.1.1...gcp-metadata-v8.1.2) (2025-10-29)
+
+
+### Bug Fixes
+
+* Gcp metadata ts issues. ([#110](https://github.com/googleapis/google-cloud-node-core/issues/110)) ([c51b901](https://github.com/googleapis/google-cloud-node-core/commit/c51b901a96c9a1e7b76ea2a0dbf183d2174c0ced))
+
 ## [8.1.1](https://github.com/googleapis/google-cloud-node-core/compare/gcp-metadata-v7.0.1...gcp-metadata-v8.1.1) (2025-10-13)
 
 
