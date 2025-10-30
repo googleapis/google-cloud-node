@@ -8,7 +8,11 @@
   },
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
-  "repository": "googleapis/google-auth-library-nodejs.git",
+  "repository": {
+    "type": "git",
+    "directory": "packages/google-auth-library-nodejs",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
+  },
   "keywords": [
     "google",
     "api",
@@ -75,8 +79,8 @@
     "pretest": "npm run compile -- --sourceMap",
     "docs": "jsdoc -c .jsdoc.js",
     "samples-setup": "cd samples/ && npm link ../ && npm run setup && cd ../",
-    "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
-    "system-test": "mocha build/system-test --timeout 60000",
+    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test",
+    "system-test": "npm run compile && c8 mocha build/system-test",
     "presystem-test": "npm run compile -- --sourceMap",
     "webpack": "webpack",
     "browser-test": "karma start",
@@ -84,5 +88,6 @@
     "predocs-test": "npm run docs",
     "prelint": "cd samples; npm link ../; npm install"
   },
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/google-auth-library-nodejs"
 }
