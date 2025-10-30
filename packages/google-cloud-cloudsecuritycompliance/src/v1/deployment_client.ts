@@ -203,6 +203,24 @@ export class DeploymentClient {
       organizationLocationPathTemplate: new this._gaxModule.PathTemplate(
         'organizations/{organization}/locations/{location}'
       ),
+      organizationLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/cmEnrollment'
+      ),
+      organizationLocationFrameworkAuditScopeReportsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}'
+      ),
+      organizationLocationFrameworkAuditsPathTemplate: new this._gaxModule.PathTemplate(
+        'organizations/{organization}/locations/{location}/frameworkAudits/{framework_audit}'
+      ),
+      projectLocationCmEnrollmentPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/cmEnrollment'
+      ),
+      projectLocationFrameworkAuditScopeReportsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}'
+      ),
+      projectLocationFrameworkAuditsPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/frameworkAudits/{framework_audit}'
+      ),
     };
 
     // Some of the methods on this service return "paged" results,
@@ -396,13 +414,14 @@ export class DeploymentClient {
   // -- Service calls --
   // -------------------
 /**
- * Gets details of a single FrameworkDeployment.
+ * Gets details about a framework deployment.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. FrameworkDeployment name in the following format:
- *   organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}
+ *   Required. The name of the framework deployment, in the format
+ *   `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+ *   The only supported location is `global`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -491,13 +510,14 @@ export class DeploymentClient {
       });
   }
 /**
- * Gets details of a single CloudControlDeployment.
+ * Gets details about a cloud control deployment.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. CloudControlDeployment name in the following format:
- *   organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}
+ *   Required. The name for the cloud control deployment, in the format
+ *   `organizations/{organization}/locations/{location}/cloudControlDeployments/{cloud_control_deployment_id}`.
+ *   The only supported location is `global`.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -587,20 +607,23 @@ export class DeploymentClient {
   }
 
 /**
- * Creates a new FrameworkDeployment in a given parent resource.
+ * Creates a framework deployment in a given parent resource. A
+ * framework deployment lets you assign a particular framework version to an
+ * organization, folder, or project so that you can control and monitor
+ * those resources using the framework's cloud controls.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. The parent resource of the FrameworkDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource of the framework deployment in the format
+ *   `organizations/{organization}/locations/{location}`.
+ *   Only the global location is supported.
  * @param {string} [request.frameworkDeploymentId]
- *   Optional. User provided identifier. It should be unique in scope of a
- *   parent. This is optional and if not provided, a random UUID will be
+ *   Optional. An identifier for the framework deployment that's unique in scope
+ *   of the parent. If you don't specify a value, then a random UUID is
  *   generated.
  * @param {google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment} request.frameworkDeployment
- *   Required. The FrameworkDeployment to be created.
+ *   Required. The framework deployment that you're creating.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -702,20 +725,21 @@ export class DeploymentClient {
     return decodeOperation as LROperation<protos.google.cloud.cloudsecuritycompliance.v1.FrameworkDeployment, protos.google.cloud.cloudsecuritycompliance.v1.OperationMetadata>;
   }
 /**
- * Deletes a single FrameworkDeployment.
+ * Deletes a framework deployment.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.name
- *   Required. name of the FrameworkDeployment to be deleted in the following
- *   format:
- *   organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}
+ *   Required. The name of the framework deployment that you want to delete,
+ *   in the format
+ *   `organizations/{organization}/locations/{location}/frameworkDeployments/{framework_deployment_id}`.
+ *   The only supported location is `global`.
  * @param {string} [request.etag]
  *   Optional. An opaque identifier for the current version of the resource.
  *
  *   If you provide this value, then it must match the existing value. If the
  *   values don't match, then the request fails with an
- *   {@link protos.google.rpc.Code.ABORTED|ABORTED} error.
+ *   {@link protos.google.rpc.Code.ABORTED|`ABORTED`} error.
  *
  *   If you omit this value, then the resource is deleted regardless of its
  *   current `etag` value.
@@ -820,24 +844,32 @@ export class DeploymentClient {
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.cloudsecuritycompliance.v1.OperationMetadata>;
   }
  /**
- * Lists FrameworkDeployments in a given parent resource.
+ * Lists the framework deployments in a given parent resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the FrameworkDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource of the framework deployment, in the format
+ *   `organizations/{organization}/locations/{location}`.
+ *   The only supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies a page of results the server should
+ *   return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to be applied on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -931,19 +963,27 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the FrameworkDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource of the framework deployment, in the format
+ *   `organizations/{organization}/locations/{location}`.
+ *   The only supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies a page of results the server should
+ *   return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to be applied on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -986,19 +1026,27 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the FrameworkDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource of the framework deployment, in the format
+ *   `organizations/{organization}/locations/{location}`.
+ *   The only supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies a page of results the server should
+ *   return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to be applied on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1035,24 +1083,32 @@ export class DeploymentClient {
     ) as AsyncIterable<protos.google.cloud.cloudsecuritycompliance.v1.IFrameworkDeployment>;
   }
  /**
- * Lists CloudControlDeployments in a given parent resource.
+ * Lists the cloud conrol deployments in a given parent resource.
  *
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the CloudControlDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource for the cloud control deployment, in the
+ *   format `organizations/{organization}/locations/{location}`. The only
+ *   supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   you requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies the page of results that the server
+ *   should return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to apply on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -1146,19 +1202,27 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the CloudControlDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource for the cloud control deployment, in the
+ *   format `organizations/{organization}/locations/{location}`. The only
+ *   supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   you requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies the page of results that the server
+ *   should return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to apply on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Stream}
@@ -1201,19 +1265,27 @@ export class DeploymentClient {
  * @param {Object} request
  *   The request object that will be sent.
  * @param {string} request.parent
- *   Required. parent resource of the CloudControlDeployment in the format:
- *   organizations/{organization}/locations/{location}
- *   Only global location is supported.
+ *   Required. The parent resource for the cloud control deployment, in the
+ *   format `organizations/{organization}/locations/{location}`. The only
+ *   supported location is `global`.
  * @param {number} [request.pageSize]
- *   Optional. Requested page size. Server may return fewer items than
- *   requested. If unspecified, server will pick an appropriate default.
+ *   Optional. The requested page size. The server might return fewer items than
+ *   you requested.
+ *   If unspecified, the server picks an appropriate default.
  * @param {string} [request.pageToken]
- *   Optional. A token identifying a page of results the server should return.
+ *   Optional. A token that identifies the page of results that the server
+ *   should return.
  * @param {string} [request.filter]
- *   Optional. Filter to be applied on the resource, defined by EBNF grammar
- *   https://google.aip.dev/assets/misc/ebnf-filtering.txt.
+ *   Optional. The filter to apply on the resource, as defined by
+ *   [AIP-160: Filtering](https://google.aip.dev/160).
  * @param {string} [request.orderBy]
- *   Optional. Sort results. Supported are "name", "name desc" or "" (unsorted).
+ *   Optional. The sort order for the results. The following values are
+ *   supported:
+ *
+ *   * `name`
+ *   * `name desc`
+ *
+ *   If you do not specify a value, then the results are not sorted.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Object}
@@ -1808,6 +1880,274 @@ export class DeploymentClient {
    */
   matchLocationFromOrganizationLocationName(organizationLocationName: string) {
     return this.pathTemplates.organizationLocationPathTemplate.match(organizationLocationName).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationCmEnrollment resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  organizationLocationCmEnrollmentPath(organization:string,location:string) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.render({
+      organization: organization,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationCmEnrollment resource.
+   *
+   * @param {string} organizationLocationCmEnrollmentName
+   *   A fully-qualified path representing organization_location_cmEnrollment resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationCmEnrollmentName(organizationLocationCmEnrollmentName: string) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(organizationLocationCmEnrollmentName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationCmEnrollment resource.
+   *
+   * @param {string} organizationLocationCmEnrollmentName
+   *   A fully-qualified path representing organization_location_cmEnrollment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationCmEnrollmentName(organizationLocationCmEnrollmentName: string) {
+    return this.pathTemplates.organizationLocationCmEnrollmentPathTemplate.match(organizationLocationCmEnrollmentName).location;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworkAuditScopeReports resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} generate_framework_audit_scope_report_response
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworkAuditScopeReportsPath(organization:string,location:string,generateFrameworkAuditScopeReportResponse:string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.render({
+      organization: organization,
+      location: location,
+      generate_framework_audit_scope_report_response: generateFrameworkAuditScopeReportResponse,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).location;
+  }
+
+  /**
+   * Parse the generate_framework_audit_scope_report_response from OrganizationLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing organization_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the generate_framework_audit_scope_report_response.
+   */
+  matchGenerateFrameworkAuditScopeReportResponseFromOrganizationLocationFrameworkAuditScopeReportsName(organizationLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditScopeReportsPathTemplate.match(organizationLocationFrameworkAuditScopeReportsName).generate_framework_audit_scope_report_response;
+  }
+
+  /**
+   * Return a fully-qualified organizationLocationFrameworkAudits resource name string.
+   *
+   * @param {string} organization
+   * @param {string} location
+   * @param {string} framework_audit
+   * @returns {string} Resource name string.
+   */
+  organizationLocationFrameworkAuditsPath(organization:string,location:string,frameworkAudit:string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.render({
+      organization: organization,
+      location: location,
+      framework_audit: frameworkAudit,
+    });
+  }
+
+  /**
+   * Parse the organization from OrganizationLocationFrameworkAudits resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditsName
+   *   A fully-qualified path representing organization_location_frameworkAudits resource.
+   * @returns {string} A string representing the organization.
+   */
+  matchOrganizationFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).organization;
+  }
+
+  /**
+   * Parse the location from OrganizationLocationFrameworkAudits resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditsName
+   *   A fully-qualified path representing organization_location_frameworkAudits resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).location;
+  }
+
+  /**
+   * Parse the framework_audit from OrganizationLocationFrameworkAudits resource.
+   *
+   * @param {string} organizationLocationFrameworkAuditsName
+   *   A fully-qualified path representing organization_location_frameworkAudits resource.
+   * @returns {string} A string representing the framework_audit.
+   */
+  matchFrameworkAuditFromOrganizationLocationFrameworkAuditsName(organizationLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.organizationLocationFrameworkAuditsPathTemplate.match(organizationLocationFrameworkAuditsName).framework_audit;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationCmEnrollment resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @returns {string} Resource name string.
+   */
+  projectLocationCmEnrollmentPath(project:string,location:string) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.render({
+      project: project,
+      location: location,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationCmEnrollment resource.
+   *
+   * @param {string} projectLocationCmEnrollmentName
+   *   A fully-qualified path representing project_location_cmEnrollment resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationCmEnrollmentName(projectLocationCmEnrollmentName: string) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(projectLocationCmEnrollmentName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationCmEnrollment resource.
+   *
+   * @param {string} projectLocationCmEnrollmentName
+   *   A fully-qualified path representing project_location_cmEnrollment resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationCmEnrollmentName(projectLocationCmEnrollmentName: string) {
+    return this.pathTemplates.projectLocationCmEnrollmentPathTemplate.match(projectLocationCmEnrollmentName).location;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworkAuditScopeReports resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} generate_framework_audit_scope_report_response
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworkAuditScopeReportsPath(project:string,location:string,generateFrameworkAuditScopeReportResponse:string) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.render({
+      project: project,
+      location: location,
+      generate_framework_audit_scope_report_response: generateFrameworkAuditScopeReportResponse,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} projectLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} projectLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).location;
+  }
+
+  /**
+   * Parse the generate_framework_audit_scope_report_response from ProjectLocationFrameworkAuditScopeReports resource.
+   *
+   * @param {string} projectLocationFrameworkAuditScopeReportsName
+   *   A fully-qualified path representing project_location_frameworkAuditScopeReports resource.
+   * @returns {string} A string representing the generate_framework_audit_scope_report_response.
+   */
+  matchGenerateFrameworkAuditScopeReportResponseFromProjectLocationFrameworkAuditScopeReportsName(projectLocationFrameworkAuditScopeReportsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditScopeReportsPathTemplate.match(projectLocationFrameworkAuditScopeReportsName).generate_framework_audit_scope_report_response;
+  }
+
+  /**
+   * Return a fully-qualified projectLocationFrameworkAudits resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} framework_audit
+   * @returns {string} Resource name string.
+   */
+  projectLocationFrameworkAuditsPath(project:string,location:string,frameworkAudit:string) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.render({
+      project: project,
+      location: location,
+      framework_audit: frameworkAudit,
+    });
+  }
+
+  /**
+   * Parse the project from ProjectLocationFrameworkAudits resource.
+   *
+   * @param {string} projectLocationFrameworkAuditsName
+   *   A fully-qualified path representing project_location_frameworkAudits resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).project;
+  }
+
+  /**
+   * Parse the location from ProjectLocationFrameworkAudits resource.
+   *
+   * @param {string} projectLocationFrameworkAuditsName
+   *   A fully-qualified path representing project_location_frameworkAudits resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).location;
+  }
+
+  /**
+   * Parse the framework_audit from ProjectLocationFrameworkAudits resource.
+   *
+   * @param {string} projectLocationFrameworkAuditsName
+   *   A fully-qualified path representing project_location_frameworkAudits resource.
+   * @returns {string} A string representing the framework_audit.
+   */
+  matchFrameworkAuditFromProjectLocationFrameworkAuditsName(projectLocationFrameworkAuditsName: string) {
+    return this.pathTemplates.projectLocationFrameworkAuditsPathTemplate.match(projectLocationFrameworkAuditsName).framework_audit;
   }
 
   /**

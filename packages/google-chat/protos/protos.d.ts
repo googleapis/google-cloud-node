@@ -15137,7 +15137,8 @@ export namespace google {
                 enum MembershipRole {
                     MEMBERSHIP_ROLE_UNSPECIFIED = 0,
                     ROLE_MEMBER = 1,
-                    ROLE_MANAGER = 2
+                    ROLE_MANAGER = 2,
+                    ROLE_ASSISTANT_MANAGER = 4
                 }
             }
 
@@ -20673,6 +20674,9 @@ export namespace google {
                     /** PermissionSetting managersAllowed */
                     managersAllowed?: (boolean|null);
 
+                    /** PermissionSetting assistantManagersAllowed */
+                    assistantManagersAllowed?: (boolean|null);
+
                     /** PermissionSetting membersAllowed */
                     membersAllowed?: (boolean|null);
                 }
@@ -20688,6 +20692,9 @@ export namespace google {
 
                     /** PermissionSetting managersAllowed. */
                     public managersAllowed: boolean;
+
+                    /** PermissionSetting assistantManagersAllowed. */
+                    public assistantManagersAllowed?: (boolean|null);
 
                     /** PermissionSetting membersAllowed. */
                     public membersAllowed: boolean;

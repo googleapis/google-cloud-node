@@ -5,6 +5,159 @@
       "changes": [
         {
           "type": "feat",
+          "sha": "84654a5c0cc56d940b96a85b0e439dc6ac140699",
+          "message": "[chat] add ROLE_ASSISTANT_MANAGER to the MembershipRole enum in the Membership proto and assistant_managers_allowed to the PermissionSetting",
+          "issues": [
+            "6843"
+          ]
+        }
+      ],
+      "version": "0.21.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-apps/chat",
+      "id": "81e740ea-4ebf-476c-81a6-e7a129e6020d",
+      "createTime": "2025-10-25T03:59:34.796Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "da2c71816dc16c6ec4d64d74b7913ae5e399a0bc",
+          "message": "Add EmbedContent method v1",
+          "issues": [
+            "6844"
+          ]
+        }
+      ],
+      "version": "5.12.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "07134093-8517-44f5-840b-6c0829e742fe",
+      "createTime": "2025-10-25T03:59:34.776Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "fix",
+          "sha": "468c23374a64c1dbdbfb52707d43169fc8fda2dc",
+          "message": "Bug in system test deletion logic",
+          "issues": [
+            "6845"
+          ]
+        }
+      ],
+      "version": "0.1.6",
+      "language": "JAVASCRIPT",
+      "artifactName": "gapic-node-processing",
+      "id": "e34cd443-08c5-4aeb-a38f-2a8c9a0102af",
+      "createTime": "2025-10-24T20:55:51.632Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "79e9ddf22a87f114cb7c692be5ee3b34424ad5d5",
+          "message": "[admanager] Added Application resource",
+          "issues": [
+            "6834"
+          ]
+        }
+      ],
+      "version": "0.5.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-ads/admanager",
+      "id": "94298076-8858-42a8-8b9f-8b6370d80955",
+      "createTime": "2025-10-23T17:47:01.168Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "31da8eb0033e4edd861695715eda47830a5b447a",
+          "message": "[places] Add Review.visitDate field to indicate when the review author visited",
+          "issues": [
+            "6836"
+          ]
+        }
+      ],
+      "version": "2.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@googlemaps/places",
+      "id": "f388a30b-05a1-4a26-8564-26e8c906801d",
+      "createTime": "2025-10-23T17:47:01.135Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "7f614ac2228003354479fd3b5959f631c67e7cc6",
+          "message": "[container] add node_kernel_module_loading field to LinuxNodeConfig",
+          "issues": [
+            "6832"
+          ]
+        }
+      ],
+      "version": "6.6.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/container",
+      "id": "8ec4f74a-a4f0-4146-bf30-7006d5aaec55",
+      "createTime": "2025-10-23T17:47:01.110Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "b334162c5081489ffc9a970157723b3ffb9cc063",
+          "message": "[dialogflow] Added support for Build Your Own Assist feature",
+          "issues": [
+            "6835"
+          ]
+        }
+      ],
+      "version": "7.3.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dialogflow",
+      "id": "ecb31434-3d2f-4a23-8453-6bc11b682833",
+      "createTime": "2025-10-23T17:47:01.088Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8cd5a4acb6460d56f4267abff60b00be93cf2a55",
+          "message": "[dataplex] A new message `DataDocumentationSpec` is added representing Data Documentation Spec",
+          "issues": [
+            "6837"
+          ]
+        }
+      ],
+      "version": "5.2.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/dataplex",
+      "id": "b2b095af-7e83-4b4e-a51e-7b1f721bfcd5",
+      "createTime": "2025-10-23T17:47:01.058Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "8a7ce8e898273557543277bcdb664d5aee9183ce",
+          "message": "Add EmbedContent method v1beta1",
+          "issues": [
+            "6833"
+          ]
+        }
+      ],
+      "version": "5.11.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/aiplatform",
+      "id": "26103632-b6d9-4ab5-9884-4e2befff013b",
+      "createTime": "2025-10-23T17:47:01.027Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
           "sha": "a00faa8f3da51868df3e5d7a4a418bdb2f0de840",
           "message": "[oracledatabase] Expand Oracle Database v1 API to add support for Exadata Exascale (`ExadbVmCluster`, `ExascaleDbStorageVault`), Base Database (`DbSystem`, `Database`, `PluggableDatabase`), and Networking (`OdbNetwork`, `OdbSubnet`). Adds enhance...",
           "issues": [
@@ -66496,5 +66649,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-10-21T17:28:44.603Z"
+  "updateTime": "2025-10-25T03:59:34.796Z"
 }

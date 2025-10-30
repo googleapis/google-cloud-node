@@ -18,12 +18,16 @@
 
 import * as v1 from './v1';
 
+const AuditClient = v1.AuditClient;
+type AuditClient = v1.AuditClient;
+const CmEnrollmentServiceClient = v1.CmEnrollmentServiceClient;
+type CmEnrollmentServiceClient = v1.CmEnrollmentServiceClient;
 const ConfigClient = v1.ConfigClient;
 type ConfigClient = v1.ConfigClient;
 const DeploymentClient = v1.DeploymentClient;
 type DeploymentClient = v1.DeploymentClient;
 
-export {v1, ConfigClient, DeploymentClient};
-export default {v1, ConfigClient, DeploymentClient};
+export {v1, AuditClient, CmEnrollmentServiceClient, ConfigClient, DeploymentClient};
+export default {v1, AuditClient, CmEnrollmentServiceClient, ConfigClient, DeploymentClient};
 import * as protos from '../protos/protos';
 export {protos};

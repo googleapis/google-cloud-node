@@ -23597,6 +23597,26 @@
                               "(google.api.method_signature)": "model,contents"
                             }
                           ]
+                        },
+                        "EmbedContent": {
+                          "requestType": "EmbedContentRequest",
+                          "responseType": "EmbedContentResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{model=projects/*/locations/*/publishers/*/models/*}:embedContent",
+                            "(google.api.http).body": "*",
+                            "(google.api.method_signature)": "model,content"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{model=projects/*/locations/*/publishers/*/models/*}:embedContent",
+                                "body": "*"
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "model,content"
+                            }
+                          ]
                         }
                       }
                     },
@@ -24267,6 +24287,216 @@
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "EmbedContentRequest": {
+                      "oneofs": {
+                        "_model": {
+                          "oneof": [
+                            "model"
+                          ]
+                        },
+                        "_content": {
+                          "oneof": [
+                            "content"
+                          ]
+                        },
+                        "_title": {
+                          "oneof": [
+                            "title"
+                          ]
+                        },
+                        "_taskType": {
+                          "oneof": [
+                            "taskType"
+                          ]
+                        },
+                        "_outputDimensionality": {
+                          "oneof": [
+                            "outputDimensionality"
+                          ]
+                        },
+                        "_autoTruncate": {
+                          "oneof": [
+                            "autoTruncate"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "model": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.resource_reference).type": "aiplatform.googleapis.com/Endpoint",
+                            "proto3_optional": true
+                          }
+                        },
+                        "content": {
+                          "type": "Content",
+                          "id": 2,
+                          "options": {
+                            "proto3_optional": true
+                          }
+                        },
+                        "title": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "taskType": {
+                          "type": "EmbeddingTaskType",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "outputDimensionality": {
+                          "type": "int32",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        },
+                        "autoTruncate": {
+                          "type": "bool",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL",
+                            "proto3_optional": true
+                          }
+                        }
+                      },
+                      "nested": {
+                        "EmbeddingTaskType": {
+                          "values": {
+                            "UNSPECIFIED": 0,
+                            "RETRIEVAL_QUERY": 2,
+                            "RETRIEVAL_DOCUMENT": 3,
+                            "SEMANTIC_SIMILARITY": 4,
+                            "CLASSIFICATION": 5,
+                            "CLUSTERING": 6,
+                            "QUESTION_ANSWERING": 7,
+                            "FACT_VERIFICATION": 8,
+                            "CODE_RETRIEVAL_QUERY": 9
+                          }
+                        }
+                      }
+                    },
+                    "EmbedContentResponse": {
+                      "fields": {
+                        "embedding": {
+                          "type": "Embedding",
+                          "id": 1
+                        },
+                        "usageMetadata": {
+                          "type": "UsageMetadata",
+                          "id": 2
+                        },
+                        "truncated": {
+                          "type": "bool",
+                          "id": 4
+                        }
+                      },
+                      "nested": {
+                        "Embedding": {
+                          "fields": {
+                            "values": {
+                              "rule": "repeated",
+                              "type": "float",
+                              "id": 1
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "UsageMetadata": {
+                      "fields": {
+                        "promptTokenCount": {
+                          "type": "int32",
+                          "id": 1
+                        },
+                        "candidatesTokenCount": {
+                          "type": "int32",
+                          "id": 2
+                        },
+                        "totalTokenCount": {
+                          "type": "int32",
+                          "id": 3
+                        },
+                        "toolUsePromptTokenCount": {
+                          "type": "int32",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "thoughtsTokenCount": {
+                          "type": "int32",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cachedContentTokenCount": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "promptTokensDetails": {
+                          "rule": "repeated",
+                          "type": "ModalityTokenCount",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cacheTokensDetails": {
+                          "rule": "repeated",
+                          "type": "ModalityTokenCount",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "candidatesTokensDetails": {
+                          "rule": "repeated",
+                          "type": "ModalityTokenCount",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "toolUsePromptTokensDetails": {
+                          "rule": "repeated",
+                          "type": "ModalityTokenCount",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "trafficType": {
+                          "type": "TrafficType",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "TrafficType": {
+                          "values": {
+                            "TRAFFIC_TYPE_UNSPECIFIED": 0,
+                            "ON_DEMAND": 1,
+                            "PROVISIONED_THROUGHPUT": 2
                           }
                         }
                       }

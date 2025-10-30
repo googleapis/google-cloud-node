@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.5...gapic-node-processing-v0.1.6) (2025-10-24)
+
+
+### Bug Fixes
+
+* Bug in system test deletion logic ([#6845](https://github.com/googleapis/google-cloud-node/issues/6845)) ([468c233](https://github.com/googleapis/google-cloud-node/commit/468c23374a64c1dbdbfb52707d43169fc8fda2dc))
+
 ## [0.1.5](https://github.com/googleapis/google-cloud-node/compare/gapic-node-processing-v0.1.4...gapic-node-processing-v0.1.5) (2025-10-13)
 
 

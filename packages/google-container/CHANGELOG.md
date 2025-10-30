@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/container?activeTab=versions
 
+## [6.6.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.5.0...container-v6.6.0) (2025-10-23)
+
+
+### Features
+
+* [container] add node_kernel_module_loading field to LinuxNodeConfig ([#6832](https://github.com/googleapis/google-cloud-node/issues/6832)) ([7f614ac](https://github.com/googleapis/google-cloud-node/commit/7f614ac2228003354479fd3b5959f631c67e7cc6))
+
 ## [6.5.0](https://github.com/googleapis/google-cloud-node/compare/container-v6.4.1...container-v6.5.0) (2025-10-16)
 
 

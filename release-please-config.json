@@ -215,7 +215,8 @@
     "packages/google-cloud-cloudsecuritycompliance": {},
     "packages/google-cloud-capacityplanner": {},
     "packages/google-cloud-locationfinder": {},
-    "packages/google-ads-datamanager": {}
+    "packages/google-ads-datamanager": {},
+    "packages/google-cloud-geminidataanalytics": {}
   },
   "plugins": [
     {

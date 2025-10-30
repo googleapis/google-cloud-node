@@ -29,19 +29,19 @@ function main(parent, frameworkDeployment) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. The parent resource of the FrameworkDeployment in the format:
-   *  organizations/{organization}/locations/{location}
-   *  Only global location is supported.
+   *  Required. The parent resource of the framework deployment in the format
+   *  `organizations/{organization}/locations/{location}`.
+   *  Only the global location is supported.
    */
   // const parent = 'abc123'
   /**
-   *  Optional. User provided identifier. It should be unique in scope of a
-   *  parent. This is optional and if not provided, a random UUID will be
+   *  Optional. An identifier for the framework deployment that's unique in scope
+   *  of the parent. If you don't specify a value, then a random UUID is
    *  generated.
    */
   // const frameworkDeploymentId = 'abc123'
   /**
-   *  Required. The FrameworkDeployment to be created.
+   *  Required. The framework deployment that you're creating.
    */
   // const frameworkDeployment = {}
 

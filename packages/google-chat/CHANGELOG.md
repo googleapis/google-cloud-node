@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.20.0...chat-v0.21.0) (2025-10-25)
+
+
+### Features
+
+* [chat] add ROLE_ASSISTANT_MANAGER to the MembershipRole enum in the Membership proto and assistant_managers_allowed to the PermissionSetting ([#6843](https://github.com/googleapis/google-cloud-node/issues/6843)) ([84654a5](https://github.com/googleapis/google-cloud-node/commit/84654a5c0cc56d940b96a85b0e439dc6ac140699))
+
 ## [0.20.0](https://github.com/googleapis/google-cloud-node/compare/chat-v0.19.1...chat-v0.20.0) (2025-10-16)
 
 

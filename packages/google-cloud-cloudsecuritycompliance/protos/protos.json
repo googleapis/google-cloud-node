@@ -19,6 +19,730 @@
                     "(google.api.resource_definition).pattern": "organizations/{organization}/locations/{location}"
                   },
                   "nested": {
+                    "Audit": {
+                      "options": {
+                        "(google.api.default_host)": "cloudsecuritycompliance.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "GenerateFrameworkAuditScopeReport": {
+                          "requestType": "GenerateFrameworkAuditScopeReportRequest",
+                          "responseType": "GenerateFrameworkAuditScopeReportResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/{scope=folders/*/locations/*}/frameworkAuditScopeReports:generateFrameworkAuditScopeReport",
+                            "(google.api.http).body": "*",
+                            "(google.api.http).additional_bindings.post": "/v1/{scope=organizations/*/locations/*}/frameworkAuditScopeReports:generateFrameworkAuditScopeReport",
+                            "(google.api.http).additional_bindings.body": "*",
+                            "(google.api.method_signature)": "scope,report_format,compliance_framework"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{scope=folders/*/locations/*}/frameworkAuditScopeReports:generateFrameworkAuditScopeReport",
+                                "body": "*",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{scope=projects/*/locations/*}/frameworkAuditScopeReports:generateFrameworkAuditScopeReport",
+                                    "body": "*"
+                                  },
+                                  {
+                                    "post": "/v1/{scope=organizations/*/locations/*}/frameworkAuditScopeReports:generateFrameworkAuditScopeReport",
+                                    "body": "*"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "scope,report_format,compliance_framework"
+                            }
+                          ]
+                        },
+                        "CreateFrameworkAudit": {
+                          "requestType": "CreateFrameworkAuditRequest",
+                          "responseType": "google.longrunning.Operation",
+                          "options": {
+                            "(google.api.http).post": "/v1/{parent=organizations/*/locations/*}/frameworkAudits",
+                            "(google.api.http).body": "framework_audit",
+                            "(google.api.http).additional_bindings.post": "/v1/{parent=projects/*/locations/*}/frameworkAudits",
+                            "(google.api.http).additional_bindings.body": "framework_audit",
+                            "(google.api.method_signature)": "parent,framework_audit,framework_audit_id",
+                            "(google.longrunning.operation_info).response_type": "FrameworkAudit",
+                            "(google.longrunning.operation_info).metadata_type": "google.cloud.cloudsecuritycompliance.v1.OperationMetadata"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/{parent=organizations/*/locations/*}/frameworkAudits",
+                                "body": "framework_audit",
+                                "additional_bindings": [
+                                  {
+                                    "post": "/v1/{parent=folders/*/locations/*}/frameworkAudits",
+                                    "body": "framework_audit"
+                                  },
+                                  {
+                                    "post": "/v1/{parent=projects/*/locations/*}/frameworkAudits",
+                                    "body": "framework_audit"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent,framework_audit,framework_audit_id"
+                            },
+                            {
+                              "(google.longrunning.operation_info)": {
+                                "response_type": "FrameworkAudit",
+                                "metadata_type": "google.cloud.cloudsecuritycompliance.v1.OperationMetadata"
+                              }
+                            }
+                          ]
+                        },
+                        "ListFrameworkAudits": {
+                          "requestType": "ListFrameworkAuditsRequest",
+                          "responseType": "ListFrameworkAuditsResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{parent=organizations/*/locations/*}/frameworkAudits",
+                            "(google.api.http).additional_bindings.get": "/v1/{parent=projects/*/locations/*}/frameworkAudits",
+                            "(google.api.method_signature)": "parent"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{parent=organizations/*/locations/*}/frameworkAudits",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{parent=folders/*/locations/*}/frameworkAudits"
+                                  },
+                                  {
+                                    "get": "/v1/{parent=projects/*/locations/*}/frameworkAudits"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "parent"
+                            }
+                          ]
+                        },
+                        "GetFrameworkAudit": {
+                          "requestType": "GetFrameworkAuditRequest",
+                          "responseType": "FrameworkAudit",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/locations/*/frameworkAudits/*}",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/frameworkAudits/*}",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/locations/*/frameworkAudits/*}",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/locations/*/frameworkAudits/*}"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/locations/*/frameworkAudits/*}"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "ComplianceState": {
+                      "values": {
+                        "COMPLIANCE_STATE_UNSPECIFIED": 0,
+                        "COMPLIANT": 1,
+                        "VIOLATION": 2,
+                        "MANUAL_REVIEW_NEEDED": 3,
+                        "ERROR": 4,
+                        "AUDIT_NOT_SUPPORTED": 5
+                      }
+                    },
+                    "GenerateFrameworkAuditScopeReportRequest": {
+                      "fields": {
+                        "scope": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "reportFormat": {
+                          "type": "Format",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "complianceFramework": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Format": {
+                          "values": {
+                            "FORMAT_UNSPECIFIED": 0,
+                            "ODF": 1
+                          }
+                        }
+                      }
+                    },
+                    "GenerateFrameworkAuditScopeReportResponse": {
+                      "options": {
+                        "(google.api.resource).type": "cloudsecuritycompliance.googleapis.com/GenerateFrameworkAuditScopeReportResponse",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/frameworkAuditScopeReports/{generate_framework_audit_scope_report_response}",
+                        "(google.api.resource).plural": "frameworkAuditScopeReports",
+                        "(google.api.resource).singular": "generateFrameworkAuditScopeReportResponse"
+                      },
+                      "oneofs": {
+                        "auditReport": {
+                          "oneof": [
+                            "scopeReportContents"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "scopeReportContents": {
+                          "type": "bytes",
+                          "id": 3
+                        },
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "complianceFramework": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ReportSummary": {
+                      "fields": {
+                        "totalCount": {
+                          "type": "int32",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "compliantCount": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "violationCount": {
+                          "type": "int32",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "manualReviewNeededCount": {
+                          "type": "int32",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "errorCount": {
+                          "type": "int32",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CreateFrameworkAuditRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudsecuritycompliance.googleapis.com/FrameworkAudit"
+                          }
+                        },
+                        "frameworkAuditId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "frameworkAudit": {
+                          "type": "FrameworkAudit",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "FrameworkAuditDestination": {
+                      "oneofs": {
+                        "destinationType": {
+                          "oneof": [
+                            "bucket"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "bucket": {
+                          "type": "BucketDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "BucketDestination": {
+                      "fields": {
+                        "bucketUri": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "frameworkAuditFormat": {
+                          "type": "Format",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "Format": {
+                          "values": {
+                            "FORMAT_UNSPECIFIED": 0,
+                            "ODF": 1
+                          }
+                        }
+                      }
+                    },
+                    "FrameworkAudit": {
+                      "options": {
+                        "(google.api.resource).type": "cloudsecuritycompliance.googleapis.com/FrameworkAudit",
+                        "(google.api.resource).pattern": "organizations/{organization}/locations/{location}/frameworkAudits/{framework_audit}",
+                        "(google.api.resource).plural": "frameworkAudits",
+                        "(google.api.resource).singular": "frameworkAudit"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "frameworkAuditId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "complianceFramework": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "scope": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "frameworkAuditDestination": {
+                          "type": "FrameworkAuditDestination",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "startTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "finishTime": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "complianceState": {
+                          "type": "ComplianceState",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reportSummary": {
+                          "type": "ReportSummary",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cloudControlGroupAuditDetails": {
+                          "rule": "repeated",
+                          "type": "CloudControlGroupAuditDetails",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cloudControlAuditDetails": {
+                          "rule": "repeated",
+                          "type": "CloudControlAuditDetails",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "operationId": {
+                          "type": "string",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "state": {
+                          "type": "State",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "SCHEDULED": 1,
+                            "RUNNING": 2,
+                            "UPLOADING": 3,
+                            "FAILED": 4,
+                            "SUCCEEDED": 5
+                          }
+                        }
+                      }
+                    },
+                    "ListFrameworkAuditsRequest": {
+                      "fields": {
+                        "parent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).child_type": "cloudsecuritycompliance.googleapis.com/FrameworkAudit"
+                          }
+                        },
+                        "pageSize": {
+                          "type": "int32",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "pageToken": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "filter": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ListFrameworkAuditsResponse": {
+                      "fields": {
+                        "frameworkAudits": {
+                          "rule": "repeated",
+                          "type": "FrameworkAudit",
+                          "id": 1
+                        },
+                        "nextPageToken": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "GetFrameworkAuditRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsecuritycompliance.googleapis.com/FrameworkAudit"
+                          }
+                        }
+                      }
+                    },
+                    "CloudControlGroupAuditDetails": {
+                      "fields": {
+                        "cloudControlGroupId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "description": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "responsibilityType": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "googleResponsibilityDescription": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "googleResponsibilityImplementation": {
+                          "type": "string",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customerResponsibilityDescription": {
+                          "type": "string",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "customerResponsibilityImplementation": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "complianceState": {
+                          "type": "ComplianceState",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "controlId": {
+                          "type": "string",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "controlFamily": {
+                          "type": "ControlFamily",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cloudControlDetails": {
+                          "rule": "repeated",
+                          "type": "CloudControlAuditDetails",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reportSummary": {
+                          "type": "ReportSummary",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "FindingDetails": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "complianceState": {
+                          "type": "ComplianceState",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "observation": {
+                          "type": "ObservationDetails",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "evidence": {
+                          "type": "EvidenceDetails",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ObservationDetails": {
+                      "fields": {
+                        "currentValue": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "expectedValue": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "guidance": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "EvidenceDetails": {
+                      "fields": {
+                        "resource": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "service": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "evidencePath": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "CloudControlAuditDetails": {
+                      "fields": {
+                        "cloudControl": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cloudControlId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "cloudControlDescription": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "complianceState": {
+                          "type": "ComplianceState",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "reportSummary": {
+                          "type": "ReportSummary",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "findings": {
+                          "rule": "repeated",
+                          "type": "FindingDetails",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "RegulatoryControlResponsibilityType": {
+                      "values": {
+                        "REGULATORY_CONTROL_RESPONSIBILITY_TYPE_UNSPECIFIED": 0,
+                        "GOOGLE": 1,
+                        "CUSTOMER": 2,
+                        "SHARED": 3
+                      }
+                    },
                     "EnforcementMode": {
                       "values": {
                         "ENFORCEMENT_MODE_UNSPECIFIED": 0,
@@ -375,6 +1099,15 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
+                      },
+                      "nested": {
+                        "Type": {
+                          "values": {
+                            "TYPE_UNSPECIFIED": 0,
+                            "CUSTOM": 1,
+                            "BUILT_IN": 2
+                          }
+                        }
                       }
                     },
                     "ParameterSpec": {
@@ -708,6 +1441,183 @@
                           "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      }
+                    },
+                    "ControlFamily": {
+                      "fields": {
+                        "familyId": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "CmEnrollmentService": {
+                      "options": {
+                        "(google.api.default_host)": "cloudsecuritycompliance.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/cloud-platform"
+                      },
+                      "methods": {
+                        "UpdateCmEnrollment": {
+                          "requestType": "UpdateCmEnrollmentRequest",
+                          "responseType": "CmEnrollment",
+                          "options": {
+                            "(google.api.http).patch": "/v1/{cm_enrollment.name=organizations/*/locations/*/cmEnrollment}",
+                            "(google.api.http).body": "cm_enrollment",
+                            "(google.api.http).additional_bindings.patch": "/v1/{cm_enrollment.name=projects/*/locations/*/cmEnrollment}",
+                            "(google.api.http).additional_bindings.body": "cm_enrollment",
+                            "(google.api.method_signature)": "cm_enrollment,update_mask"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "patch": "/v1/{cm_enrollment.name=organizations/*/locations/*/cmEnrollment}",
+                                "body": "cm_enrollment",
+                                "additional_bindings": [
+                                  {
+                                    "patch": "/v1/{cm_enrollment.name=folders/*/locations/*/cmEnrollment}",
+                                    "body": "cm_enrollment"
+                                  },
+                                  {
+                                    "patch": "/v1/{cm_enrollment.name=projects/*/locations/*/cmEnrollment}",
+                                    "body": "cm_enrollment"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "cm_enrollment,update_mask"
+                            }
+                          ]
+                        },
+                        "CalculateEffectiveCmEnrollment": {
+                          "requestType": "CalculateEffectiveCmEnrollmentRequest",
+                          "responseType": "CalculateEffectiveCmEnrollmentResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/{name=organizations/*/locations/*/cmEnrollment}:calculate",
+                            "(google.api.http).additional_bindings.get": "/v1/{name=projects/*/locations/*/cmEnrollment}:calculate",
+                            "(google.api.method_signature)": "name"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/{name=organizations/*/locations/*/cmEnrollment}:calculate",
+                                "additional_bindings": [
+                                  {
+                                    "get": "/v1/{name=folders/*/locations/*/cmEnrollment}:calculate"
+                                  },
+                                  {
+                                    "get": "/v1/{name=projects/*/locations/*/cmEnrollment}:calculate"
+                                  }
+                                ]
+                              }
+                            },
+                            {
+                              "(google.api.method_signature)": "name"
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "UpdateCmEnrollmentRequest": {
+                      "fields": {
+                        "cmEnrollment": {
+                          "type": "CmEnrollment",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "updateMask": {
+                          "type": "google.protobuf.FieldMask",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CalculateEffectiveCmEnrollmentRequest": {
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED",
+                            "(google.api.resource_reference).type": "cloudsecuritycompliance.googleapis.com/CmEnrollment"
+                          }
+                        }
+                      }
+                    },
+                    "CmEnrollment": {
+                      "options": {
+                        "(google.api.resource).type": "cloudsecuritycompliance.googleapis.com/CmEnrollment",
+                        "(google.api.resource).pattern": "projects/{project}/locations/{location}/cmEnrollment",
+                        "(google.api.resource).plural": "cmEnrollments",
+                        "(google.api.resource).singular": "cmEnrollment"
+                      },
+                      "fields": {
+                        "name": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "IDENTIFIER"
+                          }
+                        },
+                        "enrolled": {
+                          "type": "bool",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "auditConfig": {
+                          "type": "AuditConfig",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CalculateEffectiveCmEnrollmentResponse": {
+                      "fields": {
+                        "cmEnrollment": {
+                          "type": "CmEnrollment",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "AuditConfig": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "CmEligibleDestination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "CmEligibleDestination": {
+                          "oneofs": {
+                            "cmEligibleDestinations": {
+                              "oneof": [
+                                "gcsBucket"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "gcsBucket": {
+                              "type": "string",
+                              "id": 1
+                            }
                           }
                         }
                       }
@@ -1076,6 +1986,13 @@
                           "options": {
                             "(google.api.field_behavior)": "REQUIRED",
                             "(google.api.resource_reference).type": "cloudsecuritycompliance.googleapis.com/CloudControl"
+                          }
+                        },
+                        "majorRevisionId": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
                           }
                         }
                       }
@@ -1807,113 +2724,14 @@
         },
         "api": {
           "options": {
-            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "go_package": "google.golang.org/genproto/googleapis/api/annotations;annotations",
             "java_multiple_files": true,
-            "java_outer_classname": "LaunchStageProto",
+            "java_outer_classname": "ResourceProto",
             "java_package": "com.google.api",
             "objc_class_prefix": "GAPI",
             "cc_enable_arenas": true
           },
           "nested": {
-            "fieldBehavior": {
-              "rule": "repeated",
-              "type": "google.api.FieldBehavior",
-              "id": 1052,
-              "extend": "google.protobuf.FieldOptions",
-              "options": {
-                "packed": false
-              }
-            },
-            "FieldBehavior": {
-              "values": {
-                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
-                "OPTIONAL": 1,
-                "REQUIRED": 2,
-                "OUTPUT_ONLY": 3,
-                "INPUT_ONLY": 4,
-                "IMMUTABLE": 5,
-                "UNORDERED_LIST": 6,
-                "NON_EMPTY_DEFAULT": 7,
-                "IDENTIFIER": 8
-              }
-            },
-            "resourceReference": {
-              "type": "google.api.ResourceReference",
-              "id": 1055,
-              "extend": "google.protobuf.FieldOptions"
-            },
-            "resourceDefinition": {
-              "rule": "repeated",
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.FileOptions"
-            },
-            "resource": {
-              "type": "google.api.ResourceDescriptor",
-              "id": 1053,
-              "extend": "google.protobuf.MessageOptions"
-            },
-            "ResourceDescriptor": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "pattern": {
-                  "rule": "repeated",
-                  "type": "string",
-                  "id": 2
-                },
-                "nameField": {
-                  "type": "string",
-                  "id": 3
-                },
-                "history": {
-                  "type": "History",
-                  "id": 4
-                },
-                "plural": {
-                  "type": "string",
-                  "id": 5
-                },
-                "singular": {
-                  "type": "string",
-                  "id": 6
-                },
-                "style": {
-                  "rule": "repeated",
-                  "type": "Style",
-                  "id": 10
-                }
-              },
-              "nested": {
-                "History": {
-                  "values": {
-                    "HISTORY_UNSPECIFIED": 0,
-                    "ORIGINALLY_SINGLE_PATTERN": 1,
-                    "FUTURE_MULTI_PATTERN": 2
-                  }
-                },
-                "Style": {
-                  "values": {
-                    "STYLE_UNSPECIFIED": 0,
-                    "DECLARATIVE_FRIENDLY": 1
-                  }
-                }
-              }
-            },
-            "ResourceReference": {
-              "fields": {
-                "type": {
-                  "type": "string",
-                  "id": 1
-                },
-                "childType": {
-                  "type": "string",
-                  "id": 2
-                }
-              }
-            },
             "http": {
               "type": "HttpRule",
               "id": 72295728,
@@ -2303,6 +3121,105 @@
                 "BETA": 3,
                 "GA": 4,
                 "DEPRECATED": 5
+              }
+            },
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
+            "resourceReference": {
+              "type": "google.api.ResourceReference",
+              "id": 1055,
+              "extend": "google.protobuf.FieldOptions"
+            },
+            "resourceDefinition": {
+              "rule": "repeated",
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.FileOptions"
+            },
+            "resource": {
+              "type": "google.api.ResourceDescriptor",
+              "id": 1053,
+              "extend": "google.protobuf.MessageOptions"
+            },
+            "ResourceDescriptor": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "pattern": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 2
+                },
+                "nameField": {
+                  "type": "string",
+                  "id": 3
+                },
+                "history": {
+                  "type": "History",
+                  "id": 4
+                },
+                "plural": {
+                  "type": "string",
+                  "id": 5
+                },
+                "singular": {
+                  "type": "string",
+                  "id": 6
+                },
+                "style": {
+                  "rule": "repeated",
+                  "type": "Style",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "History": {
+                  "values": {
+                    "HISTORY_UNSPECIFIED": 0,
+                    "ORIGINALLY_SINGLE_PATTERN": 1,
+                    "FUTURE_MULTI_PATTERN": 2
+                  }
+                },
+                "Style": {
+                  "values": {
+                    "STYLE_UNSPECIFIED": 0,
+                    "DECLARATIVE_FRIENDLY": 1
+                  }
+                }
+              }
+            },
+            "ResourceReference": {
+              "fields": {
+                "type": {
+                  "type": "string",
+                  "id": 1
+                },
+                "childType": {
+                  "type": "string",
+                  "id": 2
+                }
               }
             }
           }
@@ -3618,6 +4535,18 @@
                 }
               }
             },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
             "Timestamp": {
               "fields": {
                 "seconds": {
@@ -3630,14 +4559,14 @@
                 }
               }
             },
-            "Duration": {
+            "Any": {
               "fields": {
-                "seconds": {
-                  "type": "int64",
+                "type_url": {
+                  "type": "string",
                   "id": 1
                 },
-                "nanos": {
-                  "type": "int32",
+                "value": {
+                  "type": "bytes",
                   "id": 2
                 }
               }
@@ -3651,18 +4580,6 @@
                   "rule": "repeated",
                   "type": "string",
                   "id": 1
-                }
-              }
-            },
-            "Any": {
-              "fields": {
-                "type_url": {
-                  "type": "string",
-                  "id": 1
-                },
-                "value": {
-                  "type": "bytes",
-                  "id": 2
                 }
               }
             }
