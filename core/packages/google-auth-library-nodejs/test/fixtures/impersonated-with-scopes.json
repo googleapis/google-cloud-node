@@ -1,0 +1,13 @@
+{
+  "type": "impersonated_service_account",
+  "source_credentials": {
+    "client_id": "oauth_client_id",
+    "client_secret": "oauth_client_secret",
+    "refresh_token": "user_refresh_token",
+    "type": "authorized_user"
+  },
+  "service_account_impersonation_url": "https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/service-account-email@project-name.iam.gserviceaccount.com:generateAccessToken",
+  "scopes": [
+    "https://www.googleapis.com/auth/drive"
+  ]
+}

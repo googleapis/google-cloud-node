@@ -1,0 +1,32 @@
+{
+  "name": "google-auth-library-samples",
+  "description": "A set of samples for the google-auth-library npm module.",
+  "files": [
+    "*.js"
+  ],
+  "scripts": {
+    "setup": "node scripts/*.js",
+    "test": "mocha --timeout 60000"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/language": "^7.0.0",
+    "@google-cloud/storage": "^7.0.0",
+    "@aws-sdk/credential-providers": "^3.58.0",
+    "@googleapis/iam": "^34.0.0",
+    "google-auth-library": "^10.5.0",
+    "dotenv": "^17.0.0",
+    "gaxios": "^7.0.0",
+    "node-fetch": "^2.3.0",
+    "open": "^9.0.0",
+    "server-destroy": "^1.0.1",
+    "@aws-sdk/client-sts": "^3.58.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.0"
+  }
+}
