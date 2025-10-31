@@ -1,0 +1,8 @@
+{
+  "cert_configs": {
+    "workload": {
+      "key_path": "./test/fixtures/external-account-cert/leaf_malformed.key",
+      "cert_path": "./test/fixtures/external-account-cert/leaf.crt"
+    }
+  }
+}
