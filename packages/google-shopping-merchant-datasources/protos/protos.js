@@ -2538,7 +2538,6 @@
                              * @property {string|null} [contentLanguage] PrimaryProductDataSource contentLanguage
                              * @property {Array.<string>|null} [countries] PrimaryProductDataSource countries
                              * @property {google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDefaultRule|null} [defaultRule] PrimaryProductDataSource defaultRule
-                             * @property {boolean|null} [containsCustomRules] PrimaryProductDataSource containsCustomRules
                              * @property {Array.<google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination>|null} [destinations] PrimaryProductDataSource destinations
                              */
     
@@ -2600,14 +2599,6 @@
                             PrimaryProductDataSource.prototype.defaultRule = null;
     
                             /**
-                             * PrimaryProductDataSource containsCustomRules.
-                             * @member {boolean} containsCustomRules
-                             * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
-                             * @instance
-                             */
-                            PrimaryProductDataSource.prototype.containsCustomRules = false;
-    
-                            /**
                              * PrimaryProductDataSource destinations.
                              * @member {Array.<google.shopping.merchant.datasources.v1.PrimaryProductDataSource.IDestination>} destinations
                              * @memberof google.shopping.merchant.datasources.v1.PrimaryProductDataSource
@@ -2663,8 +2654,6 @@
                                         writer.uint32(/* id 6, wireType 2 =*/50).string(message.countries[i]);
                                 if (message.defaultRule != null && Object.hasOwnProperty.call(message, "defaultRule"))
                                     $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.encode(message.defaultRule, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
-                                if (message.containsCustomRules != null && Object.hasOwnProperty.call(message, "containsCustomRules"))
-                                    writer.uint32(/* id 9, wireType 0 =*/72).bool(message.containsCustomRules);
                                 if (message.destinations != null && message.destinations.length)
                                     for (var i = 0; i < message.destinations.length; ++i)
                                         $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.Destination.encode(message.destinations[i], writer.uint32(/* id 10, wireType 2 =*/82).fork()).ldelim();
@@ -2726,10 +2715,6 @@
                                         }
                                     case 7: {
                                             message.defaultRule = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.decode(reader, reader.uint32());
-                                            break;
-                                        }
-                                    case 9: {
-                                            message.containsCustomRules = reader.bool();
                                             break;
                                         }
                                     case 10: {
@@ -2799,9 +2784,6 @@
                                     if (error)
                                         return "defaultRule." + error;
                                 }
-                                if (message.containsCustomRules != null && message.hasOwnProperty("containsCustomRules"))
-                                    if (typeof message.containsCustomRules !== "boolean")
-                                        return "containsCustomRules: boolean expected";
                                 if (message.destinations != null && message.hasOwnProperty("destinations")) {
                                     if (!Array.isArray(message.destinations))
                                         return "destinations: array expected";
@@ -2844,8 +2826,6 @@
                                         throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.defaultRule: object expected");
                                     message.defaultRule = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.fromObject(object.defaultRule);
                                 }
-                                if (object.containsCustomRules != null)
-                                    message.containsCustomRules = Boolean(object.containsCustomRules);
                                 if (object.destinations) {
                                     if (!Array.isArray(object.destinations))
                                         throw TypeError(".google.shopping.merchant.datasources.v1.PrimaryProductDataSource.destinations: array expected");
@@ -2878,7 +2858,6 @@
                                 }
                                 if (options.defaults) {
                                     object.defaultRule = null;
-                                    object.containsCustomRules = false;
                                     object.legacyLocal = false;
                                 }
                                 if (message.feedLabel != null && message.hasOwnProperty("feedLabel")) {
@@ -2898,8 +2877,6 @@
                                 }
                                 if (message.defaultRule != null && message.hasOwnProperty("defaultRule"))
                                     object.defaultRule = $root.google.shopping.merchant.datasources.v1.PrimaryProductDataSource.DefaultRule.toObject(message.defaultRule, options);
-                                if (message.containsCustomRules != null && message.hasOwnProperty("containsCustomRules"))
-                                    object.containsCustomRules = message.containsCustomRules;
                                 if (message.destinations && message.destinations.length) {
                                     object.destinations = [];
                                     for (var j = 0; j < message.destinations.length; ++j)
