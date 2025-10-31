@@ -1,9 +1,0 @@
-{
-  "type": "external_account_authorized_user",
-  "audience": "//iam.googleapis.com/projects/123456/locations/global/workloadIdentityPools/POOL_ID/providers/PROVIDER_ID",
-  "client_id": "clientId",
-  "client_secret": "clientSecret",
-  "refresh_token": "refreshToken",
-  "token_url": "https://sts.googleapis.com/v1/oauthtoken",
-  "token_info_url": "https://sts.googleapis.com/v1/introspect"
-}
