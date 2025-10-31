@@ -1,0 +1,17 @@
+{
+  "extends": "./node_modules/gts/tsconfig-google.json",
+  "compilerOptions": {
+    "lib": ["DOM"],
+    "rootDir": ".",
+    "outDir": "build"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.cts",
+    "test/**/*.ts",
+    "system-test/*.ts",
+    "browser-test/*.ts",
+    "browser-test/**/*.ts"
+  ],
+  "exclude": ["test/fixtures"]
+}
