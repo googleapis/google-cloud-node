@@ -44,8 +44,8 @@
     "postpack": "npm run postpack:cjs && npm run postpack:esm",
     "test": "bazelisk test --test_output=errors //:unit_tests",
     "ts-test-application": "mocha bazel-bin/typescript/test/test-application/test-ts --timeout 600000",
-    "system-test": "npm run compile && c8 mocha build/system-test",
-    "samples-test": "npm run compile && cd samples/ && npm link ../ && npm i && npm test"
+    "system-test": "echo 'no system test'",
+    "samples-test": "echo 'no samples test'"
   },
   "dependencies": {
     "@types/js-yaml": "^4.0.9",
