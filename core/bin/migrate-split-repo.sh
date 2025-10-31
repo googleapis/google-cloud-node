@@ -30,7 +30,7 @@ ARTIFACT_NAME=$2
 SCRIPT_DIR=$(realpath $(dirname "${BASH_SOURCE[0]}"))
  
 export UPDATE_SCRIPT="${SCRIPT_DIR}/split-repo-post-process.sh"
-export PACKAGE_PATH="generator/${ARTIFACT_NAME}"
+export PACKAGE_PATH="packages/${ARTIFACT_NAME}"
 
 # run the migrate script, remove .kokoro and .github folders
 # keep the .github/.OwlBot.yaml config
