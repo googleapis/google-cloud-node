@@ -6,7 +6,7 @@
     "dev-packages/jsdoc-region-tag": {},
     "dev-packages/logging-utils": {},
     "dev-packages/pack-n-play": {},
-    "generator/google-auth-library-nodejs": {},
+    "packages/google-auth-library-nodejs": {},
     "packages/gax": {},
     "packages/gaxios": {},
     "packages/gcp-metadata": {},
