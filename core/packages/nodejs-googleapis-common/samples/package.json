@@ -1,0 +1,23 @@
+{
+  "description": "Samples for the nodejs-googleapis-common npm module.",
+  "license": "MIT",
+  "author": "Google LLC",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "*.js",
+    "!test/"
+  ],
+  "repository": "googleapis/nodejs-googleapis-common",
+  "private": true,
+  "scripts": {
+    "test": "echo \"There are no sample tests 👻\""
+  },
+  "dependencies": {
+    "googleapis-common": "^8.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.0.0"
+  }
+}
