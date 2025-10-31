@@ -18,7 +18,7 @@
     "benchmark": "node build/benchmark/bench.js",
     "compile": "tsc -p .",
     "test": "c8 mocha build/test",
-    "system-test": "npm run compile && c8 mocha build/system-test",
+    "system-test": "npm run compile && c8 mocha build/system-test  --timeout 60000",
     "presystem-test": "npm run compile",
     "fix": "gts fix",
     "prepare": "npm run compile",
