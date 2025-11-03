@@ -40,8 +40,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/googleapis/gax-nodejs.git",
-    "directory": "gapic-tools"
+    "directory": "packages/tools",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.4",
@@ -58,6 +58,10 @@
     "protobufjs": "^7.5.0",
     "typescript": "^5.7.3"
   },
+  "bugs": {
+    "url": "https://github.com/googleapis/google-cloud-node-core/issues"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/packages/tools",
   "engines": {
     "node": ">=18"
   }

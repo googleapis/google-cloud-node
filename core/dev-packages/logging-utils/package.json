@@ -22,8 +22,8 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/googleapis/gax-nodejs.git",
-    "directory": "logging-utils"
+    "directory": "dev-packages/logging-utils",
+    "url": "https://github.com/googleapis/google-cloud-node-core.git"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.10",
@@ -35,6 +35,10 @@
     "sinon": "^21.0.0",
     "typescript": "^5.1.6"
   },
+  "bugs": {
+    "url": "https://github.com/googleapis/google-cloud-node-core/issues"
+  },
+  "homepage": "https://github.com/googleapis/google-cloud-node-core/tree/main/dev-packages/logging-utils",
   "engines": {
     "node": ">=14"
   }
