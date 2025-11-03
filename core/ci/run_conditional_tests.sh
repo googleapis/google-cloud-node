@@ -78,7 +78,7 @@ subdirs=(
 )
 
 RETVAL=0
-tests_with_credentials="packages/google-auth-library-nodejs"
+tests_with_credentials="packages/google-auth-library-nodejs/"
 
 for subdir in ${subdirs[@]}; do
     for d in `ls -d ${subdir}/*/`; do

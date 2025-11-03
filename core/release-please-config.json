@@ -7,9 +7,11 @@
     "dev-packages/logging-utils": {},
     "dev-packages/pack-n-play": {},
     "generator/gapic-generator-typescript": {},
+    "packages/google-auth-library-nodejs": {},
     "packages/gax": {},
     "packages/gaxios": {},
     "packages/gcp-metadata": {},
+    "packages/nodejs-googleapis-common": {},
     "packages/proto3-json-serializer-nodejs": {},
     "packages/tools": {}
   },
