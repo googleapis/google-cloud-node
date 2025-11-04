@@ -311748,6 +311748,9 @@ export namespace google {
 
                     /** ListEventsRequest filter */
                     filter?: (string|null);
+
+                    /** ListEventsRequest orderBy */
+                    orderBy?: (string|null);
                 }
 
                 /** Represents a ListEventsRequest. */
@@ -311770,6 +311773,9 @@ export namespace google {
 
                     /** ListEventsRequest filter. */
                     public filter: string;
+
+                    /** ListEventsRequest orderBy. */
+                    public orderBy: string;
 
                     /**
                      * Creates a new ListEventsRequest instance using the specified properties.
