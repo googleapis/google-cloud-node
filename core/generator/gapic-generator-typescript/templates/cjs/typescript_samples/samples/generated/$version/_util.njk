@@ -1,0 +1,112 @@
+{%- macro printCommentsForSample(method) -%}
+{%- set commentsMap = method.paramComment -%}
+{%- for oneComment in commentsMap -%}
+{%- set lines = oneComment.comments -%}
+{%- if not (r/Deprecated/).test(lines) -%}
+{{ \n }}
+  /**
+{%- for line in lines %}
+{%- set trimmed = line.replace(r/\s+$/, '') -%}
+{%- if trimmed.length > 0 %}
+{%- set formattedLine = trimmed.replaceAll('*/', '* /') | safe %}
+{%- set regExpIgnoreCase1 = r/\`\[/g %}
+{%- set regExpIgnoreCase2 = r/\]\+/g %}
+{%- set regExpIgnoreCase3 = r/\]\{/g %}
+{%- set regExpIgnoreCase4 = r/\/\[/g %}
+{%- set regExpIgnoreCase5 = r/\]\"/g %}
+{%- set regExpIgnoreCase6 = r/\]\//g %}
+{%- set regExpFindCase1 = r/\]/g %}
+{%- set regExpFindCase2 = r/\[/g %}
+{%- set regExpFindCase3 = r/\][\.,'"\/`:;\)]/g %}
+{%- if regExpFindCase1.test(formattedLine) or regExpFindCase2.test(formattedLine) %}
+{%- if regExpIgnoreCase1.test(formattedLine) or regExpIgnoreCase2.test(formattedLine) or regExpIgnoreCase3.test(formattedLine) or regExpIgnoreCase4.test(formattedLine) or regExpIgnoreCase5.test(formattedLine) or regExpIgnoreCase6.test(formattedLine) %}
+   * {{ formattedLine -}}
+{% else %}
+{%- if regExpFindCase3.test(formattedLine) %}
+   * {{ formattedLine.replaceAll(r/\]\[/g, " ").replaceAll(r/\[/g, "").replaceAll(r/\]/g, "") | safe -}} 
+{% else %}
+   * {{ formattedLine.replaceAll(r/\[/g, "").replaceAll(r/\]/g, " ") | safe -}}
+{%- endif %}
+{%- endif %}
+{%- else %}
+   * {{ formattedLine -}}
+{%- endif %}
+{%- endif -%}
+{%- endfor -%}
+{{ \n }}
+   */
+{%- endif -%}
+{%- set type = oneComment.paramType -%}
+{%- set lines = oneComment.comments -%}
+{%- if not (r/Deprecated/).test(lines) -%}
+{%- if printParamFieldSample(oneComment) == 'project' %}
+  // const {{ printParamFieldSample(oneComment) }} = 'my-project'
+{%- elif printParamFieldSample(oneComment) == 'region' %}
+  // const {{ printParamFieldSample(oneComment) }} = 'us-central1'
+{%- elif type.startsWith('.') %}
+{%- if method.maxResultsParameter
+  and method.pagingResponseType
+  and (printParamFieldSample(oneComment) | replace('[', '') | replace(']', '')).val=="maxResults"
+  and not asyncOrStream
+  and (type == ".google.protobuf.UInt32Value" or type == ".google.protobuf.Int32Value")%}
+  // const {{ printParamFieldSample(oneComment) | replace('[', '') | replace(']', '') }} = {{ printTypeExample('number') -}} {{-\n-}}
+  {%- else %}
+  // const {{ printParamFieldSample(oneComment) | replace('[', '') | replace(']', '') }} = {{ printTypeExample(type.substring(1)) -}} {{-\n-}}
+  {%- endif -%}
+{%- else %}
+  // const {{ printParamFieldSample(oneComment) | replace('[', '') | replace(']', '') }} = {{ printTypeExample(convertParamType(oneComment.paramType)) -}}
+{%- endif -%}
+{%- endif -%}
+{%- endfor -%}
+{%- endmacro -%}
+
+{%- macro printParamFieldSample(oneComment) %}
+{%- if oneComment.fieldBehavior and oneComment.fieldBehavior === 1 -%}
+[{{ oneComment.paramName.toCamelCase() }}]
+{%- else -%}
+{{ oneComment.paramName.toCamelCase() }}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro typescriptType(protobufType) -%}
+{%- if protobufType.includes('TYPE_BYTES') -%}
+{%- set type = 'Buffer' -%}
+{%- elif protobufType.includes('TYPE_BOOL') -%}
+{%- set type = 'boolean' -%}
+{%- elif protobufType.includes('TYPE_STRING') -%}
+{%- set type = 'string' -%}
+{%- elif protobufType.includes('TYPE_') -%}
+{#- any other type is essentially a number: int32, uint32, etc. -#}
+{%- set type = 'number' -%}
+{%- else -%}
+{%- set type = '' -%}
+{%- endif -%}
+{%- if protobufType.includes('[]') -%}
+{{ type }}[]
+{%- else -%}
+{{ type }}
+{%- endif -%}
+{%- endmacro -%}
+
+
+{%- macro printTypeExample(type) -%}
+{%- if type.includes('Buffer') -%}
+            Buffer.from('string')
+{%- elif type.includes('boolean') -%}
+            true
+{%- elif type.includes('string[]') -%}
+            ['abc','def']
+{%- elif type.includes('[]') -%}
+            [1,2,3,4]
+{%- elif type.includes('string') -%}
+            'abc123'
+{%- elif type.includes('number') -%}
+            1234
+{%- else -%}
+            {}
+{%- endif -%}
+{%- endmacro -%}
+
+{%- macro convertParamType(paramType) -%}
+          {{- typescriptType(paramType) -}}
+{%- endmacro -%}
