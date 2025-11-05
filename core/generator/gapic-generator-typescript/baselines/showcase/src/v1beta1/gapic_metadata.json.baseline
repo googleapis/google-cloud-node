@@ -120,6 +120,7 @@
       }
     },
     "Echo": {
+      "apiVersion": "v1_20240408",
       "clients": {
         "grpc": {
           "libraryClient": "EchoClient",

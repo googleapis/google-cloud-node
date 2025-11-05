@@ -43,6 +43,9 @@ limitations under the License.
 {%- for service in api.services -%}
     {{- serviceJoiner() -}}
     "{{ service.name }}": {
+      {%- if service.apiVersion -%}
+      "apiVersion": "{{ service.apiVersion }}",
+      {%- endif -%}
 {#- TODO(@alexander-fenster): replace hardcoded transports ("grpc", etc.) with an iteration. -#}
       "clients": {
         "grpc": {
