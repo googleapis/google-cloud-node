@@ -62909,6 +62909,7 @@
                          * @property {google.cloud.dataplex.v1.DataProfileSpec.IPostScanActions|null} [postScanActions] DataProfileSpec postScanActions
                          * @property {google.cloud.dataplex.v1.DataProfileSpec.ISelectedFields|null} [includeFields] DataProfileSpec includeFields
                          * @property {google.cloud.dataplex.v1.DataProfileSpec.ISelectedFields|null} [excludeFields] DataProfileSpec excludeFields
+                         * @property {boolean|null} [catalogPublishingEnabled] DataProfileSpec catalogPublishingEnabled
                          */
     
                         /**
@@ -62967,6 +62968,14 @@
                         DataProfileSpec.prototype.excludeFields = null;
     
                         /**
+                         * DataProfileSpec catalogPublishingEnabled.
+                         * @member {boolean} catalogPublishingEnabled
+                         * @memberof google.cloud.dataplex.v1.DataProfileSpec
+                         * @instance
+                         */
+                        DataProfileSpec.prototype.catalogPublishingEnabled = false;
+    
+                        /**
                          * Creates a new DataProfileSpec instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataplex.v1.DataProfileSpec
@@ -63000,6 +63009,8 @@
                                 $root.google.cloud.dataplex.v1.DataProfileSpec.SelectedFields.encode(message.includeFields, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.excludeFields != null && Object.hasOwnProperty.call(message, "excludeFields"))
                                 $root.google.cloud.dataplex.v1.DataProfileSpec.SelectedFields.encode(message.excludeFields, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.catalogPublishingEnabled != null && Object.hasOwnProperty.call(message, "catalogPublishingEnabled"))
+                                writer.uint32(/* id 8, wireType 0 =*/64).bool(message.catalogPublishingEnabled);
                             return writer;
                         };
     
@@ -63054,6 +63065,10 @@
                                     }
                                 case 6: {
                                         message.excludeFields = $root.google.cloud.dataplex.v1.DataProfileSpec.SelectedFields.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 8: {
+                                        message.catalogPublishingEnabled = reader.bool();
                                         break;
                                     }
                                 default:
@@ -63112,6 +63127,9 @@
                                 if (error)
                                     return "excludeFields." + error;
                             }
+                            if (message.catalogPublishingEnabled != null && message.hasOwnProperty("catalogPublishingEnabled"))
+                                if (typeof message.catalogPublishingEnabled !== "boolean")
+                                    return "catalogPublishingEnabled: boolean expected";
                             return null;
                         };
     
@@ -63146,6 +63164,8 @@
                                     throw TypeError(".google.cloud.dataplex.v1.DataProfileSpec.excludeFields: object expected");
                                 message.excludeFields = $root.google.cloud.dataplex.v1.DataProfileSpec.SelectedFields.fromObject(object.excludeFields);
                             }
+                            if (object.catalogPublishingEnabled != null)
+                                message.catalogPublishingEnabled = Boolean(object.catalogPublishingEnabled);
                             return message;
                         };
     
@@ -63168,6 +63188,7 @@
                                 object.postScanActions = null;
                                 object.includeFields = null;
                                 object.excludeFields = null;
+                                object.catalogPublishingEnabled = false;
                             }
                             if (message.samplingPercent != null && message.hasOwnProperty("samplingPercent"))
                                 object.samplingPercent = options.json && !isFinite(message.samplingPercent) ? String(message.samplingPercent) : message.samplingPercent;
@@ -63179,6 +63200,8 @@
                                 object.includeFields = $root.google.cloud.dataplex.v1.DataProfileSpec.SelectedFields.toObject(message.includeFields, options);
                             if (message.excludeFields != null && message.hasOwnProperty("excludeFields"))
                                 object.excludeFields = $root.google.cloud.dataplex.v1.DataProfileSpec.SelectedFields.toObject(message.excludeFields, options);
+                            if (message.catalogPublishingEnabled != null && message.hasOwnProperty("catalogPublishingEnabled"))
+                                object.catalogPublishingEnabled = message.catalogPublishingEnabled;
                             return object;
                         };
     
@@ -63857,6 +63880,7 @@
                          * @property {google.cloud.dataplex.v1.DataProfileResult.IProfile|null} [profile] DataProfileResult profile
                          * @property {google.cloud.dataplex.v1.IScannedData|null} [scannedData] DataProfileResult scannedData
                          * @property {google.cloud.dataplex.v1.DataProfileResult.IPostScanActionsResult|null} [postScanActionsResult] DataProfileResult postScanActionsResult
+                         * @property {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus|null} [catalogPublishingStatus] DataProfileResult catalogPublishingStatus
                          */
     
                         /**
@@ -63907,6 +63931,14 @@
                         DataProfileResult.prototype.postScanActionsResult = null;
     
                         /**
+                         * DataProfileResult catalogPublishingStatus.
+                         * @member {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus|null|undefined} catalogPublishingStatus
+                         * @memberof google.cloud.dataplex.v1.DataProfileResult
+                         * @instance
+                         */
+                        DataProfileResult.prototype.catalogPublishingStatus = null;
+    
+                        /**
                          * Creates a new DataProfileResult instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dataplex.v1.DataProfileResult
@@ -63938,6 +63970,8 @@
                                 $root.google.cloud.dataplex.v1.ScannedData.encode(message.scannedData, writer.uint32(/* id 5, wireType 2 =*/42).fork()).ldelim();
                             if (message.postScanActionsResult != null && Object.hasOwnProperty.call(message, "postScanActionsResult"))
                                 $root.google.cloud.dataplex.v1.DataProfileResult.PostScanActionsResult.encode(message.postScanActionsResult, writer.uint32(/* id 6, wireType 2 =*/50).fork()).ldelim();
+                            if (message.catalogPublishingStatus != null && Object.hasOwnProperty.call(message, "catalogPublishingStatus"))
+                                $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.encode(message.catalogPublishingStatus, writer.uint32(/* id 7, wireType 2 =*/58).fork()).ldelim();
                             return writer;
                         };
     
@@ -63988,6 +64022,10 @@
                                     }
                                 case 6: {
                                         message.postScanActionsResult = $root.google.cloud.dataplex.v1.DataProfileResult.PostScanActionsResult.decode(reader, reader.uint32());
+                                        break;
+                                    }
+                                case 7: {
+                                        message.catalogPublishingStatus = $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.decode(reader, reader.uint32());
                                         break;
                                     }
                                 default:
@@ -64043,6 +64081,11 @@
                                 if (error)
                                     return "postScanActionsResult." + error;
                             }
+                            if (message.catalogPublishingStatus != null && message.hasOwnProperty("catalogPublishingStatus")) {
+                                var error = $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.verify(message.catalogPublishingStatus);
+                                if (error)
+                                    return "catalogPublishingStatus." + error;
+                            }
                             return null;
                         };
     
@@ -64082,6 +64125,11 @@
                                     throw TypeError(".google.cloud.dataplex.v1.DataProfileResult.postScanActionsResult: object expected");
                                 message.postScanActionsResult = $root.google.cloud.dataplex.v1.DataProfileResult.PostScanActionsResult.fromObject(object.postScanActionsResult);
                             }
+                            if (object.catalogPublishingStatus != null) {
+                                if (typeof object.catalogPublishingStatus !== "object")
+                                    throw TypeError(".google.cloud.dataplex.v1.DataProfileResult.catalogPublishingStatus: object expected");
+                                message.catalogPublishingStatus = $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.fromObject(object.catalogPublishingStatus);
+                            }
                             return message;
                         };
     
@@ -64107,6 +64155,7 @@
                                 object.profile = null;
                                 object.scannedData = null;
                                 object.postScanActionsResult = null;
+                                object.catalogPublishingStatus = null;
                             }
                             if (message.rowCount != null && message.hasOwnProperty("rowCount"))
                                 if (typeof message.rowCount === "number")
@@ -64119,6 +64168,8 @@
                                 object.scannedData = $root.google.cloud.dataplex.v1.ScannedData.toObject(message.scannedData, options);
                             if (message.postScanActionsResult != null && message.hasOwnProperty("postScanActionsResult"))
                                 object.postScanActionsResult = $root.google.cloud.dataplex.v1.DataProfileResult.PostScanActionsResult.toObject(message.postScanActionsResult, options);
+                            if (message.catalogPublishingStatus != null && message.hasOwnProperty("catalogPublishingStatus"))
+                                object.catalogPublishingStatus = $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.toObject(message.catalogPublishingStatus, options);
                             return object;
                         };
     
@@ -66763,6 +66814,251 @@
                         })();
     
                         return DataProfileResult;
+                    })();
+    
+                    v1.DataScanCatalogPublishingStatus = (function() {
+    
+                        /**
+                         * Properties of a DataScanCatalogPublishingStatus.
+                         * @memberof google.cloud.dataplex.v1
+                         * @interface IDataScanCatalogPublishingStatus
+                         * @property {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State|null} [state] DataScanCatalogPublishingStatus state
+                         */
+    
+                        /**
+                         * Constructs a new DataScanCatalogPublishingStatus.
+                         * @memberof google.cloud.dataplex.v1
+                         * @classdesc Represents a DataScanCatalogPublishingStatus.
+                         * @implements IDataScanCatalogPublishingStatus
+                         * @constructor
+                         * @param {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus=} [properties] Properties to set
+                         */
+                        function DataScanCatalogPublishingStatus(properties) {
+                            if (properties)
+                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                    if (properties[keys[i]] != null)
+                                        this[keys[i]] = properties[keys[i]];
+                        }
+    
+                        /**
+                         * DataScanCatalogPublishingStatus state.
+                         * @member {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State} state
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @instance
+                         */
+                        DataScanCatalogPublishingStatus.prototype.state = 0;
+    
+                        /**
+                         * Creates a new DataScanCatalogPublishingStatus instance using the specified properties.
+                         * @function create
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus=} [properties] Properties to set
+                         * @returns {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} DataScanCatalogPublishingStatus instance
+                         */
+                        DataScanCatalogPublishingStatus.create = function create(properties) {
+                            return new DataScanCatalogPublishingStatus(properties);
+                        };
+    
+                        /**
+                         * Encodes the specified DataScanCatalogPublishingStatus message. Does not implicitly {@link google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.verify|verify} messages.
+                         * @function encode
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus} message DataScanCatalogPublishingStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataScanCatalogPublishingStatus.encode = function encode(message, writer) {
+                            if (!writer)
+                                writer = $Writer.create();
+                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
+                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
+                            return writer;
+                        };
+    
+                        /**
+                         * Encodes the specified DataScanCatalogPublishingStatus message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.verify|verify} messages.
+                         * @function encodeDelimited
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @static
+                         * @param {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus} message DataScanCatalogPublishingStatus message or plain object to encode
+                         * @param {$protobuf.Writer} [writer] Writer to encode to
+                         * @returns {$protobuf.Writer} Writer
+                         */
+                        DataScanCatalogPublishingStatus.encodeDelimited = function encodeDelimited(message, writer) {
+                            return this.encode(message, writer).ldelim();
+                        };
+    
+                        /**
+                         * Decodes a DataScanCatalogPublishingStatus message from the specified reader or buffer.
+                         * @function decode
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @param {number} [length] Message length if known beforehand
+                         * @returns {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} DataScanCatalogPublishingStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataScanCatalogPublishingStatus.decode = function decode(reader, length, error) {
+                            if (!(reader instanceof $Reader))
+                                reader = $Reader.create(reader);
+                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus();
+                            while (reader.pos < end) {
+                                var tag = reader.uint32();
+                                if (tag === error)
+                                    break;
+                                switch (tag >>> 3) {
+                                case 1: {
+                                        message.state = reader.int32();
+                                        break;
+                                    }
+                                default:
+                                    reader.skipType(tag & 7);
+                                    break;
+                                }
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Decodes a DataScanCatalogPublishingStatus message from the specified reader or buffer, length delimited.
+                         * @function decodeDelimited
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @static
+                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                         * @returns {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} DataScanCatalogPublishingStatus
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        DataScanCatalogPublishingStatus.decodeDelimited = function decodeDelimited(reader) {
+                            if (!(reader instanceof $Reader))
+                                reader = new $Reader(reader);
+                            return this.decode(reader, reader.uint32());
+                        };
+    
+                        /**
+                         * Verifies a DataScanCatalogPublishingStatus message.
+                         * @function verify
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @static
+                         * @param {Object.<string,*>} message Plain object to verify
+                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                         */
+                        DataScanCatalogPublishingStatus.verify = function verify(message) {
+                            if (typeof message !== "object" || message === null)
+                                return "object expected";
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                switch (message.state) {
+                                default:
+                                    return "state: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                    break;
+                                }
+                            return null;
+                        };
+    
+                        /**
+                         * Creates a DataScanCatalogPublishingStatus message from a plain object. Also converts values to their respective internal types.
+                         * @function fromObject
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @static
+                         * @param {Object.<string,*>} object Plain object
+                         * @returns {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} DataScanCatalogPublishingStatus
+                         */
+                        DataScanCatalogPublishingStatus.fromObject = function fromObject(object) {
+                            if (object instanceof $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus)
+                                return object;
+                            var message = new $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus();
+                            switch (object.state) {
+                            default:
+                                if (typeof object.state === "number") {
+                                    message.state = object.state;
+                                    break;
+                                }
+                                break;
+                            case "STATE_UNSPECIFIED":
+                            case 0:
+                                message.state = 0;
+                                break;
+                            case "SUCCEEDED":
+                            case 1:
+                                message.state = 1;
+                                break;
+                            case "FAILED":
+                            case 2:
+                                message.state = 2;
+                                break;
+                            }
+                            return message;
+                        };
+    
+                        /**
+                         * Creates a plain object from a DataScanCatalogPublishingStatus message. Also converts values to other types if specified.
+                         * @function toObject
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @static
+                         * @param {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} message DataScanCatalogPublishingStatus
+                         * @param {$protobuf.IConversionOptions} [options] Conversion options
+                         * @returns {Object.<string,*>} Plain object
+                         */
+                        DataScanCatalogPublishingStatus.toObject = function toObject(message, options) {
+                            if (!options)
+                                options = {};
+                            var object = {};
+                            if (options.defaults)
+                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
+                            if (message.state != null && message.hasOwnProperty("state"))
+                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State[message.state] : message.state;
+                            return object;
+                        };
+    
+                        /**
+                         * Converts this DataScanCatalogPublishingStatus to JSON.
+                         * @function toJSON
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @instance
+                         * @returns {Object.<string,*>} JSON object
+                         */
+                        DataScanCatalogPublishingStatus.prototype.toJSON = function toJSON() {
+                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                        };
+    
+                        /**
+                         * Gets the default type url for DataScanCatalogPublishingStatus
+                         * @function getTypeUrl
+                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
+                         * @static
+                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns {string} The default type url
+                         */
+                        DataScanCatalogPublishingStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                            if (typeUrlPrefix === undefined) {
+                                typeUrlPrefix = "type.googleapis.com";
+                            }
+                            return typeUrlPrefix + "/google.cloud.dataplex.v1.DataScanCatalogPublishingStatus";
+                        };
+    
+                        /**
+                         * State enum.
+                         * @name google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State
+                         * @enum {number}
+                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
+                         * @property {number} SUCCEEDED=1 SUCCEEDED value
+                         * @property {number} FAILED=2 FAILED value
+                         */
+                        DataScanCatalogPublishingStatus.State = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "SUCCEEDED"] = 1;
+                            values[valuesById[2] = "FAILED"] = 2;
+                            return values;
+                        })();
+    
+                        return DataScanCatalogPublishingStatus;
                     })();
     
                     v1.Trigger = (function() {
@@ -75175,251 +75471,6 @@
                         };
     
                         return DataQualityColumnResult;
-                    })();
-    
-                    v1.DataScanCatalogPublishingStatus = (function() {
-    
-                        /**
-                         * Properties of a DataScanCatalogPublishingStatus.
-                         * @memberof google.cloud.dataplex.v1
-                         * @interface IDataScanCatalogPublishingStatus
-                         * @property {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State|null} [state] DataScanCatalogPublishingStatus state
-                         */
-    
-                        /**
-                         * Constructs a new DataScanCatalogPublishingStatus.
-                         * @memberof google.cloud.dataplex.v1
-                         * @classdesc Represents a DataScanCatalogPublishingStatus.
-                         * @implements IDataScanCatalogPublishingStatus
-                         * @constructor
-                         * @param {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus=} [properties] Properties to set
-                         */
-                        function DataScanCatalogPublishingStatus(properties) {
-                            if (properties)
-                                for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
-                                    if (properties[keys[i]] != null)
-                                        this[keys[i]] = properties[keys[i]];
-                        }
-    
-                        /**
-                         * DataScanCatalogPublishingStatus state.
-                         * @member {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State} state
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @instance
-                         */
-                        DataScanCatalogPublishingStatus.prototype.state = 0;
-    
-                        /**
-                         * Creates a new DataScanCatalogPublishingStatus instance using the specified properties.
-                         * @function create
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @static
-                         * @param {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus=} [properties] Properties to set
-                         * @returns {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} DataScanCatalogPublishingStatus instance
-                         */
-                        DataScanCatalogPublishingStatus.create = function create(properties) {
-                            return new DataScanCatalogPublishingStatus(properties);
-                        };
-    
-                        /**
-                         * Encodes the specified DataScanCatalogPublishingStatus message. Does not implicitly {@link google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.verify|verify} messages.
-                         * @function encode
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @static
-                         * @param {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus} message DataScanCatalogPublishingStatus message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DataScanCatalogPublishingStatus.encode = function encode(message, writer) {
-                            if (!writer)
-                                writer = $Writer.create();
-                            if (message.state != null && Object.hasOwnProperty.call(message, "state"))
-                                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.state);
-                            return writer;
-                        };
-    
-                        /**
-                         * Encodes the specified DataScanCatalogPublishingStatus message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.verify|verify} messages.
-                         * @function encodeDelimited
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @static
-                         * @param {google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus} message DataScanCatalogPublishingStatus message or plain object to encode
-                         * @param {$protobuf.Writer} [writer] Writer to encode to
-                         * @returns {$protobuf.Writer} Writer
-                         */
-                        DataScanCatalogPublishingStatus.encodeDelimited = function encodeDelimited(message, writer) {
-                            return this.encode(message, writer).ldelim();
-                        };
-    
-                        /**
-                         * Decodes a DataScanCatalogPublishingStatus message from the specified reader or buffer.
-                         * @function decode
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @param {number} [length] Message length if known beforehand
-                         * @returns {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} DataScanCatalogPublishingStatus
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DataScanCatalogPublishingStatus.decode = function decode(reader, length, error) {
-                            if (!(reader instanceof $Reader))
-                                reader = $Reader.create(reader);
-                            var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus();
-                            while (reader.pos < end) {
-                                var tag = reader.uint32();
-                                if (tag === error)
-                                    break;
-                                switch (tag >>> 3) {
-                                case 1: {
-                                        message.state = reader.int32();
-                                        break;
-                                    }
-                                default:
-                                    reader.skipType(tag & 7);
-                                    break;
-                                }
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Decodes a DataScanCatalogPublishingStatus message from the specified reader or buffer, length delimited.
-                         * @function decodeDelimited
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @static
-                         * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
-                         * @returns {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} DataScanCatalogPublishingStatus
-                         * @throws {Error} If the payload is not a reader or valid buffer
-                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                         */
-                        DataScanCatalogPublishingStatus.decodeDelimited = function decodeDelimited(reader) {
-                            if (!(reader instanceof $Reader))
-                                reader = new $Reader(reader);
-                            return this.decode(reader, reader.uint32());
-                        };
-    
-                        /**
-                         * Verifies a DataScanCatalogPublishingStatus message.
-                         * @function verify
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @static
-                         * @param {Object.<string,*>} message Plain object to verify
-                         * @returns {string|null} `null` if valid, otherwise the reason why it is not
-                         */
-                        DataScanCatalogPublishingStatus.verify = function verify(message) {
-                            if (typeof message !== "object" || message === null)
-                                return "object expected";
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                switch (message.state) {
-                                default:
-                                    return "state: enum value expected";
-                                case 0:
-                                case 1:
-                                case 2:
-                                    break;
-                                }
-                            return null;
-                        };
-    
-                        /**
-                         * Creates a DataScanCatalogPublishingStatus message from a plain object. Also converts values to their respective internal types.
-                         * @function fromObject
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @static
-                         * @param {Object.<string,*>} object Plain object
-                         * @returns {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} DataScanCatalogPublishingStatus
-                         */
-                        DataScanCatalogPublishingStatus.fromObject = function fromObject(object) {
-                            if (object instanceof $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus)
-                                return object;
-                            var message = new $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus();
-                            switch (object.state) {
-                            default:
-                                if (typeof object.state === "number") {
-                                    message.state = object.state;
-                                    break;
-                                }
-                                break;
-                            case "STATE_UNSPECIFIED":
-                            case 0:
-                                message.state = 0;
-                                break;
-                            case "SUCCEEDED":
-                            case 1:
-                                message.state = 1;
-                                break;
-                            case "FAILED":
-                            case 2:
-                                message.state = 2;
-                                break;
-                            }
-                            return message;
-                        };
-    
-                        /**
-                         * Creates a plain object from a DataScanCatalogPublishingStatus message. Also converts values to other types if specified.
-                         * @function toObject
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @static
-                         * @param {google.cloud.dataplex.v1.DataScanCatalogPublishingStatus} message DataScanCatalogPublishingStatus
-                         * @param {$protobuf.IConversionOptions} [options] Conversion options
-                         * @returns {Object.<string,*>} Plain object
-                         */
-                        DataScanCatalogPublishingStatus.toObject = function toObject(message, options) {
-                            if (!options)
-                                options = {};
-                            var object = {};
-                            if (options.defaults)
-                                object.state = options.enums === String ? "STATE_UNSPECIFIED" : 0;
-                            if (message.state != null && message.hasOwnProperty("state"))
-                                object.state = options.enums === String ? $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State[message.state] === undefined ? message.state : $root.google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State[message.state] : message.state;
-                            return object;
-                        };
-    
-                        /**
-                         * Converts this DataScanCatalogPublishingStatus to JSON.
-                         * @function toJSON
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @instance
-                         * @returns {Object.<string,*>} JSON object
-                         */
-                        DataScanCatalogPublishingStatus.prototype.toJSON = function toJSON() {
-                            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
-                        };
-    
-                        /**
-                         * Gets the default type url for DataScanCatalogPublishingStatus
-                         * @function getTypeUrl
-                         * @memberof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus
-                         * @static
-                         * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                         * @returns {string} The default type url
-                         */
-                        DataScanCatalogPublishingStatus.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
-                            if (typeUrlPrefix === undefined) {
-                                typeUrlPrefix = "type.googleapis.com";
-                            }
-                            return typeUrlPrefix + "/google.cloud.dataplex.v1.DataScanCatalogPublishingStatus";
-                        };
-    
-                        /**
-                         * State enum.
-                         * @name google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State
-                         * @enum {number}
-                         * @property {number} STATE_UNSPECIFIED=0 STATE_UNSPECIFIED value
-                         * @property {number} SUCCEEDED=1 SUCCEEDED value
-                         * @property {number} FAILED=2 FAILED value
-                         */
-                        DataScanCatalogPublishingStatus.State = (function() {
-                            var valuesById = {}, values = Object.create(valuesById);
-                            values[valuesById[0] = "STATE_UNSPECIFIED"] = 0;
-                            values[valuesById[1] = "SUCCEEDED"] = 1;
-                            values[valuesById[2] = "FAILED"] = 2;
-                            return values;
-                        })();
-    
-                        return DataScanCatalogPublishingStatus;
                     })();
     
                     v1.DataTaxonomyService = (function() {
