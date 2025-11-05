@@ -346,7 +346,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 135,
+          "end": 139,
           "type": "FULL"
         }
       ],
@@ -397,6 +397,10 @@
           },
           {
             "name": "enable_rotation_correction",
+            "type": "TYPE_BOOL"
+          },
+          {
+            "name": "pdf_native_only",
             "type": "TYPE_BOOL"
           }
         ],
@@ -584,6 +588,58 @@
         "method": {
           "shortName": "DeleteGlossary",
           "fullName": "google.cloud.translation.v3beta1.TranslationService.DeleteGlossary",
+          "service": {
+            "shortName": "TranslationService",
+            "fullName": "google.cloud.translation.v3beta1.TranslationService"
+          }
+        }
+      }
+    },
+    {
+      "regionTag": "translate_v3beta1_generated_TranslationService_RefineText_async",
+      "title": "TranslationService refineText Sample",
+      "origin": "API_DEFINITION",
+      "description": " Refines the input translated text to improve the quality.",
+      "canonical": true,
+      "file": "translation_service.refine_text.js",
+      "language": "JAVASCRIPT",
+      "segments": [
+        {
+          "start": 25,
+          "end": 75,
+          "type": "FULL"
+        }
+      ],
+      "clientMethod": {
+        "shortName": "RefineText",
+        "fullName": "google.cloud.translation.v3beta1.TranslationService.RefineText",
+        "async": true,
+        "parameters": [
+          {
+            "name": "parent",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "refinement_entries",
+            "type": "TYPE_MESSAGE[]"
+          },
+          {
+            "name": "source_language_code",
+            "type": "TYPE_STRING"
+          },
+          {
+            "name": "target_language_code",
+            "type": "TYPE_STRING"
+          }
+        ],
+        "resultType": ".google.cloud.translation.v3beta1.RefineTextResponse",
+        "client": {
+          "shortName": "TranslationServiceClient",
+          "fullName": "google.cloud.translation.v3beta1.TranslationServiceClient"
+        },
+        "method": {
+          "shortName": "RefineText",
+          "fullName": "google.cloud.translation.v3beta1.TranslationService.RefineText",
           "service": {
             "shortName": "TranslationService",
             "fullName": "google.cloud.translation.v3beta1.TranslationService"
