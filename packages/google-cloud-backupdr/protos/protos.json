@@ -6395,6 +6395,11 @@
                         "nextPageToken": {
                           "type": "string",
                           "id": 2
+                        },
+                        "unreachable": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3
                         }
                       }
                     },

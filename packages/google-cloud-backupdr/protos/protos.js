@@ -41627,6 +41627,7 @@
                          * @interface IListDataSourceReferencesResponse
                          * @property {Array.<google.cloud.backupdr.v1.IDataSourceReference>|null} [dataSourceReferences] ListDataSourceReferencesResponse dataSourceReferences
                          * @property {string|null} [nextPageToken] ListDataSourceReferencesResponse nextPageToken
+                         * @property {Array.<string>|null} [unreachable] ListDataSourceReferencesResponse unreachable
                          */
     
                         /**
@@ -41639,6 +41640,7 @@
                          */
                         function ListDataSourceReferencesResponse(properties) {
                             this.dataSourceReferences = [];
+                            this.unreachable = [];
                             if (properties)
                                 for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                     if (properties[keys[i]] != null)
@@ -41660,6 +41662,14 @@
                          * @instance
                          */
                         ListDataSourceReferencesResponse.prototype.nextPageToken = "";
+    
+                        /**
+                         * ListDataSourceReferencesResponse unreachable.
+                         * @member {Array.<string>} unreachable
+                         * @memberof google.cloud.backupdr.v1.ListDataSourceReferencesResponse
+                         * @instance
+                         */
+                        ListDataSourceReferencesResponse.prototype.unreachable = $util.emptyArray;
     
                         /**
                          * Creates a new ListDataSourceReferencesResponse instance using the specified properties.
@@ -41690,6 +41700,9 @@
                                     $root.google.cloud.backupdr.v1.DataSourceReference.encode(message.dataSourceReferences[i], writer.uint32(/* id 1, wireType 2 =*/10).fork()).ldelim();
                             if (message.nextPageToken != null && Object.hasOwnProperty.call(message, "nextPageToken"))
                                 writer.uint32(/* id 2, wireType 2 =*/18).string(message.nextPageToken);
+                            if (message.unreachable != null && message.unreachable.length)
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    writer.uint32(/* id 3, wireType 2 =*/26).string(message.unreachable[i]);
                             return writer;
                         };
     
@@ -41734,6 +41747,12 @@
                                     }
                                 case 2: {
                                         message.nextPageToken = reader.string();
+                                        break;
+                                    }
+                                case 3: {
+                                        if (!(message.unreachable && message.unreachable.length))
+                                            message.unreachable = [];
+                                        message.unreachable.push(reader.string());
                                         break;
                                     }
                                 default:
@@ -41783,6 +41802,13 @@
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 if (!$util.isString(message.nextPageToken))
                                     return "nextPageToken: string expected";
+                            if (message.unreachable != null && message.hasOwnProperty("unreachable")) {
+                                if (!Array.isArray(message.unreachable))
+                                    return "unreachable: array expected";
+                                for (var i = 0; i < message.unreachable.length; ++i)
+                                    if (!$util.isString(message.unreachable[i]))
+                                        return "unreachable: string[] expected";
+                            }
                             return null;
                         };
     
@@ -41810,6 +41836,13 @@
                             }
                             if (object.nextPageToken != null)
                                 message.nextPageToken = String(object.nextPageToken);
+                            if (object.unreachable) {
+                                if (!Array.isArray(object.unreachable))
+                                    throw TypeError(".google.cloud.backupdr.v1.ListDataSourceReferencesResponse.unreachable: array expected");
+                                message.unreachable = [];
+                                for (var i = 0; i < object.unreachable.length; ++i)
+                                    message.unreachable[i] = String(object.unreachable[i]);
+                            }
                             return message;
                         };
     
@@ -41826,8 +41859,10 @@
                             if (!options)
                                 options = {};
                             var object = {};
-                            if (options.arrays || options.defaults)
+                            if (options.arrays || options.defaults) {
                                 object.dataSourceReferences = [];
+                                object.unreachable = [];
+                            }
                             if (options.defaults)
                                 object.nextPageToken = "";
                             if (message.dataSourceReferences && message.dataSourceReferences.length) {
@@ -41837,6 +41872,11 @@
                             }
                             if (message.nextPageToken != null && message.hasOwnProperty("nextPageToken"))
                                 object.nextPageToken = message.nextPageToken;
+                            if (message.unreachable && message.unreachable.length) {
+                                object.unreachable = [];
+                                for (var j = 0; j < message.unreachable.length; ++j)
+                                    object.unreachable[j] = message.unreachable[j];
+                            }
                             return object;
                         };
     

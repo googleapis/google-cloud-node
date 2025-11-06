@@ -15109,6 +15109,9 @@ export namespace google {
 
                     /** ListDataSourceReferencesResponse nextPageToken */
                     nextPageToken?: (string|null);
+
+                    /** ListDataSourceReferencesResponse unreachable */
+                    unreachable?: (string[]|null);
                 }
 
                 /** Represents a ListDataSourceReferencesResponse. */
@@ -15125,6 +15128,9 @@ export namespace google {
 
                     /** ListDataSourceReferencesResponse nextPageToken. */
                     public nextPageToken: string;
+
+                    /** ListDataSourceReferencesResponse unreachable. */
+                    public unreachable: string[];
 
                     /**
                      * Creates a new ListDataSourceReferencesResponse instance using the specified properties.
