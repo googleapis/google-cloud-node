@@ -1,0 +1,3026 @@
+{
+  "nested": {
+    "google": {
+      "nested": {
+        "ads": {
+          "nested": {
+            "datamanager": {
+              "nested": {
+                "v1": {
+                  "options": {
+                    "csharp_namespace": "Google.Ads.DataManager.V1",
+                    "go_package": "google.golang.org/genproto/googleapis/ads/datamanager/v1;datamanager",
+                    "java_multiple_files": true,
+                    "java_outer_classname": "TermsOfServiceProto",
+                    "java_package": "com.google.ads.datamanager.v1",
+                    "php_namespace": "Google\\Ads\\DataManager\\V1",
+                    "ruby_package": "Google::Ads::DataManager::V1"
+                  },
+                  "nested": {
+                    "AudienceMember": {
+                      "oneofs": {
+                        "data": {
+                          "oneof": [
+                            "userData",
+                            "pairData",
+                            "mobileData"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "destinationReferences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userData": {
+                          "type": "UserData",
+                          "id": 2
+                        },
+                        "pairData": {
+                          "type": "PairData",
+                          "id": 4
+                        },
+                        "mobileData": {
+                          "type": "MobileData",
+                          "id": 5
+                        },
+                        "consent": {
+                          "type": "Consent",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "PairData": {
+                      "fields": {
+                        "pairIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "MobileData": {
+                      "fields": {
+                        "mobileIds": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "Consent": {
+                      "fields": {
+                        "adUserData": {
+                          "type": "ConsentStatus",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adPersonalization": {
+                          "type": "ConsentStatus",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "ConsentStatus": {
+                      "values": {
+                        "CONSENT_STATUS_UNSPECIFIED": 0,
+                        "CONSENT_GRANTED": 1,
+                        "CONSENT_DENIED": 2
+                      }
+                    },
+                    "UserData": {
+                      "fields": {
+                        "userIdentifiers": {
+                          "rule": "repeated",
+                          "type": "UserIdentifier",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "UserIdentifier": {
+                      "oneofs": {
+                        "identifier": {
+                          "oneof": [
+                            "emailAddress",
+                            "phoneNumber",
+                            "address"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "emailAddress": {
+                          "type": "string",
+                          "id": 1
+                        },
+                        "phoneNumber": {
+                          "type": "string",
+                          "id": 2
+                        },
+                        "address": {
+                          "type": "AddressInfo",
+                          "id": 3
+                        }
+                      }
+                    },
+                    "AddressInfo": {
+                      "fields": {
+                        "givenName": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "familyName": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "regionCode": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "postalCode": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "CartData": {
+                      "fields": {
+                        "merchantId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "merchantFeedLabel": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "merchantFeedLanguageCode": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "transactionDiscount": {
+                          "type": "double",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "items": {
+                          "rule": "repeated",
+                          "type": "Item",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Item": {
+                      "fields": {
+                        "merchantProductId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "quantity": {
+                          "type": "int64",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "unitPrice": {
+                          "type": "double",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "Destination": {
+                      "fields": {
+                        "reference": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "loginAccount": {
+                          "type": "ProductAccount",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "linkedAccount": {
+                          "type": "ProductAccount",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "operatingAccount": {
+                          "type": "ProductAccount",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "productDestinationId": {
+                          "type": "string",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "ProductAccount": {
+                      "fields": {
+                        "product": {
+                          "type": "Product",
+                          "id": 1,
+                          "options": {
+                            "deprecated": true
+                          }
+                        },
+                        "accountId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "accountType": {
+                          "type": "AccountType",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "AccountType": {
+                          "values": {
+                            "ACCOUNT_TYPE_UNSPECIFIED": 0,
+                            "GOOGLE_ADS": 1,
+                            "DISPLAY_VIDEO_PARTNER": 2,
+                            "DISPLAY_VIDEO_ADVERTISER": 3,
+                            "DATA_PARTNER": 4
+                          }
+                        }
+                      }
+                    },
+                    "Product": {
+                      "options": {
+                        "deprecated": true
+                      },
+                      "values": {
+                        "PRODUCT_UNSPECIFIED": 0,
+                        "GOOGLE_ADS": 1,
+                        "DISPLAY_VIDEO_PARTNER": 2,
+                        "DISPLAY_VIDEO_ADVERTISER": 3,
+                        "DATA_PARTNER": 4
+                      }
+                    },
+                    "DeviceInfo": {
+                      "fields": {
+                        "userAgent": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "ipAddress": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "EncryptionInfo": {
+                      "oneofs": {
+                        "wrappedKey": {
+                          "oneof": [
+                            "gcpWrappedKeyInfo"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "gcpWrappedKeyInfo": {
+                          "type": "GcpWrappedKeyInfo",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "GcpWrappedKeyInfo": {
+                      "fields": {
+                        "keyType": {
+                          "type": "KeyType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "wipProvider": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "kekUri": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "encryptedDek": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "KeyType": {
+                          "values": {
+                            "KEY_TYPE_UNSPECIFIED": 0,
+                            "XCHACHA20_POLY1305": 1
+                          }
+                        }
+                      }
+                    },
+                    "ErrorReason": {
+                      "values": {
+                        "ERROR_REASON_UNSPECIFIED": 0,
+                        "INTERNAL_ERROR": 1,
+                        "DEADLINE_EXCEEDED": 2,
+                        "RESOURCE_EXHAUSTED": 3,
+                        "NOT_FOUND": 4,
+                        "PERMISSION_DENIED": 5,
+                        "INVALID_ARGUMENT": 6,
+                        "REQUIRED_FIELD_MISSING": 7,
+                        "INVALID_FORMAT": 8,
+                        "INVALID_HEX_ENCODING": 9,
+                        "INVALID_BASE64_ENCODING": 10,
+                        "INVALID_SHA256_FORMAT": 11,
+                        "INVALID_POSTAL_CODE": 12,
+                        "INVALID_COUNTRY_CODE": 13,
+                        "INVALID_ENUM_VALUE": 14,
+                        "INVALID_USER_LIST_TYPE": 15,
+                        "INVALID_AUDIENCE_MEMBER": 16,
+                        "TOO_MANY_AUDIENCE_MEMBERS": 17,
+                        "TOO_MANY_USER_IDENTIFIERS": 18,
+                        "TOO_MANY_DESTINATIONS": 19,
+                        "INVALID_DESTINATION": 20,
+                        "DATA_PARTNER_USER_LIST_MUTATE_NOT_ALLOWED": 21,
+                        "INVALID_MOBILE_ID_FORMAT": 22,
+                        "INVALID_USER_LIST_ID": 23,
+                        "MULTIPLE_DATA_TYPES_NOT_ALLOWED": 24,
+                        "DIFFERENT_LOGIN_ACCOUNTS_NOT_ALLOWED_FOR_DATA_PARTNER": 25,
+                        "TERMS_AND_CONDITIONS_NOT_SIGNED": 26,
+                        "INVALID_NUMBER_FORMAT": 27,
+                        "INVALID_CONVERSION_ACTION_ID": 28,
+                        "INVALID_CONVERSION_ACTION_TYPE": 29,
+                        "INVALID_CURRENCY_CODE": 30,
+                        "INVALID_EVENT": 31,
+                        "TOO_MANY_EVENTS": 32,
+                        "DESTINATION_ACCOUNT_NOT_ENABLED_ENHANCED_CONVERSIONS_FOR_LEADS": 33,
+                        "DESTINATION_ACCOUNT_DATA_POLICY_PROHIBITS_ENHANCED_CONVERSIONS": 34,
+                        "DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED": 35,
+                        "DUPLICATE_DESTINATION_REFERENCE": 36,
+                        "NO_IDENTIFIERS_PROVIDED": 39,
+                        "INVALID_REQUEST_ID": 48
+                      }
+                    },
+                    "Event": {
+                      "fields": {
+                        "destinationReferences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "transactionId": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "eventTimestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "lastUpdatedTimestamp": {
+                          "type": "google.protobuf.Timestamp",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userData": {
+                          "type": "UserData",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "consent": {
+                          "type": "Consent",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "adIdentifiers": {
+                          "type": "AdIdentifiers",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "currency": {
+                          "type": "string",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "conversionValue": {
+                          "type": "double",
+                          "id": 9,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "eventSource": {
+                          "type": "EventSource",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "eventDeviceInfo": {
+                          "type": "DeviceInfo",
+                          "id": 11,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "cartData": {
+                          "type": "CartData",
+                          "id": 12,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customVariables": {
+                          "rule": "repeated",
+                          "type": "CustomVariable",
+                          "id": 13,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "experimentalFields": {
+                          "rule": "repeated",
+                          "type": "ExperimentalField",
+                          "id": 14,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "userProperties": {
+                          "type": "UserProperties",
+                          "id": 15,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "AdIdentifiers": {
+                      "fields": {
+                        "sessionAttributes": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gclid": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "gbraid": {
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "wbraid": {
+                          "type": "string",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "landingPageDeviceInfo": {
+                          "type": "DeviceInfo",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CustomVariable": {
+                      "fields": {
+                        "variable": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "destinationReferences": {
+                          "rule": "repeated",
+                          "type": "string",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "EventSource": {
+                      "values": {
+                        "EVENT_SOURCE_UNSPECIFIED": 0,
+                        "WEB": 1,
+                        "APP": 2,
+                        "IN_STORE": 3,
+                        "PHONE": 4,
+                        "OTHER": 5
+                      }
+                    },
+                    "ExperimentalField": {
+                      "fields": {
+                        "field": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "value": {
+                          "type": "string",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "UserProperties": {
+                      "fields": {
+                        "customerType": {
+                          "type": "CustomerType",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "customerValueBucket": {
+                          "type": "CustomerValueBucket",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "CustomerType": {
+                      "values": {
+                        "CUSTOMER_TYPE_UNSPECIFIED": 0,
+                        "NEW": 1,
+                        "RETURNING": 2,
+                        "REENGAGED": 3
+                      }
+                    },
+                    "CustomerValueBucket": {
+                      "values": {
+                        "CUSTOMER_VALUE_BUCKET_UNSPECIFIED": 0,
+                        "LOW": 1,
+                        "MEDIUM": 2,
+                        "HIGH": 3
+                      }
+                    },
+                    "IngestionService": {
+                      "options": {
+                        "(google.api.default_host)": "datamanager.googleapis.com",
+                        "(google.api.oauth_scopes)": "https://www.googleapis.com/auth/datamanager"
+                      },
+                      "methods": {
+                        "IngestAudienceMembers": {
+                          "requestType": "IngestAudienceMembersRequest",
+                          "responseType": "IngestAudienceMembersResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/audienceMembers:ingest",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/audienceMembers:ingest",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "RemoveAudienceMembers": {
+                          "requestType": "RemoveAudienceMembersRequest",
+                          "responseType": "RemoveAudienceMembersResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/audienceMembers:remove",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/audienceMembers:remove",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "IngestEvents": {
+                          "requestType": "IngestEventsRequest",
+                          "responseType": "IngestEventsResponse",
+                          "options": {
+                            "(google.api.http).post": "/v1/events:ingest",
+                            "(google.api.http).body": "*"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "post": "/v1/events:ingest",
+                                "body": "*"
+                              }
+                            }
+                          ]
+                        },
+                        "RetrieveRequestStatus": {
+                          "requestType": "RetrieveRequestStatusRequest",
+                          "responseType": "RetrieveRequestStatusResponse",
+                          "options": {
+                            "(google.api.http).get": "/v1/requestStatus:retrieve"
+                          },
+                          "parsedOptions": [
+                            {
+                              "(google.api.http)": {
+                                "get": "/v1/requestStatus:retrieve"
+                              }
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    "IngestAudienceMembersRequest": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "Destination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "audienceMembers": {
+                          "rule": "repeated",
+                          "type": "AudienceMember",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "consent": {
+                          "type": "Consent",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encoding": {
+                          "type": "Encoding",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "termsOfService": {
+                          "type": "TermsOfService",
+                          "id": 7,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "IngestAudienceMembersResponse": {
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RemoveAudienceMembersRequest": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "Destination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "audienceMembers": {
+                          "rule": "repeated",
+                          "type": "AudienceMember",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encoding": {
+                          "type": "Encoding",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "RemoveAudienceMembersResponse": {
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "IngestEventsRequest": {
+                      "fields": {
+                        "destinations": {
+                          "rule": "repeated",
+                          "type": "Destination",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "events": {
+                          "rule": "repeated",
+                          "type": "Event",
+                          "id": 2,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        },
+                        "consent": {
+                          "type": "Consent",
+                          "id": 3,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "validateOnly": {
+                          "type": "bool",
+                          "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encoding": {
+                          "type": "Encoding",
+                          "id": 5,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "encryptionInfo": {
+                          "type": "EncryptionInfo",
+                          "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "IngestEventsResponse": {
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "RetrieveRequestStatusRequest": {
+                      "fields": {
+                        "requestId": {
+                          "type": "string",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
+                        }
+                      }
+                    },
+                    "RetrieveRequestStatusResponse": {
+                      "fields": {
+                        "requestStatusPerDestination": {
+                          "rule": "repeated",
+                          "type": "RequestStatusPerDestination",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "Encoding": {
+                      "values": {
+                        "ENCODING_UNSPECIFIED": 0,
+                        "HEX": 1,
+                        "BASE64": 2
+                      }
+                    },
+                    "RequestStatusPerDestination": {
+                      "oneofs": {
+                        "status": {
+                          "oneof": [
+                            "audienceMembersIngestionStatus",
+                            "eventsIngestionStatus",
+                            "audienceMembersRemovalStatus"
+                          ]
+                        }
+                      },
+                      "fields": {
+                        "destination": {
+                          "type": "Destination",
+                          "id": 1
+                        },
+                        "requestStatus": {
+                          "type": "RequestStatus",
+                          "id": 2
+                        },
+                        "errorInfo": {
+                          "type": "ErrorInfo",
+                          "id": 3
+                        },
+                        "warningInfo": {
+                          "type": "WarningInfo",
+                          "id": 7
+                        },
+                        "audienceMembersIngestionStatus": {
+                          "type": "IngestAudienceMembersStatus",
+                          "id": 4
+                        },
+                        "eventsIngestionStatus": {
+                          "type": "IngestEventsStatus",
+                          "id": 5
+                        },
+                        "audienceMembersRemovalStatus": {
+                          "type": "RemoveAudienceMembersStatus",
+                          "id": 6
+                        }
+                      },
+                      "nested": {
+                        "RequestStatus": {
+                          "values": {
+                            "REQUEST_STATUS_UNKNOWN": 0,
+                            "SUCCESS": 1,
+                            "PROCESSING": 2,
+                            "FAILED": 3,
+                            "PARTIAL_SUCCESS": 4
+                          }
+                        },
+                        "IngestAudienceMembersStatus": {
+                          "oneofs": {
+                            "status": {
+                              "oneof": [
+                                "userDataIngestionStatus",
+                                "mobileDataIngestionStatus",
+                                "pairDataIngestionStatus"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "userDataIngestionStatus": {
+                              "type": "IngestUserDataStatus",
+                              "id": 1
+                            },
+                            "mobileDataIngestionStatus": {
+                              "type": "IngestMobileDataStatus",
+                              "id": 2
+                            },
+                            "pairDataIngestionStatus": {
+                              "type": "IngestPairDataStatus",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "RemoveAudienceMembersStatus": {
+                          "oneofs": {
+                            "status": {
+                              "oneof": [
+                                "userDataRemovalStatus",
+                                "mobileDataRemovalStatus",
+                                "pairDataRemovalStatus"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "userDataRemovalStatus": {
+                              "type": "RemoveUserDataStatus",
+                              "id": 1
+                            },
+                            "mobileDataRemovalStatus": {
+                              "type": "RemoveMobileDataStatus",
+                              "id": 2
+                            },
+                            "pairDataRemovalStatus": {
+                              "type": "RemovePairDataStatus",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "IngestEventsStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            }
+                          }
+                        },
+                        "IngestUserDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "userIdentifierCount": {
+                              "type": "int64",
+                              "id": 2
+                            },
+                            "uploadMatchRateRange": {
+                              "type": "MatchRateRange",
+                              "id": 3
+                            }
+                          }
+                        },
+                        "RemoveUserDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "userIdentifierCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngestMobileDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "mobileIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemoveMobileDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "mobileIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "IngestPairDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "pairIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        },
+                        "RemovePairDataStatus": {
+                          "fields": {
+                            "recordCount": {
+                              "type": "int64",
+                              "id": 1
+                            },
+                            "pairIdCount": {
+                              "type": "int64",
+                              "id": 2
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "MatchRateRange": {
+                      "values": {
+                        "MATCH_RATE_RANGE_UNKNOWN": 0,
+                        "MATCH_RATE_RANGE_NOT_ELIGIBLE": 1,
+                        "MATCH_RATE_RANGE_LESS_THAN_20": 2,
+                        "MATCH_RATE_RANGE_20_TO_30": 3,
+                        "MATCH_RATE_RANGE_31_TO_40": 4,
+                        "MATCH_RATE_RANGE_41_TO_50": 5,
+                        "MATCH_RATE_RANGE_51_TO_60": 6,
+                        "MATCH_RATE_RANGE_61_TO_70": 7,
+                        "MATCH_RATE_RANGE_71_TO_80": 8,
+                        "MATCH_RATE_RANGE_81_TO_90": 9,
+                        "MATCH_RATE_RANGE_91_TO_100": 10
+                      }
+                    },
+                    "ErrorInfo": {
+                      "fields": {
+                        "errorCounts": {
+                          "rule": "repeated",
+                          "type": "ErrorCount",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "ErrorCount": {
+                      "fields": {
+                        "recordCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "ProcessingErrorReason",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "WarningInfo": {
+                      "fields": {
+                        "warningCounts": {
+                          "rule": "repeated",
+                          "type": "WarningCount",
+                          "id": 1
+                        }
+                      }
+                    },
+                    "WarningCount": {
+                      "fields": {
+                        "recordCount": {
+                          "type": "int64",
+                          "id": 1
+                        },
+                        "reason": {
+                          "type": "ProcessingWarningReason",
+                          "id": 2
+                        }
+                      }
+                    },
+                    "ProcessingErrorReason": {
+                      "values": {
+                        "PROCESSING_ERROR_REASON_UNSPECIFIED": 0,
+                        "PROCESSING_ERROR_REASON_INVALID_CUSTOM_VARIABLE": 1,
+                        "PROCESSING_ERROR_REASON_CUSTOM_VARIABLE_NOT_ENABLED": 2,
+                        "PROCESSING_ERROR_REASON_EVENT_TOO_OLD": 3,
+                        "PROCESSING_ERROR_REASON_DENIED_CONSENT": 4,
+                        "PROCESSING_ERROR_REASON_NO_CONSENT": 5,
+                        "PROCESSING_ERROR_REASON_UNKNOWN_CONSENT": 6,
+                        "PROCESSING_ERROR_REASON_DUPLICATE_GCLID": 7,
+                        "PROCESSING_ERROR_REASON_DUPLICATE_TRANSACTION_ID": 8,
+                        "PROCESSING_ERROR_REASON_INVALID_GBRAID": 9,
+                        "PROCESSING_ERROR_REASON_INVALID_GCLID": 10,
+                        "PROCESSING_ERROR_REASON_INVALID_MERCHANT_ID": 11,
+                        "PROCESSING_ERROR_REASON_INVALID_WBRAID": 12,
+                        "PROCESSING_ERROR_REASON_INTERNAL_ERROR": 13,
+                        "PROCESSING_ERROR_REASON_DESTINATION_ACCOUNT_ENHANCED_CONVERSIONS_TERMS_NOT_SIGNED": 14,
+                        "PROCESSING_ERROR_REASON_INVALID_EVENT": 15,
+                        "PROCESSING_ERROR_REASON_INSUFFICIENT_MATCHED_TRANSACTIONS": 16,
+                        "PROCESSING_ERROR_REASON_INSUFFICIENT_TRANSACTIONS": 17,
+                        "PROCESSING_ERROR_REASON_INVALID_FORMAT": 18,
+                        "PROCESSING_ERROR_REASON_DECRYPTION_ERROR": 19,
+                        "PROCESSING_ERROR_REASON_DEK_DECRYPTION_ERROR": 20,
+                        "PROCESSING_ERROR_REASON_INVALID_WIP": 21,
+                        "PROCESSING_ERROR_REASON_INVALID_KEK": 22,
+                        "PROCESSING_ERROR_REASON_WIP_AUTH_FAILED": 23,
+                        "PROCESSING_ERROR_REASON_KEK_PERMISSION_DENIED": 24,
+                        "PROCESSING_ERROR_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 25,
+                        "PROCESSING_ERROR_OPERATING_ACCOUNT_MISMATCH_FOR_AD_IDENTIFIER": 26
+                      }
+                    },
+                    "ProcessingWarningReason": {
+                      "values": {
+                        "PROCESSING_WARNING_REASON_UNSPECIFIED": 0,
+                        "PROCESSING_WARNING_REASON_KEK_PERMISSION_DENIED": 1,
+                        "PROCESSING_WARNING_REASON_DEK_DECRYPTION_ERROR": 2,
+                        "PROCESSING_WARNING_REASON_DECRYPTION_ERROR": 3,
+                        "PROCESSING_WARNING_REASON_WIP_AUTH_FAILED": 4,
+                        "PROCESSING_WARNING_REASON_INVALID_WIP": 5,
+                        "PROCESSING_WARNING_REASON_INVALID_KEK": 6,
+                        "PROCESSING_WARNING_REASON_USER_IDENTIFIER_DECRYPTION_ERROR": 7,
+                        "PROCESSING_WARNING_REASON_INTERNAL_ERROR": 8
+                      }
+                    },
+                    "TermsOfService": {
+                      "fields": {
+                        "customerMatchTermsOfServiceStatus": {
+                          "type": "TermsOfServiceStatus",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        }
+                      }
+                    },
+                    "TermsOfServiceStatus": {
+                      "values": {
+                        "TERMS_OF_SERVICE_STATUS_UNSPECIFIED": 0,
+                        "ACCEPTED": 1,
+                        "REJECTED": 2
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "api": {
+          "options": {
+            "go_package": "google.golang.org/genproto/googleapis/api;api",
+            "java_multiple_files": true,
+            "java_outer_classname": "LaunchStageProto",
+            "java_package": "com.google.api",
+            "objc_class_prefix": "GAPI",
+            "cc_enable_arenas": true
+          },
+          "nested": {
+            "fieldBehavior": {
+              "rule": "repeated",
+              "type": "google.api.FieldBehavior",
+              "id": 1052,
+              "extend": "google.protobuf.FieldOptions",
+              "options": {
+                "packed": false
+              }
+            },
+            "FieldBehavior": {
+              "values": {
+                "FIELD_BEHAVIOR_UNSPECIFIED": 0,
+                "OPTIONAL": 1,
+                "REQUIRED": 2,
+                "OUTPUT_ONLY": 3,
+                "INPUT_ONLY": 4,
+                "IMMUTABLE": 5,
+                "UNORDERED_LIST": 6,
+                "NON_EMPTY_DEFAULT": 7,
+                "IDENTIFIER": 8
+              }
+            },
+            "http": {
+              "type": "HttpRule",
+              "id": 72295728,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "Http": {
+              "fields": {
+                "rules": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 1
+                },
+                "fullyDecodeReservedExpansion": {
+                  "type": "bool",
+                  "id": 2
+                }
+              }
+            },
+            "HttpRule": {
+              "oneofs": {
+                "pattern": {
+                  "oneof": [
+                    "get",
+                    "put",
+                    "post",
+                    "delete",
+                    "patch",
+                    "custom"
+                  ]
+                }
+              },
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "get": {
+                  "type": "string",
+                  "id": 2
+                },
+                "put": {
+                  "type": "string",
+                  "id": 3
+                },
+                "post": {
+                  "type": "string",
+                  "id": 4
+                },
+                "delete": {
+                  "type": "string",
+                  "id": 5
+                },
+                "patch": {
+                  "type": "string",
+                  "id": 6
+                },
+                "custom": {
+                  "type": "CustomHttpPattern",
+                  "id": 8
+                },
+                "body": {
+                  "type": "string",
+                  "id": 7
+                },
+                "responseBody": {
+                  "type": "string",
+                  "id": 12
+                },
+                "additionalBindings": {
+                  "rule": "repeated",
+                  "type": "HttpRule",
+                  "id": 11
+                }
+              }
+            },
+            "CustomHttpPattern": {
+              "fields": {
+                "kind": {
+                  "type": "string",
+                  "id": 1
+                },
+                "path": {
+                  "type": "string",
+                  "id": 2
+                }
+              }
+            },
+            "methodSignature": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 1051,
+              "extend": "google.protobuf.MethodOptions"
+            },
+            "defaultHost": {
+              "type": "string",
+              "id": 1049,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "oauthScopes": {
+              "type": "string",
+              "id": 1050,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "apiVersion": {
+              "type": "string",
+              "id": 525000001,
+              "extend": "google.protobuf.ServiceOptions"
+            },
+            "CommonLanguageSettings": {
+              "fields": {
+                "referenceDocsUri": {
+                  "type": "string",
+                  "id": 1,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "destinations": {
+                  "rule": "repeated",
+                  "type": "ClientLibraryDestination",
+                  "id": 2
+                }
+              }
+            },
+            "ClientLibrarySettings": {
+              "fields": {
+                "version": {
+                  "type": "string",
+                  "id": 1
+                },
+                "launchStage": {
+                  "type": "LaunchStage",
+                  "id": 2
+                },
+                "restNumericEnums": {
+                  "type": "bool",
+                  "id": 3
+                },
+                "javaSettings": {
+                  "type": "JavaSettings",
+                  "id": 21
+                },
+                "cppSettings": {
+                  "type": "CppSettings",
+                  "id": 22
+                },
+                "phpSettings": {
+                  "type": "PhpSettings",
+                  "id": 23
+                },
+                "pythonSettings": {
+                  "type": "PythonSettings",
+                  "id": 24
+                },
+                "nodeSettings": {
+                  "type": "NodeSettings",
+                  "id": 25
+                },
+                "dotnetSettings": {
+                  "type": "DotnetSettings",
+                  "id": 26
+                },
+                "rubySettings": {
+                  "type": "RubySettings",
+                  "id": 27
+                },
+                "goSettings": {
+                  "type": "GoSettings",
+                  "id": 28
+                }
+              }
+            },
+            "Publishing": {
+              "fields": {
+                "methodSettings": {
+                  "rule": "repeated",
+                  "type": "MethodSettings",
+                  "id": 2
+                },
+                "newIssueUri": {
+                  "type": "string",
+                  "id": 101
+                },
+                "documentationUri": {
+                  "type": "string",
+                  "id": 102
+                },
+                "apiShortName": {
+                  "type": "string",
+                  "id": 103
+                },
+                "githubLabel": {
+                  "type": "string",
+                  "id": 104
+                },
+                "codeownerGithubTeams": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 105
+                },
+                "docTagPrefix": {
+                  "type": "string",
+                  "id": 106
+                },
+                "organization": {
+                  "type": "ClientLibraryOrganization",
+                  "id": 107
+                },
+                "librarySettings": {
+                  "rule": "repeated",
+                  "type": "ClientLibrarySettings",
+                  "id": 109
+                },
+                "protoReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 110
+                },
+                "restReferenceDocumentationUri": {
+                  "type": "string",
+                  "id": 111
+                }
+              }
+            },
+            "JavaSettings": {
+              "fields": {
+                "libraryPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "serviceClassNames": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 3
+                }
+              }
+            },
+            "CppSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PhpSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "PythonSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "NodeSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "DotnetSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                },
+                "renamedServices": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 2
+                },
+                "renamedResources": {
+                  "keyType": "string",
+                  "type": "string",
+                  "id": 3
+                },
+                "ignoredResources": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 4
+                },
+                "forcedNamespaceAliases": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                },
+                "handwrittenSignatures": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 6
+                }
+              }
+            },
+            "RubySettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "GoSettings": {
+              "fields": {
+                "common": {
+                  "type": "CommonLanguageSettings",
+                  "id": 1
+                }
+              }
+            },
+            "MethodSettings": {
+              "fields": {
+                "selector": {
+                  "type": "string",
+                  "id": 1
+                },
+                "longRunning": {
+                  "type": "LongRunning",
+                  "id": 2
+                },
+                "autoPopulatedFields": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                }
+              },
+              "nested": {
+                "LongRunning": {
+                  "fields": {
+                    "initialPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 1
+                    },
+                    "pollDelayMultiplier": {
+                      "type": "float",
+                      "id": 2
+                    },
+                    "maxPollDelay": {
+                      "type": "google.protobuf.Duration",
+                      "id": 3
+                    },
+                    "totalPollTimeout": {
+                      "type": "google.protobuf.Duration",
+                      "id": 4
+                    }
+                  }
+                }
+              }
+            },
+            "ClientLibraryOrganization": {
+              "values": {
+                "CLIENT_LIBRARY_ORGANIZATION_UNSPECIFIED": 0,
+                "CLOUD": 1,
+                "ADS": 2,
+                "PHOTOS": 3,
+                "STREET_VIEW": 4,
+                "SHOPPING": 5,
+                "GEO": 6,
+                "GENERATIVE_AI": 7
+              }
+            },
+            "ClientLibraryDestination": {
+              "values": {
+                "CLIENT_LIBRARY_DESTINATION_UNSPECIFIED": 0,
+                "GITHUB": 10,
+                "PACKAGE_MANAGER": 20
+              }
+            },
+            "LaunchStage": {
+              "values": {
+                "LAUNCH_STAGE_UNSPECIFIED": 0,
+                "UNIMPLEMENTED": 6,
+                "PRELAUNCH": 7,
+                "EARLY_ACCESS": 1,
+                "ALPHA": 2,
+                "BETA": 3,
+                "GA": 4,
+                "DEPRECATED": 5
+              }
+            }
+          }
+        },
+        "protobuf": {
+          "options": {
+            "go_package": "google.golang.org/protobuf/types/descriptorpb",
+            "java_package": "com.google.protobuf",
+            "java_outer_classname": "DescriptorProtos",
+            "csharp_namespace": "Google.Protobuf.Reflection",
+            "objc_class_prefix": "GPB",
+            "cc_enable_arenas": true,
+            "optimize_for": "SPEED"
+          },
+          "nested": {
+            "FileDescriptorSet": {
+              "edition": "proto2",
+              "fields": {
+                "file": {
+                  "rule": "repeated",
+                  "type": "FileDescriptorProto",
+                  "id": 1
+                }
+              }
+            },
+            "Edition": {
+              "edition": "proto2",
+              "values": {
+                "EDITION_UNKNOWN": 0,
+                "EDITION_PROTO2": 998,
+                "EDITION_PROTO3": 999,
+                "EDITION_2023": 1000,
+                "EDITION_2024": 1001,
+                "EDITION_1_TEST_ONLY": 1,
+                "EDITION_2_TEST_ONLY": 2,
+                "EDITION_99997_TEST_ONLY": 99997,
+                "EDITION_99998_TEST_ONLY": 99998,
+                "EDITION_99999_TEST_ONLY": 99999,
+                "EDITION_MAX": 2147483647
+              }
+            },
+            "FileDescriptorProto": {
+              "edition": "proto2",
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "package": {
+                  "type": "string",
+                  "id": 2
+                },
+                "dependency": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 3
+                },
+                "publicDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 10
+                },
+                "weakDependency": {
+                  "rule": "repeated",
+                  "type": "int32",
+                  "id": 11
+                },
+                "messageType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 4
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 5
+                },
+                "service": {
+                  "rule": "repeated",
+                  "type": "ServiceDescriptorProto",
+                  "id": 6
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 7
+                },
+                "options": {
+                  "type": "FileOptions",
+                  "id": 8
+                },
+                "sourceCodeInfo": {
+                  "type": "SourceCodeInfo",
+                  "id": 9
+                },
+                "syntax": {
+                  "type": "string",
+                  "id": 12
+                },
+                "edition": {
+                  "type": "Edition",
+                  "id": 14
+                }
+              }
+            },
+            "DescriptorProto": {
+              "edition": "proto2",
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "field": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 2
+                },
+                "extension": {
+                  "rule": "repeated",
+                  "type": "FieldDescriptorProto",
+                  "id": 6
+                },
+                "nestedType": {
+                  "rule": "repeated",
+                  "type": "DescriptorProto",
+                  "id": 3
+                },
+                "enumType": {
+                  "rule": "repeated",
+                  "type": "EnumDescriptorProto",
+                  "id": 4
+                },
+                "extensionRange": {
+                  "rule": "repeated",
+                  "type": "ExtensionRange",
+                  "id": 5
+                },
+                "oneofDecl": {
+                  "rule": "repeated",
+                  "type": "OneofDescriptorProto",
+                  "id": 8
+                },
+                "options": {
+                  "type": "MessageOptions",
+                  "id": 7
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "ReservedRange",
+                  "id": 9
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 10
+                }
+              },
+              "nested": {
+                "ExtensionRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    },
+                    "options": {
+                      "type": "ExtensionRangeOptions",
+                      "id": 3
+                    }
+                  }
+                },
+                "ReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "ExtensionRangeOptions": {
+              "edition": "proto2",
+              "fields": {
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                },
+                "declaration": {
+                  "rule": "repeated",
+                  "type": "Declaration",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_SOURCE"
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
+                "verification": {
+                  "type": "VerificationState",
+                  "id": 3,
+                  "options": {
+                    "default": "UNVERIFIED",
+                    "retention": "RETENTION_SOURCE"
+                  }
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "Declaration": {
+                  "fields": {
+                    "number": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "fullName": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "type": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "reserved": {
+                      "type": "bool",
+                      "id": 5
+                    },
+                    "repeated": {
+                      "type": "bool",
+                      "id": 6
+                    }
+                  },
+                  "reserved": [
+                    [
+                      4,
+                      4
+                    ]
+                  ]
+                },
+                "VerificationState": {
+                  "values": {
+                    "DECLARATION": 0,
+                    "UNVERIFIED": 1
+                  }
+                }
+              }
+            },
+            "FieldDescriptorProto": {
+              "edition": "proto2",
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 3
+                },
+                "label": {
+                  "type": "Label",
+                  "id": 4
+                },
+                "type": {
+                  "type": "Type",
+                  "id": 5
+                },
+                "typeName": {
+                  "type": "string",
+                  "id": 6
+                },
+                "extendee": {
+                  "type": "string",
+                  "id": 2
+                },
+                "defaultValue": {
+                  "type": "string",
+                  "id": 7
+                },
+                "oneofIndex": {
+                  "type": "int32",
+                  "id": 9
+                },
+                "jsonName": {
+                  "type": "string",
+                  "id": 10
+                },
+                "options": {
+                  "type": "FieldOptions",
+                  "id": 8
+                },
+                "proto3Optional": {
+                  "type": "bool",
+                  "id": 17
+                }
+              },
+              "nested": {
+                "Type": {
+                  "values": {
+                    "TYPE_DOUBLE": 1,
+                    "TYPE_FLOAT": 2,
+                    "TYPE_INT64": 3,
+                    "TYPE_UINT64": 4,
+                    "TYPE_INT32": 5,
+                    "TYPE_FIXED64": 6,
+                    "TYPE_FIXED32": 7,
+                    "TYPE_BOOL": 8,
+                    "TYPE_STRING": 9,
+                    "TYPE_GROUP": 10,
+                    "TYPE_MESSAGE": 11,
+                    "TYPE_BYTES": 12,
+                    "TYPE_UINT32": 13,
+                    "TYPE_ENUM": 14,
+                    "TYPE_SFIXED32": 15,
+                    "TYPE_SFIXED64": 16,
+                    "TYPE_SINT32": 17,
+                    "TYPE_SINT64": 18
+                  }
+                },
+                "Label": {
+                  "values": {
+                    "LABEL_OPTIONAL": 1,
+                    "LABEL_REPEATED": 3,
+                    "LABEL_REQUIRED": 2
+                  }
+                }
+              }
+            },
+            "OneofDescriptorProto": {
+              "edition": "proto2",
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "options": {
+                  "type": "OneofOptions",
+                  "id": 2
+                }
+              }
+            },
+            "EnumDescriptorProto": {
+              "edition": "proto2",
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "value": {
+                  "rule": "repeated",
+                  "type": "EnumValueDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumOptions",
+                  "id": 3
+                },
+                "reservedRange": {
+                  "rule": "repeated",
+                  "type": "EnumReservedRange",
+                  "id": 4
+                },
+                "reservedName": {
+                  "rule": "repeated",
+                  "type": "string",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "EnumReservedRange": {
+                  "fields": {
+                    "start": {
+                      "type": "int32",
+                      "id": 1
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "EnumValueDescriptorProto": {
+              "edition": "proto2",
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "number": {
+                  "type": "int32",
+                  "id": 2
+                },
+                "options": {
+                  "type": "EnumValueOptions",
+                  "id": 3
+                }
+              }
+            },
+            "ServiceDescriptorProto": {
+              "edition": "proto2",
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "method": {
+                  "rule": "repeated",
+                  "type": "MethodDescriptorProto",
+                  "id": 2
+                },
+                "options": {
+                  "type": "ServiceOptions",
+                  "id": 3
+                }
+              }
+            },
+            "MethodDescriptorProto": {
+              "edition": "proto2",
+              "fields": {
+                "name": {
+                  "type": "string",
+                  "id": 1
+                },
+                "inputType": {
+                  "type": "string",
+                  "id": 2
+                },
+                "outputType": {
+                  "type": "string",
+                  "id": 3
+                },
+                "options": {
+                  "type": "MethodOptions",
+                  "id": 4
+                },
+                "clientStreaming": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "serverStreaming": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "default": false
+                  }
+                }
+              }
+            },
+            "FileOptions": {
+              "edition": "proto2",
+              "fields": {
+                "javaPackage": {
+                  "type": "string",
+                  "id": 1
+                },
+                "javaOuterClassname": {
+                  "type": "string",
+                  "id": 8
+                },
+                "javaMultipleFiles": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenerateEqualsAndHash": {
+                  "type": "bool",
+                  "id": 20,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "javaStringCheckUtf8": {
+                  "type": "bool",
+                  "id": 27,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "optimizeFor": {
+                  "type": "OptimizeMode",
+                  "id": 9,
+                  "options": {
+                    "default": "SPEED"
+                  }
+                },
+                "goPackage": {
+                  "type": "string",
+                  "id": 11
+                },
+                "ccGenericServices": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "javaGenericServices": {
+                  "type": "bool",
+                  "id": 17,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "pyGenericServices": {
+                  "type": "bool",
+                  "id": 18,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 23,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "ccEnableArenas": {
+                  "type": "bool",
+                  "id": 31,
+                  "options": {
+                    "default": true
+                  }
+                },
+                "objcClassPrefix": {
+                  "type": "string",
+                  "id": 36
+                },
+                "csharpNamespace": {
+                  "type": "string",
+                  "id": 37
+                },
+                "swiftPrefix": {
+                  "type": "string",
+                  "id": 39
+                },
+                "phpClassPrefix": {
+                  "type": "string",
+                  "id": 40
+                },
+                "phpNamespace": {
+                  "type": "string",
+                  "id": 41
+                },
+                "phpMetadataNamespace": {
+                  "type": "string",
+                  "id": 44
+                },
+                "rubyPackage": {
+                  "type": "string",
+                  "id": 45
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 50
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  42,
+                  42
+                ],
+                [
+                  38,
+                  38
+                ]
+              ],
+              "nested": {
+                "OptimizeMode": {
+                  "values": {
+                    "SPEED": 1,
+                    "CODE_SIZE": 2,
+                    "LITE_RUNTIME": 3
+                  }
+                }
+              }
+            },
+            "MessageOptions": {
+              "edition": "proto2",
+              "fields": {
+                "messageSetWireFormat": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "noStandardDescriptorAccessor": {
+                  "type": "bool",
+                  "id": 2,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "mapEntry": {
+                  "type": "bool",
+                  "id": 7
+                },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 11,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 12
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  5,
+                  5
+                ],
+                [
+                  6,
+                  6
+                ],
+                [
+                  8,
+                  8
+                ],
+                [
+                  9,
+                  9
+                ]
+              ]
+            },
+            "FieldOptions": {
+              "edition": "proto2",
+              "fields": {
+                "ctype": {
+                  "type": "CType",
+                  "id": 1,
+                  "options": {
+                    "default": "STRING"
+                  }
+                },
+                "packed": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "jstype": {
+                  "type": "JSType",
+                  "id": 6,
+                  "options": {
+                    "default": "JS_NORMAL"
+                  }
+                },
+                "lazy": {
+                  "type": "bool",
+                  "id": 5,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "unverifiedLazy": {
+                  "type": "bool",
+                  "id": 15,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "weak": {
+                  "type": "bool",
+                  "id": 10,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 16,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "retention": {
+                  "type": "OptionRetention",
+                  "id": 17
+                },
+                "targets": {
+                  "rule": "repeated",
+                  "type": "OptionTargetType",
+                  "id": 19
+                },
+                "editionDefaults": {
+                  "rule": "repeated",
+                  "type": "EditionDefault",
+                  "id": 20
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 21
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  4,
+                  4
+                ],
+                [
+                  18,
+                  18
+                ]
+              ],
+              "nested": {
+                "CType": {
+                  "values": {
+                    "STRING": 0,
+                    "CORD": 1,
+                    "STRING_PIECE": 2
+                  }
+                },
+                "JSType": {
+                  "values": {
+                    "JS_NORMAL": 0,
+                    "JS_STRING": 1,
+                    "JS_NUMBER": 2
+                  }
+                },
+                "OptionRetention": {
+                  "values": {
+                    "RETENTION_UNKNOWN": 0,
+                    "RETENTION_RUNTIME": 1,
+                    "RETENTION_SOURCE": 2
+                  }
+                },
+                "OptionTargetType": {
+                  "values": {
+                    "TARGET_TYPE_UNKNOWN": 0,
+                    "TARGET_TYPE_FILE": 1,
+                    "TARGET_TYPE_EXTENSION_RANGE": 2,
+                    "TARGET_TYPE_MESSAGE": 3,
+                    "TARGET_TYPE_FIELD": 4,
+                    "TARGET_TYPE_ONEOF": 5,
+                    "TARGET_TYPE_ENUM": 6,
+                    "TARGET_TYPE_ENUM_ENTRY": 7,
+                    "TARGET_TYPE_SERVICE": 8,
+                    "TARGET_TYPE_METHOD": 9
+                  }
+                },
+                "EditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "value": {
+                      "type": "string",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "OneofOptions": {
+              "edition": "proto2",
+              "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 1
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "EnumOptions": {
+              "edition": "proto2",
+              "fields": {
+                "allowAlias": {
+                  "type": "bool",
+                  "id": 2
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "deprecatedLegacyJsonFieldConflicts": {
+                  "type": "bool",
+                  "id": 6,
+                  "options": {
+                    "deprecated": true
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 7
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "reserved": [
+                [
+                  5,
+                  5
+                ]
+              ]
+            },
+            "EnumValueOptions": {
+              "edition": "proto2",
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 1,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 2
+                },
+                "debugRedact": {
+                  "type": "bool",
+                  "id": 3,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "ServiceOptions": {
+              "edition": "proto2",
+              "fields": {
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 34
+                },
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ]
+            },
+            "MethodOptions": {
+              "edition": "proto2",
+              "fields": {
+                "deprecated": {
+                  "type": "bool",
+                  "id": 33,
+                  "options": {
+                    "default": false
+                  }
+                },
+                "idempotencyLevel": {
+                  "type": "IdempotencyLevel",
+                  "id": 34,
+                  "options": {
+                    "default": "IDEMPOTENCY_UNKNOWN"
+                  }
+                },
+                "features": {
+                  "type": "FeatureSet",
+                  "id": 35
+                },
+                "uninterpretedOption": {
+                  "rule": "repeated",
+                  "type": "UninterpretedOption",
+                  "id": 999
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  536870911
+                ]
+              ],
+              "nested": {
+                "IdempotencyLevel": {
+                  "values": {
+                    "IDEMPOTENCY_UNKNOWN": 0,
+                    "NO_SIDE_EFFECTS": 1,
+                    "IDEMPOTENT": 2
+                  }
+                }
+              }
+            },
+            "UninterpretedOption": {
+              "edition": "proto2",
+              "fields": {
+                "name": {
+                  "rule": "repeated",
+                  "type": "NamePart",
+                  "id": 2
+                },
+                "identifierValue": {
+                  "type": "string",
+                  "id": 3
+                },
+                "positiveIntValue": {
+                  "type": "uint64",
+                  "id": 4
+                },
+                "negativeIntValue": {
+                  "type": "int64",
+                  "id": 5
+                },
+                "doubleValue": {
+                  "type": "double",
+                  "id": 6
+                },
+                "stringValue": {
+                  "type": "bytes",
+                  "id": 7
+                },
+                "aggregateValue": {
+                  "type": "string",
+                  "id": 8
+                }
+              },
+              "nested": {
+                "NamePart": {
+                  "fields": {
+                    "namePart": {
+                      "rule": "required",
+                      "type": "string",
+                      "id": 1
+                    },
+                    "isExtension": {
+                      "rule": "required",
+                      "type": "bool",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "FeatureSet": {
+              "edition": "proto2",
+              "fields": {
+                "fieldPresence": {
+                  "type": "FieldPresence",
+                  "id": 1,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_2023",
+                    "edition_defaults.value": "EXPLICIT"
+                  }
+                },
+                "enumType": {
+                  "type": "EnumType",
+                  "id": 2,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "OPEN"
+                  }
+                },
+                "repeatedFieldEncoding": {
+                  "type": "RepeatedFieldEncoding",
+                  "id": 3,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "PACKED"
+                  }
+                },
+                "utf8Validation": {
+                  "type": "Utf8Validation",
+                  "id": 4,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "VERIFY"
+                  }
+                },
+                "messageEncoding": {
+                  "type": "MessageEncoding",
+                  "id": 5,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO2",
+                    "edition_defaults.value": "LENGTH_PREFIXED"
+                  }
+                },
+                "jsonFormat": {
+                  "type": "JsonFormat",
+                  "id": 6,
+                  "options": {
+                    "retention": "RETENTION_RUNTIME",
+                    "targets": "TARGET_TYPE_FILE",
+                    "edition_defaults.edition": "EDITION_PROTO3",
+                    "edition_defaults.value": "ALLOW"
+                  }
+                }
+              },
+              "extensions": [
+                [
+                  1000,
+                  1000
+                ],
+                [
+                  1001,
+                  1001
+                ],
+                [
+                  1002,
+                  1002
+                ],
+                [
+                  9990,
+                  9990
+                ],
+                [
+                  9995,
+                  9999
+                ],
+                [
+                  10000,
+                  10000
+                ]
+              ],
+              "reserved": [
+                [
+                  999,
+                  999
+                ]
+              ],
+              "nested": {
+                "FieldPresence": {
+                  "values": {
+                    "FIELD_PRESENCE_UNKNOWN": 0,
+                    "EXPLICIT": 1,
+                    "IMPLICIT": 2,
+                    "LEGACY_REQUIRED": 3
+                  }
+                },
+                "EnumType": {
+                  "values": {
+                    "ENUM_TYPE_UNKNOWN": 0,
+                    "OPEN": 1,
+                    "CLOSED": 2
+                  }
+                },
+                "RepeatedFieldEncoding": {
+                  "values": {
+                    "REPEATED_FIELD_ENCODING_UNKNOWN": 0,
+                    "PACKED": 1,
+                    "EXPANDED": 2
+                  }
+                },
+                "Utf8Validation": {
+                  "values": {
+                    "UTF8_VALIDATION_UNKNOWN": 0,
+                    "VERIFY": 2,
+                    "NONE": 3
+                  }
+                },
+                "MessageEncoding": {
+                  "values": {
+                    "MESSAGE_ENCODING_UNKNOWN": 0,
+                    "LENGTH_PREFIXED": 1,
+                    "DELIMITED": 2
+                  }
+                },
+                "JsonFormat": {
+                  "values": {
+                    "JSON_FORMAT_UNKNOWN": 0,
+                    "ALLOW": 1,
+                    "LEGACY_BEST_EFFORT": 2
+                  }
+                }
+              }
+            },
+            "FeatureSetDefaults": {
+              "edition": "proto2",
+              "fields": {
+                "defaults": {
+                  "rule": "repeated",
+                  "type": "FeatureSetEditionDefault",
+                  "id": 1
+                },
+                "minimumEdition": {
+                  "type": "Edition",
+                  "id": 4
+                },
+                "maximumEdition": {
+                  "type": "Edition",
+                  "id": 5
+                }
+              },
+              "nested": {
+                "FeatureSetEditionDefault": {
+                  "fields": {
+                    "edition": {
+                      "type": "Edition",
+                      "id": 3
+                    },
+                    "features": {
+                      "type": "FeatureSet",
+                      "id": 2
+                    }
+                  }
+                }
+              }
+            },
+            "SourceCodeInfo": {
+              "edition": "proto2",
+              "fields": {
+                "location": {
+                  "rule": "repeated",
+                  "type": "Location",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Location": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
+                    },
+                    "span": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 2,
+                      "options": {
+                        "packed": true
+                      }
+                    },
+                    "leadingComments": {
+                      "type": "string",
+                      "id": 3
+                    },
+                    "trailingComments": {
+                      "type": "string",
+                      "id": 4
+                    },
+                    "leadingDetachedComments": {
+                      "rule": "repeated",
+                      "type": "string",
+                      "id": 6
+                    }
+                  }
+                }
+              }
+            },
+            "GeneratedCodeInfo": {
+              "edition": "proto2",
+              "fields": {
+                "annotation": {
+                  "rule": "repeated",
+                  "type": "Annotation",
+                  "id": 1
+                }
+              },
+              "nested": {
+                "Annotation": {
+                  "fields": {
+                    "path": {
+                      "rule": "repeated",
+                      "type": "int32",
+                      "id": 1,
+                      "options": {
+                        "packed": true
+                      }
+                    },
+                    "sourceFile": {
+                      "type": "string",
+                      "id": 2
+                    },
+                    "begin": {
+                      "type": "int32",
+                      "id": 3
+                    },
+                    "end": {
+                      "type": "int32",
+                      "id": 4
+                    },
+                    "semantic": {
+                      "type": "Semantic",
+                      "id": 5
+                    }
+                  },
+                  "nested": {
+                    "Semantic": {
+                      "values": {
+                        "NONE": 0,
+                        "SET": 1,
+                        "ALIAS": 2
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "Timestamp": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            },
+            "Duration": {
+              "fields": {
+                "seconds": {
+                  "type": "int64",
+                  "id": 1
+                },
+                "nanos": {
+                  "type": "int32",
+                  "id": 2
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "datamanager",
+  "name_pretty": "Data Manager API",
+  "product_documentation": "https://developers.google.com/data-manager",
+  "client_documentation": "https://cloud.google.com/nodejs/docs/reference/datamanager/latest",
+  "issue_tracker": "https://github.com/googleapis/google-cloud-node/issues",
+  "release_level": "preview",
+  "language": "nodejs",
+  "repo": "googleapis/google-cloud-node",
+  "distribution_name": "@google-ads/datamanager",
+  "api_id": "datamanager.googleapis.com",
+  "default_version": "v1",
+  "requires_billing": true,
+  "library_type": "GAPIC_AUTO",
+  "api_shortname": "datamanager"
+}
+
