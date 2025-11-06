@@ -3,6 +3,7 @@
   "dev-packages/jsdoc-region-tag": "4.0.1",
   "dev-packages/logging-utils": "1.1.2",
   "dev-packages/pack-n-play": "4.2.1",
+  "generator/gapic-generator-typescript": "4.11.9",
   "packages/google-auth-library-nodejs": "10.5.0",
   "packages/gax": "5.0.5",
   "packages/gaxios": "7.1.3",
