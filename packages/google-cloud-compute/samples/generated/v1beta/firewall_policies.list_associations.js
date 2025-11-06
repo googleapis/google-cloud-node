@@ -29,7 +29,14 @@ function main() {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The target resource to list associations. It is an organization, or a folder.
+   *  If set to "true", the response will contain a list of all associations for
+   *  the containing folders and the containing organization of the target. The
+   *  parameter has no effect if the target is an organization.
+   */
+  // const includeInheritedPolicies = true
+  /**
+   *  The target resource to list associations. It is an organization, or a
+   *  folder.
    */
   // const targetResource = 'abc123'
 

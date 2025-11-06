@@ -37,7 +37,8 @@ function main(networkEndpointGroup, project, region) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the region where the network endpoint group is located. It should comply with RFC1035.
+   *  The name of the region where
+   *  the network endpoint group is located. It should comply with RFC1035.
    */
   // const region = 'us-central1'
 

@@ -29,7 +29,8 @@ function main(instanceGroupManager, project, region, resizeRequest) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  The name of the managed instance group. Name should conform to RFC1035 or be a resource ID.
+   *  The name of the managed instance group.
+   *  Name should conform to RFC1035 or be a resource ID.
    */
   // const instanceGroupManager = 'abc123'
   /**
@@ -37,11 +38,13 @@ function main(instanceGroupManager, project, region, resizeRequest) {
    */
   // const project = 'my-project'
   /**
-   *  The name of the region scoping this request. Name should conform to RFC1035.
+   *  The name of the region
+   *  scoping this request. Name should conform to RFC1035.
    */
   // const region = 'us-central1'
   /**
-   *  The name of the resize request. Name should conform to RFC1035 or be a resource ID.
+   *  The name of the resize request.
+   *  Name should conform to RFC1035 or be a resource ID.
    */
   // const resizeRequest = 'abc123'
 
