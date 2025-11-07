@@ -1,0 +1,188 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.geminidataanalytics.v1alpha",
+  "libraryPackage": "@google-cloud/geminidataanalytics",
+  "services": {
+    "DataAgentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataAgentServiceClient",
+          "rpcs": {
+            "GetDataAgent": {
+              "methods": [
+                "getDataAgent"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "CreateDataAgent": {
+              "methods": [
+                "createDataAgent"
+              ]
+            },
+            "UpdateDataAgent": {
+              "methods": [
+                "updateDataAgent"
+              ]
+            },
+            "DeleteDataAgent": {
+              "methods": [
+                "deleteDataAgent"
+              ]
+            },
+            "ListDataAgents": {
+              "methods": [
+                "listDataAgents",
+                "listDataAgentsStream",
+                "listDataAgentsAsync"
+              ]
+            },
+            "ListAccessibleDataAgents": {
+              "methods": [
+                "listAccessibleDataAgents",
+                "listAccessibleDataAgentsStream",
+                "listAccessibleDataAgentsAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataAgentServiceClient",
+          "rpcs": {
+            "GetDataAgent": {
+              "methods": [
+                "getDataAgent"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "CreateDataAgent": {
+              "methods": [
+                "createDataAgent"
+              ]
+            },
+            "UpdateDataAgent": {
+              "methods": [
+                "updateDataAgent"
+              ]
+            },
+            "DeleteDataAgent": {
+              "methods": [
+                "deleteDataAgent"
+              ]
+            },
+            "ListDataAgents": {
+              "methods": [
+                "listDataAgents",
+                "listDataAgentsStream",
+                "listDataAgentsAsync"
+              ]
+            },
+            "ListAccessibleDataAgents": {
+              "methods": [
+                "listAccessibleDataAgents",
+                "listAccessibleDataAgentsStream",
+                "listAccessibleDataAgentsAsync"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DataChatService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DataChatServiceClient",
+          "rpcs": {
+            "CreateConversation": {
+              "methods": [
+                "createConversation"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "deleteConversation"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "getConversation"
+              ]
+            },
+            "Chat": {
+              "methods": [
+                "chat"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "listConversations",
+                "listConversationsStream",
+                "listConversationsAsync"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "listMessages",
+                "listMessagesStream",
+                "listMessagesAsync"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DataChatServiceClient",
+          "rpcs": {
+            "CreateConversation": {
+              "methods": [
+                "createConversation"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "deleteConversation"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "getConversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "listConversations",
+                "listConversationsStream",
+                "listConversationsAsync"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "listMessages",
+                "listMessagesStream",
+                "listMessagesAsync"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
