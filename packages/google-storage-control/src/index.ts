@@ -17,11 +17,12 @@
 // ** All changes to this file may be overwritten. **
 
 import * as v2 from './v2';
+import * as v2 from './v2';
 
 const StorageControlClient = v2.StorageControlClient;
 type StorageControlClient = v2.StorageControlClient;
 
-export {v2, StorageControlClient};
-export default {v2, StorageControlClient};
+export {v2, v2, StorageControlClient};
+export default {v2, v2, StorageControlClient};
 import * as protos from '../protos/protos';
 export {protos};
