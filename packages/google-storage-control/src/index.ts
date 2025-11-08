@@ -19,7 +19,7 @@
 import * as v2 from './v2';
 import {StorageControlClient} from './storage_control_client';
 
-export {v2, StorageControlClient};
-export default {v2, StorageControlClient};
+export {v2, v2, StorageControlClient};
+export default {v2, v2, StorageControlClient};
 import * as protos from '../protos/protos';
 export {protos};

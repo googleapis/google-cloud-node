@@ -2186,7 +2186,11 @@
                     },
                     "ComposeObject": {
                       "requestType": "ComposeObjectRequest",
+<<<<<<< HEAD
                       "responseType": "StorageObject",
+=======
+                      "responseType": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "destination.bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}"
@@ -2229,7 +2233,11 @@
                     },
                     "RestoreObject": {
                       "requestType": "RestoreObjectRequest",
+<<<<<<< HEAD
                       "responseType": "StorageObject",
+=======
+                      "responseType": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
@@ -2273,7 +2281,11 @@
                     },
                     "GetObject": {
                       "requestType": "GetObjectRequest",
+<<<<<<< HEAD
                       "responseType": "StorageObject",
+=======
+                      "responseType": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
@@ -2344,7 +2356,11 @@
                     },
                     "UpdateObject": {
                       "requestType": "UpdateObjectRequest",
+<<<<<<< HEAD
                       "responseType": "StorageObject",
+=======
+                      "responseType": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "object.bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
@@ -2462,7 +2478,11 @@
                     },
                     "MoveObject": {
                       "requestType": "MoveObjectRequest",
+<<<<<<< HEAD
                       "responseType": "StorageObject",
+=======
+                      "responseType": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "options": {
                         "(google.api.routing).routing_parameters.field": "bucket",
                         "(google.api.routing).routing_parameters.path_template": "{bucket=**}",
@@ -2783,7 +2803,11 @@
                   },
                   "fields": {
                     "destination": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 1,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
@@ -3326,7 +3350,11 @@
                       "id": 3
                     },
                     "metadata": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 4
                     }
                   }
@@ -3478,7 +3506,11 @@
                       "id": 6
                     },
                     "metadata": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 4
                     },
                     "readHandle": {
@@ -3670,7 +3702,11 @@
                   },
                   "fields": {
                     "resource": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 1,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
@@ -3799,7 +3835,11 @@
                       "id": 1
                     },
                     "resource": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 2
                     }
                   }
@@ -3976,7 +4016,11 @@
                       "id": 1
                     },
                     "resource": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 2
                     },
                     "writeHandle": {
@@ -4131,7 +4175,11 @@
                       "id": 1
                     },
                     "resource": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 2
                     }
                   }
@@ -4204,7 +4252,11 @@
                       }
                     },
                     "destination": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 1,
                       "options": {
                         "(google.api.field_behavior)": "OPTIONAL"
@@ -4365,7 +4417,11 @@
                       "id": 4
                     },
                     "resource": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 5
                     }
                   }
@@ -4560,7 +4616,11 @@
                   },
                   "fields": {
                     "object": {
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 1,
                       "options": {
                         "(google.api.field_behavior)": "REQUIRED"
@@ -5768,7 +5828,11 @@
                     }
                   }
                 },
+<<<<<<< HEAD
                 "StorageObject": {
+=======
+                "Object": {
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                   "oneofs": {
                     "_restoreToken": {
                       "oneof": [
@@ -6132,7 +6196,11 @@
                   "fields": {
                     "objects": {
                       "rule": "repeated",
+<<<<<<< HEAD
                       "type": "StorageObject",
+=======
+                      "type": "Object",
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                       "id": 1
                     },
                     "prefixes": {

@@ -5549,7 +5549,11 @@ export namespace google {
                 /**
                  * Calls ComposeObject.
                  * @param request ComposeObjectRequest message or plain object
+<<<<<<< HEAD
                  * @param callback Node-style callback called with the error, if any, and StorageObject
+=======
+                 * @param callback Node-style callback called with the error, if any, and Object
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                  */
                 public composeObject(request: google.storage.v2.IComposeObjectRequest, callback: google.storage.v2.Storage.ComposeObjectCallback): void;
 
@@ -5558,7 +5562,11 @@ export namespace google {
                  * @param request ComposeObjectRequest message or plain object
                  * @returns Promise
                  */
+<<<<<<< HEAD
                 public composeObject(request: google.storage.v2.IComposeObjectRequest): Promise<google.storage.v2.StorageObject>;
+=======
+                public composeObject(request: google.storage.v2.IComposeObjectRequest): Promise<google.storage.v2.object>;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Calls DeleteObject.
@@ -5577,7 +5585,11 @@ export namespace google {
                 /**
                  * Calls RestoreObject.
                  * @param request RestoreObjectRequest message or plain object
+<<<<<<< HEAD
                  * @param callback Node-style callback called with the error, if any, and StorageObject
+=======
+                 * @param callback Node-style callback called with the error, if any, and Object
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                  */
                 public restoreObject(request: google.storage.v2.IRestoreObjectRequest, callback: google.storage.v2.Storage.RestoreObjectCallback): void;
 
@@ -5586,7 +5598,11 @@ export namespace google {
                  * @param request RestoreObjectRequest message or plain object
                  * @returns Promise
                  */
+<<<<<<< HEAD
                 public restoreObject(request: google.storage.v2.IRestoreObjectRequest): Promise<google.storage.v2.StorageObject>;
+=======
+                public restoreObject(request: google.storage.v2.IRestoreObjectRequest): Promise<google.storage.v2.object>;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Calls CancelResumableWrite.
@@ -5605,7 +5621,11 @@ export namespace google {
                 /**
                  * Calls GetObject.
                  * @param request GetObjectRequest message or plain object
+<<<<<<< HEAD
                  * @param callback Node-style callback called with the error, if any, and StorageObject
+=======
+                 * @param callback Node-style callback called with the error, if any, and Object
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                  */
                 public getObject(request: google.storage.v2.IGetObjectRequest, callback: google.storage.v2.Storage.GetObjectCallback): void;
 
@@ -5614,7 +5634,11 @@ export namespace google {
                  * @param request GetObjectRequest message or plain object
                  * @returns Promise
                  */
+<<<<<<< HEAD
                 public getObject(request: google.storage.v2.IGetObjectRequest): Promise<google.storage.v2.StorageObject>;
+=======
+                public getObject(request: google.storage.v2.IGetObjectRequest): Promise<google.storage.v2.object>;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Calls ReadObject.
@@ -5647,7 +5671,11 @@ export namespace google {
                 /**
                  * Calls UpdateObject.
                  * @param request UpdateObjectRequest message or plain object
+<<<<<<< HEAD
                  * @param callback Node-style callback called with the error, if any, and StorageObject
+=======
+                 * @param callback Node-style callback called with the error, if any, and Object
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                  */
                 public updateObject(request: google.storage.v2.IUpdateObjectRequest, callback: google.storage.v2.Storage.UpdateObjectCallback): void;
 
@@ -5656,7 +5684,11 @@ export namespace google {
                  * @param request UpdateObjectRequest message or plain object
                  * @returns Promise
                  */
+<<<<<<< HEAD
                 public updateObject(request: google.storage.v2.IUpdateObjectRequest): Promise<google.storage.v2.StorageObject>;
+=======
+                public updateObject(request: google.storage.v2.IUpdateObjectRequest): Promise<google.storage.v2.object>;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Calls WriteObject.
@@ -5745,7 +5777,11 @@ export namespace google {
                 /**
                  * Calls MoveObject.
                  * @param request MoveObjectRequest message or plain object
+<<<<<<< HEAD
                  * @param callback Node-style callback called with the error, if any, and StorageObject
+=======
+                 * @param callback Node-style callback called with the error, if any, and Object
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                  */
                 public moveObject(request: google.storage.v2.IMoveObjectRequest, callback: google.storage.v2.Storage.MoveObjectCallback): void;
 
@@ -5754,7 +5790,11 @@ export namespace google {
                  * @param request MoveObjectRequest message or plain object
                  * @returns Promise
                  */
+<<<<<<< HEAD
                 public moveObject(request: google.storage.v2.IMoveObjectRequest): Promise<google.storage.v2.StorageObject>;
+=======
+                public moveObject(request: google.storage.v2.IMoveObjectRequest): Promise<google.storage.v2.object>;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
             }
 
             namespace Storage {
@@ -5825,9 +5865,15 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|composeObject}.
                  * @param error Error, if any
+<<<<<<< HEAD
                  * @param [response] StorageObject
                  */
                 type ComposeObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+=======
+                 * @param [response] Object
+                 */
+                type ComposeObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|deleteObject}.
@@ -5839,9 +5885,15 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|restoreObject}.
                  * @param error Error, if any
+<<<<<<< HEAD
                  * @param [response] StorageObject
                  */
                 type RestoreObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+=======
+                 * @param [response] Object
+                 */
+                type RestoreObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|cancelResumableWrite}.
@@ -5853,9 +5905,15 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|getObject}.
                  * @param error Error, if any
+<<<<<<< HEAD
                  * @param [response] StorageObject
                  */
                 type GetObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+=======
+                 * @param [response] Object
+                 */
+                type GetObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|readObject}.
@@ -5874,9 +5932,15 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|updateObject}.
                  * @param error Error, if any
+<<<<<<< HEAD
                  * @param [response] StorageObject
                  */
                 type UpdateObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+=======
+                 * @param [response] Object
+                 */
+                type UpdateObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|writeObject}.
@@ -5923,9 +5987,15 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|moveObject}.
                  * @param error Error, if any
+<<<<<<< HEAD
                  * @param [response] StorageObject
                  */
                 type MoveObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
+=======
+                 * @param [response] Object
+                 */
+                type MoveObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
             }
 
             /** Properties of a DeleteBucketRequest. */
@@ -6749,7 +6819,11 @@ export namespace google {
             interface IComposeObjectRequest {
 
                 /** ComposeObjectRequest destination */
+<<<<<<< HEAD
                 destination?: (google.storage.v2.IStorageObject|null);
+=======
+                destination?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** ComposeObjectRequest sourceObjects */
                 sourceObjects?: (google.storage.v2.ComposeObjectRequest.ISourceObject[]|null);
@@ -6783,7 +6857,11 @@ export namespace google {
                 constructor(properties?: google.storage.v2.IComposeObjectRequest);
 
                 /** ComposeObjectRequest destination. */
+<<<<<<< HEAD
                 public destination?: (google.storage.v2.IStorageObject|null);
+=======
+                public destination?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** ComposeObjectRequest sourceObjects. */
                 public sourceObjects: google.storage.v2.ComposeObjectRequest.ISourceObject[];
@@ -7901,7 +7979,11 @@ export namespace google {
                 contentRange?: (google.storage.v2.IContentRange|null);
 
                 /** ReadObjectResponse metadata */
+<<<<<<< HEAD
                 metadata?: (google.storage.v2.IStorageObject|null);
+=======
+                metadata?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
             }
 
             /** Represents a ReadObjectResponse. */
@@ -7923,7 +8005,11 @@ export namespace google {
                 public contentRange?: (google.storage.v2.IContentRange|null);
 
                 /** ReadObjectResponse metadata. */
+<<<<<<< HEAD
                 public metadata?: (google.storage.v2.IStorageObject|null);
+=======
+                public metadata?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Creates a new ReadObjectResponse instance using the specified properties.
@@ -8270,7 +8356,11 @@ export namespace google {
                 objectDataRanges?: (google.storage.v2.IObjectRangeData[]|null);
 
                 /** BidiReadObjectResponse metadata */
+<<<<<<< HEAD
                 metadata?: (google.storage.v2.IStorageObject|null);
+=======
+                metadata?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** BidiReadObjectResponse readHandle */
                 readHandle?: (google.storage.v2.IBidiReadHandle|null);
@@ -8289,7 +8379,11 @@ export namespace google {
                 public objectDataRanges: google.storage.v2.IObjectRangeData[];
 
                 /** BidiReadObjectResponse metadata. */
+<<<<<<< HEAD
                 public metadata?: (google.storage.v2.IStorageObject|null);
+=======
+                public metadata?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** BidiReadObjectResponse readHandle. */
                 public readHandle?: (google.storage.v2.IBidiReadHandle|null);
@@ -9200,7 +9294,11 @@ export namespace google {
             interface IWriteObjectSpec {
 
                 /** WriteObjectSpec resource */
+<<<<<<< HEAD
                 resource?: (google.storage.v2.IStorageObject|null);
+=======
+                resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** WriteObjectSpec predefinedAcl */
                 predefinedAcl?: (string|null);
@@ -9234,7 +9332,11 @@ export namespace google {
                 constructor(properties?: google.storage.v2.IWriteObjectSpec);
 
                 /** WriteObjectSpec resource. */
+<<<<<<< HEAD
                 public resource?: (google.storage.v2.IStorageObject|null);
+=======
+                public resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** WriteObjectSpec predefinedAcl. */
                 public predefinedAcl: string;
@@ -9481,7 +9583,11 @@ export namespace google {
                 persistedSize?: (number|Long|string|null);
 
                 /** WriteObjectResponse resource */
+<<<<<<< HEAD
                 resource?: (google.storage.v2.IStorageObject|null);
+=======
+                resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
             }
 
             /** Represents a WriteObjectResponse. */
@@ -9497,7 +9603,11 @@ export namespace google {
                 public persistedSize?: (number|Long|string|null);
 
                 /** WriteObjectResponse resource. */
+<<<<<<< HEAD
                 public resource?: (google.storage.v2.IStorageObject|null);
+=======
+                public resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** WriteObjectResponse writeStatus. */
                 public writeStatus?: ("persistedSize"|"resource");
@@ -9877,7 +9987,11 @@ export namespace google {
                 persistedSize?: (number|Long|string|null);
 
                 /** BidiWriteObjectResponse resource */
+<<<<<<< HEAD
                 resource?: (google.storage.v2.IStorageObject|null);
+=======
+                resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** BidiWriteObjectResponse writeHandle */
                 writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
@@ -9896,7 +10010,11 @@ export namespace google {
                 public persistedSize?: (number|Long|string|null);
 
                 /** BidiWriteObjectResponse resource. */
+<<<<<<< HEAD
                 public resource?: (google.storage.v2.IStorageObject|null);
+=======
+                public resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** BidiWriteObjectResponse writeHandle. */
                 public writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
@@ -10267,7 +10385,11 @@ export namespace google {
                 persistedSize?: (number|Long|string|null);
 
                 /** QueryWriteStatusResponse resource */
+<<<<<<< HEAD
                 resource?: (google.storage.v2.IStorageObject|null);
+=======
+                resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
             }
 
             /** Represents a QueryWriteStatusResponse. */
@@ -10283,7 +10405,11 @@ export namespace google {
                 public persistedSize?: (number|Long|string|null);
 
                 /** QueryWriteStatusResponse resource. */
+<<<<<<< HEAD
                 public resource?: (google.storage.v2.IStorageObject|null);
+=======
+                public resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** QueryWriteStatusResponse writeStatus. */
                 public writeStatus?: ("persistedSize"|"resource");
@@ -10379,7 +10505,11 @@ export namespace google {
                 destinationKmsKey?: (string|null);
 
                 /** RewriteObjectRequest destination */
+<<<<<<< HEAD
                 destination?: (google.storage.v2.IStorageObject|null);
+=======
+                destination?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** RewriteObjectRequest sourceBucket */
                 sourceBucket?: (string|null);
@@ -10458,7 +10588,11 @@ export namespace google {
                 public destinationKmsKey: string;
 
                 /** RewriteObjectRequest destination. */
+<<<<<<< HEAD
                 public destination?: (google.storage.v2.IStorageObject|null);
+=======
+                public destination?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** RewriteObjectRequest sourceBucket. */
                 public sourceBucket: string;
@@ -10611,7 +10745,11 @@ export namespace google {
                 rewriteToken?: (string|null);
 
                 /** RewriteResponse resource */
+<<<<<<< HEAD
                 resource?: (google.storage.v2.IStorageObject|null);
+=======
+                resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
             }
 
             /** Represents a RewriteResponse. */
@@ -10636,7 +10774,11 @@ export namespace google {
                 public rewriteToken: string;
 
                 /** RewriteResponse resource. */
+<<<<<<< HEAD
                 public resource?: (google.storage.v2.IStorageObject|null);
+=======
+                public resource?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /**
                  * Creates a new RewriteResponse instance using the specified properties.
@@ -11083,7 +11225,11 @@ export namespace google {
             interface IUpdateObjectRequest {
 
                 /** UpdateObjectRequest object */
+<<<<<<< HEAD
                 object?: (google.storage.v2.IStorageObject|null);
+=======
+                object?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** UpdateObjectRequest ifGenerationMatch */
                 ifGenerationMatch?: (number|Long|string|null);
@@ -11120,7 +11266,11 @@ export namespace google {
                 constructor(properties?: google.storage.v2.IUpdateObjectRequest);
 
                 /** UpdateObjectRequest object. */
+<<<<<<< HEAD
                 public object?: (google.storage.v2.IStorageObject|null);
+=======
+                public object?: (google.storage.v2.IObject|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** UpdateObjectRequest ifGenerationMatch. */
                 public ifGenerationMatch?: (number|Long|string|null);
@@ -14954,6 +15104,7 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+<<<<<<< HEAD
             /** Properties of a StorageObject. */
             interface IStorageObject {
 
@@ -15209,12 +15360,270 @@ export namespace google {
 
                 /**
                  * Verifies a StorageObject message.
+=======
+            /** Properties of an Object. */
+            interface IObject {
+
+                /** Object name */
+                name?: (string|null);
+
+                /** Object bucket */
+                bucket?: (string|null);
+
+                /** Object etag */
+                etag?: (string|null);
+
+                /** Object generation */
+                generation?: (number|Long|string|null);
+
+                /** Object restoreToken */
+                restoreToken?: (string|null);
+
+                /** Object metageneration */
+                metageneration?: (number|Long|string|null);
+
+                /** Object storageClass */
+                storageClass?: (string|null);
+
+                /** Object size */
+                size?: (number|Long|string|null);
+
+                /** Object contentEncoding */
+                contentEncoding?: (string|null);
+
+                /** Object contentDisposition */
+                contentDisposition?: (string|null);
+
+                /** Object cacheControl */
+                cacheControl?: (string|null);
+
+                /** Object acl */
+                acl?: (google.storage.v2.IObjectAccessControl[]|null);
+
+                /** Object contentLanguage */
+                contentLanguage?: (string|null);
+
+                /** Object deleteTime */
+                deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object finalizeTime */
+                finalizeTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object contentType */
+                contentType?: (string|null);
+
+                /** Object createTime */
+                createTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object componentCount */
+                componentCount?: (number|null);
+
+                /** Object checksums */
+                checksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** Object updateTime */
+                updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object kmsKey */
+                kmsKey?: (string|null);
+
+                /** Object updateStorageClassTime */
+                updateStorageClassTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object temporaryHold */
+                temporaryHold?: (boolean|null);
+
+                /** Object retentionExpireTime */
+                retentionExpireTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object metadata */
+                metadata?: ({ [k: string]: string }|null);
+
+                /** Object contexts */
+                contexts?: (google.storage.v2.IObjectContexts|null);
+
+                /** Object eventBasedHold */
+                eventBasedHold?: (boolean|null);
+
+                /** Object owner */
+                owner?: (google.storage.v2.IOwner|null);
+
+                /** Object customerEncryption */
+                customerEncryption?: (google.storage.v2.ICustomerEncryption|null);
+
+                /** Object customTime */
+                customTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object softDeleteTime */
+                softDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object hardDeleteTime */
+                hardDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object retention */
+                retention?: (google.storage.v2.Object.IRetention|null);
+            }
+
+            /** Represents an Object. */
+            class Object implements IObject {
+
+                /**
+                 * Constructs a new Object.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.storage.v2.IObject);
+
+                /** Object name. */
+                public name: string;
+
+                /** Object bucket. */
+                public bucket: string;
+
+                /** Object etag. */
+                public etag: string;
+
+                /** Object generation. */
+                public generation: (number|Long|string);
+
+                /** Object restoreToken. */
+                public restoreToken?: (string|null);
+
+                /** Object metageneration. */
+                public metageneration: (number|Long|string);
+
+                /** Object storageClass. */
+                public storageClass: string;
+
+                /** Object size. */
+                public size: (number|Long|string);
+
+                /** Object contentEncoding. */
+                public contentEncoding: string;
+
+                /** Object contentDisposition. */
+                public contentDisposition: string;
+
+                /** Object cacheControl. */
+                public cacheControl: string;
+
+                /** Object acl. */
+                public acl: google.storage.v2.IObjectAccessControl[];
+
+                /** Object contentLanguage. */
+                public contentLanguage: string;
+
+                /** Object deleteTime. */
+                public deleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object finalizeTime. */
+                public finalizeTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object contentType. */
+                public contentType: string;
+
+                /** Object createTime. */
+                public createTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object componentCount. */
+                public componentCount: number;
+
+                /** Object checksums. */
+                public checksums?: (google.storage.v2.IObjectChecksums|null);
+
+                /** Object updateTime. */
+                public updateTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object kmsKey. */
+                public kmsKey: string;
+
+                /** Object updateStorageClassTime. */
+                public updateStorageClassTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object temporaryHold. */
+                public temporaryHold: boolean;
+
+                /** Object retentionExpireTime. */
+                public retentionExpireTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object metadata. */
+                public metadata: { [k: string]: string };
+
+                /** Object contexts. */
+                public contexts?: (google.storage.v2.IObjectContexts|null);
+
+                /** Object eventBasedHold. */
+                public eventBasedHold?: (boolean|null);
+
+                /** Object owner. */
+                public owner?: (google.storage.v2.IOwner|null);
+
+                /** Object customerEncryption. */
+                public customerEncryption?: (google.storage.v2.ICustomerEncryption|null);
+
+                /** Object customTime. */
+                public customTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object softDeleteTime. */
+                public softDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object hardDeleteTime. */
+                public hardDeleteTime?: (google.protobuf.ITimestamp|null);
+
+                /** Object retention. */
+                public retention?: (google.storage.v2.Object.IRetention|null);
+
+                /**
+                 * Creates a new Object instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns Object instance
+                 */
+                public static create(properties?: google.storage.v2.IObject): google.storage.v2.object;
+
+                /**
+                 * Encodes the specified Object message. Does not implicitly {@link google.storage.v2.Object.verify|verify} messages.
+                 * @param message Object message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.storage.v2.IObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified Object message, length delimited. Does not implicitly {@link google.storage.v2.Object.verify|verify} messages.
+                 * @param message Object message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.storage.v2.IObject, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an Object message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns Object
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.object;
+
+                /**
+                 * Decodes an Object message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns Object
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.object;
+
+                /**
+                 * Verifies an Object message.
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
+<<<<<<< HEAD
                  * Creates a StorageObject message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
                  * @returns StorageObject
@@ -15231,25 +15640,55 @@ export namespace google {
 
                 /**
                  * Converts this StorageObject to JSON.
+=======
+                 * Creates an Object message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns Object
+                 */
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.object;
+
+                /**
+                 * Creates a plain object from an Object message. Also converts values to other types if specified.
+                 * @param message Object
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.storage.v2.object, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this Object to JSON.
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
+<<<<<<< HEAD
                  * Gets the default type url for StorageObject
+=======
+                 * Gets the default type url for Object
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
+<<<<<<< HEAD
             namespace StorageObject {
+=======
+            namespace Object {
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** Properties of a Retention. */
                 interface IRetention {
 
                     /** Retention mode */
+<<<<<<< HEAD
                     mode?: (google.storage.v2.StorageObject.Retention.Mode|keyof typeof google.storage.v2.StorageObject.Retention.Mode|null);
+=======
+                    mode?: (google.storage.v2.Object.Retention.Mode|keyof typeof google.storage.v2.Object.Retention.Mode|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                     /** Retention retainUntilTime */
                     retainUntilTime?: (google.protobuf.ITimestamp|null);
@@ -15262,10 +15701,17 @@ export namespace google {
                      * Constructs a new Retention.
                      * @param [properties] Properties to set
                      */
+<<<<<<< HEAD
                     constructor(properties?: google.storage.v2.StorageObject.IRetention);
 
                     /** Retention mode. */
                     public mode: (google.storage.v2.StorageObject.Retention.Mode|keyof typeof google.storage.v2.StorageObject.Retention.Mode);
+=======
+                    constructor(properties?: google.storage.v2.Object.IRetention);
+
+                    /** Retention mode. */
+                    public mode: (google.storage.v2.Object.Retention.Mode|keyof typeof google.storage.v2.Object.Retention.Mode);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                     /** Retention retainUntilTime. */
                     public retainUntilTime?: (google.protobuf.ITimestamp|null);
@@ -15275,23 +15721,41 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns Retention instance
                      */
+<<<<<<< HEAD
                     public static create(properties?: google.storage.v2.StorageObject.IRetention): google.storage.v2.StorageObject.Retention;
 
                     /**
                      * Encodes the specified Retention message. Does not implicitly {@link google.storage.v2.StorageObject.Retention.verify|verify} messages.
+=======
+                    public static create(properties?: google.storage.v2.Object.IRetention): google.storage.v2.Object.Retention;
+
+                    /**
+                     * Encodes the specified Retention message. Does not implicitly {@link google.storage.v2.Object.Retention.verify|verify} messages.
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                      * @param message Retention message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
+<<<<<<< HEAD
                     public static encode(message: google.storage.v2.StorageObject.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Encodes the specified Retention message, length delimited. Does not implicitly {@link google.storage.v2.StorageObject.Retention.verify|verify} messages.
+=======
+                    public static encode(message: google.storage.v2.Object.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified Retention message, length delimited. Does not implicitly {@link google.storage.v2.Object.Retention.verify|verify} messages.
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
                      * @param message Retention message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
+<<<<<<< HEAD
                     public static encodeDelimited(message: google.storage.v2.StorageObject.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+=======
+                    public static encodeDelimited(message: google.storage.v2.Object.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                     /**
                      * Decodes a Retention message from the specified reader or buffer.
@@ -15301,7 +15765,11 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
+<<<<<<< HEAD
                     public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.StorageObject.Retention;
+=======
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Object.Retention;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                     /**
                      * Decodes a Retention message from the specified reader or buffer, length delimited.
@@ -15310,7 +15778,11 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
+<<<<<<< HEAD
                     public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.StorageObject.Retention;
+=======
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Object.Retention;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                     /**
                      * Verifies a Retention message.
@@ -15324,7 +15796,11 @@ export namespace google {
                      * @param object Plain object
                      * @returns Retention
                      */
+<<<<<<< HEAD
                     public static fromObject(object: { [k: string]: any }): google.storage.v2.StorageObject.Retention;
+=======
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Object.Retention;
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                     /**
                      * Creates a plain object from a Retention message. Also converts values to other types if specified.
@@ -15332,7 +15808,11 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
+<<<<<<< HEAD
                     public static toObject(message: google.storage.v2.StorageObject.Retention, options?: $protobuf.IConversionOptions): { [k: string]: any };
+=======
+                    public static toObject(message: google.storage.v2.Object.Retention, options?: $protobuf.IConversionOptions): { [k: string]: any };
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                     /**
                      * Converts this Retention to JSON.
@@ -15508,7 +15988,11 @@ export namespace google {
             interface IListObjectsResponse {
 
                 /** ListObjectsResponse objects */
+<<<<<<< HEAD
                 objects?: (google.storage.v2.IStorageObject[]|null);
+=======
+                objects?: (google.storage.v2.IObject[]|null);
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** ListObjectsResponse prefixes */
                 prefixes?: (string[]|null);
@@ -15527,7 +16011,11 @@ export namespace google {
                 constructor(properties?: google.storage.v2.IListObjectsResponse);
 
                 /** ListObjectsResponse objects. */
+<<<<<<< HEAD
                 public objects: google.storage.v2.IStorageObject[];
+=======
+                public objects: google.storage.v2.IObject[];
+>>>>>>> 9b515972a8 (🦉 Updates from OwlBot post-processor)
 
                 /** ListObjectsResponse prefixes. */
                 public prefixes: string[];
