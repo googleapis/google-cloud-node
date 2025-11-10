@@ -120023,6 +120023,7 @@
                          * @property {google.cloud.dialogflow.v2beta1.Participant.Role|null} [role] Participant role
                          * @property {string|null} [obfuscatedExternalUserId] Participant obfuscatedExternalUserId
                          * @property {Object.<string,string>|null} [documentsMetadataFilters] Participant documentsMetadataFilters
+                         * @property {google.cloud.dialogflow.v2beta1.Participant.AgentDesktopSource|null} [agentDesktopSource] Participant agentDesktopSource
                          */
     
                         /**
@@ -120074,6 +120075,14 @@
                         Participant.prototype.documentsMetadataFilters = $util.emptyObject;
     
                         /**
+                         * Participant agentDesktopSource.
+                         * @member {google.cloud.dialogflow.v2beta1.Participant.AgentDesktopSource} agentDesktopSource
+                         * @memberof google.cloud.dialogflow.v2beta1.Participant
+                         * @instance
+                         */
+                        Participant.prototype.agentDesktopSource = 0;
+    
+                        /**
                          * Creates a new Participant instance using the specified properties.
                          * @function create
                          * @memberof google.cloud.dialogflow.v2beta1.Participant
@@ -120106,6 +120115,8 @@
                             if (message.documentsMetadataFilters != null && Object.hasOwnProperty.call(message, "documentsMetadataFilters"))
                                 for (var keys = Object.keys(message.documentsMetadataFilters), i = 0; i < keys.length; ++i)
                                     writer.uint32(/* id 8, wireType 2 =*/66).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.documentsMetadataFilters[keys[i]]).ldelim();
+                            if (message.agentDesktopSource != null && Object.hasOwnProperty.call(message, "agentDesktopSource"))
+                                writer.uint32(/* id 10, wireType 0 =*/80).int32(message.agentDesktopSource);
                             return writer;
                         };
     
@@ -120177,6 +120188,10 @@
                                         message.documentsMetadataFilters[key] = value;
                                         break;
                                     }
+                                case 10: {
+                                        message.agentDesktopSource = reader.int32();
+                                        break;
+                                    }
                                 default:
                                     reader.skipType(tag & 7);
                                     break;
@@ -120236,6 +120251,18 @@
                                     if (!$util.isString(message.documentsMetadataFilters[key[i]]))
                                         return "documentsMetadataFilters: string{k:string} expected";
                             }
+                            if (message.agentDesktopSource != null && message.hasOwnProperty("agentDesktopSource"))
+                                switch (message.agentDesktopSource) {
+                                default:
+                                    return "agentDesktopSource: enum value expected";
+                                case 0:
+                                case 1:
+                                case 2:
+                                case 3:
+                                case 4:
+                                case 8:
+                                    break;
+                                }
                             return null;
                         };
     
@@ -120286,6 +120313,38 @@
                                 for (var keys = Object.keys(object.documentsMetadataFilters), i = 0; i < keys.length; ++i)
                                     message.documentsMetadataFilters[keys[i]] = String(object.documentsMetadataFilters[keys[i]]);
                             }
+                            switch (object.agentDesktopSource) {
+                            default:
+                                if (typeof object.agentDesktopSource === "number") {
+                                    message.agentDesktopSource = object.agentDesktopSource;
+                                    break;
+                                }
+                                break;
+                            case "AGENT_DESKTOP_SOURCE_UNSPECIFIED":
+                            case 0:
+                                message.agentDesktopSource = 0;
+                                break;
+                            case "LIVE_PERSON":
+                            case 1:
+                                message.agentDesktopSource = 1;
+                                break;
+                            case "GENESYS_CLOUD":
+                            case 2:
+                                message.agentDesktopSource = 2;
+                                break;
+                            case "TWILIO":
+                            case 3:
+                                message.agentDesktopSource = 3;
+                                break;
+                            case "SALESFORCE":
+                            case 4:
+                                message.agentDesktopSource = 4;
+                                break;
+                            case "OTHER":
+                            case 8:
+                                message.agentDesktopSource = 8;
+                                break;
+                            }
                             return message;
                         };
     
@@ -120308,6 +120367,7 @@
                                 object.name = "";
                                 object.role = options.enums === String ? "ROLE_UNSPECIFIED" : 0;
                                 object.obfuscatedExternalUserId = "";
+                                object.agentDesktopSource = options.enums === String ? "AGENT_DESKTOP_SOURCE_UNSPECIFIED" : 0;
                             }
                             if (message.name != null && message.hasOwnProperty("name"))
                                 object.name = message.name;
@@ -120321,6 +120381,8 @@
                                 for (var j = 0; j < keys2.length; ++j)
                                     object.documentsMetadataFilters[keys2[j]] = message.documentsMetadataFilters[keys2[j]];
                             }
+                            if (message.agentDesktopSource != null && message.hasOwnProperty("agentDesktopSource"))
+                                object.agentDesktopSource = options.enums === String ? $root.google.cloud.dialogflow.v2beta1.Participant.AgentDesktopSource[message.agentDesktopSource] === undefined ? message.agentDesktopSource : $root.google.cloud.dialogflow.v2beta1.Participant.AgentDesktopSource[message.agentDesktopSource] : message.agentDesktopSource;
                             return object;
                         };
     
@@ -120365,6 +120427,28 @@
                             values[valuesById[1] = "HUMAN_AGENT"] = 1;
                             values[valuesById[2] = "AUTOMATED_AGENT"] = 2;
                             values[valuesById[3] = "END_USER"] = 3;
+                            return values;
+                        })();
+    
+                        /**
+                         * AgentDesktopSource enum.
+                         * @name google.cloud.dialogflow.v2beta1.Participant.AgentDesktopSource
+                         * @enum {number}
+                         * @property {number} AGENT_DESKTOP_SOURCE_UNSPECIFIED=0 AGENT_DESKTOP_SOURCE_UNSPECIFIED value
+                         * @property {number} LIVE_PERSON=1 LIVE_PERSON value
+                         * @property {number} GENESYS_CLOUD=2 GENESYS_CLOUD value
+                         * @property {number} TWILIO=3 TWILIO value
+                         * @property {number} SALESFORCE=4 SALESFORCE value
+                         * @property {number} OTHER=8 OTHER value
+                         */
+                        Participant.AgentDesktopSource = (function() {
+                            var valuesById = {}, values = Object.create(valuesById);
+                            values[valuesById[0] = "AGENT_DESKTOP_SOURCE_UNSPECIFIED"] = 0;
+                            values[valuesById[1] = "LIVE_PERSON"] = 1;
+                            values[valuesById[2] = "GENESYS_CLOUD"] = 2;
+                            values[valuesById[3] = "TWILIO"] = 3;
+                            values[valuesById[4] = "SALESFORCE"] = 4;
+                            values[valuesById[8] = "OTHER"] = 8;
                             return values;
                         })();
     
