@@ -170,6 +170,13 @@
                 "listBackupsAsync"
               ]
             },
+            "FetchBackupsForResourceType": {
+              "methods": [
+                "fetchBackupsForResourceType",
+                "fetchBackupsForResourceTypeStream",
+                "fetchBackupsForResourceTypeAsync"
+              ]
+            },
             "ListBackupPlans": {
               "methods": [
                 "listBackupPlans",
@@ -196,6 +203,13 @@
                 "fetchBackupPlanAssociationsForResourceType",
                 "fetchBackupPlanAssociationsForResourceTypeStream",
                 "fetchBackupPlanAssociationsForResourceTypeAsync"
+              ]
+            },
+            "ListDataSourceReferences": {
+              "methods": [
+                "listDataSourceReferences",
+                "listDataSourceReferencesStream",
+                "listDataSourceReferencesAsync"
               ]
             },
             "FetchDataSourceReferencesForResourceType": {
@@ -370,6 +384,13 @@
                 "listBackupsAsync"
               ]
             },
+            "FetchBackupsForResourceType": {
+              "methods": [
+                "fetchBackupsForResourceType",
+                "fetchBackupsForResourceTypeStream",
+                "fetchBackupsForResourceTypeAsync"
+              ]
+            },
             "ListBackupPlans": {
               "methods": [
                 "listBackupPlans",
@@ -396,6 +417,13 @@
                 "fetchBackupPlanAssociationsForResourceType",
                 "fetchBackupPlanAssociationsForResourceTypeStream",
                 "fetchBackupPlanAssociationsForResourceTypeAsync"
+              ]
+            },
+            "ListDataSourceReferences": {
+              "methods": [
+                "listDataSourceReferences",
+                "listDataSourceReferencesStream",
+                "listDataSourceReferencesAsync"
               ]
             },
             "FetchDataSourceReferencesForResourceType": {

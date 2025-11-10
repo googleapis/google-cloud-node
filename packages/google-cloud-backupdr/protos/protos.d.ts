@@ -243,6 +243,20 @@ export namespace google {
                     public listBackups(request: google.cloud.backupdr.v1.IListBackupsRequest): Promise<google.cloud.backupdr.v1.ListBackupsResponse>;
 
                     /**
+                     * Calls FetchBackupsForResourceType.
+                     * @param request FetchBackupsForResourceTypeRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FetchBackupsForResourceTypeResponse
+                     */
+                    public fetchBackupsForResourceType(request: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest, callback: google.cloud.backupdr.v1.BackupDR.FetchBackupsForResourceTypeCallback): void;
+
+                    /**
+                     * Calls FetchBackupsForResourceType.
+                     * @param request FetchBackupsForResourceTypeRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchBackupsForResourceType(request: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest): Promise<google.cloud.backupdr.v1.FetchBackupsForResourceTypeResponse>;
+
+                    /**
                      * Calls GetBackup.
                      * @param request GetBackupRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and Backup
@@ -509,6 +523,20 @@ export namespace google {
                     public getDataSourceReference(request: google.cloud.backupdr.v1.IGetDataSourceReferenceRequest): Promise<google.cloud.backupdr.v1.DataSourceReference>;
 
                     /**
+                     * Calls ListDataSourceReferences.
+                     * @param request ListDataSourceReferencesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListDataSourceReferencesResponse
+                     */
+                    public listDataSourceReferences(request: google.cloud.backupdr.v1.IListDataSourceReferencesRequest, callback: google.cloud.backupdr.v1.BackupDR.ListDataSourceReferencesCallback): void;
+
+                    /**
+                     * Calls ListDataSourceReferences.
+                     * @param request ListDataSourceReferencesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listDataSourceReferences(request: google.cloud.backupdr.v1.IListDataSourceReferencesRequest): Promise<google.cloud.backupdr.v1.ListDataSourceReferencesResponse>;
+
+                    /**
                      * Calls FetchDataSourceReferencesForResourceType.
                      * @param request FetchDataSourceReferencesForResourceTypeRequest message or plain object
                      * @param callback Node-style callback called with the error, if any, and FetchDataSourceReferencesForResourceTypeResponse
@@ -636,6 +664,13 @@ export namespace google {
                      * @param [response] ListBackupsResponse
                      */
                     type ListBackupsCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListBackupsResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|fetchBackupsForResourceType}.
+                     * @param error Error, if any
+                     * @param [response] FetchBackupsForResourceTypeResponse
+                     */
+                    type FetchBackupsForResourceTypeCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.FetchBackupsForResourceTypeResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|getBackup}.
@@ -769,6 +804,13 @@ export namespace google {
                      * @param [response] DataSourceReference
                      */
                     type GetDataSourceReferenceCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.DataSourceReference) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|listDataSourceReferences}.
+                     * @param error Error, if any
+                     * @param [response] ListDataSourceReferencesResponse
+                     */
+                    type ListDataSourceReferencesCallback = (error: (Error|null), response?: google.cloud.backupdr.v1.ListDataSourceReferencesResponse) => void;
 
                     /**
                      * Callback as used by {@link google.cloud.backupdr.v1.BackupDR|fetchDataSourceReferencesForResourceType}.
@@ -5518,8 +5560,14 @@ export namespace google {
                     /** CloudSqlInstanceBackupProperties sourceInstance */
                     sourceInstance?: (string|null);
 
+                    /** CloudSqlInstanceBackupProperties instanceCreateTime */
+                    instanceCreateTime?: (google.protobuf.ITimestamp|null);
+
                     /** CloudSqlInstanceBackupProperties instanceTier */
                     instanceTier?: (string|null);
+
+                    /** CloudSqlInstanceBackupProperties instanceDeleteTime */
+                    instanceDeleteTime?: (google.protobuf.ITimestamp|null);
                 }
 
                 /** Represents a CloudSqlInstanceBackupProperties. */
@@ -5540,8 +5588,14 @@ export namespace google {
                     /** CloudSqlInstanceBackupProperties sourceInstance. */
                     public sourceInstance: string;
 
+                    /** CloudSqlInstanceBackupProperties instanceCreateTime. */
+                    public instanceCreateTime?: (google.protobuf.ITimestamp|null);
+
                     /** CloudSqlInstanceBackupProperties instanceTier. */
                     public instanceTier: string;
+
+                    /** CloudSqlInstanceBackupProperties instanceDeleteTime. */
+                    public instanceDeleteTime?: (google.protobuf.ITimestamp|null);
 
                     /**
                      * Creates a new CloudSqlInstanceBackupProperties instance using the specified properties.
@@ -7396,6 +7450,9 @@ export namespace google {
 
                     /** Backup satisfiesPzi */
                     satisfiesPzi?: (boolean|null);
+
+                    /** Backup gcpResource */
+                    gcpResource?: (google.cloud.backupdr.v1.IBackupGcpResource|null);
                 }
 
                 /** Represents a Backup. */
@@ -7470,11 +7527,17 @@ export namespace google {
                     /** Backup satisfiesPzi. */
                     public satisfiesPzi?: (boolean|null);
 
+                    /** Backup gcpResource. */
+                    public gcpResource?: (google.cloud.backupdr.v1.IBackupGcpResource|null);
+
                     /** Backup backupProperties. */
                     public backupProperties?: ("computeInstanceBackupProperties"|"cloudSqlInstanceBackupProperties"|"backupApplianceBackupProperties"|"diskBackupProperties");
 
                     /** Backup planInfo. */
                     public planInfo?: "gcpBackupPlanInfo";
+
+                    /** Backup sourceResource. */
+                    public sourceResource?: "gcpResource";
 
                     /**
                      * Creates a new Backup instance using the specified properties.
@@ -8271,6 +8334,242 @@ export namespace google {
 
                     /**
                      * Gets the default type url for FetchUsableBackupVaultsResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchBackupsForResourceTypeRequest. */
+                interface IFetchBackupsForResourceTypeRequest {
+
+                    /** FetchBackupsForResourceTypeRequest parent */
+                    parent?: (string|null);
+
+                    /** FetchBackupsForResourceTypeRequest resourceType */
+                    resourceType?: (string|null);
+
+                    /** FetchBackupsForResourceTypeRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** FetchBackupsForResourceTypeRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** FetchBackupsForResourceTypeRequest filter */
+                    filter?: (string|null);
+
+                    /** FetchBackupsForResourceTypeRequest orderBy */
+                    orderBy?: (string|null);
+
+                    /** FetchBackupsForResourceTypeRequest view */
+                    view?: (google.cloud.backupdr.v1.BackupView|keyof typeof google.cloud.backupdr.v1.BackupView|null);
+                }
+
+                /** Represents a FetchBackupsForResourceTypeRequest. */
+                class FetchBackupsForResourceTypeRequest implements IFetchBackupsForResourceTypeRequest {
+
+                    /**
+                     * Constructs a new FetchBackupsForResourceTypeRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest);
+
+                    /** FetchBackupsForResourceTypeRequest parent. */
+                    public parent: string;
+
+                    /** FetchBackupsForResourceTypeRequest resourceType. */
+                    public resourceType: string;
+
+                    /** FetchBackupsForResourceTypeRequest pageSize. */
+                    public pageSize: number;
+
+                    /** FetchBackupsForResourceTypeRequest pageToken. */
+                    public pageToken: string;
+
+                    /** FetchBackupsForResourceTypeRequest filter. */
+                    public filter: string;
+
+                    /** FetchBackupsForResourceTypeRequest orderBy. */
+                    public orderBy: string;
+
+                    /** FetchBackupsForResourceTypeRequest view. */
+                    public view: (google.cloud.backupdr.v1.BackupView|keyof typeof google.cloud.backupdr.v1.BackupView);
+
+                    /**
+                     * Creates a new FetchBackupsForResourceTypeRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchBackupsForResourceTypeRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest): google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest;
+
+                    /**
+                     * Encodes the specified FetchBackupsForResourceTypeRequest message. Does not implicitly {@link google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest.verify|verify} messages.
+                     * @param message FetchBackupsForResourceTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchBackupsForResourceTypeRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest.verify|verify} messages.
+                     * @param message FetchBackupsForResourceTypeRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchBackupsForResourceTypeRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchBackupsForResourceTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest;
+
+                    /**
+                     * Decodes a FetchBackupsForResourceTypeRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchBackupsForResourceTypeRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest;
+
+                    /**
+                     * Verifies a FetchBackupsForResourceTypeRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchBackupsForResourceTypeRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchBackupsForResourceTypeRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest;
+
+                    /**
+                     * Creates a plain object from a FetchBackupsForResourceTypeRequest message. Also converts values to other types if specified.
+                     * @param message FetchBackupsForResourceTypeRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchBackupsForResourceTypeRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchBackupsForResourceTypeRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchBackupsForResourceTypeResponse. */
+                interface IFetchBackupsForResourceTypeResponse {
+
+                    /** FetchBackupsForResourceTypeResponse backups */
+                    backups?: (google.cloud.backupdr.v1.IBackup[]|null);
+
+                    /** FetchBackupsForResourceTypeResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a FetchBackupsForResourceTypeResponse. */
+                class FetchBackupsForResourceTypeResponse implements IFetchBackupsForResourceTypeResponse {
+
+                    /**
+                     * Constructs a new FetchBackupsForResourceTypeResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse);
+
+                    /** FetchBackupsForResourceTypeResponse backups. */
+                    public backups: google.cloud.backupdr.v1.IBackup[];
+
+                    /** FetchBackupsForResourceTypeResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new FetchBackupsForResourceTypeResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchBackupsForResourceTypeResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse): google.cloud.backupdr.v1.FetchBackupsForResourceTypeResponse;
+
+                    /**
+                     * Encodes the specified FetchBackupsForResourceTypeResponse message. Does not implicitly {@link google.cloud.backupdr.v1.FetchBackupsForResourceTypeResponse.verify|verify} messages.
+                     * @param message FetchBackupsForResourceTypeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchBackupsForResourceTypeResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.FetchBackupsForResourceTypeResponse.verify|verify} messages.
+                     * @param message FetchBackupsForResourceTypeResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IFetchBackupsForResourceTypeResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchBackupsForResourceTypeResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchBackupsForResourceTypeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.FetchBackupsForResourceTypeResponse;
+
+                    /**
+                     * Decodes a FetchBackupsForResourceTypeResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchBackupsForResourceTypeResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.FetchBackupsForResourceTypeResponse;
+
+                    /**
+                     * Verifies a FetchBackupsForResourceTypeResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchBackupsForResourceTypeResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchBackupsForResourceTypeResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.FetchBackupsForResourceTypeResponse;
+
+                    /**
+                     * Creates a plain object from a FetchBackupsForResourceTypeResponse message. Also converts values to other types if specified.
+                     * @param message FetchBackupsForResourceTypeResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.FetchBackupsForResourceTypeResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchBackupsForResourceTypeResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchBackupsForResourceTypeResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -10072,6 +10371,115 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GcpResource
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a BackupGcpResource. */
+                interface IBackupGcpResource {
+
+                    /** BackupGcpResource gcpResourcename */
+                    gcpResourcename?: (string|null);
+
+                    /** BackupGcpResource location */
+                    location?: (string|null);
+
+                    /** BackupGcpResource type */
+                    type?: (string|null);
+                }
+
+                /** Represents a BackupGcpResource. */
+                class BackupGcpResource implements IBackupGcpResource {
+
+                    /**
+                     * Constructs a new BackupGcpResource.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IBackupGcpResource);
+
+                    /** BackupGcpResource gcpResourcename. */
+                    public gcpResourcename: string;
+
+                    /** BackupGcpResource location. */
+                    public location: string;
+
+                    /** BackupGcpResource type. */
+                    public type: string;
+
+                    /**
+                     * Creates a new BackupGcpResource instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns BackupGcpResource instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IBackupGcpResource): google.cloud.backupdr.v1.BackupGcpResource;
+
+                    /**
+                     * Encodes the specified BackupGcpResource message. Does not implicitly {@link google.cloud.backupdr.v1.BackupGcpResource.verify|verify} messages.
+                     * @param message BackupGcpResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IBackupGcpResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified BackupGcpResource message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.BackupGcpResource.verify|verify} messages.
+                     * @param message BackupGcpResource message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IBackupGcpResource, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a BackupGcpResource message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns BackupGcpResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.BackupGcpResource;
+
+                    /**
+                     * Decodes a BackupGcpResource message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns BackupGcpResource
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.BackupGcpResource;
+
+                    /**
+                     * Verifies a BackupGcpResource message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a BackupGcpResource message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns BackupGcpResource
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.BackupGcpResource;
+
+                    /**
+                     * Creates a plain object from a BackupGcpResource message. Also converts values to other types if specified.
+                     * @param message BackupGcpResource
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.BackupGcpResource, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this BackupGcpResource to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for BackupGcpResource
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */
@@ -14138,6 +14546,9 @@ export namespace google {
 
                     /** DataSourceReference dataSourceGcpResourceInfo */
                     dataSourceGcpResourceInfo?: (google.cloud.backupdr.v1.IDataSourceGcpResourceInfo|null);
+
+                    /** DataSourceReference totalStoredBytes */
+                    totalStoredBytes?: (number|Long|string|null);
                 }
 
                 /** Represents a DataSourceReference. */
@@ -14169,6 +14580,9 @@ export namespace google {
 
                     /** DataSourceReference dataSourceGcpResourceInfo. */
                     public dataSourceGcpResourceInfo?: (google.cloud.backupdr.v1.IDataSourceGcpResourceInfo|null);
+
+                    /** DataSourceReference totalStoredBytes. */
+                    public totalStoredBytes?: (number|Long|string|null);
 
                     /**
                      * Creates a new DataSourceReference instance using the specified properties.
@@ -14560,6 +14974,236 @@ export namespace google {
 
                     /**
                      * Gets the default type url for GetDataSourceReferenceRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataSourceReferencesRequest. */
+                interface IListDataSourceReferencesRequest {
+
+                    /** ListDataSourceReferencesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListDataSourceReferencesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListDataSourceReferencesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListDataSourceReferencesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListDataSourceReferencesRequest orderBy */
+                    orderBy?: (string|null);
+                }
+
+                /** Represents a ListDataSourceReferencesRequest. */
+                class ListDataSourceReferencesRequest implements IListDataSourceReferencesRequest {
+
+                    /**
+                     * Constructs a new ListDataSourceReferencesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListDataSourceReferencesRequest);
+
+                    /** ListDataSourceReferencesRequest parent. */
+                    public parent: string;
+
+                    /** ListDataSourceReferencesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListDataSourceReferencesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListDataSourceReferencesRequest filter. */
+                    public filter: string;
+
+                    /** ListDataSourceReferencesRequest orderBy. */
+                    public orderBy: string;
+
+                    /**
+                     * Creates a new ListDataSourceReferencesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataSourceReferencesRequest instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListDataSourceReferencesRequest): google.cloud.backupdr.v1.ListDataSourceReferencesRequest;
+
+                    /**
+                     * Encodes the specified ListDataSourceReferencesRequest message. Does not implicitly {@link google.cloud.backupdr.v1.ListDataSourceReferencesRequest.verify|verify} messages.
+                     * @param message ListDataSourceReferencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListDataSourceReferencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataSourceReferencesRequest message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListDataSourceReferencesRequest.verify|verify} messages.
+                     * @param message ListDataSourceReferencesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListDataSourceReferencesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataSourceReferencesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataSourceReferencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListDataSourceReferencesRequest;
+
+                    /**
+                     * Decodes a ListDataSourceReferencesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataSourceReferencesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListDataSourceReferencesRequest;
+
+                    /**
+                     * Verifies a ListDataSourceReferencesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataSourceReferencesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataSourceReferencesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListDataSourceReferencesRequest;
+
+                    /**
+                     * Creates a plain object from a ListDataSourceReferencesRequest message. Also converts values to other types if specified.
+                     * @param message ListDataSourceReferencesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListDataSourceReferencesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataSourceReferencesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataSourceReferencesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListDataSourceReferencesResponse. */
+                interface IListDataSourceReferencesResponse {
+
+                    /** ListDataSourceReferencesResponse dataSourceReferences */
+                    dataSourceReferences?: (google.cloud.backupdr.v1.IDataSourceReference[]|null);
+
+                    /** ListDataSourceReferencesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+
+                    /** ListDataSourceReferencesResponse unreachable */
+                    unreachable?: (string[]|null);
+                }
+
+                /** Represents a ListDataSourceReferencesResponse. */
+                class ListDataSourceReferencesResponse implements IListDataSourceReferencesResponse {
+
+                    /**
+                     * Constructs a new ListDataSourceReferencesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.backupdr.v1.IListDataSourceReferencesResponse);
+
+                    /** ListDataSourceReferencesResponse dataSourceReferences. */
+                    public dataSourceReferences: google.cloud.backupdr.v1.IDataSourceReference[];
+
+                    /** ListDataSourceReferencesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /** ListDataSourceReferencesResponse unreachable. */
+                    public unreachable: string[];
+
+                    /**
+                     * Creates a new ListDataSourceReferencesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListDataSourceReferencesResponse instance
+                     */
+                    public static create(properties?: google.cloud.backupdr.v1.IListDataSourceReferencesResponse): google.cloud.backupdr.v1.ListDataSourceReferencesResponse;
+
+                    /**
+                     * Encodes the specified ListDataSourceReferencesResponse message. Does not implicitly {@link google.cloud.backupdr.v1.ListDataSourceReferencesResponse.verify|verify} messages.
+                     * @param message ListDataSourceReferencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.backupdr.v1.IListDataSourceReferencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListDataSourceReferencesResponse message, length delimited. Does not implicitly {@link google.cloud.backupdr.v1.ListDataSourceReferencesResponse.verify|verify} messages.
+                     * @param message ListDataSourceReferencesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.backupdr.v1.IListDataSourceReferencesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListDataSourceReferencesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListDataSourceReferencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.backupdr.v1.ListDataSourceReferencesResponse;
+
+                    /**
+                     * Decodes a ListDataSourceReferencesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListDataSourceReferencesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.backupdr.v1.ListDataSourceReferencesResponse;
+
+                    /**
+                     * Verifies a ListDataSourceReferencesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListDataSourceReferencesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListDataSourceReferencesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.backupdr.v1.ListDataSourceReferencesResponse;
+
+                    /**
+                     * Creates a plain object from a ListDataSourceReferencesResponse message. Also converts values to other types if specified.
+                     * @param message ListDataSourceReferencesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.backupdr.v1.ListDataSourceReferencesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListDataSourceReferencesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListDataSourceReferencesResponse
                      * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                      * @returns The default type url
                      */

@@ -25512,6 +25512,9 @@ export namespace google {
 
                     /** DataProfileSpec excludeFields */
                     excludeFields?: (google.cloud.dataplex.v1.DataProfileSpec.ISelectedFields|null);
+
+                    /** DataProfileSpec catalogPublishingEnabled */
+                    catalogPublishingEnabled?: (boolean|null);
                 }
 
                 /** Represents a DataProfileSpec. */
@@ -25537,6 +25540,9 @@ export namespace google {
 
                     /** DataProfileSpec excludeFields. */
                     public excludeFields?: (google.cloud.dataplex.v1.DataProfileSpec.ISelectedFields|null);
+
+                    /** DataProfileSpec catalogPublishingEnabled. */
+                    public catalogPublishingEnabled: boolean;
 
                     /**
                      * Creates a new DataProfileSpec instance using the specified properties.
@@ -25927,6 +25933,9 @@ export namespace google {
 
                     /** DataProfileResult postScanActionsResult */
                     postScanActionsResult?: (google.cloud.dataplex.v1.DataProfileResult.IPostScanActionsResult|null);
+
+                    /** DataProfileResult catalogPublishingStatus */
+                    catalogPublishingStatus?: (google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus|null);
                 }
 
                 /** Represents a DataProfileResult. */
@@ -25949,6 +25958,9 @@ export namespace google {
 
                     /** DataProfileResult postScanActionsResult. */
                     public postScanActionsResult?: (google.cloud.dataplex.v1.DataProfileResult.IPostScanActionsResult|null);
+
+                    /** DataProfileResult catalogPublishingStatus. */
+                    public catalogPublishingStatus?: (google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus|null);
 
                     /**
                      * Creates a new DataProfileResult instance using the specified properties.
@@ -27053,6 +27065,113 @@ export namespace google {
                                 SKIPPED = 3
                             }
                         }
+                    }
+                }
+
+                /** Properties of a DataScanCatalogPublishingStatus. */
+                interface IDataScanCatalogPublishingStatus {
+
+                    /** DataScanCatalogPublishingStatus state */
+                    state?: (google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State|keyof typeof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State|null);
+                }
+
+                /** Represents a DataScanCatalogPublishingStatus. */
+                class DataScanCatalogPublishingStatus implements IDataScanCatalogPublishingStatus {
+
+                    /**
+                     * Constructs a new DataScanCatalogPublishingStatus.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus);
+
+                    /** DataScanCatalogPublishingStatus state. */
+                    public state: (google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State|keyof typeof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State);
+
+                    /**
+                     * Creates a new DataScanCatalogPublishingStatus instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns DataScanCatalogPublishingStatus instance
+                     */
+                    public static create(properties?: google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus): google.cloud.dataplex.v1.DataScanCatalogPublishingStatus;
+
+                    /**
+                     * Encodes the specified DataScanCatalogPublishingStatus message. Does not implicitly {@link google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.verify|verify} messages.
+                     * @param message DataScanCatalogPublishingStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified DataScanCatalogPublishingStatus message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.verify|verify} messages.
+                     * @param message DataScanCatalogPublishingStatus message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a DataScanCatalogPublishingStatus message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns DataScanCatalogPublishingStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataScanCatalogPublishingStatus;
+
+                    /**
+                     * Decodes a DataScanCatalogPublishingStatus message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns DataScanCatalogPublishingStatus
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataScanCatalogPublishingStatus;
+
+                    /**
+                     * Verifies a DataScanCatalogPublishingStatus message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a DataScanCatalogPublishingStatus message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns DataScanCatalogPublishingStatus
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataScanCatalogPublishingStatus;
+
+                    /**
+                     * Creates a plain object from a DataScanCatalogPublishingStatus message. Also converts values to other types if specified.
+                     * @param message DataScanCatalogPublishingStatus
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.dataplex.v1.DataScanCatalogPublishingStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this DataScanCatalogPublishingStatus to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for DataScanCatalogPublishingStatus
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                namespace DataScanCatalogPublishingStatus {
+
+                    /** State enum. */
+                    enum State {
+                        STATE_UNSPECIFIED = 0,
+                        SUCCEEDED = 1,
+                        FAILED = 2
                     }
                 }
 
@@ -30537,113 +30656,6 @@ export namespace google {
                      * @returns The default type url
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                /** Properties of a DataScanCatalogPublishingStatus. */
-                interface IDataScanCatalogPublishingStatus {
-
-                    /** DataScanCatalogPublishingStatus state */
-                    state?: (google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State|keyof typeof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State|null);
-                }
-
-                /** Represents a DataScanCatalogPublishingStatus. */
-                class DataScanCatalogPublishingStatus implements IDataScanCatalogPublishingStatus {
-
-                    /**
-                     * Constructs a new DataScanCatalogPublishingStatus.
-                     * @param [properties] Properties to set
-                     */
-                    constructor(properties?: google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus);
-
-                    /** DataScanCatalogPublishingStatus state. */
-                    public state: (google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State|keyof typeof google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.State);
-
-                    /**
-                     * Creates a new DataScanCatalogPublishingStatus instance using the specified properties.
-                     * @param [properties] Properties to set
-                     * @returns DataScanCatalogPublishingStatus instance
-                     */
-                    public static create(properties?: google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus): google.cloud.dataplex.v1.DataScanCatalogPublishingStatus;
-
-                    /**
-                     * Encodes the specified DataScanCatalogPublishingStatus message. Does not implicitly {@link google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.verify|verify} messages.
-                     * @param message DataScanCatalogPublishingStatus message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encode(message: google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Encodes the specified DataScanCatalogPublishingStatus message, length delimited. Does not implicitly {@link google.cloud.dataplex.v1.DataScanCatalogPublishingStatus.verify|verify} messages.
-                     * @param message DataScanCatalogPublishingStatus message or plain object to encode
-                     * @param [writer] Writer to encode to
-                     * @returns Writer
-                     */
-                    public static encodeDelimited(message: google.cloud.dataplex.v1.IDataScanCatalogPublishingStatus, writer?: $protobuf.Writer): $protobuf.Writer;
-
-                    /**
-                     * Decodes a DataScanCatalogPublishingStatus message from the specified reader or buffer.
-                     * @param reader Reader or buffer to decode from
-                     * @param [length] Message length if known beforehand
-                     * @returns DataScanCatalogPublishingStatus
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.dataplex.v1.DataScanCatalogPublishingStatus;
-
-                    /**
-                     * Decodes a DataScanCatalogPublishingStatus message from the specified reader or buffer, length delimited.
-                     * @param reader Reader or buffer to decode from
-                     * @returns DataScanCatalogPublishingStatus
-                     * @throws {Error} If the payload is not a reader or valid buffer
-                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
-                     */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.dataplex.v1.DataScanCatalogPublishingStatus;
-
-                    /**
-                     * Verifies a DataScanCatalogPublishingStatus message.
-                     * @param message Plain object to verify
-                     * @returns `null` if valid, otherwise the reason why it is not
-                     */
-                    public static verify(message: { [k: string]: any }): (string|null);
-
-                    /**
-                     * Creates a DataScanCatalogPublishingStatus message from a plain object. Also converts values to their respective internal types.
-                     * @param object Plain object
-                     * @returns DataScanCatalogPublishingStatus
-                     */
-                    public static fromObject(object: { [k: string]: any }): google.cloud.dataplex.v1.DataScanCatalogPublishingStatus;
-
-                    /**
-                     * Creates a plain object from a DataScanCatalogPublishingStatus message. Also converts values to other types if specified.
-                     * @param message DataScanCatalogPublishingStatus
-                     * @param [options] Conversion options
-                     * @returns Plain object
-                     */
-                    public static toObject(message: google.cloud.dataplex.v1.DataScanCatalogPublishingStatus, options?: $protobuf.IConversionOptions): { [k: string]: any };
-
-                    /**
-                     * Converts this DataScanCatalogPublishingStatus to JSON.
-                     * @returns JSON object
-                     */
-                    public toJSON(): { [k: string]: any };
-
-                    /**
-                     * Gets the default type url for DataScanCatalogPublishingStatus
-                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
-                     * @returns The default type url
-                     */
-                    public static getTypeUrl(typeUrlPrefix?: string): string;
-                }
-
-                namespace DataScanCatalogPublishingStatus {
-
-                    /** State enum. */
-                    enum State {
-                        STATE_UNSPECIFIED = 0,
-                        SUCCEEDED = 1,
-                        FAILED = 2
-                    }
                 }
 
                 /** Represents a DataTaxonomyService */
