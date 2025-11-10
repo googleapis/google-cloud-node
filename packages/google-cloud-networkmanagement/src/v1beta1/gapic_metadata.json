@@ -189,6 +189,13 @@
                 "queryOrgVpcFlowLogsConfigsStream",
                 "queryOrgVpcFlowLogsConfigsAsync"
               ]
+            },
+            "ShowEffectiveFlowLogsConfigs": {
+              "methods": [
+                "showEffectiveFlowLogsConfigs",
+                "showEffectiveFlowLogsConfigsStream",
+                "showEffectiveFlowLogsConfigsAsync"
+              ]
             }
           }
         },
@@ -227,6 +234,13 @@
                 "queryOrgVpcFlowLogsConfigs",
                 "queryOrgVpcFlowLogsConfigsStream",
                 "queryOrgVpcFlowLogsConfigsAsync"
+              ]
+            },
+            "ShowEffectiveFlowLogsConfigs": {
+              "methods": [
+                "showEffectiveFlowLogsConfigs",
+                "showEffectiveFlowLogsConfigsStream",
+                "showEffectiveFlowLogsConfigsAsync"
               ]
             }
           }
