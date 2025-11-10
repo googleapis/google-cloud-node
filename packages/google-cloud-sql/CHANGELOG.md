@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.22.0](https://github.com/googleapis/google-cloud-node/compare/sql-v0.21.1...sql-v0.22.0) (2025-10-31)
+
+
+### Features
+
+* [sql] introduces POSTGRES_17 and POSTGRES_18 database versions in the SqlDatabaseVersion enum type ([#6854](https://github.com/googleapis/google-cloud-node/issues/6854)) ([90ffcd9](https://github.com/googleapis/google-cloud-node/commit/90ffcd969537de0668c80caf611eaafd6beb1273))
+
 ## [0.21.1](https://github.com/googleapis/google-cloud-node/compare/sql-v0.21.0...sql-v0.21.1) (2025-10-13)
 
 
