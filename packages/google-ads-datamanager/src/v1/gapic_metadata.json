@@ -1,0 +1,63 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.ads.datamanager.v1",
+  "libraryPackage": "@google-ads/datamanager",
+  "services": {
+    "IngestionService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "IngestionServiceClient",
+          "rpcs": {
+            "IngestAudienceMembers": {
+              "methods": [
+                "ingestAudienceMembers"
+              ]
+            },
+            "RemoveAudienceMembers": {
+              "methods": [
+                "removeAudienceMembers"
+              ]
+            },
+            "IngestEvents": {
+              "methods": [
+                "ingestEvents"
+              ]
+            },
+            "RetrieveRequestStatus": {
+              "methods": [
+                "retrieveRequestStatus"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "IngestionServiceClient",
+          "rpcs": {
+            "IngestAudienceMembers": {
+              "methods": [
+                "ingestAudienceMembers"
+              ]
+            },
+            "RemoveAudienceMembers": {
+              "methods": [
+                "removeAudienceMembers"
+              ]
+            },
+            "IngestEvents": {
+              "methods": [
+                "ingestEvents"
+              ]
+            },
+            "RetrieveRequestStatus": {
+              "methods": [
+                "retrieveRequestStatus"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

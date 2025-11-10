@@ -4,6 +4,41 @@
     {
       "changes": [
         {
+          "type": "fix",
+          "sha": "91207939dad2b0c1e258bd8f24ec70d6a0bbe35b",
+          "message": "[merchantapi] An existing field `contains_custom_rules` is removed from message `.google.shopping.merchant.datasources.v1.PrimaryProductDataSource`",
+          "issues": [
+            "6860"
+          ],
+          "breakingChangeNote": "[merchantapi] An existing field `contains_custom_rules` is removed from message `.google.shopping.merchant.datasources.v1.PrimaryProductDataSource` ([#6860](https://github.com/googleapis/google-cloud-node/issues/6860))"
+        }
+      ],
+      "version": "0.10.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-shopping/datasources",
+      "id": "957907c1-ae3a-487b-a2ca-56b1f1c4e3b7",
+      "createTime": "2025-10-31T23:33:45.328Z"
+    },
+    {
+      "changes": [
+        {
+          "type": "feat",
+          "sha": "90ffcd969537de0668c80caf611eaafd6beb1273",
+          "message": "[sql] introduces POSTGRES_17 and POSTGRES_18 database versions in the SqlDatabaseVersion enum type",
+          "issues": [
+            "6854"
+          ]
+        }
+      ],
+      "version": "0.22.0",
+      "language": "JAVASCRIPT",
+      "artifactName": "@google-cloud/sql",
+      "id": "90282008-1e6c-4dcb-9117-455644e600ac",
+      "createTime": "2025-10-31T23:33:45.297Z"
+    },
+    {
+      "changes": [
+        {
           "type": "feat",
           "sha": "c1bfaf1f5b0b3dc1c9abbcd06ca4583e2e9b92c3",
           "message": "Add initial files for google.cloud.geminidataanalytics.v1beta",
@@ -66708,5 +66743,5 @@
       "createTime": "2023-01-28T04:18:24.718Z"
     }
   ],
-  "updateTime": "2025-10-29T18:52:27.981Z"
+  "updateTime": "2025-10-31T23:33:45.328Z"
 }
