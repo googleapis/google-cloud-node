@@ -5549,7 +5549,7 @@ export namespace google {
                 /**
                  * Calls ComposeObject.
                  * @param request ComposeObjectRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
                  */
                 public composeObject(request: google.storage.v2.IComposeObjectRequest, callback: google.storage.v2.Storage.ComposeObjectCallback): void;
 
@@ -5558,7 +5558,7 @@ export namespace google {
                  * @param request ComposeObjectRequest message or plain object
                  * @returns Promise
                  */
-                public composeObject(request: google.storage.v2.IComposeObjectRequest): Promise<google.storage.v2.object>;
+                public composeObject(request: google.storage.v2.IComposeObjectRequest): Promise<google.storage.v2.StorageObject>;
 
                 /**
                  * Calls DeleteObject.
@@ -5577,7 +5577,7 @@ export namespace google {
                 /**
                  * Calls RestoreObject.
                  * @param request RestoreObjectRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
                  */
                 public restoreObject(request: google.storage.v2.IRestoreObjectRequest, callback: google.storage.v2.Storage.RestoreObjectCallback): void;
 
@@ -5586,7 +5586,7 @@ export namespace google {
                  * @param request RestoreObjectRequest message or plain object
                  * @returns Promise
                  */
-                public restoreObject(request: google.storage.v2.IRestoreObjectRequest): Promise<google.storage.v2.object>;
+                public restoreObject(request: google.storage.v2.IRestoreObjectRequest): Promise<google.storage.v2.StorageObject>;
 
                 /**
                  * Calls CancelResumableWrite.
@@ -5605,7 +5605,7 @@ export namespace google {
                 /**
                  * Calls GetObject.
                  * @param request GetObjectRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
                  */
                 public getObject(request: google.storage.v2.IGetObjectRequest, callback: google.storage.v2.Storage.GetObjectCallback): void;
 
@@ -5614,7 +5614,7 @@ export namespace google {
                  * @param request GetObjectRequest message or plain object
                  * @returns Promise
                  */
-                public getObject(request: google.storage.v2.IGetObjectRequest): Promise<google.storage.v2.object>;
+                public getObject(request: google.storage.v2.IGetObjectRequest): Promise<google.storage.v2.StorageObject>;
 
                 /**
                  * Calls ReadObject.
@@ -5647,7 +5647,7 @@ export namespace google {
                 /**
                  * Calls UpdateObject.
                  * @param request UpdateObjectRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
                  */
                 public updateObject(request: google.storage.v2.IUpdateObjectRequest, callback: google.storage.v2.Storage.UpdateObjectCallback): void;
 
@@ -5656,7 +5656,7 @@ export namespace google {
                  * @param request UpdateObjectRequest message or plain object
                  * @returns Promise
                  */
-                public updateObject(request: google.storage.v2.IUpdateObjectRequest): Promise<google.storage.v2.object>;
+                public updateObject(request: google.storage.v2.IUpdateObjectRequest): Promise<google.storage.v2.StorageObject>;
 
                 /**
                  * Calls WriteObject.
@@ -5745,7 +5745,7 @@ export namespace google {
                 /**
                  * Calls MoveObject.
                  * @param request MoveObjectRequest message or plain object
-                 * @param callback Node-style callback called with the error, if any, and Object
+                 * @param callback Node-style callback called with the error, if any, and StorageObject
                  */
                 public moveObject(request: google.storage.v2.IMoveObjectRequest, callback: google.storage.v2.Storage.MoveObjectCallback): void;
 
@@ -5754,7 +5754,7 @@ export namespace google {
                  * @param request MoveObjectRequest message or plain object
                  * @returns Promise
                  */
-                public moveObject(request: google.storage.v2.IMoveObjectRequest): Promise<google.storage.v2.object>;
+                public moveObject(request: google.storage.v2.IMoveObjectRequest): Promise<google.storage.v2.StorageObject>;
             }
 
             namespace Storage {
@@ -5825,9 +5825,9 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|composeObject}.
                  * @param error Error, if any
-                 * @param [response] Object
+                 * @param [response] StorageObject
                  */
-                type ComposeObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+                type ComposeObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
 
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|deleteObject}.
@@ -5839,9 +5839,9 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|restoreObject}.
                  * @param error Error, if any
-                 * @param [response] Object
+                 * @param [response] StorageObject
                  */
-                type RestoreObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+                type RestoreObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
 
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|cancelResumableWrite}.
@@ -5853,9 +5853,9 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|getObject}.
                  * @param error Error, if any
-                 * @param [response] Object
+                 * @param [response] StorageObject
                  */
-                type GetObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+                type GetObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
 
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|readObject}.
@@ -5874,9 +5874,9 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|updateObject}.
                  * @param error Error, if any
-                 * @param [response] Object
+                 * @param [response] StorageObject
                  */
-                type UpdateObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+                type UpdateObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
 
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|writeObject}.
@@ -5923,9 +5923,9 @@ export namespace google {
                 /**
                  * Callback as used by {@link google.storage.v2.Storage|moveObject}.
                  * @param error Error, if any
-                 * @param [response] Object
+                 * @param [response] StorageObject
                  */
-                type MoveObjectCallback = (error: (Error|null), response?: google.storage.v2.object) => void;
+                type MoveObjectCallback = (error: (Error|null), response?: google.storage.v2.StorageObject) => void;
             }
 
             /** Properties of a DeleteBucketRequest. */
@@ -6749,7 +6749,7 @@ export namespace google {
             interface IComposeObjectRequest {
 
                 /** ComposeObjectRequest destination */
-                destination?: (google.storage.v2.IObject|null);
+                destination?: (google.storage.v2.IStorageObject|null);
 
                 /** ComposeObjectRequest sourceObjects */
                 sourceObjects?: (google.storage.v2.ComposeObjectRequest.ISourceObject[]|null);
@@ -6783,7 +6783,7 @@ export namespace google {
                 constructor(properties?: google.storage.v2.IComposeObjectRequest);
 
                 /** ComposeObjectRequest destination. */
-                public destination?: (google.storage.v2.IObject|null);
+                public destination?: (google.storage.v2.IStorageObject|null);
 
                 /** ComposeObjectRequest sourceObjects. */
                 public sourceObjects: google.storage.v2.ComposeObjectRequest.ISourceObject[];
@@ -7901,7 +7901,7 @@ export namespace google {
                 contentRange?: (google.storage.v2.IContentRange|null);
 
                 /** ReadObjectResponse metadata */
-                metadata?: (google.storage.v2.IObject|null);
+                metadata?: (google.storage.v2.IStorageObject|null);
             }
 
             /** Represents a ReadObjectResponse. */
@@ -7923,7 +7923,7 @@ export namespace google {
                 public contentRange?: (google.storage.v2.IContentRange|null);
 
                 /** ReadObjectResponse metadata. */
-                public metadata?: (google.storage.v2.IObject|null);
+                public metadata?: (google.storage.v2.IStorageObject|null);
 
                 /**
                  * Creates a new ReadObjectResponse instance using the specified properties.
@@ -8270,7 +8270,7 @@ export namespace google {
                 objectDataRanges?: (google.storage.v2.IObjectRangeData[]|null);
 
                 /** BidiReadObjectResponse metadata */
-                metadata?: (google.storage.v2.IObject|null);
+                metadata?: (google.storage.v2.IStorageObject|null);
 
                 /** BidiReadObjectResponse readHandle */
                 readHandle?: (google.storage.v2.IBidiReadHandle|null);
@@ -8289,7 +8289,7 @@ export namespace google {
                 public objectDataRanges: google.storage.v2.IObjectRangeData[];
 
                 /** BidiReadObjectResponse metadata. */
-                public metadata?: (google.storage.v2.IObject|null);
+                public metadata?: (google.storage.v2.IStorageObject|null);
 
                 /** BidiReadObjectResponse readHandle. */
                 public readHandle?: (google.storage.v2.IBidiReadHandle|null);
@@ -9200,7 +9200,7 @@ export namespace google {
             interface IWriteObjectSpec {
 
                 /** WriteObjectSpec resource */
-                resource?: (google.storage.v2.IObject|null);
+                resource?: (google.storage.v2.IStorageObject|null);
 
                 /** WriteObjectSpec predefinedAcl */
                 predefinedAcl?: (string|null);
@@ -9234,7 +9234,7 @@ export namespace google {
                 constructor(properties?: google.storage.v2.IWriteObjectSpec);
 
                 /** WriteObjectSpec resource. */
-                public resource?: (google.storage.v2.IObject|null);
+                public resource?: (google.storage.v2.IStorageObject|null);
 
                 /** WriteObjectSpec predefinedAcl. */
                 public predefinedAcl: string;
@@ -9481,7 +9481,7 @@ export namespace google {
                 persistedSize?: (number|Long|string|null);
 
                 /** WriteObjectResponse resource */
-                resource?: (google.storage.v2.IObject|null);
+                resource?: (google.storage.v2.IStorageObject|null);
             }
 
             /** Represents a WriteObjectResponse. */
@@ -9497,7 +9497,7 @@ export namespace google {
                 public persistedSize?: (number|Long|string|null);
 
                 /** WriteObjectResponse resource. */
-                public resource?: (google.storage.v2.IObject|null);
+                public resource?: (google.storage.v2.IStorageObject|null);
 
                 /** WriteObjectResponse writeStatus. */
                 public writeStatus?: ("persistedSize"|"resource");
@@ -9877,7 +9877,7 @@ export namespace google {
                 persistedSize?: (number|Long|string|null);
 
                 /** BidiWriteObjectResponse resource */
-                resource?: (google.storage.v2.IObject|null);
+                resource?: (google.storage.v2.IStorageObject|null);
 
                 /** BidiWriteObjectResponse writeHandle */
                 writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
@@ -9896,7 +9896,7 @@ export namespace google {
                 public persistedSize?: (number|Long|string|null);
 
                 /** BidiWriteObjectResponse resource. */
-                public resource?: (google.storage.v2.IObject|null);
+                public resource?: (google.storage.v2.IStorageObject|null);
 
                 /** BidiWriteObjectResponse writeHandle. */
                 public writeHandle?: (google.storage.v2.IBidiWriteHandle|null);
@@ -10267,7 +10267,7 @@ export namespace google {
                 persistedSize?: (number|Long|string|null);
 
                 /** QueryWriteStatusResponse resource */
-                resource?: (google.storage.v2.IObject|null);
+                resource?: (google.storage.v2.IStorageObject|null);
             }
 
             /** Represents a QueryWriteStatusResponse. */
@@ -10283,7 +10283,7 @@ export namespace google {
                 public persistedSize?: (number|Long|string|null);
 
                 /** QueryWriteStatusResponse resource. */
-                public resource?: (google.storage.v2.IObject|null);
+                public resource?: (google.storage.v2.IStorageObject|null);
 
                 /** QueryWriteStatusResponse writeStatus. */
                 public writeStatus?: ("persistedSize"|"resource");
@@ -10379,7 +10379,7 @@ export namespace google {
                 destinationKmsKey?: (string|null);
 
                 /** RewriteObjectRequest destination */
-                destination?: (google.storage.v2.IObject|null);
+                destination?: (google.storage.v2.IStorageObject|null);
 
                 /** RewriteObjectRequest sourceBucket */
                 sourceBucket?: (string|null);
@@ -10458,7 +10458,7 @@ export namespace google {
                 public destinationKmsKey: string;
 
                 /** RewriteObjectRequest destination. */
-                public destination?: (google.storage.v2.IObject|null);
+                public destination?: (google.storage.v2.IStorageObject|null);
 
                 /** RewriteObjectRequest sourceBucket. */
                 public sourceBucket: string;
@@ -10611,7 +10611,7 @@ export namespace google {
                 rewriteToken?: (string|null);
 
                 /** RewriteResponse resource */
-                resource?: (google.storage.v2.IObject|null);
+                resource?: (google.storage.v2.IStorageObject|null);
             }
 
             /** Represents a RewriteResponse. */
@@ -10636,7 +10636,7 @@ export namespace google {
                 public rewriteToken: string;
 
                 /** RewriteResponse resource. */
-                public resource?: (google.storage.v2.IObject|null);
+                public resource?: (google.storage.v2.IStorageObject|null);
 
                 /**
                  * Creates a new RewriteResponse instance using the specified properties.
@@ -11083,7 +11083,7 @@ export namespace google {
             interface IUpdateObjectRequest {
 
                 /** UpdateObjectRequest object */
-                object?: (google.storage.v2.IObject|null);
+                object?: (google.storage.v2.IStorageObject|null);
 
                 /** UpdateObjectRequest ifGenerationMatch */
                 ifGenerationMatch?: (number|Long|string|null);
@@ -11120,7 +11120,7 @@ export namespace google {
                 constructor(properties?: google.storage.v2.IUpdateObjectRequest);
 
                 /** UpdateObjectRequest object. */
-                public object?: (google.storage.v2.IObject|null);
+                public object?: (google.storage.v2.IStorageObject|null);
 
                 /** UpdateObjectRequest ifGenerationMatch. */
                 public ifGenerationMatch?: (number|Long|string|null);
@@ -14954,302 +14954,302 @@ export namespace google {
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            /** Properties of an Object. */
-            interface IObject {
+            /** Properties of a StorageObject. */
+            interface IStorageObject {
 
-                /** Object name */
+                /** StorageObject name */
                 name?: (string|null);
 
-                /** Object bucket */
+                /** StorageObject bucket */
                 bucket?: (string|null);
 
-                /** Object etag */
+                /** StorageObject etag */
                 etag?: (string|null);
 
-                /** Object generation */
+                /** StorageObject generation */
                 generation?: (number|Long|string|null);
 
-                /** Object restoreToken */
+                /** StorageObject restoreToken */
                 restoreToken?: (string|null);
 
-                /** Object metageneration */
+                /** StorageObject metageneration */
                 metageneration?: (number|Long|string|null);
 
-                /** Object storageClass */
+                /** StorageObject storageClass */
                 storageClass?: (string|null);
 
-                /** Object size */
+                /** StorageObject size */
                 size?: (number|Long|string|null);
 
-                /** Object contentEncoding */
+                /** StorageObject contentEncoding */
                 contentEncoding?: (string|null);
 
-                /** Object contentDisposition */
+                /** StorageObject contentDisposition */
                 contentDisposition?: (string|null);
 
-                /** Object cacheControl */
+                /** StorageObject cacheControl */
                 cacheControl?: (string|null);
 
-                /** Object acl */
+                /** StorageObject acl */
                 acl?: (google.storage.v2.IObjectAccessControl[]|null);
 
-                /** Object contentLanguage */
+                /** StorageObject contentLanguage */
                 contentLanguage?: (string|null);
 
-                /** Object deleteTime */
+                /** StorageObject deleteTime */
                 deleteTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object finalizeTime */
+                /** StorageObject finalizeTime */
                 finalizeTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object contentType */
+                /** StorageObject contentType */
                 contentType?: (string|null);
 
-                /** Object createTime */
+                /** StorageObject createTime */
                 createTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object componentCount */
+                /** StorageObject componentCount */
                 componentCount?: (number|null);
 
-                /** Object checksums */
+                /** StorageObject checksums */
                 checksums?: (google.storage.v2.IObjectChecksums|null);
 
-                /** Object updateTime */
+                /** StorageObject updateTime */
                 updateTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object kmsKey */
+                /** StorageObject kmsKey */
                 kmsKey?: (string|null);
 
-                /** Object updateStorageClassTime */
+                /** StorageObject updateStorageClassTime */
                 updateStorageClassTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object temporaryHold */
+                /** StorageObject temporaryHold */
                 temporaryHold?: (boolean|null);
 
-                /** Object retentionExpireTime */
+                /** StorageObject retentionExpireTime */
                 retentionExpireTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object metadata */
+                /** StorageObject metadata */
                 metadata?: ({ [k: string]: string }|null);
 
-                /** Object contexts */
+                /** StorageObject contexts */
                 contexts?: (google.storage.v2.IObjectContexts|null);
 
-                /** Object eventBasedHold */
+                /** StorageObject eventBasedHold */
                 eventBasedHold?: (boolean|null);
 
-                /** Object owner */
+                /** StorageObject owner */
                 owner?: (google.storage.v2.IOwner|null);
 
-                /** Object customerEncryption */
+                /** StorageObject customerEncryption */
                 customerEncryption?: (google.storage.v2.ICustomerEncryption|null);
 
-                /** Object customTime */
+                /** StorageObject customTime */
                 customTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object softDeleteTime */
+                /** StorageObject softDeleteTime */
                 softDeleteTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object hardDeleteTime */
+                /** StorageObject hardDeleteTime */
                 hardDeleteTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object retention */
-                retention?: (google.storage.v2.Object.IRetention|null);
+                /** StorageObject retention */
+                retention?: (google.storage.v2.StorageObject.IRetention|null);
             }
 
-            /** Represents an Object. */
-            class Object implements IObject {
+            /** Represents a StorageObject. */
+            class StorageObject implements IStorageObject {
 
                 /**
-                 * Constructs a new Object.
+                 * Constructs a new StorageObject.
                  * @param [properties] Properties to set
                  */
-                constructor(properties?: google.storage.v2.IObject);
+                constructor(properties?: google.storage.v2.IStorageObject);
 
-                /** Object name. */
+                /** StorageObject name. */
                 public name: string;
 
-                /** Object bucket. */
+                /** StorageObject bucket. */
                 public bucket: string;
 
-                /** Object etag. */
+                /** StorageObject etag. */
                 public etag: string;
 
-                /** Object generation. */
+                /** StorageObject generation. */
                 public generation: (number|Long|string);
 
-                /** Object restoreToken. */
+                /** StorageObject restoreToken. */
                 public restoreToken?: (string|null);
 
-                /** Object metageneration. */
+                /** StorageObject metageneration. */
                 public metageneration: (number|Long|string);
 
-                /** Object storageClass. */
+                /** StorageObject storageClass. */
                 public storageClass: string;
 
-                /** Object size. */
+                /** StorageObject size. */
                 public size: (number|Long|string);
 
-                /** Object contentEncoding. */
+                /** StorageObject contentEncoding. */
                 public contentEncoding: string;
 
-                /** Object contentDisposition. */
+                /** StorageObject contentDisposition. */
                 public contentDisposition: string;
 
-                /** Object cacheControl. */
+                /** StorageObject cacheControl. */
                 public cacheControl: string;
 
-                /** Object acl. */
+                /** StorageObject acl. */
                 public acl: google.storage.v2.IObjectAccessControl[];
 
-                /** Object contentLanguage. */
+                /** StorageObject contentLanguage. */
                 public contentLanguage: string;
 
-                /** Object deleteTime. */
+                /** StorageObject deleteTime. */
                 public deleteTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object finalizeTime. */
+                /** StorageObject finalizeTime. */
                 public finalizeTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object contentType. */
+                /** StorageObject contentType. */
                 public contentType: string;
 
-                /** Object createTime. */
+                /** StorageObject createTime. */
                 public createTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object componentCount. */
+                /** StorageObject componentCount. */
                 public componentCount: number;
 
-                /** Object checksums. */
+                /** StorageObject checksums. */
                 public checksums?: (google.storage.v2.IObjectChecksums|null);
 
-                /** Object updateTime. */
+                /** StorageObject updateTime. */
                 public updateTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object kmsKey. */
+                /** StorageObject kmsKey. */
                 public kmsKey: string;
 
-                /** Object updateStorageClassTime. */
+                /** StorageObject updateStorageClassTime. */
                 public updateStorageClassTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object temporaryHold. */
+                /** StorageObject temporaryHold. */
                 public temporaryHold: boolean;
 
-                /** Object retentionExpireTime. */
+                /** StorageObject retentionExpireTime. */
                 public retentionExpireTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object metadata. */
+                /** StorageObject metadata. */
                 public metadata: { [k: string]: string };
 
-                /** Object contexts. */
+                /** StorageObject contexts. */
                 public contexts?: (google.storage.v2.IObjectContexts|null);
 
-                /** Object eventBasedHold. */
+                /** StorageObject eventBasedHold. */
                 public eventBasedHold?: (boolean|null);
 
-                /** Object owner. */
+                /** StorageObject owner. */
                 public owner?: (google.storage.v2.IOwner|null);
 
-                /** Object customerEncryption. */
+                /** StorageObject customerEncryption. */
                 public customerEncryption?: (google.storage.v2.ICustomerEncryption|null);
 
-                /** Object customTime. */
+                /** StorageObject customTime. */
                 public customTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object softDeleteTime. */
+                /** StorageObject softDeleteTime. */
                 public softDeleteTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object hardDeleteTime. */
+                /** StorageObject hardDeleteTime. */
                 public hardDeleteTime?: (google.protobuf.ITimestamp|null);
 
-                /** Object retention. */
-                public retention?: (google.storage.v2.Object.IRetention|null);
+                /** StorageObject retention. */
+                public retention?: (google.storage.v2.StorageObject.IRetention|null);
 
                 /**
-                 * Creates a new Object instance using the specified properties.
+                 * Creates a new StorageObject instance using the specified properties.
                  * @param [properties] Properties to set
-                 * @returns Object instance
+                 * @returns StorageObject instance
                  */
-                public static create(properties?: google.storage.v2.IObject): google.storage.v2.object;
+                public static create(properties?: google.storage.v2.IStorageObject): google.storage.v2.StorageObject;
 
                 /**
-                 * Encodes the specified Object message. Does not implicitly {@link google.storage.v2.Object.verify|verify} messages.
-                 * @param message Object message or plain object to encode
+                 * Encodes the specified StorageObject message. Does not implicitly {@link google.storage.v2.StorageObject.verify|verify} messages.
+                 * @param message StorageObject message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encode(message: google.storage.v2.IObject, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encode(message: google.storage.v2.IStorageObject, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Encodes the specified Object message, length delimited. Does not implicitly {@link google.storage.v2.Object.verify|verify} messages.
-                 * @param message Object message or plain object to encode
+                 * Encodes the specified StorageObject message, length delimited. Does not implicitly {@link google.storage.v2.StorageObject.verify|verify} messages.
+                 * @param message StorageObject message or plain object to encode
                  * @param [writer] Writer to encode to
                  * @returns Writer
                  */
-                public static encodeDelimited(message: google.storage.v2.IObject, writer?: $protobuf.Writer): $protobuf.Writer;
+                public static encodeDelimited(message: google.storage.v2.IStorageObject, writer?: $protobuf.Writer): $protobuf.Writer;
 
                 /**
-                 * Decodes an Object message from the specified reader or buffer.
+                 * Decodes a StorageObject message from the specified reader or buffer.
                  * @param reader Reader or buffer to decode from
                  * @param [length] Message length if known beforehand
-                 * @returns Object
+                 * @returns StorageObject
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.object;
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.StorageObject;
 
                 /**
-                 * Decodes an Object message from the specified reader or buffer, length delimited.
+                 * Decodes a StorageObject message from the specified reader or buffer, length delimited.
                  * @param reader Reader or buffer to decode from
-                 * @returns Object
+                 * @returns StorageObject
                  * @throws {Error} If the payload is not a reader or valid buffer
                  * @throws {$protobuf.util.ProtocolError} If required fields are missing
                  */
-                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.object;
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.StorageObject;
 
                 /**
-                 * Verifies an Object message.
+                 * Verifies a StorageObject message.
                  * @param message Plain object to verify
                  * @returns `null` if valid, otherwise the reason why it is not
                  */
                 public static verify(message: { [k: string]: any }): (string|null);
 
                 /**
-                 * Creates an Object message from a plain object. Also converts values to their respective internal types.
+                 * Creates a StorageObject message from a plain object. Also converts values to their respective internal types.
                  * @param object Plain object
-                 * @returns Object
+                 * @returns StorageObject
                  */
-                public static fromObject(object: { [k: string]: any }): google.storage.v2.object;
+                public static fromObject(object: { [k: string]: any }): google.storage.v2.StorageObject;
 
                 /**
-                 * Creates a plain object from an Object message. Also converts values to other types if specified.
-                 * @param message Object
+                 * Creates a plain object from a StorageObject message. Also converts values to other types if specified.
+                 * @param message StorageObject
                  * @param [options] Conversion options
                  * @returns Plain object
                  */
-                public static toObject(message: google.storage.v2.object, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                public static toObject(message: google.storage.v2.StorageObject, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                 /**
-                 * Converts this Object to JSON.
+                 * Converts this StorageObject to JSON.
                  * @returns JSON object
                  */
                 public toJSON(): { [k: string]: any };
 
                 /**
-                 * Gets the default type url for Object
+                 * Gets the default type url for StorageObject
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
                 public static getTypeUrl(typeUrlPrefix?: string): string;
             }
 
-            namespace Object {
+            namespace StorageObject {
 
                 /** Properties of a Retention. */
                 interface IRetention {
 
                     /** Retention mode */
-                    mode?: (google.storage.v2.Object.Retention.Mode|keyof typeof google.storage.v2.Object.Retention.Mode|null);
+                    mode?: (google.storage.v2.StorageObject.Retention.Mode|keyof typeof google.storage.v2.StorageObject.Retention.Mode|null);
 
                     /** Retention retainUntilTime */
                     retainUntilTime?: (google.protobuf.ITimestamp|null);
@@ -15262,10 +15262,10 @@ export namespace google {
                      * Constructs a new Retention.
                      * @param [properties] Properties to set
                      */
-                    constructor(properties?: google.storage.v2.Object.IRetention);
+                    constructor(properties?: google.storage.v2.StorageObject.IRetention);
 
                     /** Retention mode. */
-                    public mode: (google.storage.v2.Object.Retention.Mode|keyof typeof google.storage.v2.Object.Retention.Mode);
+                    public mode: (google.storage.v2.StorageObject.Retention.Mode|keyof typeof google.storage.v2.StorageObject.Retention.Mode);
 
                     /** Retention retainUntilTime. */
                     public retainUntilTime?: (google.protobuf.ITimestamp|null);
@@ -15275,23 +15275,23 @@ export namespace google {
                      * @param [properties] Properties to set
                      * @returns Retention instance
                      */
-                    public static create(properties?: google.storage.v2.Object.IRetention): google.storage.v2.Object.Retention;
+                    public static create(properties?: google.storage.v2.StorageObject.IRetention): google.storage.v2.StorageObject.Retention;
 
                     /**
-                     * Encodes the specified Retention message. Does not implicitly {@link google.storage.v2.Object.Retention.verify|verify} messages.
+                     * Encodes the specified Retention message. Does not implicitly {@link google.storage.v2.StorageObject.Retention.verify|verify} messages.
                      * @param message Retention message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encode(message: google.storage.v2.Object.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encode(message: google.storage.v2.StorageObject.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
-                     * Encodes the specified Retention message, length delimited. Does not implicitly {@link google.storage.v2.Object.Retention.verify|verify} messages.
+                     * Encodes the specified Retention message, length delimited. Does not implicitly {@link google.storage.v2.StorageObject.Retention.verify|verify} messages.
                      * @param message Retention message or plain object to encode
                      * @param [writer] Writer to encode to
                      * @returns Writer
                      */
-                    public static encodeDelimited(message: google.storage.v2.Object.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
+                    public static encodeDelimited(message: google.storage.v2.StorageObject.IRetention, writer?: $protobuf.Writer): $protobuf.Writer;
 
                     /**
                      * Decodes a Retention message from the specified reader or buffer.
@@ -15301,7 +15301,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.Object.Retention;
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.storage.v2.StorageObject.Retention;
 
                     /**
                      * Decodes a Retention message from the specified reader or buffer, length delimited.
@@ -15310,7 +15310,7 @@ export namespace google {
                      * @throws {Error} If the payload is not a reader or valid buffer
                      * @throws {$protobuf.util.ProtocolError} If required fields are missing
                      */
-                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.Object.Retention;
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.storage.v2.StorageObject.Retention;
 
                     /**
                      * Verifies a Retention message.
@@ -15324,7 +15324,7 @@ export namespace google {
                      * @param object Plain object
                      * @returns Retention
                      */
-                    public static fromObject(object: { [k: string]: any }): google.storage.v2.Object.Retention;
+                    public static fromObject(object: { [k: string]: any }): google.storage.v2.StorageObject.Retention;
 
                     /**
                      * Creates a plain object from a Retention message. Also converts values to other types if specified.
@@ -15332,7 +15332,7 @@ export namespace google {
                      * @param [options] Conversion options
                      * @returns Plain object
                      */
-                    public static toObject(message: google.storage.v2.Object.Retention, options?: $protobuf.IConversionOptions): { [k: string]: any };
+                    public static toObject(message: google.storage.v2.StorageObject.Retention, options?: $protobuf.IConversionOptions): { [k: string]: any };
 
                     /**
                      * Converts this Retention to JSON.
@@ -15508,7 +15508,7 @@ export namespace google {
             interface IListObjectsResponse {
 
                 /** ListObjectsResponse objects */
-                objects?: (google.storage.v2.IObject[]|null);
+                objects?: (google.storage.v2.IStorageObject[]|null);
 
                 /** ListObjectsResponse prefixes */
                 prefixes?: (string[]|null);
@@ -15527,7 +15527,7 @@ export namespace google {
                 constructor(properties?: google.storage.v2.IListObjectsResponse);
 
                 /** ListObjectsResponse objects. */
-                public objects: google.storage.v2.IObject[];
+                public objects: google.storage.v2.IStorageObject[];
 
                 /** ListObjectsResponse prefixes. */
                 public prefixes: string[];
@@ -16301,6 +16301,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations */
             destinations?: (google.api.ClientLibraryDestination[]|null);
+
+            /** CommonLanguageSettings selectiveGapicGeneration */
+            selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
         }
 
         /** Represents a CommonLanguageSettings. */
@@ -16317,6 +16320,9 @@ export namespace google {
 
             /** CommonLanguageSettings destinations. */
             public destinations: google.api.ClientLibraryDestination[];
+
+            /** CommonLanguageSettings selectiveGapicGeneration. */
+            public selectiveGapicGeneration?: (google.api.ISelectiveGapicGeneration|null);
 
             /**
              * Creates a new CommonLanguageSettings instance using the specified properties.
@@ -17018,6 +17024,9 @@ export namespace google {
 
             /** PythonSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures */
+            experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
         }
 
         /** Represents a PythonSettings. */
@@ -17031,6 +17040,9 @@ export namespace google {
 
             /** PythonSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** PythonSettings experimentalFeatures. */
+            public experimentalFeatures?: (google.api.PythonSettings.IExperimentalFeatures|null);
 
             /**
              * Creates a new PythonSettings instance using the specified properties.
@@ -17108,6 +17120,118 @@ export namespace google {
              * @returns The default type url
              */
             public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
+        namespace PythonSettings {
+
+            /** Properties of an ExperimentalFeatures. */
+            interface IExperimentalFeatures {
+
+                /** ExperimentalFeatures restAsyncIoEnabled */
+                restAsyncIoEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled */
+                protobufPythonicTypesEnabled?: (boolean|null);
+
+                /** ExperimentalFeatures unversionedPackageDisabled */
+                unversionedPackageDisabled?: (boolean|null);
+            }
+
+            /** Represents an ExperimentalFeatures. */
+            class ExperimentalFeatures implements IExperimentalFeatures {
+
+                /**
+                 * Constructs a new ExperimentalFeatures.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.api.PythonSettings.IExperimentalFeatures);
+
+                /** ExperimentalFeatures restAsyncIoEnabled. */
+                public restAsyncIoEnabled: boolean;
+
+                /** ExperimentalFeatures protobufPythonicTypesEnabled. */
+                public protobufPythonicTypesEnabled: boolean;
+
+                /** ExperimentalFeatures unversionedPackageDisabled. */
+                public unversionedPackageDisabled: boolean;
+
+                /**
+                 * Creates a new ExperimentalFeatures instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns ExperimentalFeatures instance
+                 */
+                public static create(properties?: google.api.PythonSettings.IExperimentalFeatures): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified ExperimentalFeatures message, length delimited. Does not implicitly {@link google.api.PythonSettings.ExperimentalFeatures.verify|verify} messages.
+                 * @param message ExperimentalFeatures message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.api.PythonSettings.IExperimentalFeatures, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Decodes an ExperimentalFeatures message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns ExperimentalFeatures
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Verifies an ExperimentalFeatures message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates an ExperimentalFeatures message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns ExperimentalFeatures
+                 */
+                public static fromObject(object: { [k: string]: any }): google.api.PythonSettings.ExperimentalFeatures;
+
+                /**
+                 * Creates a plain object from an ExperimentalFeatures message. Also converts values to other types if specified.
+                 * @param message ExperimentalFeatures
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.api.PythonSettings.ExperimentalFeatures, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this ExperimentalFeatures to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for ExperimentalFeatures
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
         }
 
         /** Properties of a NodeSettings. */
@@ -17436,6 +17560,9 @@ export namespace google {
 
             /** GoSettings common */
             common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices */
+            renamedServices?: ({ [k: string]: string }|null);
         }
 
         /** Represents a GoSettings. */
@@ -17449,6 +17576,9 @@ export namespace google {
 
             /** GoSettings common. */
             public common?: (google.api.ICommonLanguageSettings|null);
+
+            /** GoSettings renamedServices. */
+            public renamedServices: { [k: string]: string };
 
             /**
              * Creates a new GoSettings instance using the specified properties.
@@ -17774,6 +17904,109 @@ export namespace google {
             PACKAGE_MANAGER = 20
         }
 
+        /** Properties of a SelectiveGapicGeneration. */
+        interface ISelectiveGapicGeneration {
+
+            /** SelectiveGapicGeneration methods */
+            methods?: (string[]|null);
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal */
+            generateOmittedAsInternal?: (boolean|null);
+        }
+
+        /** Represents a SelectiveGapicGeneration. */
+        class SelectiveGapicGeneration implements ISelectiveGapicGeneration {
+
+            /**
+             * Constructs a new SelectiveGapicGeneration.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ISelectiveGapicGeneration);
+
+            /** SelectiveGapicGeneration methods. */
+            public methods: string[];
+
+            /** SelectiveGapicGeneration generateOmittedAsInternal. */
+            public generateOmittedAsInternal: boolean;
+
+            /**
+             * Creates a new SelectiveGapicGeneration instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns SelectiveGapicGeneration instance
+             */
+            public static create(properties?: google.api.ISelectiveGapicGeneration): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified SelectiveGapicGeneration message, length delimited. Does not implicitly {@link google.api.SelectiveGapicGeneration.verify|verify} messages.
+             * @param message SelectiveGapicGeneration message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ISelectiveGapicGeneration, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Decodes a SelectiveGapicGeneration message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns SelectiveGapicGeneration
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Verifies a SelectiveGapicGeneration message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a SelectiveGapicGeneration message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns SelectiveGapicGeneration
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.SelectiveGapicGeneration;
+
+            /**
+             * Creates a plain object from a SelectiveGapicGeneration message. Also converts values to other types if specified.
+             * @param message SelectiveGapicGeneration
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.SelectiveGapicGeneration, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this SelectiveGapicGeneration to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for SelectiveGapicGeneration
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+
         /** LaunchStage enum. */
         enum LaunchStage {
             LAUNCH_STAGE_UNSPECIFIED = 0,
@@ -17804,6 +18037,9 @@ export namespace google {
 
             /** FieldInfo format */
             format?: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format|null);
+
+            /** FieldInfo referencedTypes */
+            referencedTypes?: (google.api.ITypeReference[]|null);
         }
 
         /** Represents a FieldInfo. */
@@ -17817,6 +18053,9 @@ export namespace google {
 
             /** FieldInfo format. */
             public format: (google.api.FieldInfo.Format|keyof typeof google.api.FieldInfo.Format);
+
+            /** FieldInfo referencedTypes. */
+            public referencedTypes: google.api.ITypeReference[];
 
             /**
              * Creates a new FieldInfo instance using the specified properties.
@@ -17906,6 +18145,103 @@ export namespace google {
                 IPV6 = 3,
                 IPV4_OR_IPV6 = 4
             }
+        }
+
+        /** Properties of a TypeReference. */
+        interface ITypeReference {
+
+            /** TypeReference typeName */
+            typeName?: (string|null);
+        }
+
+        /** Represents a TypeReference. */
+        class TypeReference implements ITypeReference {
+
+            /**
+             * Constructs a new TypeReference.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.api.ITypeReference);
+
+            /** TypeReference typeName. */
+            public typeName: string;
+
+            /**
+             * Creates a new TypeReference instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns TypeReference instance
+             */
+            public static create(properties?: google.api.ITypeReference): google.api.TypeReference;
+
+            /**
+             * Encodes the specified TypeReference message. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified TypeReference message, length delimited. Does not implicitly {@link google.api.TypeReference.verify|verify} messages.
+             * @param message TypeReference message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.api.ITypeReference, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.api.TypeReference;
+
+            /**
+             * Decodes a TypeReference message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns TypeReference
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.api.TypeReference;
+
+            /**
+             * Verifies a TypeReference message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates a TypeReference message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns TypeReference
+             */
+            public static fromObject(object: { [k: string]: any }): google.api.TypeReference;
+
+            /**
+             * Creates a plain object from a TypeReference message. Also converts values to other types if specified.
+             * @param message TypeReference
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.api.TypeReference, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this TypeReference to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for TypeReference
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
         }
 
         /** Properties of a ResourceDescriptor. */
@@ -18464,6 +18800,7 @@ export namespace google {
         /** Edition enum. */
         enum Edition {
             EDITION_UNKNOWN = 0,
+            EDITION_LEGACY = 900,
             EDITION_PROTO2 = 998,
             EDITION_PROTO3 = 999,
             EDITION_2023 = 1000,
@@ -18493,6 +18830,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency */
             weakDependency?: (number[]|null);
+
+            /** FileDescriptorProto optionDependency */
+            optionDependency?: (string[]|null);
 
             /** FileDescriptorProto messageType */
             messageType?: (google.protobuf.IDescriptorProto[]|null);
@@ -18542,6 +18882,9 @@ export namespace google {
 
             /** FileDescriptorProto weakDependency. */
             public weakDependency: number[];
+
+            /** FileDescriptorProto optionDependency. */
+            public optionDependency: string[];
 
             /** FileDescriptorProto messageType. */
             public messageType: google.protobuf.IDescriptorProto[];
@@ -18677,6 +19020,9 @@ export namespace google {
 
             /** DescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** DescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents a DescriptorProto. */
@@ -18717,6 +19063,9 @@ export namespace google {
 
             /** DescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** DescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new DescriptorProto instance using the specified properties.
@@ -19565,6 +19914,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName */
             reservedName?: (string[]|null);
+
+            /** EnumDescriptorProto visibility */
+            visibility?: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility|null);
         }
 
         /** Represents an EnumDescriptorProto. */
@@ -19590,6 +19942,9 @@ export namespace google {
 
             /** EnumDescriptorProto reservedName. */
             public reservedName: string[];
+
+            /** EnumDescriptorProto visibility. */
+            public visibility: (google.protobuf.SymbolVisibility|keyof typeof google.protobuf.SymbolVisibility);
 
             /**
              * Creates a new EnumDescriptorProto instance using the specified properties.
@@ -20525,6 +20880,9 @@ export namespace google {
             /** FieldOptions features */
             features?: (google.protobuf.IFeatureSet|null);
 
+            /** FieldOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** FieldOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
 
@@ -20582,6 +20940,9 @@ export namespace google {
 
             /** FieldOptions features. */
             public features?: (google.protobuf.IFeatureSet|null);
+
+            /** FieldOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** FieldOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -20798,6 +21159,121 @@ export namespace google {
 
                 /**
                  * Gets the default type url for EditionDefault
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            /** Properties of a FeatureSupport. */
+            interface IFeatureSupport {
+
+                /** FeatureSupport editionIntroduced */
+                editionIntroduced?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport editionDeprecated */
+                editionDeprecated?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+
+                /** FeatureSupport deprecationWarning */
+                deprecationWarning?: (string|null);
+
+                /** FeatureSupport editionRemoved */
+                editionRemoved?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
+            }
+
+            /** Represents a FeatureSupport. */
+            class FeatureSupport implements IFeatureSupport {
+
+                /**
+                 * Constructs a new FeatureSupport.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FieldOptions.IFeatureSupport);
+
+                /** FeatureSupport editionIntroduced. */
+                public editionIntroduced: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport editionDeprecated. */
+                public editionDeprecated: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /** FeatureSupport deprecationWarning. */
+                public deprecationWarning: string;
+
+                /** FeatureSupport editionRemoved. */
+                public editionRemoved: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
+
+                /**
+                 * Creates a new FeatureSupport instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns FeatureSupport instance
+                 */
+                public static create(properties?: google.protobuf.FieldOptions.IFeatureSupport): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Encodes the specified FeatureSupport message. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified FeatureSupport message, length delimited. Does not implicitly {@link google.protobuf.FieldOptions.FeatureSupport.verify|verify} messages.
+                 * @param message FeatureSupport message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FieldOptions.IFeatureSupport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Decodes a FeatureSupport message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns FeatureSupport
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Verifies a FeatureSupport message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a FeatureSupport message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns FeatureSupport
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FieldOptions.FeatureSupport;
+
+                /**
+                 * Creates a plain object from a FeatureSupport message. Also converts values to other types if specified.
+                 * @param message FeatureSupport
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FieldOptions.FeatureSupport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this FeatureSupport to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for FeatureSupport
                  * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
                  * @returns The default type url
                  */
@@ -21041,6 +21517,9 @@ export namespace google {
             /** EnumValueOptions debugRedact */
             debugRedact?: (boolean|null);
 
+            /** EnumValueOptions featureSupport */
+            featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
+
             /** EnumValueOptions uninterpretedOption */
             uninterpretedOption?: (google.protobuf.IUninterpretedOption[]|null);
         }
@@ -21062,6 +21541,9 @@ export namespace google {
 
             /** EnumValueOptions debugRedact. */
             public debugRedact: boolean;
+
+            /** EnumValueOptions featureSupport. */
+            public featureSupport?: (google.protobuf.FieldOptions.IFeatureSupport|null);
 
             /** EnumValueOptions uninterpretedOption. */
             public uninterpretedOption: google.protobuf.IUninterpretedOption[];
@@ -21658,6 +22140,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat */
             jsonFormat?: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat|null);
+
+            /** FeatureSet enforceNamingStyle */
+            enforceNamingStyle?: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle|null);
+
+            /** FeatureSet defaultSymbolVisibility */
+            defaultSymbolVisibility?: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|null);
         }
 
         /** Represents a FeatureSet. */
@@ -21686,6 +22174,12 @@ export namespace google {
 
             /** FeatureSet jsonFormat. */
             public jsonFormat: (google.protobuf.FeatureSet.JsonFormat|keyof typeof google.protobuf.FeatureSet.JsonFormat);
+
+            /** FeatureSet enforceNamingStyle. */
+            public enforceNamingStyle: (google.protobuf.FeatureSet.EnforceNamingStyle|keyof typeof google.protobuf.FeatureSet.EnforceNamingStyle);
+
+            /** FeatureSet defaultSymbolVisibility. */
+            public defaultSymbolVisibility: (google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility|keyof typeof google.protobuf.FeatureSet.VisibilityFeature.DefaultSymbolVisibility);
 
             /**
              * Creates a new FeatureSet instance using the specified properties.
@@ -21809,6 +22303,116 @@ export namespace google {
                 ALLOW = 1,
                 LEGACY_BEST_EFFORT = 2
             }
+
+            /** EnforceNamingStyle enum. */
+            enum EnforceNamingStyle {
+                ENFORCE_NAMING_STYLE_UNKNOWN = 0,
+                STYLE2024 = 1,
+                STYLE_LEGACY = 2
+            }
+
+            /** Properties of a VisibilityFeature. */
+            interface IVisibilityFeature {
+            }
+
+            /** Represents a VisibilityFeature. */
+            class VisibilityFeature implements IVisibilityFeature {
+
+                /**
+                 * Constructs a new VisibilityFeature.
+                 * @param [properties] Properties to set
+                 */
+                constructor(properties?: google.protobuf.FeatureSet.IVisibilityFeature);
+
+                /**
+                 * Creates a new VisibilityFeature instance using the specified properties.
+                 * @param [properties] Properties to set
+                 * @returns VisibilityFeature instance
+                 */
+                public static create(properties?: google.protobuf.FeatureSet.IVisibilityFeature): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Encodes the specified VisibilityFeature message. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encode(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Encodes the specified VisibilityFeature message, length delimited. Does not implicitly {@link google.protobuf.FeatureSet.VisibilityFeature.verify|verify} messages.
+                 * @param message VisibilityFeature message or plain object to encode
+                 * @param [writer] Writer to encode to
+                 * @returns Writer
+                 */
+                public static encodeDelimited(message: google.protobuf.FeatureSet.IVisibilityFeature, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer.
+                 * @param reader Reader or buffer to decode from
+                 * @param [length] Message length if known beforehand
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Decodes a VisibilityFeature message from the specified reader or buffer, length delimited.
+                 * @param reader Reader or buffer to decode from
+                 * @returns VisibilityFeature
+                 * @throws {Error} If the payload is not a reader or valid buffer
+                 * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                 */
+                public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Verifies a VisibilityFeature message.
+                 * @param message Plain object to verify
+                 * @returns `null` if valid, otherwise the reason why it is not
+                 */
+                public static verify(message: { [k: string]: any }): (string|null);
+
+                /**
+                 * Creates a VisibilityFeature message from a plain object. Also converts values to their respective internal types.
+                 * @param object Plain object
+                 * @returns VisibilityFeature
+                 */
+                public static fromObject(object: { [k: string]: any }): google.protobuf.FeatureSet.VisibilityFeature;
+
+                /**
+                 * Creates a plain object from a VisibilityFeature message. Also converts values to other types if specified.
+                 * @param message VisibilityFeature
+                 * @param [options] Conversion options
+                 * @returns Plain object
+                 */
+                public static toObject(message: google.protobuf.FeatureSet.VisibilityFeature, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                /**
+                 * Converts this VisibilityFeature to JSON.
+                 * @returns JSON object
+                 */
+                public toJSON(): { [k: string]: any };
+
+                /**
+                 * Gets the default type url for VisibilityFeature
+                 * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                 * @returns The default type url
+                 */
+                public static getTypeUrl(typeUrlPrefix?: string): string;
+            }
+
+            namespace VisibilityFeature {
+
+                /** DefaultSymbolVisibility enum. */
+                enum DefaultSymbolVisibility {
+                    DEFAULT_SYMBOL_VISIBILITY_UNKNOWN = 0,
+                    EXPORT_ALL = 1,
+                    EXPORT_TOP_LEVEL = 2,
+                    LOCAL_ALL = 3,
+                    STRICT = 4
+                }
+            }
         }
 
         /** Properties of a FeatureSetDefaults. */
@@ -21928,8 +22532,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition */
                 edition?: (google.protobuf.Edition|keyof typeof google.protobuf.Edition|null);
 
-                /** FeatureSetEditionDefault features */
-                features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures */
+                overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures */
+                fixedFeatures?: (google.protobuf.IFeatureSet|null);
             }
 
             /** Represents a FeatureSetEditionDefault. */
@@ -21944,8 +22551,11 @@ export namespace google {
                 /** FeatureSetEditionDefault edition. */
                 public edition: (google.protobuf.Edition|keyof typeof google.protobuf.Edition);
 
-                /** FeatureSetEditionDefault features. */
-                public features?: (google.protobuf.IFeatureSet|null);
+                /** FeatureSetEditionDefault overridableFeatures. */
+                public overridableFeatures?: (google.protobuf.IFeatureSet|null);
+
+                /** FeatureSetEditionDefault fixedFeatures. */
+                public fixedFeatures?: (google.protobuf.IFeatureSet|null);
 
                 /**
                  * Creates a new FeatureSetEditionDefault instance using the specified properties.
@@ -22476,6 +23086,13 @@ export namespace google {
                     ALIAS = 2
                 }
             }
+        }
+
+        /** SymbolVisibility enum. */
+        enum SymbolVisibility {
+            VISIBILITY_UNSET = 0,
+            VISIBILITY_LOCAL = 1,
+            VISIBILITY_EXPORT = 2
         }
 
         /** Properties of a Duration. */

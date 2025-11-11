@@ -30,6 +30,7 @@
   ],
   "scripts": {
     "clean": "gts clean",
+    "fix-and-gen": "tsc src/util/storage_control_utils.ts && cd src/util && node storage_control_utils.js && rm *.js",
     "compile": "tsc -p . && cp -r protos build/",
     "compile-protos": "compileProtos src",
     "docs": "jsdoc -c .jsdoc.js",
@@ -38,7 +39,7 @@
     "fix": "gts fix",
     "lint": "gts check",
     "postpack": "minifyProtoJson",
-    "prepare": "npm run compile",
+    "prepare": "npm run fix-and-gen && npm run compile-protos && npm run compile",
     "system-test": "c8 mocha build/system-test",
     "test": "c8 mocha build/test",
     "samples-test": "cd samples/ && npm link ../ && npm i && npm test",

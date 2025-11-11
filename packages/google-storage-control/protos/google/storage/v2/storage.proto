@@ -282,7 +282,7 @@ service Storage {
   // the `storage.objects.delete` permission. If the request body includes
   // the retention property, the authenticated user must also have the
   // `storage.objects.setRetention` IAM permission.
-  rpc ComposeObject(ComposeObjectRequest) returns (Object) {
+  rpc ComposeObject(ComposeObjectRequest) returns (StorageObject) {
     option (google.api.routing) = {
       routing_parameters {
         field: "destination.bucket"
@@ -336,8 +336,8 @@ service Storage {
   //   `copySourceAcl` is `true`.
   //
   // If a live object using the same name already exists in the bucket and
-  // becomes overwritten, the live object becomes a noncurrent object if Object
-  // Versioning is enabled on the bucket. If Object Versioning is not enabled,
+  // becomes overwritten, the live object becomes a noncurrent object if StorageObject
+  // Versioning is enabled on the bucket. If StorageObject Versioning is not enabled,
   // the live object becomes soft deleted.
   //
   // **IAM Permissions**:
@@ -354,7 +354,7 @@ service Storage {
   //   - `storage.objects.setIamPolicy` (only required if `copySourceAcl` is
   //   `true` and the relevant
   //     bucket has uniform bucket-level access disabled)
-  rpc RestoreObject(RestoreObjectRequest) returns (Object) {
+  rpc RestoreObject(RestoreObjectRequest) returns (StorageObject) {
     option (google.api.routing) = {
       routing_parameters { field: "bucket" path_template: "{bucket=**}" }
     };
@@ -387,7 +387,7 @@ service Storage {
   // Requires `storage.objects.get` IAM permission on the bucket.
   // To return object ACLs, the authenticated user must also have
   // the `storage.objects.getIamPolicy` permission.
-  rpc GetObject(GetObjectRequest) returns (Object) {
+  rpc GetObject(GetObjectRequest) returns (StorageObject) {
     option (google.api.routing) = {
       routing_parameters { field: "bucket" path_template: "{bucket=**}" }
     };
@@ -438,7 +438,7 @@ service Storage {
   // **IAM Permissions**:
   //
   // Requires `storage.objects.update` IAM permission on the bucket.
-  rpc UpdateObject(UpdateObjectRequest) returns (Object) {
+  rpc UpdateObject(UpdateObjectRequest) returns (StorageObject) {
     option (google.api.routing) = {
       routing_parameters { field: "object.bucket" path_template: "{bucket=**}" }
     };
@@ -621,7 +621,7 @@ service Storage {
   //   - `storage.objects.create`
   //   - `storage.objects.delete` (only required if overwriting an existing
   //   object)
-  rpc MoveObject(MoveObjectRequest) returns (Object) {
+  rpc MoveObject(MoveObjectRequest) returns (StorageObject) {
     option (google.api.routing) = {
       routing_parameters { field: "bucket" path_template: "{bucket=**}" }
     };
@@ -841,7 +841,7 @@ message ComposeObjectRequest {
   }
 
   // Required. Properties of the resulting object.
-  Object destination = 1 [(google.api.field_behavior) = REQUIRED];
+  StorageObject destination = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. The list of source objects that is concatenated into a single
   // object.
@@ -1019,7 +1019,7 @@ message ReadObjectRequest {
   int64 read_offset = 4 [(google.api.field_behavior) = OPTIONAL];
 
   // Optional. The maximum number of `data` bytes the server is allowed to
-  // return in the sum of all `Object` messages. A `read_limit` of zero
+  // return in the sum of all `StorageObject` messages. A `read_limit` of zero
   // indicates that there is no limit, and a negative `read_limit` causes an
   // error.
   //
@@ -1136,7 +1136,7 @@ message ReadObjectResponse {
 
   // Metadata of the object whose media is being returned.
   // Only populated in the first response in the stream.
-  Object metadata = 4;
+  StorageObject metadata = 4;
 }
 
 // Describes the object to read in a BidiReadObject request.
@@ -1230,7 +1230,7 @@ message BidiReadObjectResponse {
   // Metadata of the object whose media is being returned.
   // Only populated in the first response in the stream and not populated when
   // the stream is opened with a read handle.
-  Object metadata = 4;
+  StorageObject metadata = 4;
 
   // This field is periodically refreshed, however it might not be set in
   // every response. It allows the client to more efficiently open subsequent
@@ -1351,7 +1351,7 @@ message BidiWriteHandle {
 // Describes an attempt to insert an object, possibly over multiple requests.
 message WriteObjectSpec {
   // Required. Destination object, including its name and its metadata.
-  Object resource = 1 [(google.api.field_behavior) = REQUIRED];
+  StorageObject resource = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Optional. Apply a predefined set of access controls to this object.
   // Valid values are `authenticatedRead`, `bucketOwnerFullControl`,
@@ -1457,7 +1457,7 @@ message WriteObjectResponse {
 
     // A resource containing the metadata for the uploaded object. Only set if
     // the upload has finalized.
-    Object resource = 2;
+    StorageObject resource = 2;
   }
 }
 
@@ -1588,7 +1588,7 @@ message BidiWriteObjectResponse {
 
     // A resource containing the metadata for the uploaded object. Only set if
     // the upload has finalized.
-    Object resource = 2;
+    StorageObject resource = 2;
   }
 
   // An optional write handle that is returned periodically in response
@@ -1700,7 +1700,7 @@ message QueryWriteStatusResponse {
 
     // A resource containing the metadata for the uploaded object. Only set if
     // the upload has finalized.
-    Object resource = 2;
+    StorageObject resource = 2;
   }
 }
 
@@ -1753,7 +1753,7 @@ message RewriteObjectRequest {
   // If `destination` is present it is used to construct the destination
   // object's metadata; otherwise the destination object's metadata is
   // copied from the source object.
-  Object destination = 1 [(google.api.field_behavior) = OPTIONAL];
+  StorageObject destination = 1 [(google.api.field_behavior) = OPTIONAL];
 
   // Required. Name of the bucket in which to find the source object.
   string source_bucket = 2 [
@@ -1874,7 +1874,7 @@ message RewriteResponse {
 
   // A resource containing the metadata for the copied-to object. This property
   // is present in the response only when copying completes.
-  Object resource = 5;
+  StorageObject resource = 5;
 }
 
 // Request message for [MoveObject][google.storage.v2.Storage.MoveObject].
@@ -1994,7 +1994,7 @@ message UpdateObjectRequest {
   // update. If present, the object's generation field selects a specific
   // revision of this object whose metadata should be updated. Otherwise,
   // assumes the live version of the object.
-  Object object = 1 [(google.api.field_behavior) = REQUIRED];
+  StorageObject object = 1 [(google.api.field_behavior) = REQUIRED];
 
   // Makes the operation conditional on whether the object's current generation
   // matches the given value. Setting to 0 makes the operation succeed only if
@@ -2291,7 +2291,7 @@ message Bucket {
   }
 
   // Lifecycle properties of a bucket.
-  // For more information, see [Object Lifecycle
+  // For more information, see [StorageObject Lifecycle
   // Management](https://cloud.google.com/storage/docs/lifecycle).
   message Lifecycle {
     // A lifecycle Rule, combining an action to take on an object and a
@@ -2395,7 +2395,7 @@ message Bucket {
     string log_object_prefix = 2 [(google.api.field_behavior) = OPTIONAL];
   }
 
-  // Object Retention related properties of a bucket.
+  // StorageObject Retention related properties of a bucket.
   message ObjectRetention {
     // Optional. Output only. If true, object retention is enabled for the
     // bucket.
@@ -2436,7 +2436,7 @@ message Bucket {
   }
 
   // Properties of a bucket related to versioning.
-  // For more information about Cloud Storage versioning, see [Object
+  // For more information about Cloud Storage versioning, see [StorageObject
   // versioning](https://cloud.google.com/storage/docs/object-versioning).
   message Versioning {
     // Optional. While set to true, versioning is fully enabled for this bucket.
@@ -2586,7 +2586,7 @@ message Bucket {
   // Output only. The metadata generation of this bucket.
   int64 metageneration = 4 [(google.api.field_behavior) = OUTPUT_ONLY];
 
-  // Immutable. The location of the bucket. Object data for objects in the
+  // Immutable. The location of the bucket. StorageObject data for objects in the
   // bucket resides in physical storage within this region.  Defaults to `US`.
   // Attempting to update this field after the bucket is created results in an
   // error.
@@ -2841,13 +2841,13 @@ message CustomerEncryption {
 }
 
 // An object.
-message Object {
+message StorageObject {
   // Specifies retention parameters of the object. Objects under retention
   // cannot be deleted or overwritten until their retention expires.
   message Retention {
     // Retention mode values.
     enum Mode {
-      // No specified mode. Object is not under retention.
+      // No specified mode. StorageObject is not under retention.
       MODE_UNSPECIFIED = 0;
 
       // Retention period might be decreased or increased.
@@ -2973,7 +2973,7 @@ message Object {
   // metadata of the object changes. This includes changes made by a requester,
   // such as modifying custom metadata, as well as changes made by Cloud Storage
   // on behalf of a requester, such as changing the storage class based on an
-  // Object Lifecycle Configuration.
+  // StorageObject Lifecycle Configuration.
   google.protobuf.Timestamp update_time = 17
       [(google.api.field_behavior) = OUTPUT_ONLY];
 
@@ -3119,7 +3119,7 @@ message ObjectAccessControl {
 // The result of a call to Objects.ListObjects
 message ListObjectsResponse {
   // The list of items.
-  repeated Object objects = 1;
+  repeated StorageObject objects = 1;
 
   // The list of prefixes of objects matching-but-not-listed up to and including
   // the requested delimiter.
