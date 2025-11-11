@@ -13473,6 +13473,17 @@
                             }
                           }
                         },
+                        "CodeBlock": {
+                          "fields": {
+                            "code": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            }
+                          }
+                        },
                         "ConversationHistory": {
                           "options": {
                             "(google.api.default_host)": "dialogflow.googleapis.com",
@@ -19456,6 +19467,13 @@
                                     "(google.api.field_behavior)": "OPTIONAL"
                                   }
                                 },
+                                "serviceAccountAuthConfig": {
+                                  "type": "ServiceAccountAuthConfig",
+                                  "id": 18,
+                                  "options": {
+                                    "(google.api.field_behavior)": "OPTIONAL"
+                                  }
+                                },
                                 "webhookType": {
                                   "type": "WebhookType",
                                   "id": 6,
@@ -19546,6 +19564,17 @@
                                     "NONE": 1,
                                     "ID_TOKEN": 2,
                                     "ACCESS_TOKEN": 3
+                                  }
+                                },
+                                "ServiceAccountAuthConfig": {
+                                  "fields": {
+                                    "serviceAccount": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
+                                      }
+                                    }
                                   }
                                 },
                                 "WebhookType": {
@@ -21463,6 +21492,21 @@
                                 "(google.api.resource_reference).type": "dialogflow.googleapis.com/Tool"
                               }
                             },
+                            "inlineActions": {
+                              "rule": "repeated",
+                              "type": "string",
+                              "id": 22,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            },
+                            "codeBlock": {
+                              "type": "CodeBlock",
+                              "id": 21,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "llmModelSettings": {
                               "type": "LlmModelSettings",
                               "id": 14,
@@ -22889,7 +22933,8 @@
                                     "apiKeyConfig",
                                     "oauthConfig",
                                     "serviceAgentAuthConfig",
-                                    "bearerTokenConfig"
+                                    "bearerTokenConfig",
+                                    "serviceAccountAuthConfig"
                                   ]
                                 }
                               },
@@ -22909,6 +22954,10 @@
                                 "bearerTokenConfig": {
                                   "type": "BearerTokenConfig",
                                   "id": 4
+                                },
+                                "serviceAccountAuthConfig": {
+                                  "type": "ServiceAccountAuthConfig",
+                                  "id": 5
                                 }
                               },
                               "nested": {
@@ -23043,6 +23092,17 @@
                                       "options": {
                                         "(google.api.field_behavior)": "OPTIONAL",
                                         "(google.api.resource_reference).type": "secretmanager.googleapis.com/SecretVersion"
+                                      }
+                                    }
+                                  }
+                                },
+                                "ServiceAccountAuthConfig": {
+                                  "fields": {
+                                    "serviceAccount": {
+                                      "type": "string",
+                                      "id": 1,
+                                      "options": {
+                                        "(google.api.field_behavior)": "REQUIRED"
                                       }
                                     }
                                   }
