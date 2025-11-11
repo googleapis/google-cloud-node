@@ -255,7 +255,7 @@ export class DataChatServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const dataChatServiceStubMethods =
-        ['chat', 'createConversation', 'getConversation', 'listConversations', 'listMessages'];
+        ['chat', 'createConversation', 'deleteConversation', 'getConversation', 'listConversations', 'listMessages'];
     for (const methodName of dataChatServiceStubMethods) {
       const callPromise = this.dataChatServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -475,6 +475,102 @@ export class DataChatServiceClient {
       });
   }
 /**
+ * Deletes a conversation.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. Name of the resource.
+ *   Format:
+ *   `projects/{project}/locations/{location}/conversations/{conversation}`
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.protobuf.Empty|Empty}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1beta/data_chat_service.delete_conversation.js</caption>
+ * region_tag:geminidataanalytics_v1beta_generated_DataChatService_DeleteConversation_async
+ */
+  deleteConversation(
+      request?: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|undefined, {}|undefined
+      ]>;
+  deleteConversation(
+      request: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConversation(
+      request: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
+      callback: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteConversation(
+      request?: protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.protobuf.IEmpty,
+          protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('deleteConversation request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('deleteConversation response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.deleteConversation(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.protobuf.IEmpty,
+        protos.google.cloud.geminidataanalytics.v1beta.IDeleteConversationRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('deleteConversation response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
  * Gets details of a single conversation by using conversation id and parent.
  *
  * @param {Object} request
@@ -587,6 +683,11 @@ export class DataChatServiceClient {
  * @param {google.cloud.geminidataanalytics.v1beta.DataAgentContext} [request.dataAgentContext]
  *   Optional. Context for the chat request. Use this to chat with an Agent
  *   statelessly, without managed conversation persistence.
+ * @param {google.cloud.geminidataanalytics.v1beta.ClientManagedResourceContext} [request.clientManagedResourceContext]
+ *   Optional. Context with client managed resources.
+ *   Some clients may not use GDA managed resources including
+ *   conversations and agents, instead they create and manage their own
+ *   conversations and agents resources.
  * @param {string} [request.project]
  *   Optional. The Google Cloud project to be used for quota and billing.
  * @param {string} request.parent
@@ -638,7 +739,7 @@ export class DataChatServiceClient {
  * @param {string} [request.filter]
  *   Optional. Returned conversations will match criteria specified within the
  *   filter. ListConversations allows filtering by:
- *    * agent_id
+ *    * agents
  *    * labels
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -744,7 +845,7 @@ export class DataChatServiceClient {
  * @param {string} [request.filter]
  *   Optional. Returned conversations will match criteria specified within the
  *   filter. ListConversations allows filtering by:
- *    * agent_id
+ *    * agents
  *    * labels
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -799,7 +900,7 @@ export class DataChatServiceClient {
  * @param {string} [request.filter]
  *   Optional. Returned conversations will match criteria specified within the
  *   filter. ListConversations allows filtering by:
- *    * agent_id
+ *    * agents
  *    * labels
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.

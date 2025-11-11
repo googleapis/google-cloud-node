@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/nodejs-translate?activeTab=versions
 
+## [9.3.0](https://github.com/googleapis/google-cloud-node/compare/translate-v9.2.1...translate-v9.3.0) (2025-11-11)
+
+
+### Features
+
+* [translate] Adds support for RefineText ([#6867](https://github.com/googleapis/google-cloud-node/issues/6867)) ([c9d8b6a](https://github.com/googleapis/google-cloud-node/commit/c9d8b6ad53d584999a6a76073ae1f3e47fae3d37))
+
 ## [9.2.1](https://github.com/googleapis/google-cloud-node/compare/translate-v9.2.0...translate-v9.2.1) (2025-10-13)
 
 

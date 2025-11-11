@@ -422,7 +422,7 @@
       "segments": [
         {
           "start": 25,
-          "end": 81,
+          "end": 88,
           "type": "FULL"
         }
       ],
@@ -442,6 +442,10 @@
           {
             "name": "data_agent_context",
             "type": ".google.cloud.geminidataanalytics.v1alpha.DataAgentContext"
+          },
+          {
+            "name": "client_managed_resource_context",
+            "type": ".google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext"
           },
           {
             "name": "project",

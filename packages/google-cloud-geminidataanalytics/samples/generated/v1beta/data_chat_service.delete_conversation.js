@@ -20,8 +20,8 @@
 
 'use strict';
 
-function main(parent) {
-  // [START geminidataanalytics_v1beta_generated_DataChatService_ListConversations_async]
+function main(name) {
+  // [START geminidataanalytics_v1beta_generated_DataChatService_DeleteConversation_async]
   /**
    * This snippet has been automatically generated and should be regarded as a code template only.
    * It will require modifications to work.
@@ -29,27 +29,11 @@ function main(parent) {
    * TODO(developer): Uncomment these variables before running the sample.
    */
   /**
-   *  Required. Parent value for ListConversationsRequest.
-   *  Format: `projects/{project}/locations/{location}`
+   *  Required. Name of the resource.
+   *  Format:
+   *  `projects/{project}/locations/{location}/conversations/{conversation}`
    */
-  // const parent = 'abc123'
-  /**
-   *  Optional. Requested page size. Server may return fewer items than
-   *  requested. The max page size is 100. All larger page sizes will be coerced
-   *  to 100. If unspecified, server will pick 50 as an approperiate default.
-   */
-  // const pageSize = 1234
-  /**
-   *  Optional. A token identifying a page of results the server should return.
-   */
-  // const pageToken = 'abc123'
-  /**
-   *  Optional. Returned conversations will match criteria specified within the
-   *  filter. ListConversations allows filtering by:
-   *   * agents
-   *   * labels
-   */
-  // const filter = 'abc123'
+  // const name = 'abc123'
 
   // Imports the Geminidataanalytics library
   const {DataChatServiceClient} = require('@google-cloud/geminidataanalytics').v1beta;
@@ -57,21 +41,19 @@ function main(parent) {
   // Instantiates a client
   const geminidataanalyticsClient = new DataChatServiceClient();
 
-  async function callListConversations() {
+  async function callDeleteConversation() {
     // Construct request
     const request = {
-      parent,
+      name,
     };
 
     // Run request
-    const iterable = geminidataanalyticsClient.listConversationsAsync(request);
-    for await (const response of iterable) {
-        console.log(response);
-    }
+    const response = await geminidataanalyticsClient.deleteConversation(request);
+    console.log(response);
   }
 
-  callListConversations();
-  // [END geminidataanalytics_v1beta_generated_DataChatService_ListConversations_async]
+  callDeleteConversation();
+  // [END geminidataanalytics_v1beta_generated_DataChatService_DeleteConversation_async]
 }
 
 process.on('unhandledRejection', err => {
