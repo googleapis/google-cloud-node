@@ -41,8 +41,8 @@ function main(parent, productInput, dataSource) {
    *  Required. The primary or supplemental product data source name. If the
    *  product already exists and data source provided is different, then the
    *  product will be moved to a new data source. For more information, see
-   *  Overview of Data sources
-   *  sub-API (/merchant/api/guides/data-sources/overview).
+   *  Create a primary data
+   *  source (/merchant/api/guides/data-sources/api-sources#create-primary-data-source).
    *  Only API data sources are supported.
    *  Format: `accounts/{account}/dataSources/{datasource}`. For example,
    *  `accounts/123456/dataSources/104628`.

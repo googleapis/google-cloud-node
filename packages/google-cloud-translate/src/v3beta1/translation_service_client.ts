@@ -295,7 +295,7 @@ export class TranslationServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const translationServiceStubMethods =
-        ['translateText', 'detectLanguage', 'getSupportedLanguages', 'translateDocument', 'batchTranslateText', 'batchTranslateDocument', 'createGlossary', 'listGlossaries', 'getGlossary', 'deleteGlossary'];
+        ['translateText', 'detectLanguage', 'getSupportedLanguages', 'translateDocument', 'batchTranslateText', 'batchTranslateDocument', 'createGlossary', 'listGlossaries', 'getGlossary', 'deleteGlossary', 'refineText'];
     for (const methodName of translationServiceStubMethods) {
       const callPromise = this.translationServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -1071,6 +1071,115 @@ export class TranslationServiceClient {
         throw error;
       });
   }
+/**
+ * Refines the input translated text to improve the quality.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. Project or location to make a call. Must refer to a caller's
+ *   project.
+ *
+ *   Format: `projects/{project-number-or-id}/locations/{location-id}`.
+ *
+ *   For global calls, use `projects/{project-number-or-id}/locations/global` or
+ *   `projects/{project-number-or-id}`.
+ * @param {number[]} request.refinementEntries
+ *   Required. The source texts and original translations in the source and
+ *   target languages.
+ * @param {string} request.sourceLanguageCode
+ *   Required. The BCP-47 language code of the source text in the request, for
+ *   example, "en-US".
+ * @param {string} request.targetLanguageCode
+ *   Required. The BCP-47 language code for translation output, for example,
+ *   "zh-CN".
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.translation.v3beta1.RefineTextResponse|RefineTextResponse}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v3beta1/translation_service.refine_text.js</caption>
+ * region_tag:translate_v3beta1_generated_TranslationService_RefineText_async
+ */
+  refineText(
+      request?: protos.google.cloud.translation.v3beta1.IRefineTextRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.translation.v3beta1.IRefineTextResponse,
+        protos.google.cloud.translation.v3beta1.IRefineTextRequest|undefined, {}|undefined
+      ]>;
+  refineText(
+      request: protos.google.cloud.translation.v3beta1.IRefineTextRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.translation.v3beta1.IRefineTextResponse,
+          protos.google.cloud.translation.v3beta1.IRefineTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  refineText(
+      request: protos.google.cloud.translation.v3beta1.IRefineTextRequest,
+      callback: Callback<
+          protos.google.cloud.translation.v3beta1.IRefineTextResponse,
+          protos.google.cloud.translation.v3beta1.IRefineTextRequest|null|undefined,
+          {}|null|undefined>): void;
+  refineText(
+      request?: protos.google.cloud.translation.v3beta1.IRefineTextRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.translation.v3beta1.IRefineTextResponse,
+          protos.google.cloud.translation.v3beta1.IRefineTextRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.translation.v3beta1.IRefineTextResponse,
+          protos.google.cloud.translation.v3beta1.IRefineTextRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.translation.v3beta1.IRefineTextResponse,
+        protos.google.cloud.translation.v3beta1.IRefineTextRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('refineText request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.translation.v3beta1.IRefineTextResponse,
+        protos.google.cloud.translation.v3beta1.IRefineTextRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('refineText response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.refineText(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.translation.v3beta1.IRefineTextResponse,
+        protos.google.cloud.translation.v3beta1.IRefineTextRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('refineText response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
 
 /**
  * Translates a large volume of text in asynchronous batch mode.
@@ -1318,6 +1427,8 @@ export class TranslationServiceClient {
  *   is_translate_native_pdf_only: false && pdf_native_only: false
  * @param {boolean} [request.enableRotationCorrection]
  *   Optional. If true, enable auto rotation correction in DVS.
+ * @param {boolean} [request.pdfNativeOnly]
+ *   Optional. If true, only native pdf pages will be translated.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

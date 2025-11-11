@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.3.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.2.0...dataplex-v5.3.0) (2025-11-11)
+
+
+### Features
+
+* **dataplex:** [dataplex] Allow publishing Data Profile scan results to the Dataplex Catalog ([#6868](https://github.com/googleapis/google-cloud-node/issues/6868)) ([524ca3c](https://github.com/googleapis/google-cloud-node/commit/524ca3cabe52d2e58e83467f94968cdf28c79fe9))
+* **dataplex:** Add GetIamPolicy method for DataProduct resources ([524ca3c](https://github.com/googleapis/google-cloud-node/commit/524ca3cabe52d2e58e83467f94968cdf28c79fe9))
+
 ## [5.2.0](https://github.com/googleapis/google-cloud-node/compare/dataplex-v5.1.1...dataplex-v5.2.0) (2025-10-23)
 
 

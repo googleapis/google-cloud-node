@@ -3094,6 +3094,7 @@
                              * @property {string|null} [languageCode] RenderProductIssuesRequest languageCode
                              * @property {string|null} [timeZone] RenderProductIssuesRequest timeZone
                              * @property {google.shopping.merchant.issueresolution.v1.IRenderIssuesRequestPayload|null} [payload] RenderProductIssuesRequest payload
+                             * @property {boolean|null} [productIdBase64UrlEncoded] RenderProductIssuesRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -3144,6 +3145,14 @@
                             RenderProductIssuesRequest.prototype.payload = null;
     
                             /**
+                             * RenderProductIssuesRequest productIdBase64UrlEncoded.
+                             * @member {boolean} productIdBase64UrlEncoded
+                             * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
+                             * @instance
+                             */
+                            RenderProductIssuesRequest.prototype.productIdBase64UrlEncoded = false;
+    
+                            /**
                              * Creates a new RenderProductIssuesRequest instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest
@@ -3175,6 +3184,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.timeZone);
                                 if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
                                     $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.encode(message.payload, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -3227,6 +3238,10 @@
                                             message.payload = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 5: {
+                                            message.productIdBase64UrlEncoded = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -3276,6 +3291,9 @@
                                     if (error)
                                         return "payload." + error;
                                 }
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
+                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -3302,6 +3320,8 @@
                                         throw TypeError(".google.shopping.merchant.issueresolution.v1.RenderProductIssuesRequest.payload: object expected");
                                     message.payload = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.fromObject(object.payload);
                                 }
+                                if (object.productIdBase64UrlEncoded != null)
+                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -3323,6 +3343,7 @@
                                     object.languageCode = "";
                                     object.timeZone = "";
                                     object.payload = null;
+                                    object.productIdBase64UrlEncoded = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -3332,6 +3353,8 @@
                                     object.timeZone = message.timeZone;
                                 if (message.payload != null && message.hasOwnProperty("payload"))
                                     object.payload = $root.google.shopping.merchant.issueresolution.v1.RenderIssuesRequestPayload.toObject(message.payload, options);
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     
@@ -8633,6 +8656,7 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
                                         break;
                                     }
                                 if (message.uri != null && message.hasOwnProperty("uri"))
@@ -8679,6 +8703,10 @@
                                 case "VERIFY_IDENTITY_IN_MERCHANT_CENTER":
                                 case 4:
                                     message.type = 4;
+                                    break;
+                                case "VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER":
+                                case 5:
+                                    message.type = 5;
                                     break;
                                 }
                                 if (object.uri != null)
@@ -8745,6 +8773,7 @@
                              * @property {number} REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER=2 REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER value
                              * @property {number} LEGAL_APPEAL_IN_HELP_CENTER=3 LEGAL_APPEAL_IN_HELP_CENTER value
                              * @property {number} VERIFY_IDENTITY_IN_MERCHANT_CENTER=4 VERIFY_IDENTITY_IN_MERCHANT_CENTER value
+                             * @property {number} VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER=5 VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER value
                              */
                             ExternalAction.ExternalActionType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -8753,6 +8782,7 @@
                                 values[valuesById[2] = "REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER"] = 2;
                                 values[valuesById[3] = "LEGAL_APPEAL_IN_HELP_CENTER"] = 3;
                                 values[valuesById[4] = "VERIFY_IDENTITY_IN_MERCHANT_CENTER"] = 4;
+                                values[valuesById[5] = "VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER"] = 5;
                                 return values;
                             })();
     
@@ -13674,6 +13704,7 @@
                              * @property {string|null} [languageCode] RenderProductIssuesRequest languageCode
                              * @property {string|null} [timeZone] RenderProductIssuesRequest timeZone
                              * @property {google.shopping.merchant.issueresolution.v1beta.IRenderIssuesRequestPayload|null} [payload] RenderProductIssuesRequest payload
+                             * @property {boolean|null} [productIdBase64UrlEncoded] RenderProductIssuesRequest productIdBase64UrlEncoded
                              */
     
                             /**
@@ -13724,6 +13755,14 @@
                             RenderProductIssuesRequest.prototype.payload = null;
     
                             /**
+                             * RenderProductIssuesRequest productIdBase64UrlEncoded.
+                             * @member {boolean} productIdBase64UrlEncoded
+                             * @memberof google.shopping.merchant.issueresolution.v1beta.RenderProductIssuesRequest
+                             * @instance
+                             */
+                            RenderProductIssuesRequest.prototype.productIdBase64UrlEncoded = false;
+    
+                            /**
                              * Creates a new RenderProductIssuesRequest instance using the specified properties.
                              * @function create
                              * @memberof google.shopping.merchant.issueresolution.v1beta.RenderProductIssuesRequest
@@ -13755,6 +13794,8 @@
                                     writer.uint32(/* id 3, wireType 2 =*/26).string(message.timeZone);
                                 if (message.payload != null && Object.hasOwnProperty.call(message, "payload"))
                                     $root.google.shopping.merchant.issueresolution.v1beta.RenderIssuesRequestPayload.encode(message.payload, writer.uint32(/* id 4, wireType 2 =*/34).fork()).ldelim();
+                                if (message.productIdBase64UrlEncoded != null && Object.hasOwnProperty.call(message, "productIdBase64UrlEncoded"))
+                                    writer.uint32(/* id 5, wireType 0 =*/40).bool(message.productIdBase64UrlEncoded);
                                 return writer;
                             };
     
@@ -13807,6 +13848,10 @@
                                             message.payload = $root.google.shopping.merchant.issueresolution.v1beta.RenderIssuesRequestPayload.decode(reader, reader.uint32());
                                             break;
                                         }
+                                    case 5: {
+                                            message.productIdBase64UrlEncoded = reader.bool();
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -13856,6 +13901,9 @@
                                     if (error)
                                         return "payload." + error;
                                 }
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    if (typeof message.productIdBase64UrlEncoded !== "boolean")
+                                        return "productIdBase64UrlEncoded: boolean expected";
                                 return null;
                             };
     
@@ -13882,6 +13930,8 @@
                                         throw TypeError(".google.shopping.merchant.issueresolution.v1beta.RenderProductIssuesRequest.payload: object expected");
                                     message.payload = $root.google.shopping.merchant.issueresolution.v1beta.RenderIssuesRequestPayload.fromObject(object.payload);
                                 }
+                                if (object.productIdBase64UrlEncoded != null)
+                                    message.productIdBase64UrlEncoded = Boolean(object.productIdBase64UrlEncoded);
                                 return message;
                             };
     
@@ -13903,6 +13953,7 @@
                                     object.languageCode = "";
                                     object.timeZone = "";
                                     object.payload = null;
+                                    object.productIdBase64UrlEncoded = false;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -13912,6 +13963,8 @@
                                     object.timeZone = message.timeZone;
                                 if (message.payload != null && message.hasOwnProperty("payload"))
                                     object.payload = $root.google.shopping.merchant.issueresolution.v1beta.RenderIssuesRequestPayload.toObject(message.payload, options);
+                                if (message.productIdBase64UrlEncoded != null && message.hasOwnProperty("productIdBase64UrlEncoded"))
+                                    object.productIdBase64UrlEncoded = message.productIdBase64UrlEncoded;
                                 return object;
                             };
     
@@ -19213,6 +19266,7 @@
                                     case 2:
                                     case 3:
                                     case 4:
+                                    case 5:
                                         break;
                                     }
                                 if (message.uri != null && message.hasOwnProperty("uri"))
@@ -19259,6 +19313,10 @@
                                 case "VERIFY_IDENTITY_IN_MERCHANT_CENTER":
                                 case 4:
                                     message.type = 4;
+                                    break;
+                                case "VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER":
+                                case 5:
+                                    message.type = 5;
                                     break;
                                 }
                                 if (object.uri != null)
@@ -19325,6 +19383,7 @@
                              * @property {number} REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER=2 REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER value
                              * @property {number} LEGAL_APPEAL_IN_HELP_CENTER=3 LEGAL_APPEAL_IN_HELP_CENTER value
                              * @property {number} VERIFY_IDENTITY_IN_MERCHANT_CENTER=4 VERIFY_IDENTITY_IN_MERCHANT_CENTER value
+                             * @property {number} VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER=5 VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER value
                              */
                             ExternalAction.ExternalActionType = (function() {
                                 var valuesById = {}, values = Object.create(valuesById);
@@ -19333,6 +19392,7 @@
                                 values[valuesById[2] = "REVIEW_ACCOUNT_ISSUE_IN_MERCHANT_CENTER"] = 2;
                                 values[valuesById[3] = "LEGAL_APPEAL_IN_HELP_CENTER"] = 3;
                                 values[valuesById[4] = "VERIFY_IDENTITY_IN_MERCHANT_CENTER"] = 4;
+                                values[valuesById[5] = "VERIFY_BUSINESS_VIDEO_IN_MERCHANT_CENTER"] = 5;
                                 return values;
                             })();
     

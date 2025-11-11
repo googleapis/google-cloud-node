@@ -6134,6 +6134,7 @@
                              * @property {google.cloud.bigquery.analyticshub.v1.IPublisher|null} [publisher] Listing publisher
                              * @property {string|null} [requestAccess] Listing requestAccess
                              * @property {google.cloud.bigquery.analyticshub.v1.Listing.IRestrictedExportConfig|null} [restrictedExportConfig] Listing restrictedExportConfig
+                             * @property {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig|null} [storedProcedureConfig] Listing storedProcedureConfig
                              * @property {google.cloud.bigquery.analyticshub.v1.DiscoveryType|null} [discoveryType] Listing discoveryType
                              * @property {google.cloud.bigquery.analyticshub.v1.SharedResourceType|null} [resourceType] Listing resourceType
                              * @property {google.cloud.bigquery.analyticshub.v1.Listing.ICommercialInfo|null} [commercialInfo] Listing commercialInfo
@@ -6268,6 +6269,14 @@
                              * @instance
                              */
                             Listing.prototype.restrictedExportConfig = null;
+    
+                            /**
+                             * Listing storedProcedureConfig.
+                             * @member {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig|null|undefined} storedProcedureConfig
+                             * @memberof google.cloud.bigquery.analyticshub.v1.Listing
+                             * @instance
+                             */
+                            Listing.prototype.storedProcedureConfig = null;
     
                             /**
                              * Listing discoveryType.
@@ -6413,6 +6422,8 @@
                                     writer.uint32(/* id 18, wireType 0 =*/144).bool(message.logLinkedDatasetQueryUserEmail);
                                 if (message.allowOnlyMetadataSharing != null && Object.hasOwnProperty.call(message, "allowOnlyMetadataSharing"))
                                     writer.uint32(/* id 19, wireType 0 =*/152).bool(message.allowOnlyMetadataSharing);
+                                if (message.storedProcedureConfig != null && Object.hasOwnProperty.call(message, "storedProcedureConfig"))
+                                    $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.encode(message.storedProcedureConfig, writer.uint32(/* id 20, wireType 2 =*/162).fork()).ldelim();
                                 return writer;
                             };
     
@@ -6510,6 +6521,10 @@
                                         }
                                     case 13: {
                                             message.restrictedExportConfig = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.decode(reader, reader.uint32());
+                                            break;
+                                        }
+                                    case 20: {
+                                            message.storedProcedureConfig = $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.decode(reader, reader.uint32());
                                             break;
                                         }
                                     case 14: {
@@ -6660,6 +6675,11 @@
                                     var error = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.verify(message.restrictedExportConfig);
                                     if (error)
                                         return "restrictedExportConfig." + error;
+                                }
+                                if (message.storedProcedureConfig != null && message.hasOwnProperty("storedProcedureConfig")) {
+                                    var error = $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.verify(message.storedProcedureConfig);
+                                    if (error)
+                                        return "storedProcedureConfig." + error;
                                 }
                                 if (message.discoveryType != null && message.hasOwnProperty("discoveryType")) {
                                     properties._discoveryType = 1;
@@ -6869,6 +6889,11 @@
                                         throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.restrictedExportConfig: object expected");
                                     message.restrictedExportConfig = $root.google.cloud.bigquery.analyticshub.v1.Listing.RestrictedExportConfig.fromObject(object.restrictedExportConfig);
                                 }
+                                if (object.storedProcedureConfig != null) {
+                                    if (typeof object.storedProcedureConfig !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.Listing.storedProcedureConfig: object expected");
+                                    message.storedProcedureConfig = $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.fromObject(object.storedProcedureConfig);
+                                }
                                 switch (object.discoveryType) {
                                 default:
                                     if (typeof object.discoveryType === "number") {
@@ -6955,6 +6980,7 @@
                                     object.requestAccess = "";
                                     object.restrictedExportConfig = null;
                                     object.resourceType = options.enums === String ? "SHARED_RESOURCE_TYPE_UNSPECIFIED" : 0;
+                                    object.storedProcedureConfig = null;
                                 }
                                 if (message.name != null && message.hasOwnProperty("name"))
                                     object.name = message.name;
@@ -7015,6 +7041,8 @@
                                     if (options.oneofs)
                                         object._allowOnlyMetadataSharing = "allowOnlyMetadataSharing";
                                 }
+                                if (message.storedProcedureConfig != null && message.hasOwnProperty("storedProcedureConfig"))
+                                    object.storedProcedureConfig = $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.toObject(message.storedProcedureConfig, options);
                                 return object;
                             };
     
@@ -9344,6 +9372,292 @@
                             })();
     
                             return Listing;
+                        })();
+    
+                        v1.StoredProcedureConfig = (function() {
+    
+                            /**
+                             * Properties of a StoredProcedureConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @interface IStoredProcedureConfig
+                             * @property {boolean|null} [enabled] StoredProcedureConfig enabled
+                             * @property {Array.<google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType>|null} [allowedStoredProcedureTypes] StoredProcedureConfig allowedStoredProcedureTypes
+                             */
+    
+                            /**
+                             * Constructs a new StoredProcedureConfig.
+                             * @memberof google.cloud.bigquery.analyticshub.v1
+                             * @classdesc Represents a StoredProcedureConfig.
+                             * @implements IStoredProcedureConfig
+                             * @constructor
+                             * @param {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig=} [properties] Properties to set
+                             */
+                            function StoredProcedureConfig(properties) {
+                                this.allowedStoredProcedureTypes = [];
+                                if (properties)
+                                    for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
+                                        if (properties[keys[i]] != null)
+                                            this[keys[i]] = properties[keys[i]];
+                            }
+    
+                            /**
+                             * StoredProcedureConfig enabled.
+                             * @member {boolean} enabled
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @instance
+                             */
+                            StoredProcedureConfig.prototype.enabled = false;
+    
+                            /**
+                             * StoredProcedureConfig allowedStoredProcedureTypes.
+                             * @member {Array.<google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType>} allowedStoredProcedureTypes
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @instance
+                             */
+                            StoredProcedureConfig.prototype.allowedStoredProcedureTypes = $util.emptyArray;
+    
+                            /**
+                             * Creates a new StoredProcedureConfig instance using the specified properties.
+                             * @function create
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig=} [properties] Properties to set
+                             * @returns {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} StoredProcedureConfig instance
+                             */
+                            StoredProcedureConfig.create = function create(properties) {
+                                return new StoredProcedureConfig(properties);
+                            };
+    
+                            /**
+                             * Encodes the specified StoredProcedureConfig message. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.verify|verify} messages.
+                             * @function encode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig} message StoredProcedureConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StoredProcedureConfig.encode = function encode(message, writer) {
+                                if (!writer)
+                                    writer = $Writer.create();
+                                if (message.enabled != null && Object.hasOwnProperty.call(message, "enabled"))
+                                    writer.uint32(/* id 1, wireType 0 =*/8).bool(message.enabled);
+                                if (message.allowedStoredProcedureTypes != null && message.allowedStoredProcedureTypes.length) {
+                                    writer.uint32(/* id 2, wireType 2 =*/18).fork();
+                                    for (var i = 0; i < message.allowedStoredProcedureTypes.length; ++i)
+                                        writer.int32(message.allowedStoredProcedureTypes[i]);
+                                    writer.ldelim();
+                                }
+                                return writer;
+                            };
+    
+                            /**
+                             * Encodes the specified StoredProcedureConfig message, length delimited. Does not implicitly {@link google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.verify|verify} messages.
+                             * @function encodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.IStoredProcedureConfig} message StoredProcedureConfig message or plain object to encode
+                             * @param {$protobuf.Writer} [writer] Writer to encode to
+                             * @returns {$protobuf.Writer} Writer
+                             */
+                            StoredProcedureConfig.encodeDelimited = function encodeDelimited(message, writer) {
+                                return this.encode(message, writer).ldelim();
+                            };
+    
+                            /**
+                             * Decodes a StoredProcedureConfig message from the specified reader or buffer.
+                             * @function decode
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @param {number} [length] Message length if known beforehand
+                             * @returns {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} StoredProcedureConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StoredProcedureConfig.decode = function decode(reader, length, error) {
+                                if (!(reader instanceof $Reader))
+                                    reader = $Reader.create(reader);
+                                var end = length === undefined ? reader.len : reader.pos + length, message = new $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig();
+                                while (reader.pos < end) {
+                                    var tag = reader.uint32();
+                                    if (tag === error)
+                                        break;
+                                    switch (tag >>> 3) {
+                                    case 1: {
+                                            message.enabled = reader.bool();
+                                            break;
+                                        }
+                                    case 2: {
+                                            if (!(message.allowedStoredProcedureTypes && message.allowedStoredProcedureTypes.length))
+                                                message.allowedStoredProcedureTypes = [];
+                                            if ((tag & 7) === 2) {
+                                                var end2 = reader.uint32() + reader.pos;
+                                                while (reader.pos < end2)
+                                                    message.allowedStoredProcedureTypes.push(reader.int32());
+                                            } else
+                                                message.allowedStoredProcedureTypes.push(reader.int32());
+                                            break;
+                                        }
+                                    default:
+                                        reader.skipType(tag & 7);
+                                        break;
+                                    }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Decodes a StoredProcedureConfig message from the specified reader or buffer, length delimited.
+                             * @function decodeDelimited
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {$protobuf.Reader|Uint8Array} reader Reader or buffer to decode from
+                             * @returns {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} StoredProcedureConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            StoredProcedureConfig.decodeDelimited = function decodeDelimited(reader) {
+                                if (!(reader instanceof $Reader))
+                                    reader = new $Reader(reader);
+                                return this.decode(reader, reader.uint32());
+                            };
+    
+                            /**
+                             * Verifies a StoredProcedureConfig message.
+                             * @function verify
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {Object.<string,*>} message Plain object to verify
+                             * @returns {string|null} `null` if valid, otherwise the reason why it is not
+                             */
+                            StoredProcedureConfig.verify = function verify(message) {
+                                if (typeof message !== "object" || message === null)
+                                    return "object expected";
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    if (typeof message.enabled !== "boolean")
+                                        return "enabled: boolean expected";
+                                if (message.allowedStoredProcedureTypes != null && message.hasOwnProperty("allowedStoredProcedureTypes")) {
+                                    if (!Array.isArray(message.allowedStoredProcedureTypes))
+                                        return "allowedStoredProcedureTypes: array expected";
+                                    for (var i = 0; i < message.allowedStoredProcedureTypes.length; ++i)
+                                        switch (message.allowedStoredProcedureTypes[i]) {
+                                        default:
+                                            return "allowedStoredProcedureTypes: enum value[] expected";
+                                        case 0:
+                                        case 1:
+                                            break;
+                                        }
+                                }
+                                return null;
+                            };
+    
+                            /**
+                             * Creates a StoredProcedureConfig message from a plain object. Also converts values to their respective internal types.
+                             * @function fromObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {Object.<string,*>} object Plain object
+                             * @returns {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} StoredProcedureConfig
+                             */
+                            StoredProcedureConfig.fromObject = function fromObject(object) {
+                                if (object instanceof $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig)
+                                    return object;
+                                var message = new $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig();
+                                if (object.enabled != null)
+                                    message.enabled = Boolean(object.enabled);
+                                if (object.allowedStoredProcedureTypes) {
+                                    if (!Array.isArray(object.allowedStoredProcedureTypes))
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.allowedStoredProcedureTypes: array expected");
+                                    message.allowedStoredProcedureTypes = [];
+                                    for (var i = 0; i < object.allowedStoredProcedureTypes.length; ++i)
+                                        switch (object.allowedStoredProcedureTypes[i]) {
+                                        default:
+                                            if (typeof object.allowedStoredProcedureTypes[i] === "number") {
+                                                message.allowedStoredProcedureTypes[i] = object.allowedStoredProcedureTypes[i];
+                                                break;
+                                            }
+                                        case "STORED_PROCEDURE_TYPE_UNSPECIFIED":
+                                        case 0:
+                                            message.allowedStoredProcedureTypes[i] = 0;
+                                            break;
+                                        case "SQL_PROCEDURE":
+                                        case 1:
+                                            message.allowedStoredProcedureTypes[i] = 1;
+                                            break;
+                                        }
+                                }
+                                return message;
+                            };
+    
+                            /**
+                             * Creates a plain object from a StoredProcedureConfig message. Also converts values to other types if specified.
+                             * @function toObject
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig} message StoredProcedureConfig
+                             * @param {$protobuf.IConversionOptions} [options] Conversion options
+                             * @returns {Object.<string,*>} Plain object
+                             */
+                            StoredProcedureConfig.toObject = function toObject(message, options) {
+                                if (!options)
+                                    options = {};
+                                var object = {};
+                                if (options.arrays || options.defaults)
+                                    object.allowedStoredProcedureTypes = [];
+                                if (options.defaults)
+                                    object.enabled = false;
+                                if (message.enabled != null && message.hasOwnProperty("enabled"))
+                                    object.enabled = message.enabled;
+                                if (message.allowedStoredProcedureTypes && message.allowedStoredProcedureTypes.length) {
+                                    object.allowedStoredProcedureTypes = [];
+                                    for (var j = 0; j < message.allowedStoredProcedureTypes.length; ++j)
+                                        object.allowedStoredProcedureTypes[j] = options.enums === String ? $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType[message.allowedStoredProcedureTypes[j]] === undefined ? message.allowedStoredProcedureTypes[j] : $root.google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType[message.allowedStoredProcedureTypes[j]] : message.allowedStoredProcedureTypes[j];
+                                }
+                                return object;
+                            };
+    
+                            /**
+                             * Converts this StoredProcedureConfig to JSON.
+                             * @function toJSON
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @instance
+                             * @returns {Object.<string,*>} JSON object
+                             */
+                            StoredProcedureConfig.prototype.toJSON = function toJSON() {
+                                return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+                            };
+    
+                            /**
+                             * Gets the default type url for StoredProcedureConfig
+                             * @function getTypeUrl
+                             * @memberof google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig
+                             * @static
+                             * @param {string} [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns {string} The default type url
+                             */
+                            StoredProcedureConfig.getTypeUrl = function getTypeUrl(typeUrlPrefix) {
+                                if (typeUrlPrefix === undefined) {
+                                    typeUrlPrefix = "type.googleapis.com";
+                                }
+                                return typeUrlPrefix + "/google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig";
+                            };
+    
+                            /**
+                             * StoredProcedureType enum.
+                             * @name google.cloud.bigquery.analyticshub.v1.StoredProcedureConfig.StoredProcedureType
+                             * @enum {number}
+                             * @property {number} STORED_PROCEDURE_TYPE_UNSPECIFIED=0 STORED_PROCEDURE_TYPE_UNSPECIFIED value
+                             * @property {number} SQL_PROCEDURE=1 SQL_PROCEDURE value
+                             */
+                            StoredProcedureConfig.StoredProcedureType = (function() {
+                                var valuesById = {}, values = Object.create(valuesById);
+                                values[valuesById[0] = "STORED_PROCEDURE_TYPE_UNSPECIFIED"] = 0;
+                                values[valuesById[1] = "SQL_PROCEDURE"] = 1;
+                                return values;
+                            })();
+    
+                            return StoredProcedureConfig;
                         })();
     
                         v1.Subscription = (function() {
@@ -17766,6 +18080,7 @@
                              * @property {boolean|null} [detached] PubSubSubscription detached
                              * @property {boolean|null} [enableExactlyOnceDelivery] PubSubSubscription enableExactlyOnceDelivery
                              * @property {Array.<google.cloud.bigquery.analyticshub.v1.IMessageTransform>|null} [messageTransforms] PubSubSubscription messageTransforms
+                             * @property {Object.<string,string>|null} [tags] PubSubSubscription tags
                              */
     
                             /**
@@ -17779,6 +18094,7 @@
                             function PubSubSubscription(properties) {
                                 this.labels = {};
                                 this.messageTransforms = [];
+                                this.tags = {};
                                 if (properties)
                                     for (var keys = Object.keys(properties), i = 0; i < keys.length; ++i)
                                         if (properties[keys[i]] != null)
@@ -17914,6 +18230,14 @@
                             PubSubSubscription.prototype.messageTransforms = $util.emptyArray;
     
                             /**
+                             * PubSubSubscription tags.
+                             * @member {Object.<string,string>} tags
+                             * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
+                             * @instance
+                             */
+                            PubSubSubscription.prototype.tags = $util.emptyObject;
+    
+                            /**
                              * Creates a new PubSubSubscription instance using the specified properties.
                              * @function create
                              * @memberof google.cloud.bigquery.analyticshub.v1.PubSubSubscription
@@ -17971,6 +18295,9 @@
                                 if (message.messageTransforms != null && message.messageTransforms.length)
                                     for (var i = 0; i < message.messageTransforms.length; ++i)
                                         $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.encode(message.messageTransforms[i], writer.uint32(/* id 25, wireType 2 =*/202).fork()).ldelim();
+                                if (message.tags != null && Object.hasOwnProperty.call(message, "tags"))
+                                    for (var keys = Object.keys(message.tags), i = 0; i < keys.length; ++i)
+                                        writer.uint32(/* id 26, wireType 2 =*/210).fork().uint32(/* id 1, wireType 2 =*/10).string(keys[i]).uint32(/* id 2, wireType 2 =*/18).string(message.tags[keys[i]]).ldelim();
                                 return writer;
                             };
     
@@ -18092,6 +18419,29 @@
                                             message.messageTransforms.push($root.google.cloud.bigquery.analyticshub.v1.MessageTransform.decode(reader, reader.uint32()));
                                             break;
                                         }
+                                    case 26: {
+                                            if (message.tags === $util.emptyObject)
+                                                message.tags = {};
+                                            var end2 = reader.uint32() + reader.pos;
+                                            key = "";
+                                            value = "";
+                                            while (reader.pos < end2) {
+                                                var tag2 = reader.uint32();
+                                                switch (tag2 >>> 3) {
+                                                case 1:
+                                                    key = reader.string();
+                                                    break;
+                                                case 2:
+                                                    value = reader.string();
+                                                    break;
+                                                default:
+                                                    reader.skipType(tag2 & 7);
+                                                    break;
+                                                }
+                                            }
+                                            message.tags[key] = value;
+                                            break;
+                                        }
                                     default:
                                         reader.skipType(tag & 7);
                                         break;
@@ -18200,6 +18550,14 @@
                                             return "messageTransforms." + error;
                                     }
                                 }
+                                if (message.tags != null && message.hasOwnProperty("tags")) {
+                                    if (!$util.isObject(message.tags))
+                                        return "tags: object expected";
+                                    var key = Object.keys(message.tags);
+                                    for (var i = 0; i < key.length; ++i)
+                                        if (!$util.isString(message.tags[key[i]]))
+                                            return "tags: string{k:string} expected";
+                                }
                                 return null;
                             };
     
@@ -18281,6 +18639,13 @@
                                         message.messageTransforms[i] = $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.fromObject(object.messageTransforms[i]);
                                     }
                                 }
+                                if (object.tags) {
+                                    if (typeof object.tags !== "object")
+                                        throw TypeError(".google.cloud.bigquery.analyticshub.v1.PubSubSubscription.tags: object expected");
+                                    message.tags = {};
+                                    for (var keys = Object.keys(object.tags), i = 0; i < keys.length; ++i)
+                                        message.tags[keys[i]] = String(object.tags[keys[i]]);
+                                }
                                 return message;
                             };
     
@@ -18299,8 +18664,10 @@
                                 var object = {};
                                 if (options.arrays || options.defaults)
                                     object.messageTransforms = [];
-                                if (options.objects || options.defaults)
+                                if (options.objects || options.defaults) {
                                     object.labels = {};
+                                    object.tags = {};
+                                }
                                 if (options.defaults) {
                                     object.name = "";
                                     object.pushConfig = null;
@@ -18355,6 +18722,11 @@
                                     object.messageTransforms = [];
                                     for (var j = 0; j < message.messageTransforms.length; ++j)
                                         object.messageTransforms[j] = $root.google.cloud.bigquery.analyticshub.v1.MessageTransform.toObject(message.messageTransforms[j], options);
+                                }
+                                if (message.tags && (keys2 = Object.keys(message.tags)).length) {
+                                    object.tags = {};
+                                    for (var j = 0; j < keys2.length; ++j)
+                                        object.tags[keys2[j]] = message.tags[keys2[j]];
                                 }
                                 return object;
                             };

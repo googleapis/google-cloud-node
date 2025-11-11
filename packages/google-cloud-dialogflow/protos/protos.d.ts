@@ -49194,6 +49194,9 @@ export namespace google {
 
                     /** Participant documentsMetadataFilters */
                     documentsMetadataFilters?: ({ [k: string]: string }|null);
+
+                    /** Participant agentDesktopSource */
+                    agentDesktopSource?: (google.cloud.dialogflow.v2beta1.Participant.AgentDesktopSource|keyof typeof google.cloud.dialogflow.v2beta1.Participant.AgentDesktopSource|null);
                 }
 
                 /** Represents a Participant. */
@@ -49216,6 +49219,9 @@ export namespace google {
 
                     /** Participant documentsMetadataFilters. */
                     public documentsMetadataFilters: { [k: string]: string };
+
+                    /** Participant agentDesktopSource. */
+                    public agentDesktopSource: (google.cloud.dialogflow.v2beta1.Participant.AgentDesktopSource|keyof typeof google.cloud.dialogflow.v2beta1.Participant.AgentDesktopSource);
 
                     /**
                      * Creates a new Participant instance using the specified properties.
@@ -49303,6 +49309,16 @@ export namespace google {
                         HUMAN_AGENT = 1,
                         AUTOMATED_AGENT = 2,
                         END_USER = 3
+                    }
+
+                    /** AgentDesktopSource enum. */
+                    enum AgentDesktopSource {
+                        AGENT_DESKTOP_SOURCE_UNSPECIFIED = 0,
+                        LIVE_PERSON = 1,
+                        GENESYS_CLOUD = 2,
+                        TWILIO = 3,
+                        SALESFORCE = 4,
+                        OTHER = 8
                     }
                 }
 

@@ -117,6 +117,11 @@
                 "createConversation"
               ]
             },
+            "DeleteConversation": {
+              "methods": [
+                "deleteConversation"
+              ]
+            },
             "GetConversation": {
               "methods": [
                 "getConversation"
@@ -149,6 +154,11 @@
             "CreateConversation": {
               "methods": [
                 "createConversation"
+              ]
+            },
+            "DeleteConversation": {
+              "methods": [
+                "deleteConversation"
               ]
             },
             "GetConversation": {

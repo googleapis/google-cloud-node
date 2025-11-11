@@ -31,10 +31,10 @@ function main(name, dataSource) {
   /**
    *  Required. The name of the product input resource to delete.
    *  Format: `accounts/{account}/productInputs/{product}`
-   *  where the last section `product` consists of 4 parts:
-   *  `channel~content_language~feed_label~offer_id`
+   *  where the last section `product` consists of:
+   *  `content_language~feed_label~offer_id`
    *  example for product name is
-   *  `accounts/123/productInputs/online~en~US~sku123`.
+   *  `accounts/123/productInputs/en~US~sku123`.
    */
   // const name = 'abc123'
   /**
@@ -44,6 +44,19 @@ function main(name, dataSource) {
    *  `accounts/123456/dataSources/104628`.
    */
   // const dataSource = 'abc123'
+  /**
+   *  Optional. If true, the `{productInput}` in the `name` field of the request
+   *  will be interpreted as unpadded base64url-encoded and decoded during
+   *  request processing to match the decoded value. Default value is `false`.
+   *  Use this if your `{productInput}` contains special characters, such as
+   *  forward slash
+   *  `/` or other characters that are unpadded base64url-encoded (as per RFC
+   *  7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+   *  Note that future versions of the API will only accept unpadded
+   *  base64url-encoded product ids, so we strongly recommend proactively setting
+   *  this to `true` and encoding the product ids.
+   */
+  // const productIdBase64UrlEncoded = true
 
   // Imports the Products library
   const {ProductInputsServiceClient} = require('@google-shopping/products').v1beta;

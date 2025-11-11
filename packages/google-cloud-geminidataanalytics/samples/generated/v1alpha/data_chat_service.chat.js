@@ -45,6 +45,13 @@ function main(parent, messages) {
    */
   // const dataAgentContext = {}
   /**
+   *  Optional. Context with client managed resources.
+   *  Some clients may not use GDA managed resources including
+   *  conversations and agents, instead they create and manage their own
+   *  conversations and agents resources.
+   */
+  // const clientManagedResourceContext = {}
+  /**
    *  Optional. The Google Cloud project to be used for quota and billing.
    */
   // const project = 'abc123'

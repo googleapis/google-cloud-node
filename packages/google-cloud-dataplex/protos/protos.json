@@ -8423,6 +8423,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "catalogPublishingEnabled": {
+                          "type": "bool",
+                          "id": 8,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -8490,6 +8497,13 @@
                         "postScanActionsResult": {
                           "type": "PostScanActionsResult",
                           "id": 6,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        },
+                        "catalogPublishingStatus": {
+                          "type": "DataScanCatalogPublishingStatus",
+                          "id": 7,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -8762,6 +8776,26 @@
                                 }
                               }
                             }
+                          }
+                        }
+                      }
+                    },
+                    "DataScanCatalogPublishingStatus": {
+                      "fields": {
+                        "state": {
+                          "type": "State",
+                          "id": 1,
+                          "options": {
+                            "(google.api.field_behavior)": "OUTPUT_ONLY"
+                          }
+                        }
+                      },
+                      "nested": {
+                        "State": {
+                          "values": {
+                            "STATE_UNSPECIFIED": 0,
+                            "SUCCEEDED": 1,
+                            "FAILED": 2
                           }
                         }
                       }
@@ -9555,26 +9589,6 @@
                           "id": 4,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      }
-                    },
-                    "DataScanCatalogPublishingStatus": {
-                      "fields": {
-                        "state": {
-                          "type": "State",
-                          "id": 1,
-                          "options": {
-                            "(google.api.field_behavior)": "OUTPUT_ONLY"
-                          }
-                        }
-                      },
-                      "nested": {
-                        "State": {
-                          "values": {
-                            "STATE_UNSPECIFIED": 0,
-                            "SUCCEEDED": 1,
-                            "FAILED": 2
                           }
                         }
                       }
