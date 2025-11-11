@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/capacityplanner",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Capacity Planner API client for Node.js",
   "repository": {
     "type": "git",
