@@ -8465,6 +8465,2580 @@ export namespace google {
                      */
                     public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
+
+                /** Represents a Monitoring */
+                class Monitoring extends $protobuf.rpc.Service {
+
+                    /**
+                     * Constructs a new Monitoring service.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     */
+                    constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+                    /**
+                     * Creates new Monitoring service using the specified rpc implementation.
+                     * @param rpcImpl RPC implementation
+                     * @param [requestDelimited=false] Whether requests are length-delimited
+                     * @param [responseDelimited=false] Whether responses are length-delimited
+                     * @returns RPC service. Useful where requests and/or responses are streamed.
+                     */
+                    public static create(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean): Monitoring;
+
+                    /**
+                     * Calls ListFrameworkComplianceSummaries.
+                     * @param request ListFrameworkComplianceSummariesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFrameworkComplianceSummariesResponse
+                     */
+                    public listFrameworkComplianceSummaries(request: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesRequest, callback: google.cloud.cloudsecuritycompliance.v1.Monitoring.ListFrameworkComplianceSummariesCallback): void;
+
+                    /**
+                     * Calls ListFrameworkComplianceSummaries.
+                     * @param request ListFrameworkComplianceSummariesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFrameworkComplianceSummaries(request: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesRequest): Promise<google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse>;
+
+                    /**
+                     * Calls ListFindingSummaries.
+                     * @param request ListFindingSummariesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListFindingSummariesResponse
+                     */
+                    public listFindingSummaries(request: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesRequest, callback: google.cloud.cloudsecuritycompliance.v1.Monitoring.ListFindingSummariesCallback): void;
+
+                    /**
+                     * Calls ListFindingSummaries.
+                     * @param request ListFindingSummariesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listFindingSummaries(request: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesRequest): Promise<google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesResponse>;
+
+                    /**
+                     * Calls FetchFrameworkComplianceReport.
+                     * @param request FetchFrameworkComplianceReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and FrameworkComplianceReport
+                     */
+                    public fetchFrameworkComplianceReport(request: google.cloud.cloudsecuritycompliance.v1.IFetchFrameworkComplianceReportRequest, callback: google.cloud.cloudsecuritycompliance.v1.Monitoring.FetchFrameworkComplianceReportCallback): void;
+
+                    /**
+                     * Calls FetchFrameworkComplianceReport.
+                     * @param request FetchFrameworkComplianceReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public fetchFrameworkComplianceReport(request: google.cloud.cloudsecuritycompliance.v1.IFetchFrameworkComplianceReportRequest): Promise<google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport>;
+
+                    /**
+                     * Calls ListControlComplianceSummaries.
+                     * @param request ListControlComplianceSummariesRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and ListControlComplianceSummariesResponse
+                     */
+                    public listControlComplianceSummaries(request: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesRequest, callback: google.cloud.cloudsecuritycompliance.v1.Monitoring.ListControlComplianceSummariesCallback): void;
+
+                    /**
+                     * Calls ListControlComplianceSummaries.
+                     * @param request ListControlComplianceSummariesRequest message or plain object
+                     * @returns Promise
+                     */
+                    public listControlComplianceSummaries(request: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesRequest): Promise<google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesResponse>;
+
+                    /**
+                     * Calls AggregateFrameworkComplianceReport.
+                     * @param request AggregateFrameworkComplianceReportRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and AggregateFrameworkComplianceReportResponse
+                     */
+                    public aggregateFrameworkComplianceReport(request: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportRequest, callback: google.cloud.cloudsecuritycompliance.v1.Monitoring.AggregateFrameworkComplianceReportCallback): void;
+
+                    /**
+                     * Calls AggregateFrameworkComplianceReport.
+                     * @param request AggregateFrameworkComplianceReportRequest message or plain object
+                     * @returns Promise
+                     */
+                    public aggregateFrameworkComplianceReport(request: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportRequest): Promise<google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportResponse>;
+                }
+
+                namespace Monitoring {
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.Monitoring|listFrameworkComplianceSummaries}.
+                     * @param error Error, if any
+                     * @param [response] ListFrameworkComplianceSummariesResponse
+                     */
+                    type ListFrameworkComplianceSummariesCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.Monitoring|listFindingSummaries}.
+                     * @param error Error, if any
+                     * @param [response] ListFindingSummariesResponse
+                     */
+                    type ListFindingSummariesCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.Monitoring|fetchFrameworkComplianceReport}.
+                     * @param error Error, if any
+                     * @param [response] FrameworkComplianceReport
+                     */
+                    type FetchFrameworkComplianceReportCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.Monitoring|listControlComplianceSummaries}.
+                     * @param error Error, if any
+                     * @param [response] ListControlComplianceSummariesResponse
+                     */
+                    type ListControlComplianceSummariesCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesResponse) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.cloudsecuritycompliance.v1.Monitoring|aggregateFrameworkComplianceReport}.
+                     * @param error Error, if any
+                     * @param [response] AggregateFrameworkComplianceReportResponse
+                     */
+                    type AggregateFrameworkComplianceReportCallback = (error: (Error|null), response?: google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportResponse) => void;
+                }
+
+                /** EvaluationState enum. */
+                enum EvaluationState {
+                    EVALUATION_STATE_UNSPECIFIED = 0,
+                    EVALUATION_STATE_PASSED = 1,
+                    EVALUATION_STATE_FAILED = 2,
+                    EVALUATION_STATE_NOT_ASSESSED = 3
+                }
+
+                /** FindingClass enum. */
+                enum FindingClass {
+                    FINDING_CLASS_UNSPECIFIED = 0,
+                    THREAT = 1,
+                    VULNERABILITY = 2,
+                    MISCONFIGURATION = 3,
+                    OBSERVATION = 4,
+                    SCC_ERROR = 5,
+                    POSTURE_VIOLATION = 6,
+                    TOXIC_COMBINATION = 7,
+                    SENSITIVE_DATA_RISK = 8,
+                    CHOKEPOINT = 9
+                }
+
+                /** Properties of a ListFrameworkComplianceSummariesRequest. */
+                interface IListFrameworkComplianceSummariesRequest {
+
+                    /** ListFrameworkComplianceSummariesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFrameworkComplianceSummariesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFrameworkComplianceSummariesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListFrameworkComplianceSummariesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListFrameworkComplianceSummariesRequest. */
+                class ListFrameworkComplianceSummariesRequest implements IListFrameworkComplianceSummariesRequest {
+
+                    /**
+                     * Constructs a new ListFrameworkComplianceSummariesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesRequest);
+
+                    /** ListFrameworkComplianceSummariesRequest parent. */
+                    public parent: string;
+
+                    /** ListFrameworkComplianceSummariesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFrameworkComplianceSummariesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListFrameworkComplianceSummariesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListFrameworkComplianceSummariesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFrameworkComplianceSummariesRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesRequest): google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesRequest;
+
+                    /**
+                     * Encodes the specified ListFrameworkComplianceSummariesRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesRequest.verify|verify} messages.
+                     * @param message ListFrameworkComplianceSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFrameworkComplianceSummariesRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesRequest.verify|verify} messages.
+                     * @param message ListFrameworkComplianceSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFrameworkComplianceSummariesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFrameworkComplianceSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesRequest;
+
+                    /**
+                     * Decodes a ListFrameworkComplianceSummariesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFrameworkComplianceSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesRequest;
+
+                    /**
+                     * Verifies a ListFrameworkComplianceSummariesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFrameworkComplianceSummariesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFrameworkComplianceSummariesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesRequest;
+
+                    /**
+                     * Creates a plain object from a ListFrameworkComplianceSummariesRequest message. Also converts values to other types if specified.
+                     * @param message ListFrameworkComplianceSummariesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFrameworkComplianceSummariesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFrameworkComplianceSummariesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFrameworkComplianceSummariesResponse. */
+                interface IListFrameworkComplianceSummariesResponse {
+
+                    /** ListFrameworkComplianceSummariesResponse frameworkComplianceSummaries */
+                    frameworkComplianceSummaries?: (google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceSummary[]|null);
+
+                    /** ListFrameworkComplianceSummariesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFrameworkComplianceSummariesResponse. */
+                class ListFrameworkComplianceSummariesResponse implements IListFrameworkComplianceSummariesResponse {
+
+                    /**
+                     * Constructs a new ListFrameworkComplianceSummariesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesResponse);
+
+                    /** ListFrameworkComplianceSummariesResponse frameworkComplianceSummaries. */
+                    public frameworkComplianceSummaries: google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceSummary[];
+
+                    /** ListFrameworkComplianceSummariesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFrameworkComplianceSummariesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFrameworkComplianceSummariesResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesResponse): google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse;
+
+                    /**
+                     * Encodes the specified ListFrameworkComplianceSummariesResponse message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse.verify|verify} messages.
+                     * @param message ListFrameworkComplianceSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFrameworkComplianceSummariesResponse message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse.verify|verify} messages.
+                     * @param message ListFrameworkComplianceSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IListFrameworkComplianceSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFrameworkComplianceSummariesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFrameworkComplianceSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse;
+
+                    /**
+                     * Decodes a ListFrameworkComplianceSummariesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFrameworkComplianceSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse;
+
+                    /**
+                     * Verifies a ListFrameworkComplianceSummariesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFrameworkComplianceSummariesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFrameworkComplianceSummariesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse;
+
+                    /**
+                     * Creates a plain object from a ListFrameworkComplianceSummariesResponse message. Also converts values to other types if specified.
+                     * @param message ListFrameworkComplianceSummariesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ListFrameworkComplianceSummariesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFrameworkComplianceSummariesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFrameworkComplianceSummariesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FrameworkComplianceReport. */
+                interface IFrameworkComplianceReport {
+
+                    /** FrameworkComplianceReport framework */
+                    framework?: (string|null);
+
+                    /** FrameworkComplianceReport frameworkDescription */
+                    frameworkDescription?: (string|null);
+
+                    /** FrameworkComplianceReport updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FrameworkComplianceReport controlAssessmentDetails */
+                    controlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails|null);
+
+                    /** FrameworkComplianceReport frameworkType */
+                    frameworkType?: (google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|keyof typeof google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|null);
+
+                    /** FrameworkComplianceReport supportedCloudProviders */
+                    supportedCloudProviders?: (google.cloud.cloudsecuritycompliance.v1.CloudProvider[]|null);
+
+                    /** FrameworkComplianceReport frameworkCategories */
+                    frameworkCategories?: (google.cloud.cloudsecuritycompliance.v1.FrameworkCategory[]|null);
+
+                    /** FrameworkComplianceReport frameworkDisplayName */
+                    frameworkDisplayName?: (string|null);
+
+                    /** FrameworkComplianceReport name */
+                    name?: (string|null);
+
+                    /** FrameworkComplianceReport majorRevisionId */
+                    majorRevisionId?: (number|Long|string|null);
+
+                    /** FrameworkComplianceReport minorRevisionId */
+                    minorRevisionId?: (number|Long|string|null);
+
+                    /** FrameworkComplianceReport targetResourceDetails */
+                    targetResourceDetails?: (google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails[]|null);
+                }
+
+                /** Represents a FrameworkComplianceReport. */
+                class FrameworkComplianceReport implements IFrameworkComplianceReport {
+
+                    /**
+                     * Constructs a new FrameworkComplianceReport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceReport);
+
+                    /** FrameworkComplianceReport framework. */
+                    public framework: string;
+
+                    /** FrameworkComplianceReport frameworkDescription. */
+                    public frameworkDescription: string;
+
+                    /** FrameworkComplianceReport updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FrameworkComplianceReport controlAssessmentDetails. */
+                    public controlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails|null);
+
+                    /** FrameworkComplianceReport frameworkType. */
+                    public frameworkType: (google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|keyof typeof google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType);
+
+                    /** FrameworkComplianceReport supportedCloudProviders. */
+                    public supportedCloudProviders: google.cloud.cloudsecuritycompliance.v1.CloudProvider[];
+
+                    /** FrameworkComplianceReport frameworkCategories. */
+                    public frameworkCategories: google.cloud.cloudsecuritycompliance.v1.FrameworkCategory[];
+
+                    /** FrameworkComplianceReport frameworkDisplayName. */
+                    public frameworkDisplayName: string;
+
+                    /** FrameworkComplianceReport name. */
+                    public name: string;
+
+                    /** FrameworkComplianceReport majorRevisionId. */
+                    public majorRevisionId: (number|Long|string);
+
+                    /** FrameworkComplianceReport minorRevisionId. */
+                    public minorRevisionId: (number|Long|string);
+
+                    /** FrameworkComplianceReport targetResourceDetails. */
+                    public targetResourceDetails: google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails[];
+
+                    /**
+                     * Creates a new FrameworkComplianceReport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FrameworkComplianceReport instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceReport): google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport;
+
+                    /**
+                     * Encodes the specified FrameworkComplianceReport message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport.verify|verify} messages.
+                     * @param message FrameworkComplianceReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FrameworkComplianceReport message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport.verify|verify} messages.
+                     * @param message FrameworkComplianceReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FrameworkComplianceReport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FrameworkComplianceReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport;
+
+                    /**
+                     * Decodes a FrameworkComplianceReport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FrameworkComplianceReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport;
+
+                    /**
+                     * Verifies a FrameworkComplianceReport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FrameworkComplianceReport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FrameworkComplianceReport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport;
+
+                    /**
+                     * Creates a plain object from a FrameworkComplianceReport message. Also converts values to other types if specified.
+                     * @param message FrameworkComplianceReport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceReport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FrameworkComplianceReport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FrameworkComplianceReport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FetchFrameworkComplianceReportRequest. */
+                interface IFetchFrameworkComplianceReportRequest {
+
+                    /** FetchFrameworkComplianceReportRequest name */
+                    name?: (string|null);
+
+                    /** FetchFrameworkComplianceReportRequest endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a FetchFrameworkComplianceReportRequest. */
+                class FetchFrameworkComplianceReportRequest implements IFetchFrameworkComplianceReportRequest {
+
+                    /**
+                     * Constructs a new FetchFrameworkComplianceReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IFetchFrameworkComplianceReportRequest);
+
+                    /** FetchFrameworkComplianceReportRequest name. */
+                    public name: string;
+
+                    /** FetchFrameworkComplianceReportRequest endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new FetchFrameworkComplianceReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FetchFrameworkComplianceReportRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IFetchFrameworkComplianceReportRequest): google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest;
+
+                    /**
+                     * Encodes the specified FetchFrameworkComplianceReportRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest.verify|verify} messages.
+                     * @param message FetchFrameworkComplianceReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IFetchFrameworkComplianceReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FetchFrameworkComplianceReportRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest.verify|verify} messages.
+                     * @param message FetchFrameworkComplianceReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IFetchFrameworkComplianceReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FetchFrameworkComplianceReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FetchFrameworkComplianceReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest;
+
+                    /**
+                     * Decodes a FetchFrameworkComplianceReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FetchFrameworkComplianceReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest;
+
+                    /**
+                     * Verifies a FetchFrameworkComplianceReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FetchFrameworkComplianceReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FetchFrameworkComplianceReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest;
+
+                    /**
+                     * Creates a plain object from a FetchFrameworkComplianceReportRequest message. Also converts values to other types if specified.
+                     * @param message FetchFrameworkComplianceReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.FetchFrameworkComplianceReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FetchFrameworkComplianceReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FetchFrameworkComplianceReportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFindingSummariesRequest. */
+                interface IListFindingSummariesRequest {
+
+                    /** ListFindingSummariesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListFindingSummariesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListFindingSummariesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListFindingSummariesRequest filter */
+                    filter?: (string|null);
+
+                    /** ListFindingSummariesRequest endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents a ListFindingSummariesRequest. */
+                class ListFindingSummariesRequest implements IListFindingSummariesRequest {
+
+                    /**
+                     * Constructs a new ListFindingSummariesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesRequest);
+
+                    /** ListFindingSummariesRequest parent. */
+                    public parent: string;
+
+                    /** ListFindingSummariesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListFindingSummariesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListFindingSummariesRequest filter. */
+                    public filter: string;
+
+                    /** ListFindingSummariesRequest endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new ListFindingSummariesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFindingSummariesRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesRequest): google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesRequest;
+
+                    /**
+                     * Encodes the specified ListFindingSummariesRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesRequest.verify|verify} messages.
+                     * @param message ListFindingSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFindingSummariesRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesRequest.verify|verify} messages.
+                     * @param message ListFindingSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFindingSummariesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFindingSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesRequest;
+
+                    /**
+                     * Decodes a ListFindingSummariesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFindingSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesRequest;
+
+                    /**
+                     * Verifies a ListFindingSummariesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFindingSummariesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFindingSummariesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesRequest;
+
+                    /**
+                     * Creates a plain object from a ListFindingSummariesRequest message. Also converts values to other types if specified.
+                     * @param message ListFindingSummariesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFindingSummariesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingSummariesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListFindingSummariesResponse. */
+                interface IListFindingSummariesResponse {
+
+                    /** ListFindingSummariesResponse findingSummaries */
+                    findingSummaries?: (google.cloud.cloudsecuritycompliance.v1.IFindingSummary[]|null);
+
+                    /** ListFindingSummariesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListFindingSummariesResponse. */
+                class ListFindingSummariesResponse implements IListFindingSummariesResponse {
+
+                    /**
+                     * Constructs a new ListFindingSummariesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesResponse);
+
+                    /** ListFindingSummariesResponse findingSummaries. */
+                    public findingSummaries: google.cloud.cloudsecuritycompliance.v1.IFindingSummary[];
+
+                    /** ListFindingSummariesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListFindingSummariesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListFindingSummariesResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesResponse): google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesResponse;
+
+                    /**
+                     * Encodes the specified ListFindingSummariesResponse message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesResponse.verify|verify} messages.
+                     * @param message ListFindingSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListFindingSummariesResponse message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesResponse.verify|verify} messages.
+                     * @param message ListFindingSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IListFindingSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListFindingSummariesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListFindingSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesResponse;
+
+                    /**
+                     * Decodes a ListFindingSummariesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListFindingSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesResponse;
+
+                    /**
+                     * Verifies a ListFindingSummariesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListFindingSummariesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListFindingSummariesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesResponse;
+
+                    /**
+                     * Creates a plain object from a ListFindingSummariesResponse message. Also converts values to other types if specified.
+                     * @param message ListFindingSummariesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ListFindingSummariesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListFindingSummariesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListFindingSummariesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListControlComplianceSummariesRequest. */
+                interface IListControlComplianceSummariesRequest {
+
+                    /** ListControlComplianceSummariesRequest parent */
+                    parent?: (string|null);
+
+                    /** ListControlComplianceSummariesRequest endTime */
+                    endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListControlComplianceSummariesRequest pageSize */
+                    pageSize?: (number|null);
+
+                    /** ListControlComplianceSummariesRequest pageToken */
+                    pageToken?: (string|null);
+
+                    /** ListControlComplianceSummariesRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents a ListControlComplianceSummariesRequest. */
+                class ListControlComplianceSummariesRequest implements IListControlComplianceSummariesRequest {
+
+                    /**
+                     * Constructs a new ListControlComplianceSummariesRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesRequest);
+
+                    /** ListControlComplianceSummariesRequest parent. */
+                    public parent: string;
+
+                    /** ListControlComplianceSummariesRequest endTime. */
+                    public endTime?: (google.protobuf.ITimestamp|null);
+
+                    /** ListControlComplianceSummariesRequest pageSize. */
+                    public pageSize: number;
+
+                    /** ListControlComplianceSummariesRequest pageToken. */
+                    public pageToken: string;
+
+                    /** ListControlComplianceSummariesRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new ListControlComplianceSummariesRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListControlComplianceSummariesRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesRequest): google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesRequest;
+
+                    /**
+                     * Encodes the specified ListControlComplianceSummariesRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesRequest.verify|verify} messages.
+                     * @param message ListControlComplianceSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListControlComplianceSummariesRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesRequest.verify|verify} messages.
+                     * @param message ListControlComplianceSummariesRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListControlComplianceSummariesRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListControlComplianceSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesRequest;
+
+                    /**
+                     * Decodes a ListControlComplianceSummariesRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListControlComplianceSummariesRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesRequest;
+
+                    /**
+                     * Verifies a ListControlComplianceSummariesRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListControlComplianceSummariesRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListControlComplianceSummariesRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesRequest;
+
+                    /**
+                     * Creates a plain object from a ListControlComplianceSummariesRequest message. Also converts values to other types if specified.
+                     * @param message ListControlComplianceSummariesRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListControlComplianceSummariesRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListControlComplianceSummariesRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ListControlComplianceSummariesResponse. */
+                interface IListControlComplianceSummariesResponse {
+
+                    /** ListControlComplianceSummariesResponse controlComplianceSummaries */
+                    controlComplianceSummaries?: (google.cloud.cloudsecuritycompliance.v1.IControlComplianceSummary[]|null);
+
+                    /** ListControlComplianceSummariesResponse nextPageToken */
+                    nextPageToken?: (string|null);
+                }
+
+                /** Represents a ListControlComplianceSummariesResponse. */
+                class ListControlComplianceSummariesResponse implements IListControlComplianceSummariesResponse {
+
+                    /**
+                     * Constructs a new ListControlComplianceSummariesResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesResponse);
+
+                    /** ListControlComplianceSummariesResponse controlComplianceSummaries. */
+                    public controlComplianceSummaries: google.cloud.cloudsecuritycompliance.v1.IControlComplianceSummary[];
+
+                    /** ListControlComplianceSummariesResponse nextPageToken. */
+                    public nextPageToken: string;
+
+                    /**
+                     * Creates a new ListControlComplianceSummariesResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ListControlComplianceSummariesResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesResponse): google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesResponse;
+
+                    /**
+                     * Encodes the specified ListControlComplianceSummariesResponse message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesResponse.verify|verify} messages.
+                     * @param message ListControlComplianceSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ListControlComplianceSummariesResponse message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesResponse.verify|verify} messages.
+                     * @param message ListControlComplianceSummariesResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IListControlComplianceSummariesResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ListControlComplianceSummariesResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ListControlComplianceSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesResponse;
+
+                    /**
+                     * Decodes a ListControlComplianceSummariesResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ListControlComplianceSummariesResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesResponse;
+
+                    /**
+                     * Verifies a ListControlComplianceSummariesResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ListControlComplianceSummariesResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ListControlComplianceSummariesResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesResponse;
+
+                    /**
+                     * Creates a plain object from a ListControlComplianceSummariesResponse message. Also converts values to other types if specified.
+                     * @param message ListControlComplianceSummariesResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ListControlComplianceSummariesResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ListControlComplianceSummariesResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ListControlComplianceSummariesResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AggregateFrameworkComplianceReportRequest. */
+                interface IAggregateFrameworkComplianceReportRequest {
+
+                    /** AggregateFrameworkComplianceReportRequest name */
+                    name?: (string|null);
+
+                    /** AggregateFrameworkComplianceReportRequest interval */
+                    interval?: (google.type.IInterval|null);
+
+                    /** AggregateFrameworkComplianceReportRequest filter */
+                    filter?: (string|null);
+                }
+
+                /** Represents an AggregateFrameworkComplianceReportRequest. */
+                class AggregateFrameworkComplianceReportRequest implements IAggregateFrameworkComplianceReportRequest {
+
+                    /**
+                     * Constructs a new AggregateFrameworkComplianceReportRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportRequest);
+
+                    /** AggregateFrameworkComplianceReportRequest name. */
+                    public name: string;
+
+                    /** AggregateFrameworkComplianceReportRequest interval. */
+                    public interval?: (google.type.IInterval|null);
+
+                    /** AggregateFrameworkComplianceReportRequest filter. */
+                    public filter: string;
+
+                    /**
+                     * Creates a new AggregateFrameworkComplianceReportRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AggregateFrameworkComplianceReportRequest instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportRequest): google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportRequest;
+
+                    /**
+                     * Encodes the specified AggregateFrameworkComplianceReportRequest message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportRequest.verify|verify} messages.
+                     * @param message AggregateFrameworkComplianceReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AggregateFrameworkComplianceReportRequest message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportRequest.verify|verify} messages.
+                     * @param message AggregateFrameworkComplianceReportRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AggregateFrameworkComplianceReportRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AggregateFrameworkComplianceReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportRequest;
+
+                    /**
+                     * Decodes an AggregateFrameworkComplianceReportRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AggregateFrameworkComplianceReportRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportRequest;
+
+                    /**
+                     * Verifies an AggregateFrameworkComplianceReportRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AggregateFrameworkComplianceReportRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AggregateFrameworkComplianceReportRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportRequest;
+
+                    /**
+                     * Creates a plain object from an AggregateFrameworkComplianceReportRequest message. Also converts values to other types if specified.
+                     * @param message AggregateFrameworkComplianceReportRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AggregateFrameworkComplianceReportRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AggregateFrameworkComplianceReportRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AggregateFrameworkComplianceReportResponse. */
+                interface IAggregateFrameworkComplianceReportResponse {
+
+                    /** AggregateFrameworkComplianceReportResponse aggregatedComplianceReports */
+                    aggregatedComplianceReports?: (google.cloud.cloudsecuritycompliance.v1.IAggregatedComplianceReport[]|null);
+                }
+
+                /** Represents an AggregateFrameworkComplianceReportResponse. */
+                class AggregateFrameworkComplianceReportResponse implements IAggregateFrameworkComplianceReportResponse {
+
+                    /**
+                     * Constructs a new AggregateFrameworkComplianceReportResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportResponse);
+
+                    /** AggregateFrameworkComplianceReportResponse aggregatedComplianceReports. */
+                    public aggregatedComplianceReports: google.cloud.cloudsecuritycompliance.v1.IAggregatedComplianceReport[];
+
+                    /**
+                     * Creates a new AggregateFrameworkComplianceReportResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AggregateFrameworkComplianceReportResponse instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportResponse): google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportResponse;
+
+                    /**
+                     * Encodes the specified AggregateFrameworkComplianceReportResponse message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportResponse.verify|verify} messages.
+                     * @param message AggregateFrameworkComplianceReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AggregateFrameworkComplianceReportResponse message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportResponse.verify|verify} messages.
+                     * @param message AggregateFrameworkComplianceReportResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IAggregateFrameworkComplianceReportResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AggregateFrameworkComplianceReportResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AggregateFrameworkComplianceReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportResponse;
+
+                    /**
+                     * Decodes an AggregateFrameworkComplianceReportResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AggregateFrameworkComplianceReportResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportResponse;
+
+                    /**
+                     * Verifies an AggregateFrameworkComplianceReportResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AggregateFrameworkComplianceReportResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AggregateFrameworkComplianceReportResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportResponse;
+
+                    /**
+                     * Creates a plain object from an AggregateFrameworkComplianceReportResponse message. Also converts values to other types if specified.
+                     * @param message AggregateFrameworkComplianceReportResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.AggregateFrameworkComplianceReportResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AggregateFrameworkComplianceReportResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AggregateFrameworkComplianceReportResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ControlAssessmentDetails. */
+                interface IControlAssessmentDetails {
+
+                    /** ControlAssessmentDetails passingControls */
+                    passingControls?: (number|null);
+
+                    /** ControlAssessmentDetails failingControls */
+                    failingControls?: (number|null);
+
+                    /** ControlAssessmentDetails assessedPassingControls */
+                    assessedPassingControls?: (number|null);
+
+                    /** ControlAssessmentDetails notAssessedControls */
+                    notAssessedControls?: (number|null);
+                }
+
+                /** Represents a ControlAssessmentDetails. */
+                class ControlAssessmentDetails implements IControlAssessmentDetails {
+
+                    /**
+                     * Constructs a new ControlAssessmentDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails);
+
+                    /** ControlAssessmentDetails passingControls. */
+                    public passingControls: number;
+
+                    /** ControlAssessmentDetails failingControls. */
+                    public failingControls: number;
+
+                    /** ControlAssessmentDetails assessedPassingControls. */
+                    public assessedPassingControls: number;
+
+                    /** ControlAssessmentDetails notAssessedControls. */
+                    public notAssessedControls: number;
+
+                    /**
+                     * Creates a new ControlAssessmentDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ControlAssessmentDetails instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails): google.cloud.cloudsecuritycompliance.v1.ControlAssessmentDetails;
+
+                    /**
+                     * Encodes the specified ControlAssessmentDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlAssessmentDetails.verify|verify} messages.
+                     * @param message ControlAssessmentDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ControlAssessmentDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlAssessmentDetails.verify|verify} messages.
+                     * @param message ControlAssessmentDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ControlAssessmentDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ControlAssessmentDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ControlAssessmentDetails;
+
+                    /**
+                     * Decodes a ControlAssessmentDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ControlAssessmentDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ControlAssessmentDetails;
+
+                    /**
+                     * Verifies a ControlAssessmentDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ControlAssessmentDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ControlAssessmentDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ControlAssessmentDetails;
+
+                    /**
+                     * Creates a plain object from a ControlAssessmentDetails message. Also converts values to other types if specified.
+                     * @param message ControlAssessmentDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ControlAssessmentDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ControlAssessmentDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ControlAssessmentDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FrameworkComplianceSummary. */
+                interface IFrameworkComplianceSummary {
+
+                    /** FrameworkComplianceSummary framework */
+                    framework?: (string|null);
+
+                    /** FrameworkComplianceSummary controlAssessmentDetails */
+                    controlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails|null);
+
+                    /** FrameworkComplianceSummary frameworkType */
+                    frameworkType?: (google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|keyof typeof google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|null);
+
+                    /** FrameworkComplianceSummary supportedCloudProviders */
+                    supportedCloudProviders?: (google.cloud.cloudsecuritycompliance.v1.CloudProvider[]|null);
+
+                    /** FrameworkComplianceSummary frameworkCategories */
+                    frameworkCategories?: (google.cloud.cloudsecuritycompliance.v1.FrameworkCategory[]|null);
+
+                    /** FrameworkComplianceSummary frameworkDisplayName */
+                    frameworkDisplayName?: (string|null);
+
+                    /** FrameworkComplianceSummary name */
+                    name?: (string|null);
+
+                    /** FrameworkComplianceSummary majorRevisionId */
+                    majorRevisionId?: (number|Long|string|null);
+
+                    /** FrameworkComplianceSummary minorRevisionId */
+                    minorRevisionId?: (number|Long|string|null);
+
+                    /** FrameworkComplianceSummary targetResourceDetails */
+                    targetResourceDetails?: (google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails[]|null);
+                }
+
+                /** Represents a FrameworkComplianceSummary. */
+                class FrameworkComplianceSummary implements IFrameworkComplianceSummary {
+
+                    /**
+                     * Constructs a new FrameworkComplianceSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceSummary);
+
+                    /** FrameworkComplianceSummary framework. */
+                    public framework: string;
+
+                    /** FrameworkComplianceSummary controlAssessmentDetails. */
+                    public controlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails|null);
+
+                    /** FrameworkComplianceSummary frameworkType. */
+                    public frameworkType: (google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType|keyof typeof google.cloud.cloudsecuritycompliance.v1.Framework.FrameworkType);
+
+                    /** FrameworkComplianceSummary supportedCloudProviders. */
+                    public supportedCloudProviders: google.cloud.cloudsecuritycompliance.v1.CloudProvider[];
+
+                    /** FrameworkComplianceSummary frameworkCategories. */
+                    public frameworkCategories: google.cloud.cloudsecuritycompliance.v1.FrameworkCategory[];
+
+                    /** FrameworkComplianceSummary frameworkDisplayName. */
+                    public frameworkDisplayName: string;
+
+                    /** FrameworkComplianceSummary name. */
+                    public name: string;
+
+                    /** FrameworkComplianceSummary majorRevisionId. */
+                    public majorRevisionId: (number|Long|string);
+
+                    /** FrameworkComplianceSummary minorRevisionId. */
+                    public minorRevisionId: (number|Long|string);
+
+                    /** FrameworkComplianceSummary targetResourceDetails. */
+                    public targetResourceDetails: google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails[];
+
+                    /**
+                     * Creates a new FrameworkComplianceSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FrameworkComplianceSummary instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceSummary): google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary;
+
+                    /**
+                     * Encodes the specified FrameworkComplianceSummary message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary.verify|verify} messages.
+                     * @param message FrameworkComplianceSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FrameworkComplianceSummary message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary.verify|verify} messages.
+                     * @param message FrameworkComplianceSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IFrameworkComplianceSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FrameworkComplianceSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FrameworkComplianceSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary;
+
+                    /**
+                     * Decodes a FrameworkComplianceSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FrameworkComplianceSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary;
+
+                    /**
+                     * Verifies a FrameworkComplianceSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FrameworkComplianceSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FrameworkComplianceSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary;
+
+                    /**
+                     * Creates a plain object from a FrameworkComplianceSummary message. Also converts values to other types if specified.
+                     * @param message FrameworkComplianceSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.FrameworkComplianceSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FrameworkComplianceSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FrameworkComplianceSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a FindingSummary. */
+                interface IFindingSummary {
+
+                    /** FindingSummary findingCategory */
+                    findingCategory?: (string|null);
+
+                    /** FindingSummary findingClass */
+                    findingClass?: (google.cloud.cloudsecuritycompliance.v1.FindingClass|keyof typeof google.cloud.cloudsecuritycompliance.v1.FindingClass|null);
+
+                    /** FindingSummary severity */
+                    severity?: (google.cloud.cloudsecuritycompliance.v1.Severity|keyof typeof google.cloud.cloudsecuritycompliance.v1.Severity|null);
+
+                    /** FindingSummary findingCount */
+                    findingCount?: (number|Long|string|null);
+
+                    /** FindingSummary updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingSummary relatedFrameworks */
+                    relatedFrameworks?: (string[]|null);
+
+                    /** FindingSummary name */
+                    name?: (string|null);
+                }
+
+                /** Represents a FindingSummary. */
+                class FindingSummary implements IFindingSummary {
+
+                    /**
+                     * Constructs a new FindingSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IFindingSummary);
+
+                    /** FindingSummary findingCategory. */
+                    public findingCategory: string;
+
+                    /** FindingSummary findingClass. */
+                    public findingClass: (google.cloud.cloudsecuritycompliance.v1.FindingClass|keyof typeof google.cloud.cloudsecuritycompliance.v1.FindingClass);
+
+                    /** FindingSummary severity. */
+                    public severity: (google.cloud.cloudsecuritycompliance.v1.Severity|keyof typeof google.cloud.cloudsecuritycompliance.v1.Severity);
+
+                    /** FindingSummary findingCount. */
+                    public findingCount: (number|Long|string);
+
+                    /** FindingSummary updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** FindingSummary relatedFrameworks. */
+                    public relatedFrameworks: string[];
+
+                    /** FindingSummary name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new FindingSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns FindingSummary instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IFindingSummary): google.cloud.cloudsecuritycompliance.v1.FindingSummary;
+
+                    /**
+                     * Encodes the specified FindingSummary message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FindingSummary.verify|verify} messages.
+                     * @param message FindingSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IFindingSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified FindingSummary message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.FindingSummary.verify|verify} messages.
+                     * @param message FindingSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IFindingSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a FindingSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns FindingSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.FindingSummary;
+
+                    /**
+                     * Decodes a FindingSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns FindingSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.FindingSummary;
+
+                    /**
+                     * Verifies a FindingSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a FindingSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns FindingSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.FindingSummary;
+
+                    /**
+                     * Creates a plain object from a FindingSummary message. Also converts values to other types if specified.
+                     * @param message FindingSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.FindingSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this FindingSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for FindingSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ControlComplianceSummary. */
+                interface IControlComplianceSummary {
+
+                    /** ControlComplianceSummary control */
+                    control?: (string|null);
+
+                    /** ControlComplianceSummary displayName */
+                    displayName?: (string|null);
+
+                    /** ControlComplianceSummary description */
+                    description?: (string|null);
+
+                    /** ControlComplianceSummary overallEvaluationState */
+                    overallEvaluationState?: (google.cloud.cloudsecuritycompliance.v1.EvaluationState|keyof typeof google.cloud.cloudsecuritycompliance.v1.EvaluationState|null);
+
+                    /** ControlComplianceSummary totalFindingsCount */
+                    totalFindingsCount?: (number|null);
+
+                    /** ControlComplianceSummary complianceFrameworks */
+                    complianceFrameworks?: (string[]|null);
+
+                    /** ControlComplianceSummary similarControls */
+                    similarControls?: (google.cloud.cloudsecuritycompliance.v1.ISimilarControls[]|null);
+
+                    /** ControlComplianceSummary cloudControlReports */
+                    cloudControlReports?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlReport[]|null);
+
+                    /** ControlComplianceSummary controlResponsibilityType */
+                    controlResponsibilityType?: (google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|keyof typeof google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|null);
+
+                    /** ControlComplianceSummary isFakeControl */
+                    isFakeControl?: (boolean|null);
+
+                    /** ControlComplianceSummary name */
+                    name?: (string|null);
+                }
+
+                /** Represents a ControlComplianceSummary. */
+                class ControlComplianceSummary implements IControlComplianceSummary {
+
+                    /**
+                     * Constructs a new ControlComplianceSummary.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IControlComplianceSummary);
+
+                    /** ControlComplianceSummary control. */
+                    public control: string;
+
+                    /** ControlComplianceSummary displayName. */
+                    public displayName: string;
+
+                    /** ControlComplianceSummary description. */
+                    public description: string;
+
+                    /** ControlComplianceSummary overallEvaluationState. */
+                    public overallEvaluationState: (google.cloud.cloudsecuritycompliance.v1.EvaluationState|keyof typeof google.cloud.cloudsecuritycompliance.v1.EvaluationState);
+
+                    /** ControlComplianceSummary totalFindingsCount. */
+                    public totalFindingsCount: number;
+
+                    /** ControlComplianceSummary complianceFrameworks. */
+                    public complianceFrameworks: string[];
+
+                    /** ControlComplianceSummary similarControls. */
+                    public similarControls: google.cloud.cloudsecuritycompliance.v1.ISimilarControls[];
+
+                    /** ControlComplianceSummary cloudControlReports. */
+                    public cloudControlReports: google.cloud.cloudsecuritycompliance.v1.ICloudControlReport[];
+
+                    /** ControlComplianceSummary controlResponsibilityType. */
+                    public controlResponsibilityType: (google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType|keyof typeof google.cloud.cloudsecuritycompliance.v1.RegulatoryControlResponsibilityType);
+
+                    /** ControlComplianceSummary isFakeControl. */
+                    public isFakeControl: boolean;
+
+                    /** ControlComplianceSummary name. */
+                    public name: string;
+
+                    /**
+                     * Creates a new ControlComplianceSummary instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ControlComplianceSummary instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IControlComplianceSummary): google.cloud.cloudsecuritycompliance.v1.ControlComplianceSummary;
+
+                    /**
+                     * Encodes the specified ControlComplianceSummary message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlComplianceSummary.verify|verify} messages.
+                     * @param message ControlComplianceSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IControlComplianceSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ControlComplianceSummary message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ControlComplianceSummary.verify|verify} messages.
+                     * @param message ControlComplianceSummary message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IControlComplianceSummary, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ControlComplianceSummary message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ControlComplianceSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ControlComplianceSummary;
+
+                    /**
+                     * Decodes a ControlComplianceSummary message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ControlComplianceSummary
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ControlComplianceSummary;
+
+                    /**
+                     * Verifies a ControlComplianceSummary message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ControlComplianceSummary message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ControlComplianceSummary
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ControlComplianceSummary;
+
+                    /**
+                     * Creates a plain object from a ControlComplianceSummary message. Also converts values to other types if specified.
+                     * @param message ControlComplianceSummary
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ControlComplianceSummary, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ControlComplianceSummary to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ControlComplianceSummary
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudControlReport. */
+                interface ICloudControlReport {
+
+                    /** CloudControlReport manualCloudControlAssessmentDetails */
+                    manualCloudControlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.IManualCloudControlAssessmentDetails|null);
+
+                    /** CloudControlReport cloudControlAssessmentDetails */
+                    cloudControlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlAssessmentDetails|null);
+
+                    /** CloudControlReport cloudControl */
+                    cloudControl?: (string|null);
+
+                    /** CloudControlReport displayName */
+                    displayName?: (string|null);
+
+                    /** CloudControlReport description */
+                    description?: (string|null);
+
+                    /** CloudControlReport categories */
+                    categories?: (string[]|null);
+
+                    /** CloudControlReport similarControls */
+                    similarControls?: (google.cloud.cloudsecuritycompliance.v1.ISimilarControls[]|null);
+
+                    /** CloudControlReport cloudControlType */
+                    cloudControlType?: (google.cloud.cloudsecuritycompliance.v1.CloudControl.Type|keyof typeof google.cloud.cloudsecuritycompliance.v1.CloudControl.Type|null);
+
+                    /** CloudControlReport findingCategory */
+                    findingCategory?: (string|null);
+
+                    /** CloudControlReport rules */
+                    rules?: (google.cloud.cloudsecuritycompliance.v1.IRule[]|null);
+
+                    /** CloudControlReport findingSeverity */
+                    findingSeverity?: (google.cloud.cloudsecuritycompliance.v1.Severity|keyof typeof google.cloud.cloudsecuritycompliance.v1.Severity|null);
+
+                    /** CloudControlReport enforcementMode */
+                    enforcementMode?: (google.cloud.cloudsecuritycompliance.v1.EnforcementMode|keyof typeof google.cloud.cloudsecuritycompliance.v1.EnforcementMode|null);
+
+                    /** CloudControlReport cloudControlDeployment */
+                    cloudControlDeployment?: (string|null);
+
+                    /** CloudControlReport majorRevisionId */
+                    majorRevisionId?: (number|Long|string|null);
+
+                    /** CloudControlReport minorRevisionId */
+                    minorRevisionId?: (number|Long|string|null);
+
+                    /** CloudControlReport frameworkMajorRevisionIds */
+                    frameworkMajorRevisionIds?: ((number|Long|string)[]|null);
+                }
+
+                /** Represents a CloudControlReport. */
+                class CloudControlReport implements ICloudControlReport {
+
+                    /**
+                     * Constructs a new CloudControlReport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlReport);
+
+                    /** CloudControlReport manualCloudControlAssessmentDetails. */
+                    public manualCloudControlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.IManualCloudControlAssessmentDetails|null);
+
+                    /** CloudControlReport cloudControlAssessmentDetails. */
+                    public cloudControlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.ICloudControlAssessmentDetails|null);
+
+                    /** CloudControlReport cloudControl. */
+                    public cloudControl: string;
+
+                    /** CloudControlReport displayName. */
+                    public displayName: string;
+
+                    /** CloudControlReport description. */
+                    public description: string;
+
+                    /** CloudControlReport categories. */
+                    public categories: string[];
+
+                    /** CloudControlReport similarControls. */
+                    public similarControls: google.cloud.cloudsecuritycompliance.v1.ISimilarControls[];
+
+                    /** CloudControlReport cloudControlType. */
+                    public cloudControlType: (google.cloud.cloudsecuritycompliance.v1.CloudControl.Type|keyof typeof google.cloud.cloudsecuritycompliance.v1.CloudControl.Type);
+
+                    /** CloudControlReport findingCategory. */
+                    public findingCategory: string;
+
+                    /** CloudControlReport rules. */
+                    public rules: google.cloud.cloudsecuritycompliance.v1.IRule[];
+
+                    /** CloudControlReport findingSeverity. */
+                    public findingSeverity: (google.cloud.cloudsecuritycompliance.v1.Severity|keyof typeof google.cloud.cloudsecuritycompliance.v1.Severity);
+
+                    /** CloudControlReport enforcementMode. */
+                    public enforcementMode: (google.cloud.cloudsecuritycompliance.v1.EnforcementMode|keyof typeof google.cloud.cloudsecuritycompliance.v1.EnforcementMode);
+
+                    /** CloudControlReport cloudControlDeployment. */
+                    public cloudControlDeployment: string;
+
+                    /** CloudControlReport majorRevisionId. */
+                    public majorRevisionId: (number|Long|string);
+
+                    /** CloudControlReport minorRevisionId. */
+                    public minorRevisionId: (number|Long|string);
+
+                    /** CloudControlReport frameworkMajorRevisionIds. */
+                    public frameworkMajorRevisionIds: (number|Long|string)[];
+
+                    /** CloudControlReport assessmentDetails. */
+                    public assessmentDetails?: ("manualCloudControlAssessmentDetails"|"cloudControlAssessmentDetails");
+
+                    /**
+                     * Creates a new CloudControlReport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudControlReport instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlReport): google.cloud.cloudsecuritycompliance.v1.CloudControlReport;
+
+                    /**
+                     * Encodes the specified CloudControlReport message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlReport.verify|verify} messages.
+                     * @param message CloudControlReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudControlReport message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlReport.verify|verify} messages.
+                     * @param message CloudControlReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudControlReport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudControlReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CloudControlReport;
+
+                    /**
+                     * Decodes a CloudControlReport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudControlReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CloudControlReport;
+
+                    /**
+                     * Verifies a CloudControlReport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudControlReport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudControlReport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CloudControlReport;
+
+                    /**
+                     * Creates a plain object from a CloudControlReport message. Also converts values to other types if specified.
+                     * @param message CloudControlReport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CloudControlReport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudControlReport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudControlReport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a ManualCloudControlAssessmentDetails. */
+                interface IManualCloudControlAssessmentDetails {
+
+                    /** ManualCloudControlAssessmentDetails manualCloudControlGuide */
+                    manualCloudControlGuide?: (string[]|null);
+                }
+
+                /** Represents a ManualCloudControlAssessmentDetails. */
+                class ManualCloudControlAssessmentDetails implements IManualCloudControlAssessmentDetails {
+
+                    /**
+                     * Constructs a new ManualCloudControlAssessmentDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IManualCloudControlAssessmentDetails);
+
+                    /** ManualCloudControlAssessmentDetails manualCloudControlGuide. */
+                    public manualCloudControlGuide: string[];
+
+                    /**
+                     * Creates a new ManualCloudControlAssessmentDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns ManualCloudControlAssessmentDetails instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IManualCloudControlAssessmentDetails): google.cloud.cloudsecuritycompliance.v1.ManualCloudControlAssessmentDetails;
+
+                    /**
+                     * Encodes the specified ManualCloudControlAssessmentDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ManualCloudControlAssessmentDetails.verify|verify} messages.
+                     * @param message ManualCloudControlAssessmentDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IManualCloudControlAssessmentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified ManualCloudControlAssessmentDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.ManualCloudControlAssessmentDetails.verify|verify} messages.
+                     * @param message ManualCloudControlAssessmentDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IManualCloudControlAssessmentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a ManualCloudControlAssessmentDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns ManualCloudControlAssessmentDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.ManualCloudControlAssessmentDetails;
+
+                    /**
+                     * Decodes a ManualCloudControlAssessmentDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns ManualCloudControlAssessmentDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.ManualCloudControlAssessmentDetails;
+
+                    /**
+                     * Verifies a ManualCloudControlAssessmentDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a ManualCloudControlAssessmentDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns ManualCloudControlAssessmentDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.ManualCloudControlAssessmentDetails;
+
+                    /**
+                     * Creates a plain object from a ManualCloudControlAssessmentDetails message. Also converts values to other types if specified.
+                     * @param message ManualCloudControlAssessmentDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.ManualCloudControlAssessmentDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this ManualCloudControlAssessmentDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for ManualCloudControlAssessmentDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a CloudControlAssessmentDetails. */
+                interface ICloudControlAssessmentDetails {
+
+                    /** CloudControlAssessmentDetails findingsCount */
+                    findingsCount?: (number|null);
+
+                    /** CloudControlAssessmentDetails evaluationState */
+                    evaluationState?: (google.cloud.cloudsecuritycompliance.v1.EvaluationState|keyof typeof google.cloud.cloudsecuritycompliance.v1.EvaluationState|null);
+                }
+
+                /** Represents a CloudControlAssessmentDetails. */
+                class CloudControlAssessmentDetails implements ICloudControlAssessmentDetails {
+
+                    /**
+                     * Constructs a new CloudControlAssessmentDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlAssessmentDetails);
+
+                    /** CloudControlAssessmentDetails findingsCount. */
+                    public findingsCount: number;
+
+                    /** CloudControlAssessmentDetails evaluationState. */
+                    public evaluationState: (google.cloud.cloudsecuritycompliance.v1.EvaluationState|keyof typeof google.cloud.cloudsecuritycompliance.v1.EvaluationState);
+
+                    /**
+                     * Creates a new CloudControlAssessmentDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns CloudControlAssessmentDetails instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ICloudControlAssessmentDetails): google.cloud.cloudsecuritycompliance.v1.CloudControlAssessmentDetails;
+
+                    /**
+                     * Encodes the specified CloudControlAssessmentDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlAssessmentDetails.verify|verify} messages.
+                     * @param message CloudControlAssessmentDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlAssessmentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified CloudControlAssessmentDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.CloudControlAssessmentDetails.verify|verify} messages.
+                     * @param message CloudControlAssessmentDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ICloudControlAssessmentDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a CloudControlAssessmentDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns CloudControlAssessmentDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.CloudControlAssessmentDetails;
+
+                    /**
+                     * Decodes a CloudControlAssessmentDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns CloudControlAssessmentDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.CloudControlAssessmentDetails;
+
+                    /**
+                     * Verifies a CloudControlAssessmentDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a CloudControlAssessmentDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns CloudControlAssessmentDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.CloudControlAssessmentDetails;
+
+                    /**
+                     * Creates a plain object from a CloudControlAssessmentDetails message. Also converts values to other types if specified.
+                     * @param message CloudControlAssessmentDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.CloudControlAssessmentDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this CloudControlAssessmentDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for CloudControlAssessmentDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a SimilarControls. */
+                interface ISimilarControls {
+
+                    /** SimilarControls framework */
+                    framework?: (string|null);
+
+                    /** SimilarControls controlId */
+                    controlId?: (string|null);
+                }
+
+                /** Represents a SimilarControls. */
+                class SimilarControls implements ISimilarControls {
+
+                    /**
+                     * Constructs a new SimilarControls.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ISimilarControls);
+
+                    /** SimilarControls framework. */
+                    public framework: string;
+
+                    /** SimilarControls controlId. */
+                    public controlId: string;
+
+                    /**
+                     * Creates a new SimilarControls instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns SimilarControls instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ISimilarControls): google.cloud.cloudsecuritycompliance.v1.SimilarControls;
+
+                    /**
+                     * Encodes the specified SimilarControls message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.SimilarControls.verify|verify} messages.
+                     * @param message SimilarControls message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ISimilarControls, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified SimilarControls message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.SimilarControls.verify|verify} messages.
+                     * @param message SimilarControls message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ISimilarControls, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a SimilarControls message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns SimilarControls
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.SimilarControls;
+
+                    /**
+                     * Decodes a SimilarControls message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns SimilarControls
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.SimilarControls;
+
+                    /**
+                     * Verifies a SimilarControls message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a SimilarControls message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns SimilarControls
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.SimilarControls;
+
+                    /**
+                     * Creates a plain object from a SimilarControls message. Also converts values to other types if specified.
+                     * @param message SimilarControls
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.SimilarControls, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this SimilarControls to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for SimilarControls
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of an AggregatedComplianceReport. */
+                interface IAggregatedComplianceReport {
+
+                    /** AggregatedComplianceReport controlAssessmentDetails */
+                    controlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails|null);
+
+                    /** AggregatedComplianceReport reportTime */
+                    reportTime?: (google.protobuf.ITimestamp|null);
+                }
+
+                /** Represents an AggregatedComplianceReport. */
+                class AggregatedComplianceReport implements IAggregatedComplianceReport {
+
+                    /**
+                     * Constructs a new AggregatedComplianceReport.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.IAggregatedComplianceReport);
+
+                    /** AggregatedComplianceReport controlAssessmentDetails. */
+                    public controlAssessmentDetails?: (google.cloud.cloudsecuritycompliance.v1.IControlAssessmentDetails|null);
+
+                    /** AggregatedComplianceReport reportTime. */
+                    public reportTime?: (google.protobuf.ITimestamp|null);
+
+                    /**
+                     * Creates a new AggregatedComplianceReport instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns AggregatedComplianceReport instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.IAggregatedComplianceReport): google.cloud.cloudsecuritycompliance.v1.AggregatedComplianceReport;
+
+                    /**
+                     * Encodes the specified AggregatedComplianceReport message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AggregatedComplianceReport.verify|verify} messages.
+                     * @param message AggregatedComplianceReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.IAggregatedComplianceReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified AggregatedComplianceReport message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.AggregatedComplianceReport.verify|verify} messages.
+                     * @param message AggregatedComplianceReport message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.IAggregatedComplianceReport, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes an AggregatedComplianceReport message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns AggregatedComplianceReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.AggregatedComplianceReport;
+
+                    /**
+                     * Decodes an AggregatedComplianceReport message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns AggregatedComplianceReport
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.AggregatedComplianceReport;
+
+                    /**
+                     * Verifies an AggregatedComplianceReport message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates an AggregatedComplianceReport message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns AggregatedComplianceReport
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.AggregatedComplianceReport;
+
+                    /**
+                     * Creates a plain object from an AggregatedComplianceReport message. Also converts values to other types if specified.
+                     * @param message AggregatedComplianceReport
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.AggregatedComplianceReport, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this AggregatedComplianceReport to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for AggregatedComplianceReport
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a TargetResourceDetails. */
+                interface ITargetResourceDetails {
+
+                    /** TargetResourceDetails frameworkDeployment */
+                    frameworkDeployment?: (string|null);
+
+                    /** TargetResourceDetails targetResourceDisplayName */
+                    targetResourceDisplayName?: (string|null);
+
+                    /** TargetResourceDetails targetResource */
+                    targetResource?: (string|null);
+
+                    /** TargetResourceDetails createTime */
+                    createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TargetResourceDetails updateTime */
+                    updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TargetResourceDetails majorRevisionId */
+                    majorRevisionId?: (number|Long|string|null);
+
+                    /** TargetResourceDetails minorRevisionId */
+                    minorRevisionId?: (number|Long|string|null);
+                }
+
+                /** Represents a TargetResourceDetails. */
+                class TargetResourceDetails implements ITargetResourceDetails {
+
+                    /**
+                     * Constructs a new TargetResourceDetails.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails);
+
+                    /** TargetResourceDetails frameworkDeployment. */
+                    public frameworkDeployment: string;
+
+                    /** TargetResourceDetails targetResourceDisplayName. */
+                    public targetResourceDisplayName: string;
+
+                    /** TargetResourceDetails targetResource. */
+                    public targetResource: string;
+
+                    /** TargetResourceDetails createTime. */
+                    public createTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TargetResourceDetails updateTime. */
+                    public updateTime?: (google.protobuf.ITimestamp|null);
+
+                    /** TargetResourceDetails majorRevisionId. */
+                    public majorRevisionId: (number|Long|string);
+
+                    /** TargetResourceDetails minorRevisionId. */
+                    public minorRevisionId: (number|Long|string);
+
+                    /**
+                     * Creates a new TargetResourceDetails instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns TargetResourceDetails instance
+                     */
+                    public static create(properties?: google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails): google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails;
+
+                    /**
+                     * Encodes the specified TargetResourceDetails message. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails.verify|verify} messages.
+                     * @param message TargetResourceDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified TargetResourceDetails message, length delimited. Does not implicitly {@link google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails.verify|verify} messages.
+                     * @param message TargetResourceDetails message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.cloudsecuritycompliance.v1.ITargetResourceDetails, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a TargetResourceDetails message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns TargetResourceDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails;
+
+                    /**
+                     * Decodes a TargetResourceDetails message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns TargetResourceDetails
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails;
+
+                    /**
+                     * Verifies a TargetResourceDetails message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a TargetResourceDetails message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns TargetResourceDetails
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails;
+
+                    /**
+                     * Creates a plain object from a TargetResourceDetails message. Also converts values to other types if specified.
+                     * @param message TargetResourceDetails
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this TargetResourceDetails to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for TargetResourceDetails
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
             }
         }
     }
@@ -16278,6 +18852,113 @@ export namespace google {
 
             /**
              * Gets the default type url for Status
+             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+             * @returns The default type url
+             */
+            public static getTypeUrl(typeUrlPrefix?: string): string;
+        }
+    }
+
+    /** Namespace type. */
+    namespace type {
+
+        /** Properties of an Interval. */
+        interface IInterval {
+
+            /** Interval startTime */
+            startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime */
+            endTime?: (google.protobuf.ITimestamp|null);
+        }
+
+        /** Represents an Interval. */
+        class Interval implements IInterval {
+
+            /**
+             * Constructs a new Interval.
+             * @param [properties] Properties to set
+             */
+            constructor(properties?: google.type.IInterval);
+
+            /** Interval startTime. */
+            public startTime?: (google.protobuf.ITimestamp|null);
+
+            /** Interval endTime. */
+            public endTime?: (google.protobuf.ITimestamp|null);
+
+            /**
+             * Creates a new Interval instance using the specified properties.
+             * @param [properties] Properties to set
+             * @returns Interval instance
+             */
+            public static create(properties?: google.type.IInterval): google.type.Interval;
+
+            /**
+             * Encodes the specified Interval message. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encode(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Encodes the specified Interval message, length delimited. Does not implicitly {@link google.type.Interval.verify|verify} messages.
+             * @param message Interval message or plain object to encode
+             * @param [writer] Writer to encode to
+             * @returns Writer
+             */
+            public static encodeDelimited(message: google.type.IInterval, writer?: $protobuf.Writer): $protobuf.Writer;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer.
+             * @param reader Reader or buffer to decode from
+             * @param [length] Message length if known beforehand
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.type.Interval;
+
+            /**
+             * Decodes an Interval message from the specified reader or buffer, length delimited.
+             * @param reader Reader or buffer to decode from
+             * @returns Interval
+             * @throws {Error} If the payload is not a reader or valid buffer
+             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+             */
+            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.type.Interval;
+
+            /**
+             * Verifies an Interval message.
+             * @param message Plain object to verify
+             * @returns `null` if valid, otherwise the reason why it is not
+             */
+            public static verify(message: { [k: string]: any }): (string|null);
+
+            /**
+             * Creates an Interval message from a plain object. Also converts values to their respective internal types.
+             * @param object Plain object
+             * @returns Interval
+             */
+            public static fromObject(object: { [k: string]: any }): google.type.Interval;
+
+            /**
+             * Creates a plain object from an Interval message. Also converts values to other types if specified.
+             * @param message Interval
+             * @param [options] Conversion options
+             * @returns Plain object
+             */
+            public static toObject(message: google.type.Interval, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+            /**
+             * Converts this Interval to JSON.
+             * @returns JSON object
+             */
+            public toJSON(): { [k: string]: any };
+
+            /**
+             * Gets the default type url for Interval
              * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
              * @returns The default type url
              */

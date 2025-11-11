@@ -1,0 +1,18 @@
+[
+  "../../protos/google/ads/datamanager/v1/audience.proto",
+  "../../protos/google/ads/datamanager/v1/cart_data.proto",
+  "../../protos/google/ads/datamanager/v1/consent.proto",
+  "../../protos/google/ads/datamanager/v1/destination.proto",
+  "../../protos/google/ads/datamanager/v1/device_info.proto",
+  "../../protos/google/ads/datamanager/v1/encryption_info.proto",
+  "../../protos/google/ads/datamanager/v1/error.proto",
+  "../../protos/google/ads/datamanager/v1/event.proto",
+  "../../protos/google/ads/datamanager/v1/experimental_field.proto",
+  "../../protos/google/ads/datamanager/v1/ingestion_service.proto",
+  "../../protos/google/ads/datamanager/v1/match_rate.proto",
+  "../../protos/google/ads/datamanager/v1/processing_errors.proto",
+  "../../protos/google/ads/datamanager/v1/request_status_per_destination.proto",
+  "../../protos/google/ads/datamanager/v1/terms_of_service.proto",
+  "../../protos/google/ads/datamanager/v1/user_data.proto",
+  "../../protos/google/ads/datamanager/v1/user_properties.proto"
+]

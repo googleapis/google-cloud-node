@@ -381,6 +381,9 @@ export namespace google {
 
                         /** UpdateProductInputRequest dataSource */
                         dataSource?: (string|null);
+
+                        /** UpdateProductInputRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents an UpdateProductInputRequest. */
@@ -400,6 +403,9 @@ export namespace google {
 
                         /** UpdateProductInputRequest dataSource. */
                         public dataSource: string;
+
+                        /** UpdateProductInputRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new UpdateProductInputRequest instance using the specified properties.
@@ -487,6 +493,9 @@ export namespace google {
 
                         /** DeleteProductInputRequest dataSource */
                         dataSource?: (string|null);
+
+                        /** DeleteProductInputRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a DeleteProductInputRequest. */
@@ -503,6 +512,9 @@ export namespace google {
 
                         /** DeleteProductInputRequest dataSource. */
                         public dataSource: string;
+
+                        /** DeleteProductInputRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new DeleteProductInputRequest instance using the specified properties.
@@ -921,6 +933,15 @@ export namespace google {
                         /** ProductAttributes minHandlingTime */
                         minHandlingTime?: (number|Long|string|null);
 
+                        /** ProductAttributes shippingHandlingBusinessDays */
+                        shippingHandlingBusinessDays?: (google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig[]|null);
+
+                        /** ProductAttributes shippingTransitBusinessDays */
+                        shippingTransitBusinessDays?: (google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig[]|null);
+
+                        /** ProductAttributes handlingCutoffTimes */
+                        handlingCutoffTimes?: (google.shopping.merchant.products.v1.IHandlingCutoffTime[]|null);
+
                         /** ProductAttributes shippingLabel */
                         shippingLabel?: (string|null);
 
@@ -1210,6 +1231,15 @@ export namespace google {
                         /** ProductAttributes minHandlingTime. */
                         public minHandlingTime?: (number|Long|string|null);
 
+                        /** ProductAttributes shippingHandlingBusinessDays. */
+                        public shippingHandlingBusinessDays: google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig[];
+
+                        /** ProductAttributes shippingTransitBusinessDays. */
+                        public shippingTransitBusinessDays: google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig[];
+
+                        /** ProductAttributes handlingCutoffTimes. */
+                        public handlingCutoffTimes: google.shopping.merchant.products.v1.IHandlingCutoffTime[];
+
                         /** ProductAttributes shippingLabel. */
                         public shippingLabel?: (string|null);
 
@@ -1424,6 +1454,109 @@ export namespace google {
                     }
 
                     namespace ProductAttributes {
+
+                        /** Properties of a ShippingBusinessDaysConfig. */
+                        interface IShippingBusinessDaysConfig {
+
+                            /** ShippingBusinessDaysConfig country */
+                            country?: (string|null);
+
+                            /** ShippingBusinessDaysConfig businessDays */
+                            businessDays?: (string|null);
+                        }
+
+                        /** Represents a ShippingBusinessDaysConfig. */
+                        class ShippingBusinessDaysConfig implements IShippingBusinessDaysConfig {
+
+                            /**
+                             * Constructs a new ShippingBusinessDaysConfig.
+                             * @param [properties] Properties to set
+                             */
+                            constructor(properties?: google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig);
+
+                            /** ShippingBusinessDaysConfig country. */
+                            public country?: (string|null);
+
+                            /** ShippingBusinessDaysConfig businessDays. */
+                            public businessDays?: (string|null);
+
+                            /**
+                             * Creates a new ShippingBusinessDaysConfig instance using the specified properties.
+                             * @param [properties] Properties to set
+                             * @returns ShippingBusinessDaysConfig instance
+                             */
+                            public static create(properties?: google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig): google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig;
+
+                            /**
+                             * Encodes the specified ShippingBusinessDaysConfig message. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.verify|verify} messages.
+                             * @param message ShippingBusinessDaysConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encode(message: google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Encodes the specified ShippingBusinessDaysConfig message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig.verify|verify} messages.
+                             * @param message ShippingBusinessDaysConfig message or plain object to encode
+                             * @param [writer] Writer to encode to
+                             * @returns Writer
+                             */
+                            public static encodeDelimited(message: google.shopping.merchant.products.v1.ProductAttributes.IShippingBusinessDaysConfig, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                            /**
+                             * Decodes a ShippingBusinessDaysConfig message from the specified reader or buffer.
+                             * @param reader Reader or buffer to decode from
+                             * @param [length] Message length if known beforehand
+                             * @returns ShippingBusinessDaysConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig;
+
+                            /**
+                             * Decodes a ShippingBusinessDaysConfig message from the specified reader or buffer, length delimited.
+                             * @param reader Reader or buffer to decode from
+                             * @returns ShippingBusinessDaysConfig
+                             * @throws {Error} If the payload is not a reader or valid buffer
+                             * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                             */
+                            public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig;
+
+                            /**
+                             * Verifies a ShippingBusinessDaysConfig message.
+                             * @param message Plain object to verify
+                             * @returns `null` if valid, otherwise the reason why it is not
+                             */
+                            public static verify(message: { [k: string]: any }): (string|null);
+
+                            /**
+                             * Creates a ShippingBusinessDaysConfig message from a plain object. Also converts values to their respective internal types.
+                             * @param object Plain object
+                             * @returns ShippingBusinessDaysConfig
+                             */
+                            public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig;
+
+                            /**
+                             * Creates a plain object from a ShippingBusinessDaysConfig message. Also converts values to other types if specified.
+                             * @param message ShippingBusinessDaysConfig
+                             * @param [options] Conversion options
+                             * @returns Plain object
+                             */
+                            public static toObject(message: google.shopping.merchant.products.v1.ProductAttributes.ShippingBusinessDaysConfig, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                            /**
+                             * Converts this ShippingBusinessDaysConfig to JSON.
+                             * @returns JSON object
+                             */
+                            public toJSON(): { [k: string]: any };
+
+                            /**
+                             * Gets the default type url for ShippingBusinessDaysConfig
+                             * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                             * @returns The default type url
+                             */
+                            public static getTypeUrl(typeUrlPrefix?: string): string;
+                        }
 
                         /** Properties of a CarrierShipping. */
                         interface ICarrierShipping {
@@ -2574,6 +2707,12 @@ export namespace google {
 
                         /** Shipping maxTransitTime */
                         maxTransitTime?: (number|Long|string|null);
+
+                        /** Shipping handlingCutoffTime */
+                        handlingCutoffTime?: (string|null);
+
+                        /** Shipping handlingCutoffTimezone */
+                        handlingCutoffTimezone?: (string|null);
                     }
 
                     /** Represents a Shipping. */
@@ -2617,6 +2756,12 @@ export namespace google {
 
                         /** Shipping maxTransitTime. */
                         public maxTransitTime?: (number|Long|string|null);
+
+                        /** Shipping handlingCutoffTime. */
+                        public handlingCutoffTime?: (string|null);
+
+                        /** Shipping handlingCutoffTimezone. */
+                        public handlingCutoffTimezone?: (string|null);
 
                         /**
                          * Creates a new Shipping instance using the specified properties.
@@ -4200,6 +4345,121 @@ export namespace google {
                         public static getTypeUrl(typeUrlPrefix?: string): string;
                     }
 
+                    /** Properties of a HandlingCutoffTime. */
+                    interface IHandlingCutoffTime {
+
+                        /** HandlingCutoffTime country */
+                        country?: (string|null);
+
+                        /** HandlingCutoffTime cutoffTime */
+                        cutoffTime?: (string|null);
+
+                        /** HandlingCutoffTime cutoffTimezone */
+                        cutoffTimezone?: (string|null);
+
+                        /** HandlingCutoffTime disableDeliveryAfterCutoff */
+                        disableDeliveryAfterCutoff?: (boolean|null);
+                    }
+
+                    /** Represents a HandlingCutoffTime. */
+                    class HandlingCutoffTime implements IHandlingCutoffTime {
+
+                        /**
+                         * Constructs a new HandlingCutoffTime.
+                         * @param [properties] Properties to set
+                         */
+                        constructor(properties?: google.shopping.merchant.products.v1.IHandlingCutoffTime);
+
+                        /** HandlingCutoffTime country. */
+                        public country?: (string|null);
+
+                        /** HandlingCutoffTime cutoffTime. */
+                        public cutoffTime?: (string|null);
+
+                        /** HandlingCutoffTime cutoffTimezone. */
+                        public cutoffTimezone?: (string|null);
+
+                        /** HandlingCutoffTime disableDeliveryAfterCutoff. */
+                        public disableDeliveryAfterCutoff?: (boolean|null);
+
+                        /**
+                         * Creates a new HandlingCutoffTime instance using the specified properties.
+                         * @param [properties] Properties to set
+                         * @returns HandlingCutoffTime instance
+                         */
+                        public static create(properties?: google.shopping.merchant.products.v1.IHandlingCutoffTime): google.shopping.merchant.products.v1.HandlingCutoffTime;
+
+                        /**
+                         * Encodes the specified HandlingCutoffTime message. Does not implicitly {@link google.shopping.merchant.products.v1.HandlingCutoffTime.verify|verify} messages.
+                         * @param message HandlingCutoffTime message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encode(message: google.shopping.merchant.products.v1.IHandlingCutoffTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Encodes the specified HandlingCutoffTime message, length delimited. Does not implicitly {@link google.shopping.merchant.products.v1.HandlingCutoffTime.verify|verify} messages.
+                         * @param message HandlingCutoffTime message or plain object to encode
+                         * @param [writer] Writer to encode to
+                         * @returns Writer
+                         */
+                        public static encodeDelimited(message: google.shopping.merchant.products.v1.IHandlingCutoffTime, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                        /**
+                         * Decodes a HandlingCutoffTime message from the specified reader or buffer.
+                         * @param reader Reader or buffer to decode from
+                         * @param [length] Message length if known beforehand
+                         * @returns HandlingCutoffTime
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.shopping.merchant.products.v1.HandlingCutoffTime;
+
+                        /**
+                         * Decodes a HandlingCutoffTime message from the specified reader or buffer, length delimited.
+                         * @param reader Reader or buffer to decode from
+                         * @returns HandlingCutoffTime
+                         * @throws {Error} If the payload is not a reader or valid buffer
+                         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                         */
+                        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.shopping.merchant.products.v1.HandlingCutoffTime;
+
+                        /**
+                         * Verifies a HandlingCutoffTime message.
+                         * @param message Plain object to verify
+                         * @returns `null` if valid, otherwise the reason why it is not
+                         */
+                        public static verify(message: { [k: string]: any }): (string|null);
+
+                        /**
+                         * Creates a HandlingCutoffTime message from a plain object. Also converts values to their respective internal types.
+                         * @param object Plain object
+                         * @returns HandlingCutoffTime
+                         */
+                        public static fromObject(object: { [k: string]: any }): google.shopping.merchant.products.v1.HandlingCutoffTime;
+
+                        /**
+                         * Creates a plain object from a HandlingCutoffTime message. Also converts values to other types if specified.
+                         * @param message HandlingCutoffTime
+                         * @param [options] Conversion options
+                         * @returns Plain object
+                         */
+                        public static toObject(message: google.shopping.merchant.products.v1.HandlingCutoffTime, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                        /**
+                         * Converts this HandlingCutoffTime to JSON.
+                         * @returns JSON object
+                         */
+                        public toJSON(): { [k: string]: any };
+
+                        /**
+                         * Gets the default type url for HandlingCutoffTime
+                         * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                         * @returns The default type url
+                         */
+                        public static getTypeUrl(typeUrlPrefix?: string): string;
+                    }
+
                     /** Represents a ProductsService */
                     class ProductsService extends $protobuf.rpc.Service {
 
@@ -4428,6 +4688,9 @@ export namespace google {
 
                         /** GetProductRequest name */
                         name?: (string|null);
+
+                        /** GetProductRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a GetProductRequest. */
@@ -4441,6 +4704,9 @@ export namespace google {
 
                         /** GetProductRequest name. */
                         public name: string;
+
+                        /** GetProductRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new GetProductRequest instance using the specified properties.
@@ -5088,6 +5354,9 @@ export namespace google {
 
                         /** UpdateProductInputRequest dataSource */
                         dataSource?: (string|null);
+
+                        /** UpdateProductInputRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents an UpdateProductInputRequest. */
@@ -5107,6 +5376,9 @@ export namespace google {
 
                         /** UpdateProductInputRequest dataSource. */
                         public dataSource: string;
+
+                        /** UpdateProductInputRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new UpdateProductInputRequest instance using the specified properties.
@@ -5194,6 +5466,9 @@ export namespace google {
 
                         /** DeleteProductInputRequest dataSource */
                         dataSource?: (string|null);
+
+                        /** DeleteProductInputRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a DeleteProductInputRequest. */
@@ -5210,6 +5485,9 @@ export namespace google {
 
                         /** DeleteProductInputRequest dataSource. */
                         public dataSource: string;
+
+                        /** DeleteProductInputRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new DeleteProductInputRequest instance using the specified properties.
@@ -6997,6 +7275,12 @@ export namespace google {
 
                         /** Shipping maxTransitTime */
                         maxTransitTime?: (number|Long|string|null);
+
+                        /** Shipping handlingCutoffTime */
+                        handlingCutoffTime?: (string|null);
+
+                        /** Shipping handlingCutoffTimezone */
+                        handlingCutoffTimezone?: (string|null);
                     }
 
                     /** Represents a Shipping. */
@@ -7040,6 +7324,12 @@ export namespace google {
 
                         /** Shipping maxTransitTime. */
                         public maxTransitTime?: (number|Long|string|null);
+
+                        /** Shipping handlingCutoffTime. */
+                        public handlingCutoffTime?: (string|null);
+
+                        /** Shipping handlingCutoffTimezone. */
+                        public handlingCutoffTimezone?: (string|null);
 
                         /**
                          * Creates a new Shipping instance using the specified properties.
@@ -8851,6 +9141,9 @@ export namespace google {
 
                         /** GetProductRequest name */
                         name?: (string|null);
+
+                        /** GetProductRequest productIdBase64UrlEncoded */
+                        productIdBase64UrlEncoded?: (boolean|null);
                     }
 
                     /** Represents a GetProductRequest. */
@@ -8864,6 +9157,9 @@ export namespace google {
 
                         /** GetProductRequest name. */
                         public name: string;
+
+                        /** GetProductRequest productIdBase64UrlEncoded. */
+                        public productIdBase64UrlEncoded: boolean;
 
                         /**
                          * Creates a new GetProductRequest instance using the specified properties.

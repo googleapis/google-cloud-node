@@ -46,7 +46,7 @@ function main(parent) {
   /**
    *  Optional. Returned conversations will match criteria specified within the
    *  filter. ListConversations allows filtering by:
-   *   * agent_id
+   *   * agents
    *   * labels
    */
   // const filter = 'abc123'

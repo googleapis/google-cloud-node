@@ -205,6 +205,9 @@ export class DepServiceClient {
       httpRoutePathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/httpRoutes/{http_route}'
       ),
+      lbEdgeExtensionPathTemplate: new this._gaxModule.PathTemplate(
+        'projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}'
+      ),
       lbRouteExtensionPathTemplate: new this._gaxModule.PathTemplate(
         'projects/{project}/locations/{location}/lbRouteExtensions/{lb_route_extension}'
       ),
@@ -251,6 +254,8 @@ export class DepServiceClient {
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'lbTrafficExtensions'),
       listLbRouteExtensions:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'lbRouteExtensions'),
+      listLbEdgeExtensions:
+          new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'lbEdgeExtensions'),
       listAuthzExtensions:
           new this._gaxModule.PageDescriptor('pageToken', 'nextPageToken', 'authzExtensions')
     };
@@ -295,6 +300,18 @@ export class DepServiceClient {
       '.google.protobuf.Empty') as gax.protobuf.Type;
     const deleteLbRouteExtensionMetadata = protoFilesRoot.lookup(
       '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const createLbEdgeExtensionResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.LbEdgeExtension') as gax.protobuf.Type;
+    const createLbEdgeExtensionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const updateLbEdgeExtensionResponse = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.LbEdgeExtension') as gax.protobuf.Type;
+    const updateLbEdgeExtensionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
+    const deleteLbEdgeExtensionResponse = protoFilesRoot.lookup(
+      '.google.protobuf.Empty') as gax.protobuf.Type;
+    const deleteLbEdgeExtensionMetadata = protoFilesRoot.lookup(
+      '.google.cloud.networkservices.v1.OperationMetadata') as gax.protobuf.Type;
     const createAuthzExtensionResponse = protoFilesRoot.lookup(
       '.google.cloud.networkservices.v1.AuthzExtension') as gax.protobuf.Type;
     const createAuthzExtensionMetadata = protoFilesRoot.lookup(
@@ -333,6 +350,18 @@ export class DepServiceClient {
         this.operationsClient,
         deleteLbRouteExtensionResponse.decode.bind(deleteLbRouteExtensionResponse),
         deleteLbRouteExtensionMetadata.decode.bind(deleteLbRouteExtensionMetadata)),
+      createLbEdgeExtension: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        createLbEdgeExtensionResponse.decode.bind(createLbEdgeExtensionResponse),
+        createLbEdgeExtensionMetadata.decode.bind(createLbEdgeExtensionMetadata)),
+      updateLbEdgeExtension: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        updateLbEdgeExtensionResponse.decode.bind(updateLbEdgeExtensionResponse),
+        updateLbEdgeExtensionMetadata.decode.bind(updateLbEdgeExtensionMetadata)),
+      deleteLbEdgeExtension: new this._gaxModule.LongrunningDescriptor(
+        this.operationsClient,
+        deleteLbEdgeExtensionResponse.decode.bind(deleteLbEdgeExtensionResponse),
+        deleteLbEdgeExtensionMetadata.decode.bind(deleteLbEdgeExtensionMetadata)),
       createAuthzExtension: new this._gaxModule.LongrunningDescriptor(
         this.operationsClient,
         createAuthzExtensionResponse.decode.bind(createAuthzExtensionResponse),
@@ -390,7 +419,7 @@ export class DepServiceClient {
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
     const depServiceStubMethods =
-        ['listLbTrafficExtensions', 'getLbTrafficExtension', 'createLbTrafficExtension', 'updateLbTrafficExtension', 'deleteLbTrafficExtension', 'listLbRouteExtensions', 'getLbRouteExtension', 'createLbRouteExtension', 'updateLbRouteExtension', 'deleteLbRouteExtension', 'listAuthzExtensions', 'getAuthzExtension', 'createAuthzExtension', 'updateAuthzExtension', 'deleteAuthzExtension'];
+        ['listLbTrafficExtensions', 'getLbTrafficExtension', 'createLbTrafficExtension', 'updateLbTrafficExtension', 'deleteLbTrafficExtension', 'listLbRouteExtensions', 'getLbRouteExtension', 'createLbRouteExtension', 'updateLbRouteExtension', 'deleteLbRouteExtension', 'listLbEdgeExtensions', 'getLbEdgeExtension', 'createLbEdgeExtension', 'updateLbEdgeExtension', 'deleteLbEdgeExtension', 'listAuthzExtensions', 'getAuthzExtension', 'createAuthzExtension', 'updateAuthzExtension', 'deleteAuthzExtension'];
     for (const methodName of depServiceStubMethods) {
       const callPromise = this.depServiceStub.then(
         stub => (...args: Array<{}>) => {
@@ -677,6 +706,102 @@ export class DepServiceClient {
         {}|undefined
       ]) => {
         this._log.info('getLbRouteExtension response %j', response);
+        return [response, options, rawResponse];
+      }).catch((error: any) => {
+        if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
+          const protos = this._gaxModule.protobuf.Root.fromJSON(jsonProtos) as unknown as gax.protobuf.Type;
+          error.statusDetails = decodeAnyProtosInArray(error.statusDetails, protos);
+        }
+        throw error;
+      });
+  }
+/**
+ * Gets details of the specified `LbEdgeExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. A name of the `LbEdgeExtension` resource to get. Must be in the
+ *   format
+ *   `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing {@link protos.google.cloud.networkservices.v1.LbEdgeExtension|LbEdgeExtension}.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.get_lb_edge_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_GetLbEdgeExtension_async
+ */
+  getLbEdgeExtension(
+      request?: protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbEdgeExtension,
+        protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest|undefined, {}|undefined
+      ]>;
+  getLbEdgeExtension(
+      request: protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.ILbEdgeExtension,
+          protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLbEdgeExtension(
+      request: protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest,
+      callback: Callback<
+          protos.google.cloud.networkservices.v1.ILbEdgeExtension,
+          protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest|null|undefined,
+          {}|null|undefined>): void;
+  getLbEdgeExtension(
+      request?: protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.networkservices.v1.ILbEdgeExtension,
+          protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.networkservices.v1.ILbEdgeExtension,
+          protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbEdgeExtension,
+        protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    this._log.info('getLbEdgeExtension request %j', request);
+    const wrappedCallback: Callback<
+        protos.google.cloud.networkservices.v1.ILbEdgeExtension,
+        protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest|null|undefined,
+        {}|null|undefined>|undefined = callback
+      ? (error, response, options, rawResponse) => {
+          this._log.info('getLbEdgeExtension response %j', response);
+          callback!(error, response, options, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    return this.innerApiCalls.getLbEdgeExtension(request, options, wrappedCallback)
+      ?.then(([response, options, rawResponse]: [
+        protos.google.cloud.networkservices.v1.ILbEdgeExtension,
+        protos.google.cloud.networkservices.v1.IGetLbEdgeExtensionRequest|undefined,
+        {}|undefined
+      ]) => {
+        this._log.info('getLbEdgeExtension response %j', response);
         return [response, options, rawResponse];
       }).catch((error: any) => {
         if (error && 'statusDetails' in error && error.statusDetails instanceof Array) {
@@ -1533,6 +1658,379 @@ export class DepServiceClient {
     return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>;
   }
 /**
+ * Creates a new `LbEdgeExtension` resource in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The parent resource of the `LbEdgeExtension` resource. Must be in
+ *   the format `projects/{project}/locations/{location}`.
+ * @param {string} request.lbEdgeExtensionId
+ *   Required. User-provided ID of the `LbEdgeExtension` resource to be created.
+ * @param {google.cloud.networkservices.v1.LbEdgeExtension} request.lbEdgeExtension
+ *   Required. `LbEdgeExtension` resource to be created.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server ignores the second request This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.create_lb_edge_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_CreateLbEdgeExtension_async
+ */
+  createLbEdgeExtension(
+      request?: protos.google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  createLbEdgeExtension(
+      request: protos.google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createLbEdgeExtension(
+      request: protos.google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  createLbEdgeExtension(
+      request?: protos.google.cloud.networkservices.v1.ICreateLbEdgeExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('createLbEdgeExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('createLbEdgeExtension request %j', request);
+    return this.innerApiCalls.createLbEdgeExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('createLbEdgeExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `createLbEdgeExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.create_lb_edge_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_CreateLbEdgeExtension_async
+ */
+  async checkCreateLbEdgeExtensionProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.LbEdgeExtension, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('createLbEdgeExtension long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.createLbEdgeExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.LbEdgeExtension, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
+ * Updates the parameters of the specified `LbEdgeExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.protobuf.FieldMask} [request.updateMask]
+ *   Optional. Used to specify the fields to be overwritten in the
+ *   `LbEdgeExtension` resource by the update.
+ *   The fields specified in the `update_mask` are relative to the resource, not
+ *   the full request. A field is overwritten if it is in the mask. If the
+ *   user does not specify a mask, then all fields are overwritten.
+ * @param {google.cloud.networkservices.v1.LbEdgeExtension} request.lbEdgeExtension
+ *   Required. `LbEdgeExtension` resource being updated.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for 60 minutes since the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server ignores the second request This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.update_lb_edge_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_UpdateLbEdgeExtension_async
+ */
+  updateLbEdgeExtension(
+      request?: protos.google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  updateLbEdgeExtension(
+      request: protos.google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateLbEdgeExtension(
+      request: protos.google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  updateLbEdgeExtension(
+      request?: protos.google.cloud.networkservices.v1.IUpdateLbEdgeExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'lb_edge_extension.name': request.lbEdgeExtension!.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('updateLbEdgeExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('updateLbEdgeExtension request %j', request);
+    return this.innerApiCalls.updateLbEdgeExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.cloud.networkservices.v1.ILbEdgeExtension, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('updateLbEdgeExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `updateLbEdgeExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.update_lb_edge_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_UpdateLbEdgeExtension_async
+ */
+  async checkUpdateLbEdgeExtensionProgress(name: string): Promise<LROperation<protos.google.cloud.networkservices.v1.LbEdgeExtension, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('updateLbEdgeExtension long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.updateLbEdgeExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.cloud.networkservices.v1.LbEdgeExtension, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
+ * Deletes the specified `LbEdgeExtension` resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.name
+ *   Required. The name of the `LbEdgeExtension` resource to delete. Must be in
+ *   the format
+ *   `projects/{project}/locations/{location}/lbEdgeExtensions/{lb_edge_extension}`.
+ * @param {string} [request.requestId]
+ *   Optional. An optional request ID to identify requests. Specify a unique
+ *   request ID so that if you must retry your request, the server can ignore
+ *   the request if it has already been completed. The server guarantees
+ *   that for 60 minutes after the first request.
+ *
+ *   For example, consider a situation where you make an initial request and the
+ *   request times out. If you make the request again with the same request
+ *   ID, the server ignores the second request This prevents
+ *   clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is
+ *   not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing
+ *   a long running operation. Its `promise()` method returns a promise
+ *   you can `await` for.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.delete_lb_edge_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_DeleteLbEdgeExtension_async
+ */
+  deleteLbEdgeExtension(
+      request?: protos.google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest,
+      options?: CallOptions):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>;
+  deleteLbEdgeExtension(
+      request: protos.google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest,
+      options: CallOptions,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteLbEdgeExtension(
+      request: protos.google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest,
+      callback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>): void;
+  deleteLbEdgeExtension(
+      request?: protos.google.cloud.networkservices.v1.IDeleteLbEdgeExtensionRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+        protos.google.longrunning.IOperation|undefined, {}|undefined
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'name': request.name ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: Callback<
+          LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+          protos.google.longrunning.IOperation|null|undefined,
+          {}|null|undefined>|undefined = callback
+      ? (error, response, rawResponse, _) => {
+          this._log.info('deleteLbEdgeExtension response %j', rawResponse);
+          callback!(error, response, rawResponse, _); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('deleteLbEdgeExtension request %j', request);
+    return this.innerApiCalls.deleteLbEdgeExtension(request, options, wrappedCallback)
+    ?.then(([response, rawResponse, _]: [
+      LROperation<protos.google.protobuf.IEmpty, protos.google.cloud.networkservices.v1.IOperationMetadata>,
+      protos.google.longrunning.IOperation|undefined, {}|undefined
+    ]) => {
+      this._log.info('deleteLbEdgeExtension response %j', rawResponse);
+      return [response, rawResponse, _];
+    });
+  }
+/**
+ * Check the status of the long running operation returned by `deleteLbEdgeExtension()`.
+ * @param {String} name
+ *   The operation name that will be passed.
+ * @returns {Promise} - The promise which resolves to an object.
+ *   The decoded operation object has result and metadata field to get information from.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.delete_lb_edge_extension.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_DeleteLbEdgeExtension_async
+ */
+  async checkDeleteLbEdgeExtensionProgress(name: string): Promise<LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>>{
+    this._log.info('deleteLbEdgeExtension long-running');
+    const request = new this._gaxModule.operationsProtos.google.longrunning.GetOperationRequest({name});
+    const [operation] = await this.operationsClient.getOperation(request);
+    const decodeOperation = new this._gaxModule.Operation(operation, this.descriptors.longrunning.deleteLbEdgeExtension, this._gaxModule.createDefaultBackoffSettings());
+    return decodeOperation as LROperation<protos.google.protobuf.Empty, protos.google.cloud.networkservices.v1.OperationMetadata>;
+  }
+/**
  * Creates a new `AuthzExtension` resource in a given project
  * and location.
  *
@@ -2331,6 +2829,218 @@ export class DepServiceClient {
       request as {},
       callSettings
     ) as AsyncIterable<protos.google.cloud.networkservices.v1.ILbRouteExtension>;
+  }
+ /**
+ * Lists `LbEdgeExtension` resources in a given project and location.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `LbEdgeExtension`
+ *   resources are listed. These values are specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint about how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is Array of {@link protos.google.cloud.networkservices.v1.LbEdgeExtension|LbEdgeExtension}.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed and will merge results from all the pages into this array.
+ *   Note that it can affect your quota.
+ *   We recommend using `listLbEdgeExtensionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listLbEdgeExtensions(
+      request?: protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbEdgeExtension[],
+        protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse
+      ]>;
+  listLbEdgeExtensions(
+      request: protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+      options: CallOptions,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbEdgeExtension>): void;
+  listLbEdgeExtensions(
+      request: protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+      callback: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbEdgeExtension>): void;
+  listLbEdgeExtensions(
+      request?: protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+      optionsOrCallback?: CallOptions|PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbEdgeExtension>,
+      callback?: PaginationCallback<
+          protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+          protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse|null|undefined,
+          protos.google.cloud.networkservices.v1.ILbEdgeExtension>):
+      Promise<[
+        protos.google.cloud.networkservices.v1.ILbEdgeExtension[],
+        protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse
+      ]>|void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    }
+    else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    this.initialize().catch(err => {throw err});
+    const wrappedCallback: PaginationCallback<
+      protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+      protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse|null|undefined,
+      protos.google.cloud.networkservices.v1.ILbEdgeExtension>|undefined = callback
+      ? (error, values, nextPageRequest, rawResponse) => {
+          this._log.info('listLbEdgeExtensions values %j', values);
+          callback!(error, values, nextPageRequest, rawResponse); // We verified callback above.
+        }
+      : undefined;
+    this._log.info('listLbEdgeExtensions request %j', request);
+    return this.innerApiCalls
+      .listLbEdgeExtensions(request, options, wrappedCallback)
+      ?.then(([response, input, output]: [
+        protos.google.cloud.networkservices.v1.ILbEdgeExtension[],
+        protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest|null,
+        protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsResponse
+      ]) => {
+        this._log.info('listLbEdgeExtensions values %j', response);
+        return [response, input, output];
+      });
+  }
+
+/**
+ * Equivalent to `listLbEdgeExtensions`, but returns a NodeJS Stream object.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `LbEdgeExtension`
+ *   resources are listed. These values are specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint about how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Stream}
+ *   An object stream which emits an object representing {@link protos.google.cloud.networkservices.v1.LbEdgeExtension|LbEdgeExtension} on 'data' event.
+ *   The client library will perform auto-pagination by default: it will call the API as many
+ *   times as needed. Note that it can affect your quota.
+ *   We recommend using `listLbEdgeExtensionsAsync()`
+ *   method described below for async iteration which you can stop as needed.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ */
+  listLbEdgeExtensionsStream(
+      request?: protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+      options?: CallOptions):
+    Transform{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listLbEdgeExtensions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listLbEdgeExtensions stream %j', request);
+    return this.descriptors.page.listLbEdgeExtensions.createStream(
+      this.innerApiCalls.listLbEdgeExtensions as GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+/**
+ * Equivalent to `listLbEdgeExtensions`, but returns an iterable object.
+ *
+ * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.parent
+ *   Required. The project and location from which the `LbEdgeExtension`
+ *   resources are listed. These values are specified in the following format:
+ *   `projects/{project}/locations/{location}`.
+ * @param {number} [request.pageSize]
+ *   Optional. Requested page size. The server might return fewer items than
+ *   requested. If unspecified, the server picks an appropriate default.
+ * @param {string} [request.pageToken]
+ *   Optional. A token identifying a page of results that the server returns.
+ * @param {string} [request.filter]
+ *   Optional. Filtering results.
+ * @param {string} [request.orderBy]
+ *   Optional. Hint about how to order the results.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Object}
+ *   An iterable Object that allows {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols | async iteration }.
+ *   When you iterate the returned iterable, each element will be an object representing
+ *   {@link protos.google.cloud.networkservices.v1.LbEdgeExtension|LbEdgeExtension}. The API will be called under the hood as needed, once per the page,
+ *   so you can stop the iteration when you don't need more results.
+ *   Please see the {@link https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination | documentation }
+ *   for more details and examples.
+ * @example <caption>include:samples/generated/v1/dep_service.list_lb_edge_extensions.js</caption>
+ * region_tag:networkservices_v1_generated_DepService_ListLbEdgeExtensions_async
+ */
+  listLbEdgeExtensionsAsync(
+      request?: protos.google.cloud.networkservices.v1.IListLbEdgeExtensionsRequest,
+      options?: CallOptions):
+    AsyncIterable<protos.google.cloud.networkservices.v1.ILbEdgeExtension>{
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = this._gaxModule.routingHeader.fromParams({
+      'parent': request.parent ?? '',
+    });
+    const defaultCallSettings = this._defaults['listLbEdgeExtensions'];
+    const callSettings = defaultCallSettings.merge(options);
+    this.initialize().catch(err => {throw err});
+    this._log.info('listLbEdgeExtensions iterate %j', request);
+    return this.descriptors.page.listLbEdgeExtensions.asyncIterate(
+      this.innerApiCalls['listLbEdgeExtensions'] as GaxCall,
+      request as {},
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.networkservices.v1.ILbEdgeExtension>;
   }
  /**
  * Lists `AuthzExtension` resources in a given project and location.
@@ -3293,6 +4003,55 @@ export class DepServiceClient {
    */
   matchHttpRouteFromHttpRouteName(httpRouteName: string) {
     return this.pathTemplates.httpRoutePathTemplate.match(httpRouteName).http_route;
+  }
+
+  /**
+   * Return a fully-qualified lbEdgeExtension resource name string.
+   *
+   * @param {string} project
+   * @param {string} location
+   * @param {string} lb_edge_extension
+   * @returns {string} Resource name string.
+   */
+  lbEdgeExtensionPath(project:string,location:string,lbEdgeExtension:string) {
+    return this.pathTemplates.lbEdgeExtensionPathTemplate.render({
+      project: project,
+      location: location,
+      lb_edge_extension: lbEdgeExtension,
+    });
+  }
+
+  /**
+   * Parse the project from LbEdgeExtension resource.
+   *
+   * @param {string} lbEdgeExtensionName
+   *   A fully-qualified path representing LbEdgeExtension resource.
+   * @returns {string} A string representing the project.
+   */
+  matchProjectFromLbEdgeExtensionName(lbEdgeExtensionName: string) {
+    return this.pathTemplates.lbEdgeExtensionPathTemplate.match(lbEdgeExtensionName).project;
+  }
+
+  /**
+   * Parse the location from LbEdgeExtension resource.
+   *
+   * @param {string} lbEdgeExtensionName
+   *   A fully-qualified path representing LbEdgeExtension resource.
+   * @returns {string} A string representing the location.
+   */
+  matchLocationFromLbEdgeExtensionName(lbEdgeExtensionName: string) {
+    return this.pathTemplates.lbEdgeExtensionPathTemplate.match(lbEdgeExtensionName).location;
+  }
+
+  /**
+   * Parse the lb_edge_extension from LbEdgeExtension resource.
+   *
+   * @param {string} lbEdgeExtensionName
+   *   A fully-qualified path representing LbEdgeExtension resource.
+   * @returns {string} A string representing the lb_edge_extension.
+   */
+  matchLbEdgeExtensionFromLbEdgeExtensionName(lbEdgeExtensionName: string) {
+    return this.pathTemplates.lbEdgeExtensionPathTemplate.match(lbEdgeExtensionName).lb_edge_extension;
   }
 
   /**

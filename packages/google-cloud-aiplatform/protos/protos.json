@@ -9052,7 +9052,9 @@
                         "GETTING_CONTAINER_IMAGE": 9,
                         "STARTING_MODEL_SERVER": 3,
                         "FINISHING_UP": 4,
-                        "DEPLOYMENT_TERMINATED": 10
+                        "DEPLOYMENT_TERMINATED": 10,
+                        "SUCCESSFULLY_DEPLOYED": 11,
+                        "FAILED_TO_DEPLOY": 12
                       }
                     },
                     "EndpointService": {
@@ -13361,14 +13363,14 @@
                             },
                             "enableDirectBigtableAccess": {
                               "type": "bool",
-                              "id": 2,
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "bigtableMetadata": {
                               "type": "BigtableMetadata",
-                              "id": 3,
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -14203,7 +14205,7 @@
                         },
                         "bigtableMetadata": {
                           "type": "BigtableMetadata",
-                          "id": 21,
+                          "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -49025,7 +49027,9 @@
                         "GETTING_CONTAINER_IMAGE": 9,
                         "STARTING_MODEL_SERVER": 3,
                         "FINISHING_UP": 4,
-                        "DEPLOYMENT_TERMINATED": 10
+                        "DEPLOYMENT_TERMINATED": 10,
+                        "SUCCESSFULLY_DEPLOYED": 11,
+                        "FAILED_TO_DEPLOY": 12
                       }
                     },
                     "EndpointService": {
@@ -56442,14 +56446,14 @@
                             },
                             "enableDirectBigtableAccess": {
                               "type": "bool",
-                              "id": 2,
+                              "id": 3,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
                             "bigtableMetadata": {
                               "type": "BigtableMetadata",
-                              "id": 3,
+                              "id": 4,
                               "options": {
                                 "(google.api.field_behavior)": "OUTPUT_ONLY"
                               }
@@ -57306,7 +57310,7 @@
                         },
                         "bigtableMetadata": {
                           "type": "BigtableMetadata",
-                          "id": 21,
+                          "id": 22,
                           "options": {
                             "(google.api.field_behavior)": "OUTPUT_ONLY"
                           }
@@ -82615,13 +82619,6 @@
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
                         },
-                        "transferToAgent": {
-                          "type": "bool",
-                          "id": 5,
-                          "options": {
-                            "deprecated": true
-                          }
-                        },
                         "escalate": {
                           "type": "bool",
                           "id": 6,
@@ -82984,6 +82981,13 @@
                         "filter": {
                           "type": "string",
                           "id": 4,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
+                        },
+                        "orderBy": {
+                          "type": "string",
+                          "id": 5,
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }

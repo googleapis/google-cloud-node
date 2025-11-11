@@ -20,3 +20,4 @@ export {AuditClient} from './audit_client';
 export {CmEnrollmentServiceClient} from './cm_enrollment_service_client';
 export {ConfigClient} from './config_client';
 export {DeploymentClient} from './deployment_client';
+export {MonitoringClient} from './monitoring_client';

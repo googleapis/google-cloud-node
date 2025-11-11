@@ -14490,6 +14490,13 @@
                           "options": {
                             "(google.api.field_behavior)": "OPTIONAL"
                           }
+                        },
+                        "agentDesktopSource": {
+                          "type": "AgentDesktopSource",
+                          "id": 10,
+                          "options": {
+                            "(google.api.field_behavior)": "OPTIONAL"
+                          }
                         }
                       },
                       "nested": {
@@ -14499,6 +14506,16 @@
                             "HUMAN_AGENT": 1,
                             "AUTOMATED_AGENT": 2,
                             "END_USER": 3
+                          }
+                        },
+                        "AgentDesktopSource": {
+                          "values": {
+                            "AGENT_DESKTOP_SOURCE_UNSPECIFIED": 0,
+                            "LIVE_PERSON": 1,
+                            "GENESYS_CLOUD": 2,
+                            "TWILIO": 3,
+                            "SALESFORCE": 4,
+                            "OTHER": 8
                           }
                         }
                       }
@@ -24544,7 +24561,7 @@
                               "type": "string",
                               "id": 5,
                               "options": {
-                                "(google.api.field_behavior)": "OUTPUT_ONLY",
+                                "(google.api.field_behavior)": "OPTIONAL",
                                 "proto3_optional": true
                               }
                             }

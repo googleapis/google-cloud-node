@@ -335,11 +335,11 @@ export class ProductInputsServiceClient {
   // -------------------
 /**
  * [Uploads a product input to your Merchant Center
- * account](/merchant/api/guides/products/overview#upload-product-input). You
+ * account](/merchant/api/guides/products/add-manage#add_a_product). You
  * must have a products [data
- * source](/merchant/api/guides/data-sources/overview) to be able to insert a
- * product. The unique identifier of the data source is passed as a query
- * parameter in the request URL.
+ * source](/merchant/api/guides/data-sources/api-sources#create-primary-data-source)
+ * to be able to insert a product. The unique identifier of the data source is
+ * passed as a query parameter in the request URL.
  *
  * If a product input with the same contentLanguage, offerId, and dataSource
  * already exists, then the product input inserted by this method replaces
@@ -359,8 +359,8 @@ export class ProductInputsServiceClient {
  *   Required. The primary or supplemental product data source name. If the
  *   product already exists and data source provided is different, then the
  *   product will be moved to a new data source. For more information, see
- *   [Overview of Data sources
- *   sub-API](/merchant/api/guides/data-sources/overview).
+ *   [Create a primary data
+ *   source](/merchant/api/guides/data-sources/api-sources#create-primary-data-source).
  *
  *   Only API data sources are supported.
  *
@@ -488,6 +488,18 @@ export class ProductInputsServiceClient {
  *
  *   Format: `accounts/{account}/dataSources/{datasource}`. For example,
  *   `accounts/123456/dataSources/104628`.
+ * @param {boolean} [request.productIdBase64UrlEncoded]
+ *   Optional. If true, the `{productInput}` in the `name` field of the request
+ *   will be interpreted as unpadded base64url-encoded and decoded during
+ *   request processing to match the decoded value. Default value is `false`.
+ *   Use this if your `{productInput}` contains special characters, such as
+ *   forward slash
+ *   `/` or other characters that are unpadded base64url-encoded (as per RFC
+ *   7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+ *
+ *   Note that future versions of the API will only accept unpadded
+ *   base64url-encoded product ids, so we strongly recommend proactively setting
+ *   this to `true` and encoding the product ids.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.
@@ -595,6 +607,18 @@ export class ProductInputsServiceClient {
  *   input should be deleted. Format:
  *   `accounts/{account}/dataSources/{datasource}`. For example,
  *   `accounts/123456/dataSources/104628`.
+ * @param {boolean} [request.productIdBase64UrlEncoded]
+ *   Optional. If true, the `{productInput}` in the `name` field of the request
+ *   will be interpreted as unpadded base64url-encoded and decoded during
+ *   request processing to match the decoded value. Default value is `false`.
+ *   Use this if your `{productInput}` contains special characters, such as
+ *   forward slash
+ *   `/` or other characters that are unpadded base64url-encoded (as per RFC
+ *   7515: https://datatracker.ietf.org/doc/html/rfc7515#section-2).
+ *
+ *   Note that future versions of the API will only accept unpadded
+ *   base64url-encoded product ids, so we strongly recommend proactively setting
+ *   this to `true` and encoding the product ids.
  * @param {object} [options]
  *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
  * @returns {Promise} - The promise which resolves to an array.

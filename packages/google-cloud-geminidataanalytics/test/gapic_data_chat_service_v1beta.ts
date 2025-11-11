@@ -379,6 +379,114 @@ describe('v1beta.DataChatServiceClient', () => {
         });
     });
 
+    describe('deleteConversation', () => {
+        it('invokes deleteConversation without error', async () => {
+            const client = new datachatserviceModule.v1beta.DataChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteConversation = stubSimpleCall(expectedResponse);
+            const [response] = await client.deleteConversation(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConversation without error using callback', async () => {
+            const client = new datachatserviceModule.v1beta.DataChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedResponse = generateSampleMessage(
+              new protos.google.protobuf.Empty()
+            );
+            client.innerApiCalls.deleteConversation = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.deleteConversation(
+                    request,
+                    (err?: Error|null, result?: protos.google.protobuf.IEmpty|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConversation with error', async () => {
+            const client = new datachatserviceModule.v1beta.DataChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedHeaderRequestParams = `name=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.deleteConversation = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.deleteConversation(request), expectedError);
+            const actualRequest = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.deleteConversation as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes deleteConversation with closed client', async () => {
+            const client = new datachatserviceModule.v1beta.DataChatServiceClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.geminidataanalytics.v1beta.DeleteConversationRequest', ['name']);
+            request.name = defaultValue1;
+            const expectedError = new Error('The client has already been closed.');
+            client.close().catch(err => {throw err});
+            await assert.rejects(client.deleteConversation(request), expectedError);
+        });
+    });
+
     describe('getConversation', () => {
         it('invokes getConversation without error', async () => {
             const client = new datachatserviceModule.v1beta.DataChatServiceClient({

@@ -536,6 +536,44 @@ describe('v1.QuotaServiceClient', () => {
             });
         });
 
+        describe('accountLimit', async () => {
+            const fakePath = "/rendered/path/accountLimit";
+            const expectedParameters = {
+                account: "accountValue",
+                limit: "limitValue",
+            };
+            const client = new quotaserviceModule.v1.QuotaServiceClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            client.pathTemplates.accountLimitPathTemplate.render =
+                sinon.stub().returns(fakePath);
+            client.pathTemplates.accountLimitPathTemplate.match =
+                sinon.stub().returns(expectedParameters);
+
+            it('accountLimitPath', () => {
+                const result = client.accountLimitPath("accountValue", "limitValue");
+                assert.strictEqual(result, fakePath);
+                assert((client.pathTemplates.accountLimitPathTemplate.render as SinonStub)
+                    .getCall(-1).calledWith(expectedParameters));
+            });
+
+            it('matchAccountFromAccountLimitName', () => {
+                const result = client.matchAccountFromAccountLimitName(fakePath);
+                assert.strictEqual(result, "accountValue");
+                assert((client.pathTemplates.accountLimitPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+
+            it('matchLimitFromAccountLimitName', () => {
+                const result = client.matchLimitFromAccountLimitName(fakePath);
+                assert.strictEqual(result, "limitValue");
+                assert((client.pathTemplates.accountLimitPathTemplate.match as SinonStub)
+                    .getCall(-1).calledWith(fakePath));
+            });
+        });
+
         describe('quotaGroup', async () => {
             const fakePath = "/rendered/path/quotaGroup";
             const expectedParameters = {

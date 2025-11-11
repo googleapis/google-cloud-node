@@ -1278,6 +1278,13 @@
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }
                             },
+                            "storedProcedureConfig": {
+                              "type": "StoredProcedureConfig",
+                              "id": 20,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
                             "discoveryType": {
                               "type": "DiscoveryType",
                               "id": 14,
@@ -1602,6 +1609,33 @@
                                 "CATEGORY_TRANSPORTATION_AND_LOGISTICS": 18,
                                 "CATEGORY_TRAVEL_AND_TOURISM": 19,
                                 "CATEGORY_GOOGLE_EARTH_ENGINE": 20
+                              }
+                            }
+                          }
+                        },
+                        "StoredProcedureConfig": {
+                          "fields": {
+                            "enabled": {
+                              "type": "bool",
+                              "id": 1,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "allowedStoredProcedureTypes": {
+                              "rule": "repeated",
+                              "type": "StoredProcedureType",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OUTPUT_ONLY"
+                              }
+                            }
+                          },
+                          "nested": {
+                            "StoredProcedureType": {
+                              "values": {
+                                "STORED_PROCEDURE_TYPE_UNSPECIFIED": 0,
+                                "SQL_PROCEDURE": 1
                               }
                             }
                           }
@@ -2436,6 +2470,14 @@
                               "rule": "repeated",
                               "type": "MessageTransform",
                               "id": 25,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
+                            },
+                            "tags": {
+                              "keyType": "string",
+                              "type": "string",
+                              "id": 26,
                               "options": {
                                 "(google.api.field_behavior)": "OPTIONAL"
                               }

@@ -213,6 +213,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -231,6 +238,13 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -954,6 +968,21 @@
                                 "proto3_optional": true
                               }
                             },
+                            "shippingHandlingBusinessDays": {
+                              "rule": "repeated",
+                              "type": "ShippingBusinessDaysConfig",
+                              "id": 143
+                            },
+                            "shippingTransitBusinessDays": {
+                              "rule": "repeated",
+                              "type": "ShippingBusinessDaysConfig",
+                              "id": 144
+                            },
+                            "handlingCutoffTimes": {
+                              "rule": "repeated",
+                              "type": "HandlingCutoffTime",
+                              "id": 141
+                            },
                             "shippingLabel": {
                               "type": "string",
                               "id": 46,
@@ -1233,6 +1262,36 @@
                             }
                           },
                           "nested": {
+                            "ShippingBusinessDaysConfig": {
+                              "oneofs": {
+                                "_country": {
+                                  "oneof": [
+                                    "country"
+                                  ]
+                                },
+                                "_businessDays": {
+                                  "oneof": [
+                                    "businessDays"
+                                  ]
+                                }
+                              },
+                              "fields": {
+                                "country": {
+                                  "type": "string",
+                                  "id": 1,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                },
+                                "businessDays": {
+                                  "type": "string",
+                                  "id": 2,
+                                  "options": {
+                                    "proto3_optional": true
+                                  }
+                                }
+                              }
+                            },
                             "CarrierShipping": {
                               "oneofs": {
                                 "_country": {
@@ -1692,6 +1751,16 @@
                               "oneof": [
                                 "maxTransitTime"
                               ]
+                            },
+                            "_handlingCutoffTime": {
+                              "oneof": [
+                                "handlingCutoffTime"
+                              ]
+                            },
+                            "_handlingCutoffTimezone": {
+                              "oneof": [
+                                "handlingCutoffTimezone"
+                              ]
                             }
                           },
                           "fields": {
@@ -1747,6 +1816,20 @@
                             "maxTransitTime": {
                               "type": "int64",
                               "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "handlingCutoffTime": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "handlingCutoffTimezone": {
+                              "type": "string",
+                              "id": 13,
                               "options": {
                                 "proto3_optional": true
                               }
@@ -2189,6 +2272,60 @@
                             }
                           }
                         },
+                        "HandlingCutoffTime": {
+                          "oneofs": {
+                            "_country": {
+                              "oneof": [
+                                "country"
+                              ]
+                            },
+                            "_cutoffTime": {
+                              "oneof": [
+                                "cutoffTime"
+                              ]
+                            },
+                            "_cutoffTimezone": {
+                              "oneof": [
+                                "cutoffTimezone"
+                              ]
+                            },
+                            "_disableDeliveryAfterCutoff": {
+                              "oneof": [
+                                "disableDeliveryAfterCutoff"
+                              ]
+                            }
+                          },
+                          "fields": {
+                            "country": {
+                              "type": "string",
+                              "id": 1,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "cutoffTime": {
+                              "type": "string",
+                              "id": 2,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "cutoffTimezone": {
+                              "type": "string",
+                              "id": 3,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "disableDeliveryAfterCutoff": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            }
+                          }
+                        },
                         "ProductsService": {
                           "options": {
                             "(google.api.default_host)": "merchantapi.googleapis.com",
@@ -2333,6 +2470,13 @@
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/Product"
                               }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -2373,10 +2517,13 @@
                     },
                     "v1beta": {
                       "options": {
+                        "csharp_namespace": "Google.Shopping.Merchant.Products.V1Beta",
                         "go_package": "cloud.google.com/go/shopping/merchant/products/apiv1beta/productspb;productspb",
                         "java_multiple_files": true,
                         "java_outer_classname": "ProductsProto",
                         "java_package": "com.google.shopping.merchant.products.v1beta",
+                        "php_namespace": "Google\\Shopping\\Merchant\\Products\\V1beta",
+                        "ruby_package": "Google::Shopping::Merchant::Products::V1beta",
                         "(google.api.resource_definition).type": "merchantapi.googleapis.com/Account",
                         "(google.api.resource_definition).pattern": "accounts/{account}"
                       },
@@ -2573,6 +2720,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
                               }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 4,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
+                              }
                             }
                           }
                         },
@@ -2591,6 +2745,13 @@
                               "id": 2,
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED"
+                              }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 3,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }
@@ -3689,6 +3850,16 @@
                               "oneof": [
                                 "maxTransitTime"
                               ]
+                            },
+                            "_handlingCutoffTime": {
+                              "oneof": [
+                                "handlingCutoffTime"
+                              ]
+                            },
+                            "_handlingCutoffTimezone": {
+                              "oneof": [
+                                "handlingCutoffTimezone"
+                              ]
                             }
                           },
                           "fields": {
@@ -3744,6 +3915,20 @@
                             "maxTransitTime": {
                               "type": "int64",
                               "id": 11,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "handlingCutoffTime": {
+                              "type": "string",
+                              "id": 12,
+                              "options": {
+                                "proto3_optional": true
+                              }
+                            },
+                            "handlingCutoffTimezone": {
+                              "type": "string",
+                              "id": 13,
                               "options": {
                                 "proto3_optional": true
                               }
@@ -4329,6 +4514,13 @@
                               "options": {
                                 "(google.api.field_behavior)": "REQUIRED",
                                 "(google.api.resource_reference).type": "merchantapi.googleapis.com/Product"
+                              }
+                            },
+                            "productIdBase64UrlEncoded": {
+                              "type": "bool",
+                              "id": 2,
+                              "options": {
+                                "(google.api.field_behavior)": "OPTIONAL"
                               }
                             }
                           }

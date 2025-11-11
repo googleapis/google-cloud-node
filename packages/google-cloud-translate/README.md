@@ -106,6 +106,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | get glossary | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_glossary.js) |
 | get supported languages | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.get_supported_languages.js) |
 | list glossaries | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.list_glossaries.js) |
+| refine text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.refine_text.js) |
 | translate document | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_document.js) |
 | translate text | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-translate/samples/generated/v3beta1/translation_service.translate_text.js) |
 

@@ -683,6 +683,11 @@ export class DataChatServiceClient {
  * @param {google.cloud.geminidataanalytics.v1alpha.DataAgentContext} [request.dataAgentContext]
  *   Optional. Context for the chat request. Use this to chat with an Agent
  *   statelessly, without managed conversation persistence.
+ * @param {google.cloud.geminidataanalytics.v1alpha.ClientManagedResourceContext} [request.clientManagedResourceContext]
+ *   Optional. Context with client managed resources.
+ *   Some clients may not use GDA managed resources including
+ *   conversations and agents, instead they create and manage their own
+ *   conversations and agents resources.
  * @param {string} [request.project]
  *   Optional. The Google Cloud project to be used for quota and billing.
  * @param {string} request.parent

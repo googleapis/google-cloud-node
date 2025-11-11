@@ -58,6 +58,11 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 
 | Sample                      | Source Code                       |
 | --------------------------- | --------------------------------- |
+| create vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/organization_vpc_flow_logs_service.create_vpc_flow_logs_config.js) |
+| delete vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/organization_vpc_flow_logs_service.delete_vpc_flow_logs_config.js) |
+| get vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/organization_vpc_flow_logs_service.get_vpc_flow_logs_config.js) |
+| list vpc flow logs configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/organization_vpc_flow_logs_service.list_vpc_flow_logs_configs.js) |
+| update vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/organization_vpc_flow_logs_service.update_vpc_flow_logs_config.js) |
 | create connectivity test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/reachability_service.create_connectivity_test.js) |
 | delete connectivity test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/reachability_service.delete_connectivity_test.js) |
 | get connectivity test | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/reachability_service.get_connectivity_test.js) |
@@ -69,6 +74,8 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | delete vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.delete_vpc_flow_logs_config.js) |
 | get vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.get_vpc_flow_logs_config.js) |
 | list vpc flow logs configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.list_vpc_flow_logs_configs.js) |
+| query org vpc flow logs configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.query_org_vpc_flow_logs_configs.js) |
+| show effective flow logs configs | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.show_effective_flow_logs_configs.js) |
 | update vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1/vpc_flow_logs_service.update_vpc_flow_logs_config.js) |
 | create vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1beta1/organization_vpc_flow_logs_service.create_vpc_flow_logs_config.js) |
 | delete vpc flow logs config | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-networkmanagement/samples/generated/v1beta1/organization_vpc_flow_logs_service.delete_vpc_flow_logs_config.js) |

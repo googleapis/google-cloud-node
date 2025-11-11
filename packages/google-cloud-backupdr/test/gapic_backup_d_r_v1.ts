@@ -5002,6 +5002,251 @@ describe('v1.BackupDRClient', () => {
         });
     });
 
+    describe('fetchBackupsForResourceType', () => {
+        it('invokes fetchBackupsForResourceType without error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+            ];
+            client.innerApiCalls.fetchBackupsForResourceType = stubSimpleCall(expectedResponse);
+            const [response] = await client.fetchBackupsForResourceType(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchBackupsForResourceType as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchBackupsForResourceType as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchBackupsForResourceType without error using callback', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+            ];
+            client.innerApiCalls.fetchBackupsForResourceType = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.fetchBackupsForResourceType(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.backupdr.v1.IBackup[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.fetchBackupsForResourceType as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchBackupsForResourceType as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchBackupsForResourceType with error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.fetchBackupsForResourceType = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.fetchBackupsForResourceType(request), expectedError);
+            const actualRequest = (client.innerApiCalls.fetchBackupsForResourceType as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.fetchBackupsForResourceType as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes fetchBackupsForResourceTypeStream without error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+            ];
+            client.descriptors.page.fetchBackupsForResourceType.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.fetchBackupsForResourceTypeStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.backupdr.v1.Backup[] = [];
+                stream.on('data', (response: protos.google.cloud.backupdr.v1.Backup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.fetchBackupsForResourceType.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchBackupsForResourceType, request));
+            assert(
+                (client.descriptors.page.fetchBackupsForResourceType.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes fetchBackupsForResourceTypeStream with error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchBackupsForResourceType.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.fetchBackupsForResourceTypeStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.backupdr.v1.Backup[] = [];
+                stream.on('data', (response: protos.google.cloud.backupdr.v1.Backup) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.fetchBackupsForResourceType.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.fetchBackupsForResourceType, request));
+            assert(
+                (client.descriptors.page.fetchBackupsForResourceType.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with fetchBackupsForResourceType without error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.Backup()),
+            ];
+            client.descriptors.page.fetchBackupsForResourceType.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.backupdr.v1.IBackup[] = [];
+            const iterable = client.fetchBackupsForResourceTypeAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchBackupsForResourceType.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchBackupsForResourceType.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with fetchBackupsForResourceType with error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.FetchBackupsForResourceTypeRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.fetchBackupsForResourceType.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.fetchBackupsForResourceTypeAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.backupdr.v1.IBackup[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.fetchBackupsForResourceType.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.fetchBackupsForResourceType.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
     describe('listBackupPlans', () => {
         it('invokes listBackupPlans without error', async () => {
             const client = new backupdrModule.v1.BackupDRClient({
@@ -5975,6 +6220,251 @@ describe('v1.BackupDRClient', () => {
                     .getCall(0).args[1], request);
             assert(
                 (client.descriptors.page.fetchBackupPlanAssociationsForResourceType.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+    });
+
+    describe('listDataSourceReferences', () => {
+        it('invokes listDataSourceReferences without error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.ListDataSourceReferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.ListDataSourceReferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+            ];
+            client.innerApiCalls.listDataSourceReferences = stubSimpleCall(expectedResponse);
+            const [response] = await client.listDataSourceReferences(request);
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDataSourceReferences as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDataSourceReferences as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDataSourceReferences without error using callback', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.ListDataSourceReferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.ListDataSourceReferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+            ];
+            client.innerApiCalls.listDataSourceReferences = stubSimpleCallWithCallback(expectedResponse);
+            const promise = new Promise((resolve, reject) => {
+                 client.listDataSourceReferences(
+                    request,
+                    (err?: Error|null, result?: protos.google.cloud.backupdr.v1.IDataSourceReference[]|null) => {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                        }
+                    });
+            });
+            const response = await promise;
+            assert.deepStrictEqual(response, expectedResponse);
+            const actualRequest = (client.innerApiCalls.listDataSourceReferences as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDataSourceReferences as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDataSourceReferences with error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.ListDataSourceReferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.ListDataSourceReferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.innerApiCalls.listDataSourceReferences = stubSimpleCall(undefined, expectedError);
+            await assert.rejects(client.listDataSourceReferences(request), expectedError);
+            const actualRequest = (client.innerApiCalls.listDataSourceReferences as SinonStub)
+                .getCall(0).args[0];
+            assert.deepStrictEqual(actualRequest, request);
+            const actualHeaderRequestParams = (client.innerApiCalls.listDataSourceReferences as SinonStub)
+                .getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+            assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
+        });
+
+        it('invokes listDataSourceReferencesStream without error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.ListDataSourceReferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.ListDataSourceReferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+            ];
+            client.descriptors.page.listDataSourceReferences.createStream = stubPageStreamingCall(expectedResponse);
+            const stream = client.listDataSourceReferencesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.backupdr.v1.DataSourceReference[] = [];
+                stream.on('data', (response: protos.google.cloud.backupdr.v1.DataSourceReference) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            const responses = await promise;
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert((client.descriptors.page.listDataSourceReferences.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDataSourceReferences, request));
+            assert(
+                (client.descriptors.page.listDataSourceReferences.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('invokes listDataSourceReferencesStream with error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.ListDataSourceReferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.ListDataSourceReferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDataSourceReferences.createStream = stubPageStreamingCall(undefined, expectedError);
+            const stream = client.listDataSourceReferencesStream(request);
+            const promise = new Promise((resolve, reject) => {
+                const responses: protos.google.cloud.backupdr.v1.DataSourceReference[] = [];
+                stream.on('data', (response: protos.google.cloud.backupdr.v1.DataSourceReference) => {
+                    responses.push(response);
+                });
+                stream.on('end', () => {
+                    resolve(responses);
+                });
+                stream.on('error', (err: Error) => {
+                    reject(err);
+                });
+            });
+            await assert.rejects(promise, expectedError);
+            assert((client.descriptors.page.listDataSourceReferences.createStream as SinonStub)
+                .getCall(0).calledWith(client.innerApiCalls.listDataSourceReferences, request));
+            assert(
+                (client.descriptors.page.listDataSourceReferences.createStream as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                         expectedHeaderRequestParams
+                    ) 
+            );
+        });
+
+        it('uses async iteration with listDataSourceReferences without error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+              credentials: {client_email: 'bogus', private_key: 'bogus'},
+              projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.ListDataSourceReferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.ListDataSourceReferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedResponse = [
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+              generateSampleMessage(new protos.google.cloud.backupdr.v1.DataSourceReference()),
+            ];
+            client.descriptors.page.listDataSourceReferences.asyncIterate = stubAsyncIterationCall(expectedResponse);
+            const responses: protos.google.cloud.backupdr.v1.IDataSourceReference[] = [];
+            const iterable = client.listDataSourceReferencesAsync(request);
+            for await (const resource of iterable) {
+                responses.push(resource!);
+            }
+            assert.deepStrictEqual(responses, expectedResponse);
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDataSourceReferences.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDataSourceReferences.asyncIterate as SinonStub)
+                    .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
+                        expectedHeaderRequestParams
+                    )
+            );
+        });
+
+        it('uses async iteration with listDataSourceReferences with error', async () => {
+            const client = new backupdrModule.v1.BackupDRClient({
+                credentials: {client_email: 'bogus', private_key: 'bogus'},
+                projectId: 'bogus',
+            });
+            await client.initialize();
+            const request = generateSampleMessage(
+              new protos.google.cloud.backupdr.v1.ListDataSourceReferencesRequest()
+            );
+            const defaultValue1 =
+              getTypeDefaultValue('.google.cloud.backupdr.v1.ListDataSourceReferencesRequest', ['parent']);
+            request.parent = defaultValue1;
+            const expectedHeaderRequestParams = `parent=${defaultValue1 ?? '' }`;
+            const expectedError = new Error('expected');
+            client.descriptors.page.listDataSourceReferences.asyncIterate = stubAsyncIterationCall(undefined, expectedError);
+            const iterable = client.listDataSourceReferencesAsync(request);
+            await assert.rejects(async () => {
+                const responses: protos.google.cloud.backupdr.v1.IDataSourceReference[] = [];
+                for await (const resource of iterable) {
+                    responses.push(resource!);
+                }
+            });
+            assert.deepStrictEqual(
+                (client.descriptors.page.listDataSourceReferences.asyncIterate as SinonStub)
+                    .getCall(0).args[1], request);
+            assert(
+                (client.descriptors.page.listDataSourceReferences.asyncIterate as SinonStub)
                     .getCall(0).args[2].otherArgs.headers['x-goog-request-params'].includes(
                         expectedHeaderRequestParams
                     )

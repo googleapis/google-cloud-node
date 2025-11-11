@@ -13021,6 +13021,20 @@ export namespace google {
                      * @returns Promise
                      */
                     public deleteGlossary(request: google.cloud.translation.v3beta1.IDeleteGlossaryRequest): Promise<google.longrunning.Operation>;
+
+                    /**
+                     * Calls RefineText.
+                     * @param request RefineTextRequest message or plain object
+                     * @param callback Node-style callback called with the error, if any, and RefineTextResponse
+                     */
+                    public refineText(request: google.cloud.translation.v3beta1.IRefineTextRequest, callback: google.cloud.translation.v3beta1.TranslationService.RefineTextCallback): void;
+
+                    /**
+                     * Calls RefineText.
+                     * @param request RefineTextRequest message or plain object
+                     * @returns Promise
+                     */
+                    public refineText(request: google.cloud.translation.v3beta1.IRefineTextRequest): Promise<google.cloud.translation.v3beta1.RefineTextResponse>;
                 }
 
                 namespace TranslationService {
@@ -13094,6 +13108,13 @@ export namespace google {
                      * @param [response] Operation
                      */
                     type DeleteGlossaryCallback = (error: (Error|null), response?: google.longrunning.Operation) => void;
+
+                    /**
+                     * Callback as used by {@link google.cloud.translation.v3beta1.TranslationService|refineText}.
+                     * @param error Error, if any
+                     * @param [response] RefineTextResponse
+                     */
+                    type RefineTextCallback = (error: (Error|null), response?: google.cloud.translation.v3beta1.RefineTextResponse) => void;
                 }
 
                 /** Properties of a TranslateTextGlossaryConfig. */
@@ -13104,6 +13125,9 @@ export namespace google {
 
                     /** TranslateTextGlossaryConfig ignoreCase */
                     ignoreCase?: (boolean|null);
+
+                    /** TranslateTextGlossaryConfig contextualTranslationEnabled */
+                    contextualTranslationEnabled?: (boolean|null);
                 }
 
                 /** Represents a TranslateTextGlossaryConfig. */
@@ -13120,6 +13144,9 @@ export namespace google {
 
                     /** TranslateTextGlossaryConfig ignoreCase. */
                     public ignoreCase: boolean;
+
+                    /** TranslateTextGlossaryConfig contextualTranslationEnabled. */
+                    public contextualTranslationEnabled: boolean;
 
                     /**
                      * Creates a new TranslateTextGlossaryConfig instance using the specified properties.
@@ -16942,6 +16969,9 @@ export namespace google {
 
                     /** BatchTranslateDocumentRequest enableRotationCorrection */
                     enableRotationCorrection?: (boolean|null);
+
+                    /** BatchTranslateDocumentRequest pdfNativeOnly */
+                    pdfNativeOnly?: (boolean|null);
                 }
 
                 /** Represents a BatchTranslateDocumentRequest. */
@@ -16985,6 +17015,9 @@ export namespace google {
 
                     /** BatchTranslateDocumentRequest enableRotationCorrection. */
                     public enableRotationCorrection: boolean;
+
+                    /** BatchTranslateDocumentRequest pdfNativeOnly. */
+                    public pdfNativeOnly: boolean;
 
                     /**
                      * Creates a new BatchTranslateDocumentRequest instance using the specified properties.
@@ -17577,6 +17610,321 @@ export namespace google {
                         CANCELLING = 4,
                         CANCELLED = 5
                     }
+                }
+
+                /** Properties of a RefinementEntry. */
+                interface IRefinementEntry {
+
+                    /** RefinementEntry sourceText */
+                    sourceText?: (string|null);
+
+                    /** RefinementEntry originalTranslation */
+                    originalTranslation?: (string|null);
+                }
+
+                /** Represents a RefinementEntry. */
+                class RefinementEntry implements IRefinementEntry {
+
+                    /**
+                     * Constructs a new RefinementEntry.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3beta1.IRefinementEntry);
+
+                    /** RefinementEntry sourceText. */
+                    public sourceText: string;
+
+                    /** RefinementEntry originalTranslation. */
+                    public originalTranslation: string;
+
+                    /**
+                     * Creates a new RefinementEntry instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RefinementEntry instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3beta1.IRefinementEntry): google.cloud.translation.v3beta1.RefinementEntry;
+
+                    /**
+                     * Encodes the specified RefinementEntry message. Does not implicitly {@link google.cloud.translation.v3beta1.RefinementEntry.verify|verify} messages.
+                     * @param message RefinementEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3beta1.IRefinementEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RefinementEntry message, length delimited. Does not implicitly {@link google.cloud.translation.v3beta1.RefinementEntry.verify|verify} messages.
+                     * @param message RefinementEntry message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3beta1.IRefinementEntry, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RefinementEntry message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RefinementEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3beta1.RefinementEntry;
+
+                    /**
+                     * Decodes a RefinementEntry message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RefinementEntry
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3beta1.RefinementEntry;
+
+                    /**
+                     * Verifies a RefinementEntry message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RefinementEntry message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RefinementEntry
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3beta1.RefinementEntry;
+
+                    /**
+                     * Creates a plain object from a RefinementEntry message. Also converts values to other types if specified.
+                     * @param message RefinementEntry
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3beta1.RefinementEntry, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RefinementEntry to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RefinementEntry
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RefineTextRequest. */
+                interface IRefineTextRequest {
+
+                    /** RefineTextRequest parent */
+                    parent?: (string|null);
+
+                    /** RefineTextRequest refinementEntries */
+                    refinementEntries?: (google.cloud.translation.v3beta1.IRefinementEntry[]|null);
+
+                    /** RefineTextRequest sourceLanguageCode */
+                    sourceLanguageCode?: (string|null);
+
+                    /** RefineTextRequest targetLanguageCode */
+                    targetLanguageCode?: (string|null);
+                }
+
+                /** Represents a RefineTextRequest. */
+                class RefineTextRequest implements IRefineTextRequest {
+
+                    /**
+                     * Constructs a new RefineTextRequest.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3beta1.IRefineTextRequest);
+
+                    /** RefineTextRequest parent. */
+                    public parent: string;
+
+                    /** RefineTextRequest refinementEntries. */
+                    public refinementEntries: google.cloud.translation.v3beta1.IRefinementEntry[];
+
+                    /** RefineTextRequest sourceLanguageCode. */
+                    public sourceLanguageCode: string;
+
+                    /** RefineTextRequest targetLanguageCode. */
+                    public targetLanguageCode: string;
+
+                    /**
+                     * Creates a new RefineTextRequest instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RefineTextRequest instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3beta1.IRefineTextRequest): google.cloud.translation.v3beta1.RefineTextRequest;
+
+                    /**
+                     * Encodes the specified RefineTextRequest message. Does not implicitly {@link google.cloud.translation.v3beta1.RefineTextRequest.verify|verify} messages.
+                     * @param message RefineTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3beta1.IRefineTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RefineTextRequest message, length delimited. Does not implicitly {@link google.cloud.translation.v3beta1.RefineTextRequest.verify|verify} messages.
+                     * @param message RefineTextRequest message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3beta1.IRefineTextRequest, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RefineTextRequest message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RefineTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3beta1.RefineTextRequest;
+
+                    /**
+                     * Decodes a RefineTextRequest message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RefineTextRequest
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3beta1.RefineTextRequest;
+
+                    /**
+                     * Verifies a RefineTextRequest message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RefineTextRequest message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RefineTextRequest
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3beta1.RefineTextRequest;
+
+                    /**
+                     * Creates a plain object from a RefineTextRequest message. Also converts values to other types if specified.
+                     * @param message RefineTextRequest
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3beta1.RefineTextRequest, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RefineTextRequest to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RefineTextRequest
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
+                }
+
+                /** Properties of a RefineTextResponse. */
+                interface IRefineTextResponse {
+
+                    /** RefineTextResponse refinedTranslations */
+                    refinedTranslations?: (string[]|null);
+                }
+
+                /** Represents a RefineTextResponse. */
+                class RefineTextResponse implements IRefineTextResponse {
+
+                    /**
+                     * Constructs a new RefineTextResponse.
+                     * @param [properties] Properties to set
+                     */
+                    constructor(properties?: google.cloud.translation.v3beta1.IRefineTextResponse);
+
+                    /** RefineTextResponse refinedTranslations. */
+                    public refinedTranslations: string[];
+
+                    /**
+                     * Creates a new RefineTextResponse instance using the specified properties.
+                     * @param [properties] Properties to set
+                     * @returns RefineTextResponse instance
+                     */
+                    public static create(properties?: google.cloud.translation.v3beta1.IRefineTextResponse): google.cloud.translation.v3beta1.RefineTextResponse;
+
+                    /**
+                     * Encodes the specified RefineTextResponse message. Does not implicitly {@link google.cloud.translation.v3beta1.RefineTextResponse.verify|verify} messages.
+                     * @param message RefineTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encode(message: google.cloud.translation.v3beta1.IRefineTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Encodes the specified RefineTextResponse message, length delimited. Does not implicitly {@link google.cloud.translation.v3beta1.RefineTextResponse.verify|verify} messages.
+                     * @param message RefineTextResponse message or plain object to encode
+                     * @param [writer] Writer to encode to
+                     * @returns Writer
+                     */
+                    public static encodeDelimited(message: google.cloud.translation.v3beta1.IRefineTextResponse, writer?: $protobuf.Writer): $protobuf.Writer;
+
+                    /**
+                     * Decodes a RefineTextResponse message from the specified reader or buffer.
+                     * @param reader Reader or buffer to decode from
+                     * @param [length] Message length if known beforehand
+                     * @returns RefineTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): google.cloud.translation.v3beta1.RefineTextResponse;
+
+                    /**
+                     * Decodes a RefineTextResponse message from the specified reader or buffer, length delimited.
+                     * @param reader Reader or buffer to decode from
+                     * @returns RefineTextResponse
+                     * @throws {Error} If the payload is not a reader or valid buffer
+                     * @throws {$protobuf.util.ProtocolError} If required fields are missing
+                     */
+                    public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): google.cloud.translation.v3beta1.RefineTextResponse;
+
+                    /**
+                     * Verifies a RefineTextResponse message.
+                     * @param message Plain object to verify
+                     * @returns `null` if valid, otherwise the reason why it is not
+                     */
+                    public static verify(message: { [k: string]: any }): (string|null);
+
+                    /**
+                     * Creates a RefineTextResponse message from a plain object. Also converts values to their respective internal types.
+                     * @param object Plain object
+                     * @returns RefineTextResponse
+                     */
+                    public static fromObject(object: { [k: string]: any }): google.cloud.translation.v3beta1.RefineTextResponse;
+
+                    /**
+                     * Creates a plain object from a RefineTextResponse message. Also converts values to other types if specified.
+                     * @param message RefineTextResponse
+                     * @param [options] Conversion options
+                     * @returns Plain object
+                     */
+                    public static toObject(message: google.cloud.translation.v3beta1.RefineTextResponse, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+                    /**
+                     * Converts this RefineTextResponse to JSON.
+                     * @returns JSON object
+                     */
+                    public toJSON(): { [k: string]: any };
+
+                    /**
+                     * Gets the default type url for RefineTextResponse
+                     * @param [typeUrlPrefix] your custom typeUrlPrefix(default "type.googleapis.com")
+                     * @returns The default type url
+                     */
+                    public static getTypeUrl(typeUrlPrefix?: string): string;
                 }
             }
         }

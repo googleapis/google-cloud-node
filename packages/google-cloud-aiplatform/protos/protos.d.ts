@@ -32877,7 +32877,9 @@ export namespace google {
                     GETTING_CONTAINER_IMAGE = 9,
                     STARTING_MODEL_SERVER = 3,
                     FINISHING_UP = 4,
-                    DEPLOYMENT_TERMINATED = 10
+                    DEPLOYMENT_TERMINATED = 10,
+                    SUCCESSFULLY_DEPLOYED = 11,
+                    FAILED_TO_DEPLOY = 12
                 }
 
                 /** Represents an EndpointService */
@@ -181862,7 +181864,9 @@ export namespace google {
                     GETTING_CONTAINER_IMAGE = 9,
                     STARTING_MODEL_SERVER = 3,
                     FINISHING_UP = 4,
-                    DEPLOYMENT_TERMINATED = 10
+                    DEPLOYMENT_TERMINATED = 10,
+                    SUCCESSFULLY_DEPLOYED = 11,
+                    FAILED_TO_DEPLOY = 12
                 }
 
                 /** Represents an EndpointService */
@@ -310723,9 +310727,6 @@ export namespace google {
                     /** EventActions artifactDelta */
                     artifactDelta?: ({ [k: string]: number }|null);
 
-                    /** EventActions transferToAgent */
-                    transferToAgent?: (boolean|null);
-
                     /** EventActions escalate */
                     escalate?: (boolean|null);
 
@@ -310753,9 +310754,6 @@ export namespace google {
 
                     /** EventActions artifactDelta. */
                     public artifactDelta: { [k: string]: number };
-
-                    /** EventActions transferToAgent. */
-                    public transferToAgent: boolean;
 
                     /** EventActions escalate. */
                     public escalate: boolean;
@@ -311750,6 +311748,9 @@ export namespace google {
 
                     /** ListEventsRequest filter */
                     filter?: (string|null);
+
+                    /** ListEventsRequest orderBy */
+                    orderBy?: (string|null);
                 }
 
                 /** Represents a ListEventsRequest. */
@@ -311772,6 +311773,9 @@ export namespace google {
 
                     /** ListEventsRequest filter. */
                     public filter: string;
+
+                    /** ListEventsRequest orderBy. */
+                    public orderBy: string;
 
                     /**
                      * Creates a new ListEventsRequest instance using the specified properties.

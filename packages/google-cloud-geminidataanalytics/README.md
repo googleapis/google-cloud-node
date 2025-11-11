@@ -82,6 +82,7 @@ Samples are in the [`samples/`][homepage_samples] directory. Each sample's `READ
 | update data agent | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_agent_service.update_data_agent.js) |
 | chat | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.chat.js) |
 | create conversation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.create_conversation.js) |
+| delete conversation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.delete_conversation.js) |
 | get conversation | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.get_conversation.js) |
 | list conversations | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_conversations.js) |
 | list messages | [source code](https://github.com/googleapis/google-cloud-node/blob/main/packages/google-cloud-geminidataanalytics/samples/generated/v1beta/data_chat_service.list_messages.js) |
